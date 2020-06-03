@@ -17,10 +17,10 @@ Connect to the gbif4crest_02 database by accessing the server on Amazon.
 }
 \examples{
 dbRequest("SELECT count(*) FROM taxa")
-southAfricaTaxa <- dbRequest(paste0("SELECT taxa.* ",
+southAfricaTaxa <- dbRequest(paste0("SELECT DISTINCT taxa.* ",
     "FROM taxa, distrib_qdgc, geo_qdgc ",
     "WHERE taxa.taxonid=distrib_qdgc.taxonid ",
-    "AND   distrib.qdgc.latitude=geo_qdgc.latitude ",
+    "AND   distrib_qdgc.latitude=geo_qdgc.latitude ",
     "AND   distrib_qdgc.longitude=geo_qdgc.longitude ",
     "AND geo_qdgc.countryname='South Africa'"))
 }
