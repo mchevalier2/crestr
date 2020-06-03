@@ -25,20 +25,3 @@ connect_online <- function(dbname="gbif4crest_02", port=5432, host = "gbif4crest
                   )
     return(db)
 }
-
-
-#' Disconnect the database connection.
-#'
-#' Disconnect the database connection.
-#'
-#' @param db An active database connection
-#' @export
-#' @examples
-#' \dontrun{
-#' db <- connect_online()
-#' dbDisconnect(db)
-#' }
-
-dbDisconnect <- function(db) {
-    DBI::dbDisconnect(db)
-}
