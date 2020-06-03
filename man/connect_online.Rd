@@ -32,6 +32,11 @@ Default is gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com}
 
 \item{password}{The password associated with the user name. Default is pwd12345}
 }
+\value{
+An active connection to a database
+
+An active connection to a database
+}
 \description{
 Connect to the gbif4crest_02 database by accessing the server on Amazon.
 

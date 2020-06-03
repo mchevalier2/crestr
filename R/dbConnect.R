@@ -8,7 +8,8 @@
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @param user The user name to use to connect. Default is guestuser.
 #' @param password The password associated with the user name. Default is pwd12345
-#'
+#' @return An active connection to a database
+#' @export
 #' @examples
 #' \dontrun{
 #' db <- connect_online()
@@ -23,4 +24,21 @@ connect_online <- function(dbname="gbif4crest_02", port=5432, host = "gbif4crest
                    password = password
                   )
     return(db)
+}
+
+
+#' Disconnect the database connection.
+#'
+#' Disconnect the database connection.
+#'
+#' @param db An active database connection
+#' @export
+#' @examples
+#' \dontrun{
+#' db <- connect_online()
+#' dbDisconnect(db)
+#' }
+
+dbDisconnect <- function(db) {
+    DBI::dbDisconnect(db)
 }
