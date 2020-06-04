@@ -32,5 +32,5 @@ extractTaxonID <- function (family, genus = "", species = "", taxaType = 1) {
                   "     AND taxonid <= ", (taxaType+1)*1000000, ' ',
                   "ORDER BY taxonid"
                   )
-    dbRequest(req)
+    as.vector(dbRequest(req))
 }
