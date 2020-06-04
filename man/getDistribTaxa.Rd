@@ -44,10 +44,11 @@ description, which can be at the family, the genus or the species levels.
 }
 \examples{
 taxIDs <- extractTaxonID("Zamiaceae", "Ceratozamia")
-getDistribTaxa(taxIDs, -90, 90, -90, 90,
+distrib <- getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
    continents = 'Europe',
    countries = c('Germany', 'Netherlands', 'Sweden'),
-   realms='Palaearctic' )
+   realms = 'Palaearctic' )
+distrib
 }
 \seealso{
 \code{\link{extractTaxonID}} for taxIDs, \code{\link{accClimateVariables}}

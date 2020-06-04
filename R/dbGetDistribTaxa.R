@@ -19,10 +19,11 @@
 #' @export
 #' @examples
 #' taxIDs <- extractTaxonID("Zamiaceae", "Ceratozamia")
-#' getDistribTaxa(taxIDs, -90, 90, -90, 90,
+#' distrib <- getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
 #'    continents = 'Europe',
 #'    countries = c('Germany', 'Netherlands', 'Sweden'),
-#'    realms='Palaearctic' )
+#'    realms = 'Palaearctic' )
+#' distrib
 
 getDistribTaxa <- function(taxIDs,
                             climate,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbGetClimateSpace.R
 \name{getClimateSpace}
 \alias{getClimateSpace}
-\title{Extract taxonID(s) corresponding to the taxonomic description}
+\title{Extract the distribution of the studied climate gradient(s) across the study area.}
 \usage{
 getClimateSpace(
   climate,
@@ -31,25 +31,23 @@ getClimateSpace(
 \item{biomes}{A vector of the studied botanical biomes defining the study area.}
 
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
-
-\item{taxIDs}{A vector of accepted Taxa IDs (as returned by \code{\link{extractTaxonID}}).}
 }
 \value{
 A matrix of occurrence records with the associated climate.
 }
 \description{
-Extract all possible TaxonIDs corresponding to the provided taxonomical
-description, which can be at the family, the genus or the species levels.
+Extract the distribution of the studied climate gradient(s) across the study area.
 }
 \examples{
-taxIDs <- extractTaxonID("Zamiaceae", "Ceratozamia")
-getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
+climate <- getClimateSpace('bio1', -90, 90, -90, 90,
    continents = 'Europe',
    countries = c('Germany', 'Netherlands', 'Sweden'),
    realms = 'Palaearctic' )
+head(climate)
+plot(climate[,-3], asp=1)
 }
 \seealso{
-\code{\link{extractTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
+\code{\link{accClimateVariables}}
 for a list of accepted climate variable names, \code{\link{accContinentNames}}
 for a list of accepted continent and country names, \code{\link{accRealmNames}}
 for a list of accepted realm, biome and ecoregion names.
