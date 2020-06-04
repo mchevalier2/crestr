@@ -17,19 +17,20 @@
 #' extractTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
 
 extractTaxonID <- function (family, genus = "", species = "", taxaType = 1) {
-    req <- paste0("SELECT taxonid ",
-                  "  FROM taxa ",
-                  " WHERE family = '",family,"' ",
-                  ifelse(genus == "",
-                         "",
-                         paste0(" AND genus = '",genus, "' ")
-                       ),
-                  ifelse(species == "",
-                         "",
-                         paste0(" AND species = '",species, "' ")
-                       ),
-                  "   AND taxonid >= ", taxaType*1000000, " ",
-                  "   AND taxonid <= ", (taxaType+1)*1000000
+    req <- paste0("  SELECT taxonid ",
+                  "    FROM taxa ",
+                  "   WHERE family = '",family,"' ",
+                    ifelse( genus == "",
+                            "",
+                            paste0(" AND genus = '",genus, "' ")
+                           ),
+                    ifelse( species == "",
+                            "",
+                            paste0(" AND species = '",species, "' ")
+                           ),
+                  "     AND taxonid >= ", taxaType*1000000, " ",
+                  "     AND taxonid <= ", (taxaType+1)*1000000, ' ',
+                  "ORDER BY taxonid"
                   )
     dbRequest(req)
 }
