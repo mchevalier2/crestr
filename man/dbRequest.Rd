@@ -20,6 +20,7 @@ Connect to the gbif4crest_02 database by accessing the server on Amazon.
 dbRequest("SELECT count(*) FROM taxa")
 
 #Extracting all the taxa that have at least one occurrence in South Africa.
+\dontrun{
 southAfricaTaxa <- dbRequest(paste0("SELECT DISTINCT taxa.* ",
     "FROM taxa, distrib_qdgc, geo_qdgc ",
     "WHERE taxa.taxonid=distrib_qdgc.taxonid ",
@@ -27,4 +28,5 @@ southAfricaTaxa <- dbRequest(paste0("SELECT DISTINCT taxa.* ",
     "AND   distrib_qdgc.longitude=geo_qdgc.longitude ",
     "AND geo_qdgc.countryname='South Africa'"))
 head(southAfricaTaxa)
+}
 }

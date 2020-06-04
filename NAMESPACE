@@ -3,3 +3,4 @@
 export(close_db_connection)
 export(connect_online)
 export(dbRequest)
+export(extractTaxonID)
