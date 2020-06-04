@@ -2,5 +2,6 @@
 
 export(close_db_connection)
 export(connect_online)
+export(convert2percentages)
 export(dbRequest)
 export(extractTaxonID)
