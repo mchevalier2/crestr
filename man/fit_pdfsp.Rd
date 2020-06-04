@@ -2,31 +2,34 @@
 % Please edit documentation in R/mod_fit_pdfsp.R
 \name{fit_pdfsp}
 \alias{fit_pdfsp}
-\title{Connect to the gbif4crest database}
+\title{Fit the species pdfs.}
 \usage{
-fit_pdfsp(climate, ccs, bin_width, shape, xrange, npoints = 500)
+fit_pdfsp(climate, ccs, bin_width, shape, xrange)
 }
 \arguments{
-\item{request}{A SQL request to be executed.}
+\item{climate}{A vector of climatic values where the species is present.}
+
+\item{ccs}{A \code{ccs} object returned by \code{\link{calib_clim_space}}.}
+
+\item{bin_width}{The width of the climate bins.}
+
+\item{shape}{The shape of the species pdfs. Use 'normal' or 'lognormal'.}
+
+\item{xrange}{The climate gradient upon which the pdf with be defined.}
 }
 \value{
-The result of the request.
+The pdf of the species.
 }
 \description{
-Connect to the gbif4crest_02 database by accessing the server on Amazon.
+Fit the species pdfs.
 }
 \examples{
-#Extracting the number of taxa recorded in the database
-dbRequest("SELECT count(*) FROM taxa")
+#Creating one randomised species
+climate_species <- round(stats::rnorm(50, 15, 2),1)
+#Creating one randomised climate space
+climate_space <- sample(0:300/10, 4000, replace=TRUE)
+ccs <- calib_clim_space(climate_space, 2)
+xrange <- fit_xrange(ccs, 'normal', 2)
+pdfsp <- fit_pdfsp(climate_species, ccs, 2, 'normal', xrange)
 
-#Extracting all the taxa that have at least one occurrence in South Africa.
-\dontrun{
-southAfricaTaxa <- dbRequest(paste0("SELECT DISTINCT taxa.* ",
-    "FROM taxa, distrib_qdgc, geo_qdgc ",
-    "WHERE taxa.taxonid=distrib_qdgc.taxonid ",
-    "AND   distrib_qdgc.latitude=geo_qdgc.latitude ",
-    "AND   distrib_qdgc.longitude=geo_qdgc.longitude ",
-    "AND geo_qdgc.countryname='South Africa'"))
-head(southAfricaTaxa)
-}
 }
