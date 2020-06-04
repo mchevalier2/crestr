@@ -13,7 +13,7 @@
 #' convert2percentages(df)
 #' convert2percentages(df, col2convert = 3:5)
 
-convert2percentages <- function (df, col2convert = 2:ncol(df) ) {
+convert2percentages <- function(df, col2convert = 2:ncol(df) ) {
     df2 <- cbind( df[, -col2convert],
                   100 * df[, col2convert] / apply(df[, col2convert], 1, sum)
                  )

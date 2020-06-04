@@ -16,7 +16,7 @@
 #' extractTaxonID("Zamiaceae", "Ceratozamia")
 #' extractTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
 
-extractTaxonID <- function (family, genus = "", species = "", taxaType = 1) {
+extractTaxonID <- function(family, genus = "", species = "", taxaType = 1) {
     req <- paste0("  SELECT taxonid ",
                   "    FROM taxa ",
                   "   WHERE family = '",family,"' ",

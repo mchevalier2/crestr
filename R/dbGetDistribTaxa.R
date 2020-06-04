@@ -24,7 +24,7 @@
 #'    countries = c('Germany', 'Netherlands', 'Sweden'),
 #'    realms='Palaearctic' )
 
-getDistribTaxa <- function (taxIDs,
+getDistribTaxa <- function(taxIDs,
                             climate,
                             xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                             continents=NA, countries=NA,
