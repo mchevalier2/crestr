@@ -88,7 +88,7 @@ calib_clim_space <- function(climate, bin_width){
 
 fit_xrange <- function(ccs, shape, bin_width, npoints = 500){
     if (shape == 'normal') {
-        return(seq(ccs[['k1']][1]-10*bin_width, ccs[['k1']][length(ccs[['k1']])]+10*bin_width, length.out=npoints))
+        return(seq(ccs[['k1']][1]-5*bin_width, ccs[['k1']][length(ccs[['k1']])]+5*bin_width, length.out=npoints))
     }
-    return(seq(1e-12, ccs[['k1']][length(ccs[['k1']])]+10*bin_width, length.out=npoints))
+    return(seq(1e-12, ccs[['k1']][length(ccs[['k1']])]+5*bin_width, length.out=npoints))
 }

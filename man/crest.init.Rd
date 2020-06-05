@@ -18,7 +18,10 @@ crest.init(
   realms = NA,
   biomes = NA,
   ecoregions = NA,
-  minGridCells = 20
+  minGridCells = 20,
+  bin_width = NA,
+  shape = NA,
+  npoints = 500
 )
 }
 \arguments{
@@ -43,6 +46,12 @@ crest.init(
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
 
 \item{minGridCells}{.}
+
+\item{bin_width}{.}
+
+\item{shape}{.}
+
+\item{npoints}{The number of points to be used to fit the pdfs.}
 }
 \value{
 The parameters to be used by crest()
