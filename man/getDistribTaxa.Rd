@@ -19,7 +19,7 @@ getDistribTaxa(
 )
 }
 \arguments{
-\item{taxIDs}{A vector of accepted Taxa IDs (as returned by \code{\link{extractTaxonID}}).}
+\item{taxIDs}{A vector of accepted Taxa IDs (as returned by \code{\link{getTaxonID}}).}
 
 \item{climate}{A vectof of the climate variables to extract.}
 
@@ -43,7 +43,7 @@ Extract all possible TaxonIDs corresponding to the provided taxonomical
 description, which can be at the family, the genus or the species levels.
 }
 \examples{
-taxIDs <- extractTaxonID("Zamiaceae", "Ceratozamia")
+taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
 distrib <- getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
    continents = 'Europe',
    countries = c('Germany', 'Netherlands', 'Sweden'),
@@ -51,7 +51,7 @@ distrib <- getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
 distrib
 }
 \seealso{
-\code{\link{extractTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
+\code{\link{getTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
 for a list of accepted climate variable names, \code{\link{accContinentNames}}
 for a list of accepted continent and country names, \code{\link{accRealmNames}}
 for a list of accepted realm, biome and ecoregion names.

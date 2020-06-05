@@ -12,11 +12,14 @@
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
-#' extractTaxonID("Zamiaceae")
-#' extractTaxonID("Zamiaceae", "Ceratozamia")
-#' extractTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+#' getTaxonID("Zamiaceae")
+#' getTaxonID("Zamiaceae", "Ceratozamia")
+#' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
 
-extractTaxonID <- function(family, genus = "", species = "", taxaType = 1) {
+getTaxonID <- function(family, genus = "", species = "", taxaType = 1) {
+    family <- tools::toTitleCase(base::tolower(family))
+    genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
+    species <- ifelse(is.na(species), "", tools::toTitleCase(base::tolower(species)))
     req <- paste0("  SELECT taxonid ",
                   "    FROM taxa ",
                   "   WHERE family = '",family,"' ",

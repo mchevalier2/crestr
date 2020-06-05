@@ -3,7 +3,7 @@
 #' Extract all possible TaxonIDs corresponding to the provided taxonomical
 #' description, which can be at the family, the genus or the species levels.
 #'
-#' @param taxIDs A vector of accepted Taxa IDs (as returned by \code{\link{extractTaxonID}}).
+#' @param taxIDs A vector of accepted Taxa IDs (as returned by \code{\link{getTaxonID}}).
 #' @param climate A vectof of the climate variables to extract.
 #' @param xmn,xmx,ymn,ymx The coordinates defining the study area.
 #' @param continents A vector of the continent names defining the study area.
@@ -12,13 +12,13 @@
 #' @param biomes A vector of the studied botanical biomes defining the study area.
 #' @param ecoregions A vector of the studied botanical ecoregions defining the study area.
 #' @return A matrix of occurrence records with the associated climate.
-#' @seealso \code{\link{extractTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
+#' @seealso \code{\link{getTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
 #'     for a list of accepted climate variable names, \code{\link{accContinentNames}}
 #'     for a list of accepted continent and country names, \code{\link{accRealmNames}}
 #'     for a list of accepted realm, biome and ecoregion names.
 #' @export
 #' @examples
-#' taxIDs <- extractTaxonID("Zamiaceae", "Ceratozamia")
+#' taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
 #' distrib <- getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
 #'    continents = 'Europe',
 #'    countries = c('Germany', 'Netherlands', 'Sweden'),
