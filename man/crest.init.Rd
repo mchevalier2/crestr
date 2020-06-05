@@ -4,7 +4,22 @@
 \alias{crest.init}
 \title{Connect to the gbif4crest database}
 \usage{
-crest.init(df, pse, taxaType)
+crest.init(
+  df,
+  pse,
+  taxaType,
+  climate,
+  xmn = -180,
+  xmx = 180,
+  ymn = -90,
+  ymx = 90,
+  continents = NA,
+  countries = NA,
+  realms = NA,
+  biomes = NA,
+  ecoregions = NA,
+  minGridCells = 20
+)
 }
 \arguments{
 \item{df}{.}
@@ -12,6 +27,22 @@ crest.init(df, pse, taxaType)
 \item{pse}{.}
 
 \item{taxaType}{.}
+
+\item{climate}{A vectof of the climate variables to extract.}
+
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
+
+\item{continents}{A vector of the continent names defining the study area.}
+
+\item{countries}{A vector of the country names defining the study area.}
+
+\item{realms}{A vector of the studied botanical realms defining the study area.}
+
+\item{biomes}{A vector of the studied botanical biomes defining the study area.}
+
+\item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
+
+\item{minGridCells}{.}
 }
 \value{
 The parameters to be used by crest()

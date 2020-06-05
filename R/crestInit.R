@@ -5,6 +5,14 @@
 #' @param df .
 #' @param pse .
 #' @param taxaType .
+#' @param climate A vectof of the climate variables to extract.
+#' @param xmn,xmx,ymn,ymx The coordinates defining the study area.
+#' @param continents A vector of the continent names defining the study area.
+#' @param countries A vector of the country names defining the study area.
+#' @param realms A vector of the studied botanical realms defining the study area.
+#' @param biomes A vector of the studied botanical biomes defining the study area.
+#' @param ecoregions A vector of the studied botanical ecoregions defining the study area.
+#' @param minGridCells .
 #' @return The parameters to be used by crest()
 #' @export
 #' @examples
@@ -12,7 +20,7 @@
 #' db <- connect_online()
 #' }
 
-crest.init <- function(df, pse, taxaType ) {
+crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = -90, ymx = 90, continents=NA, countries=NA, realms=NA, biomes=NA, ecoregions=NA, minGridCells=20 ) {
     if (is.character(df)) {
         df <- rio::import(df)
     }
@@ -80,9 +88,9 @@ crest.init <- function(df, pse, taxaType ) {
                                         taxaType
                                        )
                 if(length(taxonIDs) > 0) {
-                    existingTaxa <- taxonIDs %in% taxonID2proxy[, 1]
+                    existingTaxa <- taxonIDs %in% taxonID2proxy[, 'taxonID']
                     if (sum(existingTaxa) > 0) {
-                        taxonID2proxy[taxonID2proxy[, 1] %in% taxonIDs, 2] <- tax
+                        taxonID2proxy[taxonID2proxy[, 'taxonID'] %in% taxonIDs, 'proxyName'] <- tax
                     }
                     taxonID2proxy <- rbind( taxonID2proxy,
                                             cbind(taxonIDs[!existingTaxa], rep(tax, sum(!existingTaxa)))
@@ -93,5 +101,33 @@ crest.init <- function(df, pse, taxaType ) {
             }
         }
     }
-    taxonID2proxy <- taxonID2proxy[order(taxonID2proxy[, 2]), ]
+    taxonID2proxy <- taxonID2proxy[-1, ]
+    taxonID2proxy <- taxonID2proxy[order(taxonID2proxy[, 'proxyName']), ]
+
+    climate=c('bio1','ai')
+    xmx=-50; xmn=-85; ymn=-15; ymx=10
+    continents=countries=realms=biomes=ecoregions=NA
+
+    #Getting climates ----------------------------------------------------------
+    climate_space <- getClimateSpace( climate,
+                                      xmn, xmx, ymn, ymx,
+                                      continents, countries,
+                                      realms, biomes, ecoregions
+                                     )
+
+    distributions <- list()
+    for(tax in unique(taxonID2proxy[, 'proxyName'])){
+        print(tax)
+        distributions[[tax]] <- getDistribTaxa( taxIDs = taxonID2proxy[taxonID2proxy[, 'proxyName'] == tax, 1],
+                                                climate,
+                                                xmn, xmx, ymn, ymx,
+                                                continents, countries,
+                                                realms, biomes, ecoregions
+                                               )
+        extent_taxa <- table(distributions[[tax]][,1])
+        extent_taxa <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
+        distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa, ]
+    }
+    save(distributions, file="/Users/mchevali1/GitHub/Rpackages/_crestr_testdata/LagunaFuquene_species_distributions.RData")
+    load("/Users/mchevali1/GitHub/Rpackages/_crestr_testdata/LagunaFuquene_species_distributions.RData")
 }
