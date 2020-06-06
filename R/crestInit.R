@@ -16,6 +16,8 @@
 #' @param bin_width .
 #' @param shape .
 #' @param npoints The number of points to be used to fit the pdfs.
+#' @param geoWeighting The number of points to be used to fit the pdfs.
+#' @param climateSpaceWeighting The number of points to be used to fit the pdfs.
 #' @return The parameters to be used by crest()
 #' @export
 #' @examples
@@ -23,7 +25,7 @@
 #' db <- connect_online()
 #' }
 
-crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = -90, ymx = 90, continents=NA, countries=NA, realms=NA, biomes=NA, ecoregions=NA, minGridCells=20, bin_width=NA, shape=NA, npoints = 500 ) {
+crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = -90, ymx = 90, continents=NA, countries=NA, realms=NA, biomes=NA, ecoregions=NA, minGridCells=20, bin_width=NA, shape=NA, npoints = 500, geoWeighting = TRUE, climateSpaceWeighting = TRUE ) {
     if (is.character(df)) {
         df <- rio::import(df)
     }
@@ -165,17 +167,24 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
             for(sp in unique(distributions[[tax]][, 'taxonid'])) {
                 w <- which(distributions[[tax]][, 'taxonid'] == sp)
                 tmp <- cbind( tmp,
-                              fit_pdfsp( distributions[[tax]][w, clim],
-                                         ccs[[clim]],
-                                         bin_width[clim, ],
-                                         shape[clim, ],
-                                         xrange[[clim]]
+                              fit_pdfsp( climate = distributions[[tax]][w, clim],
+                                         ccs = ccs[[clim]],
+                                         bin_width = bin_width[clim, ],
+                                         shape = shape[clim, ],
+                                         xrange = xrange[[clim]],
+                                         use_ccs = climateSpaceWeighting
                                         )
                              )
-                pdfpol <- pdfpol + tmp[, ncol(tmp)] * length(w)
+                pdfpol <- pdfpol + tmp[, ncol(tmp)] * ifelse( geoWeighting,
+                                                              length(w),
+                                                              1
+                                                             )
             }
             pdfs[[tax]][[clim]][['pdfsp']] <- tmp[, -1]
-            pdfs[[tax]][[clim]][['pdfpol']] <- pdfpol / nrow(distributions)
+            pdfs[[tax]][[clim]][['pdfpol']] <- pdfpol / ifelse( geoWeighting,
+                                                                nrow(distributions[[tax]]),
+                                                                length(unique(distributions[[tax]][, 'taxonid']))
+                                                               )
         }
     }
 }

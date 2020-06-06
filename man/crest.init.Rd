@@ -21,7 +21,9 @@ crest.init(
   minGridCells = 20,
   bin_width = NA,
   shape = NA,
-  npoints = 500
+  npoints = 500,
+  geoWeighting = TRUE,
+  climateSpaceWeighting = TRUE
 )
 }
 \arguments{
@@ -52,6 +54,10 @@ crest.init(
 \item{shape}{.}
 
 \item{npoints}{The number of points to be used to fit the pdfs.}
+
+\item{geoWeighting}{The number of points to be used to fit the pdfs.}
+
+\item{climateSpaceWeighting}{The number of points to be used to fit the pdfs.}
 }
 \value{
 The parameters to be used by crest()

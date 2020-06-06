@@ -4,7 +4,7 @@
 \alias{fit_pdfsp}
 \title{Fit the species pdfs.}
 \usage{
-fit_pdfsp(climate, ccs, bin_width, shape, xrange)
+fit_pdfsp(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE)
 }
 \arguments{
 \item{climate}{A vector of climatic values where the species is present.}
@@ -16,6 +16,9 @@ fit_pdfsp(climate, ccs, bin_width, shape, xrange)
 \item{shape}{The shape of the species pdfs. Use 'normal' or 'lognormal'.}
 
 \item{xrange}{The climate gradient upon which the pdf with be defined.}
+
+\item{use_ccs}{Boolean to indicate if the pdfsp should be corrected by the
+distributin of the modern climate space}
 }
 \value{
 The pdf of the species.
