@@ -15,9 +15,12 @@
 #' @param minGridCells .
 #' @param bin_width .
 #' @param shape .
+#' @param selectedTaxa .
 #' @param npoints The number of points to be used to fit the pdfs.
 #' @param geoWeighting The number of points to be used to fit the pdfs.
 #' @param climateSpaceWeighting The number of points to be used to fit the pdfs.
+#' @param presenceThreshold .
+#' @param taxWeight 'originalData', 'presence/absence', percentages' or 'normalisation'
 #' @return The parameters to be used by crest()
 #' @export
 #' @examples
@@ -25,7 +28,7 @@
 #' db <- connect_online()
 #' }
 
-crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = -90, ymx = 90, continents=NA, countries=NA, realms=NA, biomes=NA, ecoregions=NA, minGridCells=20, bin_width=NA, shape=NA, npoints = 500, geoWeighting = TRUE, climateSpaceWeighting = TRUE ) {
+crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = -90, ymx = 90, continents=NA, countries=NA, realms=NA, biomes=NA, ecoregions=NA, minGridCells=20, bin_width=NA, shape=NA, npoints = 500, geoWeighting = TRUE, climateSpaceWeighting = TRUE, selectedTaxa = NA, presenceThreshold = 0, taxWeight = 'normalisation' ) {
     if (is.character(df)) {
         df <- rio::import(df)
     }
@@ -44,6 +47,16 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
 
     taxa <- colnames(df)[-1]
     time <- df[, 1]
+
+
+    if (is.na(selectedTaxa)) {
+        selectedTaxa <- data.frame( matrix( rep(1, length(climate) * length(taxa)),
+                                           ncol = length(climate)
+                                          )
+                                   )
+        rownames(selectedTaxa) = taxa
+        colnames(selectedTaxa) = climate
+    }
 
     if (sum(taxa %in% pse$ProxyName) != length(taxa)) {
         print(paste("The following taxa are in the input file and are not in",
@@ -113,7 +126,7 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
     xmx=-50; xmn=-85; ymn=-15; ymx=10
     continents=countries=realms=biomes=ecoregions=NA
     shape=c('normal','lognormal')
-    bin_wdith=c(2,2500)
+    bin_width=c(2,2500)
     #Getting climates ----------------------------------------------------------
     climate_space <- getClimateSpace( climate,
                                       xmn, xmx, ymn, ymx,
@@ -187,4 +200,37 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
                                                                )
         }
     }
+
+    if (tolower(taxWeight) == 'percentages') {
+        taxWeight <- convert2percentages(df)
+    } else (
+        if (tolower(taxWeight) == 'presence/absence') {
+            taxWeight <- convert2presenceAbsence(df, presenceThreshold)
+        } else {
+            if (tolower(taxWeight) == 'normalisation') {
+                taxWeight <- normalise(df)
+            } else {
+                taxWeight <- df
+            }
+        }
+    )
+    colnames(taxWeight) <- colnames(df)
+
+    reconstructions <- list()
+    for (clim in climate) {
+        reconstructions[[clim]] <- rep(1, npoints)
+        for(tax in names(pdfs)) {
+            norm_factor <- 0
+            if (taxWeight[tax, clim] > 0 & selectedTaxa[tax, clim] > 1) {
+                norn_factor <- norm_factor + taxWeight[tax, clim]
+                reconstructions[[clim]] <- reconstructions[[clim]]
+                                             *
+                                           pdfs[[tax]][[clim]][['pdfpol']]**taxWeight[tax, clim]
+            }
+        }
+        reconstructions[[clim]] <- reconstructions[[clim]]**(1 / sum(norm_factor))
+    }
+
+
+
 }
