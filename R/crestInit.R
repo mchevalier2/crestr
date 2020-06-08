@@ -86,21 +86,24 @@ crest.init <- function ( df,
     }
 
     cont.list <- accContinentNames()
-    for (cont in continents) {
-        if (! cont %in% names(cont.list)) {
-            print(paste("Problem here. The continent '", cont, "' is not an accepted value. Please select a name from the following list.", sep=''))
-            print(names(cont.list))
-            return()
+    if (! is.na(continents)) {
+        for (cont in continents) {
+            if (! cont %in% names(cont.list)) {
+                print(paste("Problem here. The continent '", cont, "' is not an accepted value. Please select a name from the following list.", sep=''))
+                print(names(cont.list))
+                return()
+            }
         }
     }
-    for (country  in countries) {
-        if (! country %in% unlist(cont.list)) {
-            print(paste("Problem here. The country '", country, "' is not an accepted value. Please select a name from the following list.", sep=''))
-            print(cont.list)
-            return()
+    if (! is.na(countries)) {
+        for (country  in countries) {
+            if (! country %in% unlist(cont.list)) {
+                print(paste("Problem here. The country '", country, "' is not an accepted value. Please select a name from the following list.", sep=''))
+                print(cont.list)
+                return()
+            }
         }
     }
-
 
 ##.Formatting data in the expected format --------------------------------------
     taxa <- colnames(df)[-1]
@@ -123,7 +126,7 @@ crest.init <- function ( df,
                     " not in the proxy_species_equivalency table."))
         print(paste(missing_taxa, collapse = ', '))
         ss <- paste("Should we exclude",
-                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon)'),
+                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon'),
                     "and continue? [Y/N] "
                   )
         x <- base::readline(ss)
@@ -147,7 +150,7 @@ crest.init <- function ( df,
                     " not in the input table."))
         print(paste(missing_taxa, collapse = ', '))
         ss <- paste("Should we exclude",
-                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon)'),
+                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon'),
                     "and continue? [Y/N] "
                   )
         x <- base::readline(ss)
@@ -194,13 +197,6 @@ crest.init <- function ( df,
     taxonID2proxy <- taxonID2proxy[-1, ]
     taxonID2proxy <- taxonID2proxy[order(taxonID2proxy[, 'proxyName']), ]
 
-    ##Need to delete Cyperaceae because it is not in the input pollen; only the pse.
-
-    climate=c('bio1','ai')
-    xmx=-50; xmn=-85; ymn=-15; ymx=10
-    continents=countries=realms=biomes=ecoregions=NA
-    shape=c('normal','lognormal')
-    bin_width=c(2,2500)
     #Getting climates ----------------------------------------------------------
     climate_space <- getClimateSpace( climate,
                                       xmn, xmx, ymn, ymx,
