@@ -28,12 +28,30 @@
 #' db <- connect_online()
 #' }
 
-crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = -90, ymx = 90, continents=NA, countries=NA, realms=NA, biomes=NA, ecoregions=NA, minGridCells=20, bin_width=NA, shape=NA, npoints = 500, geoWeighting = TRUE, climateSpaceWeighting = TRUE, selectedTaxa = NA, presenceThreshold = 0, taxWeight = 'normalisation' ) {
+crest.init <- function ( df,
+                         pse,
+                         taxaType,
+                         climate,
+                         xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                         continents=NA, countries=NA,
+                         realms=NA, biomes=NA, ecoregions=NA,
+                         minGridCells=20,
+                         bin_width=NA,
+                         shape=NA,
+                         npoints = 500,
+                         geoWeighting = TRUE,
+                         climateSpaceWeighting = TRUE,
+                         selectedTaxa = NA,
+                         presenceThreshold = 0,
+                         taxWeight = 'normalisation'
+                        ) {
+
+##.Testing if the input variables are in the correct format --------------------
     if (is.character(df)) {
         df <- rio::import(df)
     }
     if (! is.data.frame(df)) {
-        print("Problem here. Input data is not a data frame.")
+        cat("Problem here. Input data is not a data frame.")
         return()
     }
 
@@ -45,55 +63,109 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
         return()
     }
 
+    for (clim in climate) {
+        if (! (clim %in% accClimateVariables()[,1] | clim %in% accClimateVariables()[,2]) ) {
+            print(paste("Problem here. The variable '", clim, "' is not an accepted value. Please select a name or ID from the following list.", sep=''))
+            print(accClimateVariables())
+            return()
+        }
+    }
+
+    if (xmn >= xmx) {
+        print("xmn is larger than xmx. Inverting the two values and continuing.")
+        tmp <- xmn
+        xmn <- xmx
+        xmx <- tmp
+    }
+
+    if (ymn >= ymx) {
+        print("ymn is larger than ymx. Inverting the two values and continuing.")
+        tmp <- ymn
+        ymn <- ymx
+        ymx <- tmp
+    }
+
+    cont.list <- accContinentNames()
+    for (cont in continents) {
+        if (! cont %in% names(cont.list)) {
+            print(paste("Problem here. The continent '", cont, "' is not an accepted value. Please select a name from the following list.", sep=''))
+            print(names(cont.list))
+            return()
+        }
+    }
+    for (country  in countries) {
+        if (! country %in% unlist(cont.list)) {
+            print(paste("Problem here. The country '", country, "' is not an accepted value. Please select a name from the following list.", sep=''))
+            print(cont.list)
+            return()
+        }
+    }
+
+
+##.Formatting data in the expected format --------------------------------------
     taxa <- colnames(df)[-1]
     time <- df[, 1]
 
-
     if (is.na(selectedTaxa)) {
         selectedTaxa <- data.frame( matrix( rep(1, length(climate) * length(taxa)),
-                                           ncol = length(climate)
-                                          )
+                                            ncol = length(climate)
+                                           )
                                    )
         rownames(selectedTaxa) = taxa
         colnames(selectedTaxa) = climate
     }
 
     if (sum(taxa %in% pse$ProxyName) != length(taxa)) {
-        print(paste("The following taxa are in the input file and are not in",
-                    "the proxy_species_equivalency table."))
         missing_taxa <- taxa[! (taxa %in% pse$ProxyName)]
+        print(paste("The following", ifelse( length(missing_taxa) > 1,
+                                             'taxa are in the input file and are',
+                                             'taxon is in the input file and is'),
+                    " not in the proxy_species_equivalency table."))
         print(paste(missing_taxa, collapse = ', '))
-        x <- base::readline("Should we continue? [Y/N] ")
+        ss <- paste("Should we exclude",
+                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon)'),
+                    "and continue? [Y/N] "
+                  )
+        x <- base::readline(ss)
         while (! x %in% c('y', 'yes', 'Y', 'YES', 'n', 'N', 'no', 'NO') ) {
-            x <- base::readline("Should we continue? [Y/N] ")
+            x <- base::readline(ss)
         }
         if( x %in% c('n', 'N', 'no', 'NO')) {
             return()
         } else {
-            df.ok <- TRUE
-            taxa <- taxa[taxa %in% pse$ProxyName]
+            df <- df[, -missing_taxa]
+            taxa <- colnames(df)[-1]
+            selectedTaxa <- selectedTaxa[-missing_taxa, ]
         }
     }
 
     if (sum(unique(pse$ProxyName) %in% taxa) != length(unique(pse$ProxyName))) {
-        print(paste("The following proxies are in the proxy_species_equivalency",
-                    "table but not in the input data file."))
         missing_taxa <- unique(pse$ProxyName)[! (unique(pse$ProxyName) %in% taxa)]
+        print(paste("The following", ifelse( length(missing_taxa) > 1,
+                                             'taxa are in the proxy_species_equivalency file and are',
+                                             'taxon is in the proxy_species_equivalency file and is'),
+                    " not in the input table."))
         print(paste(missing_taxa, collapse = ', '))
-        x <- base::readline("Should we continue? [Y/N] ")
+        ss <- paste("Should we exclude",
+                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon)'),
+                    "and continue? [Y/N] "
+                  )
+        x <- base::readline(ss)
         while (! x %in% c('y', 'yes', 'Y', 'YES', 'n', 'N', 'no', 'NO') ) {
-            x <- base::readline("Should we continue? [Y/N] ")
+            x <- base::readline(ss)
         }
         if( x %in% c('n', 'N', 'no', 'NO')) {
             return()
         } else {
-            pse.ok <- TRUE
             pse <- pse[pse$ProxyName %in% taxa, ]
             pse <- pse[pse$Level < 4, ]
+            taxa <- unique(pse$ProxyName)
+            selectedTaxa <- selectedTaxa[taxa, ]
+            df <- df[, taxa]
         }
     }
 
-    #Getting list of species ---------------------------------------------------
+##.Getting list of species -----------------------------------------------------
     taxonID2proxy <- matrix(ncol = 2)
     colnames(taxonID2proxy) <- c("taxonID", "proxyName")
     for (taxLevel in 1:3){
@@ -122,6 +194,8 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
     taxonID2proxy <- taxonID2proxy[-1, ]
     taxonID2proxy <- taxonID2proxy[order(taxonID2proxy[, 'proxyName']), ]
 
+    ##Need to delete Cyperaceae because it is not in the input pollen; only the pse.
+
     climate=c('bio1','ai')
     xmx=-50; xmn=-85; ymn=-15; ymx=10
     continents=countries=realms=biomes=ecoregions=NA
@@ -135,7 +209,7 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
                                      )
 
     distributions <- list()
-    for(tax in unique(taxonID2proxy[, 'proxyName'])){
+    for(tax in unique(taxonID2proxy[, 'proxyName'])) {
         print(tax)
         distributions[[tax]] <- getDistribTaxa( taxIDs = taxonID2proxy[taxonID2proxy[, 'proxyName'] == tax, 1],
                                                 climate,
@@ -201,6 +275,8 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
         }
     }
 
+    taxWeight = 'normalisation'
+
     if (tolower(taxWeight) == 'percentages') {
         taxWeight <- convert2percentages(df)
     } else (
@@ -218,19 +294,34 @@ crest.init <- function(df, pse, taxaType, climate, xmn = -180, xmx = 180, ymn = 
 
     reconstructions <- list()
     for (clim in climate) {
-        reconstructions[[clim]] <- rep(1, npoints)
-        for(tax in names(pdfs)) {
+        reconstructions[[clim]][['posterior']] <- matrix(rep(1, npoints * nrow(df)), ncol = npoints)
+        reconstructions[[clim]][['optima']] <- rep(NA, nrow(df))
+        for (s in 1:nrow(df)) {
             norm_factor <- 0
-            if (taxWeight[tax, clim] > 0 & selectedTaxa[tax, clim] > 1) {
-                norn_factor <- norm_factor + taxWeight[tax, clim]
-                reconstructions[[clim]] <- reconstructions[[clim]]
-                                             *
-                                           pdfs[[tax]][[clim]][['pdfpol']]**taxWeight[tax, clim]
+            for(tax in names(pdfs)) {
+                if (taxWeight[s, tax] > 0 & selectedTaxa[tax, clim] > 0) {
+                    norm_factor <- norm_factor + taxWeight[s, tax]
+                    #print(sum(pdfs[[tax]][[clim]][['pdfpol']]**taxWeight[s, tax]))
+                    reconstructions[[clim]][['posterior']][s, ] <-
+                                      reconstructions[[clim]][['posterior']][s, ] *
+                                      pdfs[[tax]][[clim]][['pdfpol']]**taxWeight[s, tax]
+                }
             }
+            reconstructions[[clim]][['posterior']][s, ] <-
+                                    reconstructions[[clim]][['posterior']][s, ]**(1 / norm_factor)
+            reconstructions[[clim]][['posterior']][s, ] <-
+                                    reconstructions[[clim]][['posterior']][s, ] /
+                                    (  sum(reconstructions[[clim]][['posterior']][s,]) *
+                                       (xrange[[clim]][2] -xrange[[clim]][1])
+                                     )
+            reconstructions[[clim]][['optima']][s] <-
+                                    xrange[[clim]][which.max(reconstructions[[clim]][['posterior']][s, ])]
         }
-        reconstructions[[clim]] <- reconstructions[[clim]]**(1 / sum(norm_factor))
     }
 
 
-
+clim='bio1'
+plot(0,0,xlim=range(xrange[[clim]]), ylim=c(0,0.1))
+for(i in 1:nrow(df)) points(xrange[[clim]], reconstructions[[clim]][['posterior']][i,], type='l')
+plot(df[,1], reconstructions[[clim]][['optima']])
 }

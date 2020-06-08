@@ -8,30 +8,31 @@
 #' accClimateVariables()
 
 accClimateVariables <- function() {
-    res <- data.frame( c(paste('bio', 1:19, sep=''), 'ai'),
-                       c('Annual Mean Temperature',
-                         'Mean Diurnal Range (Mean of monthly (max temp - min temp))',
-                         'Isothermality (BIO2/BIO7) (x100)',
-                         'Temperature Seasonality (standard deviation x100)',
-                         'Max Temperature of Warmest Month',
-                         'Min Temperature of Coldest Month',
-                         'Temperature Annual Range (BIO5-BIO6)',
-                         'Mean Temperature of Wettest Quarter',
-                         'Mean Temperature of Driest Quarter',
-                         'Mean Temperature of Warmest Quarter',
-                         'Mean Temperature of Coldest Quarter',
-                         'Annual Precipitation',
-                         'Precipitation of Wettest Month',
-                         'Precipitation of Driest Month',
-                         'Precipitation Seasonality (Coefficient of Variation)',
-                         'Precipitation of Wettest Quarter',
-                         'Precipitation of Driest Quarter',
-                         'Precipitation of Warmest Quarter',
-                         'Precipitation of Coldest Quarter',
+    res <- data.frame( 1:20,
+                       c(paste('bio', 1:19, sep=''), 'ai'),
+                       c( 'Annual Mean Temperature',
+                          'Mean Diurnal Range (Mean of monthly (max temp - min temp))',
+                          'Isothermality (BIO2/BIO7) (x100)',
+                          'Temperature Seasonality (standard deviation x100)',
+                          'Max Temperature of Warmest Month',
+                          'Min Temperature of Coldest Month',
+                          'Temperature Annual Range (BIO5-BIO6)',
+                          'Mean Temperature of Wettest Quarter',
+                          'Mean Temperature of Driest Quarter',
+                          'Mean Temperature of Warmest Quarter',
+                          'Mean Temperature of Coldest Quarter',
+                          'Annual Precipitation',
+                          'Precipitation of Wettest Month',
+                          'Precipitation of Driest Month',
+                          'Precipitation Seasonality (Coefficient of Variation)',
+                          'Precipitation of Wettest Quarter',
+                          'Precipitation of Driest Quarter',
+                          'Precipitation of Warmest Quarter',
+                          'Precipitation of Coldest Quarter',
                           "Aridity Index. Low/High values indicate dry/wet environmental conditions"
                          )
-                      )
-    colnames(res) <- c('Variable name', 'Description')
+                       )
+    colnames(res) <- c('Variable ID', 'Variable name', 'Description')
     res
 }
 

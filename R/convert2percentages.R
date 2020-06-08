@@ -65,7 +65,7 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df) 
 #' convert2presenceAbsence(df, threshold = 15)
 #' convert2presenceAbsence(df, col2convert = 3:5)
 
-normalisePercents <- function(df, threshold = 2, col2convert = 2:ncol(df) ) {
+normalise <- function(df, threshold = 2, col2convert = 2:ncol(df) ) {
     df2 <- convert2percentages(df, col2convert)
     df2 <- cbind( df2[, -col2convert],
                   df2[, col2convert] / apply(df2[, col2convert], 1, meanPositiveValues )

@@ -23,7 +23,10 @@ crest.init(
   shape = NA,
   npoints = 500,
   geoWeighting = TRUE,
-  climateSpaceWeighting = TRUE
+  climateSpaceWeighting = TRUE,
+  selectedTaxa = NA,
+  presenceThreshold = 0,
+  taxWeight = "normalisation"
 )
 }
 \arguments{
@@ -58,6 +61,12 @@ crest.init(
 \item{geoWeighting}{The number of points to be used to fit the pdfs.}
 
 \item{climateSpaceWeighting}{The number of points to be used to fit the pdfs.}
+
+\item{selectedTaxa}{.}
+
+\item{presenceThreshold}{.}
+
+\item{taxWeight}{'originalData', 'presence/absence', percentages' or 'normalisation'}
 }
 \value{
 The parameters to be used by crest()
