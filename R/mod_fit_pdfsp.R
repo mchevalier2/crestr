@@ -27,6 +27,7 @@
 #' sum(pdfsp * (xrange[2] - xrange[1])) == 1
 
 fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
+    climate <- climate[!is.na(climate)]
     if (use_ccs) {
         w <- (climate - ccs[['k1']][1]) %/% bin_width
         w2 <- base::tabulate(w + 1, nbins = base::length(ccs[['k1']])) / ccs[['k2']]

@@ -67,9 +67,10 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df) 
 
 normalise <- function(df, threshold = 2, col2convert = 2:ncol(df) ) {
     df2 <- convert2percentages(df, col2convert)
-    df2 <- cbind( df2[, -col2convert],
-                  df2[, col2convert] / apply(df2[, col2convert], 1, meanPositiveValues )
-                 )
+    colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
+    for (i in 1:nrow(df2)) {
+        df2[i, col2convert] <- df2[i, col2convert] / colweights
+    }
     colnames(df2) <- colnames(df)
     rownames(df2) <- rownames(df)
     df2

@@ -3,6 +3,7 @@
 #' Connect to the gbif4crest_02 database by accessing the server on Amazon.
 #'
 #' @param request A SQL request to be executed.
+#' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return The result of the request.
 #' @export
 #' @examples
@@ -20,7 +21,7 @@
 #' head(southAfricaTaxa)
 #' }
 
-dbRequest <- function(request) {
+dbRequest <- function(request, dbname='gbif4crest_02') {
     db <- connect_online()
     res <- DBI::dbGetQuery(db, request)
     close_db_connection(db)

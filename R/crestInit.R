@@ -63,13 +63,24 @@ crest.init <- function ( df,
         return()
     }
 
-    for (clim in climate) {
-        if (! (clim %in% accClimateVariables()[,1] | clim %in% accClimateVariables()[,2]) ) {
-            print(paste("Problem here. The variable '", clim, "' is not an accepted value. Please select a name or ID from the following list.", sep=''))
-            print(accClimateVariables())
+    for (clim in 1:length(climate)) {
+        climVar <- accClimateVariables()
+        new_clim <- climate
+        if (! (climate[clim] %in% climVar[,1] | climate[clim] %in% climVar[,2]) ) {
+            print(paste("Problem here. The variable '", climate[clim], "' is not an accepted value. Please select a name or ID from the following list.", sep=''))
+            print(climVar)
             return()
+        } else {
+            defaultW <- getOption("warn")
+            options(warn = -1)
+            if (! is.na(as.numeric(climate[clim]))) {
+                new_clim[clim] <- as.character(climVar[which(climVar[, 1] == as.numeric(climate[clim])), 2])
+            }
+            options(warn = defaultW)
         }
     }
+    climate <- new_clim
+
 
     if (xmn >= xmx) {
         print("xmn is larger than xmx. Inverting the two values and continuing.")
@@ -77,12 +88,18 @@ crest.init <- function ( df,
         xmn <- xmx
         xmx <- tmp
     }
+    if (xmn < -180 | xmx > 180) {
+        print("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Continuing.")
+    }
 
     if (ymn >= ymx) {
         print("ymn is larger than ymx. Inverting the two values and continuing.")
         tmp <- ymn
         ymn <- ymx
         ymx <- tmp
+    }
+    if (ymn < -90 | ymx > 90) {
+        print("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Continuing.")
     }
 
     cont.list <- accContinentNames()
@@ -105,17 +122,43 @@ crest.init <- function ( df,
         }
     }
 
+    if (! is.na(countries[1]) | ! is.na(continents[1])) {
+        res <- dbRequest(paste0( "SELECT DISTINCT continent, countryname, count(*) FROM geo_qdgc WHERE ",
+                                 ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"),"') ")),
+                                 ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
+                                 ifelse(is.na(countries)[1], "", paste0("countryname IN ('", paste(countries, collapse = "', '"),"') ")),
+                                 " GROUP BY continent, countryname"
+                                )
+                         )
+        if (length(res) == 0) {
+            print(paste("Problem here. No result for any of the combination continent x country.", sep=''))
+        } else {
+            print(paste("The database is composed of these stuff.", sep=''))
+            res
+        }
+    }
+
 ##.Formatting data in the expected format --------------------------------------
     taxa <- colnames(df)[-1]
     time <- df[, 1]
 
-    if (is.na(selectedTaxa)) {
+    if (is.na(as.vector(selectedTaxa)[1])) {
         selectedTaxa <- data.frame( matrix( rep(1, length(climate) * length(taxa)),
                                             ncol = length(climate)
                                            )
                                    )
         rownames(selectedTaxa) = taxa
         colnames(selectedTaxa) = climate
+    } else {
+        w <- which(apply(selectedTaxa, 1, sum) == 0)
+        if (length(w) > 0) {
+            print("The following taxa are not selected for any variable and are therefore excluded from the study.")
+            print(taxa[w])
+            taxa <- taxa[-w]
+            selectedTaxa <- selectedTaxa[taxa, ]
+            pse <- pse[pse$ProxyName %in% taxa, ]
+            df <- df[, taxa]
+        }
     }
 
     if (sum(taxa %in% pse$ProxyName) != length(taxa)) {
@@ -203,6 +246,7 @@ crest.init <- function ( df,
                                       continents, countries,
                                       realms, biomes, ecoregions
                                      )
+    colnames(climate_space)[-c(1,2)] <- climate
 
     distributions <- list()
     for(tax in unique(taxonID2proxy[, 'proxyName'])) {
@@ -268,43 +312,42 @@ crest.init <- function ( df,
                                                                 nrow(distributions[[tax]]),
                                                                 length(unique(distributions[[tax]][, 'taxonid']))
                                                                )
+            pdfs[[tax]][[clim]][['pdfpol_log']] <- log(pdfs[[tax]][[clim]][['pdfpol']])
         }
     }
 
-    taxWeight = 'normalisation'
-
-    if (tolower(taxWeight) == 'percentages') {
-        taxWeight <- convert2percentages(df)
-    } else (
+    if (tolower(taxWeight) == 'normalisation') {
+        taxWeight <- normalise(df, col2convert=1:ncol(df))
+    } else {
         if (tolower(taxWeight) == 'presence/absence') {
-            taxWeight <- convert2presenceAbsence(df, presenceThreshold)
+            taxWeight <- convert2presenceAbsence(df, presenceThreshold, col2convert=1:ncol(df))
         } else {
-            if (tolower(taxWeight) == 'normalisation') {
-                taxWeight <- normalise(df)
+            if (tolower(taxWeight) == 'percentages') {
+              taxWeight <- convert2percentages(df, col2convert=1:ncol(df))
             } else {
                 taxWeight <- df
             }
         }
-    )
+    }
     colnames(taxWeight) <- colnames(df)
 
     reconstructions <- list()
     for (clim in climate) {
-        reconstructions[[clim]][['posterior']] <- matrix(rep(1, npoints * nrow(df)), ncol = npoints)
+        reconstructions[[clim]][['posterior']] <- matrix(rep(0, npoints * nrow(df)), ncol = npoints)
         reconstructions[[clim]][['optima']] <- rep(NA, nrow(df))
         for (s in 1:nrow(df)) {
             norm_factor <- 0
             for(tax in names(pdfs)) {
                 if (taxWeight[s, tax] > 0 & selectedTaxa[tax, clim] > 0) {
                     norm_factor <- norm_factor + taxWeight[s, tax]
-                    #print(sum(pdfs[[tax]][[clim]][['pdfpol']]**taxWeight[s, tax]))
                     reconstructions[[clim]][['posterior']][s, ] <-
-                                      reconstructions[[clim]][['posterior']][s, ] *
-                                      pdfs[[tax]][[clim]][['pdfpol']]**taxWeight[s, tax]
+                                      reconstructions[[clim]][['posterior']][s, ] +
+                                      pdfs[[tax]][[clim]][['pdfpol_log']]*taxWeight[s, tax]
                 }
             }
             reconstructions[[clim]][['posterior']][s, ] <-
-                                    reconstructions[[clim]][['posterior']][s, ]**(1 / norm_factor)
+                                    reconstructions[[clim]][['posterior']][s, ] * (1 / norm_factor)
+            reconstructions[[clim]][['posterior']][s, ] <- exp(reconstructions[[clim]][['posterior']][s, ])
             reconstructions[[clim]][['posterior']][s, ] <-
                                     reconstructions[[clim]][['posterior']][s, ] /
                                     (  sum(reconstructions[[clim]][['posterior']][s,]) *
@@ -314,10 +357,9 @@ crest.init <- function ( df,
                                     xrange[[clim]][which.max(reconstructions[[clim]][['posterior']][s, ])]
         }
     }
-
-
-clim='bio1'
-plot(0,0,xlim=range(xrange[[clim]]), ylim=c(0,0.1))
-for(i in 1:nrow(df)) points(xrange[[clim]], reconstructions[[clim]][['posterior']][i,], type='l')
-plot(df[,1], reconstructions[[clim]][['optima']])
+    for (tax in names(distributions)) {
+        for (clim in climate) {
+            pdfs[[tax]][[clim]][['pdfpol_log']] <- NA
+        }
+    }
 }

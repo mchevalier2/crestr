@@ -4,10 +4,12 @@
 \alias{dbRequest}
 \title{Connect to the gbif4crest database}
 \usage{
-dbRequest(request)
+dbRequest(request, dbname = "gbif4crest_02")
 }
 \arguments{
 \item{request}{A SQL request to be executed.}
+
+\item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
 The result of the request.
