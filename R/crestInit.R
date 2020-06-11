@@ -28,7 +28,7 @@
 #' db <- connect_online()
 #' }
 
-crest.init <- function ( df,
+crest <- function ( df,
                          pse,
                          taxaType,
                          climate,
@@ -359,7 +359,7 @@ crest.init <- function ( df,
     }
     for (tax in names(distributions)) {
         for (clim in climate) {
-            pdfs[[tax]][[clim]][['pdfpol_log']] <- NA
+            pdfs[[tax]][[clim]][['pdfpol_log']] <- NULL
         }
     }
 }
