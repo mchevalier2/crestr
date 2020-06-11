@@ -28,23 +28,20 @@
 #' db <- connect_online()
 #' }
 
-crest <- function ( df,
-                         pse,
-                         taxaType,
-                         climate,
-                         xmn = -180, xmx = 180, ymn = -90, ymx = 90,
-                         continents=NA, countries=NA,
-                         realms=NA, biomes=NA, ecoregions=NA,
-                         minGridCells=20,
-                         bin_width=NA,
-                         shape=NA,
-                         npoints = 500,
-                         geoWeighting = TRUE,
-                         climateSpaceWeighting = TRUE,
-                         selectedTaxa = NA,
-                         presenceThreshold = 0,
-                         taxWeight = 'normalisation'
-                        ) {
+crest <- function ( df, pse, taxaType, climate,
+                    xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                    continents=NA, countries=NA,
+                    realms=NA, biomes=NA, ecoregions=NA,
+                    minGridCells=20,
+                    bin_width=NA,
+                    shape=NA,
+                    npoints = 500,
+                    geoWeighting = TRUE,
+                    climateSpaceWeighting = TRUE,
+                    selectedTaxa = NA,
+                    presenceThreshold = 0,
+                    taxWeight = 'normalisation'
+                  ) {
 
 ##.Testing if the input variables are in the correct format --------------------
     if (is.character(df)) {
@@ -139,27 +136,21 @@ crest <- function ( df,
     }
 
 ##.Formatting data in the expected format --------------------------------------
-    taxa <- colnames(df)[-1]
     time <- df[, 1]
+    time.name <- colnames(df)[1]
+    taxa <- colnames(df)[-1]
+    df <- df[, -1]
 
-    if (is.na(as.vector(selectedTaxa)[1])) {
+    if (is.na(as.vector(t(selectedTaxa))[1])) {
         selectedTaxa <- data.frame( matrix( rep(1, length(climate) * length(taxa)),
                                             ncol = length(climate)
                                            )
                                    )
         rownames(selectedTaxa) = taxa
         colnames(selectedTaxa) = climate
-    } else {
-        w <- which(apply(selectedTaxa, 1, sum) == 0)
-        if (length(w) > 0) {
-            print("The following taxa are not selected for any variable and are therefore excluded from the study.")
-            print(taxa[w])
-            taxa <- taxa[-w]
-            selectedTaxa <- selectedTaxa[taxa, ]
-            pse <- pse[pse$ProxyName %in% taxa, ]
-            df <- df[, taxa]
-        }
     }
+    selectedTaxa <- cbind(selectedTaxa, as.character(rep("", length(taxa))))
+    colnames(selectedTaxa)[ncol(selectedTaxa)] <- 'notes'
 
     if (sum(taxa %in% pse$ProxyName) != length(taxa)) {
         missing_taxa <- taxa[! (taxa %in% pse$ProxyName)]
@@ -168,9 +159,9 @@ crest <- function ( df,
                                              'taxon is in the input file and is'),
                     " not in the proxy_species_equivalency table."))
         print(paste(missing_taxa, collapse = ', '))
-        ss <- paste("Should we exclude",
-                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon'),
-                    "and continue? [Y/N] "
+        ss <- paste("Should",
+                    ifelse(length(missing_taxa) > 1, 'these taxa', 'this taxon'),
+                    "be ignored to continue? [Y/N] "
                   )
         x <- base::readline(ss)
         while (! x %in% c('y', 'yes', 'Y', 'YES', 'n', 'N', 'no', 'NO') ) {
@@ -179,9 +170,10 @@ crest <- function ( df,
         if( x %in% c('n', 'N', 'no', 'NO')) {
             return()
         } else {
-            df <- df[, -missing_taxa]
-            taxa <- colnames(df)[-1]
-            selectedTaxa <- selectedTaxa[-missing_taxa, ]
+            for (tax in missing_taxa) {
+                #selectedTaxa[tax, ncol(selectedTaxa)] <- as.character(selectedTaxa[tax, ncol(selectedTaxa)])
+                selectedTaxa[tax, ] <- c(rep(0, length(climate)), as.factor('No association with vegetation'))
+            }
         }
     }
 
@@ -192,9 +184,9 @@ crest <- function ( df,
                                              'taxon is in the proxy_species_equivalency file and is'),
                     " not in the input table."))
         print(paste(missing_taxa, collapse = ', '))
-        ss <- paste("Should we exclude",
-                    ifelse(length(missing_taxa) > 1, 'taxa', 'taxon'),
-                    "and continue? [Y/N] "
+        ss <- paste("Should",
+                    ifelse(length(missing_taxa) > 1, 'these taxa', 'this taxon'),
+                    "be ignored to continue? [Y/N] "
                   )
         x <- base::readline(ss)
         while (! x %in% c('y', 'yes', 'Y', 'YES', 'n', 'N', 'no', 'NO') ) {
@@ -204,10 +196,21 @@ crest <- function ( df,
             return()
         } else {
             pse <- pse[pse$ProxyName %in% taxa, ]
-            pse <- pse[pse$Level < 4, ]
-            taxa <- unique(pse$ProxyName)
-            selectedTaxa <- selectedTaxa[taxa, ]
-            df <- df[, taxa]
+            w <- which(pse$Level == 4)
+            if (length(w) > 0) {
+                print(paste("The following", ifelse(length(w)>1, 'taxa have', 'taxon has'),
+                            "not been classified and will not contribute to the reconstruction.",
+                            ifelse(length(w)>1, 'They', 'It'), "will still contribute",
+                            "to the estimation of the weights if either 'normalisation' or",
+                            "'percentages' have been selected."
+                          )
+                      )
+                print(unique(pse$ProxyName[w]))
+                for (tax in unique(pse$ProxyName[w])) {
+                    selectedTaxa[tax, ] <- c(rep(0, length(climate)), as.character('No association with vegetation'))
+                }
+                pse <- pse[-w, ]
+            }
         }
     }
 
@@ -233,7 +236,8 @@ crest <- function ( df,
                                            )
                 } else {
                     print(paste("No match for taxon ", paste(pse[w, 2:5], collapse = ', ')))
-                }
+                    selectedTaxa[tax, ] <- c(rep(0, length(climate)), 'No correspondance with vegetation')
+              }
             }
         }
     }
@@ -249,20 +253,25 @@ crest <- function ( df,
     colnames(climate_space)[-c(1,2)] <- climate
 
     distributions <- list()
-    for(tax in unique(taxonID2proxy[, 'proxyName'])) {
+    for(tax in taxa) {
         print(tax)
-        distributions[[tax]] <- getDistribTaxa( taxIDs = taxonID2proxy[taxonID2proxy[, 'proxyName'] == tax, 1],
-                                                climate,
-                                                xmn, xmx, ymn, ymx,
-                                                continents, countries,
-                                                realms, biomes, ecoregions
-                                               )
-        extent_taxa <- table(distributions[[tax]][,1])
-        extent_taxa <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
-        distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa, ]
-        if (nrow(distributions[[tax]]) == 0) {
-            print(paste0("Insufficient data points to calibrate a pdf for ", tax))
-            distributions[[tax]] <- NULL
+        if (sum(as.numeric(selectedTaxa[tax, climate])) > 0) {
+            distributions[[tax]] <- getDistribTaxa( taxIDs = taxonID2proxy[taxonID2proxy[, 'proxyName'] == tax, 1],
+                                                    climate,
+                                                    xmn, xmx, ymn, ymx,
+                                                    continents, countries,
+                                                    realms, biomes, ecoregions
+                                                   )
+            extent_taxa <- table(distributions[[tax]][,1])
+            extent_taxa <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
+            distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa, ]
+            if (nrow(distributions[[tax]]) == 0) {
+                print(paste0("Insufficient data points to calibrate a pdf for ", tax))
+                distributions[[tax]] <- NA
+                selectedTaxa[tax, ] <- c(rep(0, length(climate)), 'Not enough data points')
+            }
+        } else {
+            distributions[[tax]] <- NA
         }
     }
     save(distributions, file="/Users/mchevali1/GitHub/Rpackages/_crestr_testdata/LagunaFuquene_species_distributions.RData")
@@ -286,33 +295,41 @@ crest <- function ( df,
 
     pdfs <- list()
     for (tax in names(distributions)) {
-        pdfs[[tax]] <- list()
-        for (clim in climate) {
-            pdfs[[tax]][[clim]] <- list()
-            tmp <- xrange[[clim]]
-            pdfpol <- rep(0, npoints)
-            for(sp in unique(distributions[[tax]][, 'taxonid'])) {
-                w <- which(distributions[[tax]][, 'taxonid'] == sp)
-                tmp <- cbind( tmp,
-                              fit_pdfsp( climate = distributions[[tax]][w, clim],
-                                         ccs = ccs[[clim]],
-                                         bin_width = bin_width[clim, ],
-                                         shape = shape[clim, ],
-                                         xrange = xrange[[clim]],
-                                         use_ccs = climateSpaceWeighting
-                                        )
-                             )
-                pdfpol <- pdfpol + tmp[, ncol(tmp)] * ifelse( geoWeighting,
-                                                              length(w),
-                                                              1
-                                                             )
+        if (sum(as.numeric(selectedTaxa[tax, climate])) > 0) {
+            pdfs[[tax]] <- list()
+            for (clim in climate) {
+                if (sum(as.numeric(selectedTaxa[tax, clim])) > 0) {
+                    pdfs[[tax]][[clim]] <- list()
+                    tmp <- xrange[[clim]]
+                    pdfpol <- rep(0, npoints)
+                    for(sp in unique(distributions[[tax]][, 'taxonid'])) {
+                        w <- which(distributions[[tax]][, 'taxonid'] == sp)
+                        tmp <- cbind( tmp,
+                                      fit_pdfsp( climate = distributions[[tax]][w, clim],
+                                                 ccs = ccs[[clim]],
+                                                 bin_width = bin_width[clim, ],
+                                                 shape = shape[clim, ],
+                                                 xrange = xrange[[clim]],
+                                                 use_ccs = climateSpaceWeighting
+                                                )
+                                     )
+                        pdfpol <- pdfpol + tmp[, ncol(tmp)] * ifelse( geoWeighting,
+                                                                      length(w),
+                                                                      1
+                                                                     )
+                    }
+                    pdfs[[tax]][[clim]][['pdfsp']] <- tmp[, -1]
+                    pdfs[[tax]][[clim]][['pdfpol']] <- pdfpol / ifelse( geoWeighting,
+                                                                        nrow(distributions[[tax]]),
+                                                                        length(unique(distributions[[tax]][, 'taxonid']))
+                                                                       )
+                    pdfs[[tax]][[clim]][['pdfpol_log']] <- log(pdfs[[tax]][[clim]][['pdfpol']])
+                } else {
+                    pdfs[[tax]][[clim]] <- NA
+                }
             }
-            pdfs[[tax]][[clim]][['pdfsp']] <- tmp[, -1]
-            pdfs[[tax]][[clim]][['pdfpol']] <- pdfpol / ifelse( geoWeighting,
-                                                                nrow(distributions[[tax]]),
-                                                                length(unique(distributions[[tax]][, 'taxonid']))
-                                                               )
-            pdfs[[tax]][[clim]][['pdfpol_log']] <- log(pdfs[[tax]][[clim]][['pdfpol']])
+        } else {
+            pdfs[[tax]] <- NA
         }
     }
 
@@ -330,36 +347,43 @@ crest <- function ( df,
         }
     }
     colnames(taxWeight) <- colnames(df)
+    rownames(taxWeight) <- rownames(df)
 
     reconstructions <- list()
     for (clim in climate) {
-        reconstructions[[clim]][['posterior']] <- matrix(rep(0, npoints * nrow(df)), ncol = npoints)
-        reconstructions[[clim]][['optima']] <- rep(NA, nrow(df))
-        for (s in 1:nrow(df)) {
-            norm_factor <- 0
-            for(tax in names(pdfs)) {
-                if (taxWeight[s, tax] > 0 & selectedTaxa[tax, clim] > 0) {
-                    norm_factor <- norm_factor + taxWeight[s, tax]
-                    reconstructions[[clim]][['posterior']][s, ] <-
-                                      reconstructions[[clim]][['posterior']][s, ] +
-                                      pdfs[[tax]][[clim]][['pdfpol_log']]*taxWeight[s, tax]
+        if (sum(as.numeric(selectedTaxa[, clim])) > 0) {
+            reconstructions[[clim]][['posterior']] <- matrix(rep(0, npoints * nrow(df)), ncol = npoints)
+            reconstructions[[clim]][['optima']] <- rep(NA, nrow(df))
+            for (s in 1:nrow(df)) {
+                norm_factor <- 0
+                for(tax in names(pdfs)) {
+                    if (taxWeight[s, tax] > 0 & as.numeric(selectedTaxa[tax, clim]) > 0) {
+                        norm_factor <- norm_factor + taxWeight[s, tax]
+                        reconstructions[[clim]][['posterior']][s, ] <-
+                                          reconstructions[[clim]][['posterior']][s, ] +
+                                          pdfs[[tax]][[clim]][['pdfpol_log']]*taxWeight[s, tax]
+                    }
                 }
+                reconstructions[[clim]][['posterior']][s, ] <-
+                                        reconstructions[[clim]][['posterior']][s, ] * (1 / norm_factor)
+                reconstructions[[clim]][['posterior']][s, ] <- exp(reconstructions[[clim]][['posterior']][s, ])
+                reconstructions[[clim]][['posterior']][s, ] <-
+                                        reconstructions[[clim]][['posterior']][s, ] /
+                                        (  sum(reconstructions[[clim]][['posterior']][s,]) *
+                                           (xrange[[clim]][2] -xrange[[clim]][1])
+                                         )
+                reconstructions[[clim]][['optima']][s] <-
+                                        xrange[[clim]][which.max(reconstructions[[clim]][['posterior']][s, ])]
             }
-            reconstructions[[clim]][['posterior']][s, ] <-
-                                    reconstructions[[clim]][['posterior']][s, ] * (1 / norm_factor)
-            reconstructions[[clim]][['posterior']][s, ] <- exp(reconstructions[[clim]][['posterior']][s, ])
-            reconstructions[[clim]][['posterior']][s, ] <-
-                                    reconstructions[[clim]][['posterior']][s, ] /
-                                    (  sum(reconstructions[[clim]][['posterior']][s,]) *
-                                       (xrange[[clim]][2] -xrange[[clim]][1])
-                                     )
-            reconstructions[[clim]][['optima']][s] <-
-                                    xrange[[clim]][which.max(reconstructions[[clim]][['posterior']][s, ])]
+        } else {
+            reconstructions[[clim]] <- NA
         }
     }
     for (tax in names(distributions)) {
         for (clim in climate) {
-            pdfs[[tax]][[clim]][['pdfpol_log']] <- NULL
+            if (as.numeric(selectedTaxa[tax, clim]) > 0) {
+                pdfs[[tax]][[clim]][['pdfpol_log']] <- NULL
+            }
         }
     }
 }
