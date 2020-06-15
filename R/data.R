@@ -4,7 +4,7 @@
 #'
 #' @format A data frame with 20 rows (samples) and 7 columns (taxa):
 #' \describe{
-#'   \item{Age:}{Age assigned to each sample in 1000 years before 1950.}
+#'   \item{Age:}{Age of each sample}
 #'   \item{Taxon1:}{Percentage of Taxon1 in each sample.}
 #'   \item{Taxon2:}{Percentage of Taxon2 in each sample.}
 #'   \item{Taxon3:}{Percentage of Taxon3 in each sample.}
@@ -14,3 +14,35 @@
 #'   \item{Taxon7:}{Percentage of Taxon7 in each sample.}
 #' }
 "crest_ex"
+
+
+
+#' Example dataset to associate taxa with climate varibles.
+#'
+#' A data frame indicating which taxa should be used to reconstruct each
+#' climate variable.
+#'
+#' @format A data frame with 7 rows (taxa) and 2 columns (climate variables):
+#' \describe{
+#'   \item{bio1:}{The first variable to reconstruct (mean annual temperature)}
+#'   \item{bio12:}{The second variable to reconstruct (annual precipitation)}
+#' }
+"crest_ex_selection"
+
+
+
+#' Example dataset to Extract data from the example database.
+#'
+#' A database indicating the taxonomy of the example proxies.
+#'
+#' @format A data frame with 7 rows (taxa) and 5 columns (taxonomy description):
+#' \describe{
+#'   \item{Level:}{An integr indicating the taxonomic resolution
+#'                 (1 family, 2 genus, 3 species, 4 ignore taxon)}
+#'   \item{Family:}{The family corresponding to the ProxyName}
+#'   \item{Genus:}{The genus corresponding to the ProxyName}
+#'   \item{Species:}{The species corresponding to the ProxyName}
+#'   \item{ProxyName:}{The names of the observed proxies, as reported in the
+#'                     main data file}
+#' }
+"crest_ex_pse"

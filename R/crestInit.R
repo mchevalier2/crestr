@@ -25,9 +25,13 @@
 #' @return The parameters to be used by crest()
 #' @export
 #' @examples
-#' \dontrun{
-#' db <- connect_online()
-#' }
+#' data(crest_ex)
+#' data(crest_ex_pse)
+#' data(crest_ex_selection)
+#' crest(crest_ex, crest_ex_pse, taxaType = 0, climate = c('bio1', 'bio12'),
+#'       bin_width = c(2, 20), shape = c('normal', 'lognormal'),
+#'       selectedTaxa = crest_ex_selection, dbname = 'crest_example')
+
 
 crest <- function ( df, pse, taxaType, climate,
                     xmn = -180, xmx = 180, ymn = -90, ymx = 90,
@@ -101,7 +105,7 @@ crest <- function ( df, pse, taxaType, climate,
         print("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Continuing.")
     }
 
-    cont.list <- accContinentNames()
+    cont.list <- accContinentNames(dbname)
     if (! is.na(continents)) {
         for (cont in continents) {
             if (! cont %in% names(cont.list)) {
@@ -127,7 +131,8 @@ crest <- function ( df, pse, taxaType, climate,
                                  ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
                                  ifelse(is.na(countries)[1], "", paste0("countryname IN ('", paste(countries, collapse = "', '"),"') ")),
                                  " GROUP BY continent, countryname"
-                                )
+                               ),
+                          dbname
                          )
         if (length(res) == 0) {
             print(paste("Problem here. No result for any of the combination continent x country.", sep=''))
@@ -226,7 +231,8 @@ crest <- function ( df, pse, taxaType, climate,
                 taxonIDs <- getTaxonID( pse$Family[w],
                                         pse$Genus[w],
                                         pse$Species[w],
-                                        taxaType
+                                        taxaType,
+                                        dbname
                                        )
                 if(length(taxonIDs) > 0) {
                     existingTaxa <- taxonIDs %in% taxonID2proxy[, 'taxonID']
@@ -250,19 +256,20 @@ crest <- function ( df, pse, taxaType, climate,
     climate_space <- getClimateSpace( climate,
                                       xmn, xmx, ymn, ymx,
                                       continents, countries,
-                                      realms, biomes, ecoregions
+                                      realms, biomes, ecoregions,
+                                      dbname
                                      )
     colnames(climate_space)[-c(1,2)] <- climate
 
     distributions <- list()
     for(tax in taxa) {
-        print(tax)
         if (sum(as.numeric(selectedTaxa[tax, climate])) > 0) {
             distributions[[tax]] <- getDistribTaxa( taxIDs = taxonID2proxy[taxonID2proxy[, 'proxyName'] == tax, 1],
                                                     climate,
                                                     xmn, xmx, ymn, ymx,
                                                     continents, countries,
-                                                    realms, biomes, ecoregions
+                                                    realms, biomes, ecoregions,
+                                                    dbname
                                                    )
             extent_taxa <- table(distributions[[tax]][,1])
             extent_taxa <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
@@ -276,8 +283,6 @@ crest <- function ( df, pse, taxaType, climate,
             distributions[[tax]] <- NA
         }
     }
-    save(distributions, file="/Users/mchevali1/GitHub/Rpackages/_crestr_testdata/LagunaFuquene_species_distributions.RData")
-    load("/Users/mchevali1/GitHub/Rpackages/_crestr_testdata/LagunaFuquene_species_distributions.RData")
 
     if (! unique(is.na(bin_width))) {
         bin_width <- as.data.frame(bin_width)
@@ -387,5 +392,9 @@ crest <- function ( df, pse, taxaType, climate,
                 pdfs[[tax]][[clim]][['pdfpol_log']] <- NULL
             }
         }
+    }
+    par(mfrow=c(length(climate), 1))
+    for(clim in climate) {
+        plot(time, reconstructions[[clim]][['optima']], type='b')
     }
 }
