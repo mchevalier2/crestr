@@ -26,7 +26,8 @@ crest(
   climateSpaceWeighting = TRUE,
   selectedTaxa = NA,
   presenceThreshold = 0,
-  taxWeight = "normalisation"
+  taxWeight = "normalisation",
+  dbname = "gbif4crest_02"
 )
 }
 \arguments{
@@ -67,6 +68,8 @@ crest(
 \item{presenceThreshold}{.}
 
 \item{taxWeight}{'originalData', 'presence/absence', percentages' or 'normalisation'}
+
+\item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
 The parameters to be used by crest()

@@ -4,7 +4,13 @@
 \alias{getTaxonID}
 \title{Extract taxonID(s) corresponding to the taxonomic description}
 \usage{
-getTaxonID(family, genus = "", species = "", taxaType = 1)
+getTaxonID(
+  family,
+  genus = "",
+  species = "",
+  taxaType = 1,
+  dbname = "gbif4crest_02"
+)
 }
 \arguments{
 \item{family}{The name of the family.}
@@ -15,7 +21,9 @@ getTaxonID(family, genus = "", species = "", taxaType = 1)
 
 \item{taxaType}{A numerical index (between 1 and 5) to define the type of
 palaeoproxy used: 1 for plants, 2 for beetles, 3 for foraminifers,
-4 for diatoms and 5 for chironomids.}
+4 for diatoms, 5 for chironomids and 6 for rodents.}
+
+\item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
 A vector of unique taxonIDs.

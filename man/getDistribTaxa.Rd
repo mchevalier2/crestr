@@ -15,7 +15,8 @@ getDistribTaxa(
   countries = NA,
   realms = NA,
   biomes = NA,
-  ecoregions = NA
+  ecoregions = NA,
+  dbname = "gbif4crest_02"
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ getDistribTaxa(
 \item{biomes}{A vector of the studied botanical biomes defining the study area.}
 
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
+
+\item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
 A matrix of occurrence records with the associated climate.

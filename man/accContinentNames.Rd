@@ -4,7 +4,10 @@
 \alias{accContinentNames}
 \title{Return the list of the continents and associated countries.}
 \usage{
-accContinentNames()
+accContinentNames(dbname = "gbif4crest_02")
+}
+\arguments{
+\item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
 A list with elements that correspond to the country names of each continent.
