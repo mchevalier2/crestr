@@ -42,22 +42,23 @@ accClimateVariables <- function() {
 #'
 #' Return the list of the continents and associated countries.
 #'
+#' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A list with elements that correspond to the country names of each continent.
 #' @export
 #' @examples
 #' accContinentNames()
 
-accContinentNames <- function() {
+accContinentNames <- function(dbname = 'gbif4crest_02') {
   res <- list()
   req <- "SELECT DISTINCT continent FROM geo_qdgc WHERE continent IS NOT NULL ORDER BY continent"
-  continents <- dbRequest(req)[, 1]
+  continents <- dbRequest(req, dbname)[, 1]
   for (i in continents) {
       req <- paste0("  SELECT DISTINCT countryname ",
                     "    FROM geo_qdgc ",
                     "   WHERE continent='",i,"' ",
                     "ORDER BY countryname"
                     )
-      res[[i]] <- dbRequest(req)[, 1]
+      res[[i]] <- dbRequest(req, dbname)[, 1]
   }
   names(res) <- continents
   res
@@ -70,23 +71,24 @@ accContinentNames <- function() {
 #' Return the list of the realms and associated biomes and ecoregions.
 #'
 #' @param ecoregion A boolean to choose whether to get the ecoregions names.
+#' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A list with elements that correspond to the biomes (and possibly
 #'     ecoregions) of each realm.
 #' @export
 #' @examples
 #' accRealmNames()
 
-accRealmNames <- function(ecoregion=TRUE) {
+accRealmNames <- function(ecoregion=TRUE, dbname = 'gbif4crest_02') {
     res <- list()
     req <- "SELECT DISTINCT realm FROM wwf_qdgc WHERE realm IS NOT NULL ORDER BY realm"
-    realms <- dbRequest(req)[, 1]
+    realms <- dbRequest(req, dbname)[, 1]
     for (i in realms) {
         req <- paste0("  SELECT DISTINCT biome ", ifelse(ecoregion, ", ecoregion ", ""),
                       "    FROM wwf_QDGC ",
                       "   WHERE realm='",i,"' ",
                       "ORDER BY biome", ifelse(ecoregion, ", ecoregion ", "")
                       )
-        res[[i]] <- dbRequest(req)
+        res[[i]] <- dbRequest(req, dbname)
     }
     names(res) <- realms
     res

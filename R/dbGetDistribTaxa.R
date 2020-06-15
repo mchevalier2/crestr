@@ -11,6 +11,7 @@
 #' @param realms A vector of the studied botanical realms defining the study area.
 #' @param biomes A vector of the studied botanical biomes defining the study area.
 #' @param ecoregions A vector of the studied botanical ecoregions defining the study area.
+#' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A matrix of occurrence records with the associated climate.
 #' @seealso \code{\link{getTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
 #'     for a list of accepted climate variable names, \code{\link{accContinentNames}}
@@ -29,7 +30,8 @@ getDistribTaxa <- function(taxIDs,
                             climate,
                             xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                             continents=NA, countries=NA,
-                            realms=NA, biomes=NA, ecoregions=NA) {
+                            realms=NA, biomes=NA, ecoregions=NA,
+                            dbname = 'gbif4crest_02') {
 
     #Formatting subsets of the request------------------------------------------
     #Formatting the geographical subsetting
@@ -80,5 +82,5 @@ getDistribTaxa <- function(taxIDs,
                 )
 
     #Executing the request------------------------------------------------------
-    dbRequest(req)
+    dbRequest(req, dbname)
 }

@@ -21,6 +21,7 @@
 #' @param climateSpaceWeighting The number of points to be used to fit the pdfs.
 #' @param presenceThreshold .
 #' @param taxWeight 'originalData', 'presence/absence', percentages' or 'normalisation'
+#' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return The parameters to be used by crest()
 #' @export
 #' @examples
@@ -40,7 +41,8 @@ crest <- function ( df, pse, taxaType, climate,
                     climateSpaceWeighting = TRUE,
                     selectedTaxa = NA,
                     presenceThreshold = 0,
-                    taxWeight = 'normalisation'
+                    taxWeight = 'normalisation',
+                    dbname = 'gbif4crest_02'
                   ) {
 
 ##.Testing if the input variables are in the correct format --------------------

@@ -8,7 +8,8 @@
 #' @param species The name of the species.
 #' @param taxaType A numerical index (between 1 and 5) to define the type of
 #'     palaeoproxy used: 1 for plants, 2 for beetles, 3 for foraminifers,
-#'     4 for diatoms and 5 for chironomids.
+#'     4 for diatoms, 5 for chironomids and 6 for rodents.
+#' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
@@ -16,7 +17,7 @@
 #' getTaxonID("Zamiaceae", "Ceratozamia")
 #' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
 
-getTaxonID <- function(family, genus = "", species = "", taxaType = 1) {
+getTaxonID <- function(family, genus = "", species = "", taxaType = 1, dbname = 'gbif4crest_02') {
     family <- tools::toTitleCase(base::tolower(family))
     genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
     species <- ifelse(is.na(species), "", tools::toTitleCase(base::tolower(species)))
@@ -35,7 +36,7 @@ getTaxonID <- function(family, genus = "", species = "", taxaType = 1) {
                   "     AND taxonid <= ", (taxaType+1)*1000000, ' ',
                   "ORDER BY taxonid"
                   )
-    res <- dbRequest(req)
+    res <- dbRequest(req, dbname)
     if (length(res) > 0 ) res <- res[, 1]
     res
 }
