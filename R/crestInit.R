@@ -28,9 +28,10 @@
 #' data(crest_ex)
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
-#' crest(crest_ex, crest_ex_pse, taxaType = 0, climate = c('bio1', 'bio12'),
-#'       bin_width = c(2, 20), shape = c('normal', 'lognormal'),
-#'       selectedTaxa = crest_ex_selection, dbname = 'crest_example')
+#' recons <- crest(crest_ex, crest_ex_pse, taxaType = 0,
+#'                 climate = c('bio1', 'bio12'), bin_width = c(2, 20),
+#'                 shape = c('normal', 'lognormal'),
+#'                 selectedTaxa = crest_ex_selection, dbname = 'crest_example')
 
 
 crest <- function ( df, pse, taxaType, climate,
@@ -221,6 +222,19 @@ crest <- function ( df, pse, taxaType, climate,
         }
     }
 
+    res <- crestObj(df, pse, taxaType, climate,
+                            xmn, xmx, ymn, ymx,
+                            continents, countries,
+                            realms, biomes, ecoregions,
+                            minGridCells,
+                            bin_width, shape,
+                            npoints,
+                            geoWeighting,
+                            climateSpaceWeighting,
+                            selectedTaxa,
+                            presenceThreshold,
+                            taxWeight)
+
 ##.Getting list of species -----------------------------------------------------
     taxonID2proxy <- matrix(ncol = 2)
     colnames(taxonID2proxy) <- c("taxonID", "proxyName")
@@ -251,6 +265,7 @@ crest <- function ( df, pse, taxaType, climate,
     }
     taxonID2proxy <- taxonID2proxy[-1, ]
     taxonID2proxy <- taxonID2proxy[order(taxonID2proxy[, 'proxyName']), ]
+    res$modelling$taxonID2proxy <- taxonID2proxy
 
     #Getting climates ----------------------------------------------------------
     climate_space <- getClimateSpace( climate,
@@ -260,6 +275,8 @@ crest <- function ( df, pse, taxaType, climate,
                                       dbname
                                      )
     colnames(climate_space)[-c(1,2)] <- climate
+    res$modelling$climate_space <- climate_space
+
 
     distributions <- list()
     for(tax in taxa) {
@@ -283,6 +300,7 @@ crest <- function ( df, pse, taxaType, climate,
             distributions[[tax]] <- NA
         }
     }
+    res$modelling$distributions <- distributions
 
     if (! unique(is.na(bin_width))) {
         bin_width <- as.data.frame(bin_width)
@@ -339,6 +357,7 @@ crest <- function ( df, pse, taxaType, climate,
             pdfs[[tax]] <- NA
         }
     }
+    res$modelling$pdfs <- pdfs
 
     if (tolower(taxWeight) == 'normalisation') {
         taxWeight <- normalise(df, col2convert=1:ncol(df))
@@ -355,6 +374,8 @@ crest <- function ( df, pse, taxaType, climate,
     }
     colnames(taxWeight) <- colnames(df)
     rownames(taxWeight) <- rownames(df)
+    res$modelling$weights <- taxWeight
+
 
     reconstructions <- list()
     for (clim in climate) {
@@ -393,8 +414,6 @@ crest <- function ( df, pse, taxaType, climate,
             }
         }
     }
-    par(mfrow=c(length(climate), 1))
-    for(clim in climate) {
-        plot(time, reconstructions[[clim]][['optima']], type='b')
-    }
+    res$reconstructions <- reconstructions
+    res
 }

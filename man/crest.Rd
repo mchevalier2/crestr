@@ -19,8 +19,8 @@ crest(
   biomes = NA,
   ecoregions = NA,
   minGridCells = 20,
-  bin_width = NA,
-  shape = NA,
+  bin_width = rep(1, length(climate)),
+  shape = rep("normal", length(climate)),
   npoints = 500,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
@@ -81,7 +81,8 @@ Connect to the gbif4crest_02 database by accessing the server on Amazon.
 data(crest_ex)
 data(crest_ex_pse)
 data(crest_ex_selection)
-crest(crest_ex, crest_ex_pse, taxaType = 0, climate = c('bio1', 'bio12'),
-      bin_width = c(2, 20), shape = c('normal', 'lognormal'),
-      selectedTaxa = crest_ex_selection, dbname = 'crest_example')
+recons <- crest(crest_ex, crest_ex_pse, taxaType = 0,
+                climate = c('bio1', 'bio12'), bin_width = c(2, 20),
+                shape = c('normal', 'lognormal'),
+                selectedTaxa = crest_ex_selection, dbname = 'crest_example')
 }
