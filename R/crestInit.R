@@ -32,6 +32,7 @@
 #'                 climate = c('bio1', 'bio12'), bin_width = c(2, 20),
 #'                 shape = c('normal', 'lognormal'),
 #'                 selectedTaxa = crest_ex_selection, dbname = 'crest_example')
+#' plot(recons)
 
 
 crest <- function ( df, pse, taxaType, climate,
@@ -222,7 +223,7 @@ crest <- function ( df, pse, taxaType, climate,
         }
     }
 
-    res <- crestObj(df, pse, taxaType, climate,
+    res <- crestObj(df, time, pse, taxaType, climate,
                             xmn, xmx, ymn, ymx,
                             continents, countries,
                             realms, biomes, ecoregions,
@@ -400,9 +401,12 @@ crest <- function ( df, pse, taxaType, climate,
                                         (  sum(reconstructions[[clim]][['posterior']][s,]) *
                                            (xrange[[clim]][2] -xrange[[clim]][1])
                                          )
-                reconstructions[[clim]][['optima']][s] <-
-                                        xrange[[clim]][which.max(reconstructions[[clim]][['posterior']][s, ])]
+                reconstructions[[clim]][['optima']][s] <- xrange[[clim]][which.max(reconstructions[[clim]][['posterior']][s, ])]
+
             }
+            reconstructions[[clim]][['posterior']] <- rbind(xrange[[clim]], reconstructions[[clim]][['posterior']])
+            reconstructions[[clim]][['optima']] <- cbind(time, reconstructions[[clim]][['optima']])
+
         } else {
             reconstructions[[clim]] <- NA
         }
