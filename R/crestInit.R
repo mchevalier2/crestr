@@ -56,7 +56,7 @@ crest <- function ( df, pse, taxaType, climate,
         df <- rio::import(df)
     }
     if (! is.data.frame(df)) {
-        cat("Problem here. Input data is not a data frame.")
+        cat("Problem here. Input data is not a data frame.\n")
         return()
     }
 
@@ -158,7 +158,7 @@ crest <- function ( df, pse, taxaType, climate,
         rownames(selectedTaxa) = taxa
         colnames(selectedTaxa) = climate
     }
-    selectedTaxa <- cbind(selectedTaxa, as.character(rep("", length(taxa))))
+    selectedTaxa <- cbind(selectedTaxa, as.character(rep("", length(taxa))), stringsAsFactors = FALSE)
     colnames(selectedTaxa)[ncol(selectedTaxa)] <- 'notes'
 
     if (sum(taxa %in% pse$ProxyName) != length(taxa)) {
@@ -234,7 +234,9 @@ crest <- function ( df, pse, taxaType, climate,
                             climateSpaceWeighting,
                             selectedTaxa,
                             presenceThreshold,
-                            taxWeight)
+                            taxWeight,
+                            time.name
+                          )
 
 ##.Getting list of species -----------------------------------------------------
     taxonID2proxy <- matrix(ncol = 2)
@@ -280,7 +282,11 @@ crest <- function ( df, pse, taxaType, climate,
 
 
     distributions <- list()
+    cat('Extracting data from the online database.\n     ')
+    pb  <- utils::txtProgressBar(0, length(taxa), style=3, width = min(50, getOption("width")/2))
+    pbi <- 1
     for(tax in taxa) {
+        utils::setTxtProgressBar(pb, pbi)
         if (sum(as.numeric(selectedTaxa[tax, climate])) > 0) {
             distributions[[tax]] <- getDistribTaxa( taxIDs = taxonID2proxy[taxonID2proxy[, 'proxyName'] == tax, 1],
                                                     climate,
@@ -300,8 +306,10 @@ crest <- function ( df, pse, taxaType, climate,
         } else {
             distributions[[tax]] <- NA
         }
+        pbi <- pbi + 1
     }
     res$modelling$distributions <- distributions
+    close(pb)
 
     if (! unique(is.na(bin_width))) {
         bin_width <- as.data.frame(bin_width)
