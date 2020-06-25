@@ -181,7 +181,7 @@ crest <- function ( df, pse, taxaType, climate,
         } else {
             for (tax in missing_taxa) {
                 #selectedTaxa[tax, ncol(selectedTaxa)] <- as.character(selectedTaxa[tax, ncol(selectedTaxa)])
-                selectedTaxa[tax, ] <- c(rep(0, length(climate)), as.factor('No association with vegetation'))
+                selectedTaxa[tax, ] <- c(rep(0, length(climate)), 'No association with vegetation')
             }
         }
     }
@@ -216,7 +216,7 @@ crest <- function ( df, pse, taxaType, climate,
                       )
                 print(unique(pse$ProxyName[w]))
                 for (tax in unique(pse$ProxyName[w])) {
-                    selectedTaxa[tax, ] <- c(rep(0, length(climate)), as.character('No association with vegetation'))
+                    selectedTaxa[tax, ] <- c(rep(0, length(climate)), 'No association with vegetation')
                 }
                 pse <- pse[-w, ]
             }
@@ -238,7 +238,7 @@ crest <- function ( df, pse, taxaType, climate,
                             time.name
                           )
 
-##.Getting list of species -----------------------------------------------------
+    ##.Getting list of species -------------------------------------------------
     taxonID2proxy <- matrix(ncol = 2)
     colnames(taxonID2proxy) <- c("taxonID", "proxyName")
     for (taxLevel in 1:3){
