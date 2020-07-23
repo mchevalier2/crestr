@@ -2,3 +2,4 @@
 .RData
 .Rproj.user
 *.tex
+.DS_Store
