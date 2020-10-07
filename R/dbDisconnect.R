@@ -11,7 +11,7 @@
 #' db <- connect_online()
 #' close_db_connection(db)
 #' }
-
+#'
 close_db_connection <- function(db) {
-    DBI::dbDisconnect(db)
+  DBI::dbDisconnect(db)
 }

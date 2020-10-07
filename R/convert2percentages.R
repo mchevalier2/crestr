@@ -8,18 +8,18 @@
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
-#' df = data.frame(matrix(1:25, ncol = 5))
-#' colnames(df) = paste( rep("col", 5), 1:5, sep = '')
+#' df <- data.frame(matrix(1:25, ncol = 5))
+#' colnames(df) <- paste(rep("col", 5), 1:5, sep = "")
 #' convert2percentages(df)
 #' convert2percentages(df, col2convert = 3:5)
-
-convert2percentages <- function(df, col2convert = 2:ncol(df) ) {
-    df2 <- cbind( df[, -col2convert],
-                  100 * df[, col2convert] / apply(df[, col2convert], 1, sum)
-                 )
-    colnames(df2) <- colnames(df)
-    rownames(df2) <- rownames(df)
-    df2
+convert2percentages <- function(df, col2convert = 2:ncol(df)) {
+  df2 <- cbind(
+    df[, -col2convert],
+    100 * df[, col2convert] / apply(df[, col2convert], 1, sum)
+  )
+  colnames(df2) <- colnames(df)
+  rownames(df2) <- rownames(df)
+  df2
 }
 
 
@@ -34,18 +34,18 @@ convert2percentages <- function(df, col2convert = 2:ncol(df) ) {
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
-#' df = data.frame(matrix(1:25, ncol = 5))
-#' colnames(df) = paste( rep("col", 5), 1:5, sep = '')
+#' df <- data.frame(matrix(1:25, ncol = 5))
+#' colnames(df) <- paste(rep("col", 5), 1:5, sep = "")
 #' convert2presenceAbsence(df, threshold = 15)
 #' convert2presenceAbsence(df, col2convert = 3:5)
-
-convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df) ) {
-    df2 <- cbind( df[, -col2convert],
-                  ifelse(df[, col2convert] >= threshold, 1, 0)
-                 )
-    colnames(df2) <- colnames(df)
-    rownames(df2) <- rownames(df)
-    df2
+convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
+  df2 <- cbind(
+    df[, -col2convert],
+    ifelse(df[, col2convert] >= threshold, 1, 0)
+  )
+  colnames(df2) <- colnames(df)
+  rownames(df2) <- rownames(df)
+  df2
 }
 
 
@@ -60,20 +60,19 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df) 
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
-#' df = data.frame(matrix(1:25, ncol = 5))
-#' colnames(df) = paste( rep("col", 5), 1:5, sep = '')
+#' df <- data.frame(matrix(1:25, ncol = 5))
+#' colnames(df) <- paste(rep("col", 5), 1:5, sep = "")
 #' convert2presenceAbsence(df, threshold = 15)
 #' convert2presenceAbsence(df, col2convert = 3:5)
-
-normalise <- function(df, threshold = 2, col2convert = 2:ncol(df) ) {
-    df2 <- convert2percentages(df, col2convert)
-    colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
-    for (i in 1:nrow(df2)) {
-        df2[i, col2convert] <- df2[i, col2convert] / colweights
-    }
-    colnames(df2) <- colnames(df)
-    rownames(df2) <- rownames(df)
-    df2
+normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
+  df2 <- convert2percentages(df, col2convert)
+  colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
+  for (i in 1:nrow(df2)) {
+    df2[i, col2convert] <- df2[i, col2convert] / colweights
+  }
+  colnames(df2) <- colnames(df)
+  rownames(df2) <- rownames(df)
+  df2
 }
 
 
@@ -86,8 +85,7 @@ normalise <- function(df, threshold = 2, col2convert = 2:ncol(df) ) {
 #' @export
 #' @examples
 #' meanPositiveValues(-10:10)
-
 meanPositiveValues <- function(x) {
-    w <- which(x > 0)
-    base::mean(x[w])
+  w <- which(x > 0)
+  base::mean(x[w])
 }
