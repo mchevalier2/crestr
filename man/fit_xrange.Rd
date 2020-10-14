@@ -22,9 +22,9 @@ A regularly spaced climate gradient with \code{npoints} points.
 Define teh climate gradient to fit the pdfs.
 }
 \examples{
-#Creating one randomised climate space
-climate_space <- sample(0:300/10, 4000, replace=TRUE)
+# Creating one randomised climate space
+climate_space <- sample(0:300 / 10, 4000, replace = TRUE)
 ccs <- calib_clim_space(climate_space, 2)
-xrange <- fit_xrange(ccs, 'normal', 2)
+xrange <- fit_xrange(ccs, "normal", 2)
 head(xrange)
 }

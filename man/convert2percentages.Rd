@@ -19,8 +19,8 @@ A vector of unique taxonIDs.
 Convert abundance data into percentage data.
 }
 \examples{
-df = data.frame(matrix(1:25, ncol = 5))
-colnames(df) = paste( rep("col", 5), 1:5, sep = '')
+df <- data.frame(matrix(1:25, ncol = 5))
+colnames(df) <- paste(rep("col", 5), 1:5, sep = "")
 convert2percentages(df)
 convert2percentages(df, col2convert = 3:5)
 }

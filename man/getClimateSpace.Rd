@@ -42,12 +42,13 @@ A matrix of occurrence records with the associated climate.
 Extract the distribution of the studied climate gradient(s) across the study area.
 }
 \examples{
-climate <- getClimateSpace('bio1', -90, 90, -90, 90,
-   continents = 'Europe',
-   countries = c('Germany', 'Netherlands', 'Sweden'),
-   realms = 'Palaearctic' )
+climate <- getClimateSpace("bio1", -90, 90, -90, 90,
+  continents = "Europe",
+  countries = c("Germany", "Netherlands", "Sweden"),
+  realms = "Palaearctic"
+)
 head(climate)
-plot(climate[,-3], asp=1)
+plot(climate[, -3], asp = 1)
 }
 \seealso{
 \code{\link{accClimateVariables}}

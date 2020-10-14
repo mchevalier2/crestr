@@ -10,11 +10,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' data(crest_ex)
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
-#' x <- crest.get_distributions(
-#'   taxa.name = colnames(crest_ex)[-1],
+#' x <- crest.get_modern_data(
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
@@ -23,21 +21,28 @@
 #' lapply(x$modelling$distributions, head)
 #' }
 #'
-crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
-                                    xmn = -180, xmx = 180, ymn = -90, ymx = 90,
-                                    continents = NA, countries = NA,
-                                    realms = NA, biomes = NA, ecoregions = NA,
-                                    minGridCells = 20,
-                                    selectedTaxa = NA,
-                                    dbname = "gbif4crest_02") {
+crest.get_modern_data <- function(pse, taxaType, climate,
+                                  taxa.name = unique(pse[, 'ProxyName']),
+                                  xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                                  continents = NA, countries = NA,
+                                  realms = NA, biomes = NA, ecoregions = NA,
+                                  minGridCells = 20,
+                                  selectedTaxa = NA,
+                                  dbname = "gbif4crest_02") {
 
   ## . Testing if the input variables are in the correct format ---------------
-  if (is.character(pse)) {
-    pse <- rio::import(pse)
-  }
   if (!is.data.frame(pse)) {
     cat("Problem here. proxy_species_equivalency is not a data frame.\n")
     return()
+  }
+
+  taxa_to_ignore=c()
+  for(tax in taxa.name) {
+    if (! tax %in% pse[, 'ProxyName']) taxa_to_ignore=c(taxa_to_ignore, tax)
+  }
+  if (length(taxa_to_ignore)) {
+    cat(paste0('The following taxa are not in the pollen species equivalence file and will be ignored.\n'))
+    cat(c(paste(taxa_to_ignore, collapse=', '), '\n'))
   }
 
   ## . Change the climate variable ID for the climate variable name -----------
@@ -69,7 +74,9 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
     xmx <- tmp
   }
   if (xmn < -180 | xmx > 180) {
-    cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Continuing.\n")
+    xmn <- max(xmn, -180)
+    xmx <- min(xmx, 180)
+    cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Adapting and continuing.\n")
   }
 
   if (ymn >= ymx) {
@@ -79,7 +86,9 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
     ymx <- tmp
   }
   if (ymn < -90 | ymx > 90) {
-    cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Continuing.\n")
+    ymn <- max(ymn, -90)
+    ymx <- min(ymx, 90)
+    cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Adapting and continuing.\n")
   }
 
   cont.list <- accContinentNames(dbname)
@@ -132,50 +141,41 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
   selectedTaxa <- cbind(selectedTaxa, as.character(rep("", length(taxa.name))), stringsAsFactors = FALSE)
   colnames(selectedTaxa)[ncol(selectedTaxa)] <- "notes"
 
+  if (length(taxa_to_ignore)) {
+    selectedTaxa[taxa_to_ignore, ] <- c(rep(1, length(climate)), 'Taxon not in pse file.')
+  }
 
 
   ## . Formatting data in the expected format ---------------------------------
   if (sum(unique(pse$ProxyName) %in% taxa.name) != length(unique(pse$ProxyName))) {
     missing_taxa <- unique(pse$ProxyName)[!(unique(pse$ProxyName) %in% taxa.name)]
     cat(paste(
-      "The following", ifelse(length(missing_taxa) > 1,
-        "taxa are in the proxy_species_equivalency file and are",
-        "taxon is in the proxy_species_equivalency file and is"
+      "Warning: The following",
+      ifelse(length(missing_taxa) > 1,
+             "taxa are in the proxy_species_equivalency file and are",
+             "taxon is in the proxy_species_equivalency file and is"
       ),
       " not in the input table.\n"
     ))
     cat(paste(missing_taxa, collapse = ", "))
     cat("\n")
-    ss <- paste(
-      "Should",
-      ifelse(length(missing_taxa) > 1, "these taxa", "this taxon"),
-      "be ignored to continue? [Y/N] "
-    )
-    x <- base::readline(ss)
-    while (!x %in% c("y", "yes", "Y", "YES", "n", "N", "no", "NO")) {
-      x <- base::readline(ss)
+  }
+
+  w <- (pse$Level == 4)
+  if (sum(w) > 0) {
+    cat(paste(
+      "The following", ifelse(sum(w) > 1, "taxa have", "taxon has"),
+      "not been classified and will not directly contribute to the reconstruction.",
+      ifelse(sum(w) > 1, "Their", "Its"), "presence will still contribute",
+      "to the estimation of the weights if either 'normalisation' or",
+      "'percentages' have been selected.\n"
+    ))
+    cat(unique(pse$ProxyName[w]))
+    cat("\n")
+    for (tax in unique(pse$ProxyName[w])) {
+      selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No association with vegetation")
     }
-    if (x %in% c("n", "N", "no", "NO")) {
-      return()
-    } else {
-      pse <- pse[pse$ProxyName %in% taxa.name, ]
-      w <- which(pse$Level == 4)
-      if (length(w) > 0) {
-        cat(paste(
-          "The following", ifelse(length(w) > 1, "taxa have", "taxon has"),
-          "not been classified and will not contribute to the reconstruction.",
-          ifelse(length(w) > 1, "They", "It"), "will still contribute",
-          "to the estimation of the weights if either 'normalisation' or",
-          "'percentages' have been selected.\n"
-        ))
-        cat(unique(pse$ProxyName[w]))
-        cat("\n")
-        for (tax in unique(pse$ProxyName[w])) {
-          selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No association with vegetation")
-        }
-        pse <- pse[-w, ]
-      }
-    }
+    pse <- pse[-w, ]
   }
 
   crest <- crestObj(taxa.name, pse, taxaType, climate,
@@ -185,17 +185,16 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
     selectedTaxa = selectedTaxa
   )
 
-  taxonID2proxy <- matrix(ncol = 2)
-  colnames(taxonID2proxy) <- c("taxonID", "proxyName")
+  taxonID2proxy <- data.frame("taxonID" = NA, "proxyName" = NA, stringsAsFactors = FALSE)
   pse$Level <- as.numeric(as.character(pse$Level))
   pse$Family <- as.character(pse$Family)
   pse$Genus <- as.character(pse$Genus)
   pse$Species <- as.character(pse$Species)
   pse$ProxyName <- as.character(pse$ProxyName)
 
+
   for (taxLevel in 1:3) {
-    idx <- which(pse$Level == taxLevel)
-    for (tax in pse$ProxyName[idx]) {
+    for (tax in pse$ProxyName[ pse$Level == taxLevel ]) {
       for (w in which(pse$ProxyName == tax)) {
         taxonIDs <- getTaxonID(
           pse$Family[w],
@@ -206,13 +205,18 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
         )
         if (length(taxonIDs) > 0) {
           existingTaxa <- taxonIDs %in% taxonID2proxy[, "taxonID"]
+          # If the taxon was first assigned to higher group, Reassign.
           if (sum(existingTaxa) > 0) {
             taxonID2proxy[taxonID2proxy[, "taxonID"] %in% taxonIDs, "proxyName"] <- tax
           }
-          taxonID2proxy <- rbind(
-            taxonID2proxy,
-            cbind(taxonIDs[!existingTaxa], rep(tax, sum(!existingTaxa)))
-          )
+          if (sum(existingTaxa) != length(taxonIDs)) {
+            taxonID2proxy <- rbind(
+              taxonID2proxy,
+              data.frame("taxonID" = taxonIDs[!existingTaxa],
+                         "proxyName" = rep(tax, sum(!existingTaxa)),
+                         stringsAsFactors = FALSE)
+            )
+          }
         } else {
           cat(paste("No match for taxon ", paste(pse[w, 2:5], collapse = ", "), "\n"))
           crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No correspondance with vegetation")
@@ -220,6 +224,7 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
       }
     }
   }
+
   taxonID2proxy <- taxonID2proxy[-1, ]
   taxonID2proxy <- taxonID2proxy[order(taxonID2proxy[, "proxyName"]), ]
   crest$modelling$taxonID2proxy <- taxonID2proxy
@@ -254,5 +259,16 @@ crest.get_distributions <- function(taxa.name, pse, taxaType, climate,
   }
   crest$modelling$distributions <- distributions
   close(pb)
+
+  climate_space <- getClimateSpace(
+    crest$parameters$climate,
+    crest$parameters$xmn, crest$parameters$xmx, crest$parameters$ymn, crest$parameters$ymx,
+    crest$parameters$continents, crest$parameters$countries,
+    crest$parameters$realms, crest$parameters$biomes, crest$parameters$ecoregions,
+    dbname
+  )
+  colnames(climate_space)[-c(1, 2)] <- crest$parameters$climate
+  crest$modelling$climate_space <- climate_space
+
   crest
 }

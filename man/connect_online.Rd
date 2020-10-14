@@ -34,4 +34,5 @@ Connect to the gbif4crest_02 database by accessing the server on Amazon.
 \dontrun{
 db <- connect_online()
 }
+
 }

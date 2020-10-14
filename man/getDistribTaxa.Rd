@@ -47,10 +47,11 @@ description, which can be at the family, the genus or the species levels.
 }
 \examples{
 taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
-distrib <- getDistribTaxa(taxIDs, 'bio1', -90, 90, -90, 90,
-   continents = 'Europe',
-   countries = c('Germany', 'Netherlands', 'Sweden'),
-   realms = 'Palaearctic' )
+distrib <- getDistribTaxa(taxIDs, "bio1", -90, 90, -90, 90,
+  continents = "Europe",
+  countries = c("Germany", "Netherlands", "Sweden"),
+  realms = "Palaearctic"
+)
 distrib
 }
 \seealso{

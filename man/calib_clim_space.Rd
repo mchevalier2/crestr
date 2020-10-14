@@ -18,7 +18,6 @@ A \code{ccs} object that will be used by \code{\link{fit_pdfsp}}.
 Calibrate the distribution of the modern climate space.
 }
 \examples{
-#Extracting the number of taxa recorded in the database
-calib_clim_space(sample(0:300/10, 4000, replace=TRUE), 2)
-
+# Extracting the number of taxa recorded in the database
+calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
 }

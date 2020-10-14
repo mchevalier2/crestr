@@ -27,17 +27,17 @@ The pdf of the species.
 Fit the species pdfs.
 }
 \examples{
-#Creating one randomised species
-climate_species <- round(stats::rnorm(50, 15, 2),1)
+# Creating one randomised species
+climate_species <- round(stats::rnorm(50, 15, 2), 1)
 
-#Creating one randomised climate space
-climate_space <- base::sample(0:300/10, 4000, replace=TRUE)
+# Creating one randomised climate space
+climate_space <- base::sample(0:300 / 10, 4000, replace = TRUE)
 
 ccs <- calib_clim_space(climate_space, 2)
-xrange <- fit_xrange(ccs, 'normal', 2)
-pdfsp <- fit_pdfsp(climate_species, ccs, 2, 'normal', xrange)
-plot(xrange, pdfsp, type='l')
+xrange <- fit_xrange(ccs, "normal", 2)
+pdfsp <- fit_pdfsp(climate_species, ccs, 2, "normal", xrange)
+plot(xrange, pdfsp, type = "l")
 
-#Testing that the area under the curve is equal to 1.
+# Testing that the area under the curve is equal to 1.
 sum(pdfsp * (xrange[2] - xrange[1])) == 1
 }

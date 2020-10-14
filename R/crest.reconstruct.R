@@ -11,14 +11,13 @@
 #' data(crest_ex)
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
-#' x <- crest.get_distributions(
-#'   taxa.name = colnames(crest_ex)[-1],
+#' x <- crest.get_modern_data(
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
+#'   taxa.name = colnames(crest_ex)[-1],
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
 #' )
-#' x <- crest.climate_space(x, dbname = "crest_example")
-#' x <- crest.fit_pdfs(x,
+#' x <- crest.calibrate(x,
 #'   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
 #'   bin_width = c(2, 20), shape = c("normal", "lognormal")
 #' )

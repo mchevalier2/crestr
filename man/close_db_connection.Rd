@@ -19,4 +19,5 @@ close_db_connection(db)
 db <- connect_online()
 close_db_connection(db)
 }
+
 }

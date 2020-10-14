@@ -5,11 +5,10 @@
 \title{Connect to the gbif4crest database}
 \usage{
 crest(
-  taxa.name,
+  df,
   pse,
   taxaType,
   climate,
-  df,
   xmn = -180,
   xmx = 180,
   ymn = -90,
@@ -32,15 +31,13 @@ crest(
 )
 }
 \arguments{
-\item{taxa.name}{.}
+\item{df}{.}
 
 \item{pse}{.}
 
 \item{taxaType}{.}
 
 \item{climate}{A vectof of the climate variables to extract.}
-
-\item{df}{.}
 
 \item{xmn}{The coordinates defining the study area.}
 
@@ -90,9 +87,11 @@ Connect to the gbif4crest_02 database by accessing the server on Amazon.
 data(crest_ex)
 data(crest_ex_pse)
 data(crest_ex_selection)
-recons <- crest(taxa.name=colnames(crest_ex)[-1], df=crest_ex, pse=crest_ex_pse, taxaType = 0,
-                climate = c('bio1', 'bio12'), bin_width = c(2, 20),
-                shape = c('normal', 'lognormal'),
-                selectedTaxa = crest_ex_selection, dbname = 'crest_example')
+recons <- crest(
+  df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+  climate = c("bio1", "bio12"), bin_width = c(2, 20),
+  shape = c("normal", "lognormal"),
+  selectedTaxa = crest_ex_selection, dbname = "crest_example"
+)
 plot(recons)
 }
