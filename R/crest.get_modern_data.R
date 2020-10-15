@@ -246,10 +246,11 @@ crest.get_modern_data <- function(pse, taxaType, climate,
         dbname
       )
       extent_taxa <- table(distributions[[tax]][, 1])
-      extent_taxa <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
-      distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa, ]
+      extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
+      distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa_id, ]
       if (nrow(distributions[[tax]]) == 0) {
         cat(paste0("Insufficient data points to calibrate a pdf for ", tax, "\n"))
+        print(extent_taxa)
         distributions[[tax]] <- NA
         crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "Not enough data points")
       }

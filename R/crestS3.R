@@ -165,6 +165,7 @@ plot.crestObj <- function(x,
         )
         for (e in errors) {
           val <- apply(pdfter[, -1], 2, function(x) {
+            if(is.na(x[1])) return(c(NA, NA))
             w <- which(x <= e)
             return(c(w[1], w[length(w)]))
           })
@@ -216,7 +217,7 @@ plot.crestObj <- function(x,
           col = viridis::viridis(125)[26:125],
           cex.axis = 6 / 7,
           colkey = FALSE,
-          resfac = 2,
+          resfac = 1,
           tck = -.013,
           mgp = c(1.3, .3, 0),
           las = 1,
@@ -227,6 +228,7 @@ plot.crestObj <- function(x,
         )
         for (e in errors) {
           val <- apply(pdfter[, -1], 2, function(x) {
+            if(is.na(x[1])) return(c(NA, NA))
             w <- which(x <= e)
             return(c(w[1], w[length(w)]))
           })

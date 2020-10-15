@@ -19,7 +19,7 @@
 getTaxonID <- function(family, genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
   family <- tools::toTitleCase(base::tolower(family))
   genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
-  species <- ifelse(is.na(species), "", tools::toTitleCase(base::tolower(species)))
+  species <- ifelse(is.na(species), "", paste0(base::toupper(substr(name, 1, 1)), substr(base::tolower(name), 2, nchar(name))))
   req <- paste0(
     "  SELECT taxonid ",
     "    FROM taxa ",

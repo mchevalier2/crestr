@@ -94,28 +94,35 @@ crest.reconstruct <- function(x, df,
 
   reconstructions <- list()
   for (clim in x$parameters$climate) {
+    print(clim)
     if (sum(as.numeric(selectedTaxa[, clim])) > 0) {
       reconstructions[[clim]][["posterior"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
       reconstructions[[clim]][["optima"]] <- rep(NA, nrow(x$inputs$df))
       for (s in 1:nrow(x$inputs$df)) {
-        norm_factor <- 0
-        for (tax in names(x$modelling$pdfs)) {
-          if (x$modelling$weights[s, tax] > 0 & as.numeric(x$inputs$selectedTaxa[tax, clim]) > 0) {
-            norm_factor <- norm_factor + x$modelling$weights[s, tax]
-            reconstructions[[clim]][["posterior"]][s, ] <-
-              reconstructions[[clim]][["posterior"]][s, ] +
-              x$modelling$pdfs[[tax]][[clim]][["pdfpol_log"]] * x$modelling$weights[s, tax]
+        cat(s)
+        cat(' ')
+        if (is.na(x$modelling$weights[s, names(x$modelling$pdfs)[1]])) {
+          reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
+        } else {
+          norm_factor <- 0
+          for (tax in names(x$modelling$pdfs)) {
+            if (x$modelling$weights[s, tax] > 0 & as.numeric(x$inputs$selectedTaxa[tax, clim]) > 0) {
+              norm_factor <- norm_factor + x$modelling$weights[s, tax]
+              reconstructions[[clim]][["posterior"]][s, ] <-
+                reconstructions[[clim]][["posterior"]][s, ] +
+                x$modelling$pdfs[[tax]][[clim]][["pdfpol_log"]] * x$modelling$weights[s, tax]
+            }
           }
+          reconstructions[[clim]][["posterior"]][s, ] <-
+            reconstructions[[clim]][["posterior"]][s, ] * (1 / norm_factor)
+          reconstructions[[clim]][["posterior"]][s, ] <- exp(reconstructions[[clim]][["posterior"]][s, ])
+          reconstructions[[clim]][["posterior"]][s, ] <-
+            reconstructions[[clim]][["posterior"]][s, ] /
+              (sum(reconstructions[[clim]][["posterior"]][s, ]) *
+                (x$modelling$xrange[[clim]][2] - x$modelling$xrange[[clim]][1])
+              )
+          reconstructions[[clim]][["optima"]][s] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["posterior"]][s, ])]
         }
-        reconstructions[[clim]][["posterior"]][s, ] <-
-          reconstructions[[clim]][["posterior"]][s, ] * (1 / norm_factor)
-        reconstructions[[clim]][["posterior"]][s, ] <- exp(reconstructions[[clim]][["posterior"]][s, ])
-        reconstructions[[clim]][["posterior"]][s, ] <-
-          reconstructions[[clim]][["posterior"]][s, ] /
-            (sum(reconstructions[[clim]][["posterior"]][s, ]) *
-              (x$modelling$xrange[[clim]][2] - x$modelling$xrange[[clim]][1])
-            )
-        reconstructions[[clim]][["optima"]][s] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["posterior"]][s, ])]
       }
       reconstructions[[clim]][["posterior"]] <- rbind(x$modelling$xrange[[clim]], reconstructions[[clim]][["posterior"]])
       reconstructions[[clim]][["optima"]] <- cbind(x$inputs$x, reconstructions[[clim]][["optima"]])
