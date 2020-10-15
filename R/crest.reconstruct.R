@@ -59,11 +59,11 @@ crest.reconstruct <- function(x, df,
       ifelse(length(missing_taxa) > 1, "these taxa", "this taxon"),
       "be ignored to continue? [Y/N] "
     )
-    x <- base::readline(ss)
-    while (!x %in% c("y", "yes", "Y", "YES", "n", "N", "no", "NO")) {
-      x <- base::readline(ss)
+    txt <- base::readline(ss)
+    while (!txt %in% c("y", "yes", "Y", "YES", "n", "N", "no", "NO")) {
+      txt <- base::readline(ss)
     }
-    if (x %in% c("n", "N", "no", "NO")) {
+    if (txt %in% c("n", "N", "no", "NO")) {
       return()
     } else {
       for (tax in missing_taxa) {
@@ -90,6 +90,7 @@ crest.reconstruct <- function(x, df,
   rownames(taxWeight) <- rownames(x$inputs$df)
   x$modelling$weights <- taxWeight
 
+  print('here')
 
   reconstructions <- list()
   for (clim in x$parameters$climate) {

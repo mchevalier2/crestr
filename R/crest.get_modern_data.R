@@ -234,11 +234,12 @@ crest.get_modern_data <- function(pse, taxaType, climate,
   pb <- utils::txtProgressBar(0, length(taxa.name), style = 3, width = min(50, getOption("width") / 2))
   pbi <- 1
   for (tax in taxa.name) {
+    taxIDs <- taxonID2proxy[taxonID2proxy[, "proxyName"] == tax, 1]
+    if (length(taxIDs) == 0) crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No species corresponding to the proxy name.")
     utils::setTxtProgressBar(pb, pbi)
     if (sum(as.numeric(crest$inputs$selectedTaxa[tax, climate])) > 0) {
       distributions[[tax]] <- getDistribTaxa(
-        taxIDs = taxonID2proxy[taxonID2proxy[, "proxyName"] == tax, 1],
-        climate,
+        taxIDs, climate,
         xmn, xmx, ymn, ymx,
         continents, countries,
         realms, biomes, ecoregions,
