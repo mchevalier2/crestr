@@ -26,7 +26,7 @@ getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, dep
   }
   family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
   genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
-  species <- ifelse(is.na(species), "", paste0(base::toupper(substr(name, 1, 1)), substr(base::tolower(name), 2, nchar(name))))
+  species <- ifelse(is.na(species), "", paste0(base::toupper(substr(species, 1, 1)), substr(base::tolower(species), 2, nchar(species))))
   req <- paste0(
     "  SELECT DISTINCT kingdom, phylum, class_name, order_name, family, genus, species, taxonid ",
     "    FROM taxa ",
