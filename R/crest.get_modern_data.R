@@ -36,6 +36,9 @@ crest.get_modern_data <- function(pse, taxaType, climate,
     return()
   }
 
+  pse <- pse[!is.na((pse[, 'ProxyName'])), ]
+  pse <- pse[(pse[, 'ProxyName'] != ''), ]
+
   taxa_to_ignore=c()
   for(tax in taxa.name) {
     if (! tax %in% pse[, 'ProxyName']) taxa_to_ignore=c(taxa_to_ignore, tax)
@@ -142,7 +145,7 @@ crest.get_modern_data <- function(pse, taxaType, climate,
   colnames(selectedTaxa)[ncol(selectedTaxa)] <- "notes"
 
   if (length(taxa_to_ignore)) {
-    selectedTaxa[taxa_to_ignore, ] <- c(rep(1, length(climate)), 'Taxon not in pse file.')
+    selectedTaxa[taxa_to_ignore, ] <- c(rep(1, length(climate)), 'Taxon not in the proxy_species_equivalency table.')
   }
 
 

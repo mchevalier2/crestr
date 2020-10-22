@@ -98,7 +98,7 @@ print.crestObj <- function(x, ...) {
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,
                           errors = c(0.5, 0.95),
-                          xlim = range(x$inputs$x),
+                          xlim = NA,
                           ylim = NA,
                           save = FALSE,
                           plot = TRUE,
@@ -113,6 +113,15 @@ plot.crestObj <- function(x,
     return(invisible(x))
   } else {
     idx <- 0
+
+    if(is.na(xlim)) {
+      if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+        xlim <- c(1, length(x$inputs$x))
+      } else {
+        xlim <- range(x$inputs$x)
+      }
+    }
+
     for (clim in climate) {
       if (idx == 0 && plot) {
         graphics::par(mfrow = grDevices::n2mfrow(length(climate)))
@@ -142,17 +151,22 @@ plot.crestObj <- function(x,
       }
       climate_names <- accClimateVariables()
 
+      if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+        xx <- seq_along(x$inputs$x)
+      } else {
+        xx <- x$inputs$x
+      }
       if (plot) {
         graphics::par(mar = c(4, 4, 4, 0.5))
         plot3D::image2D(
           z = (1 - as.matrix(t(pdfter[, -1]))),
           y = pdfter[, 1],
-          x = x$reconstructions[[clim]][["optima"]][, 1],
+          x = xx,
           xlim = xlim,
           ylim = c(ymn, ymx),
           zlim = c(0, 1),
           col = viridis::viridis(125)[26:125],
-          cex.axis = 6 / 7,
+          axes=FALSE,
           colkey = FALSE,
           resfac = 2,
           tck = -.013,
@@ -163,24 +177,30 @@ plot.crestObj <- function(x,
           ylab = climate_names[climate_names[, 2] == clim, 3],
           cex.lab = 6 / 7
         )
+        graphics::axis(2, cex.axis=5/7)
+        if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+          graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=5/7)
+        } else {
+          graphics::axis(1, cex.axis=5/7)
+        }
         for (e in errors) {
           val <- apply(pdfter[, -1], 2, function(x) {
             if(is.na(x[1])) return(c(NA, NA))
             w <- which(x <= e)
             return(c(w[1], w[length(w)]))
           })
-          graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[1, ], 1],
+          graphics::points(xx, pdfter[val[1, ], 1],
             type = "l", col = "white", lty = 3
           )
-          graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[2, ], 1],
+          graphics::points(xx, pdfter[val[2, ], 1],
             type = "l", col = "white", lty = 3
           )
         }
 
-        graphics::points(x$reconstructions[[clim]][["optima"]],
+        graphics::points(xx, x$reconstructions[[clim]][["optima"]][, 2],
           pch = 18, col = "white", cex = 0.8
         )
-        graphics::points(x$reconstructions[[clim]][["optima"]],
+        graphics::points(xx, x$reconstructions[[clim]][["optima"]][, 2],
           col = "white", cex = 0.5, type = "l"
         )
         plot3D::colkey(
@@ -202,30 +222,36 @@ plot.crestObj <- function(x,
         )
       }
       if (save) {
-        if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
-          loc <- substr(loc, 1, nchar(loc) - 1)
-        }
         pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
         graphics::par(mar = c(3, 3, 3.2, 0.5))
         plot3D::image2D(
           z = (1 - as.matrix(t(pdfter[, -1]))),
           y = pdfter[, 1],
-          x = x$reconstructions[[clim]][["optima"]][, 1],
+          x = xx,
           xlim = xlim,
           ylim = c(ymn, ymx),
           zlim = c(0, 1),
           col = viridis::viridis(125)[26:125],
-          cex.axis = 6 / 7,
+          axes=FALSE,
           colkey = FALSE,
-          resfac = 1,
+          resfac = 2,
           tck = -.013,
-          mgp = c(1.3, .3, 0),
+          mgp = c(2, .3, 0),
           las = 1,
           hadj = c(1, 1),
           xlab = x$inputs$x.name,
-          ylab = paste0(climate_names[climate_names[, 2] == clim, 3], "\n"),
+          ylab = climate_names[climate_names[, 2] == clim, 3],
           cex.lab = 6 / 7
         )
+        graphics::axis(2, cex.axis=6/7)
+        if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+          graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
+        } else {
+          graphics::axis(1, cex.axis=6/7)
+        }
+        if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
+          loc <- substr(loc, 1, nchar(loc) - 1)
+        }
         for (e in errors) {
           val <- apply(pdfter[, -1], 2, function(x) {
             if(is.na(x[1])) return(c(NA, NA))

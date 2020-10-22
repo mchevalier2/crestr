@@ -23,6 +23,7 @@
 #' )
 #' x <- crest.reconstruct(x, crest_ex, selectedTaxa = crest_ex_selection)
 #' plot(x)
+
 crest.reconstruct <- function(x, df,
                               selectedTaxa = x$inputs$selectedTaxa,
                               presenceThreshold = 0,
@@ -42,6 +43,11 @@ crest.reconstruct <- function(x, df,
   x$parameters$taxWeight <- taxWeight
   x$parameters$presenceThreshold <- presenceThreshold
 
+  if (sum(x$inputs$taxa.name %in% x$inputs$pse$ProxyName) == 0) {
+    cat('None of the recorded proxy were listed in the proxy_species_equivalency table.\n')
+    cat('Reconstruction stopped.\n')
+    return(x)
+  }
 
   if (sum(x$inputs$taxa.name %in% x$inputs$pse$ProxyName) != length(x$inputs$taxa.name)) {
     missing_taxa <- x$inputs$taxa.name[!(x$inputs$taxa.name %in% x$inputs$pse$ProxyName)]
@@ -50,7 +56,7 @@ crest.reconstruct <- function(x, df,
         "taxa are in the input file and are",
         "taxon is in the input file and is"
       ),
-      " not in the proxy_species_equivalency table.\n"
+      "not in the proxy_species_equivalency table.\n"
     ))
     cat(paste(missing_taxa, collapse = ", "))
     cat("\n")
@@ -120,7 +126,7 @@ crest.reconstruct <- function(x, df,
         }
       }
       reconstructions[[clim]][["posterior"]] <- rbind(x$modelling$xrange[[clim]], reconstructions[[clim]][["posterior"]])
-      reconstructions[[clim]][["optima"]] <- cbind(x$inputs$x, reconstructions[[clim]][["optima"]])
+      reconstructions[[clim]][["optima"]] <- data.frame('x'=x$inputs$x, 'optima'=reconstructions[[clim]][["optima"]])
     } else {
       reconstructions[[clim]] <- NA
     }
@@ -132,6 +138,7 @@ crest.reconstruct <- function(x, df,
       }
     }
   }
+  gc()
   x$reconstructions <- reconstructions
   x
 }
