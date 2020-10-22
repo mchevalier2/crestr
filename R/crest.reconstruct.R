@@ -96,8 +96,6 @@ crest.reconstruct <- function(x, df,
       reconstructions[[clim]][["posterior"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
       reconstructions[[clim]][["optima"]] <- rep(NA, nrow(x$inputs$df))
       for (s in 1:nrow(x$inputs$df)) {
-        cat(s)
-        cat(' ')
         if (is.na(x$modelling$weights[s, names(x$modelling$pdfs)[1]])) {
           reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
         } else {
