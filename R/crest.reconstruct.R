@@ -90,11 +90,8 @@ crest.reconstruct <- function(x, df,
   rownames(taxWeight) <- rownames(x$inputs$df)
   x$modelling$weights <- taxWeight
 
-  print('here')
-
   reconstructions <- list()
   for (clim in x$parameters$climate) {
-    print(clim)
     if (sum(as.numeric(selectedTaxa[, clim])) > 0) {
       reconstructions[[clim]][["posterior"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
       reconstructions[[clim]][["optima"]] <- rep(NA, nrow(x$inputs$df))
