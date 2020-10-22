@@ -114,8 +114,8 @@ plot.crestObj <- function(x,
   } else {
     idx <- 0
     for (clim in climate) {
-      if (idx > 0 && plot) {
-        grDevices::dev.new()
+      if (idx == 0 && plot) {
+        graphics::par(mfrow = grDevices::n2mfrow(length(climate)))
       }
       idx <- idx + 1
       pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
