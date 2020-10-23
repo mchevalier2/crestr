@@ -3,3 +3,4 @@
 .Rproj.user
 *.tex
 .DS_Store
+inst/doc
