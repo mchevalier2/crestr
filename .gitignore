@@ -4,3 +4,4 @@
 *.tex
 .DS_Store
 inst/doc
+personal_helpers
