@@ -48,9 +48,13 @@ have been identified.
 ```{r data_preview_fossil}
 ## the first 6 samples
 head(crest_ex)
+```
+
+```{r data_preview_fossil2}
 ## the structure of the data frame
 str(crest_ex)
 ```
+
 
 For ech reconstruction, a proxy-species equivalency ('pse') table must be provided.
 Here, with the 7 fake taxa, it looks like:
@@ -66,7 +70,7 @@ To illustrate the process, we will reconstruct bio1 (mean annual temperature)
 and bio12 (annual precipitation) from these fake data. The description of the
 different parameters is available in the first *vignette*.
 
-```{r reconstructing_climate}
+```{r reconstructing_climate, echo=FALSE}
 recons <- crest(
    df = crest_ex, pse = crest_ex_pse, taxaType = 0,
    climate = c("bio1", "bio12"), bin_width = c(2, 20),
@@ -74,13 +78,16 @@ recons <- crest(
    selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
 ```
+Finally, we can visualise the results using the plot function:
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r plot, echo = FALSE}
+plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
+plot(recons, climate = 'bio12')
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
+The reconstructed climate values can be accessed from the *recons* object:
+
+```{r extract_results}
+head(recons$reconstructions$bio1$optima)
+recons$reconstructions$bio1$posterior[1:6, 1:10]
+```

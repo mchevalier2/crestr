@@ -40,6 +40,7 @@ which 7 taxa have been identified.
     #> Sample_4   4      0      0     37      0     27     36      0
     #> Sample_5   5      0      3     36      3     18     40      0
     #> Sample_6   6      2      2     25      0     21     50      0
+
     ## the structure of the data frame
     str(crest_ex)
     #> 'data.frame':    20 obs. of  8 variables:
@@ -83,23 +84,38 @@ temperature) and bio12 (annual precipitation) from these fake data. The
 description of the different parameters is available in the first
 *vignette*.
 
-    recons <- crest(
-       df = crest_ex, pse = crest_ex_pse, taxaType = 0,
-       climate = c("bio1", "bio12"), bin_width = c(2, 20),
-       shape = c("normal", "lognormal"),
-       selectedTaxa = crest_ex_selection, dbname = "crest_example"
-    )
     #> [1] "make a quality test for taxaType."
     #> No match for taxon  Randomaceae, Randomus, Taxon7, Taxon7 
     #> Extracting data from the online database.
     #>        |                                                |                                        |   0%  |                                                |======                                  |  14%  |                                                |===========                             |  29%  |                                                |=================                       |  43%  |                                                |=======================                 |  57%  |                                                |=============================           |  71%  |                                                |==================================      |  86%  |                                                |========================================| 100%
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date.
+Finally, we can visualise the results using the plot function:
 
-You can also embed plots, for example:
+<img src="man/figures/README-plot-1.png" width="100%" /><img src="man/figures/README-plot-2.png" width="100%" />
 
-<img src="man/figures/README-pressure-1.png" width="100%" />
+The reconstructed climate values can be accessed from the *recons*
+object:
 
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub!
+    head(recons$reconstructions$bio1$optima)
+    #>   x   optima
+    #> 1 1 17.16633
+    #> 2 2 16.99800
+    #> 3 3 17.05411
+    #> 4 4 17.50301
+    #> 5 5 18.23246
+    #> 6 6 18.96192
+    recons$reconstructions$bio1$posterior[1:6, 1:10]
+    #>              [,1]         [,2]         [,3]         [,4]         [,5]
+    #> [1,] 6.000000e+00 6.056112e+00 6.112224e+00 6.168337e+00 6.224449e+00
+    #> [2,] 7.978668e-06 8.810916e-06 9.725114e-06 1.072880e-05 1.183017e-05
+    #> [3,] 7.694906e-06 8.516925e-06 9.421857e-06 1.041752e-05 1.151241e-05
+    #> [4,] 7.946321e-06 8.787246e-06 9.712181e-06 1.072897e-05 1.184613e-05
+    #> [5,] 9.548027e-06 1.049040e-05 1.152049e-05 1.264591e-05 1.387488e-05
+    #> [6,] 1.177062e-06 1.311416e-06 1.460379e-06 1.625456e-06 1.808294e-06
+    #>              [,6]         [,7]         [,8]         [,9]        [,10]
+    #> [1,] 6.280561e+00 6.336673e+00 6.392786e+00 6.448898e+00 6.505010e+00
+    #> [2,] 1.303808e-05 1.436214e-05 1.581275e-05 1.740119e-05 1.913962e-05
+    #> [3,] 1.271576e-05 1.403760e-05 1.548878e-05 1.708110e-05 1.882732e-05
+    #> [4,] 1.307291e-05 1.441935e-05 1.589630e-05 1.751555e-05 1.928984e-05
+    #> [5,] 1.521629e-05 1.667971e-05 1.827547e-05 2.001469e-05 2.190934e-05
+    #> [6,] 2.010698e-06 2.234648e-06 2.482307e-06 2.756044e-06 3.058447e-06
