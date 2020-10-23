@@ -17,13 +17,11 @@ You can install the development version from
     # install.packages("devtools")
     devtools::install_github("mchevalier2/crestr")
 
-## Warning
-
-This package is still in an early phase of development. The
-documentation is sparse and the functionalities limited. If you notice
-any bug, or if you would like to see some specific functions
-implemented, please contact me at
-[chevalier.manue@gmail.com](chevalier.manue@gmail.com).
+> ***NOTE:*** This package is still in an early phase of development.
+> The documentation is sparse and the functionalities limited. If you
+> notice any bug, or if you would like to see some specific functions
+> implemented, please contact me at
+> <a href="mailto:chevalier.manuel@gmail.com" class="email">chevalier.manuel@gmail.com</a>.
 
 I will try to limit as much as possible changing existing functions
 and/or function parameters, but at the moment this cannot be excluded.
@@ -94,7 +92,7 @@ variable:
 To illustrate the process, we will reconstruct bio1 (mean annual
 temperature) and bio12 (annual precipitation) from these fake data. The
 description of the different parameters is available in the first
-*vignette*.
+**vignette**.
 
     recons <- crest(
        df = crest_ex, pse = crest_ex_pse, taxaType = 0,
@@ -104,7 +102,7 @@ description of the different parameters is available in the first
     )
 
 Finally, the results can be visualised using the plot function and the
-reconstructed climate values can be accessed from the nested *recons*
+reconstructed climate values can be accessed from the nested `recons`
 object:
 
     names(recons)
