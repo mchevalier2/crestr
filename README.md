@@ -17,15 +17,14 @@ You can install the development version from
     # install.packages("devtools")
     devtools::install_github("mchevalier2/crestr")
 
-> ***NOTE:*** This package is still in an early phase of development.
-> The documentation is sparse and the functionalities limited. If you
-> notice any bug, or if you would like to see some specific functions
-> implemented, please contact me at
+> ***NOTE:*** This package is still in an **early phase of
+> development**. The documentation is sparse and the functionalities
+> limited. If you notice any bug, or if you would like to see some
+> specific functions implemented, feel free to contact me at
 > <a href="mailto:chevalier.manuel@gmail.com" class="email">chevalier.manuel@gmail.com</a>.
-
-I will try to limit as much as possible changing existing functions
-and/or function parameters, but at the moment this cannot be excluded.
-My apologies for this.
+> I will try to limit as much as possible changing existing functions
+> and/or function parameters, but at the moment this cannot be excluded.
+> My apologies for this.
 
 ## Example
 
@@ -145,3 +144,13 @@ object:
     plot(recons, climate = 'bio12')
 
 <img src="man/figures/README-plot-2.png" width="100%" />
+
+## References
+
+-   Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate
+    REconstruction SofTware): a probability density function (PDF)-based
+    quantitative climate reconstruction method. *Clim. Past* 10,
+    2081–2098.
+-   Chevalier, M., 2019. Enabling possibilities to quantify past climate
+    from fossil assemblages at a global scale. *Glob. Planet. Change*
+    175, 27–35.
