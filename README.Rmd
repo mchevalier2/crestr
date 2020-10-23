@@ -18,7 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of crestr is to produce probabilistic reconstructions of past climate change from fossil assemblage data.
+The goal of crestr is to produce probabilistic reconstructions of past climate
+change from fossil assemblage data.
 
 ## Installation
 
@@ -30,17 +31,48 @@ devtools::install_github("mchevalier2/crestr")
 ```
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to run crest with randomly generated
+data:
 
 ```{r example}
 library(crestr)
-## basic example code
+## loading example data
+data(crest_ex)
+data(crest_ex_pse)
+data(crest_ex_selection)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Let's first have a look at the data. We have 20 fossil samples from which 7 taxa
+have been identified.
 
-```{r cars}
-summary(cars)
+```{r data_preview_fossil}
+## the first 6 samples
+head(crest_ex)
+## the structure of the data frame
+str(crest_ex)
+```
+
+For ech reconstruction, a proxy-species equivalency ('pse') table must be provided.
+Here, with the 7 fake taxa, it looks like:
+```{r data_preview_pse}
+crest_ex_pse
+```
+Finally, one can specify which taxa should be used to reconstruct each variable:
+```{r data_preview_selection}
+crest_ex_selection
+```
+
+To illustrate the process, we will reconstruct bio1 (mean annual temperature)
+and bio12 (annual precipitation) from these fake data. The description of the
+different parameters is available in the first *vignette*.
+
+```{r reconstructing_climate}
+recons <- crest(
+   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+   climate = c("bio1", "bio12"), bin_width = c(2, 20),
+   shape = c("normal", "lognormal"),
+   selectedTaxa = crest_ex_selection, dbname = "crest_example"
+)
 ```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
