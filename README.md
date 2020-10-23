@@ -13,7 +13,7 @@ climate paramters. These responses take the form of probability density
 functions (*pdfs*). The details of the method have been described in
 [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
 and the calibrated data presented in
-<a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016" target="_blank">Chevalier (2019)</a>.
+<a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016" target="blank">Chevalier (2019)</a>.
 
 ## Installation
 
@@ -115,8 +115,8 @@ object:
     #> [1] "inputs"          "parameters"      "modelling"       "reconstructions"
     lapply(recons$reconstructions, names)
     #> $bio1
-    #> [1] "posterior" "optima"   
-    #> 
+    #> [1] "posterior" "optima"
+    #>
     #> $bio12
     #> [1] "posterior" "optima"
 
