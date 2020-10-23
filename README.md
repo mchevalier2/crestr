@@ -12,8 +12,8 @@ estimation of conditional responses of studies bioproxy studied to
 climate paramters. These responses take the form of probability density
 functions (*pdfs*). The details of the method have been described in
 [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
-and the calibrated data presented in
-<a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016" target="blank">Chevalier (2019)</a>.
+and the calibrated data presented in [Chevalier
+(2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
 
 ## Installation
 
@@ -28,8 +28,8 @@ You can install the development version from
 > limited. If you notice any bug, or if you would like to see some
 > specific functions implemented, feel free to contact me at
 > <a href="mailto:chevalier.manuel@gmail.com" class="email">chevalier.manuel@gmail.com</a>.
-> I will try to limit as much as possible changing existing functions
-> and/or function parameters, but at the moment this cannot be excluded.
+> I will try to limit as much as possible modifying existing functions
+> and/or function parameters, but at the moment it cannot be excluded.
 > My apologies for this.
 
 ## Example
@@ -115,8 +115,8 @@ object:
     #> [1] "inputs"          "parameters"      "modelling"       "reconstructions"
     lapply(recons$reconstructions, names)
     #> $bio1
-    #> [1] "posterior" "optima"
-    #>
+    #> [1] "posterior" "optima"   
+    #> 
     #> $bio12
     #> [1] "posterior" "optima"
 
