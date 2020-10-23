@@ -70,7 +70,7 @@ To illustrate the process, we will reconstruct bio1 (mean annual temperature)
 and bio12 (annual precipitation) from these fake data. The description of the
 different parameters is available in the first *vignette*.
 
-```{r reconstructing_climate, echo=FALSE}
+```{r reconstructing_climate, results='hide'}
 recons <- crest(
    df = crest_ex, pse = crest_ex_pse, taxaType = 0,
    climate = c("bio1", "bio12"), bin_width = c(2, 20),
@@ -80,7 +80,7 @@ recons <- crest(
 ```
 Finally, we can visualise the results using the plot function:
 
-```{r plot, echo = FALSE}
+```{r plot}
 plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
 plot(recons, climate = 'bio12')
 ```
@@ -89,5 +89,8 @@ The reconstructed climate values can be accessed from the *recons* object:
 
 ```{r extract_results}
 head(recons$reconstructions$bio1$optima)
+```
+
+```{r extract_results2}
 recons$reconstructions$bio1$posterior[1:6, 1:10]
 ```

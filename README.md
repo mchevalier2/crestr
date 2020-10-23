@@ -84,14 +84,22 @@ temperature) and bio12 (annual precipitation) from these fake data. The
 description of the different parameters is available in the first
 *vignette*.
 
-    #> [1] "make a quality test for taxaType."
-    #> No match for taxon  Randomaceae, Randomus, Taxon7, Taxon7 
-    #> Extracting data from the online database.
-    #>        |                                                |                                        |   0%  |                                                |======                                  |  14%  |                                                |===========                             |  29%  |                                                |=================                       |  43%  |                                                |=======================                 |  57%  |                                                |=============================           |  71%  |                                                |==================================      |  86%  |                                                |========================================| 100%
+    recons <- crest(
+       df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+       climate = c("bio1", "bio12"), bin_width = c(2, 20),
+       shape = c("normal", "lognormal"),
+       selectedTaxa = crest_ex_selection, dbname = "crest_example"
+    )
 
 Finally, we can visualise the results using the plot function:
 
-<img src="man/figures/README-plot-1.png" width="100%" /><img src="man/figures/README-plot-2.png" width="100%" />
+    plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
+
+<img src="man/figures/README-plot-1.png" width="100%" />
+
+    plot(recons, climate = 'bio12')
+
+<img src="man/figures/README-plot-2.png" width="100%" />
 
 The reconstructed climate values can be accessed from the *recons*
 object:
@@ -104,6 +112,7 @@ object:
     #> 4 4 17.50301
     #> 5 5 18.23246
     #> 6 6 18.96192
+
     recons$reconstructions$bio1$posterior[1:6, 1:10]
     #>              [,1]         [,2]         [,3]         [,4]         [,5]
     #> [1,] 6.000000e+00 6.056112e+00 6.112224e+00 6.168337e+00 6.224449e+00
