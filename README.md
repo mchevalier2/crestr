@@ -6,16 +6,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of crestr is to …
+The goal of crestr is to produce probabilistic reconstructions of past
+climate change from fossil assemblage data.
 
 ## Installation
 
-You can install the released version of crestr from
-[CRAN](https://CRAN.R-project.org) with:
-
-    install.packages("crestr")
-
-And the development version from [GitHub](https://github.com/) with:
+You can install the development version from
+[GitHub](https://github.com/) with:
 
     # install.packages("devtools")
     devtools::install_github("mchevalier2/crestr")
