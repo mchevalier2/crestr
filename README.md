@@ -11,9 +11,9 @@ climate change from fossil assemblage data. The approach is based on the
 estimation of conditional responses of studies bioproxy studied to
 climate paramters. These responses take the form of probability density
 functions (*pdfs*). The details of the method have been described in
-[Chevalier *et al.* (2014)](www.doi.org/10.5194/cp-10-2081-2014) and the
-calibrated data presented in [Chevalier
-(2019)](wwww.doi.org/10.1016/j.gloplacha.2019.01.016).
+[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
+and the calibrated data presented in [Chevalier
+(2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
 
 ## Installation
 
@@ -44,7 +44,8 @@ generated data:
     data(crest_ex_selection)
 
 Let’s first have a look at the data. We have 20 fossil samples from
-which 7 taxa have been identified.
+which 7 taxa have been identified. The data are already expressed in
+percentages.
 
     ## the first 6 samples
     head(crest_ex)
@@ -157,8 +158,8 @@ object:
     REconstruction SofTware): a probability density function (PDF)-based
     quantitative climate reconstruction method. *Clim. Past* 10,
     2081–2098.
-    [10.5194/cp-10-2081-2014](www.doi.org/10.5194/cp-10-2081-2014)
+    [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
 -   Chevalier, M., 2019. Enabling possibilities to quantify past climate
     from fossil assemblages at a global scale. *Glob. Planet. Change*
     175, 27–35.
-    [10.1016/j.gloplacha.2019.01.016](wwww.doi.org/10.1016/j.gloplacha.2019.01.016)
+    [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
