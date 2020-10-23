@@ -29,6 +29,17 @@ You can install the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
+## Warning
+
+This package is still in an early phase of development. The documentation is
+sparse and the functionalities limited. If you notice any bug, or if you would
+like to see some specific functions implemented, please contact me at
+[chevalier.manue@gmail.com](chevalier.manue@gmail.com).
+
+I will try to limit as much as possible changing existing functions and/or
+function parameters, but at the moment this cannot be excluded. My apologies for
+this.
+
 ## Example
 
 This is a basic example which shows you how to run crest with randomly generated
@@ -56,7 +67,7 @@ str(crest_ex)
 ```
 
 
-For ech reconstruction, a proxy-species equivalency ('pse') table must be provided.
+For each reconstruction, a proxy-species equivalency ('pse') table must be provided.
 Here, with the 7 fake taxa, it looks like:
 ```{r data_preview_pse}
 crest_ex_pse
@@ -78,19 +89,25 @@ recons <- crest(
    selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
 ```
-Finally, we can visualise the results using the plot function:
+Finally, the results can be visualised using the plot function and the
+reconstructed climate values can be accessed from the nested *recons* object:
+
+```{r extract_results_0}
+names(recons)
+lapply(recons$reconstructions, names)
+```
+
+```{r extract_results}
+head(recons$reconstructions$bio1$optima)
+str(recons$reconstructions$bio1$optima)
+```
+
+```{r extract_results2}
+signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
+str(recons$reconstructions$bio1$posterior)
+```
 
 ```{r plot}
 plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
 plot(recons, climate = 'bio12')
-```
-
-The reconstructed climate values can be accessed from the *recons* object:
-
-```{r extract_results}
-head(recons$reconstructions$bio1$optima)
-```
-
-```{r extract_results2}
-recons$reconstructions$bio1$posterior[1:6, 1:10]
 ```

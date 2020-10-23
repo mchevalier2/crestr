@@ -17,6 +17,18 @@ You can install the development version from
     # install.packages("devtools")
     devtools::install_github("mchevalier2/crestr")
 
+## Warning
+
+This package is still in an early phase of development. The
+documentation is sparse and the functionalities limited. If you notice
+any bug, or if you would like to see some specific functions
+implemented, please contact me at
+[chevalier.manue@gmail.com](chevalier.manue@gmail.com).
+
+I will try to limit as much as possible changing existing functions
+and/or function parameters, but at the moment this cannot be excluded.
+My apologies for this.
+
 ## Example
 
 This is a basic example which shows you how to run crest with randomly
@@ -53,7 +65,7 @@ which 7 taxa have been identified.
     #>  $ Taxon6: int  32 27 26 36 40 50 53 47 37 38 ...
     #>  $ Taxon7: int  1 0 0 0 0 0 0 0 0 0 ...
 
-For ech reconstruction, a proxy-species equivalency (‘pse’) table must
+For each reconstruction, a proxy-species equivalency (‘pse’) table must
 be provided. Here, with the 7 fake taxa, it looks like:
 
     crest_ex_pse
@@ -91,18 +103,18 @@ description of the different parameters is available in the first
        selectedTaxa = crest_ex_selection, dbname = "crest_example"
     )
 
-Finally, we can visualise the results using the plot function:
-
-    plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
-
-<img src="man/figures/README-plot-1.png" width="100%" />
-
-    plot(recons, climate = 'bio12')
-
-<img src="man/figures/README-plot-2.png" width="100%" />
-
-The reconstructed climate values can be accessed from the *recons*
+Finally, the results can be visualised using the plot function and the
+reconstructed climate values can be accessed from the nested *recons*
 object:
+
+    names(recons)
+    #> [1] "inputs"          "parameters"      "modelling"       "reconstructions"
+    lapply(recons$reconstructions, names)
+    #> $bio1
+    #> [1] "posterior" "optima"   
+    #> 
+    #> $bio12
+    #> [1] "posterior" "optima"
 
     head(recons$reconstructions$bio1$optima)
     #>   x   optima
@@ -112,19 +124,26 @@ object:
     #> 4 4 17.50301
     #> 5 5 18.23246
     #> 6 6 18.96192
+    str(recons$reconstructions$bio1$optima)
+    #> 'data.frame':    20 obs. of  2 variables:
+    #>  $ x     : int  1 2 3 4 5 6 7 8 9 10 ...
+    #>  $ optima: num  17.2 17 17.1 17.5 18.2 ...
 
-    recons$reconstructions$bio1$posterior[1:6, 1:10]
-    #>              [,1]         [,2]         [,3]         [,4]         [,5]
-    #> [1,] 6.000000e+00 6.056112e+00 6.112224e+00 6.168337e+00 6.224449e+00
-    #> [2,] 7.978668e-06 8.810916e-06 9.725114e-06 1.072880e-05 1.183017e-05
-    #> [3,] 7.694906e-06 8.516925e-06 9.421857e-06 1.041752e-05 1.151241e-05
-    #> [4,] 7.946321e-06 8.787246e-06 9.712181e-06 1.072897e-05 1.184613e-05
-    #> [5,] 9.548027e-06 1.049040e-05 1.152049e-05 1.264591e-05 1.387488e-05
-    #> [6,] 1.177062e-06 1.311416e-06 1.460379e-06 1.625456e-06 1.808294e-06
-    #>              [,6]         [,7]         [,8]         [,9]        [,10]
-    #> [1,] 6.280561e+00 6.336673e+00 6.392786e+00 6.448898e+00 6.505010e+00
-    #> [2,] 1.303808e-05 1.436214e-05 1.581275e-05 1.740119e-05 1.913962e-05
-    #> [3,] 1.271576e-05 1.403760e-05 1.548878e-05 1.708110e-05 1.882732e-05
-    #> [4,] 1.307291e-05 1.441935e-05 1.589630e-05 1.751555e-05 1.928984e-05
-    #> [5,] 1.521629e-05 1.667971e-05 1.827547e-05 2.001469e-05 2.190934e-05
-    #> [6,] 2.010698e-06 2.234648e-06 2.482307e-06 2.756044e-06 3.058447e-06
+    signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
+    #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
+    #> [1,] 6.00e+00 6.06e+00 6.11e+00 6.17e+00 6.22e+00 6.28e+00
+    #> [2,] 7.98e-06 8.81e-06 9.73e-06 1.07e-05 1.18e-05 1.30e-05
+    #> [3,] 7.69e-06 8.52e-06 9.42e-06 1.04e-05 1.15e-05 1.27e-05
+    #> [4,] 7.95e-06 8.79e-06 9.71e-06 1.07e-05 1.18e-05 1.31e-05
+    #> [5,] 9.55e-06 1.05e-05 1.15e-05 1.26e-05 1.39e-05 1.52e-05
+    #> [6,] 1.18e-06 1.31e-06 1.46e-06 1.63e-06 1.81e-06 2.01e-06
+    str(recons$reconstructions$bio1$posterior)
+    #>  num [1:21, 1:500] 6.00 7.98e-06 7.69e-06 7.95e-06 9.55e-06 ...
+
+    plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
+
+<img src="man/figures/README-plot-1.png" width="100%" />
+
+    plot(recons, climate = 'bio12')
+
+<img src="man/figures/README-plot-2.png" width="100%" />
