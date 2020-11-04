@@ -26,7 +26,7 @@
 #' @export
 #' @examples
 #' data(crest_ex)
-#' plot_diagram(crest_ex, bars=TRUE, col='black')
+#' plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 #' plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
 #' \dontrun{
 #' plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
