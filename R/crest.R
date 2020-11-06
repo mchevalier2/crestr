@@ -3,6 +3,8 @@
 #' Connect to the gbif4crest_02 database by accessing the server on Amazon.
 #'
 #' @inheritParams crestObj
+#' @param leave_one_out A boolean to indicate whether the leave one out (loo)
+#'        reconstructions should be computed (default FALSE).
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return The parameters to be used by crest()
 #' @export
@@ -14,9 +16,12 @@
 #'   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"), bin_width = c(2, 20),
 #'   shape = c("normal", "lognormal"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
+#'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'   leave_one_out = TRUE
 #' )
 #' plot(recons)
+#' plot_loo(recons)
+#'
 crest <- function(df, pse, taxaType, climate,
                   xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                   continents = NA, countries = NA,
@@ -30,6 +35,7 @@ crest <- function(df, pse, taxaType, climate,
                   climateSpaceWeighting = TRUE,
                   presenceThreshold = 0,
                   taxWeight = "normalisation",
+                  leave_one_out = FALSE,
                   dbname = "gbif4crest_02") {
 
 
@@ -54,5 +60,8 @@ crest <- function(df, pse, taxaType, climate,
     presenceThreshold = presenceThreshold,
     taxWeight = taxWeight
   )
+
+  if(leave_one_out) x <- loo(x)
+
   x
 }

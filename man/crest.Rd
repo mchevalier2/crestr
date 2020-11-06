@@ -27,6 +27,7 @@ crest(
   climateSpaceWeighting = TRUE,
   presenceThreshold = 0,
   taxWeight = "normalisation",
+  leave_one_out = FALSE,
   dbname = "gbif4crest_02"
 )
 }
@@ -75,6 +76,9 @@ crest(
 
 \item{taxWeight}{'originalData', 'presence/absence', 'percentages' or 'normalisation'}
 
+\item{leave_one_out}{A boolean to indicate whether the leave one out (loo)
+reconstructions should be computed (default FALSE).}
+
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
@@ -91,7 +95,10 @@ recons <- crest(
   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
   climate = c("bio1", "bio12"), bin_width = c(2, 20),
   shape = c("normal", "lognormal"),
-  selectedTaxa = crest_ex_selection, dbname = "crest_example"
+  selectedTaxa = crest_ex_selection, dbname = "crest_example",
+  leave_one_out = TRUE
 )
 plot(recons)
+plot_loo(recons)
+
 }
