@@ -21,11 +21,10 @@
 #'   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
 #'   bin_width = c(2, 20), shape = c("normal", "lognormal")
 #' )
-#' x <- crest.reconstruct(x, crest_ex, selectedTaxa = crest_ex_selection)
+#' x <- crest.reconstruct(x, crest_ex)
 #' plot(x)
 
 crest.reconstruct <- function(x, df,
-                              selectedTaxa = x$inputs$selectedTaxa,
                               presenceThreshold = 0,
                               taxWeight = "normalisation") {
   if (is.character(df)) {
@@ -98,11 +97,13 @@ crest.reconstruct <- function(x, df,
 
   reconstructions <- list()
   for (clim in x$parameters$climate) {
-    if (sum(as.numeric(selectedTaxa[, clim])) > 0) {
+    if (sum(as.numeric(x$inputs$selectedTaxa[, clim])) > 0) {
       reconstructions[[clim]][["posterior"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
       reconstructions[[clim]][["optima"]] <- rep(NA, nrow(x$inputs$df))
       for (s in 1:nrow(x$inputs$df)) {
         if (is.na(x$modelling$weights[s, names(x$modelling$pdfs)[1]])) {
+          reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
+        } else if (sum(as.numeric(x$inputs$selected[, clim]) * x$modelling$weights[s, ]) == 0) {
           reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
         } else {
           norm_factor <- 0
@@ -131,13 +132,13 @@ crest.reconstruct <- function(x, df,
       reconstructions[[clim]] <- NA
     }
   }
-  for (tax in names(x$modelling$distributions)) {
-    for (clim in x$parameters$climate) {
-      if (as.numeric(x$inputs$selectedTaxa[tax, clim]) > 0) {
-        x$modelling$pdfs[[tax]][[clim]][["pdfpol_log"]] <- NULL
-      }
-    }
-  }
+  #for (tax in names(x$modelling$distributions)) {
+  #  for (clim in x$parameters$climate) {
+  #    if (as.numeric(x$inputs$selectedTaxa[tax, clim]) > 0) {
+  #      x$modelling$pdfs[[tax]][[clim]][["pdfpol_log"]] <- NULL
+  #    }
+  #  }
+  #}
   gc()
   x$reconstructions <- reconstructions
   x

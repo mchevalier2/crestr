@@ -2,11 +2,12 @@
 #'
 #' Describes all the variables available in the database.
 #'
+#' @param v The name of a variable to quickly access its description and ID.
 #' @return A data frame descriptive of the climate variables available in the database.
 #' @export
 #' @examples
 #' accClimateVariables()
-accClimateVariables <- function() {
+accClimateVariables <- function(v=NA) {
   res <- data.frame(
     1:20,
     c(paste("bio", 1:19, sep = ""), "ai"),
@@ -34,6 +35,12 @@ accClimateVariables <- function() {
     )
   )
   colnames(res) <- c("Variable ID", "Variable name", "Description")
+  if(!is.na(v[1])) {
+    if(v[1] %in% res[,2]) {
+      w=which(res[,2] == v[1])
+      return(c(res[w,1], res[w,2], res[w,3]))
+    }
+  }
   res
 }
 

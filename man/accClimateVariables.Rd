@@ -4,7 +4,10 @@
 \alias{accClimateVariables}
 \title{Describes all the variables available in the database.}
 \usage{
-accClimateVariables()
+accClimateVariables(v = NA)
+}
+\arguments{
+\item{v}{The name of a variable to quickly access its description and ID.}
 }
 \value{
 A data frame descriptive of the climate variables available in the database.

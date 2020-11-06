@@ -4,20 +4,12 @@
 \alias{crest.reconstruct}
 \title{Fit the species and proxy pdfs}
 \usage{
-crest.reconstruct(
-  x,
-  df,
-  selectedTaxa = x$inputs$selectedTaxa,
-  presenceThreshold = 0,
-  taxWeight = "normalisation"
-)
+crest.reconstruct(x, df, presenceThreshold = 0, taxWeight = "normalisation")
 }
 \arguments{
 \item{x}{a crestObj produced by the crest.fit_pdfs function.}
 
 \item{df}{.}
-
-\item{selectedTaxa}{.}
 
 \item{presenceThreshold}{.}
 
@@ -44,6 +36,6 @@ x <- crest.calibrate(x,
   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
   bin_width = c(2, 20), shape = c("normal", "lognormal")
 )
-x <- crest.reconstruct(x, crest_ex, selectedTaxa = crest_ex_selection)
+x <- crest.reconstruct(x, crest_ex)
 plot(x)
 }

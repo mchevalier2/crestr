@@ -39,6 +39,7 @@ crest <- function(df, pse, taxaType, climate,
     continents = continents, countries = countries,
     realms = realms, biomes = biomes, ecoregions = ecoregions,
     minGridCells = minGridCells,
+    selectedTaxa = selectedTaxa,
     dbname = dbname
   )
 
@@ -50,7 +51,6 @@ crest <- function(df, pse, taxaType, climate,
 
   x <- crest.reconstruct(x,
     df = df,
-    selectedTaxa = selectedTaxa,
     presenceThreshold = presenceThreshold,
     taxWeight = taxWeight
   )
