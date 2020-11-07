@@ -15,7 +15,7 @@ plot_loo(
   xlim = NA,
   tickAtSample = FALSE,
   col_pos = "black",
-  col_neg = "white",
+  col_neg = "grey80",
   title = NA
 )
 }

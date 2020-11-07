@@ -32,7 +32,7 @@ plot_loo <- function( x,
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width=1,
                       xlim=NA, tickAtSample=FALSE,
-                      col_pos = 'black', col_neg='white', title=NA ) {
+                      col_pos = 'black', col_neg='grey80', title=NA ) {
 
 
   if(! 'loo' %in% names(x$reconstructions[[x$parameters$climate[1]]])) {

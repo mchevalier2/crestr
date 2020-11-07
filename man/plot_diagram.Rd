@@ -18,7 +18,7 @@ plot_diagram(
   xlim = NA,
   tickAtSample = TRUE,
   col_pos = "black",
-  col_neg = "white",
+  col_neg = "grey80",
   title = NA
 )
 }
@@ -56,7 +56,7 @@ the file is saved in the working directory under the name Diagram.pdf.}
 
 \item{col_pos}{Graphical parameter for the barplot. Colour of all the positive values (default black).}
 
-\item{col_neg}{Graphical parameter for the barplot. Colour of all the negative values (default white).}
+\item{col_neg}{Graphical parameter for the barplot. Colour of all the negative values (default light grey).}
 
 \item{title}{Name to be added on top of the plot (default NA).}
 }
