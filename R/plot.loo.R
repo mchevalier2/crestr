@@ -34,13 +34,13 @@ plot_loo <- function( x,
                       xlim=NA, tickAtSample=FALSE,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
 
-
-  if(! 'loo' %in% names(x$reconstructions[[x$parameters$climate[1]]])) {
-    cat('ERROR: No leave-one-out data available. Please run the loo() function first.\n')
-    return(invisible())
-  }
-
   if (methods::is(x)[1] == 'crestObj') {
+
+    if(! 'loo' %in% names(x$reconstructions[[x$parameters$climate[1]]])) {
+      cat('ERROR: No leave-one-out data available. Please run the loo() function first.\n')
+      return(invisible())
+    }
+
     if (length(col_pos) != length(x$parameters$climate)) col_pos = base::rep_len(col_pos,length(x$parameters$climate))
     if (length(col_neg) != length(x$parameters$climate)) col_neg = base::rep_len(col_neg,length(x$parameters$climate))
     if (length(yax_incr) != length(x$parameters$climate)) yax_incr = base::rep_len(yax_incr,length(x$parameters$climate))
@@ -52,15 +52,20 @@ plot_loo <- function( x,
     if(!save) graphics::par(mfrow=c(1,2))
 
     for( clim in x$parameters$climate) {
-      df <- cbind(x$inputs$x)
+      df <- list()
+      df[[x$inputs$x.name]] <- x$inputs$x
+      loo_na <- rep(0, length(x$inputs$x))
       for( tax in names(x$reconstructions[[clim]]$loo)) {
         if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {
-          df <- cbind(df, rep(0, nrow(df)))
+          df[[tax]] <- loo_na
         } else {
-          df <- cbind(df, x$reconstructions[[clim]]$loo[[tax]])
+          df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]]
         }
       }
-      colnames(df)= c(x$inputs$x.name, names(x$reconstructions[[clim]]$loo))
+      df <- do.call(cbind, df)
+      print(utils::head(df))
+      #colnames(df) <- c(x$inputs$x.name, names(x$reconstructions[[clim]]$loo))
+      #print(head(df))
 
       xlim <- range(df[, 1])
       bar_width2 <- bar_width

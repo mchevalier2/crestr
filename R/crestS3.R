@@ -76,11 +76,14 @@ crestObj <- function(taxa.name, pse, taxaType, climate,
 
   reconstructions <- list()
 
+  misc <- list()
+
   value <- list(
     inputs = inputs,
     parameters = parameters,
     modelling = modelling,
-    reconstructions = reconstructions
+    reconstructions = reconstructions,
+    misc = misc
   )
   # class can be set using class() or attr() function
   attr(value, "class") <- "crestObj"
@@ -105,7 +108,7 @@ plot.crestObj <- function(x,
                           loc = getwd(),
                           ...) {
   if (length(x$reconstructions) == 0 || is.null(climate)) {
-    cat("No reconstructions available for plotting.")
+    cat("No reconstructions available for plotting.\n")
     return(invisible(x))
   }
   if (!(save || plot)) {

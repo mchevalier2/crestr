@@ -6,6 +6,7 @@
 #'
 #' @inheritParams crestObj
 #' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
 #' @return A crest() object containing the spatial distributions
 #' @export
 #' @examples
@@ -28,11 +29,12 @@ crest.get_modern_data <- function(pse, taxaType, climate,
                                   realms = NA, biomes = NA, ecoregions = NA,
                                   minGridCells = 20,
                                   selectedTaxa = NA,
-                                  dbname = "gbif4crest_02") {
+                                  dbname = "gbif4crest_02",
+                                  verbose=TRUE) {
 
   ## . Testing if the input variables are in the correct format ---------------
   if (!is.data.frame(pse)) {
-    cat("Problem here. proxy_species_equivalency is not a data frame.\n")
+    cat("ERROR: proxy_species_equivalency is not a data frame.\n")
     return()
   }
 

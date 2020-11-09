@@ -4,16 +4,25 @@
 \alias{crest.reconstruct}
 \title{Fit the species and proxy pdfs}
 \usage{
-crest.reconstruct(x, df, presenceThreshold = 0, taxWeight = "normalisation")
+crest.reconstruct(
+  x,
+  df,
+  presenceThreshold = 0,
+  taxWeight = "normalisation",
+  skip_for_loo = FALSE
+)
 }
 \arguments{
-\item{x}{a crestObj produced by the crest.fit_pdfs function.}
+\item{x}{A crestObj produced by the crest.fit_pdfs function.}
 
 \item{df}{.}
 
 \item{presenceThreshold}{.}
 
 \item{taxWeight}{'originalData', 'presence/absence', 'percentages' or 'normalisation'}
+
+\item{skip_for_loo}{A boolean that tells the loo() functiont to skip parts
+and fasten the process. Not for users.}
 }
 \value{
 A crest() object containing the reconstructions and all the associated data.

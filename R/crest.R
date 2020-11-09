@@ -5,6 +5,7 @@
 #' @inheritParams crestObj
 #' @param leave_one_out A boolean to indicate whether the leave one out (loo)
 #'        reconstructions should be computed (default FALSE).
+#' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return The parameters to be used by crest()
 #' @export
@@ -36,6 +37,7 @@ crest <- function(df, pse, taxaType, climate,
                   presenceThreshold = 0,
                   taxWeight = "normalisation",
                   leave_one_out = FALSE,
+                  verbose=TRUE,
                   dbname = "gbif4crest_02") {
 
 
@@ -46,22 +48,25 @@ crest <- function(df, pse, taxaType, climate,
     realms = realms, biomes = biomes, ecoregions = ecoregions,
     minGridCells = minGridCells,
     selectedTaxa = selectedTaxa,
+    verbose = verbose,
     dbname = dbname
   )
 
   x <- crest.calibrate(x,
     npoints = npoints,
     geoWeighting = geoWeighting,
-    climateSpaceWeighting = geoWeighting
+    climateSpaceWeighting = geoWeighting,
+    verbose = verbose
   )
 
   x <- crest.reconstruct(x,
     df = df,
     presenceThreshold = presenceThreshold,
-    taxWeight = taxWeight
+    taxWeight = taxWeight,
+    verbose = verbose
   )
 
-  if(leave_one_out) x <- loo(x)
+  if(leave_one_out) x <- loo(x, verbose = verbose)
 
   x
 }
