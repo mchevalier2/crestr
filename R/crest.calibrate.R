@@ -28,7 +28,8 @@ crest.calibrate <- function(x,
                            shape = rep("normal", length(x$parameters$climate)),
                            npoints = 500,
                            geoWeighting = TRUE,
-                           climateSpaceWeighting = TRUE) {
+                           climateSpaceWeighting = TRUE,
+                           verbose=TRUE) {
   x$parameters$npoints <- npoints
   x$parameters$geoWeighting <- geoWeighting
   x$parameters$climateSpaceWeighting <- climateSpaceWeighting

@@ -4,10 +4,10 @@
 #' climate variables.
 #'
 #' @inheritParams crestObj
+#' @inheritParams crest
 #' @param x A crestObj produced by the crest.fit_pdfs function.
 #' @param skip_for_loo A boolean that tells the loo() functiont to skip parts
 #'        and fasten the process. Not for users.
-#' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
 #' @return A crest() object containing the reconstructions and all the associated data.
 #' @export
 #' @examples
@@ -32,19 +32,19 @@ crest.reconstruct <- function(x, df,
                               taxWeight = "normalisation",
                               skip_for_loo = FALSE, verbose=TRUE) {
 
-  if(verbose) cat('## Prepping data for reconstruction\n')
+  if(verbose) cat('\n## Prepping data for reconstruction\n')
   if(! skip_for_loo) {
 
-    if(verbose) cat('  <> Checking data...')
+    if(verbose) cat('  <> Checking data ......................... ')
     if (is.character(df)) {
       df <- rio::import(df)
     }
     if (!is.data.frame(df)) {
-      if(verbose) cat("ERROR: Problem here. Input data is not a data frame.\n")
+      if(verbose) cat("\nERROR: Problem here. Input data is not a data frame.\n")
       return()
     }
 
-    if(verbose) cat('[OK]\n  <> Checking taxa...')
+    if(verbose) cat('[OK]\n  <> Checking taxa ......................... ')
     x$inputs$x <- df[, 1]
     x$inputs$x.name <- colnames(df)[1]
     x$inputs$taxa.name <- colnames(df)[-1]
@@ -85,7 +85,7 @@ crest.reconstruct <- function(x, df,
         }
       #}
     }
-    if(verbose) cat('[OK]\n  <> Defining taxa weights...')
+    if(verbose) cat('[OK]\n  <> Defining taxa weights ................. ')
 
     if (tolower(x$parameters$taxWeight) == "normalisation") {
       taxWeight <- normalise(x$inputs$df, col2convert = 1:ncol(x$inputs$df))
@@ -100,15 +100,15 @@ crest.reconstruct <- function(x, df,
         }
       }
     }
+    taxWeight[is.na(taxWeight)] <- 0
     colnames(taxWeight) <- colnames(x$inputs$df)
     rownames(taxWeight) <- rownames(x$inputs$df)
     x$modelling$weights <- taxWeight
 
     if(verbose) {
-      cat('[OK]\n  <> Starting reconstruction\n')
-      pb <- utils::txtProgressBar(0, length(x$parameters$climate) * nrow(x$inputs$df), style = 3, width = min(50, getOption("width") / 2))
+      cat('[OK]\n  <> Reconstructing ........................ \r')
     }
-    pbi <- 1
+    pbi <- 100
   }
 
   ptm <- proc.time()
@@ -143,8 +143,11 @@ crest.reconstruct <- function(x, df,
           reconstructions[[clim]][["optima"]][s] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["posterior"]][s, ])]
         }
         if(! skip_for_loo) {
-          if(verbose) utils::setTxtProgressBar(pb, pbi)
-          pbi <- pbi + 1
+          if(verbose) {
+            cat(paste0('  <> Reconstructing ........................ ', stringr::str_pad(paste0(round(pbi / (length(x$parameters$climate)*nrow(x$inputs$df))),'%\r'), width=4, side='left')))
+            utils::flush.console()
+          }
+          pbi <- pbi + 100
         }
       }
       reconstructions[[clim]][["posterior"]] <- rbind(x$modelling$xrange[[clim]], reconstructions[[clim]][["posterior"]])
@@ -154,10 +157,11 @@ crest.reconstruct <- function(x, df,
     }
   }
   x$misc$reconstruction_time <- (proc.time() - ptm)[3]
-  if(verbose) cat(paste0('\n## Reconstruction completed in ', x$misc$reconstruction_time %/% 60, 'min ', round(x$misc$reconstruction_time %% 60, 2), 's.\n\n'))
-
+  if(verbose) {
+    cat('  <> Reconstructing ........................ [OK]\n')
+    cat(paste0('## Reconstruction completed in ', x$misc$reconstruction_time %/% 60, 'min ', round(x$misc$reconstruction_time %% 60, 2), 's.\n\n'))
+  }
   gc()
   x$reconstructions <- reconstructions
-  if(!skip_for_loo & verbose) close(pb)
   x
 }
