@@ -28,6 +28,7 @@ crest(
   presenceThreshold = 0,
   taxWeight = "normalisation",
   leave_one_out = FALSE,
+  verbose = TRUE,
   dbname = "gbif4crest_02"
 )
 }
@@ -78,6 +79,8 @@ crest(
 
 \item{leave_one_out}{A boolean to indicate whether the leave one out (loo)
 reconstructions should be computed (default FALSE).}
+
+\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
 
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 }

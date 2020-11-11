@@ -20,7 +20,8 @@ crest.get_modern_data(
   ecoregions = NA,
   minGridCells = 20,
   selectedTaxa = NA,
-  dbname = "gbif4crest_02"
+  dbname = "gbif4crest_02",
+  verbose = TRUE
 )
 }
 \arguments{
@@ -55,6 +56,8 @@ crest.get_modern_data(
 \item{selectedTaxa}{.}
 
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
+
+\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
 }
 \value{
 A crest() object containing the spatial distributions

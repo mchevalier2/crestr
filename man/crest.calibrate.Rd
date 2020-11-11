@@ -10,7 +10,8 @@ crest.calibrate(
   shape = rep("normal", length(x$parameters$climate)),
   npoints = 500,
   geoWeighting = TRUE,
-  climateSpaceWeighting = TRUE
+  climateSpaceWeighting = TRUE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ crest.calibrate(
 \item{geoWeighting}{The number of points to be used to fit the pdfs.}
 
 \item{climateSpaceWeighting}{The number of points to be used to fit the pdfs.}
+
+\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
 }
 \value{
 A crest() object containing the spatial distributions and the climate space

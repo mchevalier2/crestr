@@ -4,6 +4,7 @@
 #' climate variables.
 #'
 #' @inheritParams crestObj
+#' @inheritParams crest
 #' @param x a crestObj produced by the crest.climate_space function.
 #' @return A crest() object containing the spatial distributions and the climate space
 #' @export

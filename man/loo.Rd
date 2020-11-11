@@ -4,10 +4,12 @@
 \alias{loo}
 \title{Connect to the gbif4crest database}
 \usage{
-loo(x)
+loo(x, verbose = TRUE)
 }
 \arguments{
 \item{x}{a crestObj produced by the crest.reconstruct() or crest() functions.}
+
+\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
 }
 \value{
 A crest() object containing the reconstructions and all the associated data.

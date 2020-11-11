@@ -9,7 +9,8 @@ crest.reconstruct(
   df,
   presenceThreshold = 0,
   taxWeight = "normalisation",
-  skip_for_loo = FALSE
+  skip_for_loo = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ crest.reconstruct(
 
 \item{skip_for_loo}{A boolean that tells the loo() functiont to skip parts
 and fasten the process. Not for users.}
+
+\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
 }
 \value{
 A crest() object containing the reconstructions and all the associated data.
