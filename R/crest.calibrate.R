@@ -30,6 +30,10 @@ crest.calibrate <- function(x,
                            geoWeighting = TRUE,
                            climateSpaceWeighting = TRUE,
                            verbose=TRUE) {
+
+  if(verbose) cat('\n## Calibration of the taxon-climate relationships\n')
+
+  if(verbose) cat('  <> Preparing data ........................ ')
   x$parameters$npoints <- npoints
   x$parameters$geoWeighting <- geoWeighting
   x$parameters$climateSpaceWeighting <- climateSpaceWeighting
@@ -46,6 +50,7 @@ crest.calibrate <- function(x,
   }
   x$parameters$shape <- shape
 
+  if(verbose) cat('[OK]\n  <> Calibrating climate space ............. ')
   ccs <- list()
   x$modelling$xrange <- list()
   for (clim in x$parameters$climate) {
@@ -53,6 +58,10 @@ crest.calibrate <- function(x,
     x$modelling$xrange[[clim]] <- fit_xrange(ccs[[clim]], x$parameters$shape[clim, ], x$parameters$bin_width[clim, ], x$parameters$npoints)
   }
 
+  if(verbose) {
+    cat('[OK]\n  <> Fitting relationships ................. \r')
+  }
+  pbi <- 100
   pdfs <- list()
   for (tax in names(x$modelling$distributions)) {
     if (sum(as.numeric(x$inputs$selectedTaxa[tax, x$parameters$climate])) > 0) {
@@ -93,7 +102,18 @@ crest.calibrate <- function(x,
     } else {
       pdfs[[tax]] <- NA
     }
+    if(verbose) {
+      cat(paste0('  <> Fitting relationships ................. ', stringr::str_pad(paste0(round(pbi / length(x$modelling$distributions)),'%\r'), width=4, side='left')))
+      utils::flush.console()
+    }
+    pbi <- pbi + 100
   }
   x$modelling$pdfs <- pdfs
+
+  if(verbose) {
+    cat('  <> Fitting relationships ................. [OK]\n')
+    cat(paste0('## Taxa-climate relationships fitted.\n'))
+  }
+
   x
 }

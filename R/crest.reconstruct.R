@@ -32,7 +32,7 @@ crest.reconstruct <- function(x, df,
                               taxWeight = "normalisation",
                               skip_for_loo = FALSE, verbose=TRUE) {
 
-  if(verbose) cat('\n## Prepping data for reconstruction\n')
+  if(verbose) cat('\n## Last data checks and reconstruction\n')
   if(! skip_for_loo) {
 
     if(verbose) cat('  <> Checking data ......................... ')
