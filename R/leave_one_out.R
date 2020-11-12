@@ -21,20 +21,20 @@
 #' plot_loo(recons)
 #'
 loo <- function(x, verbose=TRUE) {
-  if(verbose) cat('## Prepping data for LOO reconstructions\n')
-  if(verbose) cat('  <> Checking data...')
-  if(verbose) cat('[OK]\n  <> Checking taxa...')
+  if(verbose) cat('\n## Prepping data for LOO reconstructions\n')
+  if(verbose) cat('  <> Checking data ......................... ')
+  if(verbose) cat('[OK]\n  <> Checking taxa ................... ......')
   taxa_list <- rownames(x$inputs$selectedTaxa)[apply(x$inputs$selectedTaxa[, x$parameters$climate], 1, function(y) return(sum(as.numeric(y)))) > 0]
   estimated_time <- x$misc$reconstruction_time * length(taxa_list)
-  if(verbose) cat(paste0('[OK]\n  <> Estimated time for the LOO reconstructions: ', estimated_time %/% 60, 'min ', round(estimated_time %% 60, 2), 's.\n'))
+  if(verbose) cat(paste0('[OK]\n  *i Estimated time for the LOO reconstructions: ', estimated_time %/% 60, 'min ', round(estimated_time %% 60, 2), 's.\n'))
+  if(verbose) cat('  <> LOO reconstructions ................... \r')
+  pbi <- 100
   time0 <- proc.time()
   for(clim in x$parameters$climate) {
     x$reconstructions[[clim]][['loo']] = list()
   }
   recons_tmp <- x
   df_tmp = cbind( x$inputs$x, x$inputs$df )  ;  colnames(df_tmp) <- c(x$inputs$x.name, x$inputs$taxa.name)
-  pb <- utils::txtProgressBar(0, length(taxa_list), style = 3, width = min(50, getOption("width") / 2))
-  pbi <- 0
   for(tax in taxa_list) {
     recons_tmp$inputs$selectedTaxa <- x$inputs$selectedTaxa
     recons_tmp$inputs$selectedTaxa[tax, x$parameters$climate] <- rep(0, length(x$parameters$climate))
@@ -52,12 +52,16 @@ loo <- function(x, verbose=TRUE) {
         x$reconstructions[[clim]][['loo']][[tax]] <- NA
       }
     }
-    pbi <- pbi + 1
-    utils::setTxtProgressBar(pb, pbi)
+    if(verbose) {
+      cat(paste0('  <> LOO reconstructions ................... ', stringr::str_pad(paste0(round(pbi / length(taxa_list)),'%\r'), width=4, side='left')))
+      utils::flush.console()
+    }
+    pbi <- pbi + 100
   }
-  close(pb)
   time1 <- (proc.time() - time0)[3]
-  if(verbose) cat(paste0('## LOO reconstruction completed in ', time1 %/% 60, 'min ', round(time1 %% 60, 2), 's.\n\n'))
-
+  if(verbose) {
+    cat('  <> LOO reconstructions ................... [OK]\n')
+    cat(paste0('## LOO reconstruction completed in ', time1 %/% 60, 'min ', round(time1 %% 60, 2), 's.\n\n'))
+  }
   x
 }

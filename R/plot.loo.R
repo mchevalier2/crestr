@@ -65,9 +65,6 @@ plot_loo <- function( x,
         }
       }
       df <- do.call(cbind, df)
-      print(utils::head(df))
-      #colnames(df) <- c(x$inputs$x.name, names(x$reconstructions[[clim]]$loo))
-      #print(head(df))
 
       xlim <- range(df[, 1])
       bar_width2 <- bar_width
