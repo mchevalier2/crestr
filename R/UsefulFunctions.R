@@ -19,6 +19,7 @@ convert2percentages <- function(df, col2convert = 2:ncol(df)) {
   )
   colnames(df2) <- colnames(df)
   rownames(df2) <- rownames(df)
+  df2[is.na(df2)] <- 0
   df2
 }
 

@@ -103,6 +103,6 @@ plot_loo <- function( x, optima=TRUE,
                  title=title)
 
   }
-  graphics::par(par_usr)
+  if(!save)  graphics::par(par_usr)
   invisible()
 }

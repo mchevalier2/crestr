@@ -88,7 +88,7 @@ crest.reconstruct <- function(x, df,
     if(verbose) cat('[OK]\n  <> Defining taxa weights ................. ')
 
     if (tolower(x$parameters$taxWeight) == "normalisation") {
-      taxWeight <- normalise(x$inputs$df, col2convert = 1:ncol(x$inputs$df))
+      taxWeight <- normalise(x$inputs$df, threshold = x$parameters$presenceThreshold, col2convert = 1:ncol(x$inputs$df))
     } else {
       if (tolower(x$parameters$taxWeight) == "presence/absence") {
         taxWeight <- convert2presenceAbsence(x$inputs$df, x$parameters$presenceThreshold, col2convert = 1:ncol(x$inputs$df))

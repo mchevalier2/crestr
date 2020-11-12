@@ -97,7 +97,6 @@ plot_diagram <- function(x, bars=FALSE,
   x.scale=3.54/width
   dX <- 0.1*(xrange[2]-xrange[1])*x.scale
 
-
   yrange = range(cs)
   dY <- 0.1*(yrange[2]-yrange[1])
   yrange <- yrange + c(-0.45*dY, 0)
@@ -115,11 +114,9 @@ plot_diagram <- function(x, bars=FALSE,
     wd <- width - str_max_left - str_max_right
     k <- diff(xrange) / wd *2
     xrange <- xrange + k * c(-str_max_left, str_max_right)
-
   } else {
     xrange <- xrange + c(-2.5*dX, 0.9 *dX)
   }
-
 
   par_usr$mar <- graphics::par(mar=c(0,0,0,0))[[1]]
 
@@ -181,8 +178,10 @@ plot_diagram <- function(x, bars=FALSE,
   }
 
   graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=0.6, adj=c(0.5,0))
-  if(save)  grDevices::dev.off()
-
-  graphics::par(par_usr)
+  if(save) {
+    grDevices::dev.off()
+  } else {
+    graphics::par(par_usr)
+  }
   invisible()
 }

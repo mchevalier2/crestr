@@ -220,6 +220,7 @@ plot.crestObj <- function(x,
           ylab = climate_names[climate_names[, 2] == clim, 3],
           cex.lab = 6 / 7
         )
+
         graphics::axis(2, cex.axis=5/7)
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
           graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=5/7)
@@ -336,6 +337,6 @@ plot.crestObj <- function(x,
       }
     }
   }
-  graphics::par(par_usr)
+  if(plot) graphics::par(par_usr)
   invisible(x)
 }
