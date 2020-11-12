@@ -25,13 +25,18 @@ crest.get_modern_data(
 )
 }
 \arguments{
-\item{pse}{.}
+\item{pse}{A pollen-Species equivalency table. See \code{\link{get_pse}} for
+details.}
 
-\item{taxaType}{.}
+\item{taxaType}{A numerical index (between 1 and 6) to define the type of
+palaeoproxy used: 1 for plants, 2 for beetles, 3 for
+foraminifers, 4 for diatoms, 5 for chironomids and 6 for
+rodents. The example dataset uses taxaType=0. Default is 1.}
 
-\item{climate}{A vectof of the climate variables to extract.}
+\item{climate}{A vector of the climate variables to extract. See
+\code{\link{accClimateVariables}} for the list of accepted values.}
 
-\item{taxa.name}{.}
+\item{taxa.name}{A vector that contains the names of the taxa to study.}
 
 \item{xmn}{The coordinates defining the study area.}
 
@@ -52,9 +57,13 @@ crest.get_modern_data(
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the
 study area.}
 
-\item{minGridCells}{.}
+\item{minGridCells}{The minimum number of unique presence data necessary to
+estimate a species' climate response. Default is 20.}
 
-\item{selectedTaxa}{.}
+\item{selectedTaxa}{A data frame assigns which taxa should be used for each
+variable (1 if the taxon should be used, 0 otherwise). The colnames
+should be the climate variables' names and the rownames the taxa
+names. Default is 1 for all taxa and all variables.}
 
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 

@@ -43,7 +43,8 @@ crest <- function(df, pse, taxaType, climate,
 
 
   x <- crest.get_modern_data(
-    taxa.name = colnames(df)[-1], pse = pse, taxaType = taxaType, climate = climate,
+    pse = pse, taxaType = taxaType, climate = climate,
+    taxa.name = colnames(df)[-1],
     xmn = xmn, xmx = xmx, ymn = ymn, ymx = ymx,
     continents = continents, countries = countries,
     realms = realms, biomes = biomes, ecoregions = ecoregions,
@@ -56,6 +57,7 @@ crest <- function(df, pse, taxaType, climate,
   x <- crest.calibrate(x,
     npoints = npoints,
     shape = shape,
+    bin_width = bin_width,
     geoWeighting = geoWeighting,
     climateSpaceWeighting = geoWeighting,
     verbose = verbose
@@ -65,7 +67,8 @@ crest <- function(df, pse, taxaType, climate,
     df = df,
     presenceThreshold = presenceThreshold,
     taxWeight = taxWeight,
-    verbose = verbose
+    uncertainties = uncertainties,
+    skip_for_loo = FALSE, verbose = verbose
   )
 
   if(leave_one_out) x <- loo(x, verbose = verbose)

@@ -7,7 +7,7 @@
 \method{plot}{crestObj}(
   x,
   climate = x$parameters$climate,
-  errors = c(0.5, 0.95),
+  errors = x$parameters$uncertainties,
   optima = TRUE,
   xlim = NA,
   ylim = NA,
@@ -20,7 +20,8 @@
 \arguments{
 \item{x}{A crestObj produced by the crest.reconstruct() or crest() functions.}
 
-\item{optima}{.}
+\item{optima}{A boolean to indicate if the optima (TRUE) or the mean (FALSE)
+should be plotted.}
 }
 \description{
 Plot the reconstructions and their uncertainties

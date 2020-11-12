@@ -5,8 +5,9 @@
 #'
 #' @inheritParams crestObj
 #' @inheritParams crest
-#' @param x a crestObj produced by the crest.climate_space function.
-#' @return A crest() object containing the spatial distributions and the climate space
+#' @param x A crestObj produced by the \code{\link{crest.get_modern_data}} function.
+#' @return A crest() object containing the spatial distributions and the climate
+#'         space.
 #' @export
 #' @examples
 #' \dontrun{
@@ -25,12 +26,12 @@
 #' }
 #'
 crest.calibrate <- function(x,
-                           bin_width = rep(1, length(x$parameters$climate)),
-                           shape = rep("normal", length(x$parameters$climate)),
-                           npoints = 500,
-                           geoWeighting = TRUE,
-                           climateSpaceWeighting = TRUE,
-                           verbose=TRUE) {
+                            bin_width = x$parameters$bin_width,
+                            shape = x$parameters$shape,
+                            npoints = x$parameters$npoints,
+                            geoWeighting = x$parameters$geoWeighting,
+                            climateSpaceWeighting = x$parameters$climateSpaceWeighting,
+                            verbose=TRUE) {
 
   if(verbose) cat('\n## Calibration of the taxon-climate relationships\n')
 

@@ -3,12 +3,10 @@
 #' Extract all possible TaxonIDs corresponding to the provided taxonomical
 #' description, which can be at the family, the genus or the species levels.
 #'
+#' @inheritParams crestObj
 #' @param family The name of the family.
 #' @param genus The name of the genus.
 #' @param species The name of the species.
-#' @param taxaType A numerical index (between 1 and 5) to define the type of
-#'     palaeoproxy used: 1 for plants, 2 for beetles, 3 for foraminifers,
-#'     4 for diatoms, 5 for chironomids and 6 for rodents.
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A vector of unique taxonIDs.
 #' @export

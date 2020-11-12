@@ -2,10 +2,9 @@
 #'
 #' Fit the species pdfs.
 #'
+#' @inheritParams crestObj
 #' @param climate A vector of climatic values where the species is present.
 #' @param ccs A \code{ccs} object returned by \code{\link{calib_clim_space}}.
-#' @param bin_width The width of the climate bins.
-#' @param shape The shape of the species pdfs. Use 'normal' or 'lognormal'.
 #' @param xrange The climate gradient upon which the pdf with be defined.
 #' @param use_ccs Boolean to indicate if the pdfsp should be corrected by the
 #'    distributin of the modern climate space
@@ -60,12 +59,10 @@ fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
 #'
 #' Calibrate the distribution of the modern climate space.
 #'
-#' @param climate All the climate values observed across the study area.
-#' @param bin_width The width of the climate bins.
+#' @inheritParams fit_pdfsp
 #' @return A \code{ccs} object that will be used by \code{\link{fit_pdfsp}}.
 #' @export
 #' @examples
-#' # Extracting the number of taxa recorded in the database
 #' calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
 calib_clim_space <- function(climate, bin_width) {
   m <- base::min(climate, na.rm = TRUE) %/% 1
@@ -79,14 +76,12 @@ calib_clim_space <- function(climate, bin_width) {
 
 
 
-#' Define teh climate gradient to fit the pdfs.
+#' Define the climate gradient to fit the pdfs.
 #'
-#' Define teh climate gradient to fit the pdfs.
+#' Define the climate gradient to fit the pdfs.
 #'
-#' @param ccs A \code{ccs} object returned by \code{\link{calib_clim_space}}.
-#' @param shape The shape of the species pdfs. Use 'normal' or 'lognormal'.
-#' @param bin_width The width of the climate bins.
-#' @param npoints The number of points to be used to fit the pdfs.
+#' @inheritParams crestObj
+#' @inheritParams fit_pdfsp
 #' @return A regularly spaced climate gradient with \code{npoints} points.
 #' @export
 #' @examples

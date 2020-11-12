@@ -17,12 +17,15 @@ crest.reconstruct(
 \arguments{
 \item{x}{A crestObj produced by the crest.fit_pdfs function.}
 
-\item{df}{.}
+\item{df}{A data frame containing the data to reconstruct (counts,
+percentages or presence/absence data).}
 
-\item{presenceThreshold}{.}
+\item{presenceThreshold}{All values above that threshold will be used in the
+reconstruction (e.g. if set at 1, all percentages below 1 will be set
+to 0 and the associated presences discarded). Default is 0.}
 
-\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or
-'normalisation'}
+\item{taxWeight}{One value among the following: 'originalData',
+'presence/absence', 'percentages' or 'normalisation' (default).}
 
 \item{uncertainties}{A (vector of) threshold value(s) indicating the error
 bars that should be calculated (default both 50 and 95\% ranges).}
@@ -46,7 +49,6 @@ data(crest_ex_selection)
 x <- crest.get_modern_data(
   pse = crest_ex_pse, taxaType = 0,
   climate = c("bio1", "bio12"),
-  taxa.name = colnames(crest_ex)[-1],
   selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
 x <- crest.calibrate(x,

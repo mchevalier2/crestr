@@ -7,9 +7,11 @@
 calib_clim_space(climate, bin_width)
 }
 \arguments{
-\item{climate}{All the climate values observed across the study area.}
+\item{climate}{A vector of climatic values where the species is present.}
 
-\item{bin_width}{The width of the climate bins.}
+\item{bin_width}{The width of the bins used to correct for unbalanced climate
+state. Use values that split the studied climate gradient in
+15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 }
 \value{
 A \code{ccs} object that will be used by \code{\link{fit_pdfsp}}.
@@ -18,6 +20,5 @@ A \code{ccs} object that will be used by \code{\link{fit_pdfsp}}.
 Calibrate the distribution of the modern climate space.
 }
 \examples{
-# Extracting the number of taxa recorded in the database
 calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
 }

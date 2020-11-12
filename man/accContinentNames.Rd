@@ -10,7 +10,7 @@ accContinentNames(dbname = "gbif4crest_02")
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 }
 \value{
-A list with elements that correspond to the country names of each continent.
+A list where each element is a vector of corresponding country names.
 }
 \description{
 Return the list of the continents and associated countries.

@@ -197,10 +197,10 @@ crest.get_modern_data <- function(pse, taxaType, climate,
     cat('[OK]\n  <> Extracting taxon species .............. \r')
   }
 
-  crest <- crestObj(taxa.name, pse, taxaType, climate,
-    xmn, xmx, ymn, ymx,
-    continents, countries,
-    realms, biomes, ecoregions,
+  crest <- crestObj(taxa.name, pse=pse, taxaType=taxaType, climate=climate,
+    xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx,
+    continents=continents, countries=countries,
+    realms=realms, biomes=biomes, ecoregions=ecoregions,
     selectedTaxa = selectedTaxa
   )
 

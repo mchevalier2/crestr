@@ -17,7 +17,6 @@
 #' x <- crest.get_modern_data(
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
-#'   taxa.name = colnames(crest_ex)[-1],
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
 #' )
 #' x <- crest.calibrate(x,

@@ -19,9 +19,10 @@ getTaxonID(
 
 \item{species}{The name of the species.}
 
-\item{taxaType}{A numerical index (between 1 and 5) to define the type of
-palaeoproxy used: 1 for plants, 2 for beetles, 3 for foraminifers,
-4 for diatoms, 5 for chironomids and 6 for rodents.}
+\item{taxaType}{A numerical index (between 1 and 6) to define the type of
+palaeoproxy used: 1 for plants, 2 for beetles, 3 for
+foraminifers, 4 for diatoms, 5 for chironomids and 6 for
+rodents. The example dataset uses taxaType=0. Default is 1.}
 
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 }

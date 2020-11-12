@@ -1,12 +1,16 @@
 #' Describes all the variables available in the database.
 #'
-#' Describes all the variables available in the database.
+#' Provides the index and the short and full names of all the variables
+#' available in the database.
 #'
-#' @param v The name of a variable to quickly access its description and ID.
-#' @return A data frame descriptive of the climate variables available in the database.
+#' @param v The name of a variable to quickly access its description and ID
+#'          (default NA returns all possible values).
+#' @return A data frame descriptive of the climate variables available in the
+#'         database (if v=NA) or the description of variable v.
 #' @export
 #' @examples
 #' accClimateVariables()
+#' accClimateVariables(v='bio12')
 accClimateVariables <- function(v=NA) {
   res <- data.frame(
     1:20,
@@ -51,7 +55,7 @@ accClimateVariables <- function(v=NA) {
 #' Return the list of the continents and associated countries.
 #'
 #' @param dbname The name of the database. Default is gbif4crest_02.
-#' @return A list with elements that correspond to the country names of each continent.
+#' @return A list where each element is a vector of corresponding country names.
 #' @export
 #' @examples
 #' accContinentNames()
@@ -81,7 +85,7 @@ accContinentNames <- function(dbname = "gbif4crest_02") {
 #' @param ecoregion A boolean to choose whether to get the ecoregions names.
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A list with elements that correspond to the biomes (and possibly
-#'     ecoregions) of each realm.
+#'         ecoregions) of each realm.
 #' @export
 #' @examples
 #' accRealmNames()

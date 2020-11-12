@@ -113,36 +113,38 @@ object:
 
     names(recons)
     #> [1] "inputs"          "parameters"      "modelling"       "reconstructions"
+    #> [5] "misc"
     lapply(recons$reconstructions, names)
     #> $bio1
-    #> [1] "posterior" "optima"   
+    #> [1] "posterior"     "uncertainties" "optima"       
     #> 
     #> $bio12
-    #> [1] "posterior" "optima"
+    #> [1] "posterior"     "uncertainties" "optima"
 
     head(recons$reconstructions$bio1$optima)
-    #>   x   optima
-    #> 1 1 15.65130
-    #> 2 2 15.65130
-    #> 3 3 15.65130
-    #> 4 4 15.65130
-    #> 5 5 17.11022
-    #> 6 6 18.00802
+    #>   Age   optima     mean
+    #> 1   1 15.69739 15.69943
+    #> 2   2 15.69739 15.69943
+    #> 3   3 15.69739 15.69943
+    #> 4   4 15.69739 15.69943
+    #> 5   5 17.06814 17.08516
+    #> 6   6 18.05812 18.02322
     str(recons$reconstructions$bio1$optima)
-    #> 'data.frame':    20 obs. of  2 variables:
-    #>  $ x     : int  1 2 3 4 5 6 7 8 9 10 ...
+    #> 'data.frame':    20 obs. of  3 variables:
+    #>  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...
     #>  $ optima: num  15.7 15.7 15.7 15.7 17.1 ...
+    #>  $ mean  : num  15.7 15.7 15.7 15.7 17.1 ...
 
     signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
     #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
-    #> [1,] 6.00e+00 6.06e+00 6.11e+00 6.17e+00 6.22e+00 6.28e+00
-    #> [2,] 2.12e-06 2.42e-06 2.76e-06 3.15e-06 3.59e-06 4.09e-06
-    #> [3,] 2.12e-06 2.42e-06 2.76e-06 3.15e-06 3.59e-06 4.09e-06
-    #> [4,] 2.12e-06 2.42e-06 2.76e-06 3.15e-06 3.59e-06 4.09e-06
-    #> [5,] 2.12e-06 2.42e-06 2.76e-06 3.15e-06 3.59e-06 4.09e-06
-    #> [6,] 3.02e-08 3.53e-08 4.14e-08 4.84e-08 5.66e-08 6.61e-08
+    #> [1,] 1.00e+00 1.08e+00 1.15e+00 1.23e+00 1.30e+00 1.38e+00
+    #> [2,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12
+    #> [3,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12
+    #> [4,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12
+    #> [5,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12
+    #> [6,] 1.42e-15 1.93e-15 2.62e-15 3.56e-15 4.82e-15 6.52e-15
     str(recons$reconstructions$bio1$posterior)
-    #>  num [1:21, 1:500] 6.00 2.12e-06 2.12e-06 2.12e-06 2.12e-06 ...
+    #>  num [1:21, 1:500] 1.00 6.69e-13 6.69e-13 6.69e-13 6.69e-13 ...
 
     plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
 

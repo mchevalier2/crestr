@@ -11,9 +11,14 @@ fit_pdfsp(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE)
 
 \item{ccs}{A \code{ccs} object returned by \code{\link{calib_clim_space}}.}
 
-\item{bin_width}{The width of the climate bins.}
+\item{bin_width}{The width of the bins used to correct for unbalanced climate
+state. Use values that split the studied climate gradient in
+15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{shape}{The shape of the species pdfs. Use 'normal' or 'lognormal'.}
+\item{shape}{The imposed shape of the species pdfs. We recommend using
+'normal' for temperature variables and 'lognormal' for the
+variables that can only take positive values, such as
+precipitation or aridity. Default is 'normal' for all.}
 
 \item{xrange}{The climate gradient upon which the pdf with be defined.}
 

@@ -7,14 +7,18 @@
 accClimateVariables(v = NA)
 }
 \arguments{
-\item{v}{The name of a variable to quickly access its description and ID.}
+\item{v}{The name of a variable to quickly access its description and ID
+(default NA returns all possible values).}
 }
 \value{
-A data frame descriptive of the climate variables available in the database.
+A data frame descriptive of the climate variables available in the
+database (if v=NA) or the description of variable v.
 }
 \description{
-Describes all the variables available in the database.
+Provides the index and the short and full names of all the variables
+available in the database.
 }
 \examples{
 accClimateVariables()
+accClimateVariables(v='bio12')
 }

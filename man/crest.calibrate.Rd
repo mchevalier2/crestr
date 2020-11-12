@@ -6,31 +6,41 @@
 \usage{
 crest.calibrate(
   x,
-  bin_width = rep(1, length(x$parameters$climate)),
-  shape = rep("normal", length(x$parameters$climate)),
-  npoints = 500,
-  geoWeighting = TRUE,
-  climateSpaceWeighting = TRUE,
+  bin_width = x$parameters$bin_width,
+  shape = x$parameters$shape,
+  npoints = x$parameters$npoints,
+  geoWeighting = x$parameters$geoWeighting,
+  climateSpaceWeighting = x$parameters$climateSpaceWeighting,
   verbose = TRUE
 )
 }
 \arguments{
-\item{x}{a crestObj produced by the crest.climate_space function.}
+\item{x}{A crestObj produced by the \code{\link{crest.get_modern_data}} function.}
 
-\item{bin_width}{.}
+\item{bin_width}{The width of the bins used to correct for unbalanced climate
+state. Use values that split the studied climate gradient in
+15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{shape}{.}
+\item{shape}{The imposed shape of the species pdfs. We recommend using
+'normal' for temperature variables and 'lognormal' for the
+variables that can only take positive values, such as
+precipitation or aridity. Default is 'normal' for all.}
 
-\item{npoints}{The number of points to be used to fit the pdfs.}
+\item{npoints}{The number of points to be used to fit the pdfs. Default 200.}
 
-\item{geoWeighting}{The number of points to be used to fit the pdfs.}
+\item{geoWeighting}{A boolean to indicate if the species should be weighting
+by the squareroot of their extension when estimating a genus/family
+level taxon-climate relationships.}
 
-\item{climateSpaceWeighting}{The number of points to be used to fit the pdfs.}
+\item{climateSpaceWeighting}{A boolean to indicate if the species pdfs should
+be corrected for the modern distribution of the climate space (default
+TRUE).}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
 }
 \value{
-A crest() object containing the spatial distributions and the climate space
+A crest() object containing the spatial distributions and the climate
+space.
 }
 \description{
 This function fits the climate response of the selected taxa to the selected

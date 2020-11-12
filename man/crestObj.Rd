@@ -6,25 +6,25 @@
 \usage{
 crestObj(
   taxa.name,
-  pse,
   taxaType,
   climate,
-  xmn,
-  xmx,
-  ymn,
-  ymx,
-  continents,
-  countries,
-  realms,
-  biomes,
-  ecoregions,
+  pse = NA,
+  continents = NA,
+  countries = NA,
+  realms = NA,
+  biomes = NA,
+  ecoregions = NA,
+  xmn = -180,
+  xmx = 180,
+  ymn = -90,
+  ymx = 90,
   df = NA,
   x = NA,
   x.name = "",
   minGridCells = 20,
   bin_width = rep(1, length(climate)),
   shape = rep("normal", length(climate)),
-  npoints = 500,
+  npoints = 200,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
   selectedTaxa = NA,
@@ -34,15 +34,18 @@ crestObj(
 )
 }
 \arguments{
-\item{taxa.name}{.}
+\item{taxa.name}{A vector that contains the names of the taxa to study.}
 
-\item{pse}{.}
+\item{taxaType}{A numerical index (between 1 and 6) to define the type of
+palaeoproxy used: 1 for plants, 2 for beetles, 3 for
+foraminifers, 4 for diatoms, 5 for chironomids and 6 for
+rodents. The example dataset uses taxaType=0. Default is 1.}
 
-\item{taxaType}{.}
+\item{climate}{A vector of the climate variables to extract. See
+\code{\link{accClimateVariables}} for the list of accepted values.}
 
-\item{climate}{A vectof of the climate variables to extract.}
-
-\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
+\item{pse}{A pollen-Species equivalency table. See \code{\link{get_pse}} for
+details.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 
@@ -55,36 +58,56 @@ crestObj(
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the
 study area.}
 
-\item{df}{.}
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
 
-\item{x}{.}
+\item{df}{A data frame containing the data to reconstruct (counts,
+percentages or presence/absence data).}
 
-\item{x.name}{.}
+\item{x}{The name, age or depth of the rows of df (the samples).}
 
-\item{minGridCells}{.}
+\item{x.name}{A string describing the x axis (e.g. 'Sample Name', 'Age',
+'Depth').}
 
-\item{bin_width}{.}
+\item{minGridCells}{The minimum number of unique presence data necessary to
+estimate a species' climate response. Default is 20.}
 
-\item{shape}{.}
+\item{bin_width}{The width of the bins used to correct for unbalanced climate
+state. Use values that split the studied climate gradient in
+15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{npoints}{The number of points to be used to fit the pdfs.}
+\item{shape}{The imposed shape of the species pdfs. We recommend using
+'normal' for temperature variables and 'lognormal' for the
+variables that can only take positive values, such as
+precipitation or aridity. Default is 'normal' for all.}
 
-\item{geoWeighting}{The number of points to be used to fit the pdfs.}
+\item{npoints}{The number of points to be used to fit the pdfs. Default 200.}
 
-\item{climateSpaceWeighting}{The number of points to be used to fit the pdfs.}
+\item{geoWeighting}{A boolean to indicate if the species should be weighting
+by the squareroot of their extension when estimating a genus/family
+level taxon-climate relationships.}
 
-\item{selectedTaxa}{.}
+\item{climateSpaceWeighting}{A boolean to indicate if the species pdfs should
+be corrected for the modern distribution of the climate space (default
+TRUE).}
 
-\item{presenceThreshold}{.}
+\item{selectedTaxa}{A data frame assigns which taxa should be used for each
+variable (1 if the taxon should be used, 0 otherwise). The colnames
+should be the climate variables' names and the rownames the taxa
+names. Default is 1 for all taxa and all variables.}
 
-\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or
-'normalisation'}
+\item{presenceThreshold}{All values above that threshold will be used in the
+reconstruction (e.g. if set at 1, all percentages below 1 will be set
+to 0 and the associated presences discarded). Default is 0.}
+
+\item{taxWeight}{One value among the following: 'originalData',
+'presence/absence', 'percentages' or 'normalisation' (default).}
 
 \item{uncertainties}{A (vector of) threshold value(s) indicating the error
 bars that should be calculated (default both 50 and 95\% ranges).}
 }
 \value{
-A CREST object that is used to store data and information for reconstructing climate
+A CREST object that is used to store data and information for
+reconstructing climate
 }
 \description{
 Creates a crest() object with all default parameters.

@@ -2,13 +2,20 @@
 #'
 #' Creates a crest() object with all default parameters.
 #'
-#' @param taxa.name .
-#' @param pse .
-#' @param taxaType .
-#' @param climate A vectof of the climate variables to extract.
-#' @param df .
-#' @param x.name .
-#' @param x .
+#' @param taxa.name A vector that contains the names of the taxa to study.
+#' @param pse A pollen-Species equivalency table. See \code{\link{get_pse}} for
+#'        details.
+#' @param taxaType A numerical index (between 1 and 6) to define the type of
+#'        palaeoproxy used: 1 for plants, 2 for beetles, 3 for
+#'        foraminifers, 4 for diatoms, 5 for chironomids and 6 for
+#'        rodents. The example dataset uses taxaType=0. Default is 1.
+#' @param climate A vector of the climate variables to extract. See
+#'        \code{\link{accClimateVariables}} for the list of accepted values.
+#' @param df A data frame containing the data to reconstruct (counts,
+#'        percentages or presence/absence data).
+#' @param x.name A string describing the x axis (e.g. 'Sample Name', 'Age',
+#'        'Depth').
+#' @param x The name, age or depth of the rows of df (the samples).
 #' @param xmn,xmx,ymn,ymx The coordinates defining the study area.
 #' @param continents A vector of the continent names defining the study area.
 #' @param countries A vector of the country names defining the study area.
@@ -16,36 +23,54 @@
 #' @param biomes A vector of the studied botanical biomes defining the study area.
 #' @param ecoregions A vector of the studied botanical ecoregions defining the
 #'        study area.
-#' @param minGridCells .
-#' @param bin_width .
-#' @param shape .
-#' @param selectedTaxa .
-#' @param npoints The number of points to be used to fit the pdfs.
-#' @param geoWeighting The number of points to be used to fit the pdfs.
-#' @param climateSpaceWeighting The number of points to be used to fit the pdfs.
-#' @param presenceThreshold .
-#' @param taxWeight 'originalData', 'presence/absence', 'percentages' or
-#'        'normalisation'
+#' @param minGridCells The minimum number of unique presence data necessary to
+#'        estimate a species' climate response. Default is 20.
+#' @param bin_width The width of the bins used to correct for unbalanced climate
+#'        state. Use values that split the studied climate gradient in
+#'        15-25 classes (e.g. 2°C for temperature variables). Default is 1.
+#' @param shape The imposed shape of the species pdfs. We recommend using
+#'        'normal' for temperature variables and 'lognormal' for the
+#'        variables that can only take positive values, such as
+#'        precipitation or aridity. Default is 'normal' for all.
+#' @param selectedTaxa A data frame assigns which taxa should be used for each
+#'        variable (1 if the taxon should be used, 0 otherwise). The colnames
+#'        should be the climate variables' names and the rownames the taxa
+#'        names. Default is 1 for all taxa and all variables.
+#' @param npoints The number of points to be used to fit the pdfs. Default 200.
+#' @param geoWeighting A boolean to indicate if the species should be weighting
+#'        by the squareroot of their extension when estimating a genus/family
+#'        level taxon-climate relationships.
+#' @param climateSpaceWeighting A boolean to indicate if the species pdfs should
+#'        be corrected for the modern distribution of the climate space (default
+#'        TRUE).
+#' @param presenceThreshold All values above that threshold will be used in the
+#'        reconstruction (e.g. if set at 1, all percentages below 1 will be set
+#'        to 0 and the associated presences discarded). Default is 0.
+#' @param taxWeight One value among the following: 'originalData',
+#'        'presence/absence', 'percentages' or 'normalisation' (default).
 #' @param uncertainties A (vector of) threshold value(s) indicating the error
 #'        bars that should be calculated (default both 50 and 95% ranges).
-#' @return A CREST object that is used to store data and information for reconstructing climate
+#' @return A CREST object that is used to store data and information for
+#'         reconstructing climate
 #' @export
 
-crestObj <- function(taxa.name, pse, taxaType, climate,
-                     xmn, xmx, ymn, ymx,
-                     continents, countries,
-                     realms, biomes, ecoregions,
+crestObj <- function(taxa.name, taxaType, climate,
+                     pse = NA,
+                     continents = NA, countries = NA,
+                     realms = NA, biomes = NA, ecoregions = NA,
+                     xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                      df = NA, x = NA, x.name = "",
                      minGridCells = 20,
                      bin_width = rep(1, length(climate)),
                      shape = rep("normal", length(climate)),
-                     npoints = 500,
+                     npoints = 200,
                      geoWeighting = TRUE,
                      climateSpaceWeighting = TRUE,
                      selectedTaxa = NA,
                      presenceThreshold = 0,
                      taxWeight = "normalisation",
                      uncertainties = c(0.5, 0.95)) {
+
   inputs <- list(
     df = df,
     taxa.name = taxa.name,
@@ -108,11 +133,12 @@ print.crestObj <- function(x, ...) {
 #' Plot the reconstructions and their uncertainties
 #'
 #' @param x A crestObj produced by the crest.reconstruct() or crest() functions.
-#' @param optima .
+#' @param optima A boolean to indicate if the optima (TRUE) or the mean (FALSE)
+#'        should be plotted.
 #' @export
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,
-                          errors = c(0.5, 0.95),
+                          errors = x$parameters$uncertainties,
                           optima = TRUE,
                           xlim = NA,
                           ylim = NA,
@@ -145,7 +171,6 @@ plot.crestObj <- function(x,
       }
       idx <- idx + 1
       pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
-      # MAT.ysmooth=gausmooth(MAT[,c(1,2)], XX.interp, mean(diff(MAT[,1])))
       pdfter <- pdf
 
       for (i in 2:ncol(pdf)) {

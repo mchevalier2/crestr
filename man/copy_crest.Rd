@@ -15,7 +15,8 @@ copy_crest(
 \arguments{
 \item{x}{A crestObj produced by the crest.reconstruct() or crest() functions.}
 
-\item{climate}{A vectof of the climate variables to extract.}
+\item{climate}{A vector of the climate variables to extract. See
+\code{\link{accClimateVariables}} for the list of accepted values.}
 
 \item{optima}{A boolean value to indicate if the optima should be copied to the clipboard.}
 
