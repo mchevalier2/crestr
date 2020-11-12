@@ -76,15 +76,76 @@ normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
 }
 
 
-#' Convert data into presence/absence data.
+#' Calculate the mean of all stricly positive values.
 #'
-#' Convert data into presence/absence data.
+#' Calculate the mean of all stricly positive values.
 #'
 #' @param x A vector of values.
-#' @return The average of all the positive values.
+#' @return The average of all the positive values. Returns NaN is no positive
+#'         values are found.
 #' @export
 #' @examples
 #' meanPositiveValues(-10:10)
 meanPositiveValues <- function(x) {
   base::mean(x[x > 0])
+}
+
+
+
+#' Copy crest data to the clipboard.
+#'
+#' Copy crest data to the clipboard for an easy extraction of the data from the
+#' R environment.
+#'
+#' @inheritParams crest
+#' @param x A crestObj produced by the crest.reconstruct() or crest() functions.
+#' @param optima A boolean value to indicate if the optima should be copied to the clipboard.
+#' @param mean A boolean value to indicate if the means should be copied to the clipboard.
+#' @param uncertainties A boolean value to indicate if the uncertainties should be copied to the clipboard.
+#' @export
+#' @examples
+#' \dontrun{
+#'  if(requireNamespace('clipr', quietly=TRUE)) {
+#'    recons <- crest(
+#'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
+#'     shape = c("normal", "lognormal"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'     leave_one_out = TRUE
+#'    )
+#'    copy_crest(recons, uncertainties=TRUE)
+#'    ## You can now paste the values in a spreadsheet.
+#'  }
+#' }
+#'
+copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FALSE, uncertainties=FALSE) {
+  if(! requireNamespace('clipr', quietly=TRUE)) {
+    cat('ERROR: copy_crest() requires the clipr package. You can install it using install.packages("clipr").\n')
+    return(invisible(NULL))
+  }
+  if(optima + mean + uncertainties == 0) {
+    cat('ERROR: optima, mean and uncertainties cannot all be set to FALSE.\n')
+    return(invisible(NULL))
+  }
+  tbl <- list()
+  tbl[[x$inputs$x.name]] <- x$inputs$x
+  for (clim in climate) {
+    if(optima) {
+      lbl <- paste(clim, 'optima', sep='_')
+      tbl[[lbl]] <- x$reconstructions[[clim]]$optima[, 2]
+    }
+    if(mean) {
+      lbl <- paste(clim, 'mean', sep='_')
+      tbl[[lbl]] <- x$reconstructions[[clim]]$optima[, 3]
+    }
+    if(uncertainties) {
+      for(k in 2:ncol(x$reconstructions[[clim]][['uncertainties']])) {
+        lbl <- paste(clim, colnames(x$reconstructions[[clim]][['uncertainties']])[k], sep='_')
+        tbl[[lbl]] <- x$reconstructions[[clim]][['uncertainties']][, k]
+      }
+    }
+  }
+  tbl <- as.data.frame(tbl)
+  clipr::write_clip(tbl)
+  invisible(x)
 }

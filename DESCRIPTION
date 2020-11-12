@@ -28,5 +28,6 @@ Depends:
 Suggests: 
     testthat,
     knitr,
-    rmarkdown
+    rmarkdown,
+    clipr
 VignetteBuilder: knitr

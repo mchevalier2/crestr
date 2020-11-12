@@ -2,7 +2,7 @@
 % Please edit documentation in R/UsefulFunctions.R
 \name{meanPositiveValues}
 \alias{meanPositiveValues}
-\title{Convert data into presence/absence data.}
+\title{Calculate the mean of all stricly positive values.}
 \usage{
 meanPositiveValues(x)
 }
@@ -10,10 +10,11 @@ meanPositiveValues(x)
 \item{x}{A vector of values.}
 }
 \value{
-The average of all the positive values.
+The average of all the positive values. Returns NaN is no positive
+values are found.
 }
 \description{
-Convert data into presence/absence data.
+Calculate the mean of all stricly positive values.
 }
 \examples{
 meanPositiveValues(-10:10)
