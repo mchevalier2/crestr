@@ -86,6 +86,5 @@ normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
 #' @examples
 #' meanPositiveValues(-10:10)
 meanPositiveValues <- function(x) {
-  w <- which(x > 0)
-  base::mean(x[w])
+  base::mean(x[x > 0])
 }

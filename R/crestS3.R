@@ -116,6 +116,7 @@ plot.crestObj <- function(x,
     return(invisible(x))
   } else {
     idx <- 0
+    par_usr <- list()
 
     if(is.na(xlim)) {
       if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
@@ -127,7 +128,7 @@ plot.crestObj <- function(x,
 
     for (clim in climate) {
       if (idx == 0 && plot) {
-        graphics::par(mfrow = grDevices::n2mfrow(length(climate)))
+        par_usr$mfrow <- graphics::par(mfrow = grDevices::n2mfrow(length(climate)))[[1]]
       }
       idx <- idx + 1
       pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
@@ -160,7 +161,7 @@ plot.crestObj <- function(x,
         xx <- x$inputs$x
       }
       if (plot) {
-        graphics::par(mar = c(4, 4, 4, 0.5))
+        par_usr$mar <- graphics::par(mar = c(4, 4, 4, 0.5))[[1]]
         plot3D::image2D(
           z = (1 - as.matrix(t(pdfter[, -1]))),
           y = pdfter[, 1],
@@ -226,7 +227,7 @@ plot.crestObj <- function(x,
       }
       if (save) {
         pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
-        graphics::par(mar = c(3, 3, 3.2, 0.5))
+        par_usr$mar <- graphics::par(mar = c(3, 3, 3.2, 0.5))[[1]]
         plot3D::image2D(
           z = (1 - as.matrix(t(pdfter[, -1]))),
           y = pdfter[, 1],
@@ -296,5 +297,6 @@ plot.crestObj <- function(x,
       }
     }
   }
+  par(par_usr)
   invisible(x)
 }

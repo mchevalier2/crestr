@@ -41,6 +41,8 @@ plot_loo <- function( x,
       return(invisible())
     }
 
+    par_usr <- list()
+
     if (length(col_pos) != length(x$parameters$climate)) col_pos = base::rep_len(col_pos,length(x$parameters$climate))
     if (length(col_neg) != length(x$parameters$climate)) col_neg = base::rep_len(col_neg,length(x$parameters$climate))
     if (length(yax_incr) != length(x$parameters$climate)) yax_incr = base::rep_len(yax_incr,length(x$parameters$climate))
@@ -49,7 +51,7 @@ plot_loo <- function( x,
     names(col_pos) = names(col_neg) = names(yax_incr) = x$parameters$climate
     if(!is.na(title[1])) names(title) = x$parameters$climate
 
-    if(!save) graphics::par(mfrow=c(1,2))
+    if(!save) par_usr$mfrow <- graphics::par(mfrow=c(1,2))[[1]]
 
     for( clim in x$parameters$climate) {
       df <- list()
@@ -101,6 +103,6 @@ plot_loo <- function( x,
                  title=title)
 
   }
-
+  par(par_usr)
   invisible()
 }

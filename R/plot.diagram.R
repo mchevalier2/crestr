@@ -53,6 +53,8 @@ plot_diagram <- function(x, bars=FALSE,
     col_neg='grey80'
   }
 
+  par_usr <- list()
+
   #x.w <- NA
   if (methods::is(x)[1] == 'crestObj') {
     #if (!unique(is.na(x$modelling$weights))) {
@@ -119,9 +121,7 @@ plot_diagram <- function(x, bars=FALSE,
   }
 
 
-  par_usr <- graphics::par()
-  graphics::par(mar=c(0,0,0,0))
-
+  par_usr$mar <- graphics::par(mar=c(0,0,0,0))[[1]]
 
   plot(x[, 1], x[, 1], type='n', xlim=xrange, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
   if(!is.na(title)) graphics::text(mean(xlim), mean(c(max(cs), yrange[2])), title, cex=0.8, font=1, adj=c(0.5, 1))
@@ -183,6 +183,6 @@ plot_diagram <- function(x, bars=FALSE,
   graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=0.6, adj=c(0.5,0))
   if(save)  grDevices::dev.off()
 
-  #par(par_usr)
+  par(par_usr)
   invisible()
 }
