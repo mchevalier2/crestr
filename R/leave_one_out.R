@@ -22,7 +22,9 @@
 #'
 loo <- function(x, verbose=TRUE) {
   if(verbose) cat('\n## Prepping data for LOO reconstructions\n')
+
   if(verbose) cat('  <> Checking data ......................... ')
+
   if(verbose) cat('[OK]\n  <> Checking taxa ................... ......')
   taxa_list <- rownames(x$inputs$selectedTaxa)[apply(x$inputs$selectedTaxa[, x$parameters$climate], 1, function(y) return(sum(as.numeric(y)))) > 0]
   estimated_time <- x$misc$reconstruction_time * length(taxa_list)
@@ -46,7 +48,9 @@ loo <- function(x, verbose=TRUE) {
                                   )
     for(clim in x$parameters$climate) {
       if(as.numeric(x$inputs$selectedTaxa[tax, clim]) > 0) {
-        x$reconstructions[[clim]][['loo']][[tax]] <- recons_tmp$reconstructions[[clim]]$optima[, 2] - x$reconstructions[[clim]]$optima[,2]
+        x$reconstructions[[clim]][['loo']][[tax]] <- cbind('optima' = recons_tmp$reconstructions[[clim]]$optima[, 2] - x$reconstructions[[clim]]$optima[, 2],
+                                                           'mean'   = recons_tmp$reconstructions[[clim]]$optima[, 3] - x$reconstructions[[clim]]$optima[, 3]
+                                                          )
         x$reconstructions[[clim]][['loo']][[tax]][is.na(x$reconstructions[[clim]][['loo']][[tax]])] <- 0
       } else {
         x$reconstructions[[clim]][['loo']][[tax]] <- NA

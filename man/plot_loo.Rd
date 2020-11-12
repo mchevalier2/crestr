@@ -6,6 +6,7 @@
 \usage{
 plot_loo(
   x,
+  optima = TRUE,
   save = FALSE,
   filename = "Diagram_loo",
   width = 3.54,
@@ -22,6 +23,8 @@ plot_loo(
 \arguments{
 \item{x}{A data frame of the data to plot (first column with age or depth)
 and the taxa in the following columns. x can also be a crestObj.}
+
+\item{optima}{.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is FALSE.}

@@ -30,6 +30,7 @@
 crest.reconstruct <- function(x, df,
                               presenceThreshold = 0,
                               taxWeight = "normalisation",
+                              uncertainties = c(0.5, 0.95),
                               skip_for_loo = FALSE, verbose=TRUE) {
 
   if(verbose) cat('\n## Last data checks and reconstruction\n')
@@ -116,12 +117,15 @@ crest.reconstruct <- function(x, df,
   for (clim in x$parameters$climate) {
     if (sum(as.numeric(x$inputs$selectedTaxa[, clim])) > 0) {
       reconstructions[[clim]][["posterior"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
-      reconstructions[[clim]][["optima"]] <- rep(NA, nrow(x$inputs$df))
+      reconstructions[[clim]][["uncertainties"]] <- matrix(rep(0, 2 * length(x$parameters$uncertainties) * nrow(x$inputs$df)), nrow = nrow(x$inputs$df))
+      reconstructions[[clim]][["optima"]] <- matrix(rep(NA, 2 * nrow(x$inputs$df)), nrow = nrow(x$inputs$df))
       for (s in 1:nrow(x$inputs$df)) {
         if (is.na(x$modelling$weights[s, names(x$modelling$pdfs)[1]])) {
           reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
+          reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
         } else if (sum(as.numeric(x$inputs$selected[, clim]) * x$modelling$weights[s, ]) == 0) {
           reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
+          reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
         } else {
           norm_factor <- 0
           for (tax in names(x$modelling$pdfs)) {
@@ -140,7 +144,22 @@ crest.reconstruct <- function(x, df,
               (sum(reconstructions[[clim]][["posterior"]][s, ]) *
                 (x$modelling$xrange[[clim]][2] - x$modelling$xrange[[clim]][1])
               )
-          reconstructions[[clim]][["optima"]][s] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["posterior"]][s, ])]
+          reconstructions[[clim]][["optima"]][s, 1] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["posterior"]][s, ])]
+          reconstructions[[clim]][["optima"]][s, 2] <- sum(x$modelling$xrange[[clim]] * reconstructions[[clim]][["posterior"]][s, ]) / sum(reconstructions[[clim]][["posterior"]][s, ])
+
+          oo <- order(reconstructions[[clim]][["posterior"]][s, ], decreasing=TRUE)
+          tmp2 <- reconstructions[[clim]][["posterior"]][s, ][oo]
+          tmp1 <- x$modelling$xrange[[clim]][oo]
+          oo <- order(tmp1)
+          pdfter <- cumsum(tmp2 / sum(tmp2))[oo]
+          tmp1 <- tmp1[oo]
+
+          err <- c()
+          for(e in x$parameters$uncertainties) {
+            w <- which(pdfter <= e)
+            err <- c(err, tmp1[w[1]], tmp1[w[length(w)]])
+          }
+          reconstructions[[clim]][["uncertainties"]][s, ] <- err
         }
         if(! skip_for_loo) {
           if(verbose) {
@@ -151,7 +170,14 @@ crest.reconstruct <- function(x, df,
         }
       }
       reconstructions[[clim]][["posterior"]] <- rbind(x$modelling$xrange[[clim]], reconstructions[[clim]][["posterior"]])
-      reconstructions[[clim]][["optima"]] <- data.frame('x'=x$inputs$x, 'optima'=reconstructions[[clim]][["optima"]])
+      reconstructions[[clim]][["uncertainties"]] <- cbind('x'=x$inputs$x, reconstructions[[clim]][["uncertainties"]])
+      reconstructions[[clim]][["optima"]] <- data.frame('x'=x$inputs$x,
+                                                        'optima'=reconstructions[[clim]][["optima"]][, 1],
+                                                        'mean'=reconstructions[[clim]][["optima"]][, 2]
+                                                        )
+      colnames(reconstructions[[clim]][["uncertainties"]])[1] <- colnames(reconstructions[[clim]][["optima"]])[1] <- x$inputs$x.name
+      colnames(reconstructions[[clim]][["uncertainties"]])[-1] <- paste(rep(x$parameters$uncertainties,each=2), c("inf", "sup"),sep='_')
+
     } else {
       reconstructions[[clim]] <- NA
     }

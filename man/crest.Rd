@@ -27,6 +27,7 @@ crest(
   climateSpaceWeighting = TRUE,
   presenceThreshold = 0,
   taxWeight = "normalisation",
+  uncertainties = c(0.5, 0.95),
   leave_one_out = FALSE,
   verbose = TRUE,
   dbname = "gbif4crest_02"
@@ -57,7 +58,8 @@ crest(
 
 \item{biomes}{A vector of the studied botanical biomes defining the study area.}
 
-\item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
+\item{ecoregions}{A vector of the studied botanical ecoregions defining the
+study area.}
 
 \item{minGridCells}{.}
 
@@ -75,7 +77,11 @@ crest(
 
 \item{presenceThreshold}{.}
 
-\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or 'normalisation'}
+\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or
+'normalisation'}
+
+\item{uncertainties}{A (vector of) threshold value(s) indicating the error
+bars that should be calculated (default both 50 and 95\% ranges).}
 
 \item{leave_one_out}{A boolean to indicate whether the leave one out (loo)
 reconstructions should be computed (default FALSE).}

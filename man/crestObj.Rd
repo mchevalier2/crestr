@@ -29,7 +29,8 @@ crestObj(
   climateSpaceWeighting = TRUE,
   selectedTaxa = NA,
   presenceThreshold = 0,
-  taxWeight = "normalisation"
+  taxWeight = "normalisation",
+  uncertainties = c(0.5, 0.95)
 )
 }
 \arguments{
@@ -51,7 +52,8 @@ crestObj(
 
 \item{biomes}{A vector of the studied botanical biomes defining the study area.}
 
-\item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
+\item{ecoregions}{A vector of the studied botanical ecoregions defining the
+study area.}
 
 \item{df}{.}
 
@@ -75,7 +77,11 @@ crestObj(
 
 \item{presenceThreshold}{.}
 
-\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or 'normalisation'}
+\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or
+'normalisation'}
+
+\item{uncertainties}{A (vector of) threshold value(s) indicating the error
+bars that should be calculated (default both 50 and 95\% ranges).}
 }
 \value{
 A CREST object that is used to store data and information for reconstructing climate

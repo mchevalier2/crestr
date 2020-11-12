@@ -14,7 +14,8 @@
 #' @param countries A vector of the country names defining the study area.
 #' @param realms A vector of the studied botanical realms defining the study area.
 #' @param biomes A vector of the studied botanical biomes defining the study area.
-#' @param ecoregions A vector of the studied botanical ecoregions defining the study area.
+#' @param ecoregions A vector of the studied botanical ecoregions defining the
+#'        study area.
 #' @param minGridCells .
 #' @param bin_width .
 #' @param shape .
@@ -23,8 +24,10 @@
 #' @param geoWeighting The number of points to be used to fit the pdfs.
 #' @param climateSpaceWeighting The number of points to be used to fit the pdfs.
 #' @param presenceThreshold .
-#' @param taxWeight 'originalData', 'presence/absence', 'percentages' or 'normalisation'
-
+#' @param taxWeight 'originalData', 'presence/absence', 'percentages' or
+#'        'normalisation'
+#' @param uncertainties A (vector of) threshold value(s) indicating the error
+#'        bars that should be calculated (default both 50 and 95% ranges).
 #' @return A CREST object that is used to store data and information for reconstructing climate
 #' @export
 
@@ -34,13 +37,15 @@ crestObj <- function(taxa.name, pse, taxaType, climate,
                      realms, biomes, ecoregions,
                      df = NA, x = NA, x.name = "",
                      minGridCells = 20,
-                     bin_width = rep(1, length(climate)), shape = rep("normal", length(climate)),
+                     bin_width = rep(1, length(climate)),
+                     shape = rep("normal", length(climate)),
                      npoints = 500,
                      geoWeighting = TRUE,
                      climateSpaceWeighting = TRUE,
                      selectedTaxa = NA,
                      presenceThreshold = 0,
-                     taxWeight = "normalisation") {
+                     taxWeight = "normalisation",
+                     uncertainties = c(0.5, 0.95)) {
   inputs <- list(
     df = df,
     taxa.name = taxa.name,
@@ -69,7 +74,8 @@ crestObj <- function(taxa.name, pse, taxaType, climate,
     npoints = npoints,
     geoWeighting = geoWeighting,
     climateSpaceWeighting = climateSpaceWeighting,
-    presenceThreshold = presenceThreshold
+    presenceThreshold = presenceThreshold,
+    uncertainties = uncertainties
   )
 
   modelling <- list(taxonID2proxy = NA, climate_space = NA, pdfs = NA, weights = NA, xrange = NA)
@@ -97,10 +103,17 @@ print.crestObj <- function(x, ...) {
 }
 
 
+#' Plot the reconstructions.
+#'
+#' Plot the reconstructions and their uncertainties
+#'
+#' @param x A crestObj produced by the crest.reconstruct() or crest() functions.
+#' @param optima .
 #' @export
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,
                           errors = c(0.5, 0.95),
+                          optima = TRUE,
                           xlim = NA,
                           ylim = NA,
                           save = FALSE,
@@ -143,8 +156,9 @@ plot.crestObj <- function(x,
         pdfter[, i] <- cumsum(tmp2 / sum(tmp2))[oo]
       }
 
-      xmn <- which.min(x$reconstructions[[clim]][["optima"]][, 2])
-      xmx <- which.max(x$reconstructions[[clim]][["optima"]][, 2])
+      var_to_plot <- ifelse(optima, 2, 3)
+      xmn <- which.min(x$reconstructions[[clim]][["optima"]][, var_to_plot])
+      xmx <- which.max(x$reconstructions[[clim]][["optima"]][, var_to_plot])
 
       if (unique(is.na(ylim))) {
         ymn <- pdfter[which(pdfter[, xmn + 1] <= 0.99)[1], 1]
@@ -201,10 +215,10 @@ plot.crestObj <- function(x,
           )
         }
 
-        graphics::points(xx, x$reconstructions[[clim]][["optima"]][, 2],
+        graphics::points(xx, x$reconstructions[[clim]][["optima"]][, var_to_plot],
           pch = 18, col = "white", cex = 0.8
         )
-        graphics::points(xx, x$reconstructions[[clim]][["optima"]][, 2],
+        graphics::points(xx, x$reconstructions[[clim]][["optima"]][, var_to_plot],
           col = "white", cex = 0.5, type = "l"
         )
         plot3D::colkey(
@@ -297,6 +311,6 @@ plot.crestObj <- function(x,
       }
     }
   }
-  par(par_usr)
+  graphics::par(par_usr)
   invisible(x)
 }

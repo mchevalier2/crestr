@@ -9,6 +9,7 @@ crest.reconstruct(
   df,
   presenceThreshold = 0,
   taxWeight = "normalisation",
+  uncertainties = c(0.5, 0.95),
   skip_for_loo = FALSE,
   verbose = TRUE
 )
@@ -20,7 +21,11 @@ crest.reconstruct(
 
 \item{presenceThreshold}{.}
 
-\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or 'normalisation'}
+\item{taxWeight}{'originalData', 'presence/absence', 'percentages' or
+'normalisation'}
+
+\item{uncertainties}{A (vector of) threshold value(s) indicating the error
+bars that should be calculated (default both 50 and 95\% ranges).}
 
 \item{skip_for_loo}{A boolean that tells the loo() functiont to skip parts
 and fasten the process. Not for users.}

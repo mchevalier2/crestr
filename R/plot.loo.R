@@ -3,6 +3,7 @@
 #' This function plots stratigraphic data either as polygons or bars.
 #'
 #' @inheritParams plot_diagram
+#' @param optima .
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name Diagram.pdf.
@@ -27,7 +28,7 @@
 #'          col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #' }
 #'
-plot_loo <- function( x,
+plot_loo <- function( x, optima=TRUE,
                       save=FALSE, filename='Diagram_loo',
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width=1,
@@ -42,6 +43,8 @@ plot_loo <- function( x,
     }
 
     par_usr <- list()
+
+    var_to_plot <- ifelse(optima, 1, 2)
 
     if (length(col_pos) != length(x$parameters$climate)) col_pos = base::rep_len(col_pos,length(x$parameters$climate))
     if (length(col_neg) != length(x$parameters$climate)) col_neg = base::rep_len(col_neg,length(x$parameters$climate))
@@ -61,7 +64,7 @@ plot_loo <- function( x,
         if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {
           df[[tax]] <- loo_na
         } else {
-          df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]]
+          df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]][, var_to_plot]
         }
       }
       df <- do.call(cbind, df)
@@ -100,6 +103,6 @@ plot_loo <- function( x,
                  title=title)
 
   }
-  par(par_usr)
+  graphics::par(par_usr)
   invisible()
 }

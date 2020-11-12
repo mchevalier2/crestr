@@ -49,7 +49,8 @@ crest.get_modern_data(
 
 \item{biomes}{A vector of the studied botanical biomes defining the study area.}
 
-\item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
+\item{ecoregions}{A vector of the studied botanical ecoregions defining the
+study area.}
 
 \item{minGridCells}{.}
 

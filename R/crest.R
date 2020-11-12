@@ -36,6 +36,7 @@ crest <- function(df, pse, taxaType, climate,
                   climateSpaceWeighting = TRUE,
                   presenceThreshold = 0,
                   taxWeight = "normalisation",
+                  uncertainties = c(0.5, 0.95),
                   leave_one_out = FALSE,
                   verbose=TRUE,
                   dbname = "gbif4crest_02") {
@@ -54,6 +55,7 @@ crest <- function(df, pse, taxaType, climate,
 
   x <- crest.calibrate(x,
     npoints = npoints,
+    shape = shape,
     geoWeighting = geoWeighting,
     climateSpaceWeighting = geoWeighting,
     verbose = verbose

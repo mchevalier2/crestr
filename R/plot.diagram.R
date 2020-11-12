@@ -183,6 +183,6 @@ plot_diagram <- function(x, bars=FALSE,
   graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=0.6, adj=c(0.5,0))
   if(save)  grDevices::dev.off()
 
-  par(par_usr)
+  graphics::par(par_usr)
   invisible()
 }
