@@ -147,7 +147,6 @@ crest.get_modern_data <- function(pse, taxaType, climate,
 
   if(verbose) cat('[OK]\n  <> Checking/Defining selectedTaxa ........ ')
   if (is.na(as.vector(t(selectedTaxa))[1])) {
-    print('here')
     selectedTaxa <- data.frame(matrix(rep(1, length(climate) * length(taxa.name)),
       ncol = length(climate)
     ))
@@ -243,7 +242,9 @@ crest.get_modern_data <- function(pse, taxaType, climate,
           }
         } else {
           #cat(paste("WARNING: No match for taxon ", paste(pse[w, 2:5], collapse = ", "), "\n"))
-          crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No correspondance with vegetation")
+          if (tax %in% crest$inputs$taxa.name) {
+            crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No correspondance with vegetation")
+          }
         }
       }
       pbi <- pbi + 100
