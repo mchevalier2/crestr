@@ -29,7 +29,7 @@ loo <- function(x, verbose=TRUE) {
   taxa_list <- rownames(x$inputs$selectedTaxa)[apply(x$inputs$selectedTaxa[, x$parameters$climate], 1, function(y) return(sum(as.numeric(y)))) > 0]
   estimated_time <- x$misc$reconstruction_time * length(taxa_list)
   if(verbose) cat(paste0('[OK]\n  *i Estimated time for the LOO reconstructions: ', estimated_time %/% 60, 'min ', round(estimated_time %% 60, 2), 's.\n'))
-  if(verbose) cat('  <> LOO reconstructions ................... \r')
+  if(verbose) cat('  <> LOO reconstructions ...................   0%\r')
   pbi <- 100
   time0 <- proc.time()
   for(clim in x$parameters$climate) {

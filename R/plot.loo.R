@@ -58,7 +58,12 @@ plot_loo <- function( x, optima=TRUE,
 
     for( clim in x$parameters$climate) {
       df <- list()
-      df[[x$inputs$x.name]] <- x$inputs$x
+      if(is.numeric(x$inputs$x)) {
+        df[[x$inputs$x.name]] <- x$inputs$x
+      } else {
+        cat('WARNING: The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+        df[[x$inputs$x.name]] <- 1:length(x$inputs$x)
+      }
       loo_na <- rep(0, length(x$inputs$x))
       for( tax in names(x$reconstructions[[clim]]$loo)) {
         if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {

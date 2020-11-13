@@ -69,7 +69,12 @@ plot_diagram <- function(x, bars=FALSE,
     x <- cbind(x=x$inputs$x, x$inputs$df)
     colnames(x) <- col_names
   }
-  x <- x[order(x[, 1]), ]
+  if(is.numeric(x[, 1])) {
+    x <- x[order(x[, 1]), ]
+  } else {
+    cat('WARNING: The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+    x[, 1] <- 1:nrow(x)
+  }
 
   if (length(col) != ncol(x)-1) col = base::rep_len(col,ncol(x)-1)
 
