@@ -160,6 +160,17 @@ crest.get_modern_data <- function(pse, taxaType, climate,
     selectedTaxa[taxa_to_ignore, ] <- c(rep(1, length(climate)), 'Taxon not in the proxy_species_equivalency table.')
   }
 
+  w <- !(taxa.name %in% rownames(selectedTaxa))
+  print(w)
+  if (sum(w) > 0) {
+    #cat("WARNING: ymn is larger than ymx. Inverting the two values and continuing.\n")
+    for(w in which(!(taxa.name %in% rownames(selectedTaxa)))) {
+      selectedTaxa <- rbind(selectedTaxa, c(rep(1, length(climate)), 'Not present in the original selectedTaxa table. Added by default as 1s.'))
+      rownames(selectedTaxa)[nrow(selectedTaxa)] <- taxa.name[w]
+    }
+  }
+  print(selectedTaxa)
+
   if(verbose) cat('[OK]\n  <> Checking the pse table ................ ')
   ## . Formatting data in the expected format ---------------------------------
   if (sum(unique(pse$ProxyName) %in% taxa.name) != length(unique(pse$ProxyName))) {
@@ -262,6 +273,7 @@ crest.get_modern_data <- function(pse, taxaType, climate,
   distributions <- list()
 
   for (tax in taxa.name) {
+    print(tax)
     taxIDs <- taxonID2proxy[taxonID2proxy[, "proxyName"] == tax, 1]
     if (length(taxIDs) == 0) crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No species corresponding to the proxy name.")
     if(verbose) {
