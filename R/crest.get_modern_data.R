@@ -147,13 +147,14 @@ crest.get_modern_data <- function(pse, taxaType, climate,
 
   if(verbose) cat('[OK]\n  <> Checking/Defining selectedTaxa ........ ')
   if (is.na(as.vector(t(selectedTaxa))[1])) {
+    print('here')
     selectedTaxa <- data.frame(matrix(rep(1, length(climate) * length(taxa.name)),
       ncol = length(climate)
     ))
     rownames(selectedTaxa) <- taxa.name
     colnames(selectedTaxa) <- climate
   }
-  selectedTaxa <- cbind(selectedTaxa, as.character(rep("", length(taxa.name))), stringsAsFactors = FALSE)
+  selectedTaxa <- cbind(selectedTaxa, as.character(rep("", nrow(selectedTaxa))), stringsAsFactors = FALSE)
   colnames(selectedTaxa)[ncol(selectedTaxa)] <- "notes"
 
   if (length(taxa_to_ignore)) {
