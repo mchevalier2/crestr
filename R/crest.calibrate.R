@@ -59,6 +59,22 @@ crest.calibrate <- function(x,
     ccs[[clim]] <- calib_clim_space(x$modelling$climate_space[, clim], x$parameters$bin_width[clim, ])
     x$modelling$xrange[[clim]] <- fit_xrange(ccs[[clim]], x$parameters$shape[clim, ], x$parameters$bin_width[clim, ], x$parameters$npoints)
   }
+  x$modelling$ccs <- ccs
+
+  resol <- unique(diff(sort(unique(x$modelling$climate_space[,1])))) / 2.0
+  if(x$parameters$xmn == -180) {
+    x$parameters$xmn <- min(x$modelling$climate_space[, 1]) - resol
+  }
+  if(x$parameters$xmx == 180) {
+    x$parameters$xmx <- max(x$modelling$climate_space[, 1]) + resol
+  }
+  if(x$parameters$ymn == -90) {
+    x$parameters$ymn <- min(x$modelling$climate_space[, 2]) - resol
+  }
+  if(x$parameters$ymx == 90) {
+    x$parameters$ymx <- max(x$modelling$climate_space[, 2]) + resol
+  }
+
 
   if(verbose) {
     cat('[OK]\n  <> Fitting relationships ................. \r')
@@ -79,7 +95,7 @@ crest.calibrate <- function(x,
               tmp,
               fit_pdfsp(
                 climate = x$modelling$distributions[[tax]][w, clim],
-                ccs = ccs[[clim]],
+                ccs = x$modelling$ccs[[clim]],
                 bin_width = x$parameters$bin_width[clim, ],
                 shape = x$parameters$shape[clim, ],
                 xrange = x$modelling$xrange[[clim]],

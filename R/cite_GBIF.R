@@ -10,7 +10,7 @@ cite_GBIF <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
   if (x$parameters$taxaType == 1) {
     list_of_classes <- c()
     for (fam in unique(x$inputs$pse$Family[x$inputs$pse[,1]<4])) {
-      list_of_classes <- c(list_of_classes, getTaxonomy(family=fam, depth=3)['class_name'])
+      list_of_classes <- c(list_of_classes, getTaxonomy(family=fam, depth.out=3)['class_name'])
     }
     list_of_classes <- unique(list_of_classes)
     citations = list()

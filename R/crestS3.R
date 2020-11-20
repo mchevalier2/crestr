@@ -132,13 +132,23 @@ print.crestObj <- function(x, ...) {
 #'
 #' Plot the reconstructions and their uncertainties
 #'
+#' @inheritParams graphics::plot
 #' @param x A crestObj produced by the crest.reconstruct() or crest() functions.
-#' @param optima A boolean to indicate if the optima (TRUE) or the mean (FALSE)
-#'        should be plotted.
+#' @param climate The climate variables to plot (default is all the reconstructed variables from x)
+#' @param uncertainties A (vector of) threshold value(s) indicating the error
+#'        bars that should be calculated (default are the values stored in x).
+#' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
+#'        mean (FALSE) estimates.
+#' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
+#'        Default is FALSE.
+#' @param loc An absolute or relative path that indicates the folder where the
+#'        diagram(s) hould be saved. Also used to specify the name of the file.
+#'        Default: the file is saved in the working directory with a file
+#'        created for each variable as variable.pdf.
 #' @export
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,
-                          errors = x$parameters$uncertainties,
+                          uncertainties = x$parameters$uncertainties,
                           optima = TRUE,
                           xlim = NA,
                           ylim = NA,
@@ -227,7 +237,7 @@ plot.crestObj <- function(x,
         } else {
           graphics::axis(1, cex.axis=5/7)
         }
-        for (e in errors) {
+        for (e in uncertainties) {
           val <- apply(pdfter[, -1], 2, function(x) {
             if(is.na(x[1])) return(c(NA, NA))
             w <- which(x <= e)
@@ -296,7 +306,7 @@ plot.crestObj <- function(x,
         if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
           loc <- substr(loc, 1, nchar(loc) - 1)
         }
-        for (e in errors) {
+        for (e in uncertainties) {
           val <- apply(pdfter[, -1], 2, function(x) {
             if(is.na(x[1])) return(c(NA, NA))
             w <- which(x <= e)

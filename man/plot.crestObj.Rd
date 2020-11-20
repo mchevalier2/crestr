@@ -7,7 +7,7 @@
 \method{plot}{crestObj}(
   x,
   climate = x$parameters$climate,
-  errors = x$parameters$uncertainties,
+  uncertainties = x$parameters$uncertainties,
   optima = TRUE,
   xlim = NA,
   ylim = NA,
@@ -20,8 +20,32 @@
 \arguments{
 \item{x}{A crestObj produced by the crest.reconstruct() or crest() functions.}
 
-\item{optima}{A boolean to indicate if the optima (TRUE) or the mean (FALSE)
-should be plotted.}
+\item{climate}{The climate variables to plot (default is all the reconstructed variables from x)}
+
+\item{uncertainties}{A (vector of) threshold value(s) indicating the error
+bars that should be calculated (default are the values stored in x).}
+
+\item{optima}{A boolean to indicate whether to plot the optimum (TRUE) or the
+mean (FALSE) estimates.}
+
+\item{xlim}{the x limits (x1, x2) of the plot.  Note that \code{x1 > x2}
+    is allowed and leads to a \sQuote{reversed axis}.
+
+    The default value, \code{NULL}, indicates that the range of the
+    \link{finite} values to be plotted should be used.}
+
+\item{ylim}{the y limits of the plot.}
+
+\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+Default is FALSE.}
+
+\item{loc}{An absolute or relative path that indicates the folder where the
+diagram(s) hould be saved. Also used to specify the name of the file.
+Default: the file is saved in the working directory with a file
+created for each variable as variable.pdf.}
+
+\item{...}{other \link[graphics]{graphical parameters} (see \code{\link[graphics]{par}} and
+    section \sQuote{Details} below).}
 }
 \description{
 Plot the reconstructions and their uncertainties

@@ -3,8 +3,9 @@
 #' This function plots stratigraphic data either as polygons or bars.
 #'
 #' @inheritParams plot_diagram
-#' @param optima .
-#' @param filename An absolute or relative path that indicates where the diagram
+#' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the 
+#'        mean (FALSE) estimates.
+#' @param loc An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name Diagram.pdf.
 #' @param yax_incr Graphical parameters describing the increment size on the y-axis (default 5).
@@ -13,23 +14,23 @@
 #' @param col_neg Graphical parameter for the barplot. Colour of all the negative values (default white).
 #' @export
 #' @examples
-#' data(crest_ex)
-#' data(crest_ex_pse)
-#' data(crest_ex_selection)
-#' recons <- crest(
-#'   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
-#'   climate = c("bio1", "bio12"), bin_width = c(2, 20),
-#'   shape = c("normal", "lognormal"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
-#' )
-#' recons <- loo(recons)
 #' \dontrun{
-#' plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
-#'          col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
+#'   data(crest_ex)
+#'   data(crest_ex_pse)
+#'   data(crest_ex_selection)
+#'   recons <- crest(
+#'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
+#'     shape = c("normal", "lognormal"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
+#'   )
+#'   recons <- loo(recons)
+#'   plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
+#'            col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #' }
 #'
 plot_loo <- function( x, optima=TRUE,
-                      save=FALSE, filename='Diagram_loo',
+                      save=FALSE, loc='Diagram_loo',
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width=1,
                       xlim=NA, tickAtSample=FALSE,
@@ -86,7 +87,7 @@ plot_loo <- function( x, optima=TRUE,
       }
 
       plot_diagram(df, bars=TRUE,
-                   save=save, filename=paste(filename,clim,'pdf',sep='.'),
+                   save=save, loc=paste(loc,clim,'pdf',sep='.'),
                    width=width, height=height,
                    yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                    tickAtSample=tickAtSample,
@@ -101,7 +102,7 @@ plot_loo <- function( x, optima=TRUE,
     if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(x))
 
     plot_diagram(x, bars=TRUE,
-                 save=save, filename=paste(filename,clim,'pdf',sep='.'),
+                 save=save, loc=paste(loc,clim,'pdf',sep='.'),
                  width=width, height=height,
                  yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                  tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,

@@ -8,7 +8,7 @@ plot_loo(
   x,
   optima = TRUE,
   save = FALSE,
-  filename = "Diagram_loo",
+  loc = "Diagram_loo",
   width = 3.54,
   height = 9,
   yax_incr = NA,
@@ -24,12 +24,13 @@ plot_loo(
 \item{x}{A data frame of the data to plot (first column with age or depth)
 and the taxa in the following columns. x can also be a crestObj.}
 
-\item{optima}{.}
+\item{optima}{A boolean to indicate whether to plot the optimum (TRUE) or the
+mean (FALSE) estimates.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is FALSE.}
 
-\item{filename}{An absolute or relative path that indicates where the diagram
+\item{loc}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name Diagram.pdf.}
 
@@ -55,19 +56,19 @@ the file is saved in the working directory under the name Diagram.pdf.}
 This function plots stratigraphic data either as polygons or bars.
 }
 \examples{
-data(crest_ex)
-data(crest_ex_pse)
-data(crest_ex_selection)
-recons <- crest(
-  df = crest_ex, pse = crest_ex_pse, taxaType = 0,
-  climate = c("bio1", "bio12"), bin_width = c(2, 20),
-  shape = c("normal", "lognormal"),
-  selectedTaxa = crest_ex_selection, dbname = "crest_example"
-)
-recons <- loo(recons)
 \dontrun{
-plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
-         col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
+  data(crest_ex)
+  data(crest_ex_pse)
+  data(crest_ex_selection)
+  recons <- crest(
+    df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+    climate = c("bio1", "bio12"), bin_width = c(2, 20),
+    shape = c("normal", "lognormal"),
+    selectedTaxa = crest_ex_selection, dbname = "crest_example"
+  )
+  recons <- loo(recons)
+  plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
+           col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 }
 
 }

@@ -12,7 +12,7 @@
 #'        plot. Default 5.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
-#' @param filename An absolute or relative path that indicates where the diagram
+#' @param loc An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name Diagram.pdf.
 #' @param width The width of the output file in inches (default 3.54in ~ 9cm).
@@ -30,7 +30,7 @@
 #' plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 #' plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
 #' \dontrun{
-#' plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
+#' plot_diagram(crest_ex, save=TRUE, loc='testDiagram.pdf',
 #'              bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
 #'              bar_width=0.8, xlim=c(3,15))
 #' }
@@ -38,7 +38,7 @@
 plot_diagram <- function(x, bars=FALSE,
                          col = 'black',
                          amplif = 5,
-                         save=FALSE, filename='Diagram.pdf',
+                         save=FALSE, loc='Diagram.pdf',
                          width=3.54, height= 9,
                          yax_incr = 5, bar_width=1,
                          xlim=NA, tickAtSample=TRUE,
@@ -109,12 +109,12 @@ plot_diagram <- function(x, bars=FALSE,
 
 
   if(save) {
-    grDevices::pdf(filename, width=width, height=height)
+    grDevices::pdf(loc, width=width, height=height)
     plot(x[, 1], x[, 1], type='n', xlim=xrange, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
     str_max_left <- 0.7*max(graphics::strwidth(colnames(x)[-1], cex=0.5, units='inches'))
     str_max_right <- max(c(0.1, graphics::strwidth(as.character(max(seq(0, max(c(max(abs(x[, -1])), yax_incr)), 2*yax_incr))), cex=0.5, units='inches')))
     grDevices::dev.off()
-    grDevices::pdf(filename, width=width, height=height)
+    grDevices::pdf(loc, width=width, height=height)
 
     wd <- width - str_max_left - str_max_right
     k <- diff(xrange) / wd *2

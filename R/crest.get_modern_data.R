@@ -24,7 +24,7 @@
 #'
 crest.get_modern_data <- function(pse, taxaType, climate,
                                   taxa.name = unique(pse[, 'ProxyName']),
-                                  xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                                  xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                   continents = NA, countries = NA,
                                   realms = NA, biomes = NA, ecoregions = NA,
                                   minGridCells = 20,
@@ -61,7 +61,6 @@ crest.get_modern_data <- function(pse, taxaType, climate,
     new_clim <- climate
     if (!(climate[clim] %in% climVar[, 1] | climate[clim] %in% climVar[, 2])) {
       cat(paste("[FAILED]\n  ERROR: The variable '", climate[clim], "' is not an accepted value. Please select a name or ID from the following list.\n", sep = ""))
-      print(climVar)
       return()
     } else {
       defaultW <- getOption("warn")
@@ -81,28 +80,28 @@ crest.get_modern_data <- function(pse, taxaType, climate,
   }
 
   if(verbose) cat('[OK]\n  <> Checking coordinates .................. ')
+  if (xmn < -180 | is.na(xmn) | xmx > 180 | is.na(xmx)) {
+    xmn <- max(xmn, -180, na.rm=TRUE)
+    xmx <- min(xmx, 180, na.rm=TRUE)
+    #cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Adapting and continuing.\n")
+  }
   if (xmn >= xmx) {
     #cat("WARNING: xmn is larger than xmx. Inverting the two values and continuing.\n")
     tmp <- xmn
     xmn <- xmx
     xmx <- tmp
   }
-  if (xmn < -180 | xmx > 180) {
-    xmn <- max(xmn, -180)
-    xmx <- min(xmx, 180)
-    #cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Adapting and continuing.\n")
-  }
 
+  if (ymn < -90| is.na(ymn)  | ymx > 90 | is.na(ymx) ) {
+    ymn <- max(ymn, -90, na.rm=TRUE)
+    ymx <- min(ymx, 90, na.rm=TRUE)
+    #cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Adapting and continuing.\n")
+  }
   if (ymn >= ymx) {
     #cat("WARNING: ymn is larger than ymx. Inverting the two values and continuing.\n")
     tmp <- ymn
     ymn <- ymx
     ymx <- tmp
-  }
-  if (ymn < -90 | ymx > 90) {
-    ymn <- max(ymn, -90)
-    ymx <- min(ymx, 90)
-    #cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Adapting and continuing.\n")
   }
 
   if(verbose) cat('[OK]\n  <> Checking continent and country names .. ')
@@ -161,7 +160,6 @@ crest.get_modern_data <- function(pse, taxaType, climate,
   }
 
   w <- !(taxa.name %in% rownames(selectedTaxa))
-  print(w)
   if (sum(w) > 0) {
     #cat("WARNING: ymn is larger than ymx. Inverting the two values and continuing.\n")
     for(w in which(!(taxa.name %in% rownames(selectedTaxa)))) {
@@ -169,7 +167,6 @@ crest.get_modern_data <- function(pse, taxaType, climate,
       rownames(selectedTaxa)[nrow(selectedTaxa)] <- taxa.name[w]
     }
   }
-  print(selectedTaxa)
 
   if(verbose) cat('[OK]\n  <> Checking the pse table ................ ')
   ## . Formatting data in the expected format ---------------------------------
@@ -273,7 +270,6 @@ crest.get_modern_data <- function(pse, taxaType, climate,
   distributions <- list()
 
   for (tax in taxa.name) {
-    print(tax)
     taxIDs <- taxonID2proxy[taxonID2proxy[, "proxyName"] == tax, 1]
     if (length(taxIDs) == 0) crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No species corresponding to the proxy name.")
     if(verbose) {
@@ -288,17 +284,23 @@ crest.get_modern_data <- function(pse, taxaType, climate,
         realms, biomes, ecoregions,
         dbname
       )
-      extent_taxa <- table(distributions[[tax]][, 1])
-      extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
-      distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa_id, ]
       if (nrow(distributions[[tax]]) == 0) {
         #cat(paste0("WARNING: Insufficient data points to calibrate a pdf for ", tax, "\n"))
         #print(extent_taxa)
         distributions[[tax]] <- NA
         crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "Not enough data points")
+      }else{
+        extent_taxa <- table(distributions[[tax]][, 1])
+        extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
+        distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa_id, ]
+        if(nrow(distributions[[tax]]) == 0) {
+          distributions[[tax]] <- NA
+          crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "Not enough data to fit a pdf")
+        }
       }
     } else {
       distributions[[tax]] <- NA
+      crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No data available")
     }
     pbi <- pbi + 100
   }
