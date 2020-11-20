@@ -46,3 +46,9 @@
 #'                     main data file}
 #' }
 "crest_ex_pse"
+
+#' A shapefile of the world's countries.
+#'
+#' A shapefile of the world's countries.
+#'
+"M1"

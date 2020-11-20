@@ -22,7 +22,11 @@ Imports:
     viridis,
     grDevices,
     methods,
-    stringr
+    stringr,
+    raster,
+    plyr,
+    sp,
+    rgdal
 Depends:
     R (>= 2.10)
 Suggests: 
