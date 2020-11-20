@@ -78,7 +78,7 @@ crest_ex_selection
 ```
 
 To illustrate the process, we will reconstruct bio1 (mean annual temperature)
-and bio12 (annual precipitation) from these fake data. The description of the
+and bio12 (annual precipitation) from these fake data. The description of the 
 different parameters is available in the first **vignette**.
 
 ```{r reconstructing_climate, results='hide'}

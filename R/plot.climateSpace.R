@@ -39,7 +39,7 @@ plot_climateSpace <- function( x,
 
   if (methods::is(x)[1] == 'crestObj') {
 
-    if( is.na(x$modelling$pdfs) ) {
+    if( is.na(x$modelling$pdfs[[1]]) ) {
       cat('ERROR: The crestObj requires the climate space to be calibrated. Please run crest.calibrate() on your data.\n')
       return(invisible())
     }
@@ -284,6 +284,12 @@ plot_climateSpace <- function( x,
     if(save) {
       grDevices::dev.off()
     } else {
+      par_usr[['cin']] <- NULL
+      par_usr[['cra']] <- NULL
+      par_usr[['csi']] <- NULL
+      par_usr[['cxy']] <- NULL
+      par_usr[['din']] <- NULL
+      par_usr[['page']] <- NULL
       graphics::par(par_usr)
     }
   } else {

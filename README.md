@@ -111,14 +111,8 @@ The climate sampled by the data can be assessed graphically using the
 figure
 
     plot_climateSpace(recons)
-    #> Warning in if (is.na(x$modelling$pdfs)) {: the condition has length > 1 and only
-    #> the first element will be used
-    #> Warning in graphics::par(par_usr): graphical parameter "cin" cannot be set
-    #> Warning in graphics::par(par_usr): graphical parameter "cra" cannot be set
-    #> Warning in graphics::par(par_usr): graphical parameter "csi" cannot be set
-    #> Warning in graphics::par(par_usr): graphical parameter "cxy" cannot be set
-    #> Warning in graphics::par(par_usr): graphical parameter "din" cannot be set
-    #> Warning in graphics::par(par_usr): graphical parameter "page" cannot be set
+    #> Warning in if (is.na(x$modelling$pdfs[[1]])) {: the condition has length > 1 and
+    #> only the first element will be used
 
 <img src="man/figures/README-plot climate space-1.png" width="100%" />
 
