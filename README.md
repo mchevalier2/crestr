@@ -107,6 +107,21 @@ description of the different parameters is available in the first
        selectedTaxa = crest_ex_selection, dbname = "crest_example"
     )
 
+The climate sampled by the data can be assessed graphically using the
+figure
+
+    plot_climateSpace(recons)
+    #> Warning in if (is.na(x$modelling$pdfs)) {: the condition has length > 1 and only
+    #> the first element will be used
+    #> Warning in graphics::par(par_usr): graphical parameter "cin" cannot be set
+    #> Warning in graphics::par(par_usr): graphical parameter "cra" cannot be set
+    #> Warning in graphics::par(par_usr): graphical parameter "csi" cannot be set
+    #> Warning in graphics::par(par_usr): graphical parameter "cxy" cannot be set
+    #> Warning in graphics::par(par_usr): graphical parameter "din" cannot be set
+    #> Warning in graphics::par(par_usr): graphical parameter "page" cannot be set
+
+<img src="man/figures/README-plot climate space-1.png" width="100%" />
+
 Finally, the results can be visualised using the plot function and the
 reconstructed climate values can be accessed from the nested `recons`
 object:

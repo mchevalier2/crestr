@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 The goal of crestr is to produce probabilistic reconstructions of past climate
 change from fossil assemblage data. The approach is based on the estimation of
-conditional responses of studies bioproxy studied to climate paramters. These 
+conditional responses of studies bioproxy studied to climate paramters. These
 responses take the form of probability density functions (*pdfs*). The details
 of the method have been described in [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
 and the calibrated data presented in [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
@@ -89,6 +89,14 @@ recons <- crest(
    selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
 ```
+
+The climate sampled by the data can be assessed graphically using the figure
+```{r plot climate space}
+plot_climateSpace(recons)
+
+```
+
+
 Finally, the results can be visualised using the plot function and the
 reconstructed climate values can be accessed from the nested `recons` object:
 
