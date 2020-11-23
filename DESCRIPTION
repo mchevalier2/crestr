@@ -26,7 +26,8 @@ Imports:
     raster,
     plyr,
     sp,
-    rgdal
+    rgdal,
+    RPostgres
 Depends:
     R (>= 2.10)
 Suggests: 

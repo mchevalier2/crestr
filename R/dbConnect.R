@@ -17,7 +17,7 @@
 #'
 connect_online <- function(dbname = "gbif4crest_02", port = 5432, host = "gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com", user = "guestuser", password = "pwd12345") {
   db <- DBI::dbConnect(
-    drv = RPostgreSQL::PostgreSQL(),
+    drv = RPostgres::Postgres(),
     dbname = dbname,
     host = host,
     port = port,
