@@ -40,13 +40,22 @@ crest.calibrate <- function(x,
   x$parameters$geoWeighting <- geoWeighting
   x$parameters$climateSpaceWeighting <- climateSpaceWeighting
 
-  if (!unique(is.na(bin_width))) {
+  if (unique(is.na(bin_width)) | length(bin_width) != length(x$parameters$climate)) {
+    cat(paste0("[FAILED]\n  ERROR: 'bin_width' should be of the same size than 'climate', i.e. ",length(x$parameters$climate)," elements.\n"))
+    return(x)
+  } else if (!unique(is.na(bin_width))) {
     bin_width <- as.data.frame(bin_width)
     rownames(bin_width) <- x$parameters$climate
   }
   x$parameters$bin_width <- bin_width
 
-  if (!unique(is.na(shape))) {
+  if (unique(is.na(shape)) | length(shape) != length(x$parameters$climate)) {
+    cat(paste0("[FAILED]\n  ERROR: 'shape' should be of the same size than 'climate', i.e. ",length(x$parameters$climate)," elements.\n"))
+    return(x)
+  } else if (FALSE %in% (shape %in% c('normal', 'lognormal'))) {
+    cat(paste0("[FAILED]\n  ERROR: 'shape' should be either 'normal' or 'lognormal'.\n"))
+    return(x)
+  } else if (!unique(is.na(shape))) {
     shape <- as.data.frame(shape)
     rownames(shape) <- x$parameters$climate
   }
