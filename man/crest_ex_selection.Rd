@@ -15,7 +15,7 @@ A data frame with 7 rows (taxa) and 2 columns (climate variables):
 crest_ex_selection
 }
 \description{
-A data frame indicating which taxa should be used to reconstruct each
-climate variable.
+A data frame indicating the taxa that should be used to reconstruct each
+climate variable (1s in the matrix) and those who should be excluded (0s).
 }
 \keyword{datasets}

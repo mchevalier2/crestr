@@ -8,7 +8,7 @@
 A data frame with 7 rows (taxa) and 5 columns (taxonomy description):
 \describe{
 \item{Level:}{An integr indicating the taxonomic resolution
-(1 family, 2 genus, 3 species, 4 ignore taxon)}
+(1 family, 2 genus, 3 species, 4 or higher ignore taxon)}
 \item{Family:}{The family corresponding to the ProxyName}
 \item{Genus:}{The genus corresponding to the ProxyName}
 \item{Species:}{The species corresponding to the ProxyName}

@@ -3,7 +3,7 @@
 \docType{data}
 \name{M1}
 \alias{M1}
-\title{A shapefile of the world's countries.}
+\title{A shapefile of the world's country borders.}
 \format{
 An object of class \code{SpatialPolygonsDataFrame} with 252 rows and 1 columns.
 }
@@ -11,6 +11,6 @@ An object of class \code{SpatialPolygonsDataFrame} with 252 rows and 1 columns.
 M1
 }
 \description{
-A shapefile of the world's countries.
+A shapefile of the world's country borders.
 }
 \keyword{datasets}

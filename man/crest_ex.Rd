@@ -5,7 +5,8 @@
 \alias{crest_ex}
 \title{Example dataset to run the CREST method for the first time.}
 \format{
-A data frame with 20 rows (samples) and 7 columns (taxa):
+A data frame with 20 rows (samples) and 8 columns (1 column for the
+age and one for each of the 7 taxa):
 \describe{
 \item{Age:}{Age of each sample}
 \item{Taxon1:}{Percentage of Taxon1 in each sample.}
