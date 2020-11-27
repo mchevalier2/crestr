@@ -3,7 +3,7 @@
 #' This function plots stratigraphic data either as polygons or bars.
 #'
 #' @inheritParams plot_diagram
-#' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the 
+#' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
 #'        mean (FALSE) estimates.
 #' @param loc An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
@@ -85,6 +85,8 @@ plot_loo <- function( x, optima=TRUE,
       } else {
         title2 <- title[clim]
       }
+
+      if (yax_incr2 == 0) yax_incr2 <- 1
 
       plot_diagram(df, bars=TRUE,
                    save=save, loc=paste(loc,clim,'pdf',sep='.'),

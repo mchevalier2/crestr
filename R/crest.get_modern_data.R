@@ -291,19 +291,19 @@ crest.get_modern_data <- function(pse, taxaType, climate,
         #cat(paste0("WARNING: Insufficient data points to calibrate a pdf for ", tax, "\n"))
         #print(extent_taxa)
         distributions[[tax]] <- NA
-        crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "Not enough data points")
+        crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No data point available")
       }else{
         extent_taxa <- table(distributions[[tax]][, 1])
         extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
         distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa_id, ]
         if(nrow(distributions[[tax]]) == 0) {
           distributions[[tax]] <- NA
-          crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "Not enough data to fit a pdf")
+          crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "Present but insufficient data to fit a pdf")
         }
       }
     } else {
       distributions[[tax]] <- NA
-      crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), "No data available")
+      crest$inputs$selectedTaxa[tax, ] <- c(rep(0, length(climate)), paste(crest$inputs$selectedTaxa[tax, ncol(crest$inputs$selectedTaxa)], "Taxon not selected for any variable", sep='\n'))
     }
     pbi <- pbi + 100
   }

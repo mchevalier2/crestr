@@ -116,7 +116,7 @@ crest.calibrate <- function(x,
               1
             )
           }
-          pdfs[[tax]][[clim]][["pdfsp"]] <- tmp[, -1]
+          pdfs[[tax]][[clim]][["pdfsp"]] <- as.data.frame(tmp[, -1])
           pdfs[[tax]][[clim]][["pdfpol"]] <- pdfpol / ifelse(x$parameters$geoWeighting,
             nrow(x$modelling$distributions[[tax]]),
             length(unique(x$modelling$distributions[[tax]][, "taxonid"]))

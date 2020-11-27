@@ -25,7 +25,7 @@ eqearth_get_ext <- function(ext, npoints=15) {
   bckg.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
 
   ext <- raster::extent(bckg.eqearth)
-  ext[1:2] <- ext[1:2] + c(-0.15, 0.02)*diff(ext[1:2])
+  ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])
   ext[3:4] <- ext[3:4] + c(-0.1, 0.02)*diff(ext[3:4])
   ext
 }
@@ -47,9 +47,11 @@ eqearth_get_ext <- function(ext, npoints=15) {
 #' @param nlines The number of coordinate lines to add in the background
 #'        '(default is 9)
 #' @param title A description title (default is empty)
+#' @param colour_scale A boolean to add the colour scale to the plot (default TRUE).
+#' @param top_layer A raster to overlay on top of the map (e.g. a distribution).
 #' @export
 #'
-plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos, brks.lab=brks.pos, npoints=15, nlines=9, title='') {
+plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos, brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA) {
 
   utils::data(M1, package='crestr', envir = environment())
   M1 <- raster::crop(M1, ext)
@@ -61,6 +63,8 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
 
   M2 <- sp::spTransform(M1, PROJ)
   dat <- raster::projectRaster(from=dat, crs=PROJ)
+
+  if ('Raster' %in% methods::is(top_layer)) top_layer <- raster::projectRaster(from=top_layer, crs=PROJ)
 
   ll=list()
   idx=1
@@ -93,47 +97,48 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
   bckg.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
 
   ext <- raster::extent(bckg.eqearth)
-  ext[1:2] <- ext[1:2] + c(-0.15, 0.02)*diff(ext[1:2])
+  ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])
   ext[3:4] <- ext[3:4] + c(-0.1, 0.02)*diff(ext[3:4])
 
 
   ## ...........................................................................
   ## Plotting colour scale .....................................................
 
-  graphics::par(mar=c(0,0,0,0))
-  xlab <- c(-0.2,1.2)
-  xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
-  plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlab, ylim=c(-0.05,1), xaxs='i', yaxs='i')
+  if(colour_scale) {
+    graphics::par(mar=c(0,0,0,0))
+    xlab <- c(-0.2,1.2)
+    xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
+    plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlab, ylim=c(-0.05,1), xaxs='i', yaxs='i')
 
-  brks2 <- (brks.pos - brks.pos[1]) / diff(range(brks.pos))
-  #for(i in 1:(length(brks2)-1)) {
-  #  graphics::rect(brks2[i], 0, brks2[i+1], 0.3, border=NA, col=viridis::viridis(length(brks.pos)-1)[i])
-  #}
-  for(i in 1:20) {
-    graphics::rect((i-1)/20, 0, i/20, 0.3, lwd=0.3, border=viridis::viridis(20)[i], col=viridis::viridis(20)[i])
-  }
-
-  cont <- TRUE
-  res <- 1
-  while(cont) {
-    brks2.pos <- brks.pos[c(TRUE, rep(FALSE, res-1))]
-    brks2.lab <- brks.lab[c(TRUE, rep(FALSE, res-1))]
-    sizes <- graphics::strwidth(paste(' ',brks2.lab,' ', sep=''), cex=0.5)
-    x1 = (brks2.pos - brks.pos[1]) / diff(range(brks.pos)) + sizes/2 ; x1 = x1[1:(length(x1)-1)]
-    x2 = (brks2.pos - brks.pos[1]) / diff(range(brks.pos)) - sizes/2 ; x2 = x2[2:length(x2)]
-    if(min(x2-x1) <= 0) {
-      res <- res + 1
-    } else {
-      cont <- FALSE
+    brks2 <- (brks.pos - brks.pos[1]) / diff(range(brks.pos))
+    #for(i in 1:(length(brks2)-1)) {
+    #  graphics::rect(brks2[i], 0, brks2[i+1], 0.3, border=NA, col=viridis::viridis(length(brks.pos)-1)[i])
+    #}
+    for(i in 1:20) {
+      graphics::rect((i-1)/20, 0, i/20, 0.3, lwd=0.3, border=viridis::viridis(20)[i], col=viridis::viridis(20)[i])
     }
-  }
 
-  for(i in 1:length(brks2.pos)) {
-    graphics::text((brks2.pos[i] - brks2.pos[1])/diff(range(brks.pos)), 0.35, brks2.lab[i] , cex=0.5, adj=c(0.5,0))
-  }
-  graphics::rect(0,0,1,0.3, lwd=0.5)
-  graphics::text(0.5, 0.85, title, font=1, cex=0.8, adj=c(0.5,1))
+    cont <- TRUE
+    res <- 1
+    while(cont) {
+      brks2.pos <- brks.pos[c(TRUE, rep(FALSE, res-1))]
+      brks2.lab <- brks.lab[c(TRUE, rep(FALSE, res-1))]
+      sizes <- graphics::strwidth(paste(' ',brks2.lab,' ', sep=''), cex=0.5)
+      x1 = (brks2.pos - brks.pos[1]) / diff(range(brks.pos)) + sizes/2 ; x1 = x1[1:(length(x1)-1)]
+      x2 = (brks2.pos - brks.pos[1]) / diff(range(brks.pos)) - sizes/2 ; x2 = x2[2:length(x2)]
+      if(min(x2-x1) <= 0) {
+        res <- res + 1
+      } else {
+        cont <- FALSE
+      }
+    }
 
+    for(i in 1:length(brks2.pos)) {
+      graphics::text((brks2.pos[i] - brks2.pos[1])/diff(range(brks.pos)), 0.35, brks2.lab[i] , cex=0.5, adj=c(0.5,0))
+    }
+    graphics::rect(0,0,1,0.3, lwd=0.5)
+    graphics::text(0.5, 0.85, title, font=1, cex=0.8, adj=c(0.5,1))
+  }
 
   ## ...........................................................................
   ## Plotting map ..............................................................
@@ -151,6 +156,10 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     sp::plot(M2, col='black', border=NA, add=TRUE)
     raster::image(dat, colNa='black', add=TRUE, interpolate=FALSE, zlim=zlim, col=col)
     sp::plot(M2, border='black', lwd=0.5, add=TRUE)
+
+    if ('Raster' %in% methods::is(top_layer)) {
+      raster::image(top_layer, add=TRUE, col='ghostwhite')
+    }
 
     for(v in 1:length(verticals.eqearth.x)) graphics::text(verticals.eqearth.x[v],
                                                            min(horizontals.eqearth.xy[,2]),

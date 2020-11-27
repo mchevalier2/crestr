@@ -12,7 +12,6 @@
   xlim = NA,
   ylim = NA,
   save = FALSE,
-  plot = TRUE,
   loc = getwd(),
   ...
 )

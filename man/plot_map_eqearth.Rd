@@ -13,7 +13,9 @@ plot_map_eqearth(
   brks.lab = brks.pos,
   npoints = 15,
   nlines = 9,
-  title = ""
+  title = "",
+  colour_scale = TRUE,
+  top_layer = NA
 )
 }
 \arguments{
@@ -37,6 +39,10 @@ each dimension. (default is 15 for a smooth result)}
 '(default is 9)}
 
 \item{title}{A description title (default is empty)}
+
+\item{colour_scale}{A boolean to add the colour scale to the plot (default TRUE).}
+
+\item{top_layer}{A raster to overlay on top of the map (e.g. a distribution).}
 }
 \description{
 Plots raster data in equal earth projection.
