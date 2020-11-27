@@ -72,6 +72,7 @@ Here, with the 7 fake taxa, it looks like:
 ```{r data_preview_pse}
 crest_ex_pse
 ```
+
 Finally, one can specify which taxa should be used to reconstruct each variable:
 ```{r data_preview_selection}
 crest_ex_selection
@@ -93,6 +94,12 @@ recons <- crest(
 The climate sampled by the data can be assessed graphically using the figure
 ```{r plot-climate-space}
 plot_climateSpace(recons)
+```
+
+Graphical tools aldo exist to assess which taxa should/could be used for each variable
+
+```{r plot-plot_taxaCharacteristics}
+plot_taxaCharacteristics(recons, taxanames='Taxon1')
 
 ```
 
@@ -116,7 +123,7 @@ str(recons$reconstructions$bio1$posterior)
 ```
 
 ```{r plot}
-plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
+plot(recons, climate = 'bio1')
 plot(recons, climate = 'bio12')
 ```
 

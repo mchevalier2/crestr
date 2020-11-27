@@ -31,7 +31,7 @@ devtools::install_github("mchevalier2/crestr")
 > specific functions implemented, feel free to contact me at
 > <chevalier.manuel@gmail.com>. I will try to limit as much as possible
 > modifying existing functions and/or function parameters, but at the
-> moment it cannot be excluded. My apologies for this.
+> moment it cannot be excluded. <!-- slide -->My apologies for this.
 
 ## Example
 
@@ -125,11 +125,18 @@ figure
 
 ``` r
 plot_climateSpace(recons)
-#> Warning in if (is.na(x$modelling$pdfs[[1]])) {: the condition has length > 1 and
-#> only the first element will be used
 ```
 
 <img src="man/figures/README-plot-climate-space-1.png" width="100%" />
+
+Graphical tools aldo exist to assess which taxa should/could be used for
+each variable
+
+``` r
+plot_taxaCharacteristics(recons, taxanames='Taxon1')
+```
+
+<img src="man/figures/README-plot-plot_taxaCharacteristics-1.png" width="100%" />
 
 Finally, the results can be visualised using the plot function and the
 reconstructed climate values can be accessed from the nested `recons`
@@ -141,8 +148,8 @@ names(recons)
 #> [5] "misc"
 lapply(recons$reconstructions, names)
 #> $bio1
-#> [1] "posterior"     "uncertainties" "optima"       
-#> 
+#> [1] "posterior"     "uncertainties" "optima"
+#>
 #> $bio12
 #> [1] "posterior"     "uncertainties" "optima"
 ```
@@ -177,7 +184,7 @@ str(recons$reconstructions$bio1$posterior)
 ```
 
 ``` r
-plot(recons, climate = 'bio1', plot = TRUE , save = FALSE)
+plot(recons, climate = 'bio1')
 ```
 
 <img src="man/figures/README-plot-1.png" width="100%" />
