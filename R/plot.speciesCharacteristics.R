@@ -77,6 +77,7 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
       grDevices::pdf(loc, width=width, height=height)
     } else {
       par_usr <- graphics::par(no.readonly = TRUE)
+      graphics::par(ask = TRUE)
     }
 
     for(tax in taxanames) {
@@ -299,6 +300,7 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
             for(i in 1:ncol(x$modelling$pdfs[[tax]][[clim]]$pdfsp)) {
               graphics::points(x$modelling$xrange[[clim]], x$modelling$pdfs[[tax]][[clim]]$pdfsp[, i], col='grey70', type='l')
             }
+            graphics::text(max(x$modelling$xrange[[clim]]), 0.98*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp), paste(ncol(x$modelling$pdfs[[tax]][[clim]]$pdfsp), 'species     '), adj=c(1,1), cex=0.8)
             graphics::polygon(x$modelling$xrange[[clim]][c(1,1:npoints, npoints)], c(0, x$modelling$pdfs[[tax]][[clim]]$pdfpol, 0), col='black')
             graphics::rect(x$modelling$xrange[[clim]][1],0,x$modelling$xrange[[clim]][npoints], 1.02*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp))
 
