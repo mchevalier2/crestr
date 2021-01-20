@@ -36,84 +36,84 @@ plot_loo <- function( x, optima=TRUE,
                       xlim=NA, tickAtSample=FALSE,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
 
-  if (methods::is(x)[1] == 'crestObj') {
+    if (methods::is(x)[1] == 'crestObj') {
 
-    if(! 'loo' %in% names(x$reconstructions[[x$parameters$climate[1]]])) {
-      cat('ERROR: No leave-one-out data available. Please run the loo() function first.\n')
-      return(invisible())
-    }
-
-    par_usr <- list()
-
-    var_to_plot <- ifelse(optima, 1, 2)
-
-    if (length(col_pos) != length(x$parameters$climate)) col_pos = base::rep_len(col_pos,length(x$parameters$climate))
-    if (length(col_neg) != length(x$parameters$climate)) col_neg = base::rep_len(col_neg,length(x$parameters$climate))
-    if (length(yax_incr) != length(x$parameters$climate)) yax_incr = base::rep_len(yax_incr,length(x$parameters$climate))
-    if ((!is.na(unique(title)[1])) & (length(title) != length(x$parameters$climate))) title = base::rep_len(title,length(x$parameters$climate))
-
-    names(col_pos) = names(col_neg) = names(yax_incr) = x$parameters$climate
-    if(!is.na(title[1])) names(title) = x$parameters$climate
-
-    if(!save) {
-      par_usr <- graphics::par(no.readonly = TRUE)
-      graphics::par(mfrow=c(1,2))
-    }
-
-    for( clim in x$parameters$climate) {
-      df <- list()
-      if(is.numeric(x$inputs$x)) {
-        df[[x$inputs$x.name]] <- x$inputs$x
-      } else {
-        cat('WARNING: The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
-        df[[x$inputs$x.name]] <- 1:length(x$inputs$x)
+      if(! 'loo' %in% names(x$reconstructions[[x$parameters$climate[1]]])) {
+          cat('ERROR: No leave-one-out data available. Please run the loo() function first.\n')
+          return(invisible())
       }
-      loo_na <- rep(0, length(x$inputs$x))
-      for( tax in names(x$reconstructions[[clim]]$loo)) {
-        if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {
-          df[[tax]] <- loo_na
-        } else {
-          df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]][, var_to_plot]
+
+      par_usr <- list()
+
+      var_to_plot <- ifelse(optima, 1, 2)
+
+      if (length(col_pos) != length(x$parameters$climate)) col_pos = base::rep_len(col_pos,length(x$parameters$climate))
+      if (length(col_neg) != length(x$parameters$climate)) col_neg = base::rep_len(col_neg,length(x$parameters$climate))
+      if (length(yax_incr) != length(x$parameters$climate)) yax_incr = base::rep_len(yax_incr,length(x$parameters$climate))
+      if ((!is.na(unique(title)[1])) & (length(title) != length(x$parameters$climate))) title = base::rep_len(title,length(x$parameters$climate))
+
+      names(col_pos) = names(col_neg) = names(yax_incr) = x$parameters$climate
+      if(!is.na(title[1])) names(title) = x$parameters$climate
+
+      if(!save) {
+          par_usr <- graphics::par(no.readonly = TRUE)
+          graphics::par(mfrow=c(1,2))
+      }
+
+      for( clim in x$parameters$climate) {
+          df <- list()
+          if(is.numeric(x$inputs$x)) {
+              df[[x$inputs$x.name]] <- x$inputs$x
+          } else {
+              cat('WARNING: The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+              df[[x$inputs$x.name]] <- 1:length(x$inputs$x)
+          }
+          loo_na <- rep(0, length(x$inputs$x))
+          for( tax in names(x$reconstructions[[clim]]$loo)) {
+              if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {
+                  df[[tax]] <- loo_na
+              } else {
+                  df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]][, var_to_plot]
+              }
+          }
+          df <- do.call(cbind, df)
+
+          xlim <- range(df[, 1])
+          bar_width2 <- bar_width
+          yax_incr2 <- yax_incr[clim]
+          if(is.na(unique(yax_incr)[1])) yax_incr2 <- round(max(abs(df[, -1])))/10
+          if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(df))
+          if(is.na(unique(title)[1])) {
+              title2 <- accClimateVariables(clim)[3]
+          } else {
+              title2 <- title[clim]
+          }
+
+          if (yax_incr2 == 0) yax_incr2 <- 1
+
+          plot_diagram(df, bars=TRUE,
+                       save=save, loc=paste(loc,clim,'pdf',sep='.'),
+                       width=width, height=height,
+                       yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
+                       tickAtSample=tickAtSample,
+                       col_pos=col_pos[clim], col_neg=col_neg[clim],
+                       title=title2)
         }
-      }
-      df <- do.call(cbind, df)
-
-      xlim <- range(df[, 1])
+    } else {
+      xlim <- range(x[, 1])
       bar_width2 <- bar_width
-      yax_incr2 <- yax_incr[clim]
-      if(is.na(unique(yax_incr)[1])) yax_incr2 <- round(max(abs(df[, -1])))/10
-      if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(df))
-      if(is.na(unique(title)[1])) {
-        title2 <- accClimateVariables(clim)[3]
-      } else {
-        title2 <- title[clim]
-      }
+      yax_incr2 <- yax_incr
+      if(is.na(yax_incr)) yax_incr2 <- round(max(abs(x[, -1]))/10)
+      if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(x))
 
-      if (yax_incr2 == 0) yax_incr2 <- 1
-
-      plot_diagram(df, bars=TRUE,
-                   save=save, loc=paste(loc,clim,'pdf',sep='.'),
+      plot_diagram(x, bars=TRUE,
+                   save=save, loc=paste(loc,clim,'.pdf',sep=''),
                    width=width, height=height,
                    yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
-                   tickAtSample=tickAtSample,
-                   col_pos=col_pos[clim], col_neg=col_neg[clim],
-                   title=title2)
+                   tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,
+                   title=title)
+
     }
-  } else {
-    xlim <- range(x[, 1])
-    bar_width2 <- bar_width
-    yax_incr2 <- yax_incr
-    if(is.na(yax_incr)) yax_incr2 <- round(max(abs(x[, -1]))/10)
-    if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(x))
-
-    plot_diagram(x, bars=TRUE,
-                 save=save, loc=paste(loc,clim,'.pdf',sep=''),
-                 width=width, height=height,
-                 yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
-                 tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,
-                 title=title)
-
-  }
-  if(!save)  graphics::par(par_usr)
-  invisible()
+    if(!save)  graphics::par(par_usr)
+    invisible()
 }

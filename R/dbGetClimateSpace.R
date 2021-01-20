@@ -30,53 +30,53 @@ getClimateSpace <- function(climate,
                             realms = NA, biomes = NA, ecoregions = NA,
                             dbname = "gbif4crest_02") {
 
-  # Formatting subsets of the request------------------------------------------
-  # Formatting the geographical subsetting
-  if (is.na(continents)[1] & is.na(countries)[1]) {
-    GEO <- ""
-  } else {
-    GEO <- paste0(
-      "AND (longitude, latitude) IN ",
-      "  (SELECT distinct longitude, latitude ",
-      "     FROM geo_qdgc ",
-      "    WHERE ",
-      ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
-      ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
-      ifelse(is.na(countries)[1], "", paste0("countryname IN ('", paste(countries, collapse = "', '"), "') ")),
-      "   ) "
+    # Formatting subsets of the request------------------------------------------
+    # Formatting the geographical subsetting
+    if (is.na(continents)[1] & is.na(countries)[1]) {
+        GEO <- ""
+    } else {
+        GEO <- paste0(
+          "AND (longitude, latitude) IN ",
+          "  (SELECT distinct longitude, latitude ",
+          "     FROM geo_qdgc ",
+          "    WHERE ",
+          ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
+          ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
+          ifelse(is.na(countries)[1], "", paste0("countryname IN ('", paste(countries, collapse = "', '"), "') ")),
+          "   ) "
+        )
+    }
+
+    # Formatting the botanical subsetting
+    if (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) {
+        WWF <- ""
+    } else {
+        WWF <- paste0(
+          "AND (longitude, latitude) IN ",
+          "  (SELECT distinct longitude, latitude ",
+          "     FROM wwf_qdgc ",
+          "    WHERE ",
+          ifelse(is.na(realms)[1], "", paste0("realm IN ('", paste(realms, collapse = "', '"), "') ")),
+          ifelse(is.na(realms)[1] | is.na(biomes)[1], "", "AND "),
+          ifelse(is.na(biomes)[1], "", paste0("biome IN ('", paste(biomes, collapse = "', '"), "') ")),
+          ifelse(is.na(biomes)[1] | is.na(ecoregions)[1], "", "AND "),
+          ifelse(is.na(ecoregions)[1], "", paste0("ecoregion IN ('", paste(ecoregions, collapse = "', '"), "') ")),
+          "   ) "
+        )
+    }
+
+    # Formatting the request-----------------------------------------------------
+    req <- paste0(
+      "  SELECT DISTINCT longitude, latitude, ",
+      "        ", paste(climate, collapse = ", "), " ",
+      "   FROM  wc_qdgc ",
+      "   WHERE longitude >= ", xmn, " AND longitude <= ", xmx, " ",
+      "     AND latitude >= ", ymn, " AND latitude <= ", ymx, " ",
+      "     ", GEO, " ",
+      "     ", WWF, " ",
+      "ORDER BY longitude, latitude"
     )
-  }
 
-  # Formatting the botanical subsetting
-  if (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) {
-    WWF <- ""
-  } else {
-    WWF <- paste0(
-      "AND (longitude, latitude) IN ",
-      "  (SELECT distinct longitude, latitude ",
-      "     FROM wwf_qdgc ",
-      "    WHERE ",
-      ifelse(is.na(realms)[1], "", paste0("realm IN ('", paste(realms, collapse = "', '"), "') ")),
-      ifelse(is.na(realms)[1] | is.na(biomes)[1], "", "AND "),
-      ifelse(is.na(biomes)[1], "", paste0("biome IN ('", paste(biomes, collapse = "', '"), "') ")),
-      ifelse(is.na(biomes)[1] | is.na(ecoregions)[1], "", "AND "),
-      ifelse(is.na(ecoregions)[1], "", paste0("ecoregion IN ('", paste(ecoregions, collapse = "', '"), "') ")),
-      "   ) "
-    )
-  }
-
-  # Formatting the request-----------------------------------------------------
-  req <- paste0(
-    "  SELECT DISTINCT longitude, latitude, ",
-    "        ", paste(climate, collapse = ", "), " ",
-    "   FROM  wc_qdgc ",
-    "   WHERE longitude >= ", xmn, " AND longitude <= ", xmx, " ",
-    "     AND latitude >= ", ymn, " AND latitude <= ", ymx, " ",
-    "     ", GEO, " ",
-    "     ", WWF, " ",
-    "ORDER BY longitude, latitude"
-  )
-
-  # Executing the request------------------------------------------------------
-  dbRequest(req, dbname)
+    # Executing the request------------------------------------------------------
+    dbRequest(req, dbname)
 }

@@ -12,40 +12,40 @@
 #' accClimateVariables()
 #' accClimateVariables(v='bio12')
 accClimateVariables <- function(v=NA) {
-  res <- data.frame(
-    1:20,
-    c(paste("bio", 1:19, sep = ""), "ai"),
-    c(
-      "Mean Annual Temperature (\u00b0C)",
-      "Mean Diurnal Range (\u00b0C)",
-      "Isothermality (x100)",
-      "Temperature Seasonality (standard deviation x100) (\u00b0C)",
-      "Max Temperature of Warmest Month (\u00b0C)",
-      "Min Temperature of Coldest Month (\u00b0C)",
-      "Temperature Annual Range (\u00b0C)",
-      "Mean Temperature of Wettest Quarter (\u00b0C)",
-      "Mean Temperature of Driest Quarter (\u00b0C)",
-      "Mean Temperature of Warmest Quarter (\u00b0C)",
-      "Mean Temperature of Coldest Quarter (\u00b0C)",
-      "Annual Precipitation (mm)",
-      "Precipitation of Wettest Month (mm)",
-      "Precipitation of Driest Month (mm)",
-      "Precipitation Seasonality (Coefficient of Variation) (mm)",
-      "Precipitation of Wettest Quarter (mm)",
-      "Precipitation of Driest Quarter (mm)",
-      "Precipitation of Warmest Quarter (mm)",
-      "Precipitation of Coldest Quarter (mm)",
-      "Aridity Index"
+    res <- data.frame(
+      1:20,
+      c(paste("bio", 1:19, sep = ""), "ai"),
+      c(
+        "Mean Annual Temperature (\u00b0C)",
+        "Mean Diurnal Range (\u00b0C)",
+        "Isothermality (x100)",
+        "Temperature Seasonality (standard deviation x100) (\u00b0C)",
+        "Max Temperature of Warmest Month (\u00b0C)",
+        "Min Temperature of Coldest Month (\u00b0C)",
+        "Temperature Annual Range (\u00b0C)",
+        "Mean Temperature of Wettest Quarter (\u00b0C)",
+        "Mean Temperature of Driest Quarter (\u00b0C)",
+        "Mean Temperature of Warmest Quarter (\u00b0C)",
+        "Mean Temperature of Coldest Quarter (\u00b0C)",
+        "Annual Precipitation (mm)",
+        "Precipitation of Wettest Month (mm)",
+        "Precipitation of Driest Month (mm)",
+        "Precipitation Seasonality (Coefficient of Variation) (mm)",
+        "Precipitation of Wettest Quarter (mm)",
+        "Precipitation of Driest Quarter (mm)",
+        "Precipitation of Warmest Quarter (mm)",
+        "Precipitation of Coldest Quarter (mm)",
+        "Aridity Index"
+      )
     )
-  )
-  colnames(res) <- c("Variable ID", "Variable name", "Description")
-  if(!is.na(v[1])) {
-    if(v[1] %in% res[,2]) {
-      w=which(res[,2] == v[1])
-      return(c(res[w,1], res[w,2], res[w,3]))
+    colnames(res) <- c("Variable ID", "Variable name", "Description")
+    if(!is.na(v[1])) {
+        if(v[1] %in% res[,2]) {
+            w=which(res[,2] == v[1])
+            return(c(res[w,1], res[w,2], res[w,3]))
+        }
     }
-  }
-  res
+    res
 }
 
 
@@ -60,20 +60,20 @@ accClimateVariables <- function(v=NA) {
 #' @examples
 #' accContinentNames()
 accContinentNames <- function(dbname = "gbif4crest_02") {
-  res <- list()
-  req <- "SELECT DISTINCT continent FROM geo_qdgc WHERE continent IS NOT NULL ORDER BY continent"
-  continents <- dbRequest(req, dbname)[, 1]
-  for (i in continents) {
-    req <- paste0(
-      "  SELECT DISTINCT countryname ",
-      "    FROM geo_qdgc ",
-      "   WHERE continent='", i, "' ",
-      "ORDER BY countryname"
-    )
-    res[[i]] <- dbRequest(req, dbname)[, 1]
-  }
-  names(res) <- continents
-  res
+    res <- list()
+    req <- "SELECT DISTINCT continent FROM geo_qdgc WHERE continent IS NOT NULL ORDER BY continent"
+    continents <- dbRequest(req, dbname)[, 1]
+    for (i in continents) {
+        req <- paste0(
+          "  SELECT DISTINCT countryname ",
+          "    FROM geo_qdgc ",
+          "   WHERE continent='", i, "' ",
+          "ORDER BY countryname"
+        )
+        res[[i]] <- dbRequest(req, dbname)[, 1]
+    }
+    names(res) <- continents
+    res
 }
 
 
@@ -90,18 +90,18 @@ accContinentNames <- function(dbname = "gbif4crest_02") {
 #' @examples
 #' accRealmNames()
 accRealmNames <- function(ecoregion = TRUE, dbname = "gbif4crest_02") {
-  res <- list()
-  req <- "SELECT DISTINCT realm FROM wwf_qdgc WHERE realm IS NOT NULL ORDER BY realm"
-  realms <- dbRequest(req, dbname)[, 1]
-  for (i in realms) {
-    req <- paste0(
-      "  SELECT DISTINCT biome ", ifelse(ecoregion, ", ecoregion ", ""),
-      "    FROM wwf_QDGC ",
-      "   WHERE realm='", i, "' ",
-      "ORDER BY biome", ifelse(ecoregion, ", ecoregion ", "")
-    )
-    res[[i]] <- dbRequest(req, dbname)
-  }
-  names(res) <- realms
-  res
+    res <- list()
+    req <- "SELECT DISTINCT realm FROM wwf_qdgc WHERE realm IS NOT NULL ORDER BY realm"
+    realms <- dbRequest(req, dbname)[, 1]
+    for (i in realms) {
+        req <- paste0(
+          "  SELECT DISTINCT biome ", ifelse(ecoregion, ", ecoregion ", ""),
+          "    FROM wwf_QDGC ",
+          "   WHERE realm='", i, "' ",
+          "ORDER BY biome", ifelse(ecoregion, ", ecoregion ", "")
+        )
+        res[[i]] <- dbRequest(req, dbname)
+    }
+    names(res) <- realms
+    res
 }

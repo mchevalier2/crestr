@@ -13,14 +13,14 @@
 #' convert2percentages(df)
 #' convert2percentages(df, col2convert = 3:5)
 convert2percentages <- function(df, col2convert = 2:ncol(df)) {
-  df2 <- cbind(
-    df[, -col2convert],
-    100 * df[, col2convert] / apply(df[, col2convert], 1, sum)
-  )
-  colnames(df2) <- colnames(df)
-  rownames(df2) <- rownames(df)
-  df2[is.na(df2)] <- 0
-  df2
+    df2 <- cbind(
+      df[, -col2convert],
+      100 * df[, col2convert] / apply(df[, col2convert], 1, sum)
+    )
+    colnames(df2) <- colnames(df)
+    rownames(df2) <- rownames(df)
+    df2[is.na(df2)] <- 0
+    df2
 }
 
 
@@ -40,13 +40,13 @@ convert2percentages <- function(df, col2convert = 2:ncol(df)) {
 #' convert2presenceAbsence(df, threshold = 15)
 #' convert2presenceAbsence(df, col2convert = 3:5)
 convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
-  df2 <- cbind(
-    df[, -col2convert],
-    ifelse(df[, col2convert] >= threshold, 1, 0)
-  )
-  colnames(df2) <- colnames(df)
-  rownames(df2) <- rownames(df)
-  df2
+    df2 <- cbind(
+      df[, -col2convert],
+      ifelse(df[, col2convert] >= threshold, 1, 0)
+    )
+    colnames(df2) <- colnames(df)
+    rownames(df2) <- rownames(df)
+    df2
 }
 
 
@@ -66,14 +66,14 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df))
 #' convert2presenceAbsence(df, threshold = 15)
 #' convert2presenceAbsence(df, col2convert = 3:5)
 normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
-  df2 <- convert2percentages(df, col2convert)
-  colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
-  for (i in 1:nrow(df2)) {
-    df2[i, col2convert] <- df2[i, col2convert] / colweights
-  }
-  colnames(df2) <- colnames(df)
-  rownames(df2) <- rownames(df)
-  df2
+    df2 <- convert2percentages(df, col2convert)
+    colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
+    for (i in 1:nrow(df2)) {
+      df2[i, col2convert] <- df2[i, col2convert] / colweights
+    }
+    colnames(df2) <- colnames(df)
+    rownames(df2) <- rownames(df)
+    df2
 }
 
 
@@ -88,7 +88,7 @@ normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
 #' @examples
 #' meanPositiveValues(-10:10)
 meanPositiveValues <- function(x) {
-  base::mean(x[x > 0])
+    base::mean(x[x > 0])
 }
 
 
@@ -120,33 +120,33 @@ meanPositiveValues <- function(x) {
 #' }
 #'
 copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FALSE, uncertainties=FALSE) {
-  if(! requireNamespace('clipr', quietly=TRUE)) {
-    cat('ERROR: copy_crest() requires the clipr package. You can install it using install.packages("clipr").\n')
-    return(invisible(NULL))
-  }
-  if(optima + mean + uncertainties == 0) {
-    cat('ERROR: optima, mean and uncertainties cannot all be set to FALSE.\n')
-    return(invisible(NULL))
-  }
-  tbl <- list()
-  tbl[[x$inputs$x.name]] <- x$inputs$x
-  for (clim in climate) {
-    if(optima) {
-      lbl <- paste(clim, 'optima', sep='_')
-      tbl[[lbl]] <- x$reconstructions[[clim]]$optima[, 2]
+    if(! requireNamespace('clipr', quietly=TRUE)) {
+        cat('ERROR: copy_crest() requires the clipr package. You can install it using install.packages("clipr").\n')
+        return(invisible(NULL))
     }
-    if(mean) {
-      lbl <- paste(clim, 'mean', sep='_')
-      tbl[[lbl]] <- x$reconstructions[[clim]]$optima[, 3]
+    if(optima + mean + uncertainties == 0) {
+        cat('ERROR: optima, mean and uncertainties cannot all be set to FALSE.\n')
+        return(invisible(NULL))
     }
-    if(uncertainties) {
-      for(k in 2:ncol(x$reconstructions[[clim]][['uncertainties']])) {
-        lbl <- paste(clim, colnames(x$reconstructions[[clim]][['uncertainties']])[k], sep='_')
-        tbl[[lbl]] <- x$reconstructions[[clim]][['uncertainties']][, k]
-      }
+    tbl <- list()
+    tbl[[x$inputs$x.name]] <- x$inputs$x
+    for (clim in climate) {
+        if(optima) {
+            lbl <- paste(clim, 'optima', sep='_')
+            tbl[[lbl]] <- x$reconstructions[[clim]]$optima[, 2]
+        }
+        if(mean) {
+            lbl <- paste(clim, 'mean', sep='_')
+            tbl[[lbl]] <- x$reconstructions[[clim]]$optima[, 3]
+        }
+        if(uncertainties) {
+            for(k in 2:ncol(x$reconstructions[[clim]][['uncertainties']])) {
+                lbl <- paste(clim, colnames(x$reconstructions[[clim]][['uncertainties']])[k], sep='_')
+                tbl[[lbl]] <- x$reconstructions[[clim]][['uncertainties']][, k]
+            }
+        }
     }
-  }
-  tbl <- as.data.frame(tbl)
-  clipr::write_clip(tbl)
-  invisible(x)
+    tbl <- as.data.frame(tbl)
+    clipr::write_clip(tbl)
+    invisible(x)
 }

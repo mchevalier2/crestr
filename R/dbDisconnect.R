@@ -13,5 +13,5 @@
 #' }
 #'
 close_db_connection <- function(db) {
-  DBI::dbDisconnect(db)
+    DBI::dbDisconnect(db)
 }

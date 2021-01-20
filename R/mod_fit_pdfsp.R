@@ -25,33 +25,33 @@
 #' # Testing that the area under the curve is equal to 1.
 #' sum(pdfsp * (xrange[2] - xrange[1])) == 1
 fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
-  climate <- climate[!is.na(climate)]
-  if (use_ccs) {
-    w <- (climate - ccs[["k1"]][1]) %/% bin_width
-    w2 <- base::tabulate(w + 1, nbins = base::length(ccs[["k1"]])) / ccs[["k2"]]
-    w <- w2[w + 1]
-    p1 <- base::sum(w * climate) / base::sum(w)
-    p2 <- base::sum(w * (climate - p1)**2) / base::sum(w)
-  } else {
-    p1 <- base::mean(climate)
-    p2 <- stats::var(climate)
-  }
-  if (shape == "normal") {
-    return(base::exp(-0.5 * (((xrange - p1) / base::sqrt(p2))**2))
-    /
-      base::sqrt(p2 * 2 * base::pi))
-  } else {
-    if (shape != "lognormal") {
-      print("Wrong shape selected for the species pdfs.")
-      print("Please use either 'normal' or 'lognormal'.")
-      return(NA)
+    climate <- climate[!is.na(climate)]
+    if (use_ccs) {
+        w <- (climate - ccs[["k1"]][1]) %/% bin_width
+        w2 <- base::tabulate(w + 1, nbins = base::length(ccs[["k1"]])) / ccs[["k2"]]
+        w <- w2[w + 1]
+        p1 <- base::sum(w * climate) / base::sum(w)
+        p2 <- base::sum(w * (climate - p1)**2) / base::sum(w)
+    } else {
+        p1 <- base::mean(climate)
+        p2 <- stats::var(climate)
     }
-    mu <- base::log(p1) - 0.5 * base::log(1 + p2 / (p1**2))
-    sigma2 <- base::log(1 + p2 / (p1**2))
-    return(base::exp(-((base::log(xrange) - mu)**2) / (2 * sigma2))
-    /
-      base::sqrt(2 * base::pi * sigma2 * xrange**2))
-  }
+    if (shape == "normal") {
+        return(base::exp(-0.5 * (((xrange - p1) / base::sqrt(p2))**2))
+        /
+          base::sqrt(p2 * 2 * base::pi))
+    } else {
+        if (shape != "lognormal") {
+            print("Wrong shape selected for the species pdfs.")
+            print("Please use either 'normal' or 'lognormal'.")
+            return(NA)
+        }
+        mu <- base::log(p1) - 0.5 * base::log(1 + p2 / (p1**2))
+        sigma2 <- base::log(1 + p2 / (p1**2))
+        return(base::exp(-((base::log(xrange) - mu)**2) / (2 * sigma2))
+        /
+          base::sqrt(2 * base::pi * sigma2 * xrange**2))
+    }
 }
 
 
@@ -65,13 +65,13 @@ fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
 #' @examples
 #' calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
 calib_clim_space <- function(climate, bin_width) {
-  m <- base::min(climate, na.rm = TRUE) %/% 1
-  nclass <- base::diff(base::range(climate, na.rm = TRUE)) %/% bin_width
-  clim_norm <- (climate - m) %/% bin_width
-  out <- list()
-  out[["k1"]] <- base::seq(m, base::max(climate, na.rm = TRUE) %/% 1 + 1, bin_width)
-  out[["k2"]] <- base::tabulate(clim_norm + 1, nbins = base::length(out[["k1"]]))
-  out
+    m <- base::min(climate, na.rm = TRUE) %/% 1
+    nclass <- base::diff(base::range(climate, na.rm = TRUE)) %/% bin_width
+    clim_norm <- (climate - m) %/% bin_width
+    out <- list()
+    out[["k1"]] <- base::seq(m, base::max(climate, na.rm = TRUE) %/% 1 + 1, bin_width)
+    out[["k2"]] <- base::tabulate(clim_norm + 1, nbins = base::length(out[["k1"]]))
+    out
 }
 
 
@@ -91,14 +91,14 @@ calib_clim_space <- function(climate, bin_width) {
 #' xrange <- fit_xrange(ccs, "normal", 2)
 #' head(xrange)
 fit_xrange <- function(ccs, shape, bin_width, npoints = 500) {
-  if (shape == "normal") {
-    return(base::seq(ccs[["k1"]][1] - 5 * bin_width,
-      ccs[["k1"]][base::length(ccs[["k1"]])] + 5 * bin_width,
-      length.out = npoints
+    if (shape == "normal") {
+        return(base::seq(ccs[["k1"]][1] - 5 * bin_width,
+          ccs[["k1"]][base::length(ccs[["k1"]])] + 5 * bin_width,
+          length.out = npoints
+        ))
+    }
+    return(base::seq(1e-12,
+        ccs[["k1"]][base::length(ccs[["k1"]])] + 5 * bin_width,
+        length.out = npoints
     ))
-  }
-  return(base::seq(1e-12,
-    ccs[["k1"]][base::length(ccs[["k1"]])] + 5 * bin_width,
-    length.out = npoints
-  ))
 }

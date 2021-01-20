@@ -40,300 +40,300 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
                                       height= min(9, 3*length(x$parameters$climate)), h0 = 0.3
                                       ) {
 
-  if (methods::is(x)[1] == 'crestObj') {
-    if (length(x$reconstructions) == 0 ) {
-      cat('ERROR: The crestObj requires the fossil data. Please run crest.reconstruct() on your data.\n')
-      return(invisible())
-    }
+    if (methods::is(x)[1] == 'crestObj') {
+        if (length(x$reconstructions) == 0 ) {
+          cat('ERROR: The crestObj requires the fossil data. Please run crest.reconstruct() on your data.\n')
+          return(invisible())
+        }
 
-    taxanames <- taxanames[taxanames %in% x$inputs$taxa.name]
+        taxanames <- taxanames[taxanames %in% x$inputs$taxa.name]
 
-    par_usr <- list()
+        par_usr <- list()
 
-    climate <- x$parameters$climate
+        climate <- x$parameters$climate
 
-    ext <- c(x$parameters$xmn, x$parameters$xmx, x$parameters$ymn, x$parameters$ymx)
-    ext_eqearth <- eqearth_get_ext(ext)
-    xy_ratio <- diff(ext_eqearth[1:2]) / diff(ext_eqearth[3:4])
+        ext <- c(x$parameters$xmn, x$parameters$xmx, x$parameters$ymn, x$parameters$ymx)
+        ext_eqearth <- eqearth_get_ext(ext)
+        xy_ratio <- diff(ext_eqearth[1:2]) / diff(ext_eqearth[3:4])
 
-    x0 <- width - w0
-    x3 <- x0 / 3
-    y2 <- min(x3 / xy_ratio, height / 3)
-    y1 <- height - length(climate) * y2
-    x1 <- max(y1 * xy_ratio, 1.5 * x3 )
-    x1 <- min(x1, 2 * x3 - 0.1)
-    x2 <- x0 - x1
+        x0 <- width - w0
+        x3 <- x0 / 3
+        y2 <- min(x3 / xy_ratio, height / 3)
+        y1 <- height - length(climate) * y2
+        x1 <- max(y1 * xy_ratio, 1.5 * x3 )
+        x1 <- min(x1, 2 * x3 - 0.1)
+        x2 <- x0 - x1
 
 
-    if(save) {
-      y1.tmp <- x1 / xy_ratio
-      opt_height <- round(length(climate) * y2 + y1.tmp, 3)
-      if ((opt_height / height) >= 1.05 | (opt_height / height) <= 0.95) {
-        cat('SUGGEST: Using height =', opt_height, 'would get rid of all the white spaces.\n')
-      }
-    }
+        if(save) {
+            y1.tmp <- x1 / xy_ratio
+            opt_height <- round(length(climate) * y2 + y1.tmp, 3)
+            if ((opt_height / height) >= 1.05 | (opt_height / height) <= 0.95) {
+                cat('SUGGEST: Using height =', opt_height, 'would get rid of all the white spaces.\n')
+            }
+        }
 
-    if(save) {
-      grDevices::pdf(loc, width=width, height=height)
+        if(save) {
+            grDevices::pdf(loc, width=width, height=height)
+        } else {
+            par_usr <- graphics::par(no.readonly = TRUE)
+            graphics::par(ask = TRUE)
+        }
+
+        for(tax in taxanames) {
+
+            ## If data are unavailable or if the taxon is unselected for all variables
+            if (sum(x$inputs$selectedTaxa[tax, x$parameters$climate]) == 0) {
+
+                ## Defining plotting matrix --------------------------------------------
+                m1 <- matrix(c(5,2,2,1,1,5,2,2,3,3,5,2,2,4,4), ncol=5, byrow=TRUE)
+                m2 <- matrix(rep(c(1,2,3,3,4,1,2,3,3,4) , length(climate)) + 5 + 4*rep(1:length(climate)-1, each=10), ncol=5, byrow=TRUE)
+
+                graphics::layout(rbind(m1, m2),
+                       width  = c(w0, x3, x1-x3, x2-x3, x3),
+                       height = c(h0, y1-2*h0, h0, rep(c(y2-h0, h0), times=length(climate))))
+
+                graphics::par(mar=c(0,0,0,0))
+                graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
+                graphics::text(0.5, 0.5, x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)], font=2, adj=c(0.5, 0.5), cex=1.3)
+
+                graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
+                graphics::segments(0,0,1,1, col='grey70', lty=3)
+                graphics::segments(0,1,1,0, col='grey70', lty=3)
+                graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
+
+                xval <- range(x$inputs$x)
+                dX <- diff(xval)
+                xval <- xval + c(-0.07, 0.02)*dX
+                graphics::par(mar=c(0,0,1,0.25))
+                opar <- graphics::par(lwd=0.5)
+                graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02 * max(x$inputs$df[, tax])), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
+                    for(yval in graphics::axTicks(2)){
+                        if (yval < max(x$inputs$df[, tax])) {
+                            graphics::segments(min(x$inputs$x)-dX*0.02, yval, max(x$inputs$x)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
+                            graphics::segments(min(x$inputs$x)-dX*0.02, yval, min(x$inputs$x), yval)
+                            graphics::segments(max(x$inputs$x)+dX*0.02, yval, max(x$inputs$x), yval)
+                            graphics::text(min(x$inputs$x)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
+                        }
+                    }
+                    graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
+                    graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
+                }
+
+                graphics::par(mar=c(0.5,0.25,0,0.5))
+                graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
+                graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
+                for(xval in graphics::axTicks(1)){
+                    if(xval >= min(x$inputs$x)) {
+                        graphics::segments(xval, 1, xval, 0.9)
+                        graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
+                    }
+                }
+
+                graphics::par(opar)
+
+                graphics::par(mar=c(0.1,0.1,0.1,0.1))
+                graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
+                graphics::text(0.5, 0.5, tax, font=2, adj=c(0.5, 0.5), srt=90, cex=1.3)
+
+                for(clim in x$parameters$climate) {
+                    graphics::par(mar=c(0,0,0,0))
+                    graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
+                    graphics::text(0.5, 0.5, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), srt=90, cex=0.8)
+
+                    graphics::par(mar=c(0.1,0.1,0.1,0.1))
+                    for(i in 1:3) {
+                        graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
+                        graphics::segments(0,0,1,1, col='grey70', lty=3)
+                        graphics::segments(0,1,1,0, col='grey70', lty=3)
+                        graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
+                    }
+                }
+            } else { ## If data are available for the taxon --------------------------
+
+                ## Defining plotting matrix --------------------------------------------
+                m1 <- matrix(c(5,2,2,1,1,5,2,2,3,3,5,2,2,4,4), ncol=5, byrow=TRUE)
+                m2 <- matrix(rep(c(1,2,3,3,5,1,2,4,4,6) , length(climate)) + 5 + 6*rep(1:length(climate)-1, each=10), ncol=5, byrow=TRUE)
+
+                graphics::layout(rbind(m1, m2),
+                       width  = c(w0, x3, x1-x3, x2-x3, x3),
+                       height = c(h0, y1-2*h0, h0, rep(c(y2-h0, h0), times=length(climate))))
+
+
+                veg_space      <- x$modelling$distributions[[tax]][, 2:3]
+                veg_space      <- plyr::count(veg_space)
+                veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
+                veg_space[, 3] <- base::log10(veg_space[, 3])
+                veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
+
+                ## Plot species abundance --------------------------------------------------
+                zlab=c(0, ceiling(max(raster::values(veg_space), na.rm=TRUE)))
+
+                xlab <- c(-0.2,1.2)
+                xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
+
+                clab=c()
+                i <- 0
+                while(i <= max(zlab)){
+                    clab <- c( clab, c(1,2,5)*10**i )
+                    i <- i+1
+                }
+                clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
+                zlab[2] <- log10(clab[length(clab)])
+
+                graphics::par(mar=c(0,0,0,0))
+                plot_map_eqearth(veg_space, ext, zlim = zlab,
+                                 brks.pos=log10(clab), brks.lab=clab,
+                                 col=viridis::viridis(20),
+                                 title='Number of unique species occurences per grid cell')
+
+
+                ## Plot the time series ------------------------------------------------
+                xval <- range(x$inputs$x)
+                dX <- diff(xval)
+                xval <- xval + c(-0.07, 0.02)*dX
+
+                graphics::par(mar=c(0,0,1,0.25))
+                opar <- graphics::par(lwd=0.5)
+                graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02 * max(x$inputs$df[, tax])), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
+                    for(yval in graphics::axTicks(2)){
+                        if (yval < max(x$inputs$df[, tax])) {
+                            graphics::segments(min(x$inputs$x)-dX*0.02, yval, max(x$inputs$x)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
+                            graphics::segments(min(x$inputs$x)-dX*0.02, yval, min(x$inputs$x), yval)
+                            graphics::segments(max(x$inputs$x)+dX*0.02, yval, max(x$inputs$x), yval)
+                            graphics::text(min(x$inputs$x)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
+                        }
+                    }
+                    graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
+                    graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
+                }
+
+                graphics::par(mar=c(0.5,0.25,0,0.5))
+                graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
+                graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
+                for(xval in graphics::axTicks(1)){
+                    if(xval >= min(x$inputs$x)) {
+                        graphics::segments(xval, 1, xval, 0.9)
+                        graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
+                    }
+                }
+
+                graphics::par(opar)
+
+
+                ## Plot the taxon name -------------------------------------------------
+                graphics::par(mar=c(0,0,0,0))
+                graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
+                graphics::text(0.5, 0.5, tax, font=2, adj=c(0.5, 0.5), srt=90, cex=1.3)
+
+
+                for(clim in x$parameters$climate) {
+
+                    ## Plot the variable name --------------------------------------------
+                    graphics::par(mar=c(0,0,0,0))
+                    graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
+                    graphics::text(0.5, 0.5, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), srt=90, cex=0.8)
+
+
+                    ## Plot the distribution over climate --------------------------------
+                    brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
+                    R1 <- raster::rasterFromXYZ(cbind(x$modelling$climate_space[, 1:2],
+                                                      x$modelling$climate_space[, clim] ),
+                                                crs = sp::CRS("+init=epsg:4326"))
+                    plot_map_eqearth(R1, ext,
+                                     zlim=range(brks), col=viridis::viridis(length(brks)-1),
+                                     brks.pos = brks, brks.lab = brks,
+                                     title=accClimateVariables(clim)[3],
+                                     colour_scale=FALSE, top_layer=veg_space)
+
+
+                    ## Plot the histogram ------------------------------------------------
+                    h1 <- graphics::hist(x$modelling$climate_space[, clim],
+                               breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
+                               plot=FALSE)
+                    h2 <- graphics::hist(unique(x$modelling$distributions[[tax]][, -1])[, clim],
+                               breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
+                               plot=FALSE)
+
+                    xval <- range(h1$breaks)
+                    xval <- xval + c(-1, 0)*diff(xval)*0.1
+
+                    graphics::par(mar=c(0,0,0.1,0.25))
+                    opar <- graphics::par(lwd=0.5)
+                    graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02*max(h1$counts)), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
+                        for(yval in graphics::axTicks(2)){
+                            graphics::segments(h1$breaks[1], yval, max(h1$breaks), yval, col=ifelse(yval==0, 'black', 'grey90'))
+                            graphics::segments(h1$breaks[1], yval, h1$breaks[1]+diff(xval)*0.012, yval)
+                            graphics::segments(max(h1$breaks), yval, max(h1$breaks)-diff(xval)*0.012, yval)
+                            graphics::text(h1$breaks[1]-diff(xval)*0.015, yval, yval, cex=0.5, adj=c(1,0.4))
+                        }
+                        graphics::rect(h1$breaks[1],0,max(h1$breaks), 1.02*max(h1$counts))
+                        graphics::plot(h1, add=TRUE, col=viridis::viridis(length(brks)-1))
+                        graphics::plot(h2, add=TRUE, col='black')
+                    }
+
+                    graphics::par(mar=c(0.5,0,0,0.25))
+                    graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
+                    graphics::text(mean(range(h1$breaks)), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=0.6)
+                    for(xval in graphics::axTicks(1)){
+                        if(xval >= h1$breaks[1]) {
+                            graphics::segments(xval, 1, xval, 0.9)
+                            graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
+                        }
+                    }
+
+                    graphics::par(mar=c(0,0.25,0.1,0.5))
+                    xval <- range(x$modelling$xrange[[clim]], na.rm=TRUE)
+                    xval <- xval + c(-1, 0)*diff(xval)*0.1
+
+
+                    ## Plot the pdfs -----------------------------------------------------
+                    if (x$inputs$selectedTaxa[tax, clim] > 0) {
+                        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp)), axes=FALSE, main='', xaxs='i', yaxs='i')
+                        npoints <- x$parameters$npoints
+                        for(yval in graphics::axTicks(2)){
+                            graphics::segments(x$modelling$xrange[[clim]][1], yval, x$modelling$xrange[[clim]][npoints], yval, col=ifelse(yval==0, 'black', 'grey90'))
+                            graphics::segments(x$modelling$xrange[[clim]][1], yval, x$modelling$xrange[[clim]][1]+diff(xval)*0.012, yval)
+                            graphics::segments(x$modelling$xrange[[clim]][npoints], yval, x$modelling$xrange[[clim]][npoints]-diff(xval)*0.012, yval)
+                            graphics::text(x$modelling$xrange[[clim]][1]-diff(xval)*0.015, yval, yval, cex=0.5, adj=c(1,0.4))
+                        }
+                        for(i in 1:ncol(x$modelling$pdfs[[tax]][[clim]]$pdfsp)) {
+                            graphics::points(x$modelling$xrange[[clim]], x$modelling$pdfs[[tax]][[clim]]$pdfsp[, i], col='grey70', type='l')
+                        }
+                        graphics::text(max(x$modelling$xrange[[clim]]), 0.98*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp), paste(ncol(x$modelling$pdfs[[tax]][[clim]]$pdfsp), 'species     '), adj=c(1,1), cex=0.8)
+                        graphics::polygon(x$modelling$xrange[[clim]][c(1,1:npoints, npoints)], c(0, x$modelling$pdfs[[tax]][[clim]]$pdfpol, 0), col='black')
+                        graphics::rect(x$modelling$xrange[[clim]][1],0,x$modelling$xrange[[clim]][npoints], 1.02*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp))
+
+                        graphics::par(mar=c(0.5,0.25,0,0.5))
+                        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
+                        graphics::text(mean(range(x$modelling$xrange[[clim]])), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=0.6)
+                        for(xval in graphics::axTicks(1)){
+                            if(xval >= ifelse(x$parameters$shape[clim,]=='normal',x$modelling$xrange[[clim]][1], 0)) {
+                                graphics::segments(xval, 1, xval, 0.9)
+                                graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
+                            }
+                        }
+                    } else {
+                        graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
+                        graphics::segments(0,0,1,1, col='grey70', lty=3)
+                        graphics::segments(0,1,1,0, col='grey70', lty=3)
+                        graphics::text(0.5, 0.5, 'Assumed\nnot\nsensitive', adj=c(0.5, 0.5), cex=1)
+
+                        graphics::par(mar=c(0.5,0.25,0,0.5))
+                        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
+                    }
+                    graphics::par(opar)
+                }
+            }
+        }
+
+        if(save) {
+            grDevices::dev.off()
+        } else {
+            graphics::par(par_usr)
+        }
     } else {
-      par_usr <- graphics::par(no.readonly = TRUE)
-      graphics::par(ask = TRUE)
+      cat('ERROR: This function only works with crestObj.\n')
     }
-
-    for(tax in taxanames) {
-
-      ## If data are unavailable or if the taxon is unselected for all variables
-      if (sum(as.numeric(x$inputs$selectedTaxa[tax, x$parameters$climate])) == 0) {
-
-        ## Defining plotting matrix --------------------------------------------
-        m1 <- matrix(c(5,2,2,1,1,5,2,2,3,3,5,2,2,4,4), ncol=5, byrow=TRUE)
-        m2 <- matrix(rep(c(1,2,3,3,4,1,2,3,3,4) , length(climate)) + 5 + 4*rep(1:length(climate)-1, each=10), ncol=5, byrow=TRUE)
-
-        graphics::layout(rbind(m1, m2),
-               width  = c(w0, x3, x1-x3, x2-x3, x3),
-               height = c(h0, y1-2*h0, h0, rep(c(y2-h0, h0), times=length(climate))))
-
-        graphics::par(mar=c(0,0,0,0))
-        graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
-        graphics::text(0.5, 0.5, x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)], font=2, adj=c(0.5, 0.5), cex=1.3)
-
-        graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
-        graphics::segments(0,0,1,1, col='grey70', lty=3)
-        graphics::segments(0,1,1,0, col='grey70', lty=3)
-        graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
-
-        xval <- range(x$inputs$x)
-        dX <- diff(xval)
-        xval <- xval + c(-0.07, 0.02)*dX
-        graphics::par(mar=c(0,0,1,0.25))
-        opar <- graphics::par(lwd=0.5)
-        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02 * max(x$inputs$df[, tax])), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
-          for(yval in graphics::axTicks(2)){
-            if (yval < max(x$inputs$df[, tax])) {
-              graphics::segments(min(x$inputs$x)-dX*0.02, yval, max(x$inputs$x)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
-              graphics::segments(min(x$inputs$x)-dX*0.02, yval, min(x$inputs$x), yval)
-              graphics::segments(max(x$inputs$x)+dX*0.02, yval, max(x$inputs$x), yval)
-              graphics::text(min(x$inputs$x)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
-            }
-          }
-          graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
-          graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
-        }
-
-        graphics::par(mar=c(0.5,0.25,0,0.5))
-        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-        graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
-        for(xval in graphics::axTicks(1)){
-          if(xval >= min(x$inputs$x)) {
-            graphics::segments(xval, 1, xval, 0.9)
-            graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
-          }
-        }
-
-        graphics::par(opar)
-
-        graphics::par(mar=c(0.1,0.1,0.1,0.1))
-        graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
-        graphics::text(0.5, 0.5, tax, font=2, adj=c(0.5, 0.5), srt=90, cex=1.3)
-
-        for(clim in x$parameters$climate) {
-          graphics::par(mar=c(0,0,0,0))
-          graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
-          graphics::text(0.5, 0.5, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), srt=90, cex=0.8)
-
-          graphics::par(mar=c(0.1,0.1,0.1,0.1))
-          for(i in 1:3) {
-            graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
-            graphics::segments(0,0,1,1, col='grey70', lty=3)
-            graphics::segments(0,1,1,0, col='grey70', lty=3)
-            graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
-          }
-        }
-      } else { ## If data are available for the taxon --------------------------
-
-        ## Defining plotting matrix --------------------------------------------
-        m1 <- matrix(c(5,2,2,1,1,5,2,2,3,3,5,2,2,4,4), ncol=5, byrow=TRUE)
-        m2 <- matrix(rep(c(1,2,3,3,5,1,2,4,4,6) , length(climate)) + 5 + 6*rep(1:length(climate)-1, each=10), ncol=5, byrow=TRUE)
-
-        graphics::layout(rbind(m1, m2),
-               width  = c(w0, x3, x1-x3, x2-x3, x3),
-               height = c(h0, y1-2*h0, h0, rep(c(y2-h0, h0), times=length(climate))))
-
-
-        veg_space      <- x$modelling$distributions[[tax]][, 2:3]
-        veg_space      <- plyr::count(veg_space)
-        veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
-        veg_space[, 3] <- base::log10(veg_space[, 3])
-        veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
-
-        ## Plot species abundance --------------------------------------------------
-        zlab=c(0, ceiling(max(raster::values(veg_space), na.rm=TRUE)))
-
-        xlab <- c(-0.2,1.2)
-        xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
-
-        clab=c()
-        i <- 0
-        while(i <= max(zlab)){
-          clab <- c( clab, c(1,2,5)*10**i )
-          i <- i+1
-        }
-        clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
-        zlab[2] <- log10(clab[length(clab)])
-
-        graphics::par(mar=c(0,0,0,0))
-        plot_map_eqearth(veg_space, ext, zlim = zlab,
-                         brks.pos=log10(clab), brks.lab=clab,
-                         col=viridis::viridis(20),
-                         title='Number of unique species occurences per grid cell')
-
-
-        ## Plot the time series ------------------------------------------------
-        xval <- range(x$inputs$x)
-        dX <- diff(xval)
-        xval <- xval + c(-0.07, 0.02)*dX
-
-        graphics::par(mar=c(0,0,1,0.25))
-        opar <- graphics::par(lwd=0.5)
-        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02 * max(x$inputs$df[, tax])), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
-          for(yval in graphics::axTicks(2)){
-            if (yval < max(x$inputs$df[, tax])) {
-              graphics::segments(min(x$inputs$x)-dX*0.02, yval, max(x$inputs$x)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
-              graphics::segments(min(x$inputs$x)-dX*0.02, yval, min(x$inputs$x), yval)
-              graphics::segments(max(x$inputs$x)+dX*0.02, yval, max(x$inputs$x), yval)
-              graphics::text(min(x$inputs$x)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
-            }
-          }
-          graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
-          graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
-        }
-
-        graphics::par(mar=c(0.5,0.25,0,0.5))
-        graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-        graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
-        for(xval in graphics::axTicks(1)){
-          if(xval >= min(x$inputs$x)) {
-            graphics::segments(xval, 1, xval, 0.9)
-            graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
-          }
-        }
-
-        graphics::par(opar)
-
-
-        ## Plot the taxon name -------------------------------------------------
-        graphics::par(mar=c(0,0,0,0))
-        graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
-        graphics::text(0.5, 0.5, tax, font=2, adj=c(0.5, 0.5), srt=90, cex=1.3)
-
-
-        for(clim in x$parameters$climate) {
-
-          ## Plot the variable name --------------------------------------------
-          graphics::par(mar=c(0,0,0,0))
-          graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
-          graphics::text(0.5, 0.5, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), srt=90, cex=0.8)
-
-
-          ## Plot the distribution over climate --------------------------------
-          brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
-          R1 <- raster::rasterFromXYZ(cbind(x$modelling$climate_space[, 1:2],
-                                            x$modelling$climate_space[, clim] ),
-                                      crs = sp::CRS("+init=epsg:4326"))
-          plot_map_eqearth(R1, ext,
-                           zlim=range(brks), col=viridis::viridis(length(brks)-1),
-                           brks.pos = brks, brks.lab = brks,
-                           title=accClimateVariables(clim)[3],
-                           colour_scale=FALSE, top_layer=veg_space)
-
-
-          ## Plot the histogram ------------------------------------------------
-          h1 <- graphics::hist(x$modelling$climate_space[, clim],
-                     breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
-                     plot=FALSE)
-          h2 <- graphics::hist(unique(x$modelling$distributions[[tax]][, -1])[, clim],
-                     breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
-                     plot=FALSE)
-
-          xval <- range(h1$breaks)
-          xval <- xval + c(-1, 0)*diff(xval)*0.1
-
-          graphics::par(mar=c(0,0,0.1,0.25))
-          opar <- graphics::par(lwd=0.5)
-          graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02*max(h1$counts)), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
-            for(yval in graphics::axTicks(2)){
-              graphics::segments(h1$breaks[1], yval, max(h1$breaks), yval, col=ifelse(yval==0, 'black', 'grey90'))
-              graphics::segments(h1$breaks[1], yval, h1$breaks[1]+diff(xval)*0.012, yval)
-              graphics::segments(max(h1$breaks), yval, max(h1$breaks)-diff(xval)*0.012, yval)
-              graphics::text(h1$breaks[1]-diff(xval)*0.015, yval, yval, cex=0.5, adj=c(1,0.4))
-            }
-            graphics::rect(h1$breaks[1],0,max(h1$breaks), 1.02*max(h1$counts))
-            graphics::plot(h1, add=TRUE, col=viridis::viridis(length(brks)-1))
-            graphics::plot(h2, add=TRUE, col='black')
-          }
-
-          graphics::par(mar=c(0.5,0,0,0.25))
-          graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-          graphics::text(mean(range(h1$breaks)), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=0.6)
-          for(xval in graphics::axTicks(1)){
-            if(xval >= h1$breaks[1]) {
-              graphics::segments(xval, 1, xval, 0.9)
-              graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
-            }
-          }
-
-          graphics::par(mar=c(0,0.25,0.1,0.5))
-          xval <- range(x$modelling$xrange[[clim]], na.rm=TRUE)
-          xval <- xval + c(-1, 0)*diff(xval)*0.1
-
-
-          ## Plot the pdfs -----------------------------------------------------
-          if (as.numeric(x$inputs$selectedTaxa[tax, clim]) > 0) {
-            graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp)), axes=FALSE, main='', xaxs='i', yaxs='i')
-            npoints <- x$parameters$npoints
-            for(yval in graphics::axTicks(2)){
-              graphics::segments(x$modelling$xrange[[clim]][1], yval, x$modelling$xrange[[clim]][npoints], yval, col=ifelse(yval==0, 'black', 'grey90'))
-              graphics::segments(x$modelling$xrange[[clim]][1], yval, x$modelling$xrange[[clim]][1]+diff(xval)*0.012, yval)
-              graphics::segments(x$modelling$xrange[[clim]][npoints], yval, x$modelling$xrange[[clim]][npoints]-diff(xval)*0.012, yval)
-              graphics::text(x$modelling$xrange[[clim]][1]-diff(xval)*0.015, yval, yval, cex=0.5, adj=c(1,0.4))
-            }
-            for(i in 1:ncol(x$modelling$pdfs[[tax]][[clim]]$pdfsp)) {
-              graphics::points(x$modelling$xrange[[clim]], x$modelling$pdfs[[tax]][[clim]]$pdfsp[, i], col='grey70', type='l')
-            }
-            graphics::text(max(x$modelling$xrange[[clim]]), 0.98*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp), paste(ncol(x$modelling$pdfs[[tax]][[clim]]$pdfsp), 'species     '), adj=c(1,1), cex=0.8)
-            graphics::polygon(x$modelling$xrange[[clim]][c(1,1:npoints, npoints)], c(0, x$modelling$pdfs[[tax]][[clim]]$pdfpol, 0), col='black')
-            graphics::rect(x$modelling$xrange[[clim]][1],0,x$modelling$xrange[[clim]][npoints], 1.02*max(x$modelling$pdfs[[tax]][[clim]]$pdfsp))
-
-            graphics::par(mar=c(0.5,0.25,0,0.5))
-            graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-            graphics::text(mean(range(x$modelling$xrange[[clim]])), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=0.6)
-            for(xval in graphics::axTicks(1)){
-              if(xval >= ifelse(x$parameters$shape[clim,]=='normal',x$modelling$xrange[[clim]][1], 0)) {
-                graphics::segments(xval, 1, xval, 0.9)
-                graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
-              }
-            }
-          } else {
-            graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
-            graphics::segments(0,0,1,1, col='grey70', lty=3)
-            graphics::segments(0,1,1,0, col='grey70', lty=3)
-            graphics::text(0.5, 0.5, 'Assumed\nnot\nsensitive', adj=c(0.5, 0.5), cex=1)
-
-            graphics::par(mar=c(0.5,0.25,0,0.5))
-            graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-          }
-          graphics::par(opar)
-        }
-      }
-    }
-
-    if(save) {
-      grDevices::dev.off()
-    } else {
-      graphics::par(par_usr)
-    }
-  } else {
-    cat('ERROR: This function only works with crestObj.\n')
-  }
-  invisible()
+    invisible()
 }

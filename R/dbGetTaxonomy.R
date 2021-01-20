@@ -20,37 +20,37 @@
 #' getTaxonomy(genus="Ceratozamia", depth.out=8)
 #' getTaxonomy("Zamiaceae", "Ceratozamia", taxaType = 2)
 getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, depth.out = 8, dbname = "gbif4crest_02") {
-  if (family == "" & genus == "" & species == "") {
-    cat('Please indicate a family, genus or species name.\n')
-    return(invisible())
-  }
-  family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
-  genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
-  species <- ifelse(is.na(species), "", paste0(base::toupper(substr(species, 1, 1)), substr(base::tolower(species), 2, nchar(species))))
-  req <- paste0(
-    "  SELECT DISTINCT kingdom, phylum, class_name, order_name, family, genus, species, taxonid ",
-    "    FROM taxa ",
-    "   WHERE taxonID >= 0 ",
-    ifelse(family == "",
-      "",
-      paste0(" AND family LIKE '%", family, "%' ")
-    ),
-    ifelse(genus == "",
-      "",
-      paste0(" AND genus LIKE '%", genus, "%' ")
-    ),
-    ifelse(species == "",
-      "",
-      paste0(" AND species LIKE '%", species, "%' ")
-    ),
-    "     AND taxonid >= ", taxaType * 1000000, " ",
-    "     AND taxonid <= ", (taxaType + 1) * 1000000, " ",
-    "ORDER BY family, genus, species"
-  )
-  res <- dbRequest(req, dbname)
-  if (length(res) == 0) {
-    cat('Nothing matches your request.\n')
-    return(invisible())
-  }
-  unique(res[, 1:depth.out])
+    if (family == "" & genus == "" & species == "") {
+        cat('Please indicate a family, genus or species name.\n')
+        return(invisible())
+    }
+    family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
+    genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
+    species <- ifelse(is.na(species), "", paste0(base::toupper(substr(species, 1, 1)), substr(base::tolower(species), 2, nchar(species))))
+    req <- paste0(
+      "  SELECT DISTINCT kingdom, phylum, class_name, order_name, family, genus, species, taxonid ",
+      "    FROM taxa ",
+      "   WHERE taxonID >= 0 ",
+      ifelse(family == "",
+        "",
+        paste0(" AND family LIKE '%", family, "%' ")
+      ),
+      ifelse(genus == "",
+        "",
+        paste0(" AND genus LIKE '%", genus, "%' ")
+      ),
+      ifelse(species == "",
+        "",
+        paste0(" AND species LIKE '%", species, "%' ")
+      ),
+      "     AND taxonid >= ", taxaType * 1000000, " ",
+      "     AND taxonid <= ", (taxaType + 1) * 1000000, " ",
+      "ORDER BY family, genus, species"
+    )
+    res <- dbRequest(req, dbname)
+    if (length(res) == 0) {
+        cat('Nothing matches your request.\n')
+        return(invisible())
+    }
+    unique(res[, 1:depth.out])
 }

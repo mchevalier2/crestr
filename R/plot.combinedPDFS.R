@@ -40,106 +40,105 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
                                width=7.48, height = 5
                               ) {
 
-  if (methods::is(x)[1] == 'crestObj') {
-    if (length(x$reconstructions) == 0 ) {
-      cat('ERROR: The crestObj requires the fossil data. Please run crest.reconstruct() on your data.\n')
-      return(invisible())
-    }
-
-    par_usr <- list()
-
-    if(save) {
-      grDevices::pdf(loc, width=width, height=height)
-    } else {
-      par_usr <- graphics::par(no.readonly = TRUE)
-      graphics::par(ask=TRUE)
-    }
-
-    ymx <- max(x$reconstructions[[climate]]$posterior[-1, ], na.rm=TRUE)
-    for(tax in x$inputs$taxa.name) {
-        if(is.list(x$modelling$pdfs[[tax]])) {
-          ymx <- max(ymx, ifelse(is.na(x$modelling$pdfs[[tax]][[climate]]), 0, max(x$modelling$pdfs[[tax]][[climate]]$pdfpol, na.rm=TRUE)))
+    if (methods::is(x)[1] == 'crestObj') {
+        if (length(x$reconstructions) == 0 ) {
+            cat('ERROR: The crestObj requires the fossil data. Please run crest.reconstruct() on your data.\n')
+            return(invisible())
         }
-    }
-    ymx <- ymx * 1.05
 
-    COLS <- rep(pals::alphabet(), length.out=length(x$inputs$taxa.name))
-    names(COLS) <- x$inputs$taxa.name
-    LTYS <- 1:length(x$inputs$taxa.name)%/%26+1
-    names(LTYS) <- x$inputs$taxa.name
+        par_usr <- list()
 
-    var_to_plot <- ifelse(optima, 2, 3)
-    climate_name <- accClimateVariables(climate)[3]
+        if(save) {
+            grDevices::pdf(loc, width=width, height=height)
+        } else {
+            par_usr <- graphics::par(no.readonly = TRUE)
+            graphics::par(ask=TRUE)
+        }
 
-    for(s in samples) {
-
-        graphics::layout(matrix(c(1,2), ncol=2), width=c(5,2), height=1)
-        graphics::par(mar=c(2,2,0.1,0))
-        graphics::par(ps=8)
-
-        graphics::plot(0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
-             xlim=range(x$modelling$xrange[[climate]]), ylim=c(0, ymx))
-
-        graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
-                col='black', border=NA)
-
+        ymx <- max(x$reconstructions[[climate]]$posterior[-1, ], na.rm=TRUE)
         for(tax in x$inputs$taxa.name) {
-            if (x$inputs$selectedTaxa[tax, climate] == 1 & x$modelling$weights[s, tax] > 0) {
-                graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                  c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0),
-                  col=crestr::makeTransparent(COLS[tax], alpha=0.3), border=NA)
+            if(is.list(x$modelling$pdfs[[tax]])) {
+                ymx <- max(ymx, ifelse(is.na(x$modelling$pdfs[[tax]][[climate]]), 0, max(x$modelling$pdfs[[tax]][[climate]]$pdfpol, na.rm=TRUE)))
             }
         }
-        for(tax in x$inputs$taxa.name) {
-            if (x$inputs$selectedTaxa[tax, climate] == 1 & x$modelling$weights[s, tax] > 0) {
-                graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                  c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0), lwd=1.5*x$modelling$weights[s, tax], lty=LTYS[tax], col=NA, border=COLS[tax])
+        ymx <- ymx * 1.05
+
+        COLS <- rep(pals::alphabet(), length.out=length(x$inputs$taxa.name))
+        names(COLS) <- x$inputs$taxa.name
+        LTYS <- 1:length(x$inputs$taxa.name)%/%26+1
+        names(LTYS) <- x$inputs$taxa.name
+
+        var_to_plot <- ifelse(optima, 2, 3)
+        climate_name <- accClimateVariables(climate)[3]
+
+        for(s in samples) {
+            graphics::layout(matrix(c(1,2), ncol=2), width=c(5,2), height=1)
+            graphics::par(mar=c(2,2,0.1,0))
+            graphics::par(ps=8)
+
+            graphics::plot(0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
+                 xlim=range(x$modelling$xrange[[climate]]), ylim=c(0, ymx))
+
+            graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
+                    c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
+                    col='black', border=NA)
+
+            for(tax in x$inputs$taxa.name) {
+                if (x$inputs$selectedTaxa[tax, climate] == 1 & x$modelling$weights[s, tax] > 0) {
+                    graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
+                      c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0),
+                      col=crestr::makeTransparent(COLS[tax], alpha=0.3), border=NA)
+                }
             }
+            for(tax in x$inputs$taxa.name) {
+                if (x$inputs$selectedTaxa[tax, climate] == 1 & x$modelling$weights[s, tax] > 0) {
+                    graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
+                      c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0), lwd=1.5*x$modelling$weights[s, tax], lty=LTYS[tax], col=NA, border=COLS[tax])
+                }
+            }
+
+            graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
+                    c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
+                    col='black', border=NA)
+            graphics::segments(x$reconstructions[[climate]]$optima[s, var_to_plot], 0, x$reconstructions[[climate]]$optima[s, var_to_plot], ymx, col='white', lwd=1.5, lty=3)
+
+            graphics::rect(x$modelling$xrange[[climate]][x$parameters$npoints-10], ymx*0.98, x$modelling$xrange[[climate]][x$parameters$npoints-10] - graphics::strwidth(x$inputs$x[s], cex=1.5, lwd=2), ymx*0.98-graphics::strheight(x$inputs$x[s], cex=1.5, lwd=2)*2, col='white', border=NA)
+            graphics::text(x$modelling$xrange[[climate]][x$parameters$npoints-10], ymx*0.98, x$inputs$x[s], cex=1.5, lwd=2, adj=c(1, 1))
+
+            graphics::box(lwd=0.5)
+            graphics::par(mgp=c(3,0.31,0))
+            graphics::axis(2,at=c(0,ymx),labels=c("",""),tck=0,lwd=0.5)
+            graphics::axis(2,lwd.ticks=0.5,lwd=0,tck=-0.01,cex.axis=6/7)
+            graphics::mtext('Density of probability',side=2,line=1, cex=1)
+
+            graphics::par(mgp=-c(3,0,0))
+            graphics::mtext(climate_name,side=1,line=0.8, cex=1)
+            graphics::axis(1,at=range(x$modelling$xrange[[climate]]),labels=c("",""),tck=0,lwd=0.5,pos=0)
+            graphics::axis(1, lwd.ticks=0.5,lwd=0,pos=0,tck=-0.01,cex.axis=6/7)
+
+            graphics::par(mar=c(0.1,0.1,0.1,0.1))
+            graphics::par(ps=8)
+            graphics::plot( 0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
+                  xlim=c(-0.02,1), ylim=c(1+length(x$inputs$taxa.name), 1))
+
+
+            ordered_tax <- c(x$inputs$taxa.name[x$inputs$selectedTaxa[x$inputs$taxa.name, climate] == 1][order(x$modelling$weights[s, x$inputs$selectedTaxa[x$inputs$taxa.name, climate] == 1], decreasing=TRUE)],
+            x$inputs$taxa.name[x$inputs$selectedTaxa[x$inputs$taxa.name, climate] == 0])
+
+            for(tax in 1:length(x$inputs$taxa.name)) {
+                graphics::segments(0, tax+0.5, 0.20, tax+0.5, lwd=max(0.2, 1.5*x$modelling$weights[s, ordered_tax[tax]]), lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
+                graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 1, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
+            }
+
         }
 
-        graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
-                col='black', border=NA)
-        graphics::segments(x$reconstructions[[climate]]$optima[s, var_to_plot], 0, x$reconstructions[[climate]]$optima[s, var_to_plot], ymx, col='white', lwd=1.5, lty=3)
-
-        graphics::rect(x$modelling$xrange[[climate]][x$parameters$npoints-10], ymx*0.98, x$modelling$xrange[[climate]][x$parameters$npoints-10] - graphics::strwidth(x$inputs$x[s], cex=1.5, lwd=2), ymx*0.98-graphics::strheight(x$inputs$x[s], cex=1.5, lwd=2)*2, col='white', border=NA)
-        graphics::text(x$modelling$xrange[[climate]][x$parameters$npoints-10], ymx*0.98, x$inputs$x[s], cex=1.5, lwd=2, adj=c(1, 1))
-
-        graphics::box(lwd=0.5)
-        graphics::par(mgp=c(3,0.31,0))
-        graphics::axis(2,at=c(0,ymx),labels=c("",""),tck=0,lwd=0.5)
-        graphics::axis(2,lwd.ticks=0.5,lwd=0,tck=-0.01,cex.axis=6/7)
-        graphics::mtext('Density of probability',side=2,line=1, cex=1)
-
-        graphics::par(mgp=-c(3,0,0))
-        graphics::mtext(climate_name,side=1,line=0.8, cex=1)
-        graphics::axis(1,at=range(x$modelling$xrange[[climate]]),labels=c("",""),tck=0,lwd=0.5,pos=0)
-        graphics::axis(1, lwd.ticks=0.5,lwd=0,pos=0,tck=-0.01,cex.axis=6/7)
-
-        graphics::par(mar=c(0.1,0.1,0.1,0.1))
-        graphics::par(ps=8)
-        graphics::plot( 0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
-              xlim=c(-0.02,1), ylim=c(1+length(x$inputs$taxa.name), 1))
-
-
-        ordered_tax <- c(x$inputs$taxa.name[as.numeric(x$inputs$selectedTaxa[x$inputs$taxa.name, climate]) == 1][order(x$modelling$weights[s, as.numeric(x$inputs$selectedTaxa[x$inputs$taxa.name, climate]) == 1], decreasing=TRUE)],
-        x$inputs$taxa.name[as.numeric(x$inputs$selectedTaxa[x$inputs$taxa.name, climate]) == 0])
-
-        for(tax in 1:length(x$inputs$taxa.name)) {
-            graphics::segments(0, tax+0.5, 0.20, tax+0.5, lwd=max(0.2, 1.5*x$modelling$weights[s, ordered_tax[tax]]), lty=LTYS[ordered_tax[tax]], col=ifelse(as.numeric(x$inputs$selectedTaxa[ordered_tax[tax], climate]) > 0, COLS[ordered_tax[tax]], 'grey70'))
-            graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 1, col=ifelse(as.numeric(x$inputs$selectedTaxa[ordered_tax[tax], climate]) > 0, 'black', 'grey70'))
+        if(save) {
+            grDevices::dev.off()
+        } else {
+            graphics::par(par_usr)
         }
-
-    }
-
-    if(save) {
-        grDevices::dev.off()
     } else {
-        graphics::par(par_usr)
+      cat('ERROR: This function only works with crestObj.\n')
     }
-  } else {
-    cat('ERROR: This function only works with crestObj.\n')
-  }
-  invisible()
+    invisible(x)
 }
