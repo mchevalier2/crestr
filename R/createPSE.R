@@ -1,0 +1,41 @@
+#' Returns the citations associated to the GBIF data used to fit the pdfs.
+#'
+#' Returns the citations associated to the GBIF data used to fit the pdfs.
+#'
+#' @inheritParams crest
+#' @param taxa A list of taxa to include in the PSE file.
+#' @param loc An absolute or relative path that indicates where the xlsx file
+#'        should be saved. Also used to specify the name of the file. Default:
+#'        the file is saved in the working directory under the name
+#'        proxy_species_equivalency.xlsx.
+#' @export
+
+createPSE <- function(taxa, loc='proxy_species_equivalency.xlsx') {
+    if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
+        cat("This function requires the package 'openxlsx'. Install it to continue.\n\n")
+    } else {
+        wb <- openxlsx::createWorkbook()
+
+        forms <- c()
+        for(tax in 1:length(taxa)) {
+            forms <- c(forms, paste0("IF(ISBLANK(D", tax+1, "),IF(ISBLANK(C", tax+1, "),IF(ISBLANK(B", tax+1, "),4,1),2),3)"))
+        }
+
+        df <- data.frame(
+          Level = forms,
+          Family = rep(NA, length(taxa)),
+          Genus = rep(NA, length(taxa)),
+          Species = rep(NA, length(taxa)),
+          ProxyName = taxa,
+          stringsAsFactors = FALSE
+        )
+
+        class(df$Level) <- c(class(df$Level), "formula")
+
+        openxlsx::addWorksheet(wb, "proxy_species_equivalency")
+        openxlsx::writeData(wb, sheet = 1, x = df)
+        openxlsx::saveWorkbook(wb, loc, overwrite = TRUE)
+    }
+
+    invisible()
+}

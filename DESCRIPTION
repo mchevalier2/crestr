@@ -37,5 +37,6 @@ Suggests:
     testthat,
     knitr,
     rmarkdown,
-    clipr
+    clipr,
+    openxlsx
 VignetteBuilder: knitr
