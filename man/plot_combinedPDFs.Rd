@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.combinedPDFS.R
 \name{plot_combinedPDFs}
 \alias{plot_combinedPDFs}
-\title{Plot the studied climate space.}
+\title{Plot representing how the pdfs combine to produce the reconstruction.}
 \usage{
 plot_combinedPDFs(
   x,
@@ -41,7 +41,7 @@ samplePDFs.pdf.}
 per variables).}
 }
 \description{
-Plot the studied climate space.
+Plot representing how the pdfs combine to produce the reconstruction.
 }
 \examples{
 \dontrun{
