@@ -35,7 +35,7 @@ accClimateVariables <- function(v=NA) {
       "Precipitation of Driest Quarter (mm)",
       "Precipitation of Warmest Quarter (mm)",
       "Precipitation of Coldest Quarter (mm)",
-      "Humidity Index"
+      "Aridity Index"
     )
   )
   colnames(res) <- c("Variable ID", "Variable name", "Description")

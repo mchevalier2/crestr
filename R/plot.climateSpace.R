@@ -44,8 +44,6 @@ plot_climateSpace <- function( x,
       return(invisible())
     }
 
-    par_usr <- list()
-
     climate <- x$parameters$climate
 
     ext <- c(x$parameters$xmn, x$parameters$xmx, x$parameters$ymn, x$parameters$ymx)
@@ -71,7 +69,7 @@ plot_climateSpace <- function( x,
     if(save) {
       grDevices::pdf(loc, width=width, height=height)
     } else {
-      par_usr <- graphics::par()
+      par_usr <- graphics::par(no.readonly = TRUE)
     }
 
     veg_space      <- do.call(rbind, x$modelling$distributions)[, 2:3]
@@ -176,37 +174,7 @@ plot_climateSpace <- function( x,
 
     ## Plot each variables -----------------------------------------------------
     for( clim in climate) {
-      #graphics::par(mar=c(0.1,0,0,0))
-      #xlab <- c(-0.2,1.2)
-      #xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
-      #plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlab, ylim=c(0,1), xaxs='i', yaxs='i')
-
       brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
-      #brks2 <- (brks - brks[1]) / diff(range(brks))
-      #for(i in 1:(length(brks2)-1)) {
-      #  graphics::rect(brks2[i], 0, brks2[i+1], 0.3, border=NA, col=viridis::viridis(length(brks)-1)[i])
-      #}
-
-      #cont <- TRUE
-      #res <- 2
-      #while(cont) {
-      #  brks2 <- brks[c(TRUE, rep(FALSE, res-1))]
-      #  sizes <- graphics::strwidth(paste(' ',brks2,' ', sep=''), cex=0.5)
-      #  x1 = (brks2 - brks[1]) / diff(range(brks)) + sizes/2 ; x1 = x1[1:(length(x1)-1)]
-      #  x2 = (brks2 - brks[1]) / diff(range(brks)) - sizes/2 ; x2 = x2[2:length(x2)]
-      #  if(min(x2-x1) <= 0) {
-      #    res <- res + 1
-      #  } else {
-      #    cont <- FALSE
-      #  }
-      #}
-
-      #for(i in brks2) {
-      #  graphics::text((i-brks[1])/diff(range(brks)), 0.35, i, cex=0.5, adj=c(0.5,0))
-      #}
-      #graphics::rect(0,0,1,0.3, lwd=0.3)
-      #graphics::text(0.5, 0.85, accClimateVariables(clim)[3], font=1, cex=0.8, adj=c(0.5,1))
-
 
       R1 <- raster::rasterFromXYZ(cbind(x$modelling$climate_space[, 1:2],
                                         x$modelling$climate_space[, clim] ),
@@ -284,12 +252,6 @@ plot_climateSpace <- function( x,
     if(save) {
       grDevices::dev.off()
     } else {
-      par_usr[['cin']] <- NULL
-      par_usr[['cra']] <- NULL
-      par_usr[['csi']] <- NULL
-      par_usr[['cxy']] <- NULL
-      par_usr[['din']] <- NULL
-      par_usr[['page']] <- NULL
       graphics::par(par_usr)
     }
   } else {

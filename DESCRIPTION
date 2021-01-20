@@ -27,7 +27,10 @@ Imports:
     plyr,
     sp,
     rgdal,
-    RPostgres
+    RPostgres,
+    rgeos,
+    scales,
+    pals
 Depends:
     R (>= 2.10)
 Suggests: 

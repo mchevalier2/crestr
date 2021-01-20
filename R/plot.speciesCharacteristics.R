@@ -41,8 +41,7 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
                                       ) {
 
   if (methods::is(x)[1] == 'crestObj') {
-    test <- is.na(x$reconstructions)
-    if( test[1] & length(test) == 1 ) {
+    if (length(x$reconstructions) == 0 ) {
       cat('ERROR: The crestObj requires the fossil data. Please run crest.reconstruct() on your data.\n')
       return(invisible())
     }
@@ -77,7 +76,7 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
     if(save) {
       grDevices::pdf(loc, width=width, height=height)
     } else {
-      par_usr <- graphics::par()
+      par_usr <- graphics::par(no.readonly = TRUE)
     }
 
     for(tax in taxanames) {
@@ -207,7 +206,7 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
           graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
           graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
         }
-        
+
         graphics::par(mar=c(0.5,0.25,0,0.5))
         graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
         graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
@@ -329,12 +328,6 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
     if(save) {
       grDevices::dev.off()
     } else {
-      par_usr[['cin']] <- NULL
-      par_usr[['cra']] <- NULL
-      par_usr[['csi']] <- NULL
-      par_usr[['cxy']] <- NULL
-      par_usr[['din']] <- NULL
-      par_usr[['page']] <- NULL
       graphics::par(par_usr)
     }
   } else {

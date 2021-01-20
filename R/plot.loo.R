@@ -55,7 +55,10 @@ plot_loo <- function( x, optima=TRUE,
     names(col_pos) = names(col_neg) = names(yax_incr) = x$parameters$climate
     if(!is.na(title[1])) names(title) = x$parameters$climate
 
-    if(!save) par_usr$mfrow <- graphics::par(mfrow=c(1,2))[[1]]
+    if(!save) {
+      par_usr <- graphics::par(no.readonly = TRUE)
+      graphics::par(mfrow=c(1,2))
+    }
 
     for( clim in x$parameters$climate) {
       df <- list()
@@ -104,7 +107,7 @@ plot_loo <- function( x, optima=TRUE,
     if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(x))
 
     plot_diagram(x, bars=TRUE,
-                 save=save, loc=paste(loc,clim,'pdf',sep='.'),
+                 save=save, loc=paste(loc,clim,'.pdf',sep=''),
                  width=width, height=height,
                  yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                  tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,
