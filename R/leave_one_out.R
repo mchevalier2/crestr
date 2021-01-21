@@ -36,13 +36,11 @@ loo <- function(x, verbose=TRUE) {
         x$reconstructions[[clim]][['loo']] = list()
     }
     recons_tmp <- x
-    df_tmp = cbind( x$inputs$x, x$inputs$df )  ;  colnames(df_tmp) <- c(x$inputs$x.name, x$inputs$taxa.name)
     for(tax in taxa_list) {
         recons_tmp$inputs$selectedTaxa <- x$inputs$selectedTaxa
         #recons_tmp$inputs$selectedTaxa[tax, x$parameters$climate] <- rep(0, length(x$parameters$climate))
         recons_tmp <- excludeTaxa(recons_tmp, tax, x$parameters$climate)
         recons_tmp <- crest.reconstruct(recons_tmp,
-                                        df = df_tmp,
                                         presenceThreshold = x$parameters$presenceThreshold,
                                         taxWeight = x$parameters$taxWeight,
                                         skip_for_loo = TRUE, verbose=FALSE

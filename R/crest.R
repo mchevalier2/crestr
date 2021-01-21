@@ -43,32 +43,30 @@ crest <- function(df, pse, taxaType, climate,
 
 
     x <- crest.get_modern_data(
-      pse = pse, taxaType = taxaType, climate = climate,
-      taxa.name = colnames(df)[-1],
-      xmn = xmn, xmx = xmx, ymn = ymn, ymx = ymx,
-      continents = continents, countries = countries,
-      realms = realms, biomes = biomes, ecoregions = ecoregions,
-      minGridCells = minGridCells,
-      selectedTaxa = selectedTaxa,
-      verbose = verbose,
-      dbname = dbname
+        pse = pse, taxaType = taxaType, climate = climate, df = df,
+        xmn = xmn, xmx = xmx, ymn = ymn, ymx = ymx,
+        continents = continents, countries = countries,
+        realms = realms, biomes = biomes, ecoregions = ecoregions,
+        minGridCells = minGridCells,
+        selectedTaxa = selectedTaxa,
+        verbose = verbose,
+        dbname = dbname
     )
 
     x <- crest.calibrate(x,
-      npoints = npoints,
-      shape = shape,
-      bin_width = bin_width,
-      geoWeighting = geoWeighting,
-      climateSpaceWeighting = geoWeighting,
-      verbose = verbose
+        npoints = npoints,
+        shape = shape,
+        bin_width = bin_width,
+        geoWeighting = geoWeighting,
+        climateSpaceWeighting = geoWeighting,
+        verbose = verbose
     )
 
     x <- crest.reconstruct(x,
-      df = df,
-      presenceThreshold = presenceThreshold,
-      taxWeight = taxWeight,
-      uncertainties = uncertainties,
-      skip_for_loo = FALSE, verbose = verbose
+        presenceThreshold = presenceThreshold,
+        taxWeight = taxWeight,
+        uncertainties = uncertainties,
+        skip_for_loo = FALSE, verbose = verbose
     )
 
     if(leave_one_out) x <- loo(x, verbose = verbose)

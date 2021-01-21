@@ -47,7 +47,7 @@ Plot the studied climate space.
   data(crest_ex_pse)
   data(crest_ex_selection)
   x <- crest.get_modern_data(
-    pse = crest_ex_pse, taxaType = 0,
+    pse = crest_ex_pse, taxaType = 0, df = crest_ex,
     climate = c("bio1", "bio12"),
     selectedTaxa = crest_ex_selection, dbname = "crest_example"
   )

@@ -6,7 +6,6 @@
 \usage{
 crest.reconstruct(
   x,
-  df,
   presenceThreshold = 0,
   taxWeight = "normalisation",
   uncertainties = c(0.5, 0.95),
@@ -16,9 +15,6 @@ crest.reconstruct(
 }
 \arguments{
 \item{x}{A crestObj produced by the crest.fit_pdfs function.}
-
-\item{df}{A data frame containing the data to reconstruct (counts,
-percentages or presence/absence data).}
 
 \item{presenceThreshold}{All values above that threshold will be used in the
 reconstruction (e.g. if set at 1, all percentages below 1 will be set
@@ -43,10 +39,10 @@ This function fits the climate response of the selected taxa to the selected
 climate variables.
 }
 \examples{
-data(crest_ex)
 data(crest_ex_pse)
 data(crest_ex_selection)
-x <- crest.get_modern_data(
+data(crest_ex)
+x <- crest.get_modern_data( df = crest_ex,
   pse = crest_ex_pse, taxaType = 0,
   climate = c("bio1", "bio12"),
   selectedTaxa = crest_ex_selection, dbname = "crest_example"
@@ -55,6 +51,6 @@ x <- crest.calibrate(x,
   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
   bin_width = c(2, 20), shape = c("normal", "lognormal")
 )
-x <- crest.reconstruct(x, crest_ex)
+x <- crest.reconstruct(x)
 plot(x)
 }

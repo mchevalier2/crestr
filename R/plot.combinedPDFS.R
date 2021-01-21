@@ -46,6 +46,11 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             return(invisible())
         }
 
+        if (length(climate) > 1 ) {
+            cat('WARNING: The function only works for one variable at a time. Continuing with the first value.\n')
+            climate <- climate[1]
+        }
+
         par_usr <- list()
 
         if(save) {
@@ -57,7 +62,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
 
         ymx <- max(x$reconstructions[[climate]]$posterior[-1, ], na.rm=TRUE)
         for(tax in x$inputs$taxa.name) {
-            if(is.list(x$modelling$pdfs[[tax]])) {
+            if (x$inputs$selectedTaxa[tax, climate] > 0) {
                 ymx <- max(ymx, ifelse(is.na(x$modelling$pdfs[[tax]][[climate]]), 0, max(x$modelling$pdfs[[tax]][[climate]]$pdfpol, na.rm=TRUE)))
             }
         }
@@ -116,18 +121,26 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             graphics::axis(1,at=range(x$modelling$xrange[[climate]]),labels=c("",""),tck=0,lwd=0.5,pos=0)
             graphics::axis(1, lwd.ticks=0.5,lwd=0,pos=0,tck=-0.01,cex.axis=6/7)
 
+
+            # taxa selected (ranked by weight), then taxa unselected, then taxa unavailable
+            taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 1, ])
+            weights <- x$modelling$weights[s, taxa]
+            ordered_tax <- names(weights)[order(weights, decreasing=TRUE)]
+
+            taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 0, ])
+            weights <- x$modelling$weights[s, taxa]
+            ordered_tax <- c(ordered_tax, names(weights)[order(weights, decreasing=FALSE)])
+
+
             graphics::par(mar=c(0.1,0.1,0.1,0.1))
             graphics::par(ps=8)
             graphics::plot( 0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
-                  xlim=c(-0.02,1), ylim=c(1+length(x$inputs$taxa.name), 1))
+                            xlim=c(-0.02,1), ylim=c(1+length(ordered_tax), 1))
 
 
-            ordered_tax <- c(x$inputs$taxa.name[x$inputs$selectedTaxa[x$inputs$taxa.name, climate] == 1][order(x$modelling$weights[s, x$inputs$selectedTaxa[x$inputs$taxa.name, climate] == 1], decreasing=TRUE)],
-            x$inputs$taxa.name[x$inputs$selectedTaxa[x$inputs$taxa.name, climate] == 0])
-
-            for(tax in 1:length(x$inputs$taxa.name)) {
+            for(tax in 1:length(ordered_tax)) {
                 graphics::segments(0, tax+0.5, 0.20, tax+0.5, lwd=max(0.2, 1.5*x$modelling$weights[s, ordered_tax[tax]]), lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
-                graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 1, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
+                graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 7/8, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
             }
 
         }

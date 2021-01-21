@@ -11,10 +11,10 @@
 #' @return A crest() object containing the reconstructions and all the associated data.
 #' @export
 #' @examples
-#' data(crest_ex)
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
-#' x <- crest.get_modern_data(
+#' data(crest_ex)
+#' x <- crest.get_modern_data( df = crest_ex,
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
@@ -23,10 +23,10 @@
 #'   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
 #'   bin_width = c(2, 20), shape = c("normal", "lognormal")
 #' )
-#' x <- crest.reconstruct(x, crest_ex)
+#' x <- crest.reconstruct(x)
 #' plot(x)
 
-crest.reconstruct <- function(x, df,
+crest.reconstruct <- function(x,
                               presenceThreshold = 0,
                               taxWeight = "normalisation",
                               uncertainties = c(0.5, 0.95),
@@ -35,20 +35,7 @@ crest.reconstruct <- function(x, df,
     if(verbose) cat('\n## Last data checks and reconstruction\n')
     if(! skip_for_loo) {
 
-        if(verbose) cat('  <> Checking data ......................... ')
-        if (is.character(df)) {
-            df <- rio::import(df)
-        }
-        if (!is.data.frame(df)) {
-            if(verbose) cat("\nERROR: Problem here. Input data is not a data frame.\n")
-            return()
-        }
-
-        if(verbose) cat('[OK]\n  <> Checking taxa ......................... ')
-        x$inputs$x <- df[, 1]
-        x$inputs$x.name <- colnames(df)[1]
-        x$inputs$taxa.name <- colnames(df)[-1]
-        x$inputs$df <- df[, -1]
+        if(verbose) cat('  <> Checking taxa ......................... ')
         x$parameters$taxWeight <- taxWeight
         x$parameters$presenceThreshold <- presenceThreshold
 
@@ -99,7 +86,7 @@ crest.reconstruct <- function(x, df,
                     reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
                 } else {
                     norm_factor <- 0
-                    for (tax in names(x$modelling$pdfs)) {
+                    for (tax in x$inputs$taxa.name) {
                         if (x$modelling$weights[s, tax] > 0 & x$inputs$selectedTaxa[tax, clim] > 0) {
                             norm_factor <- norm_factor + x$modelling$weights[s, tax]
                             reconstructions[[clim]][["posterior"]][s, ] <-

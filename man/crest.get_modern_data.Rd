@@ -8,7 +8,7 @@ crest.get_modern_data(
   pse,
   taxaType,
   climate,
-  taxa.name = unique(pse[, "ProxyName"]),
+  df = NA,
   xmn = NA,
   xmx = NA,
   ymn = NA,
@@ -36,7 +36,8 @@ rodents. The example dataset uses taxaType=0. Default is 1.}
 \item{climate}{A vector of the climate variables to extract. See
 \code{\link{accClimateVariables}} for the list of accepted values.}
 
-\item{taxa.name}{A vector that contains the names of the taxa to study.}
+\item{df}{A data frame containing the data to reconstruct (counts,
+percentages or presence/absence data).}
 
 \item{xmn}{The coordinates defining the study area.}
 
@@ -80,7 +81,8 @@ taxon and return them as a list.
 \dontrun{
 data(crest_ex_pse)
 data(crest_ex_selection)
-x <- crest.get_modern_data(
+data(crest_ex)
+x <- crest.get_modern_data( df = crest_ex,
   pse = crest_ex_pse, taxaType = 0,
   climate = c("bio1", "bio12"),
   selectedTaxa = crest_ex_selection, dbname = "crest_example"

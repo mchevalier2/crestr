@@ -48,10 +48,10 @@ climate variables.
 }
 \examples{
 \dontrun{
-data(crest_ex)
 data(crest_ex_pse)
 data(crest_ex_selection)
-x <- crest.get_modern_data(
+data(crest_ex)
+x <- crest.get_modern_data( df = crest_ex,
   pse = crest_ex_pse, taxaType = 0,
   climate = c("bio1", "bio12"),
   selectedTaxa = crest_ex_selection, dbname = "crest_example"

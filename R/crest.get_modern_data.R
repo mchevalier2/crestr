@@ -5,6 +5,7 @@
 #' taxon and return them as a list.
 #'
 #' @inheritParams crestObj
+#' @inheritParams crest
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
 #' @return A crest() object containing the spatial distributions
@@ -13,7 +14,8 @@
 #' \dontrun{
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
-#' x <- crest.get_modern_data(
+#' data(crest_ex)
+#' x <- crest.get_modern_data( df = crest_ex,
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
@@ -23,7 +25,8 @@
 #' }
 #'
 crest.get_modern_data <- function( pse, taxaType, climate,
-                                   taxa.name = unique(pse[, 'ProxyName']),
+                                   df = NA,
+                                   #taxa.name = unique(pse[, 'ProxyName']),
                                    xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                    continents = NA, countries = NA,
                                    realms = NA, biomes = NA, ecoregions = NA,
@@ -45,14 +48,17 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     pse <- pse[!is.na((pse[, 'ProxyName'])), ]
     pse <- pse[(pse[, 'ProxyName'] != ''), ]
 
+    taxa.name <- c(unique(as.character(pse[, 'ProxyName'])))
+    if (is.data.frame(df)) taxa.name <- unique(c(taxa.name, colnames(df)[-1]))
+
     taxa_to_ignore=c()
     for(tax in taxa.name) {
         if (! tax %in% pse[, 'ProxyName']) taxa_to_ignore=c(taxa_to_ignore, tax)
     }
-    if (length(taxa_to_ignore)) {
-        #cat(paste0('WARNING: The following taxa are not in the pollen species equivalence file and will be ignored.\n'))
-        cat(c(paste(taxa_to_ignore, collapse=', '), '\n'))
-    }
+    #if (length(taxa_to_ignore)) {
+    #    cat(paste0('WARNING: The following taxa are not in the pollen species equivalence file and will be ignored.\n'))
+    #    cat(c(paste(taxa_to_ignore, collapse=', '), '\n'))
+    #}
 
     if(verbose) cat('[OK]\n  <> Checking climate variables ............ ')
     ## . Change the climate variable ID for the climate variable name -----------
@@ -161,6 +167,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         taxa_notes[[tax]] <- 'Taxon not in the proxy_species_equivalency table.'
         selectedTaxa[tax, climate] <- rep(-1, length(climate))
     }
+    taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa[apply(selectedTaxa, 1, sum)>=0, ])]
 
     w <- !(taxa.name %in% rownames(selectedTaxa))
     if (sum(w) > 0) {
@@ -203,8 +210,10 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             selectedTaxa[tax, ] <- rep(-1, length(climate))
             taxa_notes[[tax]] <- "No association with vegetation"
         }
-        pse <- pse[-w, ]
+        pse <- pse[!w, ]
     }
+    taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa[apply(selectedTaxa, 1, sum)>=0, ])]
+
 
     if(verbose) {
       cat('[OK]\n  <> Extracting taxon species .............. \r')
@@ -217,6 +226,31 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         selectedTaxa = selectedTaxa
     )
     crest$misc[['taxa_notes']] <- taxa_notes
+
+    if (is.data.frame(df)) {
+        crest$inputs$x <- df[, 1]
+        crest$inputs$x.name <- colnames(df)[1]
+        crest$inputs$taxa.name <- taxa.name
+        crest$inputs$df <- df[, -1]
+
+        w <- (apply(crest$inputs$df, 2, sum) == 0)
+        if (sum(w) > 0) {
+            for (tax in colnames(crest$inputs$df)[w]) {
+                crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
+                crest$misc$taxa_notes[[tax]] <- "All percentages equal to 0."
+            }
+        }
+
+        w <- (! taxa.name %in% colnames(df)[-1])
+        if (sum(w) > 0) {
+            for (tax in taxa.name[w]) {
+                crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
+                crest$misc$taxa_notes[[tax]] <- "Taxon not present in the data file."
+            }
+        }
+
+    }
+
 
     taxonID2proxy <- data.frame("taxonID" = NA, "proxyName" = NA, stringsAsFactors = FALSE)
     pse$Level     <- as.numeric(as.character(pse$Level))
@@ -265,6 +299,8 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             pbi <- pbi + 100
         }
     }
+    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa[apply(crest$inputs$selectedTaxa, 1, sum)>=0, ])]
+
 
     if(verbose) {
       cat('  <> Extracting taxon species .............. [OK]\n  <> Extracting species distributions ...... \r')
@@ -276,17 +312,18 @@ crest.get_modern_data <- function( pse, taxaType, climate,
 
     distributions <- list()
 
-    for (tax in taxa.name) {
+    for (tax in crest$inputs$taxa.name) {
         taxIDs <- taxonID2proxy[taxonID2proxy[, "proxyName"] == tax, 1]
         if (length(taxIDs) == 0) {
             crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-            crest$misc$taxa_notes[[tax]] <- "No species corresponding to the proxy name."
+            crest$misc$taxa_notes[[tax]] <- paste(crest$misc$taxa_notes[[tax]], "No species corresponding to the proxy name.", sep='; ')
         }
         if(verbose) {
             cat(paste0('  <> Extracting species distributions ...... ', stringr::str_pad(paste0(round(pbi / length(taxa.name)),'%\r'), width=4, side='left')))
             utils::flush.console()
         }
-        if (sum(crest$inputs$selectedTaxa[tax, climate]>0) > 0) {
+
+        if (sum(crest$inputs$selectedTaxa[tax, climate]>=0) > 0) {
             distributions[[tax]] <- getDistribTaxa(
               taxIDs, climate,
               xmn, xmx, ymn, ymx,
@@ -299,7 +336,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 #print(extent_taxa)
                 distributions[[tax]] <- NA
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                crest$misc$taxa_notes[[tax]] <- "No data point available"
+                crest$misc$taxa_notes[[tax]] <- "No data point available in the study area."
             }else{
                 extent_taxa <- table(distributions[[tax]][, 1])
                 extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
@@ -307,18 +344,14 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 if(nrow(distributions[[tax]]) == 0) {
                     distributions[[tax]] <- NA
                     crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                    crest$misc$taxa_notes[[tax]] <- "Present but insufficient data to fit a pdf"
+                    crest$misc$taxa_notes[[tax]] <- "Present but insufficient data in the study area to fit a pdf"
                 }
-            }
-        } else {
-            distributions[[tax]] <- NA
-            crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-            if(! tax %in% names(crest$misc$taxa_notes)) {
-                crest$misc$taxa_notes[[tax]] <- "Taxon not selected for any variable"
             }
         }
         pbi <- pbi + 100
     }
+    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa[apply(crest$inputs$selectedTaxa, 1, sum)>=0, ])]
+
     crest$modelling$distributions <- distributions
     if(verbose) {
       cat('  <> Extracting species distributions ...... [OK]\n  <> Extracting climate space .............. ')

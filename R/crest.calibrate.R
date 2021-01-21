@@ -11,10 +11,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' data(crest_ex)
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
-#' x <- crest.get_modern_data(
+#' data(crest_ex)
+#' x <- crest.get_modern_data( df = crest_ex,
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
@@ -90,11 +90,11 @@ crest.calibrate <- function(x,
     }
     pbi <- 100
     pdfs <- list()
-    for (tax in names(x$modelling$distributions)) {
-        if (sum(x$inputs$selectedTaxa[tax, x$parameters$climate]>0) > 0) {
+    for (tax in x$inputs$taxa.name) {
+        if (sum(x$inputs$selectedTaxa[tax, x$parameters$climate]>=0) > 0) {
             pdfs[[tax]] <- list()
             for (clim in x$parameters$climate) {
-                if (sum(x$inputs$selectedTaxa[tax, clim]>0) > 0) {
+                if (sum(x$inputs$selectedTaxa[tax, clim]>=0) >= 0) {
                     pdfs[[tax]][[clim]] <- list()
                     tmp <- x$modelling$xrange[[clim]]
                     pdfpol <- rep(0, npoints)

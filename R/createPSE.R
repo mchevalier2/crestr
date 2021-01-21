@@ -2,7 +2,6 @@
 #'
 #' Returns the citations associated to the GBIF data used to fit the pdfs.
 #'
-#' @inheritParams crest
 #' @param taxa A list of taxa to include in the PSE file.
 #' @param loc An absolute or relative path that indicates where the xlsx file
 #'        should be saved. Also used to specify the name of the file. Default:
