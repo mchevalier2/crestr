@@ -81,7 +81,7 @@ crest.reconstruct <- function(x,
                 if (is.na(x$modelling$weights[s, names(x$modelling$pdfs)[1]])) {
                     reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
                     reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
-                } else if (sum((x$inputs$selectedTaxa[, clim]>0) * x$modelling$weights[s, ]) == 0) {
+                } else if (sum((x$inputs$selectedTaxa[x$inputs$taxa.name, clim]>0) * ifelse(x$modelling$weights[s, x$inputs$taxa.name]>0, 1, 0)) == 0) {
                     reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
                     reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
                 } else {

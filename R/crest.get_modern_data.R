@@ -124,7 +124,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             }
         }
     }
-    if (!is.na(countries)) {
+    if (!is.na(countries)[1]) {
         for (country in countries) {
             if (!country %in% unlist(cont.list)) {
                 cat(paste("[FAILED]\n  ERROR: The country '", country, "' is not an accepted value. Please select a name from the following list.\n", sep = ""))

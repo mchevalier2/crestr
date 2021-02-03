@@ -53,8 +53,6 @@ plot_diagram <- function(x, bars=FALSE,
         col_neg='grey80'
     }
 
-    par_usr <- graphics::par(no.readonly = TRUE)
-
     #x.w <- NA
     if (methods::is(x)[1] == 'crestObj') {
         #if (!unique(is.na(x$modelling$weights))) {
@@ -121,6 +119,7 @@ plot_diagram <- function(x, bars=FALSE,
         xrange <- xrange + k * c(-str_max_left, str_max_right)
     } else {
         xrange <- xrange + c(-2.5*dX, 0.9 *dX)
+        par_usr <- graphics::par(no.readonly = TRUE)
     }
 
     graphics::par(mar=c(0,0,0,0))
