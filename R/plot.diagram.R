@@ -63,9 +63,9 @@ plot_diagram <- function(x, bars=FALSE,
           cat(paste0("ERROR: No data available for a stratigraphic diagram.\n"))
           return(invisible())
         }
-        col_names <- c(x$inputs$x.name, x$inputs$taxa.name)
+        #col_names <- c(x$inputs$x.name, x$inputs$taxa.name)
         x <- cbind(x=x$inputs$x, x$inputs$df)
-        colnames(x) <- col_names
+        #colnames(x) <- col_names
     }
     if(is.numeric(x[, 1])) {
         x <- x[order(x[, 1]), ]
