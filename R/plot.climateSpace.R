@@ -32,9 +32,10 @@
 #' }
 #'
 plot_climateSpace <- function( x,
-                      save=FALSE, loc='Climate_space.pdf',
-                      width=7.48,
-                      height= min(9, 3*length(x$parameters$climate)), y0 = 0.3
+                      save = FALSE, loc = 'Climate_space.pdf',
+                      width=  7.48,
+                      height = min(9, 3*length(x$parameters$climate)), y0 = 0.3,
+                      resol = 0.25
                       ) {
 
     if (methods::is(x)[1] == 'crestObj') {
@@ -72,7 +73,14 @@ plot_climateSpace <- function( x,
             par_usr <- graphics::par(no.readonly = TRUE)
         }
 
-        veg_space      <- do.call(rbind, x$modelling$distributions)[, 2:3]
+        distribs <- lapply(x$modelling$distributions,
+                           function(x) { x[, 2] = resol * (x[, 2] %/% resol) + resol/2;
+                                         x[, 3] = resol * (x[, 3] %/% resol) + resol/2;
+                                         return(stats::aggregate(. ~ longitude+latitude, data = x, mean))
+                                        }
+                          )
+
+        veg_space      <- do.call(rbind, distribs)[, c('longitude', 'latitude')]
         veg_space      <- plyr::count(veg_space)
         veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
         veg_space[, 3] <- base::log10(veg_space[, 3])
@@ -112,24 +120,29 @@ plot_climateSpace <- function( x,
 
         plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab, col=viridis::viridis(20), title='Number of unique species occurences per grid cell')
 
-
         ## Plot climate spaces -----------------------------------------------------
-        ll <- do.call(rbind, x$modelling$distributions)
+        ll <- do.call(rbind, distribs)
         ll <- ll[!is.na(ll[, 1]), ]
-        ll_unique <- unique(ll[, -1])
-        cs_colour <- rep(NA, nrow(x$modelling$climate_space))
+        ll_unique <- unique(ll[, colnames(ll) != 'taxonid'])
+
+        climate_space <- x$modelling$climate_space
+        climate_space[, 1] = resol * (climate_space[, 1] %/% resol) + resol/2;
+        climate_space[, 2] = resol * (climate_space[, 2] %/% resol) + resol/2;
+        climate_space = stats::aggregate(. ~ longitude+latitude, data = climate_space, mean)
+
+        cs_colour <- rep(NA, nrow(climate_space))
         for (i in 1:length(cs_colour)) {
-            w <- which(ll_unique[, 1] == x$modelling$climate_space[i, 1] )
-            cs_colour[i] <- ifelse(x$modelling$climate_space[i, 2] %in% ll_unique[w, 2], 'black', 'grey70' )
+            w <- which(ll_unique[, 1] == climate_space[i, 1] )
+            cs_colour[i] <- ifelse(climate_space[i, 2] %in% ll_unique[w, 2], 'black', 'grey70' )
         }
 
         if(length(climate) > 1) {
             oo <- order(cs_colour, decreasing=TRUE)
             for(clim in 1:(length(climate)-1)) {
-                miny <- min(x$modelling$climate_space[, climate[clim+1]], na.rm=TRUE)
-                maxy <- max(x$modelling$climate_space[, climate[clim+1]], na.rm=TRUE)
-                minx <- min(x$modelling$climate_space[, climate[clim]], na.rm=TRUE)
-                maxx <- max(x$modelling$climate_space[, climate[clim]], na.rm=TRUE)
+                miny <- min(climate_space[, climate[clim+1]], na.rm=TRUE)
+                maxy <- max(climate_space[, climate[clim+1]], na.rm=TRUE)
+                minx <- min(climate_space[, climate[clim]], na.rm=TRUE)
+                maxx <- max(climate_space[, climate[clim]], na.rm=TRUE)
 
                 dX <- maxx-minx
                 dY <- maxy-miny
@@ -166,7 +179,7 @@ plot_climateSpace <- function( x,
                   }
                   graphics::rect(minx, miny, maxx, maxy, lwd=0.5)
 
-                  graphics::points(x$modelling$climate_space[oo, climate[clim]], x$modelling$climate_space[oo, climate[clim+1]],
+                  graphics::points(climate_space[oo, climate[clim]], climate_space[oo, climate[clim+1]],
                        col=cs_colour[oo], pch=20, cex=0.5)
                 }
             }
@@ -176,14 +189,14 @@ plot_climateSpace <- function( x,
         for( clim in climate) {
             brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
 
-            R1 <- raster::rasterFromXYZ(cbind(x$modelling$climate_space[, 1:2],
-                                              x$modelling$climate_space[, clim] ),
+            R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
+                                              climate_space[, clim] ),
                                         crs = sp::CRS("+init=epsg:4326"))
             plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1), brks.pos = brks, brks.lab = brks, title=accClimateVariables(clim)[3])
         }
 
         for( clim in climate) {
-            h1 <- graphics::hist(x$modelling$climate_space[, clim],
+            h1 <- graphics::hist(climate_space[, clim],
                        breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
                        plot=FALSE)
             h2 <- graphics::hist(ll[, clim],
@@ -192,7 +205,6 @@ plot_climateSpace <- function( x,
 
             xval <- range(h1$breaks)
             xval <- xval + c(-1, 1)*diff(xval)*0.1
-
             graphics::par(mar=c(0,0,0,0))
             plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i') ; {
                 s1 <- graphics::strwidth('Observed', cex=0.8, font=2)

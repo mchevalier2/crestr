@@ -34,10 +34,11 @@
 #'   plot_taxaCharacteristics(x)
 #' }
 #'
-plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
-                                      save=FALSE, loc='taxaCharacteristics.pdf',
-                                      width=7.48, w0 = 0.3,
-                                      height= min(9, 3*length(x$parameters$climate)), h0 = 0.3
+plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
+                                      save = FALSE, loc = 'taxaCharacteristics.pdf',
+                                      width = 7.48, w0 = 0.3,
+                                      height = 3*length(x$parameters$climate), h0 = 0.3,
+                                      resol = 0.25
                                       ) {
 
     if (methods::is(x)[1] == 'crestObj') {
@@ -80,6 +81,18 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
             par_usr <- graphics::par(no.readonly = TRUE)
             graphics::par(ask = TRUE)
         }
+
+        climate_space <- x$modelling$climate_space
+        climate_space[, 1] = resol * (climate_space[, 1] %/% resol) + resol/2;
+        climate_space[, 2] = resol * (climate_space[, 2] %/% resol) + resol/2;
+        climate_space = stats::aggregate(. ~ longitude+latitude, data = climate_space, mean)
+
+        distribs <- lapply(x$modelling$distributions,
+                           function(x) { x[, 2] = resol * (x[, 2] %/% resol) + resol/2;
+                                         x[, 3] = resol * (x[, 3] %/% resol) + resol/2;
+                                         return(stats::aggregate(. ~ longitude+latitude, data = x, mean))
+                                        }
+                          )
 
         for(tax in taxanames) {
             ## If data are unavailable
@@ -169,11 +182,15 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
                        height = c(h0, y1-2*h0, h0, rep(c(y2-h0, h0), times=length(climate))))
 
 
-                veg_space      <- x$modelling$distributions[[tax]][, 2:3]
+
+                veg_space      <- distribs[[tax]][, c('longitude', 'latitude')]
+                veg_space[, 1] <- resol * (veg_space[, 1] %/% resol) + resol/2
+                veg_space[, 2] <- resol * (veg_space[, 2] %/% resol) + resol/2
                 veg_space      <- plyr::count(veg_space)
                 veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
                 veg_space[, 3] <- base::log10(veg_space[, 3])
                 veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
+
 
                 ## Plot species abundance --------------------------------------------------
                 zlab=c(0, ceiling(max(raster::values(veg_space), na.rm=TRUE)))
@@ -254,8 +271,8 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
 
                     ## Plot the distribution over climate --------------------------------
                     brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
-                    R1 <- raster::rasterFromXYZ(cbind(x$modelling$climate_space[, 1:2],
-                                                      x$modelling$climate_space[, clim] ),
+                    R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
+                                                      climate_space[, clim] ),
                                                 crs = sp::CRS("+init=epsg:4326"))
                     plot_map_eqearth(R1, ext,
                                      zlim=range(brks), col=viridis::viridis(length(brks)-1),
@@ -265,10 +282,10 @@ plot_taxaCharacteristics <- function( x, taxanames=x$inputs$taxa.name,
 
 
                     ## Plot the histogram ------------------------------------------------
-                    h1 <- graphics::hist(x$modelling$climate_space[, clim],
+                    h1 <- graphics::hist(climate_space[, clim],
                                breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
                                plot=FALSE)
-                    h2 <- graphics::hist(unique(x$modelling$distributions[[tax]][, -1])[, clim],
+                    h2 <- graphics::hist(unique(distribs[[tax]][, -1])[, clim],
                                breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
                                plot=FALSE)
 
