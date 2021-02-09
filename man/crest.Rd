@@ -9,6 +9,7 @@ crest(
   pse,
   taxaType,
   climate,
+  site_info = rep(NA, length(climate)),
   xmn = -180,
   xmx = 180,
   ymn = -90,
@@ -123,6 +124,7 @@ data(crest_ex_pse)
 data(crest_ex_selection)
 recons <- crest(
   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+  site_info = c(15, 15),
   climate = c("bio1", "bio12"), bin_width = c(2, 20),
   shape = c("normal", "lognormal"),
   selectedTaxa = crest_ex_selection, dbname = "crest_example",

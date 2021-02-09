@@ -20,6 +20,7 @@ crest.get_modern_data(
   ecoregions = NA,
   minGridCells = 20,
   selectedTaxa = NA,
+  site_info = c(NA, NA),
   dbname = "gbif4crest_02",
   verbose = TRUE
 )

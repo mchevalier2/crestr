@@ -3,6 +3,8 @@
 #' Connect to the gbif4crest_02 database by accessing the server on Amazon.
 #'
 #' @inheritParams crestObj
+#' @param site_info A vector containing the coordinates of the study site.
+#'        Default c(NA, NA).
 #' @param leave_one_out A boolean to indicate whether the leave one out (loo)
 #'        reconstructions should be computed (default FALSE).
 #' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
@@ -15,6 +17,7 @@
 #' data(crest_ex_selection)
 #' recons <- crest(
 #'   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+#'   site_info = c(7.5, 7.5),
 #'   climate = c("bio1", "bio12"), bin_width = c(2, 20),
 #'   shape = c("normal", "lognormal"),
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
@@ -24,6 +27,7 @@
 #' plot_loo(recons)
 #'
 crest <- function(df, pse, taxaType, climate,
+                  site_info = rep(NA, length(climate)),
                   xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                   continents = NA, countries = NA,
                   realms = NA, biomes = NA, ecoregions = NA,
@@ -50,6 +54,7 @@ crest <- function(df, pse, taxaType, climate,
         minGridCells = minGridCells,
         selectedTaxa = selectedTaxa,
         verbose = verbose,
+        site_info = site_info,
         dbname = dbname
     )
 

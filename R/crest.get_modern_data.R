@@ -32,6 +32,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                                    realms = NA, biomes = NA, ecoregions = NA,
                                    minGridCells = 20,
                                    selectedTaxa = NA,
+                                   site_info = c(NA, NA),
                                    dbname = "gbif4crest_02",
                                    verbose=TRUE) {
 
@@ -241,6 +242,17 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         selectedTaxa = selectedTaxa
     )
     crest$misc[['taxa_notes']] <- taxa_notes
+    crest$misc$site_info <- list()
+    crest$misc$site_info[['long']]   <- site_info[1]
+    crest$misc$site_info[['lat']]    <- site_info[2]
+    if((!is.na(crest$misc$site_info[['long']])) & (!is.na(crest$misc$site_info[['lat']]))) {
+        resol <- ifelse(dbname == 'crest_example', 0.5, 0.25)
+        crest$misc$site_info[['climate']] <- climate_from_xy(crest$misc$site_info[['long']],
+                                                             crest$misc$site_info[['lat']],
+                                                             crest$parameters$climate,
+                                                             resol = resol,
+                                                             dbname = dbname)
+    }
 
     if (is.data.frame(df)) {
         crest$inputs$x <- df[, 1]
