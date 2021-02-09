@@ -164,7 +164,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
 
     taxa_notes <- list()
     for (tax in taxa_to_ignore) {
-        taxa_notes[[tax]] <- 'Taxon not in the proxy_species_equivalency table.'
+        message <- 'Taxon not in the proxy_species_equivalency table.'
+        if (! message %in% names(taxa_notes)) {
+            taxa_notes[[message]] <- c()
+        }
+        taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
         selectedTaxa[tax, climate] <- rep(-1, length(climate))
     }
     taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa[apply(selectedTaxa, 1, sum)>=0, ])]
@@ -175,7 +179,14 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         for(w in which(!(taxa.name %in% rownames(selectedTaxa)))) {
             selectedTaxa <- rbind(selectedTaxa, rep(1, length(climate)))
             rownames(selectedTaxa)[nrow(selectedTaxa)] <- taxa.name[w]
-            taxa_notes[[taxa.name[w]]] <- 'Not present in the original selectedTaxa table. Added by default as 1s.'
+            for (tax in taxa_to_ignore) {
+                message <- 'Not present in the original selectedTaxa table. Added by default as 1s.'
+                if (! message %in% names(taxa_notes)) {
+                    taxa_notes[[message]] <- c()
+                }
+                taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
+                selectedTaxa[tax, climate] <- rep(-1, length(climate))
+            }
         }
     }
 
@@ -208,7 +219,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         #cat("\n")
         for (tax in unique(pse$ProxyName[w])) {
             selectedTaxa[tax, ] <- rep(-1, length(climate))
-            taxa_notes[[tax]] <- "No association with vegetation"
+            message <- "No association with vegetation"
+            if (! message %in% names(taxa_notes)) {
+                taxa_notes[[message]] <- c()
+            }
+            taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
         }
         pse <- pse[!w, ]
     }
@@ -237,7 +252,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         if (sum(w) > 0) {
             for (tax in colnames(crest$inputs$df)[w]) {
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                crest$misc$taxa_notes[[tax]] <- "All percentages equal to 0."
+                message <- "All percentages equal to 0."
+                if (! message %in% names(crest$misc[['taxa_notes']])) {
+                    crest$misc[['taxa_notes']][[message]] <- c()
+                }
+                crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }
         }
 
@@ -245,7 +264,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         if (sum(w) > 0) {
             for (tax in taxa.name[w]) {
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                crest$misc$taxa_notes[[tax]] <- "Taxon not present in the data file."
+                message <- "Taxon not present in the data file."
+                if (! message %in% names(crest$misc[['taxa_notes']])) {
+                    crest$misc[['taxa_notes']][[message]] <- c()
+                }
+                crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }
         }
 
@@ -292,7 +315,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                     #cat(paste("WARNING: No match for taxon ", paste(pse[w, 2:5], collapse = ", "), "\n"))
                     if (tax %in% crest$inputs$taxa.name) {
                       crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                      crest$misc$taxa_notes[[tax]] <- "No correspondance with vegetation"
+                      message <- "No correspondance with vegetation"
+                      if (! message %in% names(crest$misc[['taxa_notes']])) {
+                          crest$misc[['taxa_notes']][[message]] <- c()
+                      }
+                      crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
                     }
                 }
             }
@@ -316,7 +343,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         taxIDs <- taxonID2proxy[taxonID2proxy[, "proxyName"] == tax, 1]
         if (length(taxIDs) == 0) {
             crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-            crest$misc$taxa_notes[[tax]] <- paste(crest$misc$taxa_notes[[tax]], "No species corresponding to the proxy name.", sep='; ')
+            message <- "No species corresponding to the proxy name."
+            if (! message %in% names(crest$misc[['taxa_notes']])) {
+                crest$misc[['taxa_notes']][[message]] <- c()
+            }
+            crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
         }
         if(verbose) {
             cat(paste0('  <> Extracting species distributions ...... ', stringr::str_pad(paste0(round(pbi / length(taxa.name)),'%\r'), width=4, side='left')))
@@ -336,7 +367,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 #print(extent_taxa)
                 distributions[[tax]] <- NA
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                crest$misc$taxa_notes[[tax]] <- "No data point available in the study area."
+                message <- "No data point available in the study area."
+                if (! message %in% names(crest$misc[['taxa_notes']])) {
+                    crest$misc[['taxa_notes']][[message]] <- c()
+                }
+                crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }else{
                 extent_taxa <- table(distributions[[tax]][, 1])
                 extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
@@ -344,7 +379,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 if(nrow(distributions[[tax]]) == 0) {
                     distributions[[tax]] <- NA
                     crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                    crest$misc$taxa_notes[[tax]] <- "Present but insufficient data in the study area to fit a pdf"
+                    message <- "Present but insufficient data in the study area to fit a pdf"
+                    if (! message %in% names(crest$misc[['taxa_notes']])) {
+                        crest$misc[['taxa_notes']][[message]] <- c()
+                    }
+                    crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
                 }
             }
         }
