@@ -10,6 +10,7 @@
   uncertainties = x$parameters$uncertainties,
   optima = TRUE,
   add_modern = FALSE,
+  simplify = FALSE,
   xlim = NA,
   ylim = NA,
   save = FALSE,
@@ -29,6 +30,10 @@ bars that should be calculated (default are the values stored in x).}
 mean (FALSE) estimates.}
 
 \item{add_modern}{Adds the modern climate values to the plot.}
+
+\item{simplify}{A boolean to indicate if the full distribution of uncertainties
+should be plooted (FALSE, default) or if they should be simplified to
+the uncertainty range(s).}
 
 \item{xlim}{the x limits (x1, x2) of the plot.  Note that \code{x1 > x2}
     is allowed and leads to a \sQuote{reversed axis}.

@@ -139,6 +139,9 @@ print.crestObj <- function(x, ...) {
 #'        bars that should be calculated (default are the values stored in x).
 #' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
 #'        mean (FALSE) estimates.
+#' @param simplify A boolean to indicate if the full distribution of uncertainties
+#'        should be plooted (FALSE, default) or if they should be simplified to
+#'        the uncertainty range(s).
 #' @param add_modern Adds the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
@@ -152,6 +155,7 @@ plot.crestObj <- function(x,
                           uncertainties = x$parameters$uncertainties,
                           optima = TRUE,
                           add_modern = FALSE,
+                          simplify = FALSE,
                           xlim = NA,
                           ylim = NA,
                           save = FALSE,
@@ -163,7 +167,6 @@ plot.crestObj <- function(x,
     }
 
     idx <- 0
-    par_usr <- list()
 
     if(is.na(xlim)) {
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
@@ -174,14 +177,18 @@ plot.crestObj <- function(x,
     }
 
     if(add_modern) {
-        if (length(x$misc$site_info) == 2) {
+        if (length(x$misc$site_info) <= 2) {
             add_modern <- FALSE
         }
     }
 
+    if(!save) {
+        par_usr <- graphics::par(no.readonly = TRUE)
+    }
+
     for (clim in climate) {
         if (idx == 0 && !save) {
-            par_usr$mfrow <- graphics::par(mfrow = grDevices::n2mfrow(length(climate)))[[1]]
+            graphics::par(mfrow = grDevices::n2mfrow(length(climate)))[[1]]
         }
         idx <- idx + 1
         pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
@@ -214,81 +221,139 @@ plot.crestObj <- function(x,
             xx <- x$inputs$x
         }
 
-        if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
-        par_usr$mar <- graphics::par(mar = c(3, 3, 3.2, 0.5))[[1]]
-        plot3D::image2D(
-          z = (1 - as.matrix(t(pdfter[, -1]))),
-          y = pdfter[, 1],
-          x = xx,
-          xlim = xlim,
-          ylim = c(ymn, ymx),
-          zlim = c(0, 1),
-          col = viridis::viridis(125)[26:125],
-          axes=FALSE,
-          colkey = FALSE,
-          resfac = 1,
-          tck = -.013,
-          mgp = c(2, .3, 0),
-          las = 1,
-          hadj = c(1, 1),
-          xlab = x$inputs$x.name,
-          ylab = climate_names[climate_names[, 2] == clim, 3],
-          cex.lab = 6 / 7
-        )
-        graphics::axis(2, cex.axis=6/7)
-        if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
-            graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
-        } else {
-            graphics::axis(1, cex.axis=6/7)
-        }
-        if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
-            loc <- substr(loc, 1, nchar(loc) - 1)
-        }
-        for (e in uncertainties) {
-            val <- apply(pdfter[, -1], 2, function(x) {
-                if(is.na(x[1])) return(c(NA, NA))
-                w <- which(x <= e)
-                return(c(w[1], w[length(w)]))
-                }
-            )
-            graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[1, ], 1],
-                type = "l", col = "white", lty = 3
-            )
-            graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[2, ], 1],
-                type = "l", col = "white", lty = 3
-            )
-        }
-        if(add_modern) {
-            graphics::segments(xlim[1], x$misc$site_info$climate[, clim], xlim[2], x$misc$site_info$climate[, clim],
-                col = "red", cex = 0.5, lty = 2
-            )
-        }
-        graphics::points(x$reconstructions[[clim]][["optima"]],
-            pch = 18, col = "white", cex = 0.8
-        )
-        graphics::points(x$reconstructions[[clim]][["optima"]],
-            col = "white", cex = 0.5, type = "l"
-        )
 
-        plot3D::colkey(
-          side = 3,
-          length = 0.8,
-          dist = -0.01,
-          lwd = 0.1,
-          cex.axis = 6 / 7,
-          clim = c(1, 0),
-          col = viridis::viridis(125)[26:125],
-          clab = "Confidence level",
-          font.clab = 1,
-          line.clab = 1.3,
-          adj.clab = 0.5,
-          add = TRUE,
-          tck = -0.4,
-          mgp = c(3, .25, 0),
-          lwd.tick = 0.7
+
+        val <- apply(pdfter[, -1], 2, function(x) {
+            if(is.na(x[1])) return(c(NA, NA))
+            w <- which(x <= uncertainties[length(uncertainties)])
+            return(c(w[1], w[length(w)]))
+            }
         )
+        ylim2 <- pdfter[c(min(val[1, ], na.rm=TRUE),max(val[2, ], na.rm=TRUE)), 1]
+
+        if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
+
+        if(simplify) {
+            graphics::par(mar = c(2.5, 2.5, 0.4, 0.2))
+            graphics::plot(0,0, type='n', xlim=xlim, ylim = ylim2,
+                 xaxs='i', yaxs='i', frame = TRUE, axes=FALSE)
+
+            for( u in length(uncertainties):1) {
+                val <- apply(pdfter[, -1], 2, function(x) {
+                    if(is.na(x[1])) return(c(NA, NA))
+                    w <- which(x <= uncertainties[u])
+                    return(c(w[1], w[length(w)]))
+                    }
+                )
+
+                if (sum(is.na(x$reconstructions[[clim]]$optima[, var_to_plot])) > 0) {
+                    j <- 1
+                    na_cnt <- 0
+                    w <- which(is.na(x$reconstructions[[clim]]$optima[, var_to_plot]))
+                    k <- 0
+                    while(k < length(xx)) {
+                        na_cnt <- na_cnt + 1
+                        k <- min(w[na_cnt] - 1, length(xx), na.rm=TRUE)
+                        graphics::polygon(c(xx[j:k], rev(xx[j:k])), c(pdfter[val[1, ], 1][j:k], rev(pdfter[val[2, ], 1][j:k])), col=crestr::makeTransparent('cornflowerblue', alpha=1 - u / (length(uncertainties) + 1)), border='grey90', lwd=0.1)
+                        j <- w[na_cnt] + 1
+                        while(is.na(x$reconstructions[[clim]]$optima[j, var_to_plot]) & na_cnt < length(w)) {
+                            j <- j + 1
+                            na_cnt <- na_cnt + 1
+                        }
+                    }
+                } else {
+                    graphics::polygon(c(xx, rev(xx)), c(pdfter[val[1, ], 1], rev(pdfter[val[2, ], 1])), col=crestr::makeTransparent('cornflowerblue', alpha=1 - u / (length(uncertainties) + 1)), border='grey90', lwd=0.1)
+                }
+            }
+            if(add_modern) {
+                graphics::segments(xlim[1], x$misc$site_info$climate[, clim], xlim[2], x$misc$site_info$climate[, clim],
+                    col = "grey70", cex = 0.5, lty = 2
+                )
+            }
+            graphics::points(xx, x$reconstructions[[clim]]$optima[, var_to_plot], type='l', lwd=1)
+            graphics::mtext(climate_names[climate_names[, 2] == clim, 3], side=2, line=1.4, cex=0.9, font=2)
+            graphics::mtext(x$inputs$x.name, side=1, line=1.2, cex=0.9, font=2)
+            graphics::par(mgp=c(3,0.2,0))
+            graphics::axis(1, cex.axis=0.8, tck=-0.01)
+            graphics::par(mgp=c(3,0.3,0))
+            graphics::axis(2, cex.axis=0.8, tck=-0.01)
+        } else {
+            graphics::par(mar = c(3, 3, 3.2, 0.5))
+
+            plot3D::image2D(
+              z = (1 - as.matrix(t(pdfter[, -1]))),
+              y = pdfter[, 1],
+              x = xx,
+              xlim = xlim,
+              ylim = c(ymn, ymx),
+              zlim = c(0, 1),
+              col = viridis::viridis(125)[26:125],
+              axes=FALSE,
+              colkey = FALSE,
+              resfac = 1,
+              tck = -.013,
+              mgp = c(2, .3, 0),
+              las = 1,
+              hadj = c(1, 1),
+              xlab = x$inputs$x.name,
+              ylab = climate_names[climate_names[, 2] == clim, 3],
+              cex.lab = 6 / 7
+            )
+            graphics::axis(2, cex.axis=6/7)
+            if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+                graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
+            } else {
+                graphics::axis(1, cex.axis=6/7)
+            }
+            if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
+                loc <- substr(loc, 1, nchar(loc) - 1)
+            }
+            for (e in uncertainties) {
+                val <- apply(pdfter[, -1], 2, function(x) {
+                    if(is.na(x[1])) return(c(NA, NA))
+                    w <- which(x <= e)
+                    return(c(w[1], w[length(w)]))
+                    }
+                )
+                graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[1, ], 1],
+                    type = "l", col = "white", lty = 3
+                )
+                graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[2, ], 1],
+                    type = "l", col = "white", lty = 3
+                )
+            }
+            if(add_modern) {
+                graphics::segments(xlim[1], x$misc$site_info$climate[, clim], xlim[2], x$misc$site_info$climate[, clim],
+                    col = "red", cex = 0.5, lty = 2
+                )
+            }
+            graphics::points(x$reconstructions[[clim]][["optima"]],
+                pch = 18, col = "white", cex = 0.8
+            )
+            graphics::points(x$reconstructions[[clim]][["optima"]],
+                col = "white", cex = 0.5, type = "l"
+            )
+
+            plot3D::colkey(
+              side = 3,
+              length = 0.8,
+              dist = -0.01,
+              lwd = 0.1,
+              cex.axis = 6 / 7,
+              clim = c(1, 0),
+              col = viridis::viridis(125)[26:125],
+              clab = "Confidence level",
+              font.clab = 1,
+              line.clab = 1.3,
+              adj.clab = 0.5,
+              add = TRUE,
+              tck = -0.4,
+              mgp = c(3, .25, 0),
+              lwd.tick = 0.7
+            )
+        }
         if(save) grDevices::dev.off()
     }
-    if(!save) graphics::par(par_usr)
+    if(!save)  graphics::par(par_usr)
     invisible(x)
 }
