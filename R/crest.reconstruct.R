@@ -35,7 +35,13 @@ crest.reconstruct <- function(x,
     if(verbose) cat('\n## Last data checks and reconstruction\n')
     if(! skip_for_loo) {
 
-        if(verbose) cat('  <> Checking taxa ......................... ')
+        if(verbose) cat('  <> Checking data ......................... ')
+        if (!is.data.frame(x$inputs$df)) {
+            cat("\nERROR: Fossil data not provided. Please check the 'df' parameter in crest.get_modern_data().\n")
+            return(x)
+        }
+
+        if(verbose) cat('[OK]\n  <> Checking taxa ......................... ')
         x$parameters$taxWeight <- taxWeight
         x$parameters$presenceThreshold <- presenceThreshold
 
