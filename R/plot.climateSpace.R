@@ -135,7 +135,7 @@ plot_climateSpace <- function( x,
 
         site_xy <- NA
         if(add_modern) {
-            site_xy <- c(x$misc$site_info$long, x$misc$site_info$long)
+            site_xy <- c(x$misc$site_info$long, x$misc$site_info$lat)
         }
 
         plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab, col=viridis::plasma(20), title='Number of unique species occurences per grid cell', site_xy = site_xy)
