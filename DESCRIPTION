@@ -33,7 +33,7 @@ Imports:
     pals
 Depends:
     R (>= 2.10)
-Suggests: 
+Suggests:
     testthat,
     knitr,
     rmarkdown,

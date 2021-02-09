@@ -114,8 +114,8 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         #for(i in 1:(length(brks2)-1)) {
         #  graphics::rect(brks2[i], 0, brks2[i+1], 0.3, border=NA, col=viridis::viridis(length(brks.pos)-1)[i])
         #}
-        for(i in 1:20) {
-          graphics::rect((i-1)/20, 0, i/20, 0.3, lwd=0.3, border=viridis::viridis(20)[i], col=viridis::viridis(20)[i])
+        for(i in 1:length(col)) {
+          graphics::rect((i-1)/length(col), 0, i/length(col), 0.3, lwd=0.3, border=col[i], col=col[i])
         }
 
         cont <- TRUE

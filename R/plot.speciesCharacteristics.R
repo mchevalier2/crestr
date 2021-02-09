@@ -6,6 +6,8 @@
 #'        crest.reconstrut() or crest() functions.
 #' @param taxanames A list of taxa to use for the plot (default is all the
 #'        recorded taxa).
+#' @param climate Climate variables to be used to generate the plot. By default
+#'        all the variables are included.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
 #' @param loc An absolute or relative path that indicates where the diagram
@@ -17,6 +19,10 @@
 #' @param height The height of the output file in inches (default 3in ~ 7.6cm
 #'        per variables).
 #' @param h0 The vertical space used for the x-axes.
+#' @param resol For advanced users only: if higher resolution data are used to
+#'        estimate the pdfs, use this parameter to define the resolution of the
+#'        maps on the figures. (default is 0.25 degrees to match with the
+#'        default database)
 #' @export
 #' @examples
 #' \dontrun{
@@ -35,9 +41,10 @@
 #' }
 #'
 plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
+                                      climate = x$parameters$climate,
                                       save = FALSE, loc = 'taxaCharacteristics.pdf',
                                       width = 7.48, w0 = 0.3,
-                                      height = 3*length(x$parameters$climate), h0 = 0.3,
+                                      height = 3*length(climate), h0 = 0.3,
                                       resol = 0.25
                                       ) {
 
@@ -51,8 +58,6 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
         taxanames <- taxanames[taxanames %in% x$inputs$taxa.name]
         par_usr <- list()
-
-        climate <- x$parameters$climate
 
         ext <- c(x$parameters$xmn, x$parameters$xmx, x$parameters$ymn, x$parameters$ymx)
         ext_eqearth <- eqearth_get_ext(ext)
@@ -87,13 +92,8 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
         climate_space[, 2] = resol * (climate_space[, 2] %/% resol) + resol/2;
         climate_space = stats::aggregate(. ~ longitude+latitude, data = climate_space, mean)
 
-        distribs <- lapply(x$modelling$distributions,
-                           function(x) { x[, 2] = resol * (x[, 2] %/% resol) + resol/2;
-                                         x[, 3] = resol * (x[, 3] %/% resol) + resol/2;
-                                         return(stats::aggregate(. ~ longitude+latitude, data = x, mean))
-                                        }
-                          )
 
+        distribs <- list()
         for(tax in taxanames) {
             ## If data are unavailable
             if (sum(x$inputs$selectedTaxa[tax, x$parameters$climate]) < 0) {
@@ -173,6 +173,15 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 }
             } else { ## If data are available for the taxon --------------------------
 
+                tmp <- x$modelling$distributions[[tax]]
+                if(is.data.frame(tmp)) {
+                    tmp[, 2] = resol * (tmp[, 2] %/% resol) + resol/2;
+                    tmp[, 3] = resol * (tmp[, 3] %/% resol) + resol/2;
+                    distribs[[tax]] <- stats::aggregate(. ~ longitude+latitude+taxonid, data = tmp, mean, na.action = NULL)
+                } else {
+                    distribs[[tax]] <- NA
+                }
+
                 ## Defining plotting matrix --------------------------------------------
                 m1 <- matrix(c(5,2,2,1,1,5,2,2,3,3,5,2,2,4,4), ncol=5, byrow=TRUE)
                 m2 <- matrix(rep(c(1,2,3,3,5,1,2,4,4,6) , length(climate)) + 5 + 6*rep(1:length(climate)-1, each=10), ncol=5, byrow=TRUE)
@@ -190,6 +199,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
                 veg_space[, 3] <- base::log10(veg_space[, 3])
                 veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
+
 
 
                 ## Plot species abundance --------------------------------------------------
@@ -210,7 +220,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 graphics::par(mar=c(0,0,0,0))
                 plot_map_eqearth(veg_space, ext, zlim = zlab,
                                  brks.pos=log10(clab), brks.lab=clab,
-                                 col=viridis::viridis(20),
+                                 col=viridis::plasma(20),
                                  title='Number of unique species occurences per grid cell')
 
 

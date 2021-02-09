@@ -37,7 +37,7 @@ crest(
 \item{df}{A data frame containing the data to reconstruct (counts,
 percentages or presence/absence data).}
 
-\item{pse}{A pollen-Species equivalency table. See \code{\link{get_pse}} for
+\item{pse}{A pollen-Species equivalency table. See \code{\link{createPSE}} for
 details.}
 
 \item{taxaType}{A numerical index (between 1 and 6) to define the type of

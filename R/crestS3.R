@@ -3,7 +3,7 @@
 #' Creates a crest() object with all default parameters.
 #'
 #' @param taxa.name A vector that contains the names of the taxa to study.
-#' @param pse A pollen-Species equivalency table. See \code{\link{get_pse}} for
+#' @param pse A pollen-Species equivalency table. See \code{\link{createPSE}} for
 #'        details.
 #' @param taxaType A numerical index (between 1 and 6) to define the type of
 #'        palaeoproxy used: 1 for plants, 2 for beetles, 3 for
@@ -155,126 +155,127 @@ plot.crestObj <- function(x,
                           save = FALSE,
                           loc = getwd(),
                           ...) {
-  if (length(x$reconstructions) == 0 || is.null(climate)) {
-    cat("No reconstruction available for plotting.\n")
-    return(invisible(x))
-  }
+    if (length(x$reconstructions) == 0 || is.null(climate)) {
+        cat("No reconstruction available for plotting.\n")
+        return(invisible(x))
+    }
 
-  idx <- 0
-  par_usr <- list()
+    idx <- 0
+    par_usr <- list()
 
-  if(is.na(xlim)) {
+    if(is.na(xlim)) {
     if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
-      xlim <- c(1, length(x$inputs$x))
+        xlim <- c(1, length(x$inputs$x))
     } else {
-      xlim <- range(x$inputs$x)
+        xlim <- range(x$inputs$x)
     }
-  }
-
-  for (clim in climate) {
-    if (idx == 0 && !save) {
-      par_usr$mfrow <- graphics::par(mfrow = grDevices::n2mfrow(length(climate)))[[1]]
-    }
-    idx <- idx + 1
-    pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
-    pdfter <- pdf
-
-    for (i in 2:ncol(pdf)) {
-      oo <- rev(order(pdf[, i]))
-      tmp1 <- pdf[oo, 1]
-      tmp2 <- pdf[oo, i]
-      oo <- order(tmp1)
-      pdfter[, i] <- cumsum(tmp2 / sum(tmp2))[oo]
     }
 
-    var_to_plot <- ifelse(optima, 2, 3)
-    xmn <- which.min(x$reconstructions[[clim]][["optima"]][, var_to_plot])
-    xmx <- which.max(x$reconstructions[[clim]][["optima"]][, var_to_plot])
+    for (clim in climate) {
+        if (idx == 0 && !save) {
+            par_usr$mfrow <- graphics::par(mfrow = grDevices::n2mfrow(length(climate)))[[1]]
+        }
+        idx <- idx + 1
+        pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
+        pdfter <- pdf
 
-    if (unique(is.na(ylim))) {
-      ymn <- pdfter[which(pdfter[, xmn + 1] <= 0.99)[1], 1]
-      ymx <- pdfter[rev(which(pdfter[, xmx + 1] <= 0.99))[1], 1]
-    } else {
-      ymn <- ylim[idx * 2 - 1]
-      ymx <- ylim[idx * 2]
-    }
-    climate_names <- accClimateVariables()
+        for (i in 2:ncol(pdf)) {
+            oo <- rev(order(pdf[, i]))
+            tmp1 <- pdf[oo, 1]
+            tmp2 <- pdf[oo, i]
+            oo <- order(tmp1)
+            pdfter[, i] <- cumsum(tmp2 / sum(tmp2))[oo]
+        }
 
-    if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
-      xx <- seq_along(x$inputs$x)
-    } else {
-      xx <- x$inputs$x
-    }
+        var_to_plot <- ifelse(optima, 2, 3)
+        xmn <- which.min(x$reconstructions[[clim]][["optima"]][, var_to_plot])
+        xmx <- which.max(x$reconstructions[[clim]][["optima"]][, var_to_plot])
 
-    if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
-    par_usr$mar <- graphics::par(mar = c(3, 3, 3.2, 0.5))[[1]]
-    plot3D::image2D(
-      z = (1 - as.matrix(t(pdfter[, -1]))),
-      y = pdfter[, 1],
-      x = xx,
-      xlim = xlim,
-      ylim = c(ymn, ymx),
-      zlim = c(0, 1),
-      col = viridis::viridis(125)[26:125],
-      axes=FALSE,
-      colkey = FALSE,
-      resfac = 1,
-      tck = -.013,
-      mgp = c(2, .3, 0),
-      las = 1,
-      hadj = c(1, 1),
-      xlab = x$inputs$x.name,
-      ylab = climate_names[climate_names[, 2] == clim, 3],
-      cex.lab = 6 / 7
-    )
-    graphics::axis(2, cex.axis=6/7)
-    if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
-      graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
-    } else {
-      graphics::axis(1, cex.axis=6/7)
-    }
-    if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
-      loc <- substr(loc, 1, nchar(loc) - 1)
-    }
-    for (e in uncertainties) {
-      val <- apply(pdfter[, -1], 2, function(x) {
-        if(is.na(x[1])) return(c(NA, NA))
-        w <- which(x <= e)
-        return(c(w[1], w[length(w)]))
-      })
-      graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[1, ], 1],
-        type = "l", col = "white", lty = 3
-      )
-      graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[2, ], 1],
-        type = "l", col = "white", lty = 3
-      )
-    }
+        if (unique(is.na(ylim))) {
+            ymn <- pdfter[which(pdfter[, xmn + 1] <= 0.99)[1], 1]
+            ymx <- pdfter[rev(which(pdfter[, xmx + 1] <= 0.99))[1], 1]
+        } else {
+            ymn <- ylim[idx * 2 - 1]
+            ymx <- ylim[idx * 2]
+        }
+        climate_names <- accClimateVariables()
 
-    graphics::points(x$reconstructions[[clim]][["optima"]],
-      pch = 18, col = "white", cex = 0.8
-    )
-    graphics::points(x$reconstructions[[clim]][["optima"]],
-      col = "white", cex = 0.5, type = "l"
-    )
-    plot3D::colkey(
-      side = 3,
-      length = 0.8,
-      dist = -0.01,
-      lwd = 0.1,
-      cex.axis = 6 / 7,
-      clim = c(1, 0),
-      col = viridis::viridis(125)[26:125],
-      clab = "Confidence level",
-      font.clab = 1,
-      line.clab = 1.3,
-      adj.clab = 0.5,
-      add = TRUE,
-      tck = -0.4,
-      mgp = c(3, .25, 0),
-      lwd.tick = 0.7
-    )
-    if(save) grDevices::dev.off()
-  }
-  if(!save) graphics::par(par_usr)
-  invisible(x)
+        if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+            xx <- seq_along(x$inputs$x)
+        } else {
+            xx <- x$inputs$x
+        }
+
+        if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
+        par_usr$mar <- graphics::par(mar = c(3, 3, 3.2, 0.5))[[1]]
+        plot3D::image2D(
+          z = (1 - as.matrix(t(pdfter[, -1]))),
+          y = pdfter[, 1],
+          x = xx,
+          xlim = xlim,
+          ylim = c(ymn, ymx),
+          zlim = c(0, 1),
+          col = viridis::viridis(125)[26:125],
+          axes=FALSE,
+          colkey = FALSE,
+          resfac = 1,
+          tck = -.013,
+          mgp = c(2, .3, 0),
+          las = 1,
+          hadj = c(1, 1),
+          xlab = x$inputs$x.name,
+          ylab = climate_names[climate_names[, 2] == clim, 3],
+          cex.lab = 6 / 7
+        )
+        graphics::axis(2, cex.axis=6/7)
+        if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+            graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
+        } else {
+            graphics::axis(1, cex.axis=6/7)
+        }
+        if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
+            loc <- substr(loc, 1, nchar(loc) - 1)
+        }
+        for (e in uncertainties) {
+            val <- apply(pdfter[, -1], 2, function(x) {
+                if(is.na(x[1])) return(c(NA, NA))
+                w <- which(x <= e)
+                return(c(w[1], w[length(w)]))
+                }
+            )
+            graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[1, ], 1],
+                type = "l", col = "white", lty = 3
+            )
+            graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[2, ], 1],
+                type = "l", col = "white", lty = 3
+            )
+        }
+
+        graphics::points(x$reconstructions[[clim]][["optima"]],
+            pch = 18, col = "white", cex = 0.8
+        )
+        graphics::points(x$reconstructions[[clim]][["optima"]],
+            col = "white", cex = 0.5, type = "l"
+        )
+        plot3D::colkey(
+          side = 3,
+          length = 0.8,
+          dist = -0.01,
+          lwd = 0.1,
+          cex.axis = 6 / 7,
+          clim = c(1, 0),
+          col = viridis::viridis(125)[26:125],
+          clab = "Confidence level",
+          font.clab = 1,
+          line.clab = 1.3,
+          adj.clab = 0.5,
+          add = TRUE,
+          tck = -0.4,
+          mgp = c(3, .25, 0),
+          lwd.tick = 0.7
+        )
+        if(save) grDevices::dev.off()
+    }
+    if(!save) graphics::par(par_usr)
+    invisible(x)
 }

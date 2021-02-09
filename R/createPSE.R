@@ -8,7 +8,11 @@
 #'        the file is saved in the working directory under the name
 #'        proxy_species_equivalency.xlsx.
 #' @export
-
+#' @examples
+#' \dontrun{
+#'    createPSE(taxa = colnames(crest_ex)[-1])
+#' }
+#'
 createPSE <- function(taxa, loc='proxy_species_equivalency.xlsx') {
     if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
         cat("This function requires the package 'openxlsx'. Install it to continue.\n\n")

@@ -17,3 +17,9 @@ proxy_species_equivalency.xlsx.}
 \description{
 Returns the citations associated to the GBIF data used to fit the pdfs.
 }
+\examples{
+\dontrun{
+   createPSE(taxa = colnames(crest_ex)[-1])
+}
+
+}

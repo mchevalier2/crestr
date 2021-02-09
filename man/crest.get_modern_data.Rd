@@ -25,7 +25,7 @@ crest.get_modern_data(
 )
 }
 \arguments{
-\item{pse}{A pollen-Species equivalency table. See \code{\link{get_pse}} for
+\item{pse}{A pollen-Species equivalency table. See \code{\link{createPSE}} for
 details.}
 
 \item{taxaType}{A numerical index (between 1 and 6) to define the type of
