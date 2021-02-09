@@ -67,6 +67,9 @@ variable (1 if the taxon should be used, 0 otherwise). The colnames
 should be the climate variables' names and the rownames the taxa
 names. Default is 1 for all taxa and all variables.}
 
+\item{site_info}{A vector containing the coordinates of the study site.
+Default c(NA, NA).}
+
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}

@@ -15,7 +15,8 @@ plot_map_eqearth(
   nlines = 9,
   title = "",
   colour_scale = TRUE,
-  top_layer = NA
+  top_layer = NA,
+  site_xy = NA
 )
 }
 \arguments{
@@ -43,6 +44,8 @@ each dimension. (default is 15 for a smooth result)}
 \item{colour_scale}{A boolean to add the colour scale to the plot (default TRUE).}
 
 \item{top_layer}{A raster to overlay on top of the map (e.g. a distribution).}
+
+\item{site_xy}{Coordinates of a location to add to the plot.}
 }
 \description{
 Plots raster data in equal earth projection.

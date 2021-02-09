@@ -12,6 +12,7 @@ plot_climateSpace(
   width = 7.48,
   height = min(9, 3 * length(climate)),
   y0 = 0.3,
+  add_modern = FALSE,
   resol = 0.25
 )
 }
@@ -36,6 +37,8 @@ Climate_space.pdf.}
 per variables).}
 
 \item{y0}{The space to allocate to each title (default 0.3in ~ 0.76 cm)}
+
+\item{add_modern}{Adds the locations and the modern climate values to the plot.}
 
 \item{resol}{For advanced users only: if higher resolution data are used to
 estimate the pdfs, use this parameter to define the resolution of the

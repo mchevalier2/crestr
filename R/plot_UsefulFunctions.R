@@ -49,9 +49,10 @@ eqearth_get_ext <- function(ext, npoints=15) {
 #' @param title A description title (default is empty)
 #' @param colour_scale A boolean to add the colour scale to the plot (default TRUE).
 #' @param top_layer A raster to overlay on top of the map (e.g. a distribution).
+#' @param site_xy Coordinates of a location to add to the plot.
 #' @export
 #'
-plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos, brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA) {
+plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos, brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, site_xy=NA) {
 
     utils::data(M1, package='crestr', envir = environment())
     M1 <- raster::crop(M1, ext)
@@ -87,6 +88,12 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
     horizontals.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
     horizontals.eqearth.xy <- t(data.frame(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,]))))
+
+    if (length(site_xy) == 2) {
+        Sl1 <- sp::SpatialPoints(matrix(site_xy, ncol=2))
+        raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
+        XY <- sp::spTransform(Sl1, raster::crs(PROJ))
+    }
 
     bckg <- sp::Polygons(list(sp::Polygon(cbind(c(rep(ext[1], npoints),
                                                   rep(ext[2], npoints)),
@@ -161,6 +168,9 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
             raster::image(top_layer, add=TRUE, col='ghostwhite')
         }
 
+        if(length(site_xy) == 2) {
+            sp::plot(XY, col='white', bg='red', cex=2, lwd=2, pch=23, add=TRUE)
+        }
         for(v in 1:length(verticals.eqearth.x)) graphics::text(verticals.eqearth.x[v],
                                                                min(horizontals.eqearth.xy[,2]),
                                                                paste0('\n', round(as.numeric(names(verticals.eqearth))[v],2)),

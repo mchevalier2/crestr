@@ -139,6 +139,7 @@ print.crestObj <- function(x, ...) {
 #'        bars that should be calculated (default are the values stored in x).
 #' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
 #'        mean (FALSE) estimates.
+#' @param add_modern Adds the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
 #' @param loc An absolute or relative path that indicates the folder where the
@@ -150,6 +151,7 @@ plot.crestObj <- function(x,
                           climate = x$parameters$climate,
                           uncertainties = x$parameters$uncertainties,
                           optima = TRUE,
+                          add_modern = FALSE,
                           xlim = NA,
                           ylim = NA,
                           save = FALSE,
@@ -164,11 +166,17 @@ plot.crestObj <- function(x,
     par_usr <- list()
 
     if(is.na(xlim)) {
-    if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
-        xlim <- c(1, length(x$inputs$x))
-    } else {
-        xlim <- range(x$inputs$x)
+        if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+            xlim <- c(1, length(x$inputs$x))
+        } else {
+            xlim <- range(x$inputs$x)
+        }
     }
+
+    if(add_modern) {
+        if (length(x$misc$site_info) == 2) {
+            add_modern <- FALSE
+        }
     }
 
     for (clim in climate) {
@@ -250,13 +258,18 @@ plot.crestObj <- function(x,
                 type = "l", col = "white", lty = 3
             )
         }
-
+        if(add_modern) {
+            graphics::segments(xlim[1], x$misc$site_info$climate[, clim], xlim[2], x$misc$site_info$climate[, clim],
+                col = "red", cex = 0.5, lty = 2
+            )
+        }
         graphics::points(x$reconstructions[[clim]][["optima"]],
             pch = 18, col = "white", cex = 0.8
         )
         graphics::points(x$reconstructions[[clim]][["optima"]],
             col = "white", cex = 0.5, type = "l"
         )
+
         plot3D::colkey(
           side = 3,
           length = 0.8,

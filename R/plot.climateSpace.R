@@ -6,6 +6,7 @@
 #'        crest.reconstruct() or crest() functions.
 #' @param climate Climate variables to be used to generate the plot. By default
 #'        all the variables are included.
+#' @param add_modern Adds the locations and the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
 #' @param loc An absolute or relative path that indicates where the diagram
@@ -42,6 +43,7 @@ plot_climateSpace <- function( x,
                       save = FALSE, loc = 'Climate_space.pdf',
                       width=  7.48,
                       height = min(9, 3*length(climate)), y0 = 0.3,
+                      add_modern = FALSE,
                       resol = 0.25
                       ) {
 
@@ -50,6 +52,12 @@ plot_climateSpace <- function( x,
         if( test[1] & length(test) == 1 ) {
             cat('ERROR: The crestObj requires the climate space to be calibrated. Please run crest.calibrate() on your data.\n')
             return(invisible())
+        }
+
+        if(add_modern) {
+            if (length(x$misc$site_info) == 2) {
+                add_modern <- FALSE
+            }
         }
 
         ext <- c(x$parameters$xmn, x$parameters$xmx, x$parameters$ymn, x$parameters$ymx)
@@ -125,8 +133,12 @@ plot_climateSpace <- function( x,
         clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
         zlab[2] <- log10(clab[length(clab)])
 
+        site_xy <- NA
+        if(add_modern) {
+            site_xy <- c(x$misc$site_info$long, x$misc$site_info$long)
+        }
 
-        plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab, col=viridis::plasma(20), title='Number of unique species occurences per grid cell')
+        plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab, col=viridis::plasma(20), title='Number of unique species occurences per grid cell', site_xy = site_xy)
 
         ## Plot climate spaces -----------------------------------------------------
         ll <- do.call(rbind, distribs)
@@ -171,24 +183,28 @@ plot_climateSpace <- function( x,
                 plot(NA, NA, type='n', xaxs='i', yaxs='i', axes=FALSE, frame=FALSE,
                      xlim=xlim, ylim=ylim) ; {
 
-                  for(yval in graphics::axTicks(4)){
-                      if (yval >= miny & yval <= maxy) {
-                          graphics::segments(maxx, yval, minx, yval, col='grey90', lwd=0.5)
-                          graphics::segments(maxx, yval, maxx-diff(xlim)*0.012, yval, lwd=0.5)
-                          graphics::text(maxx+diff(xlim)*0.015, yval, yval, cex=0.5, adj=c(0,0.4))
-                      }
-                  }
-                  for(xval in graphics::axTicks(1)){
-                      if(xval >= minx & xval <= maxx) {
-                          graphics::segments(xval, miny, xval, maxy, col='grey90', lwd=0.5)
-                          graphics::segments(xval, miny, xval, miny+diff(ylim)*0.012, lwd=0.5)
-                          graphics::text(xval, miny-diff(ylim)*0.015, xval, cex=0.5, adj=c(0.5,1))
-                      }
-                  }
-                  graphics::rect(minx, miny, maxx, maxy, lwd=0.5)
+                    for(yval in graphics::axTicks(4)){
+                         if (yval >= miny & yval <= maxy) {
+                            graphics::segments(maxx, yval, minx, yval, col='grey90', lwd=0.5)
+                            graphics::segments(maxx, yval, maxx-diff(xlim)*0.012, yval, lwd=0.5)
+                            graphics::text(maxx+diff(xlim)*0.015, yval, yval, cex=0.5, adj=c(0,0.4))
+                        }
+                    }
+                    for(xval in graphics::axTicks(1)){
+                        if(xval >= minx & xval <= maxx) {
+                            graphics::segments(xval, miny, xval, maxy, col='grey90', lwd=0.5)
+                            graphics::segments(xval, miny, xval, miny+diff(ylim)*0.012, lwd=0.5)
+                            graphics::text(xval, miny-diff(ylim)*0.015, xval, cex=0.5, adj=c(0.5,1))
+                        }
+                    }
+                    graphics::rect(minx, miny, maxx, maxy, lwd=0.5)
 
-                  graphics::points(climate_space[oo, climate[clim]], climate_space[oo, climate[clim+1]],
-                       col=cs_colour[oo], pch=20, cex=0.5)
+                    graphics::points(climate_space[oo, climate[clim]], climate_space[oo, climate[clim+1]],
+                        col=cs_colour[oo], pch=20, cex=0.5)
+
+                    if (add_modern) {
+                        graphics::points(x$misc$site_info$climate[, climate[clim]], x$misc$site_info$climate[, climate[clim+1]], pch=23, cex=2, lwd=2, col='white', bg='red')
+                    }
                 }
             }
         }
@@ -199,7 +215,7 @@ plot_climateSpace <- function( x,
             R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
                                               climate_space[, clim] ),
                                         crs = sp::CRS("+init=epsg:4326"))
-            plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1), brks.pos = brks, brks.lab = brks, title=accClimateVariables(clim)[3])
+            plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1), brks.pos = brks, brks.lab = brks, title=accClimateVariables(clim)[3], site_xy = site_xy)
         }
 
         for( clim in climate) {
@@ -241,6 +257,9 @@ plot_climateSpace <- function( x,
             graphics::par(mar=c(0,0,0,0))
             plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xval, ylim=c(0,1), xaxs='i', yaxs='i')  ;  {
                 d1 <- -9999999
+                if(add_modern) {
+                    graphics::points(x$misc$site_info$climate[, clim], 0.5, pch=23, col='white', bg='red', cex=1.5, lwd=1.5)
+                }
                 for(i in 1:length(h1$breaks)) {
                     d2 <- h1$breaks[i] - graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=0.5, units='user')/2
                     if(d2 - d1 >= 0) {

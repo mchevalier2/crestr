@@ -9,6 +9,7 @@
   climate = x$parameters$climate,
   uncertainties = x$parameters$uncertainties,
   optima = TRUE,
+  add_modern = FALSE,
   xlim = NA,
   ylim = NA,
   save = FALSE,
@@ -26,6 +27,8 @@ bars that should be calculated (default are the values stored in x).}
 
 \item{optima}{A boolean to indicate whether to plot the optimum (TRUE) or the
 mean (FALSE) estimates.}
+
+\item{add_modern}{Adds the modern climate values to the plot.}
 
 \item{xlim}{the x limits (x1, x2) of the plot.  Note that \code{x1 > x2}
     is allowed and leads to a \sQuote{reversed axis}.
