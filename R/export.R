@@ -28,7 +28,7 @@
 #'   export(recons, sitename='crest_example', fullPosterior=TRUE, weights=TRUE, loo=TRUE)
 #' }
 #'
-export <- function( x, sitename = x$misc$site_info$sitename,
+export <- function( x, sitename = x$misc$site_info$site_name,
                     climate = x$parameters$climate,
                     loc = getwd(), as.csv = FALSE,
                     fullPosterior = FALSE,
@@ -42,6 +42,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
     }
 
     if(is.na(sitename)) sitename <- 'crest_outputs'
+    base::unlink(base::file.path(loc, sitename), recursive=TRUE)
     base::dir.create(base::file.path(loc, sitename), showWarnings = FALSE)
 
     if ((!'loo' %in% names(x$reconstructions[[climate[1]]])) & loo) {
@@ -62,7 +63,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
 
         #openxlsx::addWorksheet(wb, "ReadMe")
         df <- rep(NA, 5)
-        df <- rbind(df, c('NAME OF THE DATASET:', NA, NA, NA, NA))
+        df <- rbind(df, c(paste0('NAME OF THE DATASET: ', x$misc$site_info$site_name), NA, NA, NA, NA))
         df <- rbind(df, rep(NA, 5))
         df <- rbind(df, rep(NA, 5))
         df <- rbind(df, c(paste('LAST UPDATE:', base::date()), NA, NA, NA, NA))
@@ -82,7 +83,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
         df <- rbind(df, c(NA, 'selectedTaxa: List of taxa identified in the study and which ones are selected.', NA, NA, NA))
 
         if(as.csv) {
-            write.table(df, base::file.path(loc, sitename, clim, 'ReadMe.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
+            utils::write.table(df, base::file.path(loc, sitename, clim, 'ReadMe.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
         } else {
             wb <- openxlsx::createWorkbook()
             openxlsx::addWorksheet(wb, "ReadMe")
@@ -92,19 +93,19 @@ export <- function( x, sitename = x$misc$site_info$sitename,
 
         df <- rep(NA, 5)
         df <- rbind(df, c('SITE INFO:', NA, NA, NA, NA))
-        df <- rbind(df, c(NA, paste0('Longitude: ', x$misc$site_info$long, ' °N'), NA, NA, NA))
-        df <- rbind(df, c(NA, paste0('Latitude: ', x$misc$site_info$lat, ' °E'), NA, NA, NA))
+        df <- rbind(df, c(NA, paste0('Longitude: ', x$misc$site_info$long, ' \u00B0N'), NA, NA, NA))
+        df <- rbind(df, c(NA, paste0('Latitude: ', x$misc$site_info$lat, ' \u00B0E'), NA, NA, NA))
         df <- rbind(df, c(NA, paste0(clim, ' modern value: ', x$misc$site_info$climate[, clim]), NA, NA, NA))
         df <- rbind(df, rep(NA, 5))
         df <- rbind(df, rep(NA, 5))
         df <- rbind(df, c('DEFINITION OF THE STUDY AREA:', NA, NA, NA, NA))
-        df <- rbind(df, c(NA, paste0('Longitude: ', x$parameters$xmn, ' - ', x$parameters$xmx, ' °N'), NA, NA, NA))
-        df <- rbind(df, c(NA, paste0('Latitude: ', x$parameters$ymn, ' - ', x$parameters$ymx, ' °E'), NA, NA, NA))
-        if(!unique(is.na(x$parameters$continents))) df <- rbind(df, c(NA, paste0('Data restricted to the following continent(s): ', paste(x$parameters$continents, collapse, ', ')), NA, NA, NA))
-        if(!unique(is.na(x$parameters$countries))) df <- rbind(df, c(NA, paste0('Data restricted to the following country(ies): ', paste(x$parameters$countries, collapse, ', ')), NA, NA, NA))
-        if(!unique(is.na(x$parameters$realms))) df <- rbind(df, c(NA, paste0('Data restricted to the following realm(s): ', paste(x$parameters$realms, collapse, ', ')), NA, NA, NA))
-        if(!unique(is.na(x$parameters$biomes))) df <- rbind(df, c(NA, paste0('Data restricted to the following biome(s): ', paste(x$parameters$biomes, collapse, ', ')), NA, NA, NA))
-        if(!unique(is.na(x$parameters$ecoregions))) df <- rbind(df, c(NA, paste0('Data restricted to the following ecoregion(s): ', paste(x$parameters$ecoregions, collapse, ', ')), NA, NA, NA))
+        df <- rbind(df, c(NA, paste0('Longitude: ', x$parameters$xmn, ' - ', x$parameters$xmx, ' \u00B0N'), NA, NA, NA))
+        df <- rbind(df, c(NA, paste0('Latitude: ', x$parameters$ymn, ' - ', x$parameters$ymx, ' \u00B0E'), NA, NA, NA))
+        if(!unique(is.na(x$parameters$continents))) df <- rbind(df, c(NA, paste0('Data restricted to the following continent(s): ', paste(x$parameters$continents, collapse = ', ')), NA, NA, NA))
+        if(!unique(is.na(x$parameters$countries))) df <- rbind(df, c(NA, paste0('Data restricted to the following country(ies): ', paste(x$parameters$countries, collapse = ', ')), NA, NA, NA))
+        if(!unique(is.na(x$parameters$realms))) df <- rbind(df, c(NA, paste0('Data restricted to the following realm(s): ', paste(x$parameters$realms, collapse = ', ')), NA, NA, NA))
+        if(!unique(is.na(x$parameters$biomes))) df <- rbind(df, c(NA, paste0('Data restricted to the following biome(s): ', paste(x$parameters$biomes, collapse = ', ')), NA, NA, NA))
+        if(!unique(is.na(x$parameters$ecoregions))) df <- rbind(df, c(NA, paste0('Data restricted to the following ecoregion(s): ', paste(x$parameters$ecoregions, collapse = ', ')), NA, NA, NA))
         df <- rbind(df, rep(NA, 5))
         df <- rbind(df, rep(NA, 5))
         df <- rbind(df, c('DEFINITION OF THE PDFS:', NA, NA, NA, NA))
@@ -122,7 +123,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
 
 
         if(as.csv) {
-            write.table(df, base::file.path(loc, sitename, clim, 'Parameters.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
+            utils::write.table(df, base::file.path(loc, sitename, clim, 'Parameters.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
         } else {
             openxlsx::addWorksheet(wb, "Parameters")
             openxlsx::writeData(wb, sheet = "Parameters", x = df, colNames=FALSE)
@@ -131,7 +132,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
 
         df <- cbind(x$reconstructions[[clim]]$optima[, -3], x$reconstructions[[clim]]$uncertainties[, -1], stringsAsFactors=FALSE)
         if(as.csv) {
-            write.csv(df, base::file.path(loc, sitename, clim, 'Reconstruction.csv'), row.names=FALSE, quote=FALSE, na='')
+            utils::write.csv(df, base::file.path(loc, sitename, clim, 'Reconstruction.csv'), row.names=FALSE, quote=FALSE, na='')
         } else {
             openxlsx::addWorksheet(wb, "Reconstruction")
             openxlsx::writeData(wb, sheet = "Reconstruction", x = df)
@@ -142,7 +143,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
             df <- cbind(t(x$reconstructions[[clim]]$posterior))
             colnames(df) <- c(clim, x$inputs$x)
             if(as.csv) {
-                write.csv(df, base::file.path(loc, sitename, clim, 'fullPosterior.csv'), row.names=FALSE, quote=FALSE, na='')
+                utils::write.csv(df, base::file.path(loc, sitename, clim, 'fullPosterior.csv'), row.names=FALSE, quote=FALSE, na='')
             } else {
                 openxlsx::addWorksheet(wb, "fullPosterior")
                 openxlsx::writeData(wb, sheet = "fullPosterior", x = df)
@@ -153,7 +154,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
         df <- cbind(x$inputs$x, x$inputs$df, stringsAsFactors=FALSE)
         colnames(df)[1] <- c(x$inputs$x.name)
         if(as.csv) {
-            write.csv(df, base::file.path(loc, sitename, clim, 'taxa_percentage.csv'), row.names=FALSE, quote=FALSE, na='')
+            utils::write.csv(df, base::file.path(loc, sitename, clim, 'taxa_percentage.csv'), row.names=FALSE, quote=FALSE, na='')
         } else {
             openxlsx::addWorksheet(wb, "taxa_percentage")
             openxlsx::writeData(wb, sheet = "taxa_percentage", x = df)
@@ -164,7 +165,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
             df <- cbind(x$inputs$x, x$modelling$weights, stringsAsFactors=FALSE)
             colnames(df)[1] <- c(x$inputs$x.name)
             if(as.csv) {
-                write.csv(df, base::file.path(loc, sitename, clim, 'taxa_weights.csv'), row.names=FALSE, quote=FALSE, na='')
+                utils::write.csv(df, base::file.path(loc, sitename, clim, 'taxa_weights.csv'), row.names=FALSE, quote=FALSE, na='')
             } else {
                 openxlsx::addWorksheet(wb, "taxa_weights")
                 openxlsx::writeData(wb, sheet = "taxa_weights", x = df)
@@ -183,7 +184,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
             }
             colnames(df) <- c(x$inputs$x.name, names(x$reconstructions[[clim]]$loo))
             if(as.csv) {
-                write.csv(df, base::file.path(loc, sitename, clim, 'leave_one_out.csv'), row.names=FALSE, quote=FALSE, na='')
+                utils::write.csv(df, base::file.path(loc, sitename, clim, 'leave_one_out.csv'), row.names=FALSE, quote=FALSE, na='')
             } else {
                 openxlsx::addWorksheet(wb, "leave_one_out")
                 openxlsx::writeData(wb, sheet = "leave_one_out", x = df)
@@ -233,7 +234,7 @@ export <- function( x, sitename = x$misc$site_info$sitename,
 
         df <- df[with(df, order(Selected, Comment, ProxyName)), ]
         if(as.csv) {
-            write.csv(df, base::file.path(loc, sitename, clim, 'selectedTaxa.csv'), row.names=FALSE, quote=FALSE, na='')
+            utils::write.csv(df, base::file.path(loc, sitename, clim, 'selectedTaxa.csv'), row.names=FALSE, quote=FALSE, na='')
         } else {
             openxlsx::addWorksheet(wb, "selectedTaxa")
             openxlsx::writeData(wb, sheet = "selectedTaxa", x = df)

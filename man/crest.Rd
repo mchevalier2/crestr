@@ -10,6 +10,7 @@ crest(
   taxaType,
   climate,
   site_info = rep(NA, length(climate)),
+  site_name = NA,
   xmn = -180,
   xmx = 180,
   ymn = -90,
@@ -51,6 +52,8 @@ rodents. The example dataset uses taxaType=0. Default is 1.}
 
 \item{site_info}{A vector containing the coordinates of the study site.
 Default c(NA, NA).}
+
+\item{site_name}{The name of the dataset (default NA).}
 
 \item{xmn}{The coordinates defining the study area.}
 
@@ -127,7 +130,7 @@ data(crest_ex_pse)
 data(crest_ex_selection)
 recons <- crest(
   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
-  site_info = c(7.5, 7.5),
+  site_info = c(7.5, 7.5), site_name = 'crest_example',
   climate = c("bio1", "bio12"), bin_width = c(2, 20),
   shape = c("normal", "lognormal"),
   selectedTaxa = crest_ex_selection, dbname = "crest_example",

@@ -21,6 +21,7 @@ crest.get_modern_data(
   minGridCells = 20,
   selectedTaxa = NA,
   site_info = c(NA, NA),
+  site_name = NA,
   dbname = "gbif4crest_02",
   verbose = TRUE
 )
@@ -69,6 +70,8 @@ names. Default is 1 for all taxa and all variables.}
 
 \item{site_info}{A vector containing the coordinates of the study site.
 Default c(NA, NA).}
+
+\item{site_name}{The name of the dataset (default NA).}
 
 \item{dbname}{The name of the database. Default is gbif4crest_02.}
 

@@ -33,6 +33,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                                    minGridCells = 20,
                                    selectedTaxa = NA,
                                    site_info = c(NA, NA),
+                                   site_name = NA,
                                    dbname = "gbif4crest_02",
                                    verbose=TRUE) {
 
@@ -245,6 +246,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     crest$misc$site_info <- list()
     crest$misc$site_info[['long']]   <- site_info[1]
     crest$misc$site_info[['lat']]    <- site_info[2]
+    crest$misc$site_info[['site_name']]    <- site_name
     if((!is.na(crest$misc$site_info[['long']])) & (!is.na(crest$misc$site_info[['lat']]))) {
         resol <- ifelse(dbname == 'crest_example', 0.5, 0.25)
         crest$misc$site_info[['climate']] <- climate_from_xy(crest$misc$site_info[['long']],
