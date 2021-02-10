@@ -387,6 +387,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 }
                 crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }else{
+                ##++> Clean data here. Or in the request before.
                 extent_taxa <- table(distributions[[tax]][, 1])
                 extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
                 distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa_id, ]
