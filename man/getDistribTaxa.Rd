@@ -6,7 +6,7 @@
 \usage{
 getDistribTaxa(
   taxIDs,
-  climate,
+  climate = NA,
   xmn = -180,
   xmx = 180,
   ymn = -90,

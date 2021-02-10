@@ -14,14 +14,19 @@
 #' getTaxonID("Zamiaceae")
 #' getTaxonID("Zamiaceae", "Ceratozamia")
 #' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
-getTaxonID <- function(family, genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
-    family <- tools::toTitleCase(base::tolower(family))
+getTaxonID <- function(family = "", genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
+    family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
     genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
     species <- ifelse(is.na(species), "", paste0(base::toupper(substr(species, 1, 1)), substr(base::tolower(species), 2, nchar(species))))
     req <- paste0(
       "  SELECT taxonid ",
       "    FROM taxa ",
-      "   WHERE family = '", family, "' ",
+      "   WHERE taxonid >= ", taxaType * 1000000, " ",
+      "     AND taxonid <= ", (taxaType + 1) * 1000000, " ",
+      ifelse(family == "",
+        "",
+        paste0(" AND family = '", family, "' ")
+      ),
       ifelse(genus == "",
         "",
         paste0(" AND genus = '", genus, "' ")
@@ -30,8 +35,6 @@ getTaxonID <- function(family, genus = "", species = "", taxaType = 1, dbname = 
         "",
         paste0(" AND species = '", species, "' ")
       ),
-      "     AND taxonid >= ", taxaType * 1000000, " ",
-      "     AND taxonid <= ", (taxaType + 1) * 1000000, " ",
       "ORDER BY taxonid"
     )
     res <- dbRequest(req, dbname)

@@ -5,7 +5,7 @@
 \title{Extract taxonID(s) corresponding to the taxonomic description}
 \usage{
 getTaxonID(
-  family,
+  family = "",
   genus = "",
   species = "",
   taxaType = 1,

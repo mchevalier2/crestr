@@ -27,7 +27,7 @@
 #' )
 #' distrib
 getDistribTaxa <- function(taxIDs,
-                           climate,
+                           climate = NA,
                            xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                            continents = NA, countries = NA,
                            realms = NA, biomes = NA, ecoregions = NA,
@@ -68,19 +68,31 @@ getDistribTaxa <- function(taxIDs,
         )
     }
 
+    # If no climate variables are provided
+    if (unique(is.na(climate))) {
+        CLIM1 <- " "
+        CLIM2 <- " "
+        CLIM3 <- " "
+    } else {
+        CLIM1 <- ", wc_qdgc "
+        CLIM2 <- "     AND distrib_qdgc.longitude = wc_qdgc.longitude AND distrib_qdgc.latitude = wc_qdgc.latitude "
+        CLIM3 <- paste(', ', paste(climate, collapse = ", "))
+    }
+
     # Formatting the request-----------------------------------------------------
     req <- paste0(
       "  SELECT DISTINCT taxonid, distrib_qdgc.longitude, ",
-      "  distrib_qdgc.latitude, ", paste(climate, collapse = ", "), " ",
-      "    FROM distrib_qdgc, wc_qdgc ",
+      "  distrib_qdgc.latitude ", CLIM3,
+      "    FROM distrib_qdgc ", CLIM1,
       "   WHERE taxonID IN (", paste(taxIDs, collapse = ", "), ") ",
-      "     AND distrib_qdgc.longitude = wc_qdgc.longitude AND distrib_qdgc.latitude = wc_qdgc.latitude ",
+      "     ", CLIM2, " ",
       "     AND distrib_qdgc.longitude >= ", xmn, " AND distrib_qdgc.longitude <= ", xmx, " ",
       "     AND distrib_qdgc.latitude >= ", ymn, " AND distrib_qdgc.latitude <= ", ymx, " ",
       "     ", GEO, " ",
       "     ", WWF, " ",
       "ORDER BY taxonid, distrib_qdgc.longitude, distrib_qdgc.latitude"
     )
+
 
     # Executing the request------------------------------------------------------
     dbRequest(req, dbname)
