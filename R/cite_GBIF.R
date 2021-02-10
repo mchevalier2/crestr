@@ -27,16 +27,16 @@ cite_GBIF <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
         for (class in list_of_classes)  cat(citations[[class]])
     } else if (x$parameters$taxaType == 2) {
         cat('Please cite the following dataset: GBIF.org (24 September 2020) Beetles occurrence data. https://doi.org/10.15468/dl.nteruy.\n')
-      } else if (x$parameters$taxaType == 3) {
-          cat('Please cite the following dataset: GBIF.org (24 September 2020) Foraminifera occurrence data. https://doi.org/10.15468/dl.692yg6.\n')
-          } else if (x$parameters$taxaType == 4) {
-              cat('Please cite the following dataset: GBIF.org (24 September 2020) Diatoms occurrence data. https://doi.org/10.15468/dl.vfr257.\n')
-              } else if (x$parameters$taxaType == 5) {
-                  cat('Please cite the following dataset: GBIF.org (24 September 2020) Chironomids occurrence data. https://doi.org/10.15468/dl.jv3wsh.\n')
-                  } else if (x$parameters$taxaType == 6) {
-                      cat('Please cite the following dataset: GBIF.org (24 September 2020) Rodentia occurrence data. https://doi.org/10.15468/dl.fscw6q.\n')
-                      } else {
-                          cat('You have used the example dataset. No data citations are required.\n')
+        } else if (x$parameters$taxaType == 4) {
+            cat('Please cite the following dataset: GBIF.org (24 September 2020) Foraminifera occurrence data. https://doi.org/10.15468/dl.692yg6.\n')
+            } else if (x$parameters$taxaType == 5) {
+                cat('Please cite the following dataset: GBIF.org (24 September 2020) Diatoms occurrence data. https://doi.org/10.15468/dl.vfr257.\n')
+                } else if (x$parameters$taxaType == 3) {
+                    cat('Please cite the following dataset: GBIF.org (24 September 2020) Chironomids occurrence data. https://doi.org/10.15468/dl.jv3wsh.\n')
+                    } else if (x$parameters$taxaType == 6) {
+                        cat('Please cite the following dataset: GBIF.org (24 September 2020) Rodentia occurrence data. https://doi.org/10.15468/dl.fscw6q.\n')
+                        } else {
+                            cat('You have used the example dataset. No data citations are required.\n')
                         }
 
     invisible(x)
