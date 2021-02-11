@@ -16,7 +16,7 @@
   save = FALSE,
   width = 5.51,
   height = 5.51,
-  loc = getwd(),
+  filename = "Reconstruction.pdf",
   ...
 )
 }
@@ -52,10 +52,10 @@ Default is \code{FALSE}.}
 
 \item{width, height}{The dimensions of the pdf file (default 5.51in ~14cm).}
 
-\item{loc}{An absolute or relative path that indicates the folder where the
-diagram(s) hould be saved. Also used to specify the name of the file.
-Default: the file is saved in the working directory with a file
-created for each variable as \code{climate.pdf}.}
+\item{filename}{An absolute or relative path that indicates where the diagram
+should be saved. Also used to specify the name of the file. Default:
+the file is saved in the working directory under the name
+\code{'Reconstruction_climate.pdf'}.}
 
 \item{...}{other \link[graphics]{graphical parameters} (see \code{\link[graphics]{par}} and
     section \sQuote{Details} below).}

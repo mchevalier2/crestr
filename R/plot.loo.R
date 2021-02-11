@@ -55,7 +55,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
 
         var_to_plot <- ifelse(optima, 1, 2)
 
-        filename <- strsplit(filename, '.pdf')[[1]]
+        filename <- base::strsplit(filename, '.pdf')[[1]]
 
         if (length(col_pos) != length(climate)) col_pos = base::rep_len(col_pos,length(climate))
         if (length(col_neg) != length(climate)) col_neg = base::rep_len(col_neg,length(climate))

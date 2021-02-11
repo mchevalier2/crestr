@@ -148,10 +148,10 @@ print.crestObj <- function(x, ...) {
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is \code{FALSE}.
 #' @param width,height The dimensions of the pdf file (default 5.51in ~14cm).
-#' @param loc An absolute or relative path that indicates the folder where the
-#'        diagram(s) hould be saved. Also used to specify the name of the file.
-#'        Default: the file is saved in the working directory with a file
-#'        created for each variable as \code{climate.pdf}.
+#' @param filename An absolute or relative path that indicates where the diagram
+#'        should be saved. Also used to specify the name of the file. Default:
+#'        the file is saved in the working directory under the name
+#'        \code{'Reconstruction_climate.pdf'}.
 #' @export
 #' @examples
 #' \dontrun{
@@ -180,7 +180,7 @@ plot.crestObj <- function(x,
                           xlim = NA,
                           ylim = NA,
                           save = FALSE, width = 5.51, height = 5.51,
-                          loc = getwd(),
+                          filename = 'Reconstruction.pdf',
                           ...) {
     if (length(x$reconstructions) == 0 || is.null(climate)) {
         cat("No reconstruction available for plotting.\n")
@@ -188,6 +188,7 @@ plot.crestObj <- function(x,
     }
 
     idx <- 0
+    filename <- base::strsplit(filename, '.pdf')[[1]]
 
     if(is.na(xlim)) {
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
@@ -252,7 +253,7 @@ plot.crestObj <- function(x,
         )
         ylim2 <- pdfter[c(min(val[1, ], na.rm=TRUE),max(val[2, ], na.rm=TRUE)), 1]
 
-        if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = width, height = height)
+        if(save) pdf(paste0(filename,'_',clim,'.pdf'), width = width, height = height)
 
         if(simplify) {
             graphics::par(mar = c(2.5, 2.5, 0.4, 0.2))
@@ -325,9 +326,6 @@ plot.crestObj <- function(x,
                 graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
             } else {
                 graphics::axis(1, cex.axis=6/7)
-            }
-            if (substr(loc, nchar(loc), nchar(loc)) == .Platform$file.sep) {
-                loc <- substr(loc, 1, nchar(loc) - 1)
             }
             for (e in uncertainties) {
                 val <- apply(pdfter[, -1], 2, function(x) {
