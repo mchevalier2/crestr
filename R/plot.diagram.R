@@ -119,10 +119,9 @@ plot_diagram <- function(x, bars=FALSE,
         xrange <- xrange + k * c(-str_max_left, str_max_right)
     } else {
         xrange <- xrange + c(-2.5*dX, 0.9 *dX)
-        par_usr <- graphics::par(no.readonly = TRUE)
     }
 
-    graphics::par(mar=c(0,0,0,0))
+    parmar <- graphics::par(mar=c(0,0,0,0))
 
     plot(x[, 1], x[, 1], type='n', xlim=xrange, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
     if(!is.na(title)) graphics::text(mean(xlim), mean(c(max(cs), yrange[2])), title, cex=0.8, font=1, adj=c(0.5, 1))
@@ -175,18 +174,18 @@ plot_diagram <- function(x, bars=FALSE,
         }
         graphics::segments(tck, -0.06*dY, tck, -0.1*dY, lwd=0.5)
         graphics::text(tck, -0.12*dY, tck, adj=c(0.5, 1), cex=0.5)
-      }
-      if( tickAtSample ) {
-          for( tck in x[, 1]) {
-              graphics::segments(tck, -0.05*dY, tck, -0.01*dY, lwd=0.5)
-          }
+    }
+    if( tickAtSample ) {
+        for( tck in x[, 1]) {
+            graphics::segments(tck, -0.05*dY, tck, -0.01*dY, lwd=0.5)
+        }
     }
 
     graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=0.6, adj=c(0.5,0))
     if(save) {
         grDevices::dev.off()
     } else {
-        graphics::par(par_usr)
+        graphics::par(parmar)
     }
     invisible()
 }

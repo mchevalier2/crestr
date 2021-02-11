@@ -36,7 +36,7 @@ accClimateVariables <- function(v=NA) {
         "Precipitation of Warmest Quarter (mm)",
         "Precipitation of Coldest Quarter (mm)",
         "Aridity Index"
-      )
+    ), stringsAsFactors = FALSE
     )
     colnames(res) <- c("Variable ID", "Variable name", "Description")
     if(!is.na(v[1])) {

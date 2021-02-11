@@ -115,7 +115,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     }
 
     if(verbose) cat('[OK]\n  <> Checking continent and country names .. ')
-    cont.list <- accCountryNames(dbname)
+    cont.list <- accCountryNames()
     if (!is.na(continents)) {
         for (cont in continents) {
             if (!cont %in% names(cont.list)) {
