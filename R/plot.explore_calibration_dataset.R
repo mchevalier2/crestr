@@ -15,7 +15,7 @@
 #' }
 #'
 explore_calibration_dataset <- function( taxaType,
-                                         save = FALSE, loc = 'calibrationDataset.pdf',
+                                         save = FALSE, filename = 'calibrationDataset.pdf',
                                          width = 7.48, height = 7.48,
                                          xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                                          continents = NA, countries = NA,
@@ -38,7 +38,7 @@ explore_calibration_dataset <- function( taxaType,
 
 
     if(save) {
-        grDevices::pdf(loc, width=width, height=height)
+        grDevices::pdf(filename, width=width, height=height)
     } else {
         par_usr <- graphics::par(no.readonly = TRUE)
     }

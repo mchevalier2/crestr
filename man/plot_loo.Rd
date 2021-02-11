@@ -8,7 +8,7 @@ plot_loo(
   x,
   optima = TRUE,
   save = FALSE,
-  loc = "Diagram_loo",
+  filename = "Diagram_loo.pdf",
   width = 3.54,
   height = 9,
   yax_incr = NA,
@@ -30,9 +30,9 @@ mean (FALSE) estimates.}
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is FALSE.}
 
-\item{loc}{An absolute or relative path that indicates where the diagram
+\item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
-the file is saved in the working directory under the name Diagram.pdf.}
+the file is saved in the working directory under the name \code{Diagram_loo_climate.pdf}.}
 
 \item{width}{The width of the output file in inches (default 3.54in ~ 9cm).}
 

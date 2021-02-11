@@ -52,14 +52,9 @@ accClimateVariables <- function(v=NA) {
 
 #' Return the list of the continents and associated countries.
 #'
-#' Return the list of the continents and associated countries.
-#'
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A list where each element is a vector of corresponding country names.
-#' @export
-#' @examples
-#' accContinentNames()
-accContinentNames <- function(dbname = "gbif4crest_02") {
+.getCountryNames <- function(dbname = "gbif4crest_02") {
     res <- list()
     req <- "SELECT DISTINCT continent FROM geo_qdgc WHERE continent IS NOT NULL ORDER BY continent"
     continents <- dbRequest(req, dbname)[, 1]
@@ -77,19 +72,40 @@ accContinentNames <- function(dbname = "gbif4crest_02") {
 }
 
 
-
-#' Return the list of the realms and associated biomes and ecoregions.
+#' Return the list of the continents and associated countries.
 #'
+#' Return the list of the continents and associated countries.
+#'
+#' @param continent A name of continent. Default is NA and returns a list of all
+#'        the country names sorted by continent.
+#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @return A list where each element is a vector of corresponding country names.
+#' @export
+#' @examples
+#' accCountryNames()
+accCountryNames <- function(continent=NA, dbname = "gbif4crest_02") {
+    if (is.na(continent[1])) return(continentNames)
+    res <- list()
+    for(cont in continent) {
+        if(cont %in% names(continentNames)) {
+            res[[cont]] <- continentNames[[cont]]
+        }
+    }
+    if(length(res) != length(continent)) {
+        w <- continent[!continent %in% names(res)]
+        cat(paste0("WARNING: The following continent names do not exist [", paste(w, collapse=', '), "] and should be part of the list [",  paste(names(continentNames), collapse=', '),"].\n"))
+    }
+    res
+}
+
+
 #' Return the list of the realms and associated biomes and ecoregions.
 #'
 #' @param ecoregion A boolean to choose whether to get the ecoregions names.
 #' @param dbname The name of the database. Default is gbif4crest_02.
 #' @return A list with elements that correspond to the biomes (and possibly
 #'         ecoregions) of each realm.
-#' @export
-#' @examples
-#' accRealmNames()
-accRealmNames <- function(ecoregion = TRUE, dbname = "gbif4crest_02") {
+.getRealmNames <- function(ecoregion = TRUE, dbname = "gbif4crest_02") {
     res <- list()
     req <- "SELECT DISTINCT realm FROM wwf_qdgc WHERE realm IS NOT NULL ORDER BY realm"
     realms <- dbRequest(req, dbname)[, 1]
@@ -103,5 +119,41 @@ accRealmNames <- function(ecoregion = TRUE, dbname = "gbif4crest_02") {
         res[[i]] <- dbRequest(req, dbname)
     }
     names(res) <- realms
+    res
+}
+
+
+
+#' Return the list of the realms and associated biomes and ecoregions.
+#'
+#' Return the list of the realms and associated biomes and ecoregions.
+#'
+#' @param realm A name of accepted realm. Default is NA and returns a list of
+#'        all the biome and ecoregion names sorted by realm.
+#' @param ecoregion A boolean to choose whether to get the ecoregions names.
+#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @return A list with elements that correspond to the biomes (and possibly
+#'         ecoregions) of each realm.
+#' @export
+#' @examples
+#' accRealmNames()
+#' accRealmNames(realm='Africotropical')
+#' accRealmNames(realm='Africotropical', ecoregion=FALSE)
+accRealmNames <- function(realm=NA, ecoregion = TRUE, dbname = "gbif4crest_02") {
+    if (is.na(realm[1])) return(realmNames)
+    res <- list()
+    for(r in realm) {
+        if(r %in% names(realmNames)) {
+            if(ecoregion) {
+                res[[r]] <- realmNames[[r]]
+            } else {
+                res[[r]] <- unique(realmNames[[r]][, 1])
+            }
+        }
+    }
+    if(length(res) != length(realm)) {
+        w <- realm[!realm %in% names(res)]
+        cat(paste0("WARNING: The following realm names do not exist [", paste(w, collapse=', '), "] and should be part of the list [",  paste(names(realmNames), collapse=', '),"].\n"))
+    }
     res
 }

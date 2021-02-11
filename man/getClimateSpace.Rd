@@ -52,7 +52,7 @@ plot(climate[, -3], asp = 1)
 }
 \seealso{
 \code{\link{accClimateVariables}}
-for a list of accepted climate variable names, \code{\link{accContinentNames}}
+for a list of accepted climate variable names, \code{\link{accCountryNames}}
 for a list of accepted continent and country names, \code{\link{accRealmNames}}
 for a list of accepted realm, biome and ecoregion names.
 }

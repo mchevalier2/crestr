@@ -9,10 +9,10 @@
 #' @param add_modern Adds the locations and the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
-#' @param loc An absolute or relative path that indicates where the diagram
+#' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
-#'        Climate_space.pdf.
+#'        \code{Climate_space.pdf}.
 #' @param width The width of the output file in inches (default 7.48in ~ 19cm).
 #' @param height The height of the output file in inches (default 3in ~ 7.6cm
 #'        per variables).
@@ -40,7 +40,7 @@
 #'
 plot_climateSpace <- function( x,
                       climate = x$parameters$climate,
-                      save = FALSE, loc = 'Climate_space.pdf',
+                      save = FALSE, filename = 'Climate_space.pdf',
                       width=  7.48,
                       height = min(9, 3*length(climate)), y0 = 0.3,
                       add_modern = FALSE,
@@ -81,7 +81,7 @@ plot_climateSpace <- function( x,
         }
 
         if(save) {
-            grDevices::pdf(loc, width=width, height=height)
+            grDevices::pdf(filename, width=width, height=height)
         } else {
             par_usr <- graphics::par(no.readonly = TRUE)
         }

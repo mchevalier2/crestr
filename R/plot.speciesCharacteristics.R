@@ -10,10 +10,10 @@
 #'        all the variables are included.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is FALSE.
-#' @param loc An absolute or relative path that indicates where the diagram
+#' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
-#'        Climate_space.pdf.
+#'        \code{taxaCharacteristics.pdf}.
 #' @param width The width of the output file in inches (default 7.48in ~ 19cm).
 #' @param w0 The width of the left column with the names.
 #' @param height The height of the output file in inches (default 3in ~ 7.6cm
@@ -42,7 +42,7 @@
 #'
 plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                       climate = x$parameters$climate,
-                                      save = FALSE, loc = 'taxaCharacteristics.pdf',
+                                      save = FALSE, filename = 'taxaCharacteristics.pdf',
                                       width = 7.48, w0 = 0.3,
                                       height = 3*length(climate), h0 = 0.3,
                                       resol = 0.25
@@ -81,7 +81,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
         }
 
         if(save) {
-            grDevices::pdf(loc, width=width, height=height)
+            grDevices::pdf(filename, width=width, height=height)
         } else {
             par_usr <- graphics::par(no.readonly = TRUE)
             graphics::par(ask = TRUE)

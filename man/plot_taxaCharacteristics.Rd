@@ -9,7 +9,7 @@ plot_taxaCharacteristics(
   taxanames = x$inputs$taxa.name,
   climate = x$parameters$climate,
   save = FALSE,
-  loc = "taxaCharacteristics.pdf",
+  filename = "taxaCharacteristics.pdf",
   width = 7.48,
   w0 = 0.3,
   height = 3 * length(climate),
@@ -30,10 +30,10 @@ all the variables are included.}
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is FALSE.}
 
-\item{loc}{An absolute or relative path that indicates where the diagram
+\item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
-Climate_space.pdf.}
+\code{taxaCharacteristics.pdf}.}
 
 \item{width}{The width of the output file in inches (default 7.48in ~ 19cm).}
 

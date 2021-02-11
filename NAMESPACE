@@ -3,7 +3,7 @@
 S3method(plot,crestObj)
 S3method(print,crestObj)
 export(accClimateVariables)
-export(accContinentNames)
+export(accCountryNames)
 export(accRealmNames)
 export(calib_clim_space)
 export(cite_GBIF)

@@ -10,7 +10,7 @@ plot_diagram(
   col = "black",
   amplif = 5,
   save = FALSE,
-  loc = "Diagram.pdf",
+  filename = "Diagram.pdf",
   width = 3.54,
   height = 9,
   yax_incr = 5,
@@ -38,9 +38,9 @@ plot. Default 5.}
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is FALSE.}
 
-\item{loc}{An absolute or relative path that indicates where the diagram
+\item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
-the file is saved in the working directory under the name Diagram.pdf.}
+the file is saved in the working directory under the name \code{Diagram.pdf}.}
 
 \item{width}{The width of the output file in inches (default 3.54in ~ 9cm).}
 
@@ -68,7 +68,7 @@ data(crest_ex)
 plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
 \dontrun{
-plot_diagram(crest_ex, save=TRUE, loc='testDiagram.pdf',
+plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
              bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
              bar_width=0.8, xlim=c(3,15))
 }

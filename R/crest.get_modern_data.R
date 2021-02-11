@@ -26,7 +26,6 @@
 #'
 crest.get_modern_data <- function( pse, taxaType, climate,
                                    df = NA,
-                                   #taxa.name = unique(pse[, 'ProxyName']),
                                    xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                    continents = NA, countries = NA,
                                    realms = NA, biomes = NA, ecoregions = NA,
@@ -116,7 +115,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     }
 
     if(verbose) cat('[OK]\n  <> Checking continent and country names .. ')
-    cont.list <- accContinentNames(dbname)
+    cont.list <- accCountryNames(dbname)
     if (!is.na(continents)) {
         for (cont in continents) {
             if (!cont %in% names(cont.list)) {
