@@ -1,13 +1,13 @@
-#' Fit the species pdfs.
+#' Fit the species \code{pdfs}.
 #'
-#' Fit the species pdfs.
+#' Fit the species \code{pdfs}.
 #'
 #' @inheritParams crestObj
 #' @param climate A vector of climatic values where the species is present.
 #' @param ccs A \code{ccs} object returned by \code{\link{calib_clim_space}}.
-#' @param xrange The climate gradient upon which the pdf with be defined.
-#' @param use_ccs Boolean to indicate if the pdfsp should be corrected by the
-#'    distributin of the modern climate space
+#' @param xrange The climate gradient upon which the \code{pdf} with be defined.
+#' @param use_ccs Boolean to indicate if the \code{pdfsp} should be corrected by
+#'        the distributin of the modern climate space
 #' @return The pdf of the species.
 #' @export
 #' @examples
@@ -23,7 +23,8 @@
 #' plot(xrange, pdfsp, type = "l")
 #'
 #' # Testing that the area under the curve is equal to 1.
-#' sum(pdfsp * (xrange[2] - xrange[1])) == 1
+#' all.equal(sum(pdfsp * (xrange[2] - xrange[1])), 1)
+#'
 fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
     climate <- climate[!is.na(climate)]
     if (use_ccs) {
@@ -64,6 +65,7 @@ fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
 #' @export
 #' @examples
 #' calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
+#'
 calib_clim_space <- function(climate, bin_width) {
     m <- base::min(climate, na.rm = TRUE) %/% 1
     nclass <- base::diff(base::range(climate, na.rm = TRUE)) %/% bin_width
@@ -76,9 +78,9 @@ calib_clim_space <- function(climate, bin_width) {
 
 
 
-#' Define the climate gradient to fit the pdfs.
+#' Define the climate gradient to fit the \code{pdfs}.
 #'
-#' Define the climate gradient to fit the pdfs.
+#' Define the climate gradient to fit the \code{pdfs}.
 #'
 #' @inheritParams crestObj
 #' @inheritParams fit_pdfsp
@@ -90,6 +92,7 @@ calib_clim_space <- function(climate, bin_width) {
 #' ccs <- calib_clim_space(climate_space, 2)
 #' xrange <- fit_xrange(ccs, "normal", 2)
 #' head(xrange)
+#'
 fit_xrange <- function(ccs, shape, bin_width, npoints = 500) {
     if (shape == "normal") {
         return(base::seq(ccs[["k1"]][1] - 5 * bin_width,

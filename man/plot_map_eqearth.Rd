@@ -37,11 +37,12 @@ tickmarks position)}
 each dimension. (default is 15 for a smooth result)}
 
 \item{nlines}{The number of coordinate lines to add in the background
-'(default is 9)}
+(default is 9)}
 
-\item{title}{A description title (default is empty)}
+\item{title}{A description title (default is empty).}
 
-\item{colour_scale}{A boolean to add the colour scale to the plot (default TRUE).}
+\item{colour_scale}{A boolean to add the colour scale to the plot (default
+\code{TRUE}).}
 
 \item{top_layer}{A raster to overlay on top of the map (e.g. a distribution).}
 

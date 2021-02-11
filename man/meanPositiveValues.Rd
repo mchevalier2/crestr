@@ -10,8 +10,8 @@ meanPositiveValues(x)
 \item{x}{A vector of values.}
 }
 \value{
-The average of all the positive values. Returns NaN is no positive
-values are found.
+The average of all the positive values. Returns \code{NaN} is no
+stricly positive values are found.
 }
 \description{
 Calculate the mean of all stricly positive values.

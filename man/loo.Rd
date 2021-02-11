@@ -2,20 +2,23 @@
 % Please edit documentation in R/leave_one_out.R
 \name{loo}
 \alias{loo}
-\title{Connect to the gbif4crest database}
+\title{Performs the leave-one-out analysis}
 \usage{
 loo(x, verbose = TRUE)
 }
 \arguments{
-\item{x}{a crestObj produced by the crest.reconstruct() or crest() functions.}
+\item{x}{a \code{\link{crestObj}} produced by the
+\code{\link{crest.reconstruct}} or \code{\link{crest}} functions.}
 
-\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
+\item{verbose}{A boolean to print non-essential comments on the terminal
+(default \code{TRUE}).}
 }
 \value{
-A crest() object containing the reconstructions and all the associated data.
+A \code{\link{crestObj}} object containing the reconstructions and
+all the associated data.
 }
 \description{
-Connect to the gbif4crest_02 database by accessing the server on Amazon.
+Repeat the repetation by removing one taxon at a time.
 }
 \examples{
 data(crest_ex)

@@ -2,14 +2,14 @@
 % Please edit documentation in R/mod_fit_pdfsp.R
 \name{fit_xrange}
 \alias{fit_xrange}
-\title{Define the climate gradient to fit the pdfs.}
+\title{Define the climate gradient to fit the \code{pdfs}.}
 \usage{
 fit_xrange(ccs, shape, bin_width, npoints = 500)
 }
 \arguments{
 \item{ccs}{A \code{ccs} object returned by \code{\link{calib_clim_space}}.}
 
-\item{shape}{The imposed shape of the species pdfs. We recommend using
+\item{shape}{The imposed shape of the species \code{pdfs}. We recommend using
 'normal' for temperature variables and 'lognormal' for the
 variables that can only take positive values, such as
 precipitation or aridity. Default is 'normal' for all.}
@@ -18,13 +18,13 @@ precipitation or aridity. Default is 'normal' for all.}
 state. Use values that split the studied climate gradient in
 15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{npoints}{The number of points to be used to fit the pdfs. Default 200.}
+\item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
 }
 \value{
 A regularly spaced climate gradient with \code{npoints} points.
 }
 \description{
-Define the climate gradient to fit the pdfs.
+Define the climate gradient to fit the \code{pdfs}.
 }
 \examples{
 # Creating one randomised climate space
@@ -32,4 +32,5 @@ climate_space <- sample(0:300 / 10, 4000, replace = TRUE)
 ccs <- calib_clim_space(climate_space, 2)
 xrange <- fit_xrange(ccs, "normal", 2)
 head(xrange)
+
 }

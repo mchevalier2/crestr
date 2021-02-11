@@ -1,14 +1,17 @@
-#' Fit the species and proxy pdfs
+#' Fit the species and proxy \code{pdfs}
 #'
 #' This function fits the climate response of the selected taxa to the selected
 #' climate variables.
 #'
 #' @inheritParams crestObj
 #' @inheritParams crest
-#' @param x A crestObj produced by the crest.fit_pdfs function.
-#' @param skip_for_loo A boolean that tells the loo() functiont to skip parts
-#'        and fasten the process. Not for users.
-#' @return A crest() object containing the reconstructions and all the associated data.
+#' @param x A \code{\link{crestObj}} produced by the
+#'        \code{\link{crest.calibrate}} function.
+#' @param skip_for_loo A boolean that tells the \code{\link{loo}} function to
+#'        skip parts and fasten the process. Not for users, always leve to
+#'        \code{FALSE}.
+#' @return A \code{\link{crestObj}} object containing the reconstructions and
+#'         all the associated data.
 #' @export
 #' @examples
 #' data(crest_ex_pse)

@@ -1,6 +1,6 @@
-#' Create a crest() object.
+#' Create a \code{crestObj} object.
 #'
-#' Creates a crest() object with all default parameters.
+#' Creates a \code{crestObj} object with all default parameters.
 #'
 #' @param taxa.name A vector that contains the names of the taxa to study.
 #' @param pse A pollen-Species equivalency table. See \code{\link{createPSE}} for
@@ -28,7 +28,7 @@
 #' @param bin_width The width of the bins used to correct for unbalanced climate
 #'        state. Use values that split the studied climate gradient in
 #'        15-25 classes (e.g. 2°C for temperature variables). Default is 1.
-#' @param shape The imposed shape of the species pdfs. We recommend using
+#' @param shape The imposed shape of the species \code{pdfs}. We recommend using
 #'        'normal' for temperature variables and 'lognormal' for the
 #'        variables that can only take positive values, such as
 #'        precipitation or aridity. Default is 'normal' for all.
@@ -36,13 +36,13 @@
 #'        variable (1 if the taxon should be used, 0 otherwise). The colnames
 #'        should be the climate variables' names and the rownames the taxa
 #'        names. Default is 1 for all taxa and all variables.
-#' @param npoints The number of points to be used to fit the pdfs. Default 200.
+#' @param npoints The number of points to be used to fit the \code{pdfs}. Default 200.
 #' @param geoWeighting A boolean to indicate if the species should be weighting
 #'        by the squareroot of their extension when estimating a genus/family
 #'        level taxon-climate relationships.
-#' @param climateSpaceWeighting A boolean to indicate if the species pdfs should
-#'        be corrected for the modern distribution of the climate space (default
-#'        TRUE).
+#' @param climateSpaceWeighting A boolean to indicate if the species \code{pdfs}
+#'        should be corrected for the modern distribution of the climate space
+#'        (default \code{TRUE}).
 #' @param presenceThreshold All values above that threshold will be used in the
 #'        reconstruction (e.g. if set at 1, all percentages below 1 will be set
 #'        to 0 and the associated presences discarded). Default is 0.
@@ -50,8 +50,8 @@
 #'        'presence/absence', 'percentages' or 'normalisation' (default).
 #' @param uncertainties A (vector of) threshold value(s) indicating the error
 #'        bars that should be calculated (default both 50 and 95% ranges).
-#' @return A CREST object that is used to store data and information for
-#'         reconstructing climate
+#' @return A \code{crestObj} object that is used to store data and information
+#'         for reconstructing climate
 #' @export
 
 crestObj <- function(taxa.name, taxaType, climate,
@@ -130,26 +130,43 @@ print.crestObj <- function(x, ...) {
 
 #' Plot the reconstructions.
 #'
-#' Plot the reconstructions and their uncertainties
+#' Plot the reconstructions and their uncertainties if they exist.
 #'
 #' @inheritParams graphics::plot
-#' @param x A crestObj produced by the crest.reconstruct() or crest() functions.
-#' @param climate The climate variables to plot (default is all the reconstructed variables from x)
+#' @param x A \code{\link{crestObj}} produced by either the
+#'        \code{\link{crest.reconstruct}} oe \code{\link{ocrest}}) functions.
+#' @param climate The climate variables to plot (default is all the
+#'        reconstructed variables from x)
 #' @param uncertainties A (vector of) threshold value(s) indicating the error
 #'        bars that should be calculated (default are the values stored in x).
-#' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
-#'        mean (FALSE) estimates.
+#' @param optima A boolean to indicate whether to plot the optimum (\code{TRUE})
+#'        or the mean (\code{FALSE}) estimates.
 #' @param simplify A boolean to indicate if the full distribution of uncertainties
-#'        should be plooted (FALSE, default) or if they should be simplified to
-#'        the uncertainty range(s).
+#'        should be plooted (\code{FALSE}, default) or if they should be
+#'        simplified to the uncertainty range(s).
 #' @param add_modern Adds the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
-#'        Default is FALSE.
+#'        Default is \code{FALSE}.
+#' @param width,height The dimensions of the pdf file (default 5.51in ~14cm).
 #' @param loc An absolute or relative path that indicates the folder where the
 #'        diagram(s) hould be saved. Also used to specify the name of the file.
 #'        Default: the file is saved in the working directory with a file
-#'        created for each variable as variable.pdf.
+#'        created for each variable as \code{climate.pdf}.
 #' @export
+#' @examples
+#' data(crest_ex)
+#' data(crest_ex_pse)
+#' data(crest_ex_selection)
+#' recons <- crest(
+#'   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+#'   site_info = c(7.5, 7.5), site_name = 'crest_example',
+#'   climate = c("bio1", "bio12"), bin_width = c(2, 20),
+#'   shape = c("normal", "lognormal"),
+#'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'   leave_one_out = TRUE
+#' )
+#' plot(recons)
+#' plot(recons, climate='bio1', simplify = TRUE)
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,
                           uncertainties = x$parameters$uncertainties,
@@ -158,7 +175,7 @@ plot.crestObj <- function(x,
                           simplify = FALSE,
                           xlim = NA,
                           ylim = NA,
-                          save = FALSE,
+                          save = FALSE, width = 5.51, height = 5.51,
                           loc = getwd(),
                           ...) {
     if (length(x$reconstructions) == 0 || is.null(climate)) {
@@ -231,7 +248,7 @@ plot.crestObj <- function(x,
         )
         ylim2 <- pdfter[c(min(val[1, ], na.rm=TRUE),max(val[2, ], na.rm=TRUE)), 1]
 
-        if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = 5.51, height = 5)
+        if(save) pdf(paste0(loc, .Platform$file.sep, clim, ".pdf"), width = width, height = height)
 
         if(simplify) {
             graphics::par(mar = c(2.5, 2.5, 0.4, 0.2))

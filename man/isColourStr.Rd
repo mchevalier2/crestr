@@ -2,7 +2,7 @@
 % Please edit documentation in R/isColourStr.R
 \name{isColourStr}
 \alias{isColourStr}
-\title{Test if R can interpret a string as a colour}
+\title{Test if \code{R} can interpret a string as a colour}
 \usage{
 isColourStr(col)
 }
@@ -10,10 +10,10 @@ isColourStr(col)
 \item{col}{The string to be tested.}
 }
 \value{
-A boolean value, TRUE if col is a valid colour, FALSE otherwise
+A boolean value, \code{TRUE} if col is a valid colour, \code{FALSE} otherwise
 }
 \description{
-Test if R can interpret a string as a colour
+Test if \code{R} can interpret a string as a colour
 }
 \examples{
 isColourStr('black')

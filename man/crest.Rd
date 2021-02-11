@@ -2,7 +2,7 @@
 % Please edit documentation in R/crest.R
 \name{crest}
 \alias{crest}
-\title{Connect to the gbif4crest database}
+\title{A wrapper for all the crest functions.}
 \usage{
 crest(
   df,
@@ -51,9 +51,9 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.}
 \code{\link{accClimateVariables}} for the list of accepted values.}
 
 \item{site_info}{A vector containing the coordinates of the study site.
-Default c(NA, NA).}
+Default \code{c(NA, NA)}.}
 
-\item{site_name}{The name of the dataset (default NA).}
+\item{site_name}{The name of the dataset (default \code{NA}).}
 
 \item{xmn}{The coordinates defining the study area.}
 
@@ -86,20 +86,20 @@ names. Default is 1 for all taxa and all variables.}
 state. Use values that split the studied climate gradient in
 15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{shape}{The imposed shape of the species pdfs. We recommend using
+\item{shape}{The imposed shape of the species \code{pdfs}. We recommend using
 'normal' for temperature variables and 'lognormal' for the
 variables that can only take positive values, such as
 precipitation or aridity. Default is 'normal' for all.}
 
-\item{npoints}{The number of points to be used to fit the pdfs. Default 200.}
+\item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
 by the squareroot of their extension when estimating a genus/family
 level taxon-climate relationships.}
 
-\item{climateSpaceWeighting}{A boolean to indicate if the species pdfs should
-be corrected for the modern distribution of the climate space (default
-TRUE).}
+\item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}
+should be corrected for the modern distribution of the climate space
+(default \code{TRUE}).}
 
 \item{presenceThreshold}{All values above that threshold will be used in the
 reconstruction (e.g. if set at 1, all percentages below 1 will be set
@@ -112,17 +112,18 @@ to 0 and the associated presences discarded). Default is 0.}
 bars that should be calculated (default both 50 and 95\% ranges).}
 
 \item{leave_one_out}{A boolean to indicate whether the leave one out (loo)
-reconstructions should be computed (default FALSE).}
+reconstructions should be computed (default \code{FALSE}).}
 
-\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
+\item{verbose}{A boolean to print non-essential comments on the terminal
+(default \code{TRUE}).}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
-The parameters to be used by crest()
+A \code{\link{crestObj}} containing the reconstructions.
 }
 \description{
-Connect to the gbif4crest_02 database by accessing the server on Amazon.
+Runs all the different steps of a CREST reconstruction in one function.
 }
 \examples{
 data(crest_ex)

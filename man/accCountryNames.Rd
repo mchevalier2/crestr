@@ -7,10 +7,10 @@
 accCountryNames(continent = NA, dbname = "gbif4crest_02")
 }
 \arguments{
-\item{continent}{A name of continent. Default is NA and returns a list of all
-the country names sorted by continent.}
+\item{continent}{A name of continent. Default is \code{NA} and returns a list
+of all the country names sorted by continent.}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 A list where each element is a vector of corresponding country names.
@@ -20,4 +20,5 @@ Return the list of the continents and associated countries.
 }
 \examples{
 accCountryNames()
+accCountryNames('Europe')
 }

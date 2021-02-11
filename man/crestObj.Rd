@@ -2,7 +2,7 @@
 % Please edit documentation in R/crestS3.R
 \name{crestObj}
 \alias{crestObj}
-\title{Create a crest() object.}
+\title{Create a \code{crestObj} object.}
 \usage{
 crestObj(
   taxa.name,
@@ -75,20 +75,20 @@ estimate a species' climate response. Default is 20.}
 state. Use values that split the studied climate gradient in
 15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{shape}{The imposed shape of the species pdfs. We recommend using
+\item{shape}{The imposed shape of the species \code{pdfs}. We recommend using
 'normal' for temperature variables and 'lognormal' for the
 variables that can only take positive values, such as
 precipitation or aridity. Default is 'normal' for all.}
 
-\item{npoints}{The number of points to be used to fit the pdfs. Default 200.}
+\item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
 by the squareroot of their extension when estimating a genus/family
 level taxon-climate relationships.}
 
-\item{climateSpaceWeighting}{A boolean to indicate if the species pdfs should
-be corrected for the modern distribution of the climate space (default
-TRUE).}
+\item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}
+should be corrected for the modern distribution of the climate space
+(default \code{TRUE}).}
 
 \item{selectedTaxa}{A data frame assigns which taxa should be used for each
 variable (1 if the taxon should be used, 0 otherwise). The colnames
@@ -106,9 +106,9 @@ to 0 and the associated presences discarded). Default is 0.}
 bars that should be calculated (default both 50 and 95\% ranges).}
 }
 \value{
-A CREST object that is used to store data and information for
-reconstructing climate
+A \code{crestObj} object that is used to store data and information
+for reconstructing climate
 }
 \description{
-Creates a crest() object with all default parameters.
+Creates a \code{crestObj} object with all default parameters.
 }

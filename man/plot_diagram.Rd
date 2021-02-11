@@ -24,10 +24,11 @@ plot_diagram(
 }
 \arguments{
 \item{x}{A data frame of the data to plot (first column with age or depth)
-and the taxa in the following columns. x can also be a crestObj.}
+and the taxa in the following columns. x can also be a
+\code{\link{crestObj}}.}
 
 \item{bars}{A boolean that indicates if the data should be plotted as polygons
-(default: bars=FALSE) or vertical bars (bars=TRUE).}
+(default: \code{bars=FALSE}) or vertical bars (\code{bars=TRUE}).}
 
 \item{col}{Colours to be used for the polygons. If the number of colours does
 not match the number of taxa, colors will be recyled.}
@@ -36,29 +37,36 @@ not match the number of taxa, colors will be recyled.}
 plot. Default 5.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
-Default is FALSE.}
+Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
-the file is saved in the working directory under the name \code{Diagram.pdf}.}
+the file is saved in the working directory under the name
+\code{'Diagram.pdf'}.}
 
 \item{width}{The width of the output file in inches (default 3.54in ~ 9cm).}
 
 \item{height}{The height of the output file in inches (default 9in ~ 23cm).}
 
-\item{yax_incr}{Graphical parameters describing the increment size on the y-axis (default 5).}
+\item{yax_incr}{Graphical parameters describing the increment size on the
+y-axis (default 5).}
 
 \item{bar_width}{Width of the bars of the barplot (default 1).}
 
-\item{xlim}{The range covered by the x-axis. Canbe adjusted to get round numbers on the x-ais. If smaller than the range overed by the data, the data will be truncated (default: range of the data).}
+\item{xlim}{The range covered by the x-axis. Canbe adjusted to get round
+numbers on the x-ais. If smaller than the range overed by the data,
+the data will be truncated (default: range of the data).}
 
-\item{tickAtSample}{Boolean that indicates whether a tick mark should be added on the x-axis at the location of each sample (default TRUE).}
+\item{tickAtSample}{Boolean that indicates whether a tick mark should be added
+on the x-axis at the location of each sample (default \code{TRUE}).}
 
-\item{col_pos}{Graphical parameter for the barplot. Colour of all the positive values (default black).}
+\item{col_pos}{Graphical parameter for the barplot. Colour of all the
+positive values (default black).}
 
-\item{col_neg}{Graphical parameter for the barplot. Colour of all the negative values (default light grey).}
+\item{col_neg}{Graphical parameter for the barplot. Colour of all the
+negative values (default light grey).}
 
-\item{title}{Name to be added on top of the plot (default NA).}
+\item{title}{Name to be added on top of the plot (default \code{NA}).}
 }
 \description{
 This function plots stratigraphic data either as polygons or bars.

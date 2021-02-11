@@ -5,6 +5,7 @@
 #'
 #' @inheritParams crest
 #' @inheritParams plot_climateSpace
+#' @param width,height The dimensions of the pdf file (default 7.48in ~19cm).
 #' @return The distribution data
 #' @export
 #' @examples

@@ -9,10 +9,10 @@ createPSE(taxa, loc = "proxy_species_equivalency.xlsx")
 \arguments{
 \item{taxa}{A list of taxa to include in the PSE file.}
 
-\item{loc}{An absolute or relative path that indicates where the xlsx file
+\item{loc}{An absolute or relative path that indicates where the spreadsheet
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
-proxy_species_equivalency.xlsx.}
+\code{proxy_species_equivalency.xlsx}.}
 }
 \description{
 Returns the citations associated to the GBIF data used to fit the pdfs.

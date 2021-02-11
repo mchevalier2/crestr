@@ -33,7 +33,7 @@ getClimateSpace(
 
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 A matrix of occurrence records with the associated climate.
@@ -48,7 +48,8 @@ climate <- getClimateSpace("bio1", -90, 90, -90, 90,
   realms = "Palaearctic"
 )
 head(climate)
-plot(climate[, -3], asp = 1)
+raster::plot(raster::rasterFromXYZ(climate), asp=1)
+
 }
 \seealso{
 \code{\link{accClimateVariables}}

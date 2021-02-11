@@ -45,9 +45,10 @@ eqearth_get_ext <- function(ext, npoints=15) {
 #' @param npoints The number of points used to draw the polygons and lines along
 #'        each dimension. (default is 15 for a smooth result)
 #' @param nlines The number of coordinate lines to add in the background
-#'        '(default is 9)
-#' @param title A description title (default is empty)
-#' @param colour_scale A boolean to add the colour scale to the plot (default TRUE).
+#'        (default is 9)
+#' @param title A description title (default is empty).
+#' @param colour_scale A boolean to add the colour scale to the plot (default
+#'        \code{TRUE}).
 #' @param top_layer A raster to overlay on top of the map (e.g. a distribution).
 #' @param site_xy Coordinates of a location to add to the plot.
 #' @export

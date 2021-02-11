@@ -11,7 +11,7 @@
 #' @param realms A vector of the studied botanical realms defining the study area.
 #' @param biomes A vector of the studied botanical biomes defining the study area.
 #' @param ecoregions A vector of the studied botanical ecoregions defining the study area.
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A matrix of occurrence records with the associated climate.
 #' @seealso \code{\link{getTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
 #'     for a list of accepted climate variable names, \code{\link{accCountryNames}}

@@ -4,9 +4,9 @@
 #' available in the database.
 #'
 #' @param v The name of a variable to quickly access its description and ID
-#'          (default NA returns all possible values).
+#'          (default \code{NA} returns all possible values).
 #' @return A data frame descriptive of the climate variables available in the
-#'         database (if v=NA) or the description of variable v.
+#'         database (if \code{v=NA}) or the description of variable v.
 #' @export
 #' @examples
 #' accClimateVariables()
@@ -52,9 +52,10 @@ accClimateVariables <- function(v=NA) {
 
 #' Return the list of the continents and associated countries.
 #'
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A list where each element is a vector of corresponding country names.
-.getCountryNames <- function(dbname = "gbif4crest_02") {
+#' @keywords internal
+getCountryNames <- function(dbname = "gbif4crest_02") {
     res <- list()
     req <- "SELECT DISTINCT continent FROM geo_qdgc WHERE continent IS NOT NULL ORDER BY continent"
     continents <- dbRequest(req, dbname)[, 1]
@@ -76,13 +77,14 @@ accClimateVariables <- function(v=NA) {
 #'
 #' Return the list of the continents and associated countries.
 #'
-#' @param continent A name of continent. Default is NA and returns a list of all
-#'        the country names sorted by continent.
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param continent A name of continent. Default is \code{NA} and returns a list
+#'        of all the country names sorted by continent.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A list where each element is a vector of corresponding country names.
 #' @export
 #' @examples
 #' accCountryNames()
+#' accCountryNames('Europe')
 accCountryNames <- function(continent=NA, dbname = "gbif4crest_02") {
     if (is.na(continent[1])) return(continentNames)
     res <- list()
@@ -102,10 +104,11 @@ accCountryNames <- function(continent=NA, dbname = "gbif4crest_02") {
 #' Return the list of the realms and associated biomes and ecoregions.
 #'
 #' @param ecoregion A boolean to choose whether to get the ecoregions names.
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A list with elements that correspond to the biomes (and possibly
 #'         ecoregions) of each realm.
-.getRealmNames <- function(ecoregion = TRUE, dbname = "gbif4crest_02") {
+#' @keywords internal
+getRealmNames <- function(ecoregion = TRUE, dbname = "gbif4crest_02") {
     res <- list()
     req <- "SELECT DISTINCT realm FROM wwf_qdgc WHERE realm IS NOT NULL ORDER BY realm"
     realms <- dbRequest(req, dbname)[, 1]
@@ -128,10 +131,10 @@ accCountryNames <- function(continent=NA, dbname = "gbif4crest_02") {
 #'
 #' Return the list of the realms and associated biomes and ecoregions.
 #'
-#' @param realm A name of accepted realm. Default is NA and returns a list of
-#'        all the biome and ecoregion names sorted by realm.
+#' @param realm A name of accepted realm. Default is \code{NA} and returns a 
+#'        list of all the biome and ecoregion names sorted by realm.
 #' @param ecoregion A boolean to choose whether to get the ecoregions names.
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A list with elements that correspond to the biomes (and possibly
 #'         ecoregions) of each realm.
 #' @export
@@ -140,7 +143,7 @@ accCountryNames <- function(continent=NA, dbname = "gbif4crest_02") {
 #' accRealmNames(realm='Africotropical')
 #' accRealmNames(realm='Africotropical', ecoregion=FALSE)
 accRealmNames <- function(realm=NA, ecoregion = TRUE, dbname = "gbif4crest_02") {
-    if (is.na(realm[1])) return(realmNames)
+    if (is.na(realm[1])) realm <- names(realmNames)
     res <- list()
     for(r in realm) {
         if(r %in% names(realmNames)) {

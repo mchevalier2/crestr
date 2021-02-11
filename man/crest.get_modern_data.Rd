@@ -69,16 +69,17 @@ should be the climate variables' names and the rownames the taxa
 names. Default is 1 for all taxa and all variables.}
 
 \item{site_info}{A vector containing the coordinates of the study site.
-Default c(NA, NA).}
+Default \code{c(NA, NA)}.}
 
-\item{site_name}{The name of the dataset (default NA).}
+\item{site_name}{The name of the dataset (default \code{NA}).}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 
-\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
+\item{verbose}{A boolean to print non-essential comments on the terminal
+(default \code{TRUE}).}
 }
 \value{
-A crest() object containing the spatial distributions
+A \code{\link{crestObj}} object containing the spatial distributions
 }
 \description{
 This function will extract the distributions of all the species composing each

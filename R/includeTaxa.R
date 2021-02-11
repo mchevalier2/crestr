@@ -1,8 +1,10 @@
-#' Includes the list of taxa to the reconstructions.
+#' Includes the list of taxa into the reconstructions.
 #'
-#' Includes the list of taxa to the reconstructions.
+#' Includes the list of taxa into the reconstructions.
 #'
-#' @param x A crestObj produced by one of the crest functions.
+#' @param x A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
+#'        \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
+#'        \code{\link{crest.reconstrut}} or \code{\link{loo}} functions.
 #' @param taxa A vector of taxa to include.
 #' @param climate A vector of climate variables to link the taxa with.
 #' @export
@@ -19,12 +21,14 @@ includeTaxa <- function(x, taxa, climate) {
 }
 
 
-#' Excludes the list of taxa to the reconstructions.
+#' Excludes the list of taxa from the reconstructions.
 #'
-#' Excludes the list of taxa to the reconstructions.
+#' Excludes the list of taxa from the reconstructions.
 #'
-#' @param x A crestObj produced by one of the crest functions.
-#' @param taxa A vector of taxa to Exclude.
+#' @param x A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
+#'        \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
+#'        \code{\link{crest.reconstrut}} or \code{\link{loo}} functions.
+#' @param taxa A vector of taxa to exclude.
 #' @param climate A vector of climate variables to unlink the taxa with.
 #' @export
 

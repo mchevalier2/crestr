@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbConnect.R
 \name{connect_online}
 \alias{connect_online}
-\title{Connect to the gbif4crest database}
+\title{Connect to the gbif4crest calibration database}
 \usage{
 connect_online(
   dbname = "gbif4crest_02",
@@ -13,16 +13,16 @@ connect_online(
 )
 }
 \arguments{
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 
 \item{port}{The port to connect to the server. Default is 5432.}
 
 \item{host}{The host of the database server.
-Default is gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com}
+Default is \code{'gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com'}.}
 
-\item{user}{The user name to use to connect. Default is guestuser.}
+\item{user}{The user name to use to connect. Default is \code{'guestuser'}.}
 
-\item{password}{The password associated with the user name. Default is pwd12345}
+\item{password}{The password associated with the user name. Default is \code{'pwd12345'}.}
 }
 \value{
 An active connection to a database

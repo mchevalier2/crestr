@@ -4,18 +4,25 @@
 \alias{climate_from_xy}
 \title{Extract The climate values associated to a set of coordinates.}
 \usage{
-climate_from_xy(long, lat, climate, resol = 0.25, dbname = "gbif4crest_02")
+climate_from_xy(
+  long,
+  lat,
+  climate = accClimateVariables()[, 2],
+  resol = 0.25,
+  dbname = "gbif4crest_02"
+)
 }
 \arguments{
 \item{long}{The longitude of the site.}
 
 \item{lat}{The latitude of the site.}
 
-\item{climate}{The climate variables to extract the values from.}
+\item{climate}{The climate variables to extract the values from. Returns all
+possible values by default.}
 
-\item{resol}{The resolution of the target climatology (default 0.25 degrees)}
+\item{resol}{The resolution of the target climatology (default 0.25 degrees).}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 A data frame containing the climate values.
@@ -25,4 +32,6 @@ Extract The climate values associated to a set of coordinates.
 }
 \examples{
 climate_from_xy(50, 10, c('bio1', 'ai'))
+climate_from_xy(50, 10)
+
 }

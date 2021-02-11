@@ -6,9 +6,10 @@
 #'
 #' @inheritParams crestObj
 #' @inheritParams crest
-#' @param dbname The name of the database. Default is gbif4crest_02.
-#' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
-#' @return A crest() object containing the spatial distributions
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
+#' @param verbose A boolean to print non-essential comments on the terminal
+#'        (default \code{TRUE}).
+#' @return A \code{\link{crestObj}} object containing the spatial distributions
 #' @export
 #' @examples
 #' \dontrun{

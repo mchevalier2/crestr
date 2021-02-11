@@ -7,13 +7,14 @@
 #' @param family The name of the family.
 #' @param genus The name of the genus.
 #' @param species The name of the species.
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
 #' getTaxonID("Zamiaceae")
 #' getTaxonID("Zamiaceae", "Ceratozamia")
-#' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+#' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2) #' \code{taxaType = 2} searches for beetles and not plants.
+#'
 getTaxonID <- function(family = "", genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
     family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
     genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))

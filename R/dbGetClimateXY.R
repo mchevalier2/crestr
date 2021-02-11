@@ -4,14 +4,19 @@
 #'
 #' @param long The longitude of the site.
 #' @param lat The latitude of the site.
-#' @param climate The climate variables to extract the values from.
-#' @param resol The resolution of the target climatology (default 0.25 degrees)
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param climate The climate variables to extract the values from. Returns all
+#'        possible values by default.
+#' @param resol The resolution of the target climatology (default 0.25 degrees).
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A data frame containing the climate values.
 #' @export
 #' @examples
 #' climate_from_xy(50, 10, c('bio1', 'ai'))
-climate_from_xy <- function(long, lat, climate, resol = 0.25, dbname = "gbif4crest_02") {
+#' climate_from_xy(50, 10)
+#'
+climate_from_xy <- function(long, lat,
+                            climate = accClimateVariables()[, 2],
+                            resol = 0.25, dbname = "gbif4crest_02") {
     long <- resol * (long %/% resol) + resol/2;
     lat  <- resol * (lat %/% resol) + resol/2;
 

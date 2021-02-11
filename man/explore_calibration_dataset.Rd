@@ -28,18 +28,15 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 4 for foraminifers, 5 for diatoms and 6 for rodents. The example
 dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
-Default is FALSE.}
+\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file
+(default \code{FALSE}).}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
-\code{Climate_space.pdf}.}
+\code{'Climate_space.pdf'}.}
 
-\item{width}{The width of the output file in inches (default 7.48in ~ 19cm).}
-
-\item{height}{The height of the output file in inches (default 3in ~ 7.6cm
-per variables).}
+\item{width, height}{The dimensions of the pdf file (default 7.48in ~19cm).}
 
 \item{xmn}{The coordinates defining the study area.}
 
@@ -60,7 +57,7 @@ per variables).}
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the
 study area.}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 The distribution data

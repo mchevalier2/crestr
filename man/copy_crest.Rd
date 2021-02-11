@@ -13,7 +13,7 @@ copy_crest(
 )
 }
 \arguments{
-\item{x}{A crestObj produced by the crest.reconstruct() or crest() functions.}
+\item{x}{A \code{\link{crestObj}} produced by the \code{\link{crest.reconstruct}} or \code{\link{crest}} functions.}
 
 \item{climate}{A vector of the climate variables to extract. See
 \code{\link{accClimateVariables}} for the list of accepted values.}

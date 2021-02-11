@@ -36,7 +36,7 @@ getDistribTaxa(
 
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 A matrix of occurrence records with the associated climate.

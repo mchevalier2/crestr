@@ -1,10 +1,10 @@
 
-#' Test if R can interpret a string as a colour
+#' Test if \code{R} can interpret a string as a colour
 #'
-#' Test if R can interpret a string as a colour
+#' Test if \code{R} can interpret a string as a colour
 #'
 #' @param col The string to be tested.
-#' @return A boolean value, TRUE if col is a valid colour, FALSE otherwise
+#' @return A boolean value, \code{TRUE} if col is a valid colour, \code{FALSE} otherwise
 #' @export
 #' @examples
 #' isColourStr('black')

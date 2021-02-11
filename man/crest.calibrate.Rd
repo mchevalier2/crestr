@@ -2,7 +2,7 @@
 % Please edit documentation in R/crest.calibrate.R
 \name{crest.calibrate}
 \alias{crest.calibrate}
-\title{Fit the species and proxy pdfs}
+\title{Fit the species and proxy \code{pdfs}}
 \usage{
 crest.calibrate(
   x,
@@ -15,32 +15,33 @@ crest.calibrate(
 )
 }
 \arguments{
-\item{x}{A crestObj produced by the \code{\link{crest.get_modern_data}} function.}
+\item{x}{A \code{\link{crestObj}} produced by the \code{\link{crest.get_modern_data}} function.}
 
 \item{bin_width}{The width of the bins used to correct for unbalanced climate
 state. Use values that split the studied climate gradient in
 15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{shape}{The imposed shape of the species pdfs. We recommend using
+\item{shape}{The imposed shape of the species \code{pdfs}. We recommend using
 'normal' for temperature variables and 'lognormal' for the
 variables that can only take positive values, such as
 precipitation or aridity. Default is 'normal' for all.}
 
-\item{npoints}{The number of points to be used to fit the pdfs. Default 200.}
+\item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
 by the squareroot of their extension when estimating a genus/family
 level taxon-climate relationships.}
 
-\item{climateSpaceWeighting}{A boolean to indicate if the species pdfs should
-be corrected for the modern distribution of the climate space (default
-TRUE).}
+\item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}
+should be corrected for the modern distribution of the climate space
+(default \code{TRUE}).}
 
-\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
+\item{verbose}{A boolean to print non-essential comments on the terminal
+(default \code{TRUE}).}
 }
 \value{
-A crest() object containing the spatial distributions and the climate
-space.
+A \code{\link{crestObj}} object containing the spatial distributions
+and the climate space.
 }
 \description{
 This function fits the climate response of the selected taxa to the selected
@@ -48,18 +49,18 @@ climate variables.
 }
 \examples{
 \dontrun{
-data(crest_ex_pse)
-data(crest_ex_selection)
-data(crest_ex)
-x <- crest.get_modern_data( df = crest_ex,
-  pse = crest_ex_pse, taxaType = 0,
-  climate = c("bio1", "bio12"),
-  selectedTaxa = crest_ex_selection, dbname = "crest_example"
-)
-x <- crest.calibrate(x,
-  geoWeighting = TRUE, climateSpaceWeighting = TRUE,
-  bin_width = c(2, 20), shape = c("normal", "lognormal")
-)
+  data(crest_ex_pse)
+  data(crest_ex_selection)
+  data(crest_ex)
+  x <- crest.get_modern_data( df = crest_ex,
+    pse = crest_ex_pse, taxaType = 0,
+    climate = c("bio1", "bio12"),
+    selectedTaxa = crest_ex_selection, dbname = "crest_example"
+  )
+  x <- crest.calibrate(x,
+    geoWeighting = TRUE, climateSpaceWeighting = TRUE,
+    bin_width = c(2, 20), shape = c("normal", "lognormal")
+  )
 }
 
 }

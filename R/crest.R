@@ -1,16 +1,17 @@
-#' Connect to the gbif4crest database
+#' A wrapper for all the crest functions.
 #'
-#' Connect to the gbif4crest_02 database by accessing the server on Amazon.
+#' Runs all the different steps of a CREST reconstruction in one function.
 #'
 #' @inheritParams crestObj
 #' @param site_info A vector containing the coordinates of the study site.
-#'        Default c(NA, NA).
-#' @param site_name The name of the dataset (default NA).
+#'        Default \code{c(NA, NA)}.
+#' @param site_name The name of the dataset (default \code{NA}).
 #' @param leave_one_out A boolean to indicate whether the leave one out (loo)
-#'        reconstructions should be computed (default FALSE).
-#' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
-#' @param dbname The name of the database. Default is gbif4crest_02.
-#' @return The parameters to be used by crest()
+#'        reconstructions should be computed (default \code{FALSE}).
+#' @param verbose A boolean to print non-essential comments on the terminal
+#'        (default \code{TRUE}).
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
+#' @return A \code{\link{crestObj}} containing the reconstructions.
 #' @export
 #' @examples
 #' data(crest_ex)

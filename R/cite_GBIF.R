@@ -1,9 +1,11 @@
-#' Returns the citations associated to the GBIF data used to fit the pdfs.
+#' Returns the citations associated to the GBIF data used to fit the \code{pdfs}.
 #'
-#' Returns the citations associated to the GBIF data used to fit the pdfs.
+#' Returns the citations associated to the GBIF data used to fit the \code{pdfs}.
 #'
 #' @inheritParams crest
-#' @param x A crestObj produced by one of the crest functions.
+#' @param x A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
+#'        \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
+#'        \code{\link{crest.reconstrut}} or \code{\link{loo}} functions.
 #' @export
 
 cite_GBIF <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {

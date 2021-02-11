@@ -2,7 +2,7 @@
 % Please edit documentation in R/crest.reconstruct.R
 \name{crest.reconstruct}
 \alias{crest.reconstruct}
-\title{Fit the species and proxy pdfs}
+\title{Fit the species and proxy \code{pdfs}}
 \usage{
 crest.reconstruct(
   x,
@@ -14,7 +14,8 @@ crest.reconstruct(
 )
 }
 \arguments{
-\item{x}{A crestObj produced by the crest.fit_pdfs function.}
+\item{x}{A \code{\link{crestObj}} produced by the
+\code{\link{crest.calibrate}} function.}
 
 \item{presenceThreshold}{All values above that threshold will be used in the
 reconstruction (e.g. if set at 1, all percentages below 1 will be set
@@ -26,13 +27,16 @@ to 0 and the associated presences discarded). Default is 0.}
 \item{uncertainties}{A (vector of) threshold value(s) indicating the error
 bars that should be calculated (default both 50 and 95\% ranges).}
 
-\item{skip_for_loo}{A boolean that tells the loo() functiont to skip parts
-and fasten the process. Not for users.}
+\item{skip_for_loo}{A boolean that tells the \code{\link{loo}} function to
+skip parts and fasten the process. Not for users, always leve to
+\code{FALSE}.}
 
-\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
+\item{verbose}{A boolean to print non-essential comments on the terminal
+(default \code{TRUE}).}
 }
 \value{
-A crest() object containing the reconstructions and all the associated data.
+A \code{\link{crestObj}} object containing the reconstructions and
+all the associated data.
 }
 \description{
 This function fits the climate response of the selected taxa to the selected

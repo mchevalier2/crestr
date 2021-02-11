@@ -63,8 +63,8 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df))
 #' @examples
 #' df <- data.frame(matrix(1:25, ncol = 5))
 #' colnames(df) <- paste(rep("col", 5), 1:5, sep = "")
-#' convert2presenceAbsence(df, threshold = 15)
-#' convert2presenceAbsence(df, col2convert = 3:5)
+#' normalise(df, threshold = 15)
+#' normalise(df, col2convert = 3:5)
 normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
     df2 <- convert2percentages(df, col2convert)
     colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
@@ -82,8 +82,8 @@ normalise <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
 #' Calculate the mean of all stricly positive values.
 #'
 #' @param x A vector of values.
-#' @return The average of all the positive values. Returns NaN is no positive
-#'         values are found.
+#' @return The average of all the positive values. Returns \code{NaN} is no
+#'         stricly positive values are found.
 #' @export
 #' @examples
 #' meanPositiveValues(-10:10)
@@ -99,7 +99,7 @@ meanPositiveValues <- function(x) {
 #' R environment.
 #'
 #' @inheritParams crest
-#' @param x A crestObj produced by the crest.reconstruct() or crest() functions.
+#' @param x A \code{\link{crestObj}} produced by the \code{\link{crest.reconstruct}} or \code{\link{crest}} functions.
 #' @param optima A boolean value to indicate if the optima should be copied to the clipboard.
 #' @param mean A boolean value to indicate if the means should be copied to the clipboard.
 #' @param uncertainties A boolean value to indicate if the uncertainties should be copied to the clipboard.

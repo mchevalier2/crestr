@@ -1,28 +1,28 @@
-#' Fit the species and proxy pdfs
+#' Fit the species and proxy \code{pdfs}
 #'
 #' This function fits the climate response of the selected taxa to the selected
 #' climate variables.
 #'
 #' @inheritParams crestObj
 #' @inheritParams crest
-#' @param x A crestObj produced by the \code{\link{crest.get_modern_data}} function.
-#' @return A crest() object containing the spatial distributions and the climate
-#'         space.
+#' @param x A \code{\link{crestObj}} produced by the \code{\link{crest.get_modern_data}} function.
+#' @return A \code{\link{crestObj}} object containing the spatial distributions
+#'         and the climate space.
 #' @export
 #' @examples
 #' \dontrun{
-#' data(crest_ex_pse)
-#' data(crest_ex_selection)
-#' data(crest_ex)
-#' x <- crest.get_modern_data( df = crest_ex,
-#'   pse = crest_ex_pse, taxaType = 0,
-#'   climate = c("bio1", "bio12"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
-#' )
-#' x <- crest.calibrate(x,
-#'   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
-#'   bin_width = c(2, 20), shape = c("normal", "lognormal")
-#' )
+#'   data(crest_ex_pse)
+#'   data(crest_ex_selection)
+#'   data(crest_ex)
+#'   x <- crest.get_modern_data( df = crest_ex,
+#'     pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
+#'   )
+#'   x <- crest.calibrate(x,
+#'     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
+#'     bin_width = c(2, 20), shape = c("normal", "lognormal")
+#'   )
 #' }
 #'
 crest.calibrate <- function(x,

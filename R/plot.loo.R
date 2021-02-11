@@ -1,19 +1,23 @@
-#' Plot stratigraphic data as polygons or barplots.
+#' Plot de results of the leave-one-out analysis.
 #'
-#' This function plots stratigraphic data either as polygons or bars.
+#' Plot de results of the leave-one-out analysis.
 #'
 #' @inheritParams plot_diagram
-#' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
-#'        mean (FALSE) estimates.
+#' @param optima A boolean to indicate whether to plot the optimum (\code{TRUE})
+#'        or the mean (\code{FALSE}) estimates.
 #' @param climate Climate variables to be used to generate the plot. By default
 #'        all the variables are included.
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
-#'        the file is saved in the working directory under the name \code{Diagram_loo_climate.pdf}.
-#' @param yax_incr Graphical parameters describing the increment size on the y-axis (default 5).
+#'        the file is saved in the working directory under the name
+#'        \code{'Diagram_loo_climate.pdf'}.
+#' @param yax_incr Graphical parameters describing the increment size on the
+#'        y-axis (default 5).
 #' @param bar_width Width of the bars of the barplot (default 1).
-#' @param col_pos Graphical parameter for the barplot. Colour of all the positive values (default black).
-#' @param col_neg Graphical parameter for the barplot. Colour of all the negative values (default white).
+#' @param col_pos Graphical parameter for the barplot. Colour of all the
+#'        positive values (default black).
+#' @param col_neg Graphical parameter for the barplot. Colour of all the
+#'        negative values (default grey80).
 #' @export
 #' @examples
 #' \dontrun{

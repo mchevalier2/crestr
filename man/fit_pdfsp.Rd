@@ -2,7 +2,7 @@
 % Please edit documentation in R/mod_fit_pdfsp.R
 \name{fit_pdfsp}
 \alias{fit_pdfsp}
-\title{Fit the species pdfs.}
+\title{Fit the species \code{pdfs}.}
 \usage{
 fit_pdfsp(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE)
 }
@@ -15,21 +15,21 @@ fit_pdfsp(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE)
 state. Use values that split the studied climate gradient in
 15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
-\item{shape}{The imposed shape of the species pdfs. We recommend using
+\item{shape}{The imposed shape of the species \code{pdfs}. We recommend using
 'normal' for temperature variables and 'lognormal' for the
 variables that can only take positive values, such as
 precipitation or aridity. Default is 'normal' for all.}
 
-\item{xrange}{The climate gradient upon which the pdf with be defined.}
+\item{xrange}{The climate gradient upon which the \code{pdf} with be defined.}
 
-\item{use_ccs}{Boolean to indicate if the pdfsp should be corrected by the
-distributin of the modern climate space}
+\item{use_ccs}{Boolean to indicate if the \code{pdfsp} should be corrected by
+the distributin of the modern climate space}
 }
 \value{
 The pdf of the species.
 }
 \description{
-Fit the species pdfs.
+Fit the species \code{pdfs}.
 }
 \examples{
 # Creating one randomised species
@@ -44,5 +44,6 @@ pdfsp <- fit_pdfsp(climate_species, ccs, 2, "normal", xrange)
 plot(xrange, pdfsp, type = "l")
 
 # Testing that the area under the curve is equal to 1.
-sum(pdfsp * (xrange[2] - xrange[1])) == 1
+all.equal(sum(pdfsp * (xrange[2] - xrange[1])), 1)
+
 }

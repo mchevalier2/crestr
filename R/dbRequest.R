@@ -3,7 +3,7 @@
 #' Connect to the gbif4crest_02 database by accessing the server on Amazon.
 #'
 #' @param request A SQL request to be executed.
-#' @param dbname The name of the database. Default is gbif4crest_02.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return The result of the request.
 #' @export
 #' @examples

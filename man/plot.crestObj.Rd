@@ -14,26 +14,30 @@
   xlim = NA,
   ylim = NA,
   save = FALSE,
+  width = 5.51,
+  height = 5.51,
   loc = getwd(),
   ...
 )
 }
 \arguments{
-\item{x}{A crestObj produced by the crest.reconstruct() or crest() functions.}
+\item{x}{A \code{\link{crestObj}} produced by either the
+\code{\link{crest.reconstruct}} oe \code{\link{ocrest}}) functions.}
 
-\item{climate}{The climate variables to plot (default is all the reconstructed variables from x)}
+\item{climate}{The climate variables to plot (default is all the
+reconstructed variables from x)}
 
 \item{uncertainties}{A (vector of) threshold value(s) indicating the error
 bars that should be calculated (default are the values stored in x).}
 
-\item{optima}{A boolean to indicate whether to plot the optimum (TRUE) or the
-mean (FALSE) estimates.}
+\item{optima}{A boolean to indicate whether to plot the optimum (\code{TRUE})
+or the mean (\code{FALSE}) estimates.}
 
 \item{add_modern}{Adds the modern climate values to the plot.}
 
 \item{simplify}{A boolean to indicate if the full distribution of uncertainties
-should be plooted (FALSE, default) or if they should be simplified to
-the uncertainty range(s).}
+should be plooted (\code{FALSE}, default) or if they should be
+simplified to the uncertainty range(s).}
 
 \item{xlim}{the x limits (x1, x2) of the plot.  Note that \code{x1 > x2}
     is allowed and leads to a \sQuote{reversed axis}.
@@ -44,16 +48,33 @@ the uncertainty range(s).}
 \item{ylim}{the y limits of the plot.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
-Default is FALSE.}
+Default is \code{FALSE}.}
+
+\item{width, height}{The dimensions of the pdf file (default 5.51in ~14cm).}
 
 \item{loc}{An absolute or relative path that indicates the folder where the
 diagram(s) hould be saved. Also used to specify the name of the file.
 Default: the file is saved in the working directory with a file
-created for each variable as variable.pdf.}
+created for each variable as \code{climate.pdf}.}
 
 \item{...}{other \link[graphics]{graphical parameters} (see \code{\link[graphics]{par}} and
     section \sQuote{Details} below).}
 }
 \description{
-Plot the reconstructions and their uncertainties
+Plot the reconstructions and their uncertainties if they exist.
+}
+\examples{
+data(crest_ex)
+data(crest_ex_pse)
+data(crest_ex_selection)
+recons <- crest(
+  df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+  site_info = c(7.5, 7.5), site_name = 'crest_example',
+  climate = c("bio1", "bio12"), bin_width = c(2, 20),
+  shape = c("normal", "lognormal"),
+  selectedTaxa = crest_ex_selection, dbname = "crest_example",
+  leave_one_out = TRUE
+)
+plot(recons)
+plot(recons, climate='bio1', simplify = TRUE)
 }

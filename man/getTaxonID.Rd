@@ -24,7 +24,7 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 4 for foraminifers, 5 for diatoms and 6 for rodents. The example
 dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 A vector of unique taxonIDs.
@@ -36,5 +36,6 @@ description, which can be at the family, the genus or the species levels.
 \examples{
 getTaxonID("Zamiaceae")
 getTaxonID("Zamiaceae", "Ceratozamia")
-getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2) #' \code{taxaType = 2} searches for beetles and not plants.
+
 }

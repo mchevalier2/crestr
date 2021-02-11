@@ -2,17 +2,20 @@
 % Please edit documentation in R/cite_GBIF.R
 \name{cite_GBIF}
 \alias{cite_GBIF}
-\title{Returns the citations associated to the GBIF data used to fit the pdfs.}
+\title{Returns the citations associated to the GBIF data used to fit the \code{pdfs}.}
 \usage{
 cite_GBIF(x, dbname = "gbif4crest_02", verbose = TRUE)
 }
 \arguments{
-\item{x}{A crestObj produced by one of the crest functions.}
+\item{x}{A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
+\code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
+\code{\link{crest.reconstrut}} or \code{\link{loo}} functions.}
 
-\item{dbname}{The name of the database. Default is gbif4crest_02.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 
-\item{verbose}{A boolean to print non-essential comments on the terminal (default TRUE).}
+\item{verbose}{A boolean to print non-essential comments on the terminal
+(default \code{TRUE}).}
 }
 \description{
-Returns the citations associated to the GBIF data used to fit the pdfs.
+Returns the citations associated to the GBIF data used to fit the \code{pdfs}.
 }

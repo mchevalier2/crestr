@@ -8,11 +8,11 @@ accClimateVariables(v = NA)
 }
 \arguments{
 \item{v}{The name of a variable to quickly access its description and ID
-(default NA returns all possible values).}
+(default \code{NA} returns all possible values).}
 }
 \value{
 A data frame descriptive of the climate variables available in the
-database (if v=NA) or the description of variable v.
+database (if \code{v=NA}) or the description of variable v.
 }
 \description{
 Provides the index and the short and full names of all the variables

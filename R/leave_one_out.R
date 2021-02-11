@@ -1,10 +1,13 @@
-#' Connect to the gbif4crest database
+#' Performs the leave-one-out analysis
 #'
-#' Connect to the gbif4crest_02 database by accessing the server on Amazon.
+#' Repeat the repetation by removing one taxon at a time.
 #'
-#' @param x a crestObj produced by the crest.reconstruct() or crest() functions.
-#' @param verbose A boolean to print non-essential comments on the terminal (default TRUE).
-#' @return A crest() object containing the reconstructions and all the associated data.
+#' @param x a \code{\link{crestObj}} produced by the
+#'        \code{\link{crest.reconstruct}} or \code{\link{crest}} functions.
+#' @param verbose A boolean to print non-essential comments on the terminal
+#'        (default \code{TRUE}).
+#' @return A \code{\link{crestObj}} object containing the reconstructions and
+#'         all the associated data.
 #' @export
 #' @examples
 #' data(crest_ex)

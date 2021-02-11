@@ -2,17 +2,19 @@
 % Please edit documentation in R/includeTaxa.R
 \name{excludeTaxa}
 \alias{excludeTaxa}
-\title{Excludes the list of taxa to the reconstructions.}
+\title{Excludes the list of taxa from the reconstructions.}
 \usage{
 excludeTaxa(x, taxa, climate)
 }
 \arguments{
-\item{x}{A crestObj produced by one of the crest functions.}
+\item{x}{A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
+\code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
+\code{\link{crest.reconstrut}} or \code{\link{loo}} functions.}
 
-\item{taxa}{A vector of taxa to Exclude.}
+\item{taxa}{A vector of taxa to exclude.}
 
 \item{climate}{A vector of climate variables to unlink the taxa with.}
 }
 \description{
-Excludes the list of taxa to the reconstructions.
+Excludes the list of taxa from the reconstructions.
 }
