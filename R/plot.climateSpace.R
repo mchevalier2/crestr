@@ -58,7 +58,7 @@ plot_climateSpace <- function( x,
         }
 
         if(add_modern) {
-            if (length(x$misc$site_info) <= 2) {
+            if (length(x$misc$site_info) <= 3) {
                 add_modern <- FALSE
             }
         }
