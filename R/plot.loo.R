@@ -31,9 +31,11 @@
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
 #'   )
 #'   recons <- loo(recons)
-#'   plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
-#'            col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #' }
+#' ## example using pre-saved reconstruction obtained with the previous command.
+#' data(recons)
+#' plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
+#'          col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #'
 plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       save=FALSE, filename='Diagram_loo.pdf',

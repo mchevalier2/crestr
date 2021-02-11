@@ -18,7 +18,8 @@
 #' @examples
 #' getTaxonomy("Zamiaceae")
 #' getTaxonomy(genus="Ceratozamia", depth.out=6)
-#' getTaxonomy("Zamiaceae", "Ceratozamia", taxaType = 2) # \code{taxaType = 2} searches for beetles and not plants.
+#' ## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
+#' getTaxonomy("Zamiaceae", "Ceratozamia", taxaType = 2) 
 #'
 getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, depth.out = 8, dbname = "gbif4crest_02") {
     if (family == "" & genus == "" & species == "") {

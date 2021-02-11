@@ -5,7 +5,7 @@
 #' @inheritParams crest
 #' @param x A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
 #'        \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
-#'        \code{\link{crest.reconstrut}} or \code{\link{loo}} functions.
+#'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @export
 
 cite_GBIF <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {

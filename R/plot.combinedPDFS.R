@@ -30,9 +30,11 @@
 #'     shape = c("normal", "lognormal"),
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = FALSE
-#'    )
-#'   plot_combinedPDFs(recons, samples=1:12, climate='bio12')
+#'    ) 
 #' }
+#' ## example using pre-saved reconstruction obtained with the previous command.
+#' data(recons)
+#' plot_combinedPDFs(recons, samples=1:12, climate='bio12')
 #'
 plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parameters$climate[1],
                                optima=TRUE,

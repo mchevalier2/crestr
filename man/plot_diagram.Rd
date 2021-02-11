@@ -76,9 +76,9 @@ data(crest_ex)
 plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
 \dontrun{
-plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
-             bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
-             bar_width=0.8, xlim=c(3,15))
+  plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
+               bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
+               bar_width=0.8, xlim=c(3,15))
 }
 
 }

@@ -9,7 +9,7 @@ excludeTaxa(x, taxa, climate)
 \arguments{
 \item{x}{A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
 \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
-\code{\link{crest.reconstrut}} or \code{\link{loo}} functions.}
+\code{\link{crest.reconstruct}} or \code{\link{loo}} functions.}
 
 \item{taxa}{A vector of taxa to exclude.}
 
@@ -17,4 +17,12 @@ excludeTaxa(x, taxa, climate)
 }
 \description{
 Excludes the list of taxa from the reconstructions.
+}
+\examples{
+data(recons)
+print(recons$inputs$selectedTaxa)
+recons <- excludeTaxa(recons, 'Taxon3', 'bio1')
+## 'Taxon3' is now excluded from the reconstruction of 'bio1'.
+print(recons$inputs$selectedTaxa)
+
 }

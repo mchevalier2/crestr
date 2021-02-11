@@ -31,7 +31,7 @@ devtools::install_github("mchevalier2/crestr")
 > specific functions implemented, feel free to contact me at
 > <chevalier.manuel@gmail.com>. I will try to limit as much as possible
 > modifying existing functions and/or function parameters, but at the
-> moment it cannot be excluded. <!-- slide -->My apologies for this.
+> moment it cannot be excluded. My apologies for this.
 
 ## Example
 
@@ -148,8 +148,8 @@ names(recons)
 #> [5] "misc"
 lapply(recons$reconstructions, names)
 #> $bio1
-#> [1] "posterior"     "uncertainties" "optima"
-#>
+#> [1] "posterior"     "uncertainties" "optima"       
+#> 
 #> $bio12
 #> [1] "posterior"     "uncertainties" "optima"
 ```

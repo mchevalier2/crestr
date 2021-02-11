@@ -9,10 +9,9 @@
 #' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @param verbose A boolean to print non-essential comments on the terminal
 #'        (default \code{TRUE}).
-#' @return A \code{\link{crestObj}} object containing the spatial distributions
+#' @return A \code{\link{crestObj}} object containing the spatial distributions.
 #' @export
 #' @examples
-#' \dontrun{
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
 #' data(crest_ex)
@@ -23,7 +22,6 @@
 #' )
 #' x
 #' lapply(x$modelling$distributions, head)
-#' }
 #'
 crest.get_modern_data <- function( pse, taxaType, climate,
                                    df = NA,

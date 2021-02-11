@@ -4,12 +4,10 @@
 \alias{normalise}
 \title{Convert data into presence/absence data.}
 \usage{
-normalise(df, threshold = 2, col2convert = 2:ncol(df))
+normalise(df, col2convert = 2:ncol(df))
 }
 \arguments{
 \item{df}{The dataframe containing the data to convert.}
-
-\item{threshold}{The threshold that defines presence (presence if >= threshold)}
 
 \item{col2convert}{A vector of the columns to convert. Default is all the
 columns but the first, which contains an age, a depth or a sampleID.}
@@ -23,6 +21,6 @@ Convert data into presence/absence data.
 \examples{
 df <- data.frame(matrix(1:25, ncol = 5))
 colnames(df) <- paste(rep("col", 5), 1:5, sep = "")
-normalise(df, threshold = 15)
+normalise(df)
 normalise(df, col2convert = 3:5)
 }

@@ -53,3 +53,10 @@
 #' A shapefile of the world's country borders.
 #'
 "M1"
+
+#' A \code{\link{crestObj}} ran with the pseudo data.
+#'
+#' A \code{\link{crestObj}} ran with the pseudo data. Useful to illustrate many
+#' functions of the package.
+#'
+"recons"

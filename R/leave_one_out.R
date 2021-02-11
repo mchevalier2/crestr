@@ -10,16 +10,20 @@
 #'         all the associated data.
 #' @export
 #' @examples
-#' data(crest_ex)
-#' data(crest_ex_pse)
-#' data(crest_ex_selection)
-#' recons <- crest(
-#'   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
-#'   climate = c("bio1", "bio12"), bin_width = c(2, 20),
-#'   shape = c("normal", "lognormal"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
-#' )
-#' recons <- loo(recons)
+#' \dontrun{
+#'   data(crest_ex)
+#'   data(crest_ex_pse)
+#'   data(crest_ex_selection)
+#'   recons <- crest(
+#'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
+#'     shape = c("normal", "lognormal"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
+#'   )
+#'   recons <- loo(recons)
+#' }
+#' ## example using pre-saved reconstruction obtained with the previous command.
+#' data(recons)
 #' recons$reconstructions$bio12$loo
 #' plot_loo(recons)
 #'

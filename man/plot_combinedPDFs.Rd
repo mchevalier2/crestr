@@ -54,8 +54,10 @@ Plot representing how the \code{pdfs} combine to produce the reconstruction.
     shape = c("normal", "lognormal"),
     selectedTaxa = crest_ex_selection, dbname = "crest_example",
     leave_one_out = FALSE
-   )
-  plot_combinedPDFs(recons, samples=1:12, climate='bio12')
+   ) 
 }
+## example using pre-saved reconstruction obtained with the previous command.
+data(recons)
+plot_combinedPDFs(recons, samples=1:12, climate='bio12')
 
 }

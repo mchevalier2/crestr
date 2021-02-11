@@ -62,7 +62,9 @@ Plot the studied climate space.
     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
     bin_width = c(2, 20), shape = c("normal", "lognormal")
   )
-  plot_climateSpace(x)
 }
+## example using pre-saved reconstruction obtained with the previous command.
+data(recons)
+plot_climateSpace(recons)
 
 }

@@ -79,14 +79,13 @@ Default \code{c(NA, NA)}.}
 (default \code{TRUE}).}
 }
 \value{
-A \code{\link{crestObj}} object containing the spatial distributions
+A \code{\link{crestObj}} object containing the spatial distributions.
 }
 \description{
 This function will extract the distributions of all the species composing each
 taxon and return them as a list.
 }
 \examples{
-\dontrun{
 data(crest_ex_pse)
 data(crest_ex_selection)
 data(crest_ex)
@@ -97,6 +96,5 @@ x <- crest.get_modern_data( df = crest_ex,
 )
 x
 lapply(x$modelling$distributions, head)
-}
 
 }

@@ -9,7 +9,7 @@ includeTaxa(x, taxa, climate)
 \arguments{
 \item{x}{A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
 \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
-\code{\link{crest.reconstrut}} or \code{\link{loo}} functions.}
+\code{\link{crest.reconstruct}} or \code{\link{loo}} functions.}
 
 \item{taxa}{A vector of taxa to include.}
 
@@ -17,4 +17,13 @@ includeTaxa(x, taxa, climate)
 }
 \description{
 Includes the list of taxa into the reconstructions.
+}
+\examples{
+data(recons)
+print(recons$inputs$selectedTaxa)
+recons <- includeTaxa(recons, recons$inputs$taxa.name, 'bio12')
+## All the taxa are not selected for 'bio12', except for 'Taxon7' for which
+## data are unavailable.
+print(recons$inputs$selectedTaxa)
+
 }
