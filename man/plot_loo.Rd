@@ -7,6 +7,7 @@
 plot_loo(
   x,
   optima = TRUE,
+  climate = x$parameters$climate,
   save = FALSE,
   filename = "Diagram_loo.pdf",
   width = 3.54,
@@ -26,6 +27,9 @@ and the taxa in the following columns. x can also be a crestObj.}
 
 \item{optima}{A boolean to indicate whether to plot the optimum (TRUE) or the
 mean (FALSE) estimates.}
+
+\item{climate}{Climate variables to be used to generate the plot. By default
+all the variables are included.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is FALSE.}

@@ -5,6 +5,8 @@
 #' @inheritParams plot_diagram
 #' @param optima A boolean to indicate whether to plot the optimum (TRUE) or the
 #'        mean (FALSE) estimates.
+#' @param climate Climate variables to be used to generate the plot. By default
+#'        all the variables are included.
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name \code{Diagram_loo_climate.pdf}.
@@ -29,7 +31,7 @@
 #'            col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #' }
 #'
-plot_loo <- function( x, optima=TRUE,
+plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       save=FALSE, filename='Diagram_loo.pdf',
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width=1,
@@ -38,7 +40,7 @@ plot_loo <- function( x, optima=TRUE,
 
     if (methods::is(x)[1] == 'crestObj') {
 
-        if(! 'loo' %in% names(x$reconstructions[[x$parameters$climate[1]]])) {
+        if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {
             cat('ERROR: No leave-one-out data available. Please run the loo() function first.\n')
             return(invisible())
         }
@@ -49,20 +51,20 @@ plot_loo <- function( x, optima=TRUE,
 
         filename <- strsplit(filename, '.pdf')[[1]]
 
-        if (length(col_pos) != length(x$parameters$climate)) col_pos = base::rep_len(col_pos,length(x$parameters$climate))
-        if (length(col_neg) != length(x$parameters$climate)) col_neg = base::rep_len(col_neg,length(x$parameters$climate))
-        if (length(yax_incr) != length(x$parameters$climate)) yax_incr = base::rep_len(yax_incr,length(x$parameters$climate))
-        if ((!is.na(unique(title)[1])) & (length(title) != length(x$parameters$climate))) title = base::rep_len(title,length(x$parameters$climate))
+        if (length(col_pos) != length(climate)) col_pos = base::rep_len(col_pos,length(climate))
+        if (length(col_neg) != length(climate)) col_neg = base::rep_len(col_neg,length(climate))
+        if (length(yax_incr) != length(climate)) yax_incr = base::rep_len(yax_incr,length(climate))
+        if ((!is.na(unique(title)[1])) & (length(title) != length(climate))) title = base::rep_len(title,length(climate))
 
-        names(col_pos) = names(col_neg) = names(yax_incr) = x$parameters$climate
-        if(!is.na(title[1])) names(title) = x$parameters$climate
+        names(col_pos) = names(col_neg) = names(yax_incr) = climate
+        if(!is.na(title[1])) names(title) = climate
 
         if(!save) {
             par_usr <- graphics::par(no.readonly = TRUE)
-            graphics::par(mfrow=c(1,2))
+            graphics::par(mfrow=c(1, length(climate)))
         }
 
-        for( clim in x$parameters$climate) {
+        for( clim in climate ) {
             df <- list()
             if(is.numeric(x$inputs$x)) {
                 df[[x$inputs$x.name]] <- x$inputs$x
