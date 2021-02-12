@@ -2,8 +2,8 @@ Package: crestr
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
 Authors@R:
-    person(given = "First",
-           family = "Last",
+    person(given = "Manuel",
+           family = "Chevalier",
            role = c("aut", "cre"),
            email = "chevalier.manuel@gmail.com",
            comment = c(ORCID = "0000-0002-8183-9881"))

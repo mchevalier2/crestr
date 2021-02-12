@@ -1,3 +1,83 @@
 template:
   params:
     bootswatch: flatly
+
+figures:
+  dev: ragg::agg_png
+  dpi: 96
+  dev.args: []
+  fig.ext: png
+  fig.width: 7.2916667
+  fig.height: ~
+  fig.retina: 2
+  fig.asp: 1.618
+  bg: NA
+
+reference:
+  - title: "Reconstructing"
+    desc: >
+      Functions for installing Spark components and managing
+      connections to Spark
+    contents:
+      - '`crest.get_modern_data`'
+      - '`crest.calibrate`'
+      - '`crest.reconstruct`'
+      - '`loo`'
+      - '`crest`'
+  - title: "Plotting"
+    desc: "Functions for reading and writing Spark DataFrames."
+    contents:
+      - '`plot.crestObj`'
+      - '`plot_climateSpace`'
+      - '`plot_combinedPDFs`'
+      - '`plot_diagram`'
+      - '`plot_loo`'
+      - '`explore_calibration_dataset`'
+      - '`plot_map_eqearth`'
+      - '`plot_taxaCharacteristics`'
+      - '`eqearth_get_ext`'
+      - '`isColourStr`'
+      - '`makeTransparent`'
+  - title: "CrestObj Manipulation"
+    desc: "Functions for reading and writing Spark DataFrames."
+    contents:
+      - '`crestObj`'
+      - '`export`'
+      - '`cite_GBIF`'
+      - '`copy_crest`'
+      - '`excludeTaxa`'
+      - '`includeTaxa`'
+      - '`getSpeciesdiversity`'
+  - title: "Database"
+    desc: "Functions for reading and writing Spark DataFrames."
+    contents:
+      - '`accClimateVariables`'
+      - '`accCountryNames`'
+      - '`accRealmNames`'
+      - '`close_db_connection`'
+      - '`connect_online`'
+      - '`dbRequest`'
+      - '`getTaxonID`'
+      - '`getTaxonomy`'
+      - '`getClimateSpace`'
+      - '`getDistribTaxa`'
+      - '`climate_from_xy`'
+  - title: "Database 2"
+    desc: "Functions for reading and writing Spark DataFrames."
+    contents:
+      - '`calib_clim_space`'
+      - '`convert2percentages`'
+      - '`convert2presenceAbsence`'
+      - '`createPSE`'
+      - '`fit_pdfsp`'
+      - '`fit_xrange`'
+      - '`meanPositiveValues`'
+      - '`normalise`'
+  - title: "Datasets"
+    desc: "Functions for reading and writing Spark DataFrames."
+    contents:
+      - '`M1`'
+      - '`crest_ex`'
+      - '`crest_ex_pse`'
+      - '`crest_ex_selection`'
+      - '`recons`'
