@@ -62,7 +62,7 @@ reference:
       - '`getClimateSpace`'
       - '`getDistribTaxa`'
       - '`climate_from_xy`'
-  - title: "Database 2"
+  - title: "Modelling functions"
     desc: "Functions for reading and writing Spark DataFrames."
     contents:
       - '`calib_clim_space`'
