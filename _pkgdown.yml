@@ -63,7 +63,7 @@ reference:
       - '`getDistribTaxa`'
       - '`climate_from_xy`'
   - title: "Modelling functions"
-    desc: "Functions for reading and writing Spark DataFrames."
+    desc: "Functions used model the data. Not to be used."
     contents:
       - '`calib_clim_space`'
       - '`convert2percentages`'
@@ -74,7 +74,6 @@ reference:
       - '`meanPositiveValues`'
       - '`normalise`'
   - title: "Datasets"
-    desc: "Functions for reading and writing Spark DataFrames."
     contents:
       - '`M1`'
       - '`crest_ex`'
