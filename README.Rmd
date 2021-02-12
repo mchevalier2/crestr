@@ -124,10 +124,10 @@ str(recons$reconstructions$bio1$posterior)
 
 ```{r plot}
 plot(recons, climate = 'bio1')
-plot(recons, climate = 'bio12')
+plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
 ## References
 
  - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. *Clim. Past* 10, 2081–2098. [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
- - Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35. [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) 
+ - Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35. [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)

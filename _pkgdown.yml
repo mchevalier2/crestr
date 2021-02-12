@@ -37,7 +37,7 @@ reference:
       - '`isColourStr`'
       - '`makeTransparent`'
   - title: "CrestObj Manipulation"
-    desc: "Functions for creating, reading and manipulating crestObj objects."
+    desc: "Functions for creating, reading and modifying crestObj objects."
     contents:
       - '`crestObj`'
       - '`export`'
