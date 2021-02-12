@@ -4,3 +4,6 @@ pkgdown_sha: ~
 articles: {}
 last_built: 2021-02-12T11:59Z
 
+template:
+  params:
+    bootswatch: flatly
