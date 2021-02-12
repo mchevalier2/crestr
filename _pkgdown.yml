@@ -15,9 +15,7 @@ figures:
 
 reference:
   - title: "Reconstructing"
-    desc: >
-      Functions for installing Spark components and managing
-      connections to Spark
+    desc: "Functions for running the CREST reconstructions."
     contents:
       - '`crest.get_modern_data`'
       - '`crest.calibrate`'
@@ -25,7 +23,7 @@ reference:
       - '`loo`'
       - '`crest`'
   - title: "Plotting"
-    desc: "Functions for reading and writing Spark DataFrames."
+    desc: "Functions for generating plots."
     contents:
       - '`plot.crestObj`'
       - '`plot_climateSpace`'
@@ -39,7 +37,7 @@ reference:
       - '`isColourStr`'
       - '`makeTransparent`'
   - title: "CrestObj Manipulation"
-    desc: "Functions for reading and writing Spark DataFrames."
+    desc: "Functions for creating, reading and manipulating crestObj objects."
     contents:
       - '`crestObj`'
       - '`export`'
@@ -49,7 +47,7 @@ reference:
       - '`includeTaxa`'
       - '`getSpeciesdiversity`'
   - title: "Database"
-    desc: "Functions for reading and writing Spark DataFrames."
+    desc: "Functions for querying the calibration data database."
     contents:
       - '`accClimateVariables`'
       - '`accCountryNames`'
