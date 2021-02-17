@@ -106,23 +106,131 @@
     
     
 <hr>
-<p>The goal of crestr is to produce probabilistic reconstructions of past climate change from fossil assemblage data. The approach is based on the estimation of conditional responses of studies bioproxy studied to climate paramters. These responses take the form of probability density functions (<em>pdfs</em>). The details of the method have been described in <a href="http://www.doi.org/10.5194/cp-10-2081-2014">Chevalier <em>et al.</em> (2014)</a> and the calibrated data presented in <a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016">Chevalier (2019)</a>.</p>
-<div id="installation" class="section level2">
+<div id="example-dataset" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the development version from <a href="https://github.com/">GitHub</a> with:</p>
+<a href="#example-dataset" class="anchor"></a>Example dataset</h2>
+<p>This is a basic example which shows you how to run crest with randomly generated data:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"mchevalier2/crestr"</span><span class="op">)</span></code></pre></div>
-<blockquote>
-<p><strong><em>NOTE:</em></strong> This package is still in an <strong>early phase of development</strong>. The documentation is sparse and the functionalities limited. If you notice any bug, or if you would like to see some specific functions implemented, feel free to contact me at <a href="mailto:chevalier.manuel@gmail.com" class="email">chevalier.manuel@gmail.com</a>. I will try to limit as much as possible modifying existing functions and/or function parameters, but at the moment it cannot be excluded. My apologies for this.</p>
-</blockquote>
-</div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mchevalier2/crestr">crestr</a></span><span class="op">)</span>
+<span class="co">## loading example data</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">crest_ex</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">crest_ex_pse</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">crest_ex_selection</span><span class="op">)</span></code></pre></div>
+<p>Let’s first have a look at the data. We have 20 fossil samples from which 7 taxa have been identified. The data are already expressed in percentages.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mchevalier2/crestr">crestr</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="co">## the first 6 samples</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">crest_ex</span><span class="op">)</span>
+<span class="co">#&gt;          Age Taxon1 Taxon2 Taxon3 Taxon4 Taxon5 Taxon6 Taxon7</span>
+<span class="co">#&gt; Sample_1   1      0      0     45      1     22     32      1</span>
+<span class="co">#&gt; Sample_2   2      0      0     50      0     23     27      0</span>
+<span class="co">#&gt; Sample_3   3      0      0     49      0     25     26      0</span>
+<span class="co">#&gt; Sample_4   4      0      0     37      0     27     36      0</span>
+<span class="co">#&gt; Sample_5   5      0      3     36      3     18     40      0</span>
+<span class="co">#&gt; Sample_6   6      2      2     25      0     21     50      0</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## the structure of the data frame</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">crest_ex</span><span class="op">)</span>
+<span class="co">#&gt; 'data.frame':    20 obs. of  8 variables:</span>
+<span class="co">#&gt;  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...</span>
+<span class="co">#&gt;  $ Taxon1: int  0 0 0 0 0 2 3 5 10 15 ...</span>
+<span class="co">#&gt;  $ Taxon2: int  0 0 0 0 3 2 5 5 12 8 ...</span>
+<span class="co">#&gt;  $ Taxon3: int  45 50 49 37 36 25 18 17 10 12 ...</span>
+<span class="co">#&gt;  $ Taxon4: int  1 0 0 0 3 0 0 6 15 14 ...</span>
+<span class="co">#&gt;  $ Taxon5: int  22 23 25 27 18 21 21 20 16 13 ...</span>
+<span class="co">#&gt;  $ Taxon6: int  32 27 26 36 40 50 53 47 37 38 ...</span>
+<span class="co">#&gt;  $ Taxon7: int  1 0 0 0 0 0 0 0 0 0 ...</span></code></pre></div>
+<p>For each reconstruction, a proxy-species equivalency (‘pse’) table must be provided. Here, with the 7 fake taxa, it looks like:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">crest_ex_pse</span>
+<span class="co">#&gt;   Level      Family    Genus Species ProxyName</span>
+<span class="co">#&gt; 1     3 Randomaceae Randomus  Taxon1    Taxon1</span>
+<span class="co">#&gt; 2     3 Randomaceae Randomus  Taxon2    Taxon2</span>
+<span class="co">#&gt; 3     3 Randomaceae Randomus  Taxon3    Taxon3</span>
+<span class="co">#&gt; 4     3 Randomaceae Randomus  Taxon4    Taxon4</span>
+<span class="co">#&gt; 5     3 Randomaceae Randomus  Taxon5    Taxon5</span>
+<span class="co">#&gt; 6     3 Randomaceae Randomus  Taxon6    Taxon6</span>
+<span class="co">#&gt; 7     3 Randomaceae Randomus  Taxon7    Taxon7</span></code></pre></div>
+<p>Finally, one can specify which taxa should be used to reconstruct each variable:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">crest_ex_selection</span>
+<span class="co">#&gt;        bio1 bio12</span>
+<span class="co">#&gt; Taxon1    1     1</span>
+<span class="co">#&gt; Taxon2    1     0</span>
+<span class="co">#&gt; Taxon3    1     0</span>
+<span class="co">#&gt; Taxon4    0     1</span>
+<span class="co">#&gt; Taxon5    0     1</span>
+<span class="co">#&gt; Taxon6    0     0</span>
+<span class="co">#&gt; Taxon7    1     1</span></code></pre></div>
+</div>
+<div id="application" class="section level2">
+<h2 class="hasAnchor">
+<a href="#application" class="anchor"></a>Application</h2>
+<p>To illustrate the process, we will reconstruct bio1 (mean annual temperature) and bio12 (annual precipitation) from these fake data. The description of the different parameters is available in the first <strong>vignette</strong>.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">recons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.html">crest</a></span><span class="op">(</span>
+   df <span class="op">=</span> <span class="va">crest_ex</span>, pse <span class="op">=</span> <span class="va">crest_ex_pse</span>, taxaType <span class="op">=</span> <span class="fl">0</span>,
+   climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>, bin_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">20</span><span class="op">)</span>,
+   shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"lognormal"</span><span class="op">)</span>,
+   selectedTaxa <span class="op">=</span> <span class="va">crest_ex_selection</span>, dbname <span class="op">=</span> <span class="st">"crest_example"</span>
+<span class="op">)</span></code></pre></div>
+<p>The climate sampled by the data can be assessed graphically using the figure</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">recons</span><span class="op">)</span></code></pre></div>
+<p><img src="get-started_files/figure-html/plot-climate-space-1.png" width="700.0000032"></p>
+<p>Graphical tools aldo exist to assess which taxa should/could be used for each variable</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">recons</span>, taxanames<span class="op">=</span><span class="st">'Taxon1'</span><span class="op">)</span></code></pre></div>
+<p><img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-1.png" width="700.0000032"></p>
+</div>
+<div id="plotting-the-results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#plotting-the-results" class="anchor"></a>Plotting the results</h2>
+<p>Finally, the results can be visualised using the plot function and the reconstructed climate values can be accessed from the nested <code>recons</code> object:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">recons</span><span class="op">)</span>
+<span class="co">#&gt; [1] "inputs"          "parameters"      "modelling"       "reconstructions"</span>
+<span class="co">#&gt; [5] "misc"</span>
+<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span>, <span class="va">names</span><span class="op">)</span>
+<span class="co">#&gt; $bio1</span>
+<span class="co">#&gt; [1] "posterior"     "uncertainties" "optima"       </span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $bio12</span>
+<span class="co">#&gt; [1] "posterior"     "uncertainties" "optima"</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
+<span class="co">#&gt;   Age   optima     mean</span>
+<span class="co">#&gt; 1   1 15.69739 15.69943</span>
+<span class="co">#&gt; 2   2 15.69739 15.69943</span>
+<span class="co">#&gt; 3   3 15.69739 15.69943</span>
+<span class="co">#&gt; 4   4 15.69739 15.69943</span>
+<span class="co">#&gt; 5   5 17.06814 17.08516</span>
+<span class="co">#&gt; 6   6 18.05812 18.02322</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
+<span class="co">#&gt; 'data.frame':    20 obs. of  3 variables:</span>
+<span class="co">#&gt;  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...</span>
+<span class="co">#&gt;  $ optima: num  15.7 15.7 15.7 15.7 17.1 ...</span>
+<span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.1 ...</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
+<span class="co">#&gt;          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]</span>
+<span class="co">#&gt; [1,] 1.00e+00 1.08e+00 1.15e+00 1.23e+00 1.30e+00 1.38e+00</span>
+<span class="co">#&gt; [2,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
+<span class="co">#&gt; [3,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
+<span class="co">#&gt; [4,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
+<span class="co">#&gt; [5,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
+<span class="co">#&gt; [6,] 1.42e-15 1.93e-15 2.62e-15 3.56e-15 4.82e-15 6.52e-15</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">)</span>
+<span class="co">#&gt;  num [1:21, 1:500] 1.00 6.69e-13 6.69e-13 6.69e-13 6.69e-13 ...</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
+<p><img src="get-started_files/figure-html/plot-1.png" width="480" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>, uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p><img src="get-started_files/figure-html/plot-2.png" width="480" style="display: block; margin: auto;"></p>
+</div>
+<div id="exporting-the-results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#exporting-the-results" class="anchor"></a>Exporting the results</h2>
 <hr>
 </div>
   </div>

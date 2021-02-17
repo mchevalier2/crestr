@@ -1,5 +1,5 @@
 Package: crestr
-Title: What the Package Does (One Line, Title Case)
+Title: A probabilistic approach to reconstruct past climates from bioproxies
 Version: 0.0.0.9000
 Authors@R:
     person(given = "Manuel",
@@ -40,5 +40,5 @@ Suggests:
     clipr,
     openxlsx
 VignetteBuilder: knitr
-URL: https://github.com/mchevalier2/crestr
+URL: https://github.com/mchevalier2/crestr, https://mchevalier2.github.io/crestr/index.html
 BugReports: https://github.com/mchevalier2/crestr/issues

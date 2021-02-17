@@ -1,0 +1,66 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+<br>
+
+# **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bioproxies 
+
+The goal of crestr is to produce probabilistic reconstructions of past climate
+change from fossil assemblage data. The approach is based on the estimation of
+conditional responses of studies bioproxy studied to climate paramters. These
+responses take the form of probability density functions (*pdfs*). The details
+of the method have been described in [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
+and the calibrated data presented in [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
+
+## Installation
+
+You can install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("mchevalier2/crestr")
+```
+> **_NOTE:_**  This package is still in an **early phase of development**. The
+documentation is sparse and the functionalities limited. If you notice any bug,
+or if you would like to see some specific functions implemented, feel free to contact
+me at <chevalier.manuel@gmail.com>. I will try to limit as much as possible
+modifying existing functions and/or function parameters, but at the moment it
+cannot be excluded. My apologies for this.
+
+## Example
+
+This is a basic example which shows you how to run crest with randomly generated
+data:
+
+```{r example}
+library(crestr)
+## loading example data
+data(crest_ex)
+data(crest_ex_pse)
+data(crest_ex_selection)
+```
+
+Let's first have a look at the data. We have 20 fossil samples from which 7 taxa
+have been identified. The data are already expressed in percentages.
+
+```{r data_preview_fossil}
+## the first 6 samples
+head(crest_ex)
+```
+
+```{r data_preview_fossil2}
+## the structure of the data frame
+str(crest_ex)
+```

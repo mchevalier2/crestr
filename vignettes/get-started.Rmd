@@ -14,36 +14,101 @@ knitr::opts_chunk$set(
 )
 ```
 
+
 ----------------------
 
 
-The goal of crestr is to produce probabilistic reconstructions of past climate
-change from fossil assemblage data. The approach is based on the estimation of
-conditional responses of studies bioproxy studied to climate paramters. These
-responses take the form of probability density functions (*pdfs*). The details
-of the method have been described in [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
-and the calibrated data presented in [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
+## Example dataset
+This is a basic example which shows you how to run crest with randomly generated
+data:
 
-## Installation
-
-You can install the development version from [GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("mchevalier2/crestr")
-```
-> **_NOTE:_**  This package is still in an **early phase of development**. The
-documentation is sparse and the functionalities limited. If you notice any bug,
-or if you would like to see some specific functions implemented, feel free to contact
-me at <chevalier.manuel@gmail.com>. I will try to limit as much as possible
-modifying existing functions and/or function parameters, but at the moment it
-cannot be excluded. My apologies for this.
-
-## Example
-
-
-
-```{r setup}
+```{r example}
 library(crestr)
+## loading example data
+data(crest_ex)
+data(crest_ex_pse)
+data(crest_ex_selection)
 ```
+
+Let's first have a look at the data. We have 20 fossil samples from which 7 taxa
+have been identified. The data are already expressed in percentages.
+
+```{r data_preview_fossil}
+## the first 6 samples
+head(crest_ex)
+```
+
+```{r data_preview_fossil2}
+## the structure of the data frame
+str(crest_ex)
+```
+
+
+For each reconstruction, a proxy-species equivalency ('pse') table must be provided.
+Here, with the 7 fake taxa, it looks like:
+```{r data_preview_pse}
+crest_ex_pse
+```
+
+Finally, one can specify which taxa should be used to reconstruct each variable:
+```{r data_preview_selection}
+crest_ex_selection
+```
+
+## Application
+
+To illustrate the process, we will reconstruct bio1 (mean annual temperature)
+and bio12 (annual precipitation) from these fake data. The description of the
+different parameters is available in the first **vignette**.
+
+```{r reconstructing_climate, results='hide'}
+recons <- crest(
+   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
+   climate = c("bio1", "bio12"), bin_width = c(2, 20),
+   shape = c("normal", "lognormal"),
+   selectedTaxa = crest_ex_selection, dbname = "crest_example"
+)
+```
+
+The climate sampled by the data can be assessed graphically using the figure
+```{r plot-climate-space}
+plot_climateSpace(recons)
+```
+
+Graphical tools aldo exist to assess which taxa should/could be used for each variable
+
+```{r plot-plot_taxaCharacteristics}
+plot_taxaCharacteristics(recons, taxanames='Taxon1')
+
+```
+
+## Plotting the results
+
+
+Finally, the results can be visualised using the plot function and the
+reconstructed climate values can be accessed from the nested `recons` object:
+
+```{r extract_results_0}
+names(recons)
+lapply(recons$reconstructions, names)
+```
+
+```{r extract_results}
+head(recons$reconstructions$bio1$optima)
+str(recons$reconstructions$bio1$optima)
+```
+
+```{r extract_results2}
+signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
+str(recons$reconstructions$bio1$posterior)
+```
+
+```{r plot, fig.align='center', fig.width=5, fig.height=3}
+plot(recons, climate = 'bio1')
+plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
+```
+
+## Exporting the results
+
+
 ----------------------

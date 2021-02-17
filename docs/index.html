@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What the Package Does (One Line, Title Case) • crestr</title>
+<title>A probabilistic approach to reconstruct past climates from bioproxies • crestr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="What the Package Does (One Line, Title Case)">
+<script src="pkgdown.js"></script><meta property="og:title" content="A probabilistic approach to reconstruct past climates from bioproxies">
 <meta property="og:description" content="What the package does (one paragraph).">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -93,11 +93,11 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="crestr" class="section level1">
+
+<p><br></p>
+<div id="crestr-a-r-package-to-perform-probabilistic-palaeoclimate-reconstructions-from-fossil-bioproxies" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#crestr" class="anchor"></a>crestr</h1></div>
-<!-- badges: start -->
-<!-- badges: end -->
+<a href="#crestr-a-r-package-to-perform-probabilistic-palaeoclimate-reconstructions-from-fossil-bioproxies" class="anchor"></a><strong>crestr</strong> A R package to perform probabilistic palaeoclimate reconstructions from fossil bioproxies</h1></div>
 <p>The goal of crestr is to produce probabilistic reconstructions of past climate change from fossil assemblage data. The approach is based on the estimation of conditional responses of studies bioproxy studied to climate paramters. These responses take the form of probability density functions (<em>pdfs</em>). The details of the method have been described in <a href="http://www.doi.org/10.5194/cp-10-2081-2014">Chevalier <em>et al.</em> (2014)</a> and the calibrated data presented in <a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016">Chevalier (2019)</a>.</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -143,98 +143,9 @@
 <span class="co">#&gt;  $ Taxon5: int  22 23 25 27 18 21 21 20 16 13 ...</span>
 <span class="co">#&gt;  $ Taxon6: int  32 27 26 36 40 50 53 47 37 38 ...</span>
 <span class="co">#&gt;  $ Taxon7: int  1 0 0 0 0 0 0 0 0 0 ...</span></code></pre></div>
-<p>For each reconstruction, a proxy-species equivalency (‘pse’) table must be provided. Here, with the 7 fake taxa, it looks like:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">crest_ex_pse</span>
-<span class="co">#&gt;   Level      Family    Genus Species ProxyName</span>
-<span class="co">#&gt; 1     3 Randomaceae Randomus  Taxon1    Taxon1</span>
-<span class="co">#&gt; 2     3 Randomaceae Randomus  Taxon2    Taxon2</span>
-<span class="co">#&gt; 3     3 Randomaceae Randomus  Taxon3    Taxon3</span>
-<span class="co">#&gt; 4     3 Randomaceae Randomus  Taxon4    Taxon4</span>
-<span class="co">#&gt; 5     3 Randomaceae Randomus  Taxon5    Taxon5</span>
-<span class="co">#&gt; 6     3 Randomaceae Randomus  Taxon6    Taxon6</span>
-<span class="co">#&gt; 7     3 Randomaceae Randomus  Taxon7    Taxon7</span></code></pre></div>
-<p>Finally, one can specify which taxa should be used to reconstruct each variable:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">crest_ex_selection</span>
-<span class="co">#&gt;        bio1 bio12</span>
-<span class="co">#&gt; Taxon1    1     1</span>
-<span class="co">#&gt; Taxon2    1     0</span>
-<span class="co">#&gt; Taxon3    1     0</span>
-<span class="co">#&gt; Taxon4    0     1</span>
-<span class="co">#&gt; Taxon5    0     1</span>
-<span class="co">#&gt; Taxon6    0     0</span>
-<span class="co">#&gt; Taxon7    1     1</span></code></pre></div>
-<p>To illustrate the process, we will reconstruct bio1 (mean annual temperature) and bio12 (annual precipitation) from these fake data. The description of the different parameters is available in the first <strong>vignette</strong>.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">recons</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/crest.html">crest</a></span><span class="op">(</span>
-   df <span class="op">=</span> <span class="va">crest_ex</span>, pse <span class="op">=</span> <span class="va">crest_ex_pse</span>, taxaType <span class="op">=</span> <span class="fl">0</span>,
-   climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>, bin_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">20</span><span class="op">)</span>,
-   shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"lognormal"</span><span class="op">)</span>,
-   selectedTaxa <span class="op">=</span> <span class="va">crest_ex_selection</span>, dbname <span class="op">=</span> <span class="st">"crest_example"</span>
-<span class="op">)</span></code></pre></div>
-<p>The climate sampled by the data can be assessed graphically using the figure</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">recons</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-climate-space-1.png" width="100%"></p>
-<p>Graphical tools aldo exist to assess which taxa should/could be used for each variable</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">recons</span>, taxanames<span class="op">=</span><span class="st">'Taxon1'</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-plot_taxaCharacteristics-1.png" width="100%"></p>
-<p>Finally, the results can be visualised using the plot function and the reconstructed climate values can be accessed from the nested <code>recons</code> object:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">recons</span><span class="op">)</span>
-<span class="co">#&gt; [1] "inputs"          "parameters"      "modelling"       "reconstructions"</span>
-<span class="co">#&gt; [5] "misc"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span>, <span class="va">names</span><span class="op">)</span>
-<span class="co">#&gt; $bio1</span>
-<span class="co">#&gt; [1] "posterior"     "uncertainties" "optima"       </span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $bio12</span>
-<span class="co">#&gt; [1] "posterior"     "uncertainties" "optima"</span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
-<span class="co">#&gt;   Age   optima     mean</span>
-<span class="co">#&gt; 1   1 15.69739 15.69943</span>
-<span class="co">#&gt; 2   2 15.69739 15.69943</span>
-<span class="co">#&gt; 3   3 15.69739 15.69943</span>
-<span class="co">#&gt; 4   4 15.69739 15.69943</span>
-<span class="co">#&gt; 5   5 17.06814 17.08516</span>
-<span class="co">#&gt; 6   6 18.05812 18.02322</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
-<span class="co">#&gt; 'data.frame':    20 obs. of  3 variables:</span>
-<span class="co">#&gt;  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...</span>
-<span class="co">#&gt;  $ optima: num  15.7 15.7 15.7 15.7 17.1 ...</span>
-<span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.1 ...</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
-<span class="co">#&gt;          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]</span>
-<span class="co">#&gt; [1,] 1.00e+00 1.08e+00 1.15e+00 1.23e+00 1.30e+00 1.38e+00</span>
-<span class="co">#&gt; [2,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [3,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [4,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [5,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [6,] 1.42e-15 1.93e-15 2.62e-15 3.56e-15 4.82e-15 6.52e-15</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">)</span>
-<span class="co">#&gt;  num [1:21, 1:500] 1.00 6.69e-13 6.69e-13 6.69e-13 6.69e-13 ...</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-1.png" width="100%"></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>, uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p><img src="reference/figures/README-plot-2.png" width="100%"></p>
-</div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
-<ul>
-<li>Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. <em>Clim. Past</em> 10, 2081–2098. <a href="http://www.doi.org/10.5194/cp-10-2081-2014">10.5194/cp-10-2081-2014</a>
-</li>
-<li>Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. <em>Glob. Planet. Change</em> 175, 27–35. <a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016">10.1016/j.gloplacha.2019.01.016</a>
-</li>
-</ul>
 </div>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
