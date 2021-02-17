@@ -13,10 +13,48 @@ figures:
   fig.asp: 1.618
   bg: NA
 
+
 navbar:
   structure:
-    left:  [home, intro, reference, articles, news]
-    right: [github]
+    left:
+    - home
+    - intro
+    - reference
+    - articles
+    - tutorials
+    - news
+    right:
+    - twitter
+    - github
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    intro:
+      text: Get started
+      href: articles/get-started.html
+    reference:
+      text: Functions and Data
+      href: reference/index.html
+    news:
+      text: News
+      href: news/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/mchevalier2/crestr/
+    twitter:
+       icon: "fab fa-twitter fa-lg"
+       href: https://twitter.com/ChevalierManu
+    articles:
+      text: Vignettes
+      menu:
+      - text: my-vignette
+        href: articles/my-vignette.html
+      - text: my-vignette2
+        href: articles/my-vignette2.html
+
+
+
 
 reference:
   - title: "Reconstructing"
