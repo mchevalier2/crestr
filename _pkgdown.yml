@@ -13,6 +13,11 @@ figures:
   fig.asp: 1.618
   bg: NA
 
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, news]
+    right: [github]
+
 reference:
   - title: "Reconstructing"
     desc: "Functions for running the CREST reconstructions."

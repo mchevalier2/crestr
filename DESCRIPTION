@@ -40,3 +40,5 @@ Suggests:
     clipr,
     openxlsx
 VignetteBuilder: knitr
+URL: https://github.com/mchevalier2/crestr
+BugReports: https://github.com/mchevalier2/crestr/issues

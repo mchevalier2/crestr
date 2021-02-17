@@ -87,9 +87,29 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/my-vignette.html">my-vignette</a>
+    </li>
+    <li>
+      <a href="../articles/my-vignette2.html">my-vignette2</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/mchevalier2/crestr/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -104,7 +124,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>A wrapper for all the crest functions.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/crest.R'><code>R/crest.R</code></a></small>
     <div class="hidden name"><code>crest.Rd</code></div>
     </div>
 
@@ -328,15 +348,15 @@ reconstructions should be computed (default <code>FALSE</code>).</p></td>
 #&gt;   &lt;&gt; Checking taxa ......................... [OK]
 #&gt;   &lt;&gt; Defining taxa weights ................. [OK]
 #&gt;   &lt;&gt; Reconstructing ........................   &lt;&gt; Reconstructing ........................   2%  &lt;&gt; Reconstructing ........................   5%  &lt;&gt; Reconstructing ........................   8%  &lt;&gt; Reconstructing ........................  10%  &lt;&gt; Reconstructing ........................  12%  &lt;&gt; Reconstructing ........................  15%  &lt;&gt; Reconstructing ........................  18%  &lt;&gt; Reconstructing ........................  20%  &lt;&gt; Reconstructing ........................  22%  &lt;&gt; Reconstructing ........................  25%  &lt;&gt; Reconstructing ........................  28%  &lt;&gt; Reconstructing ........................  30%  &lt;&gt; Reconstructing ........................  32%  &lt;&gt; Reconstructing ........................  35%  &lt;&gt; Reconstructing ........................  38%  &lt;&gt; Reconstructing ........................  40%  &lt;&gt; Reconstructing ........................  42%  &lt;&gt; Reconstructing ........................  45%  &lt;&gt; Reconstructing ........................  48%  &lt;&gt; Reconstructing ........................  50%  &lt;&gt; Reconstructing ........................  52%  &lt;&gt; Reconstructing ........................  55%  &lt;&gt; Reconstructing ........................  58%  &lt;&gt; Reconstructing ........................  60%  &lt;&gt; Reconstructing ........................  62%  &lt;&gt; Reconstructing ........................  65%  &lt;&gt; Reconstructing ........................  68%  &lt;&gt; Reconstructing ........................  70%  &lt;&gt; Reconstructing ........................  72%  &lt;&gt; Reconstructing ........................  75%  &lt;&gt; Reconstructing ........................  78%  &lt;&gt; Reconstructing ........................  80%  &lt;&gt; Reconstructing ........................  82%  &lt;&gt; Reconstructing ........................  85%  &lt;&gt; Reconstructing ........................  88%  &lt;&gt; Reconstructing ........................  90%  &lt;&gt; Reconstructing ........................  92%  &lt;&gt; Reconstructing ........................  95%  &lt;&gt; Reconstructing ........................  98%  &lt;&gt; Reconstructing ........................ 100%  &lt;&gt; Reconstructing ........................ [OK]
-#&gt; ## Reconstruction completed in 0min 0.04s.
+#&gt; ## Reconstruction completed in 0min 0.06s.
 #&gt; 
 #&gt; 
 #&gt; ## Prepping data for LOO reconstructions
 #&gt;   &lt;&gt; Checking data ......................... [OK]
 #&gt;   &lt;&gt; Checking taxa ................... ......[OK]
-#&gt;   *i Estimated time for the LOO reconstructions: 0min 0.21s.
+#&gt;   *i Estimated time for the LOO reconstructions: 0min 0.28s.
 #&gt;   &lt;&gt; LOO reconstructions ...................   0%  &lt;&gt; LOO reconstructions ...................  20%  &lt;&gt; LOO reconstructions ...................  40%  &lt;&gt; LOO reconstructions ...................  60%  &lt;&gt; LOO reconstructions ...................  80%  &lt;&gt; LOO reconstructions ................... 100%  &lt;&gt; LOO reconstructions ................... [OK]
-#&gt; ## LOO reconstruction completed in 0min 0.54s.
+#&gt; ## LOO reconstruction completed in 0min 0.55s.
 #&gt; </div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>recons</span><span class='op'>)</span>
 </div><div class='img'><img src='crest-1.png' alt='' width='700' height='1133' /></div><div class='input'><span class='fu'><a href='plot_loo.html'>plot_loo</a></span><span class='op'>(</span><span class='va'>recons</span><span class='op'>)</span>
 </div><div class='img'><img src='crest-2.png' alt='' width='700' height='1133' /></div><div class='input'>
