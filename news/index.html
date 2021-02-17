@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Connect to the gbif4crest calibration database — connect_online • crestr</title>
+<title>Changelog • crestr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Connect to the gbif4crest calibration database — connect_online" />
-<meta property="og:description" content="Connect to the gbif4crest_02 database by accessing the server on Amazon." />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -126,65 +125,25 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Connect to the gbif4crest calibration database</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/dbConnect.R'><code>R/dbConnect.R</code></a></small>
-    <div class="hidden name"><code>connect_online.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/mchevalier2/crestr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Connect to the gbif4crest_02 database by accessing the server on Amazon.</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>connect_online</span><span class='op'>(</span>
-  dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span>,
-  port <span class='op'>=</span> <span class='fl'>5432</span>,
-  host <span class='op'>=</span> <span class='st'>"gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com"</span>,
-  user <span class='op'>=</span> <span class='st'>"guestuser"</span>,
-  password <span class='op'>=</span> <span class='st'>"pwd12345"</span>
-<span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>dbname</th>
-      <td><p>The name of the database. Default is <code>'gbif4crest_02'</code>.</p></td>
-    </tr>
-    <tr>
-      <th>port</th>
-      <td><p>The port to connect to the server. Default is 5432.</p></td>
-    </tr>
-    <tr>
-      <th>host</th>
-      <td><p>The host of the database server.
-Default is <code>'gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com'</code>.</p></td>
-    </tr>
-    <tr>
-      <th>user</th>
-      <td><p>The user name to use to connect. Default is <code>'guestuser'</code>.</p></td>
-    </tr>
-    <tr>
-      <th>password</th>
-      <td><p>The password associated with the user name. Default is <code>'pwd12345'</code>.</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>An active connection to a database</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='va'>db</span> <span class='op'>&lt;-</span> <span class='fu'>connect_online</span><span class='op'>(</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div id="crestr-0009000" class="section level1">
+<h1 class="page-header" data-toc-text="0.0.0.9000">
+<a href="#crestr-0009000" class="anchor"></a>crestr 0.0.0.9000</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
