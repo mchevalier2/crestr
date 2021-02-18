@@ -118,9 +118,9 @@ crest_ex_selection
 #> Taxon7    1     1
 ```
 
-These pseudo data can be provide to the function and provided some
-parameters (see the full vignettes for a detail of these parameters),
-the reconstructions will be processed.
+These pseudo data can be provided to the **crest** function and provided
+some parameters (see the full vignettes for a detail of these
+parameters), the reconstructions will be processed.
 
 ``` r
 recons <- crest(
@@ -204,7 +204,9 @@ plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 <img src="man/figures/README-plot-1.png" width="50%" /><img src="man/figures/README-plot-2.png" width="50%" />
 
 If satisfying, the results can be directly exported from the R
-environment in a user-friendly spreadsheet.
+environment in unique spreadsheets for each variables (or csv files) and
+the **crest** object is exported as an RData file to enable easy reuse
+in the future.
 
 ``` r
 export(recons, loc=getwd(), dataname='crest-test')

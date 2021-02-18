@@ -16,6 +16,7 @@ knitr::opts_chunk$set(
 # crestr
 
 <!-- badges: start -->
+
 [![Travis build status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
 <!-- badges: end -->
 
@@ -91,7 +92,7 @@ to *bio12*.
 crest_ex_selection
 ```
 
-These pseudo data can be provide to the \code{crest} function and provided some
+These pseudo data can be provided to the **crest** function and provided some
 parameters (see the full vignettes for a detail of these parameters), the
 reconstructions will be processed.
 
@@ -145,8 +146,9 @@ plot(recons, climate = 'bio1')
 plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
-If satisfying, the results can be directly exported from the R environment in a
-user-friendly spreadsheet.
+If satisfying, the results can be directly exported from the R environment in
+unique spreadsheets for each variables (or csv files) and the **crest** object
+is exported as an RData file to enable easy reuse in the future.
 
 ```{r export}
 export(recons, loc=getwd(), dataname='crest-test')
@@ -155,5 +157,8 @@ list.files(file.path(getwd(), 'crest-test'))
 
 ## References
 
- - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. *Clim. Past* 10, 2081–2098. [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
- - Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35. [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+ - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction
+   SofTware): a probability density function (PDF)-based quantitative climate
+   reconstruction method. *Clim. Past* 10, 2081–2098. [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
+ - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
+   fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35. [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
