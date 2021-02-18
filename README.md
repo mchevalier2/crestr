@@ -36,10 +36,18 @@ devtools::install_github("mchevalier2/crestr")
 > modifying existing functions and/or function parameters, but at the
 > moment it cannot be excluded. My apologies for this.
 
+## contact
+
+If you experience any trouble while using this package, or if you think
+of additional functionalities to incorporate to the package, you can
+contact me at <chevalier.manuel@gmail.com> or open a discussion
+[here](https://github.com/mchevalier2/crestr/issues).
+
 ## Example
 
-This is a basic example which shows you how to run crest with randomly
-generated data:
+The following example illustrates the basics of **crestr** using
+pseudo-data (*i.e.* randomly generated data). More elaborate examples
+can be found at <https://mchevalier2.github.io/crestr/>.
 
 ``` r
 library(crestr)
@@ -49,9 +57,9 @@ data(crest_ex_pse)
 data(crest_ex_selection)
 ```
 
-Let’s first have a look at the data. We have 20 fossil samples from
-which 7 taxa have been identified. The data are already expressed in
-percentages.
+Let’s first have a look at the data. The dataset is composed of 20
+fossil samples from which 7 taxa have been identified. The data are
+expressed in percentages.
 
 ``` r
 ## the first 6 samples
@@ -63,9 +71,7 @@ head(crest_ex)
 #> Sample_4   4      0      0     37      0     27     36      0
 #> Sample_5   5      0      3     36      3     18     40      0
 #> Sample_6   6      2      2     25      0     21     50      0
-```
-
-``` r
+##
 ## the structure of the data frame
 str(crest_ex)
 #> 'data.frame':    20 obs. of  8 variables:
@@ -80,7 +86,7 @@ str(crest_ex)
 ```
 
 For each reconstruction, a proxy-species equivalency (‘pse’) table must
-be provided. Here, with the 7 fake taxa, it looks like:
+be provided. Here, with the 7 pseudo-taxa, it looks like:
 
 ``` r
 crest_ex_pse
@@ -94,8 +100,11 @@ crest_ex_pse
 #> 7     3 Randomaceae Randomus  Taxon7    Taxon7
 ```
 
-Finally, one can specify which taxa should be used to reconstruct each
-variable:
+Finally, unique sets of taxa can be specified to reconstruct each
+climate variable. In the example, *bio1* (mean annual temperature) and
+*bio12* (annual precipitation) will be reconstructed. The dataset has
+been designed so that Taxa 1, 2, 3 and 7 are sensitive to *bio1* while
+Taxa 1, 4, 5 and 7 are sensitive to *bio12*.
 
 ``` r
 crest_ex_selection
@@ -109,10 +118,9 @@ crest_ex_selection
 #> Taxon7    1     1
 ```
 
-To illustrate the process, we will reconstruct bio1 (mean annual
-temperature) and bio12 (annual precipitation) from these fake data. The
-description of the different parameters is available in the first
-**vignette**.
+These pseudo data can be provide to the function and provided some
+parameters (see the full vignettes for a detail of these parameters),
+the reconstructions will be processed.
 
 ``` r
 recons <- crest(
@@ -123,8 +131,8 @@ recons <- crest(
 )
 ```
 
-The climate sampled by the data can be assessed graphically using the
-figure
+The climate sampled by the data can be graphically represented for a
+quick assessment of the calibration dataset.
 
 ``` r
 plot_climateSpace(recons)
@@ -132,16 +140,18 @@ plot_climateSpace(recons)
 
 <img src="man/figures/README-plot-climate-space-1.png" width="100%" />
 
-Graphical tools aldo exist to assess which taxa should/could be used for
-each variable
+Additional graphical tools can be used to assess which taxa should/could
+be used for each variable. On the following example, it is clear that
+Taxon2 has a much stronger correlation with *bio1* than to *bio12*,
+hence its selection for *bio1* only.
 
 ``` r
-plot_taxaCharacteristics(recons, taxanames='Taxon1')
+plot_taxaCharacteristics(recons, taxanames='Taxon2')
 ```
 
 <img src="man/figures/README-plot-plot_taxaCharacteristics-1.png" width="100%" />
 
-Finally, the results can be visualised using the plot function and the
+The results can be quickly visualised using the plot function and the
 reconstructed climate values can be accessed from the nested `recons`
 object:
 
@@ -197,6 +207,15 @@ plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
 <img src="man/figures/README-plot-2.png" width="100%" />
+
+If satisfying, the results can be directly exported from the R
+environment in a user-friendly spreadsheet.
+
+``` r
+export(recons, loc=getwd(), dataname='crest-test')
+list.files(file.path(getwd(), 'crest-test'))
+#> [1] "bio1"             "bio12"            "crest-test.RData"
+```
 
 ## References
 
