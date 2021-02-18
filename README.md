@@ -4,6 +4,9 @@
 # crestr
 
 <!-- badges: start -->
+
+[![Travis build
+status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
 <!-- badges: end -->
 
 The goal of crestr is to produce probabilistic reconstructions of past

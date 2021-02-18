@@ -18,6 +18,7 @@ navbar:
   structure:
     left:
     - home
+    - theory
     - intro
     - reference
     - articles
@@ -30,6 +31,9 @@ navbar:
     home:
       icon: fas fa-home fa-lg
       href: index.html
+    theory:
+      text: A bit of theory
+      href: articles/my-vignette2.html
     intro:
       text: Get started
       href: articles/get-started.html
