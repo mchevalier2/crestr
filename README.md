@@ -198,15 +198,10 @@ str(recons$reconstructions$bio1$posterior)
 
 ``` r
 plot(recons, climate = 'bio1')
-```
-
-<img src="man/figures/README-plot-1.png" width="100%" />
-
-``` r
 plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
-<img src="man/figures/README-plot-2.png" width="100%" />
+<img src="man/figures/README-plot-1.png" width="50%" /><img src="man/figures/README-plot-2.png" width="50%" />
 
 If satisfying, the results can be directly exported from the R
 environment in a user-friendly spreadsheet.

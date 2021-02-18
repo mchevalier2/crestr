@@ -139,7 +139,8 @@ signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
 str(recons$reconstructions$bio1$posterior)
 ```
 
-```{r plot}
+
+```{r plot,  fig.show="hold", out.width="50%"}
 plot(recons, climate = 'bio1')
 plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
