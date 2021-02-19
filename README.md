@@ -9,7 +9,7 @@ output: github_document
 # crestr
 
 <!-- badges: start -->
-[![packageversion](https://img.shields.io/badge/Package%20version-x86_64-apple-darwin17.0, x86_64, darwin17.0, x86_64, darwin17.0, , 4, 0.2, 2020, 06, 22, 78730, R, R version 4.0.2 (2020-06-22), Taking Off Again-orange.svg?style=flat-square)](commits/master)
+[![codecov](https://codecov.io/gh/mchevalier2/crestr/branch/master/graph/badge.svg)](https://codecov.io/gh/mchevalier2/crestr)
 [![Travis build status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/mchevalier2/crestr?branch=master&svg=true)](https://ci.appveyor.com/project/mchevalier2/crestr)
 [![CRAN status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
