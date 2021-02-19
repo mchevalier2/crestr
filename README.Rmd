@@ -33,6 +33,8 @@ knitr::opts_chunk$set(
 [![Last commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
 <!-- badges: end -->
 
+------
+
 The goal of crestr is to produce probabilistic reconstructions of past climate
 change from fossil assemblage data. The approach is based on the estimation of
 conditional responses of studies bioproxy studied to climate paramters. These

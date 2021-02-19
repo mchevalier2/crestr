@@ -31,6 +31,8 @@ version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://
 commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
 <!-- badges: end -->
 
+------------------------------------------------------------------------
+
 The goal of crestr is to produce probabilistic reconstructions of past
 climate change from fossil assemblage data. The approach is based on the
 estimation of conditional responses of studies bioproxy studied to
