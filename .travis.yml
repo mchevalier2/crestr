@@ -16,17 +16,23 @@ addons:
 os:
   - linux
   - osx
-  - windows
 
 
 matrix:
 allow_failures:
-    - os: linus
+    - os: linux
     - os: osx
-    - os: windows
 
-    
+
 env:
   global:
     - R_BUILD_ARGS=" --no-build-vignettes --no-manual "
     - R_CHECK_ARGS=" --timings --as-cran --no-manual --no-vignettes --install-args=--build"
+
+
+r_packages:
+  - covr
+  - devtools
+
+after_success:
+  - Rscript -e 'library(covr); codecov()'
