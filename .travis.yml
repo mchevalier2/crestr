@@ -13,6 +13,20 @@ addons:
       - libproj-dev
       - libgeos-dev
 
+os:
+  - linux
+  - osx
+  - windows
+
+
+matrix:
+allow_failures:
+    - os: linus
+    - os: osx
+    - os: windows
+
+    
 env:
   global:
-    - R_CHECK_ARGS="--no-build-vignettes --ignore-vignettes"
+    - R_BUILD_ARGS=" --no-build-vignettes --no-manual "
+    - R_CHECK_ARGS=" --timings --as-cran --no-manual --no-vignettes --install-args=--build"
