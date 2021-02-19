@@ -2,3 +2,10 @@
 
 language: R
 cache: packages
+
+addons:
+  apt:
+    packages:
+      - gdal-bin
+      - libgdal1-dev
+      - libproj-dev
