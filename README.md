@@ -12,18 +12,16 @@ maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-
+<br >
 [![codecov](https://codecov.io/gh/mchevalier2/crestr/branch/master/graph/badge.svg)](https://codecov.io/gh/mchevalier2/crestr)
 [![Travis build
 status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
 [![AppVeyor build
 status](https://ci.appveyor.com/api/projects/status/github/mchevalier2/crestr?branch=master&svg=true)](https://ci.appveyor.com/project/mchevalier2/crestr)
-
-[![CRAN
+<br > [![CRAN
 status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
-![CRAN/METACRAN](https://img.shields.io/cran/v/crestr)
-
-[![GitHub R package
+![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) <br > [![GitHub R
+package
 version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
 [![HitCount](http://hits.dwyl.com/mchevalier2/crestr.svg)](http://hits.dwyl.com/mchevalier2/crestr)
 [![Downloads](https://img.shields.io/github/downloads/mchevalier2/crestr/total)]()
@@ -31,7 +29,7 @@ version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://
 commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
 <!-- badges: end -->
 
-------------------------------------------------------------------------
+<hr />
 
 The goal of crestr is to produce probabilistic reconstructions of past
 climate change from fossil assemblage data. The approach is based on the
