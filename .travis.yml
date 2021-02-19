@@ -9,3 +9,4 @@ addons:
       - gdal-bin
       - libgdal1-dev
       - libproj-dev
+      - libgeos-dev
