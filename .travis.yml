@@ -13,4 +13,5 @@ addons:
       - libproj-dev
       - libgeos-dev
 
+
 r_check_args: "--no-build-vignettes --ignore-vignettes"
