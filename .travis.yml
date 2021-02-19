@@ -14,13 +14,11 @@ addons:
       - libgeos-dev
 
 os:
-  - linux
   - osx
 
 
 matrix:
 allow_failures:
-    - os: linux
     - os: osx
 
 
