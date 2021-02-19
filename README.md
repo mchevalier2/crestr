@@ -28,19 +28,17 @@ You can install the development version from
 devtools::install_github("mchevalier2/crestr")
 ```
 
-> ***NOTE:*** This package is still in an **early phase of
-> development**. The documentation is sparse and the functionalities
-> limited. If you notice any bug, or if you would like to see some
-> specific functions implemented, feel free to contact me at
-> <chevalier.manuel@gmail.com>. I will try to limit as much as possible
-> modifying existing functions and/or function parameters, but at the
-> moment it cannot be excluded. My apologies for this.
+> ***NOTE:*** If the install fails, it is possible that
+> [**gdal**](https://gdal.org/download.html) or
+> [**PROJ**](https://proj.org/install.html) are not installed on your
+> system. Ample documentation exists online to guide you through the
+> installation of these two elements to your own system.
 
 ## contact
 
-If you experience any trouble while using this package, or if you think
-of additional functionalities to incorporate to the package, you can
-contact me at <chevalier.manuel@gmail.com> or open a discussion
+If you experience any trouble while using this package, or if you can
+think of additional functionalities to incorporate to the package,
+please contact me at <chevalier.manuel@gmail.com> or open a discussion
 [here](https://github.com/mchevalier2/crestr/issues).
 
 ## Example

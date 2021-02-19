@@ -7,7 +7,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "chevalier.manuel@gmail.com",
            comment = c(ORCID = "0000-0002-8183-9881"))
-Description: What the package does (one paragraph).
+Description: The packages applies the CREST climate reconstruction method. All
+             the necessary calibration data can be obtained through the package.
+             An ensemble of graphical outputs have been designed to facilitate
+             use of the package and interpretation of the results.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
