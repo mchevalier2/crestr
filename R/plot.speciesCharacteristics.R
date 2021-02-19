@@ -85,7 +85,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
             grDevices::pdf(filename, width=width, height=height)
         } else {
             par_usr <- graphics::par(no.readonly = TRUE)
-            graphics::par(ask = TRUE)
+            if(length(taxanames) > 1)  graphics::par(ask = TRUE)
         }
 
         climate_space <- x$modelling$climate_space
