@@ -13,11 +13,6 @@ install:
 cache:
   - C:\RLibrary
 
-image:
-  - Visual Studio 2019
-  - Ubuntu
-  - macOS
-
 environment:
   NOT_CRAN: true
   # env vars that may need to be set, at least temporarily, from time to time
