@@ -18,6 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 
 [![Travis build status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/mchevalier2/crestr?branch=master&svg=true)](https://ci.appveyor.com/project/mchevalier2/crestr)
 <!-- badges: end -->
 
 The goal of crestr is to produce probabilistic reconstructions of past climate
@@ -152,6 +153,10 @@ is exported as an RData file to enable easy reuse in the future.
 ```{r export}
 export(recons, loc=getwd(), dataname='crest-test')
 list.files(file.path(getwd(), 'crest-test'))
+```
+
+```{r delete export example, echo = FALSE, results = "hide"}
+unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
 ```
 
 ## References

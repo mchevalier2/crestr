@@ -7,6 +7,8 @@
 
 [![Travis build
 status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
+[![AppVeyor build
+status](https://ci.appveyor.com/api/projects/status/github/mchevalier2/crestr?branch=master&svg=true)](https://ci.appveyor.com/project/mchevalier2/crestr)
 <!-- badges: end -->
 
 The goal of crestr is to produce probabilistic reconstructions of past
