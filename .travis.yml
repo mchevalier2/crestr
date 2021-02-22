@@ -34,3 +34,7 @@ r_packages:
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
+
+notifications:
+  email: false
+  slack: crest-go82450:E7UKXgi94sQAeuBP4XdPzAc9
