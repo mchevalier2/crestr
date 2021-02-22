@@ -49,12 +49,15 @@ data(crest_ex)
 x <- crest.get_modern_data( df = crest_ex,
   pse = crest_ex_pse, taxaType = 0,
   climate = c("bio1", "bio12"),
-  selectedTaxa = crest_ex_selection, dbname = "crest_example"
+  selectedTaxa = crest_ex_selection, dbname = "crest_example",
+  verbose = FALSE
 )
 x <- crest.calibrate(x,
   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
-  bin_width = c(2, 20), shape = c("normal", "lognormal")
+  bin_width = c(2, 20), shape = c("normal", "lognormal"),
+  verbose = FALSE
 )
-x <- crest.reconstruct(x)
+x <- crest.reconstruct(x,
+  verbose = FALSE)
 plot(x)
 }
