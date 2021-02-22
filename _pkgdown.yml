@@ -33,7 +33,7 @@ navbar:
       href: index.html
     theory:
       text: A bit of theory
-      href: articles/my-vignette2.html
+      href: articles/theory.html
     intro:
       text: Get started
       href: articles/get-started.html
@@ -53,9 +53,9 @@ navbar:
       text: Vignettes
       menu:
       - text: my-vignette
-        href: articles/my-vignette.html
+        href: articles/limpopo.html
       - text: my-vignette2
-        href: articles/my-vignette2.html
+        href: articles/theory.html
 
 
 
