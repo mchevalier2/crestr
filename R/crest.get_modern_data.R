@@ -18,7 +18,8 @@
 #' x <- crest.get_modern_data( df = crest_ex,
 #'   pse = crest_ex_pse, taxaType = 0,
 #'   climate = c("bio1", "bio12"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example"
+#'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'   verbose = FALSE
 #' )
 #' x
 #' lapply(x$modelling$distributions, head)

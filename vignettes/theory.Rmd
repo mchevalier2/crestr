@@ -31,7 +31,7 @@ When the fossils cannot be identified at the species level (*e.g.* pollen grains
 <br >
 
 ```{r img2, echo=FALSE, fig.cap="**Fig. 2**: Climate responses of the four plant species presented on **Fig. 1** (coloured curves). Their individual responses are combined together to create the response of the pollen taxon in black. The histogram inset represents the distribution of the climate space available (white) and which part of this climate space is occupied by at least one species (in black).", out.width = '40%', fig.align = 'center', out.extra='style="background:none; border:none; box-shadow:none;"'}
-knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/docs/articles/theory_files/figure-html/crest-02.png")
+knitr::include_graphics("/Users/mchevali1/GitHub/Rpackages/crestr/docs/articles/theory_files/figure-html/crest-02.png")
 ```
 
 <br >
@@ -41,7 +41,7 @@ Finally, the _pdfs_ for each fossil taxon identified in a sample are multiplied 
 <br >
 
 ```{r img3, echo=FALSE, fig.cap="**Fig. 3**: Posterior distribution of probabilities conditioned by the existence of certain fossil taxa observed with certain proportions. This distribution can be simplified to single number, such as the mean or the mode/optimum (_i.e._ the most likely) probability.", out.width = '40%', fig.align = 'center', out.extra='style="background:none; border:none; box-shadow:none;"'}
-knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/docs/articles/theory_files/figure-html/crest-03.png")
+knitr::include_graphics("/Users/mchevali1/GitHub/Rpackages/crestr/docs/articles/theory_files/figure-html/crest-03.png")
 ```
 
 <br >
