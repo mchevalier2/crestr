@@ -2,7 +2,7 @@
 % Please edit documentation in R/crest.reconstruct.R
 \name{crest.reconstruct}
 \alias{crest.reconstruct}
-\title{Fit the species and proxy \code{pdfs}}
+\title{Reconstruct climate from fossil data}
 \usage{
 crest.reconstruct(
   x,
