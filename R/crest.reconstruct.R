@@ -1,4 +1,4 @@
-#' Fit the species and proxy \code{pdfs}
+#' Reconstruct climate from fossil data
 #'
 #' This function fits the climate response of the selected taxa to the selected
 #' climate variables.
