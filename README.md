@@ -29,13 +29,15 @@ version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://
 commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
 <!-- badges: end -->
 
+# 
+
 <hr />
 
-The goal of crestr is to produce probabilistic reconstructions of past
+The goal of crestr is to enable probabilistic reconstructions of past
 climate change from fossil assemblage data. The approach is based on the
-estimation of conditional responses of studies bioproxy studied to
-climate paramters. These responses take the form of probability density
-functions (*pdfs*). The details of the method have been described in
+estimation of conditional responses of different bioproxies to various
+climate parameters. Theseresponses take the form of probability density
+functions (*pdfs*). The detailsof the method have been described in
 [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
 and the calibrated data presented in [Chevalier
 (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
@@ -63,7 +65,7 @@ think of additional functionalities to incorporate to the package,
 please contact me at <chevalier.manuel@gmail.com> or open a discussion
 [here](https://github.com/mchevalier2/crestr/issues).
 
-## Example
+## A Quick Example
 
 The following example illustrates the basics of **crestr** using
 pseudo-data (*i.e.* randomly generated data). More elaborate examples
@@ -145,7 +147,7 @@ parameters), the reconstructions will be processed.
 ``` r
 recons <- crest(
    df = crest_ex, pse = crest_ex_pse, taxaType = 0,
-   climate = c("bio1", "bio12"), bin_width = c(2, 20),
+   climate = c("bio1", "bio12"), bin_width = c(2, 50),
    shape = c("normal", "lognormal"),
    selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
