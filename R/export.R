@@ -62,7 +62,6 @@ export <- function( x, dataname = x$misc$site_info$site_name,
         for (clim in climate) {
             base::dir.create(base::file.path(loc, dataname, clim), showWarnings = FALSE)
 
-            #openxlsx::addWorksheet(wb, "ReadMe")
             df <- rep(NA, 5)
             df <- rbind(df, c(paste0('NAME OF THE DATASET: ', x$misc$site_info$site_name), NA, NA, NA, NA))
             df <- rbind(df, rep(NA, 5))
@@ -82,6 +81,13 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             if(weights)  df <- rbind(df, c(NA, 'taxa_weights: The weights derived from the percentage', NA, NA, NA))
             if(loo)  df <- rbind(df, c(NA, 'leave_one_out: Results of the leave-one-out analysis', NA, NA, NA))
             df <- rbind(df, c(NA, 'selectedTaxa: List of taxa identified in the study and which ones are selected.', NA, NA, NA))
+            df <- rbind(df, rep(NA, 5))
+            df <- rbind(df, rep(NA, 5))
+            df <- rbind(df, c('ADDITONNAL REFERENCES (please include these references if you are publishing your reconstructions and support data/methods providers)', NA, NA, NA, NA))
+            df <- rbind(df, c(NA, 'Method: ', NA, NA, NA))
+            df <- rbind(df, c(NA, 'Curated calibration dataset: ', NA, NA, NA))
+            df <- rbind(df, c(NA, 'Climate data: ', NA, NA, NA))
+            df <- rbind(df, c(NA, 'Distribution data: ', NA, NA, NA))
 
             if(as.csv) {
                 utils::write.table(df, base::file.path(loc, dataname, clim, 'ReadMe.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
