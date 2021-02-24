@@ -261,6 +261,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         crest$inputs$taxa.name <- taxa.name
         crest$inputs$df <- df[, -1]
 
+        if(unique(is.numeric(crest$inputs$x))) {
+            crest$inputs$df <- crest$inputs$df[order(crest$inputs$x), ]
+            crest$inputs$x  <- crest$inputs$x[order(crest$inputs$x)]
+        }
+
         w <- (apply(crest$inputs$df, 2, sum) == 0)
         if (sum(w) > 0) {
             for (tax in colnames(crest$inputs$df)[w]) {
