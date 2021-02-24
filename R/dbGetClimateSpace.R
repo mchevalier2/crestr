@@ -79,5 +79,9 @@ getClimateSpace <- function(climate,
     )
 
     # Executing the request------------------------------------------------------
-    dbRequest(req, dbname)
+    res <- dbRequest(req, dbname)
+    if ('ai' %in% climate) {
+        res[, 'ai'] <- res[, 'ai'] / 10000
+    }
+    res
 }

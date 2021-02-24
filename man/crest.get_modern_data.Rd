@@ -9,6 +9,7 @@ crest.get_modern_data(
   taxaType,
   climate,
   df = NA,
+  ai.sqrt = FALSE,
   xmn = NA,
   xmx = NA,
   ymn = NA,
@@ -40,6 +41,9 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
 \item{df}{A data frame containing the data to reconstruct (counts,
 percentages or presence/absence data).}
+
+\item{ai.sqrt}{A boolean to indicate whether ai values should be square-root
+transformed (default \code{FALSE}).}
 
 \item{xmn}{The coordinates defining the study area.}
 

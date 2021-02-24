@@ -25,6 +25,7 @@ crest(
   bin_width = rep(1, length(x$parameters$climate)),
   shape = rep("normal", length(x$parameters$climate)),
   npoints = 500,
+  ai.sqrt = FALSE,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
   presenceThreshold = 0,
@@ -92,6 +93,9 @@ variables that can only take positive values, such as
 precipitation or aridity. Default is 'normal' for all.}
 
 \item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
+
+\item{ai.sqrt}{A boolean to indicate whether ai values should be square-root
+transformed (default \code{FALSE}).}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
 by the squareroot of their extension when estimating a genus/family

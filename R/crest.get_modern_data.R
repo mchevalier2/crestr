@@ -25,7 +25,7 @@
 #' lapply(x$modelling$distributions, head)
 #'
 crest.get_modern_data <- function( pse, taxaType, climate,
-                                   df = NA,
+                                   df = NA, ai.sqrt = FALSE,
                                    xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                    continents = NA, countries = NA,
                                    realms = NA, biomes = NA, ecoregions = NA,
@@ -418,6 +418,15 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     )
     colnames(climate_space)[-c(1, 2)] <- crest$parameters$climate
     crest$modelling$climate_space <- climate_space
+
+    if (ai.sqrt & 'ai' %in% crest$parameters$climate) {
+        crest$modelling$climate_space[, "ai"] <- sqrt(crest$modelling$climate_space[, "ai"])
+        for (tax in crest$inputs$taxa_names) {
+            print(tax)
+            print(crest$modelling$distributions[[tax]])
+            crest$modelling$distributions[[tax]][, 'ai'] <- sqrt(crest$modelling$distributions[[tax]][, 'ai'])
+        }
+    }
 
     if (estimate_xlim) {
       resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[,1])))))[1] / 2.0

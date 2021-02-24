@@ -67,11 +67,11 @@ fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
 #' calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
 #'
 calib_clim_space <- function(climate, bin_width) {
-    m <- base::min(climate, na.rm = TRUE) %/% 1
+    m <- base::min(climate, na.rm = TRUE) %/% bin_width
     nclass <- base::diff(base::range(climate, na.rm = TRUE)) %/% bin_width
-    clim_norm <- (climate - m) %/% bin_width
+    clim_norm <- (climate - m*bin_width) %/% bin_width
     out <- list()
-    out[["k1"]] <- base::seq(m, base::max(climate, na.rm = TRUE) %/% 1 + 1, bin_width)
+    out[["k1"]] <- base::seq(m*bin_width, (base::max(climate, na.rm = TRUE) %/% bin_width) * bin_width + bin_width, bin_width)
     out[["k2"]] <- base::tabulate(clim_norm + 1, nbins = base::length(out[["k1"]]))
     out
 }
@@ -100,7 +100,7 @@ fit_xrange <- function(ccs, shape, bin_width, npoints = 500) {
           length.out = npoints
         ))
     }
-    return(base::seq(1e-12,
+    return(base::seq(base::max( 1e-12, ccs[["k1"]][1] - 5 * bin_width),
         ccs[["k1"]][base::length(ccs[["k1"]])] + 5 * bin_width,
         length.out = npoints
     ))

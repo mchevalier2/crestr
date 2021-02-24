@@ -6,6 +6,8 @@
 #' @param site_info A vector containing the coordinates of the study site.
 #'        Default \code{c(NA, NA)}.
 #' @param site_name The name of the dataset (default \code{NA}).
+#' @param ai.sqrt A boolean to indicate whether ai values should be square-root
+#'        transformed (default \code{FALSE}).
 #' @param leave_one_out A boolean to indicate whether the leave one out (loo)
 #'        reconstructions should be computed (default \code{FALSE}).
 #' @param verbose A boolean to print non-essential comments on the terminal
@@ -40,6 +42,7 @@ crest <- function(df, pse, taxaType, climate,
                   bin_width = rep(1, length(x$parameters$climate)),
                   shape = rep("normal", length(x$parameters$climate)),
                   npoints = 500,
+                  ai.sqrt = FALSE,
                   geoWeighting = TRUE,
                   climateSpaceWeighting = TRUE,
                   presenceThreshold = 0,
@@ -60,6 +63,7 @@ crest <- function(df, pse, taxaType, climate,
         verbose = verbose,
         site_info = site_info,
         site_name = site_name,
+        ai.sqrt = ai.sqrt,
         dbname = dbname
     )
 
