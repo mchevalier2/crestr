@@ -88,11 +88,17 @@ reference:
     contents:
       - '`crestObj`'
       - '`export`'
-      - '`cite_GBIF`'
       - '`copy_crest`'
       - '`excludeTaxa`'
       - '`includeTaxa`'
       - '`getSpeciesdiversity`'
+  - title: "Citing sources"
+    desc: "Functions for generating the list of references to cite when publishing reconstructions."
+    contents:
+      - '`cite_climate_data`'
+      - '`cite_distrib_data`'
+      - '`cite_method`'
+      - '`cite_crest`'
   - title: "Database"
     desc: "Functions for querying the calibration data database."
     contents:

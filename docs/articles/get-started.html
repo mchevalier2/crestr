@@ -202,28 +202,28 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
 <span class="co">#&gt;   Age   optima     mean</span>
-<span class="co">#&gt; 1   1 15.69739 15.69943</span>
-<span class="co">#&gt; 2   2 15.69739 15.69943</span>
-<span class="co">#&gt; 3   3 15.69739 15.69943</span>
-<span class="co">#&gt; 4   4 15.69739 15.69943</span>
-<span class="co">#&gt; 5   5 17.06814 17.08516</span>
-<span class="co">#&gt; 6   6 18.05812 18.02322</span>
+<span class="co">#&gt; 1   1 15.71142 15.69949</span>
+<span class="co">#&gt; 2   2 15.71142 15.69949</span>
+<span class="co">#&gt; 3   3 15.71142 15.69949</span>
+<span class="co">#&gt; 4   4 15.71142 15.69949</span>
+<span class="co">#&gt; 5   5 17.31463 17.29054</span>
+<span class="co">#&gt; 6   6 18.11623 18.12464</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    20 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...</span>
-<span class="co">#&gt;  $ optima: num  15.7 15.7 15.7 15.7 17.1 ...</span>
-<span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.1 ...</span></code></pre></div>
+<span class="co">#&gt;  $ optima: num  15.7 15.7 15.7 15.7 17.3 ...</span>
+<span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.3 ...</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt;          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]</span>
-<span class="co">#&gt; [1,] 1.00e+00 1.08e+00 1.15e+00 1.23e+00 1.30e+00 1.38e+00</span>
-<span class="co">#&gt; [2,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [3,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [4,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [5,] 6.69e-13 8.79e-13 1.15e-12 1.51e-12 1.98e-12 2.58e-12</span>
-<span class="co">#&gt; [6,] 1.42e-15 1.93e-15 2.62e-15 3.56e-15 4.82e-15 6.52e-15</span>
+<span class="co">#&gt; [1,] 0.00e+00 8.02e-02 1.60e-01 2.40e-01 3.21e-01 4.01e-01</span>
+<span class="co">#&gt; [2,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
+<span class="co">#&gt; [3,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
+<span class="co">#&gt; [4,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
+<span class="co">#&gt; [5,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
+<span class="co">#&gt; [6,] 1.45e-18 2.09e-18 3.01e-18 4.32e-18 6.19e-18 8.86e-18</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">)</span>
-<span class="co">#&gt;  num [1:21, 1:500] 1.00 6.69e-13 6.69e-13 6.69e-13 6.69e-13 ...</span></code></pre></div>
+<span class="co">#&gt;  num [1:21, 1:500] 0.00 8.41e-15 8.41e-15 8.41e-15 8.41e-15 ...</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
 <p><img src="get-started_files/figure-html/plot-1.png" width="480" style="display: block; margin: auto;"></p>

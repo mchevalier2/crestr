@@ -168,6 +168,7 @@
   bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='va'>parameters</span><span class='op'>$</span><span class='va'>climate</span><span class='op'>)</span><span class='op'>)</span>,
   shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"normal"</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>x</span><span class='op'>$</span><span class='va'>parameters</span><span class='op'>$</span><span class='va'>climate</span><span class='op'>)</span><span class='op'>)</span>,
   npoints <span class='op'>=</span> <span class='fl'>500</span>,
+  ai.sqrt <span class='op'>=</span> <span class='cn'>FALSE</span>,
   geoWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
   climateSpaceWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
   presenceThreshold <span class='op'>=</span> <span class='fl'>0</span>,
@@ -277,6 +278,11 @@ precipitation or aridity. Default is 'normal' for all.</p></td>
     <tr>
       <th>npoints</th>
       <td><p>The number of points to be used to fit the <code>pdfs</code>. Default 200.</p></td>
+    </tr>
+    <tr>
+      <th>ai.sqrt</th>
+      <td><p>A boolean to indicate whether ai values should be square-root
+transformed (default <code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>geoWeighting</th>

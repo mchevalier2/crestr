@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Define the climate gradient to fit the pdfs. — fit_xrange • crestr</title>
+<title>Returns the references associated with the climate data used to fit the pdfs. — cite_climate_data • crestr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Define the climate gradient to fit the pdfs. — fit_xrange" />
-<meta property="og:description" content="Define the climate gradient to fit the pdfs." />
+<meta property="og:title" content="Returns the references associated with the climate data used to fit the pdfs. — cite_climate_data" />
+<meta property="og:description" content="Returns the references associated with the climate data used to fit the pdfs." />
 
 
 
@@ -138,55 +138,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Define the climate gradient to fit the <code>pdfs</code>.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/mod_fit_pdfsp.R'><code>R/mod_fit_pdfsp.R</code></a></small>
-    <div class="hidden name"><code>fit_xrange.Rd</code></div>
+    <h1>Returns the references associated with the climate data used to fit the <code>pdfs</code>.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/cite_data.R'><code>R/cite_data.R</code></a></small>
+    <div class="hidden name"><code>cite_climate_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Define the climate gradient to fit the <code>pdfs</code>.</p>
+    <p>Returns the references associated with the climate data used to fit the <code>pdfs</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fit_xrange</span><span class='op'>(</span><span class='va'>ccs</span>, <span class='va'>shape</span>, <span class='va'>bin_width</span>, npoints <span class='op'>=</span> <span class='fl'>500</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>cite_climate_data</span><span class='op'>(</span><span class='va'>x</span>, dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span>, verbose <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>ccs</th>
-      <td><p>A <code>ccs</code> object returned by <code><a href='calib_clim_space.html'>calib_clim_space</a></code>.</p></td>
+      <th>x</th>
+      <td><p>A <code><a href='crestObj.html'>crestObj</a></code> produced by one of the <code><a href='crest.html'>crest</a></code>,
+<code><a href='crest.get_modern_data.html'>crest.get_modern_data</a></code>, <code><a href='crest.calibrate.html'>crest.calibrate</a></code>,
+<code><a href='crest.reconstruct.html'>crest.reconstruct</a></code> or <code><a href='loo.html'>loo</a></code> functions.</p></td>
     </tr>
     <tr>
-      <th>shape</th>
-      <td><p>The imposed shape of the species <code>pdfs</code>. We recommend using
-'normal' for temperature variables and 'lognormal' for the
-variables that can only take positive values, such as
-precipitation or aridity. Default is 'normal' for all.</p></td>
+      <th>dbname</th>
+      <td><p>The name of the database. Default is <code>'gbif4crest_02'</code>.</p></td>
     </tr>
     <tr>
-      <th>bin_width</th>
-      <td><p>The width of the bins used to correct for unbalanced climate
-state. Use values that split the studied climate gradient in
-15-25 classes (e.g. 2°C for temperature variables). Default is 1.</p></td>
-    </tr>
-    <tr>
-      <th>npoints</th>
-      <td><p>The number of points to be used to fit the <code>pdfs</code>. Default 200.</p></td>
+      <th>verbose</th>
+      <td><p>A boolean to print non-essential comments on the terminal
+(default <code>TRUE</code>).</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A regularly spaced climate gradient with <code>npoints</code> points.</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Creating one randomised climate space</span>
-<span class='va'>climate_space</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>300</span> <span class='op'>/</span> <span class='fl'>10</span>, <span class='fl'>4000</span>, replace <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>ccs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='calib_clim_space.html'>calib_clim_space</a></span><span class='op'>(</span><span class='va'>climate_space</span>, <span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>xrange</span> <span class='op'>&lt;-</span> <span class='fu'>fit_xrange</span><span class='op'>(</span><span class='va'>ccs</span>, <span class='st'>"normal"</span>, <span class='fl'>2</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>xrange</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] -10.000000  -9.895792  -9.791583  -9.687375  -9.583166  -9.478958</div><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

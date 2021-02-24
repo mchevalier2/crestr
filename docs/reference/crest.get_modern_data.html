@@ -154,6 +154,7 @@ taxon and return them as a list.</p>
   <span class='va'>taxaType</span>,
   <span class='va'>climate</span>,
   df <span class='op'>=</span> <span class='cn'>NA</span>,
+  ai.sqrt <span class='op'>=</span> <span class='cn'>FALSE</span>,
   xmn <span class='op'>=</span> <span class='cn'>NA</span>,
   xmx <span class='op'>=</span> <span class='cn'>NA</span>,
   ymn <span class='op'>=</span> <span class='cn'>NA</span>,
@@ -195,6 +196,11 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.</p></td>
       <th>df</th>
       <td><p>A data frame containing the data to reconstruct (counts,
 percentages or presence/absence data).</p></td>
+    </tr>
+    <tr>
+      <th>ai.sqrt</th>
+      <td><p>A boolean to indicate whether ai values should be square-root
+transformed (default <code>FALSE</code>).</p></td>
     </tr>
     <tr>
       <th>xmn</th>
