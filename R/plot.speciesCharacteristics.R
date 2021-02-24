@@ -296,7 +296,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     h1 <- graphics::hist(climate_space[, clim],
                                breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
                                plot=FALSE)
-                    h2 <- graphics::hist(unique(distribs[[tax]][, -1])[, clim],
+                    h2 <- graphics::hist(unique(distribs[[tax]][, colnames(distribs[[tax]]) != 'taxonid'])[, clim],
                                breaks=c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2])),
                                plot=FALSE)
 
