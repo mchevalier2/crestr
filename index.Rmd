@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 
 <br>
 
-# **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bioproxies 
+# **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bioproxies
 
 The goal of crestr is to produce probabilistic reconstructions of past climate
 change from fossil assemblage data. The approach is based on the estimation of
@@ -28,10 +28,12 @@ and the calibrated data presented in [Chevalier (2019)](http://www.doi.org/10.10
 
 You can install the development version from [GitHub](https://github.com/) with:
 
+
 ``` r
-# install.packages("devtools")
+if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
+
 > **_NOTE:_**  This package is still in an **early phase of development**. The
 documentation is sparse and the functionalities limited. If you notice any bug,
 or if you would like to see some specific functions implemented, feel free to contact
