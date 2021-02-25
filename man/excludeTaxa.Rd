@@ -19,10 +19,10 @@ excludeTaxa(x, taxa, climate)
 Excludes the list of taxa from the reconstructions.
 }
 \examples{
-data(recons)
-print(recons$inputs$selectedTaxa)
-recons <- excludeTaxa(recons, 'Taxon3', 'bio1')
+data(reconstr)
+print(reconstr$inputs$selectedTaxa)
+reconstr <- excludeTaxa(reconstr, 'Taxon3', 'bio1')
 ## 'Taxon3' is now excluded from the reconstruction of 'bio1'.
-print(recons$inputs$selectedTaxa)
+print(reconstr$inputs$selectedTaxa)
 
 }

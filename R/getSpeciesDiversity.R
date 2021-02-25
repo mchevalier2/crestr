@@ -7,8 +7,8 @@
 #'        \code{\link{crest}} functions.
 #' @export
 #' @examples
-#' data(recons)
-#' getSpeciesdiversity(recons)
+#' data(reconstr)
+#' getSpeciesdiversity(reconstr)
 
 getSpeciesdiversity <- function(x) {
     div <- rep(0, length(x$inputs$taxa.name))

@@ -24,17 +24,17 @@
 #'   data(crest_ex)
 #'   data(crest_ex_pse)
 #'   data(crest_ex_selection)
-#'   recons <- crest(
+#'   reconstr <- crest(
 #'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
 #'     shape = c("normal", "lognormal"),
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = FALSE
-#'    ) 
+#'    )
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
-#' data(recons)
-#' plot_combinedPDFs(recons, samples=1:12, climate='bio12')
+#' data(reconstr)
+#' plot_combinedPDFs(reconstr, samples=1:12, climate='bio12')
 #'
 plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parameters$climate[1],
                                optima=TRUE,

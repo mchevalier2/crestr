@@ -38,8 +38,8 @@
 #'   )
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
-#' data(recons)
-#' plot_climateSpace(recons)
+#' data(reconstr)
+#' plot_climateSpace(reconstr)
 #'
 plot_climateSpace <- function( x,
                       climate = x$parameters$climate,

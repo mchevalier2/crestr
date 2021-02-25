@@ -62,7 +62,7 @@ and bio12 (annual precipitation) from these fake data. The description of the
 different parameters is available in the first **vignette**.
 
 ```{r reconstructing_climate, results='hide'}
-recons <- crest(
+reconstr <- crest(
    df = crest_ex, pse = crest_ex_pse, taxaType = 0,
    climate = c("bio1", "bio12"), bin_width = c(2, 20),
    shape = c("normal", "lognormal"),
@@ -72,13 +72,13 @@ recons <- crest(
 
 The climate sampled by the data can be assessed graphically using the figure
 ```{r plot-climate-space}
-plot_climateSpace(recons)
+plot_climateSpace(reconstr)
 ```
 
 Graphical tools aldo exist to assess which taxa should/could be used for each variable
 
 ```{r plot-plot_taxaCharacteristics}
-plot_taxaCharacteristics(recons, taxanames='Taxon1')
+plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 
 ```
 
@@ -89,26 +89,46 @@ Finally, the results can be visualised using the plot function and the
 reconstructed climate values can be accessed from the nested `recons` object:
 
 ```{r extract_results_0}
-names(recons)
-lapply(recons$reconstructions, names)
+names(reconstr)
+lapply(reconstr$reconstructions, names)
 ```
 
 ```{r extract_results}
-head(recons$reconstructions$bio1$optima)
-str(recons$reconstructions$bio1$optima)
+head(reconstr$reconstructions$bio1$optima)
+str(reconstr$reconstructions$bio1$optima)
 ```
 
 ```{r extract_results2}
-signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
-str(recons$reconstructions$bio1$posterior)
+signif(reconstr$reconstructions$bio1$posterior[1:6, 1:6], 3)
+str(reconstr$reconstructions$bio1$posterior)
 ```
 
 ```{r plot, fig.align='center', fig.width=5, fig.height=3}
-plot(recons, climate = 'bio1')
-plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
+plot(reconstr, climate = 'bio1')
+plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
 ## Exporting the results
 
+If satisfying, the results can be directly exported from the R environment in
+unique spreadsheets for each variables (or csv files) and the **crest** object
+is exported as an RData file to enable easy reuse in the future.
+
+```{r export}
+export(reconstr, loc=getwd(), dataname='crest-test')
+list.files(file.path(getwd(), 'crest-test'))
+```
+
+```{r delete export example, echo = FALSE, results = "hide"}
+unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
+```
+
+## References
+
+ - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction
+   SofTware): a probability density function (PDF)-based quantitative climate
+   reconstruction method. *Clim. Past* 10, 2081–2098. [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
+ - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
+   fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35. [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
 
 ----------------------

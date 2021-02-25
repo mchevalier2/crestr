@@ -170,7 +170,7 @@
 <a href="#application" class="anchor"></a>Application</h2>
 <p>To illustrate the process, we will reconstruct bio1 (mean annual temperature) and bio12 (annual precipitation) from these fake data. The description of the different parameters is available in the first <strong>vignette</strong>.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">recons</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.html">crest</a></span><span class="op">(</span>
+<code class="sourceCode R"><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.html">crest</a></span><span class="op">(</span>
    df <span class="op">=</span> <span class="va">crest_ex</span>, pse <span class="op">=</span> <span class="va">crest_ex_pse</span>, taxaType <span class="op">=</span> <span class="fl">0</span>,
    climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>, bin_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">20</span><span class="op">)</span>,
    shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"lognormal"</span><span class="op">)</span>,
@@ -178,11 +178,11 @@
 <span class="op">)</span></code></pre></div>
 <p>The climate sampled by the data can be assessed graphically using the figure</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">recons</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></code></pre></div>
 <p><img src="get-started_files/figure-html/plot-climate-space-1.png" width="700.0000032"></p>
 <p>Graphical tools aldo exist to assess which taxa should/could be used for each variable</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">recons</span>, taxanames<span class="op">=</span><span class="st">'Taxon1'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon1'</span><span class="op">)</span></code></pre></div>
 <p><img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-1.png" width="700.0000032"></p>
 </div>
 <div id="plotting-the-results" class="section level2">
@@ -190,17 +190,17 @@
 <a href="#plotting-the-results" class="anchor"></a>Plotting the results</h2>
 <p>Finally, the results can be visualised using the plot function and the reconstructed climate values can be accessed from the nested <code>recons</code> object:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">recons</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span>
 <span class="co">#&gt; [1] "inputs"          "parameters"      "modelling"       "reconstructions"</span>
 <span class="co">#&gt; [5] "misc"</span>
-<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span>, <span class="va">names</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span>, <span class="va">names</span><span class="op">)</span>
 <span class="co">#&gt; $bio1</span>
 <span class="co">#&gt; [1] "posterior"     "uncertainties" "optima"       </span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $bio12</span>
 <span class="co">#&gt; [1] "posterior"     "uncertainties" "optima"</span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
 <span class="co">#&gt;   Age   optima     mean</span>
 <span class="co">#&gt; 1   1 15.71142 15.69949</span>
 <span class="co">#&gt; 2   2 15.71142 15.69949</span>
@@ -208,13 +208,13 @@
 <span class="co">#&gt; 4   4 15.71142 15.69949</span>
 <span class="co">#&gt; 5   5 17.31463 17.29054</span>
 <span class="co">#&gt; 6   6 18.11623 18.12464</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span>
 <span class="co">#&gt; 'data.frame':    20 obs. of  3 variables:</span>
 <span class="co">#&gt;  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...</span>
 <span class="co">#&gt;  $ optima: num  15.7 15.7 15.7 15.7 17.3 ...</span>
 <span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.3 ...</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Round.html">signif</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span>
 <span class="co">#&gt;          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]</span>
 <span class="co">#&gt; [1,] 0.00e+00 8.02e-02 1.60e-01 2.40e-01 3.21e-01 4.01e-01</span>
 <span class="co">#&gt; [2,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
@@ -222,18 +222,33 @@
 <span class="co">#&gt; [4,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
 <span class="co">#&gt; [5,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span>
 <span class="co">#&gt; [6,] 1.45e-18 2.09e-18 3.01e-18 4.32e-18 6.19e-18 8.86e-18</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">recons</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">posterior</span><span class="op">)</span>
 <span class="co">#&gt;  num [1:21, 1:500] 0.00 8.41e-15 8.41e-15 8.41e-15 8.41e-15 ...</span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
 <p><img src="get-started_files/figure-html/plot-1.png" width="480" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">recons</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>, uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>, uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p><img src="get-started_files/figure-html/plot-2.png" width="480" style="display: block; margin: auto;"></p>
 </div>
 <div id="exporting-the-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#exporting-the-results" class="anchor"></a>Exporting the results</h2>
+<p>If satisfying, the results can be directly exported from the R environment in unique spreadsheets for each variables (or csv files) and the <strong>crest</strong> object is exported as an RData file to enable easy reuse in the future.</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "bio1"             "bio12"            "crest-test.RData"</span></code></pre></div>
+</div>
+<div id="references" class="section level2">
+<h2 class="hasAnchor">
+<a href="#references" class="anchor"></a>References</h2>
+<ul>
+<li>Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. <em>Clim. Past</em> 10, 2081–2098. <a href="http://www.doi.org/10.5194/cp-10-2081-2014">10.5194/cp-10-2081-2014</a>
+</li>
+<li>Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. <em>Glob. Planet. Change</em> 175, 27–35. <a href="http://www.doi.org/10.1016/j.gloplacha.2019.01.016">10.1016/j.gloplacha.2019.01.016</a>
+</li>
+</ul>
 <hr>
 </div>
   </div>

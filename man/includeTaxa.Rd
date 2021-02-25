@@ -19,11 +19,11 @@ includeTaxa(x, taxa, climate)
 Includes the list of taxa into the reconstructions.
 }
 \examples{
-data(recons)
-print(recons$inputs$selectedTaxa)
-recons <- includeTaxa(recons, recons$inputs$taxa.name, 'bio12')
+data(reconstr)
+print(reconstr$inputs$selectedTaxa)
+reconstr <- includeTaxa(reconstr, reconstr$inputs$taxa.name, 'bio12')
 ## All the taxa are not selected for 'bio12', except for 'Taxon7' for which
 ## data are unavailable.
-print(recons$inputs$selectedTaxa)
+print(reconstr$inputs$selectedTaxa)
 
 }

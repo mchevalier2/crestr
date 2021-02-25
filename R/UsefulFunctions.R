@@ -106,14 +106,14 @@ meanPositiveValues <- function(x) {
 #' @examples
 #' \dontrun{
 #'  if(requireNamespace('clipr', quietly=TRUE)) {
-#'    recons <- crest(
+#'    reconstr <- crest(
 #'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
 #'     shape = c("normal", "lognormal"),
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = TRUE
 #'    )
-#'    copy_crest(recons, uncertainties=TRUE)
+#'    copy_crest(reconstr, uncertainties=TRUE)
 #'    ## You can now paste the values in a spreadsheet.
 #'  }
 #' }

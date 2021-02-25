@@ -410,6 +410,23 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     }
     crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa[apply(crest$inputs$selectedTaxa, 1, sum)>=0, ])]
 
+    class_names <- rep(NA, nrow(crest$inputs$pse))
+    if (crest$parameters$taxaType == 1) {
+        for (tax in crest$inputs$taxa.name) {
+            for(w in which(crest$inputs$pse[ ,'ProxyName'] == tax)) {
+                class_names[w] <- getTaxonomy(    family = crest$inputs$pse[w, 'Family'],
+                                                   genus = crest$inputs$pse[w, 'Genus'],
+                                                 species = crest$inputs$pse[w, 'Species'],
+                                                taxaType = crest$parameters$taxaType,
+                                               depth.out = 3,
+                                                  dbname = dbname)[, 'class_name']
+            }
+        }
+    }
+    crest$inputs$pse <- cbind( crest$inputs$pse, 'Class_name' = class_names)
+
+
+
     crest$modelling$distributions <- distributions
     if(verbose) {
       cat('  <> Extracting species distributions ...... [OK]\n  <> Extracting climate space .............. ')

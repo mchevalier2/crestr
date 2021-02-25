@@ -15,6 +15,6 @@ getSpeciesdiversity(x)
 Calculates how many species compose the respose of each taxon.
 }
 \examples{
-data(recons)
-getSpeciesdiversity(recons)
+data(reconstr)
+getSpeciesdiversity(reconstr)
 }

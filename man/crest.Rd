@@ -133,7 +133,7 @@ Runs all the different steps of a CREST reconstruction in one function.
 data(crest_ex)
 data(crest_ex_pse)
 data(crest_ex_selection)
-recons <- crest(
+reconstr <- crest(
   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
   site_info = c(7.5, 7.5), site_name = 'crest_example',
   climate = c("bio1", "bio12"), bin_width = c(2, 20),
@@ -142,7 +142,7 @@ recons <- crest(
   leave_one_out = TRUE,
   verbose = FALSE
 )
-plot(recons)
-plot_loo(recons)
+plot(reconstr)
+plot_loo(reconstr)
 
 }

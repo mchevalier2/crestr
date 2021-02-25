@@ -158,18 +158,18 @@ print.crestObj <- function(x, ...) {
 #'   data(crest_ex)
 #'   data(crest_ex_pse)
 #'   data(crest_ex_selection)
-#'   recons <- crest(
+#'   reconstr <- crest(
 #'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
 #'     shape = c("normal", "lognormal"),
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
 #'   )
-#'   recons <- loo(recons)
+#'   reconstr <- loo(reconstr)
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
-#' data(recons)
-#' plot(recons)
-#' plot(recons, climate='bio1', simplify = TRUE)
+#' data(reconstr)
+#' plot(reconstr)
+#' plot(reconstr, climate='bio1', simplify = TRUE)
 #'
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,

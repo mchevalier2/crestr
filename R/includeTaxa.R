@@ -9,12 +9,12 @@
 #' @param climate A vector of climate variables to link the taxa with.
 #' @export
 #' @examples
-#' data(recons)
-#' print(recons$inputs$selectedTaxa)
-#' recons <- includeTaxa(recons, recons$inputs$taxa.name, 'bio12')
+#' data(reconstr)
+#' print(reconstr$inputs$selectedTaxa)
+#' reconstr <- includeTaxa(reconstr, reconstr$inputs$taxa.name, 'bio12')
 #' ## All the taxa are not selected for 'bio12', except for 'Taxon7' for which
 #' ## data are unavailable.
-#' print(recons$inputs$selectedTaxa)
+#' print(reconstr$inputs$selectedTaxa)
 #'
 includeTaxa <- function(x, taxa, climate) {
     for (tax in taxa) {
@@ -39,11 +39,11 @@ includeTaxa <- function(x, taxa, climate) {
 #' @param climate A vector of climate variables to unlink the taxa with.
 #' @export
 #' @examples
-#' data(recons)
-#' print(recons$inputs$selectedTaxa)
-#' recons <- excludeTaxa(recons, 'Taxon3', 'bio1')
+#' data(reconstr)
+#' print(reconstr$inputs$selectedTaxa)
+#' reconstr <- excludeTaxa(reconstr, 'Taxon3', 'bio1')
 #' ## 'Taxon3' is now excluded from the reconstruction of 'bio1'.
-#' print(recons$inputs$selectedTaxa)
+#' print(reconstr$inputs$selectedTaxa)
 #'
 excludeTaxa <- function(x, taxa, climate) {
     for (tax in taxa) {

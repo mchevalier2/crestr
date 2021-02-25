@@ -24,17 +24,17 @@
 #'   data(crest_ex)
 #'   data(crest_ex_pse)
 #'   data(crest_ex_selection)
-#'   recons <- crest(
+#'   reconstr <- crest(
 #'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
 #'     shape = c("normal", "lognormal"),
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
 #'   )
-#'   recons <- loo(recons)
+#'   reconstr <- loo(reconstr)
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
-#' data(recons)
-#' plot_loo(recons, yax_incr=c(0.5, 50), bar_width=0.8,
+#' data(reconstr)
+#' plot_loo(reconstr, yax_incr=c(0.5, 50), bar_width=0.8,
 #'          col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #'
 plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,

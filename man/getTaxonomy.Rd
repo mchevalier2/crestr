@@ -38,7 +38,7 @@ Extract all possible TaxonIDs corresponding to the provided taxonomical
 description, which can be at the family, the genus or the species levels.
 }
 \examples{
-getTaxonomy("Zamiaceae")
+getTaxonomy("Zamiaceae    ")
 getTaxonomy(genus="Ceratozamia", depth.out=6)
 ## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
 getTaxonomy("Zamiaceae", "Ceratozamia", taxaType = 2)

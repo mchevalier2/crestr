@@ -64,7 +64,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
                         )
 
     M2 <- sp::spTransform(M1, PROJ)
-    dat <- raster::projectRaster(from=dat, crs=PROJ)
+    if (class(dat) == 'RasterLayer')  dat <- raster::projectRaster(from=dat, crs=PROJ)
 
     if ('Raster' %in% methods::is(top_layer)) top_layer <- raster::projectRaster(from=top_layer, crs=PROJ)
 
@@ -162,8 +162,10 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         sp::plot(verticals.eqearth,col='white',lwd=0.5, add=TRUE )
 
         sp::plot(M2, col='black', border=NA, add=TRUE)
-        raster::image(dat, colNa='black', add=TRUE, interpolate=FALSE, zlim=zlim, col=col)
-        sp::plot(M2, border='black', lwd=0.5, add=TRUE)
+        if (class(dat) == 'RasterLayer') {
+            raster::image(dat, colNa='black', add=TRUE, interpolate=FALSE, zlim=zlim, col=col)
+            sp::plot(M2, border='black', lwd=0.5, add=TRUE)
+        }
 
         if ('Raster' %in% methods::is(top_layer)) {
             raster::image(top_layer, add=TRUE, col='ghostwhite')
