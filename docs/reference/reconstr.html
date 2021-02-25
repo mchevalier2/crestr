@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Excludes the list of taxa from the reconstructions. — excludeTaxa • crestr</title>
+<title>A crestObj ran with the pseudo data. — reconstr • crestr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Excludes the list of taxa from the reconstructions. — excludeTaxa" />
-<meta property="og:description" content="Excludes the list of taxa from the reconstructions." />
+<meta property="og:title" content="A crestObj ran with the pseudo data. — reconstr" />
+<meta property="og:description" content="A crestObj ran with the pseudo data. Useful to illustrate many
+functions of the package." />
 
 
 
@@ -138,59 +139,23 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Excludes the list of taxa from the reconstructions.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/includeTaxa.R'><code>R/includeTaxa.R</code></a></small>
-    <div class="hidden name"><code>excludeTaxa.Rd</code></div>
+    <h1>A <code><a href='crestObj.html'>crestObj</a></code> ran with the pseudo data.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>reconstr.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Excludes the list of taxa from the reconstructions.</p>
+    <p>A <code><a href='crestObj.html'>crestObj</a></code> ran with the pseudo data. Useful to illustrate many
+functions of the package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>excludeTaxa</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>taxa</span>, <span class='va'>climate</span><span class='op'>)</span></pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>x</th>
-      <td><p>A <code><a href='crestObj.html'>crestObj</a></code> produced by one of the <code><a href='crest.html'>crest</a></code>,
-<code><a href='crest.get_modern_data.html'>crest.get_modern_data</a></code>, <code><a href='crest.calibrate.html'>crest.calibrate</a></code>,
-<code><a href='crest.reconstruct.html'>crest.reconstruct</a></code> or <code><a href='loo.html'>loo</a></code> functions.</p></td>
-    </tr>
-    <tr>
-      <th>taxa</th>
-      <td><p>A vector of taxa to exclude.</p></td>
-    </tr>
-    <tr>
-      <th>climate</th>
-      <td><p>A vector of climate variables to unlink the taxa with.</p></td>
-    </tr>
-    </table>
+    <pre class="usage"><span class='va'>reconstr</span></pre>
 
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>$</span><span class='va'>inputs</span><span class='op'>$</span><span class='va'>selectedTaxa</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        bio1 bio12
-#&gt; Taxon1    1     1
-#&gt; Taxon2    1     0
-#&gt; Taxon3    1     0
-#&gt; Taxon4    0     1
-#&gt; Taxon5    0     1
-#&gt; Taxon6    0     0
-#&gt; Taxon7   -1    -1</div><div class='input'><span class='va'>reconstr</span> <span class='op'>&lt;-</span> <span class='fu'>excludeTaxa</span><span class='op'>(</span><span class='va'>reconstr</span>, <span class='st'>'Taxon3'</span>, <span class='st'>'bio1'</span><span class='op'>)</span>
-<span class='co'>## 'Taxon3' is now excluded from the reconstruction of 'bio1'.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>$</span><span class='va'>inputs</span><span class='op'>$</span><span class='va'>selectedTaxa</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;        bio1 bio12
-#&gt; Taxon1    1     1
-#&gt; Taxon2    1     0
-#&gt; Taxon3    0     0
-#&gt; Taxon4    0     1
-#&gt; Taxon5    0     1
-#&gt; Taxon6    0     0
-#&gt; Taxon7   -1    -1</div><div class='input'>
-</div></pre>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+
+    <p>An object of class <code>crestObj</code> of length 5.</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

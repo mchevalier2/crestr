@@ -336,7 +336,7 @@ reconstructions should be computed (default <code>FALSE</code>).</p></td>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex_pse</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex_selection</span><span class='op'>)</span>
-<span class='va'>recons</span> <span class='op'>&lt;-</span> <span class='fu'>crest</span><span class='op'>(</span>
+<span class='va'>reconstr</span> <span class='op'>&lt;-</span> <span class='fu'>crest</span><span class='op'>(</span>
   df <span class='op'>=</span> <span class='va'>crest_ex</span>, pse <span class='op'>=</span> <span class='va'>crest_ex_pse</span>, taxaType <span class='op'>=</span> <span class='fl'>0</span>,
   site_info <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>7.5</span>, <span class='fl'>7.5</span><span class='op'>)</span>, site_name <span class='op'>=</span> <span class='st'>'crest_example'</span>,
   climate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bio1"</span>, <span class='st'>"bio12"</span><span class='op'>)</span>, bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>20</span><span class='op'>)</span>,
@@ -345,8 +345,8 @@ reconstructions should be computed (default <code>FALSE</code>).</p></td>
   leave_one_out <span class='op'>=</span> <span class='cn'>TRUE</span>,
   verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>recons</span><span class='op'>)</span>
-</div><div class='img'><img src='crest-1.png' alt='' width='700' height='1133' /></div><div class='input'><span class='fu'><a href='plot_loo.html'>plot_loo</a></span><span class='op'>(</span><span class='va'>recons</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>)</span>
+</div><div class='img'><img src='crest-1.png' alt='' width='700' height='1133' /></div><div class='input'><span class='fu'><a href='plot_loo.html'>plot_loo</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>)</span>
 </div><div class='img'><img src='crest-2.png' alt='' width='700' height='1133' /></div><div class='input'>
 </div></pre>
   </div>

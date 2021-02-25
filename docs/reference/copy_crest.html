@@ -187,14 +187,14 @@ R environment.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
  <span class='kw'>if</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/ns-load.html'>requireNamespace</a></span><span class='op'>(</span><span class='st'>'clipr'</span>, quietly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-   <span class='va'>recons</span> <span class='op'>&lt;-</span> <span class='fu'><a href='crest.html'>crest</a></span><span class='op'>(</span>
+   <span class='va'>reconstr</span> <span class='op'>&lt;-</span> <span class='fu'><a href='crest.html'>crest</a></span><span class='op'>(</span>
     df <span class='op'>=</span> <span class='va'>crest_ex</span>, pse <span class='op'>=</span> <span class='va'>crest_ex_pse</span>, taxaType <span class='op'>=</span> <span class='fl'>0</span>,
     climate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bio1"</span>, <span class='st'>"bio12"</span><span class='op'>)</span>, bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>20</span><span class='op'>)</span>,
     shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"normal"</span>, <span class='st'>"lognormal"</span><span class='op'>)</span>,
     selectedTaxa <span class='op'>=</span> <span class='va'>crest_ex_selection</span>, dbname <span class='op'>=</span> <span class='st'>"crest_example"</span>,
     leave_one_out <span class='op'>=</span> <span class='cn'>TRUE</span>
    <span class='op'>)</span>
-   <span class='fu'>copy_crest</span><span class='op'>(</span><span class='va'>recons</span>, uncertainties<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+   <span class='fu'>copy_crest</span><span class='op'>(</span><span class='va'>reconstr</span>, uncertainties<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
    <span class='co'>## You can now paste the values in a spreadsheet.</span>
  <span class='op'>}</span>
 <span class='op'>}</span>
