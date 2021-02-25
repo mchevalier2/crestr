@@ -17,7 +17,7 @@
 #'   data(crest_ex)
 #'   data(crest_ex_pse)
 #'   data(crest_ex_selection)
-#'   recons <- crest(
+#'   reconstr <- crest(
 #'     df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'     site_info = c(7.5, 7.5),
 #'     climate = c("bio1", "bio12"), bin_width = c(2, 20),
@@ -25,7 +25,7 @@
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = TRUE
 #'   )
-#'   export(recons, dataname='crest_example', fullPosterior=TRUE, weights=TRUE, loo=TRUE)
+#'   export(reconstr, dataname='crest_example', fullPosterior=TRUE, weights=TRUE, loo=TRUE)
 #' }
 #'
 export <- function( x, dataname = x$misc$site_info$site_name,
@@ -83,11 +83,22 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, c(NA, 'selectedTaxa: List of taxa identified in the study and which ones are selected.', NA, NA, NA))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
-            df <- rbind(df, c('ADDITONNAL REFERENCES (please include these references if you are publishing your reconstructions and support data/methods providers)', NA, NA, NA, NA))
+            refs <- cite_crest(x, verbose=FALSE)
+            df <- rbind(df, c('ADDITONNAL REFERENCES (these references must be included if you are publishing your reconstructions and support data/methods providers)', NA, NA, NA, NA))
             df <- rbind(df, c(NA, 'Method: ', NA, NA, NA))
-            df <- rbind(df, c(NA, 'Curated calibration dataset: ', NA, NA, NA))
-            df <- rbind(df, c(NA, 'Climate data: ', NA, NA, NA))
-            df <- rbind(df, c(NA, 'Distribution data: ', NA, NA, NA))
+            df <- rbind(df, c(NA, NA, refs$method[1], NA, NA))
+            if(length(refs$method) > 1) {
+                df <- rbind(df, c(NA, 'Curated calibration dataset: ', NA, NA, NA))
+                for(i in 2:length(refs$method))  df <- rbind(df, c(NA, NA, refs$method[i], NA, NA))
+            }
+            if ('climate' %in% names(refs)) {
+                df <- rbind(df, c(NA, 'Climate data: ', NA, NA, NA))
+                for(i in 1:length(refs$climate))  df <- rbind(df, c(NA, NA, refs$climate[i], NA, NA))
+            }
+            if ('distrib' %in% names(refs)) {
+                df <- rbind(df, c(NA, 'Distribution data: ', NA, NA, NA))
+                for(i in 1:length(refs$distrib))  df <- rbind(df, c(NA, NA, refs$distrib[i], NA, NA))
+            }
 
             if(as.csv) {
                 utils::write.table(df, base::file.path(loc, dataname, clim, 'ReadMe.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
@@ -180,7 +191,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             }
 
 
-            if (weights) {
+            if (loo) {
                 df <- x$inputs$x
                 for (tax in names(x$reconstructions[[clim]]$loo)) {
                     if (unique(is.na(as.vector(x$reconstructions[[clim]]$loo[[tax]])))) {

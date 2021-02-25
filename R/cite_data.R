@@ -42,12 +42,8 @@ cite_crest <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
 #'
 cite_distrib_data <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
     if (x$parameters$taxaType == 1) {
-        list_of_classes <- c()
         tocite <- c()
-        for (fam in unique(x$inputs$pse$Family[x$inputs$pse[,1]<4])) {
-          list_of_classes <- c(list_of_classes, getTaxonomy(family=fam, depth.out=3)[, 'class_name'])
-        }
-        list_of_classes <- unique(list_of_classes)
+        list_of_classes <- unique(stats::na.omit(x$inputs$pse[, 'Class_name']))
         citations = list()
         citations[['Pinopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Pinopsida occurrence data. https://doi.org/10.15468/dl.x2r7pa.'
         citations[['Cycadopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Cycadopsida occurrence data. https://doi.org/10.15468/dl.sfjzxu.'
