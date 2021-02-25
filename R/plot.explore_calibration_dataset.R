@@ -33,6 +33,8 @@ explore_calibration_dataset <- function( taxaType,
                                      dbname = dbname)
 
 
+    plot.distrib <- ifelse(nrow(distributions) == 0, FALSE, TRUE)
+
     ext <- c(xmn, xmx, ymn, ymx)
     ext_eqearth <- eqearth_get_ext(ext)
     xy_ratio <- diff(ext_eqearth[1:2]) / diff(ext_eqearth[3:4])
@@ -44,16 +46,19 @@ explore_calibration_dataset <- function( taxaType,
         par_usr <- graphics::par(no.readonly = TRUE)
     }
 
-
-    veg_space      <- distributions[, c('longitude', 'latitude')]
-    veg_space      <- plyr::count(veg_space)
-    veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
-    veg_space[, 3] <- base::log10(veg_space[, 3])
-    veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
+    if (plot.distrib) {
+        veg_space      <- distributions[, c('longitude', 'latitude')]
+        veg_space      <- plyr::count(veg_space)
+        veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
+        veg_space[, 3] <- base::log10(veg_space[, 3])
+        veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
+    } else {
+        veg_space <- NA
+    }
 
 
     ## Plot species abundance --------------------------------------------------
-    zlab=c(0, ceiling(max(raster::values(veg_space), na.rm=TRUE)))
+    zlab=c(0, ifelse(plot.distrib, ceiling(max(raster::values(veg_space), na.rm=TRUE)), 1))
 
     xlab <- c(-0.2,1.2)
     xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
@@ -64,7 +69,7 @@ explore_calibration_dataset <- function( taxaType,
         clab <- c( clab, c(1,2,5)*10**i )
         i <- i+1
     }
-    clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
+    if (plot.distrib)  clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
     zlab[2] <- log10(clab[length(clab)])
 
     graphics::layout(c(1,2), height = c(0.15, 0.85))
@@ -80,6 +85,8 @@ explore_calibration_dataset <- function( taxaType,
                      } else {
                          graphics::par(par_usr)
                      }
+
+    if (!plot.distrib)  cat('\nWARNING: No data available for plotting.\n\n')
 
     invisible(distributions)
 }
