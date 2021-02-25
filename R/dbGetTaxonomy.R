@@ -16,7 +16,7 @@
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
-#' getTaxonomy("Zamiaceae")
+#' getTaxonomy("Zamiaceae    ")
 #' getTaxonomy(genus="Ceratozamia", depth.out=6)
 #' ## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
 #' getTaxonomy("Zamiaceae", "Ceratozamia", taxaType = 2)
@@ -26,8 +26,12 @@ getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, dep
         cat('Please indicate a family, genus or species name.\n')
         return(invisible())
     }
-    family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
-    genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
+    family  <- base::trimws(family, 'both')
+    genus   <- base::trimws(genus, 'both')
+    species <- base::trimws(species, 'both')
+
+    family  <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
+    genus   <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
     species <- ifelse(is.na(species), "", paste0(base::toupper(substr(species, 1, 1)), substr(base::tolower(species), 2, nchar(species))))
     req <- paste0(
       "  SELECT DISTINCT kingdom, phylum, class_name, order_name, family, genus, species, taxonid ",
