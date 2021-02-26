@@ -290,8 +290,8 @@ The results can also be visualised in different forms using the plot function
 the last ones are rather warm and humid. A cold and dry event interupted the
 transition from the early state to the final state.
 
-<br >
-```{r plot, fig.align='center', fig.show="hold", fig.width="49%", fig.width=5, fig.height=3, fig.cap="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided."}
+
+```{r plot, fig.show="hold", fig.width="50%", fig.width=5, fig.height=3, fig.align='center', fig.cap="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided."}
 plot(reconstr, climate = 'bio1')
 plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
