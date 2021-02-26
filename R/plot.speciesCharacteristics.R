@@ -159,7 +159,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
                 graphics::text(0.5, 0.5, tax, font=2, adj=c(0.5, 0.5), srt=90, cex=1.3)
 
-                for(clim in x$parameters$climate) {
+                for(clim in climate) {
                     graphics::par(mar=c(0,0,0,0))
                     graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
                     graphics::text(0.5, 0.5, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), srt=90, cex=0.8)
@@ -272,7 +272,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 graphics::text(0.5, 0.5, tax, font=2, adj=c(0.5, 0.5), srt=90, cex=1.3)
 
 
-                for(clim in x$parameters$climate) {
+                for(clim in climate) {
 
                     ## Plot the variable name --------------------------------------------
                     graphics::par(mar=c(0,0,0,0))
