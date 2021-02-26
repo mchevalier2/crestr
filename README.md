@@ -138,7 +138,7 @@ crest_ex_selection
 #> Taxon7    1     1
 ```
 
-These pseudo data can be provided to the **crest** function and provided
+These pseudo-data can be provided to the **crest** function and provided
 some parameters (see the full vignettes for a detail of these
 parameters), the reconstructions will be processed.
 

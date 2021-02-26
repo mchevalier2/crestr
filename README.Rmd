@@ -105,7 +105,7 @@ to *bio12*.
 crest_ex_selection
 ```
 
-These pseudo data can be provided to the **crest** function and provided some
+These pseudo-data can be provided to the **crest** function and provided some
 parameters (see the full vignettes for a detail of these parameters), the
 reconstructions will be processed.
 
@@ -117,6 +117,7 @@ recons <- crest(
    selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
 ```
+
 
 The climate sampled by the data can be graphically represented for a quick
 assessment of the calibration dataset.
@@ -130,7 +131,7 @@ for each variable. On the following example, it is clear that Taxon2 has a much
 stronger correlation with *bio1* than to *bio12*, hence its selection for *bio1*
 only.
 
-```{r plot-plot_taxaCharacteristics}
+```{r plot-plot_taxaCharacteristics, fig.width=7.5, fig.height=8.8}
 plot_taxaCharacteristics(recons, taxanames='Taxon2')
 
 ```
