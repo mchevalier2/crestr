@@ -172,7 +172,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
         selectedTaxa[tax, climate] <- rep(-1, length(climate))
     }
-    taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa[apply(selectedTaxa, 1, sum)>=0, ])]
+    taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa)[apply(selectedTaxa, 1, sum)>=0]]
 
     w <- !(taxa.name %in% rownames(selectedTaxa))
     if (sum(w) > 0) {
@@ -228,8 +228,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         }
         pse <- pse[!w, ]
     }
-    taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa[apply(selectedTaxa, 1, sum)>=0, ])]
-
+    taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa)[apply(selectedTaxa, 1, sum)>=0]]
 
     if(verbose) {
       cat('[OK]\n  <> Extracting taxon species .............. \r')
@@ -344,7 +343,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             pbi <- pbi + 100
         }
     }
-    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa[apply(crest$inputs$selectedTaxa, 1, sum)>=0, ])]
+    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa)[apply(crest$inputs$selectedTaxa, 1, sum)>=0]]
 
 
     if(verbose) {
@@ -408,7 +407,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         }
         pbi <- pbi + 100
     }
-    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa[apply(crest$inputs$selectedTaxa, 1, sum)>=0, ])]
+    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa)[apply(crest$inputs$selectedTaxa, 1, sum)>=0]]
 
     class_names <- rep(NA, nrow(crest$inputs$pse))
     if (crest$parameters$taxaType == 1) {
@@ -444,8 +443,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if (ai.sqrt & 'ai' %in% crest$parameters$climate) {
         crest$modelling$climate_space[, "ai"] <- sqrt(crest$modelling$climate_space[, "ai"])
         for (tax in crest$inputs$taxa_names) {
-            print(tax)
-            print(crest$modelling$distributions[[tax]])
             crest$modelling$distributions[[tax]][, 'ai'] <- sqrt(crest$modelling$distributions[[tax]][, 'ai'])
         }
     }
