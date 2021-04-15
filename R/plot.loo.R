@@ -99,7 +99,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                 title2 <- title[clim]
             }
 
-            if (yax_incr2 == 0) yax_incr2 <- 1
+            if (yax_incr2 == 0) yax_incr2 <- x$parameters$bin_width[clim, ] / 10
 
             plot_diagram(df, bars=TRUE,
                        save=save, filename=paste0(filename,'_',clim,'.pdf'),
