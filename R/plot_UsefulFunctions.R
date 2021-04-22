@@ -104,7 +104,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
     bckg.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
 
-    dat <- raster::mask(dat, bckg.eqearth)
+    if (class(dat) == 'RasterLayer')  dat <- raster::mask(dat, bckg.eqearth)
 
     ext <- raster::extent(bckg.eqearth)
     ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])

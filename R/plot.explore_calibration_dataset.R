@@ -86,7 +86,10 @@ explore_calibration_dataset <- function( taxaType,
                          graphics::par(par_usr)
                      }
 
-    if (!plot.distrib)  cat('\nWARNING: No data available for plotting.\n\n')
-
+    if (!plot.distrib)  {
+        cat('\nWARNING: No data available for plotting.\n\n')
+        return(invisible(NULL))
+    }
+    
     invisible(distributions)
 }

@@ -34,7 +34,7 @@
 crest <- function(df, pse, taxaType, climate,
                   site_info = rep(NA, length(climate)),
                   site_name = NA,
-                  xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                  xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                   continents = NA, countries = NA,
                   realms = NA, biomes = NA, ecoregions = NA,
                   minGridCells = 20,

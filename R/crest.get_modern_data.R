@@ -301,12 +301,12 @@ crest.get_modern_data <- function( pse, taxaType, climate,
 
     pbi <- 100
     for (taxLevel in 1:3) {
-        for (tax in pse$ProxyName[ pse$Level == taxLevel ]) {
+        for (tax in unique(pse$ProxyName[ pse$Level == taxLevel ])) {
             if(verbose) {
                 cat(paste0('  <> Extracting taxon species .............. ', stringr::str_pad(paste0(round(pbi / length(pse$ProxyName)),'%\r'), width=4, side='left')))
                 utils::flush.console()
             }
-            for (w in which(pse$ProxyName == tax)) {
+            for (w in which(pse$ProxyName == tax & pse$Level == taxLevel)) {
                 taxonIDs <- getTaxonID(
                   pse$Family[w],
                   pse$Genus[w],
@@ -334,9 +334,10 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                       crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
                       message <- "No correspondance with vegetation"
                       if (! message %in% names(crest$misc[['taxa_notes']])) {
-                          crest$misc[['taxa_notes']][[message]] <- c()
+                          crest$misc[['taxa_notes']][[message]] <- as.data.frame(matrix(0, ncol=5, nrow=0))
+                          colnames(crest$misc[['taxa_notes']][[message]]) <- colnames(pse)
                       }
-                      crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
+                      crest$misc[['taxa_notes']][[message]] <- rbind(crest$misc[['taxa_notes']][[message]], pse[w, ])
                     }
                 }
             }
