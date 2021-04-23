@@ -149,3 +149,49 @@ copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FAL
     clipr::write_clip(tbl)
     invisible(x)
 }
+
+
+
+
+#' Check if the coordinates are correct.
+#'
+#' Check if the coordinates are correct.
+#'
+#' @inheritParams crest
+#' @export
+#' @examples
+#' check_coordinates(NA, NA, NA, NA)
+#' check_coordinates(-200, 0, 0, 90)
+#' check_coordinates(20, 0, 90, 0)
+#'
+check_coordinates <- function(xmn, xmx, ymn, ymx) {
+
+    estimate_xlim <- estimate_ylim <- FALSE
+
+    if (xmn < -180 | is.na(xmn) | xmx > 180 | is.na(xmx)) {
+        xmn <- max(xmn, -180, na.rm=TRUE)
+        xmx <- min(xmx, 180, na.rm=TRUE)
+        estimate_xlim <- TRUE
+        #cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Adapting and continuing.\n")
+    }
+    if (xmn >= xmx) {
+        #cat("WARNING: xmn is larger than xmx. Inverting the two values and continuing.\n")
+        tmp <- xmn
+        xmn <- xmx
+        xmx <- tmp
+    }
+
+    if (ymn < -90| is.na(ymn)  | ymx > 90 | is.na(ymx) ) {
+        ymn <- max(ymn, -90, na.rm=TRUE)
+        ymx <- min(ymx, 90, na.rm=TRUE)
+        estimate_ylim <- TRUE
+        #cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Adapting and continuing.\n")
+    }
+    if (ymn >= ymx) {
+        #cat("WARNING: ymn is larger than ymx. Inverting the two values and continuing.\n")
+        tmp <- ymn
+        ymn <- ymx
+        ymx <- tmp
+    }
+    c(xmn, xmx, ymn, ymx, estimate_xlim, estimate_ylim)
+}

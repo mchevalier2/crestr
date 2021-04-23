@@ -18,11 +18,18 @@
 explore_calibration_dataset <- function( taxaType,
                                          save = FALSE, filename = 'calibrationDataset.pdf',
                                          width = 7.48, height = 7.48,
-                                         xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                                         xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                          continents = NA, countries = NA,
                                          realms = NA, biomes = NA, ecoregions = NA,
                                          dbname = "gbif4crest_02") {
 
+    coords        <- check_coordinates(xmn, xmx, ymn, ymx)
+    xmn           <- coords[1]
+    xmx           <- coords[2]
+    ymn           <- coords[3]
+    ymx           <- coords[4]
+    estimate_xlim <- coords[5]
+    estimate_ylim <- coords[6]
 
     taxonIDs <- getTaxonID( taxaType = taxaType, dbname = dbname )
 
@@ -34,6 +41,36 @@ explore_calibration_dataset <- function( taxaType,
 
 
     plot.distrib <- ifelse(nrow(distributions) == 0, FALSE, TRUE)
+
+    # Climate_space useful to estimate the extent of selected region
+    climate_space <- getClimateSpace(
+      'bio1',
+      xmn, xmx, ymn, ymx,
+      continents, countries,
+      realms, biomes, ecoregions,
+      dbname
+    )
+    if(nrow(climate_space) > 0) {
+        resol <- sort(unique(diff(sort(unique(climate_space[, 1])))))[1] / 2.0
+        xx <- range(climate_space[, 1])
+        if (estimate_xlim) {
+            xmn <- xx[1] - resol
+            xmx <- xx[2] + resol
+        } else {
+            if (xmn > xx[1] - resol) xmn <- xx[1] - resol
+            if (xmx < xx[2] + resol) xmx <- xx[2] + resol
+        }
+
+        resol <- sort(unique(diff(sort(unique(climate_space[, 2])))))[1] / 2.0
+        yy <- range(climate_space[, 2])
+        if (estimate_ylim) {
+            ymn <- yy[1] - resol
+            ymx <- yy[2] + resol
+        }else {
+            if (ymn > yy[1] - resol) ymn <- yy[1] - resol
+            if (ymx < yy[2] + resol) ymx <- yy[2] + resol
+        }
+    }
 
     ext <- c(xmn, xmx, ymn, ymx)
     ext_eqearth <- eqearth_get_ext(ext)
@@ -90,6 +127,6 @@ explore_calibration_dataset <- function( taxaType,
         cat('\nWARNING: No data available for plotting.\n\n')
         return(invisible(NULL))
     }
-    
+
     invisible(distributions)
 }

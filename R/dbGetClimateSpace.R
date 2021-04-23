@@ -26,10 +26,12 @@
 #' raster::plot(raster::rasterFromXYZ(climate), asp=1)
 #'
 getClimateSpace <- function(climate,
-                            xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                            xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                             continents = NA, countries = NA,
                             realms = NA, biomes = NA, ecoregions = NA,
                             dbname = "gbif4crest_02") {
+
+    coords        <- check_coordinates(xmn, xmx, ymn, ymx)
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
@@ -71,8 +73,8 @@ getClimateSpace <- function(climate,
       "  SELECT DISTINCT longitude, latitude, ",
       "        ", paste(climate, collapse = ", "), " ",
       "   FROM  wc_qdgc ",
-      "   WHERE longitude >= ", xmn, " AND longitude <= ", xmx, " ",
-      "     AND latitude >= ", ymn, " AND latitude <= ", ymx, " ",
+      "   WHERE longitude >= ", coords[1], " AND longitude <= ", coords[2], " ",
+      "     AND latitude >= ", coords[3], " AND latitude <= ", coords[4], " ",
       "     ", GEO, " ",
       "     ", WWF, " ",
       "ORDER BY longitude, latitude"

@@ -6,10 +6,10 @@
 \usage{
 getClimateSpace(
   climate,
-  xmn = -180,
-  xmx = 180,
-  ymn = -90,
-  ymx = 90,
+  xmn = NA,
+  xmx = NA,
+  ymn = NA,
+  ymx = NA,
   continents = NA,
   countries = NA,
   realms = NA,

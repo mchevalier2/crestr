@@ -86,33 +86,14 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         return()
     }
 
-    estimate_xlim <- estimate_ylim <- FALSE
     if(verbose) cat('[OK]\n  <> Checking coordinates .................. ')
-    if (xmn < -180 | is.na(xmn) | xmx > 180 | is.na(xmx)) {
-        xmn <- max(xmn, -180, na.rm=TRUE)
-        xmx <- min(xmx, 180, na.rm=TRUE)
-        estimate_xlim <- TRUE
-        #cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Adapting and continuing.\n")
-    }
-    if (xmn >= xmx) {
-        #cat("WARNING: xmn is larger than xmx. Inverting the two values and continuing.\n")
-        tmp <- xmn
-        xmn <- xmx
-        xmx <- tmp
-    }
-
-    if (ymn < -90| is.na(ymn)  | ymx > 90 | is.na(ymx) ) {
-        ymn <- max(ymn, -90, na.rm=TRUE)
-        ymx <- min(ymx, 90, na.rm=TRUE)
-        estimate_ylim <- TRUE
-        #cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Adapting and continuing.\n")
-    }
-    if (ymn >= ymx) {
-        #cat("WARNING: ymn is larger than ymx. Inverting the two values and continuing.\n")
-        tmp <- ymn
-        ymn <- ymx
-        ymx <- tmp
-    }
+    coords        <- check_coordinates(xmn, xmx, ymn, ymx)
+    xmn           <- coords[1]
+    xmx           <- coords[2]
+    ymn           <- coords[3]
+    ymx           <- coords[4]
+    estimate_xlim <- coords[5]
+    estimate_ylim <- coords[6]
 
     if(verbose) cat('[OK]\n  <> Checking continent and country names .. ')
     cont.list <- accCountryNames()
@@ -439,6 +420,12 @@ crest.get_modern_data <- function( pse, taxaType, climate,
       crest$parameters$realms, crest$parameters$biomes, crest$parameters$ecoregions,
       dbname
     )
+
+    if(nrow(climate_space) == 0) {
+        cat(paste0("[FAIL]\n\nERROR: No climate values available in the defined study area N: ", crest$parameters$ymx," S: ", crest$parameters$ymn, " W: ",crest$parameters$xmn, " E: ",crest$parameters$xmx, ".\n\n"))
+        return()
+    }
+
     colnames(climate_space)[-c(1, 2)] <- crest$parameters$climate
     crest$modelling$climate_space <- climate_space
 
@@ -449,18 +436,24 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         }
     }
 
+    resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[, 1])))))[1] / 2.0
+    xx <- range(climate_space[, 1])
     if (estimate_xlim) {
-      resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[,1])))))[1] / 2.0
-      xx <- range(climate_space[, 1])
-      crest$parameters$xmn <- xx[1] - resol
-      crest$parameters$xmx <- xx[2] + resol
+        crest$parameters$xmn <- xx[1] - resol
+        crest$parameters$xmx <- xx[2] + resol
+    } else {
+        if (crest$parameters$xmn > xx[1] - resol) crest$parameters$xmn <- xx[1] - resol
+        if (crest$parameters$xmx < xx[2] + resol) crest$parameters$xmx <- xx[2] + resol
     }
 
+    resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[, 2])))))[1] / 2.0
+    yy <- range(climate_space[, 2])
     if (estimate_ylim) {
-      resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[,1])))))[1] / 2.0
-      yy <- range(climate_space[, 2])
-      crest$parameters$ymn <- yy[1] - resol
-      crest$parameters$ymx <- yy[2] + resol
+        crest$parameters$ymn <- yy[1] - resol
+        crest$parameters$ymx <- yy[2] + resol
+    }else {
+        if (crest$parameters$ymn > yy[1] - resol) crest$parameters$ymn <- yy[1] - resol
+        if (crest$parameters$ymx < yy[2] + resol) crest$parameters$ymx <- yy[2] + resol
     }
 
     if(verbose) {

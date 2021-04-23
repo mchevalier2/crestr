@@ -28,10 +28,12 @@
 #' distrib
 getDistribTaxa <- function(taxIDs,
                            climate = NA,
-                           xmn = -180, xmx = 180, ymn = -90, ymx = 90,
+                           xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                            continents = NA, countries = NA,
                            realms = NA, biomes = NA, ecoregions = NA,
                            dbname = "gbif4crest_02") {
+
+    coords <- check_coordinates(xmn, xmx, ymn, ymx)
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
@@ -86,8 +88,8 @@ getDistribTaxa <- function(taxIDs,
       "    FROM distrib_qdgc ", CLIM1,
       "   WHERE taxonID IN (", paste(taxIDs, collapse = ", "), ") ",
       "     ", CLIM2, " ",
-      "     AND distrib_qdgc.longitude >= ", xmn, " AND distrib_qdgc.longitude <= ", xmx, " ",
-      "     AND distrib_qdgc.latitude >= ", ymn, " AND distrib_qdgc.latitude <= ", ymx, " ",
+      "     AND distrib_qdgc.longitude >= ", coords[1], " AND distrib_qdgc.longitude <= ", coords[2], " ",
+      "     AND distrib_qdgc.latitude >= ", coords[3], " AND distrib_qdgc.latitude <= ", coords[4], " ",
       "     ", GEO, " ",
       "     ", WWF, " ",
       "ORDER BY taxonid, distrib_qdgc.longitude, distrib_qdgc.latitude"
