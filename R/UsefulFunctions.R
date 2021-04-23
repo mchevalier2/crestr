@@ -120,12 +120,10 @@ meanPositiveValues <- function(x) {
 #'
 copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FALSE, uncertainties=FALSE) {
     if(! requireNamespace('clipr', quietly=TRUE)) {
-        cat('ERROR: copy_crest() requires the clipr package. You can install it using install.packages("clipr").\n')
-        return(invisible(NULL))
+        stop("'copy_crest()' requires the 'clipr' package. You can install it using install.packages(\"clipr\").\n\n")
     }
     if(optima + mean + uncertainties == 0) {
-        cat('ERROR: optima, mean and uncertainties cannot all be set to FALSE.\n')
-        return(invisible(NULL))
+        stop("'optima', 'mean' and 'uncertainties' cannot all be set to FALSE.\n\n")
     }
     tbl <- list()
     tbl[[x$inputs$x.name]] <- x$inputs$x

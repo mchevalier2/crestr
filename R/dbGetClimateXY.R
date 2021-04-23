@@ -19,8 +19,7 @@ climate_from_xy <- function(long, lat,
                             resol = 0.25, dbname = "gbif4crest_02") {
 
     if(!is.numeric(long) | !is.numeric(lat)) {
-        cat('\nERROR: Your coordinates are not numeric.\n\n')
-        return(invisible(NULL))
+        stop('The coordinates are not numeric.\n')
     }
 
     long <- resol * (long %/% resol) + resol/2;
@@ -34,8 +33,7 @@ climate_from_xy <- function(long, lat,
 
     res <- dbRequest(req, dbname)
     if (nrow(res) == 0) {
-        cat('\nWARNING: No climate associated with these coordinates.\n\n')
-        return(invisible(NULL))
+        warning('No climate associated with these coordinates.')
     }
     colnames(res) <- climate
     res

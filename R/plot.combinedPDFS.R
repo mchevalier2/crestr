@@ -44,12 +44,12 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
 
     if (methods::is(x)[1] == 'crestObj') {
         if (length(x$reconstructions) == 0 ) {
-            cat('ERROR: The crestObj requires the fossil data. Please run crest.reconstruct() on your data.\n')
+            stop('The crestObj requires the fossil data. Run crest.reconstruct() on your data.\n\n')
             return(invisible())
         }
 
         if (length(climate) > 1 ) {
-            cat('WARNING: The function only works for one variable at a time. Continuing with the first value.\n')
+            warning('The function only works for one variable at a time. Only the first value was used.\n')
             climate <- climate[1]
         }
 
@@ -153,7 +153,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             graphics::par(par_usr)
         }
     } else {
-      cat('ERROR: This function only works with crestObj.\n')
+      stop('This function only works with a crestObj.\n\n')
     }
     invisible(x)
 }

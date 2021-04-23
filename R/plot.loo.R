@@ -47,8 +47,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
     if (methods::is(x)[1] == 'crestObj') {
 
         if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {
-            cat('ERROR: No leave-one-out data available. Please run the loo() function first.\n')
-            return(invisible())
+            stop('No leave-one-out data available. Run the loo() function first.\n')
         }
 
         par_usr <- list()
@@ -75,7 +74,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
             if(is.numeric(x$inputs$x)) {
                 df[[x$inputs$x.name]] <- x$inputs$x
             } else {
-                cat('WARNING: The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+                warning('The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
                 df[[x$inputs$x.name]] <- 1:length(x$inputs$x)
             }
             loo_na <- rep(0, length(x$inputs$x))

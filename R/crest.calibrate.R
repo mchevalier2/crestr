@@ -41,8 +41,8 @@ crest.calibrate <- function(x,
     x$parameters$climateSpaceWeighting <- climateSpaceWeighting
 
     if (unique(is.na(bin_width)) | length(bin_width) != length(x$parameters$climate)) {
-        cat(paste0("[FAILED]\n  ERROR: 'bin_width' should be of the same size than 'climate', i.e. ",length(x$parameters$climate)," elements.\n"))
-        return(x)
+        cat("[FAILED]\n\n")
+        stop(paste0("'bin_width' should be of the same size than 'climate', i.e. ",length(x$parameters$climate)," elements.\n\n"))
     } else if (!unique(is.na(bin_width))) {
         bin_width <- as.data.frame(bin_width)
         rownames(bin_width) <- x$parameters$climate
@@ -50,11 +50,11 @@ crest.calibrate <- function(x,
     x$parameters$bin_width <- bin_width
 
     if (unique(is.na(shape)) | length(shape) != length(x$parameters$climate)) {
-        cat(paste0("[FAILED]\n  ERROR: 'shape' should be of the same size than 'climate', i.e. ",length(x$parameters$climate)," elements.\n"))
-        return(x)
+        cat("[FAILED]\n\n")
+        stop(paste0("'shape' should be of the same size than 'climate', i.e. ",length(x$parameters$climate)," elements.\n\n"))
     } else if (FALSE %in% (shape %in% c('normal', 'lognormal'))) {
-        cat(paste0("[FAILED]\n  ERROR: 'shape' should be either 'normal' or 'lognormal'.\n"))
-        return(x)
+        cat("[FAILED]\n\n")
+        stop(paste0("'shape' should be either 'normal' or 'lognormal'.\n"))
     } else if (!unique(is.na(shape))) {
         shape <- as.data.frame(shape)
         rownames(shape) <- x$parameters$climate

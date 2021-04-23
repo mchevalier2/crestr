@@ -38,8 +38,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
     if (methods::is(x)[1] == 'crestObj') {
         if (length(x$reconstructions) == 0) {
-            cat("No reconstruction available for export.\n")
-            return(invisible(x))
+            stop("No reconstruction available for export.\n")
         }
 
         if(is.na(dataname)) dataname <- 'crest_outputs'
@@ -48,7 +47,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
         if ((!'loo' %in% names(x$reconstructions[[climate[1]]])) & loo) {
             loo <- FALSE
-            cat("WARNING: Leave-one-out data not available. Look at loo() for more details.\n")
+            warning("Leave-one-out data not available. Look at loo() for more details.\n")
         }
 
         save2<-function(recon, ...) { save(recon, ...)}
@@ -56,7 +55,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
         if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
             as.csv <- TRUE
-            cat("To export the data as xlsx, this function requires the package 'openxlsx'. The data will be saved as csv.\n\n")
+            warning("The package 'openxlsx' is requred to export the data as xlsx. The data have been exported as csv.\n\n")
         }
 
         for (clim in climate) {
@@ -263,7 +262,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             if(!as.csv) openxlsx::saveWorkbook(wb, file.path(loc, dataname, clim, paste0(clim, '.xlsx')), overwrite = TRUE)
         }
     } else {
-        cat('ERROR: Function only availble for crestObj objects.\n\n')
+        stop("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
     }
     invisible(x)
 }

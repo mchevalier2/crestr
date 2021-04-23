@@ -31,7 +31,7 @@ getClimateSpace <- function(climate,
                             realms = NA, biomes = NA, ecoregions = NA,
                             dbname = "gbif4crest_02") {
 
-    coords        <- check_coordinates(xmn, xmx, ymn, ymx)
+    coords <- check_coordinates(xmn, xmx, ymn, ymx)
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting

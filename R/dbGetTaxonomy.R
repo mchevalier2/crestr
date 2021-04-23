@@ -23,8 +23,7 @@
 #'
 getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, depth.out = 8, dbname = "gbif4crest_02") {
     if (family == "" & genus == "" & species == "") {
-        cat('Please indicate a family, genus or species name.\n')
-        return(invisible())
+        stop('No family, genus or species name were provided.\n')
     }
     family  <- base::trimws(family, 'both')
     genus   <- base::trimws(genus, 'both')

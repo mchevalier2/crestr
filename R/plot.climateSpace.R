@@ -53,7 +53,7 @@ plot_climateSpace <- function( x,
     if (methods::is(x)[1] == 'crestObj') {
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {
-            cat('ERROR: The crestObj requires the climate space to be calibrated. Please run crest.calibrate() on your data.\n')
+            stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
             return(invisible())
         }
 
@@ -296,7 +296,7 @@ plot_climateSpace <- function( x,
           graphics::par(par_usr)
         }
     } else {
-        cat('ERROR: This function only works with crestObj.\n')
+        stop('This function only works with a crestObj.\n\n')
     }
     invisible()
 }

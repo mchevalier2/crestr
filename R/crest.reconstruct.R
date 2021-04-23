@@ -43,8 +43,8 @@ crest.reconstruct <- function(x,
 
         if(verbose) cat('  <> Checking data ......................... ')
         if (!is.data.frame(x$inputs$df)) {
-            cat("\nERROR: Fossil data not provided. Please check the 'df' parameter in crest.get_modern_data().\n")
-            return(x)
+            cat("[FAILED]\n\n")
+            stop(paste0("Fossil data not provided. Check the 'df' parameter in crest.get_modern_data().\n"))
         }
 
         if(verbose) cat('[OK]\n  <> Checking taxa ......................... ')
@@ -52,8 +52,8 @@ crest.reconstruct <- function(x,
         x$parameters$presenceThreshold <- presenceThreshold
 
         if (sum(x$inputs$taxa.name %in% x$inputs$pse$ProxyName) == 0) {
-            cat('\nERROR: None of the recorded proxy were listed in the proxy_species_equivalency table. Reconstruction stopped.\n')
-            return(x)
+            cat("[FAILED]\n\n")
+            stop(paste0('None of the recorded proxy were listed in the proxy_species_equivalency table. Reconstruction stopped.\n'))
         }
 
         if(verbose) cat('[OK]\n  <> Defining taxa weights ................. ')

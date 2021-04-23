@@ -53,11 +53,11 @@ plot_diagram <- function(x, bars=FALSE,
                          col_pos = 'black', col_neg='grey80', title=NA) {
 
     if (! isColourStr(col_pos))  {
-        cat(paste0("WARNING: '",col_pos,"' is not a valid colour. Using 'black' instead.\n"))
+        warning("'",col_pos,"' is not a valid colour. Using 'black' instead.\n")
         col_pos='black'
     }
     if (! isColourStr(col_neg)) {
-        cat(paste0("WARNING: '",col_neg,"' is not a valid colour. Using 'grey80' instead.\n"))
+        warning("'",col_neg,"' is not a valid colour. Using 'grey80' instead.\n")
         col_neg='grey80'
     }
 
@@ -68,8 +68,7 @@ plot_diagram <- function(x, bars=FALSE,
         #  x.w <- x.w[order(x$inputs$x), ]
         #}
         if(unique(is.na(unlist(x$inputs$df)))) {
-          cat(paste0("ERROR: No data available for a stratigraphic diagram.\n"))
-          return(invisible())
+          stop(paste0("No data available for a stratigraphic diagram.\n\n"))
         }
         #col_names <- c(x$inputs$x.name, x$inputs$taxa.name)
         x <- cbind(x=x$inputs$x, x$inputs$df)
@@ -78,7 +77,7 @@ plot_diagram <- function(x, bars=FALSE,
     if(is.numeric(x[, 1])) {
         x <- x[order(x[, 1]), ]
     } else {
-        cat('WARNING: The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+        warning('The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
         x[, 1] <- 1:nrow(x)
     }
 
