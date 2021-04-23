@@ -106,7 +106,7 @@ reference:
       - '`accCountryNames`'
       - '`accRealmNames`'
       - '`close_db_connection`'
-      - '`connect_online`' 
+      - '`connect_online`'
       - '`dbRequest`'
       - '`getTaxonID`'
       - '`getTaxonomy`'
@@ -124,6 +124,7 @@ reference:
       - '`fit_xrange`'
       - '`meanPositiveValues`'
       - '`normalise`'
+      - '`check_coordinates`'
   - title: "Datasets"
     contents:
       - '`M1`'
