@@ -238,7 +238,8 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx,
         continents=continents, countries=countries,
         realms=realms, biomes=biomes, ecoregions=ecoregions,
-        selectedTaxa = selectedTaxa
+        selectedTaxa = selectedTaxa,
+        dbname=dbname
     )
     crest$misc[['taxa_notes']] <- taxa_notes
     crest$misc$site_info <- list()
@@ -251,7 +252,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                                                              crest$misc$site_info[['lat']],
                                                              crest$parameters$climate,
                                                              resol = resol,
-                                                             dbname = dbname)
+                                                             dbname = crest$misc$dbname)
     }
 
     if (is.data.frame(df)) {

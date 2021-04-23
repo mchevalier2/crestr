@@ -9,15 +9,16 @@ crestObj(
   taxaType,
   climate,
   pse = NA,
+  dbname = NA,
   continents = NA,
   countries = NA,
   realms = NA,
   biomes = NA,
   ecoregions = NA,
-  xmn = -180,
-  xmx = 180,
-  ymn = -90,
-  ymx = 90,
+  xmn = NA,
+  xmx = NA,
+  ymn = NA,
+  ymx = NA,
   df = NA,
   x = NA,
   x.name = "",
@@ -46,6 +47,8 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
 \item{pse}{A pollen-Species equivalency table. See \code{\link{createPSE}} for
 details.}
+
+\item{dbname}{The name of the data source database.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 

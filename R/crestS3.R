@@ -17,6 +17,7 @@
 #'        'Depth').
 #' @param x The name, age or depth of the rows of df (the samples).
 #' @param xmn,xmx,ymn,ymx The coordinates defining the study area.
+#' @param dbname The name of the data source database.
 #' @param continents A vector of the continent names defining the study area.
 #' @param countries A vector of the country names defining the study area.
 #' @param realms A vector of the studied botanical realms defining the study area.
@@ -55,7 +56,7 @@
 #' @export
 
 crestObj <- function(taxa.name, taxaType, climate,
-                     pse = NA,
+                     pse = NA, dbname = NA,
                      continents = NA, countries = NA,
                      realms = NA, biomes = NA, ecoregions = NA,
                      xmn = NA, xmx = NA, ymn = NA, ymx = NA,
@@ -107,7 +108,7 @@ crestObj <- function(taxa.name, taxaType, climate,
 
   reconstructions <- list()
 
-  misc <- list()
+  misc <- list(dbname = dbname)
 
   value <- list(
     inputs = inputs,

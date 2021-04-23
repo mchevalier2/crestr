@@ -84,7 +84,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
             refs <- cite_crest(x, verbose=FALSE)
-            df <- rbind(df, c('ADDITONNAL REFERENCES (these references must be included if you are publishing your reconstructions and support data/methods providers)', NA, NA, NA, NA))
+            df <- rbind(df, c('ADDITONNAL REFERENCES (these references must be included if you are publishing your reconstructions to support data/methods providers)', NA, NA, NA, NA))
             df <- rbind(df, c(NA, 'Method: ', NA, NA, NA))
             df <- rbind(df, c(NA, NA, refs$method[1], NA, NA))
             if(length(refs$method) > 1) {
@@ -138,7 +138,9 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, c('RECONSTRUCTION OPTIONS:', NA, NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Presence threshold: ', x$parameters$presenceThreshold), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Weighting approach: ', x$parameters$taxWeight), NA, NA, NA))
-
+            df <- rbind(df, rep(NA, 5))
+            df <- rbind(df, rep(NA, 5))
+            df <- rbind(df, c(paste0('DATABASE USED: ', x$misc$dbname), NA, NA, NA, NA))
 
             if(as.csv) {
                 utils::write.table(df, base::file.path(loc, dataname, clim, 'Parameters.txt'), col.names=FALSE, row.names=FALSE, quote=FALSE, na='', sep='\t')
