@@ -237,7 +237,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
             for(n in names(x$misc$taxa_notes)) {
                 for(tax in x$misc$taxa_notes[[n]]) {
-                    if(tax %in% x$inputs$pse[, 'ProxyName']) {
+                    if(tax %in% unique(x$inputs$pse[, 'ProxyName'])) {
                         df <- rbind(df,
                                     c(tax,
                                       as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 2]),
