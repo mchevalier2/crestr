@@ -170,7 +170,7 @@ list.files(file.path(getwd(), 'crest-test'))
 ```
 
 ```{r delete export example, echo = FALSE, results = "hide"}
-unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
+unlink(file.path(getwd(), 'crest-test'), recursive=TRUE) 
 ```
 
 ## References

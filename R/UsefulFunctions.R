@@ -193,3 +193,83 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
     }
     c(xmn, xmx, ymn, ymx, estimate_xlim, estimate_ylim)
 }
+
+
+
+#' Crop the dataset obtained from \code{\link{crest.get_modern_data}}
+#'
+#' Crop the dataset obtained from \code{\link{crest.get_modern_data}} according
+#' to an object of the class \code{SpatialPolygonsDataFrame}.
+#'
+#' @inheritParams crest.calibrate
+#' @param shp A shapefile to crop the data. Data points will be kept if their
+#'        centroid is within the shape.
+#' @export
+#' @examples
+#' data(M1)
+#' ## We want only the data covering Nigeria
+#' M2 <- M1[M1$COUNTRY == 'Nigeria', ]
+#' data(reconstr)
+#' reconstr.cropped <- crop(reconstr, M2)
+#' data1 <- raster::rasterFromXYZ(reconstr$modelling$climate_space[, 1:3], crs=raster::crs(M1))
+#' data2 <- raster::rasterFromXYZ(reconstr.cropped$modelling$climate_space[, 1:3], crs=raster::crs(M1))
+#' layout(matrix(c(1,2,3,4), byrow=FALSE, ncol=2), width=1, height=c(0.2, 0.8))
+#' plot_map_eqearth(data1, brks.pos=seq(13,29,2), colour_scale=TRUE, title='Full dataset', zlim=c(13, 29))
+#' plot_map_eqearth(data2, brks.pos=seq(13,29,2), colour_scale=TRUE, title='Cropped dataset', zlim=c(13, 29))
+#'
+crop <- function(x, shp) {
+    dat.x <- x$modelling$climate_space[, 1]
+    dat.y <- x$modelling$climate_space[, 2]
+
+    res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
+    for(i in 1:length(shp)) {
+        for(j in 1:length(shp@polygons[[i]]@Polygons)) {
+            xy <- shp@polygons[[i]]@Polygons[[j]]@coords
+            isin <- sp::point.in.polygon(dat.x, dat.y, xy[,1], xy[,2])
+            res[ isin == 1, 3] <- 1
+        }
+    }
+    if(sum(res[, 3]) > 0) {
+        x$modelling$climate_space <- x$modelling$climate_space[res[, 3] == 1, ]
+    } else {
+        stop('\nNo overlap between the data and the selected shape.\n\n')
+    }
+
+    taxalist <- c()
+    for(tax in names(x$modelling$distributions)) {
+        dat.x <- x$modelling$distributions[[tax]][, 2]
+        dat.y <- x$modelling$distributions[[tax]][, 3]
+
+        res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
+        for(i in 1:length(shp)) {
+            for(j in 1:length(shp@polygons[[i]]@Polygons)) {
+                xy <- shp@polygons[[i]]@Polygons[[j]]@coords
+                isin <- sp::point.in.polygon(dat.x, dat.y, xy[,1], xy[,2])
+                res[ isin == 1, 3] <- 1
+            }
+        }
+
+        if(sum(res[, 3]) > 0) {
+            x$modelling$distributions[[tax]] <- x$modelling$distributions[[tax]][res[, 3] == 1, ]
+            if(max(table(x$modelling$distributions[[tax]][, 1])) < x$parameters$minGridCells) {
+                x$modelling$distributions[[tax]]    <- NULL
+                x$inputs$taxa.name                  <- x$inputs$taxa.name[!(x$inputs$taxa.name == tax)]
+                x$inputs$selectedTaxa[tax, ]        <- rep(-1, length(x$parameters$climate))
+                x$modelling$taxonID2proxy           <- x$modelling$taxonID2proxy[-(x$modelling$taxonID2proxy[, 'proxyName'] == tax), ]
+                taxalist <- c(taxalist, tax)
+            }
+        } else {
+            x$modelling$distributions[[tax]]    <- NULL
+            x$inputs$taxa.name                  <- x$inputs$taxa.name[!(x$inputs$taxa.name == tax)]
+            x$inputs$selectedTaxa[tax, ]        <- rep(-1, length(x$parameters$climate))
+            x$modelling$taxonID2proxy           <- x$modelling$taxonID2proxy[-x$modelling$taxonID2proxy[, 'proxyName'] == tax, ]
+            taxalist <- c(taxalist, tax)
+        }
+    }
+    if( length(taxalist ) > 0) {
+        warning(paste0("One or more taxa were were lost due to the cropping of the study area. Check 'x$misc$taxa_notes' for details."))
+        message <- 'Taxon excluded by the crop function.'
+        x$misc$taxa_notes[[message]] <- taxalist
+    }
+    x
+}

@@ -92,6 +92,7 @@ reference:
       - '`excludeTaxa`'
       - '`includeTaxa`'
       - '`getSpeciesdiversity`'
+      - '`crop`'
   - title: "Citing sources"
     desc: "Functions for generating the list of references to cite when publishing reconstructions."
     contents:
