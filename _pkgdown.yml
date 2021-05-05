@@ -65,6 +65,7 @@ reference:
     desc: "Functions for running the CREST reconstructions."
     contents:
       - '`crest.get_modern_data`'
+      - '`crest.set_modern_data`'
       - '`crest.calibrate`'
       - '`crest.reconstruct`'
       - '`loo`'
