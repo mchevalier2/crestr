@@ -8,11 +8,11 @@
 #'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @export
 #'
-cite_crest <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
+cite_crest <- function(x, verbose=TRUE) {
     tocite <- list()
-    tocite$distrib <- cite_distrib_data(x, dbname, verbose=FALSE)
-    tocite$climate <- cite_climate_data(x, dbname, verbose=FALSE)
-    tocite$method  <- cite_method(x, dbname, verbose=FALSE)
+    tocite$distrib <- cite_distrib_data(x, verbose=FALSE)
+    tocite$climate <- cite_climate_data(x, verbose=FALSE)
+    tocite$method  <- cite_method(x, verbose=FALSE)
 
     n_ref <- sum(unlist(lapply(tocite, length)))
 
@@ -40,7 +40,7 @@ cite_crest <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
 #'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @export
 #'
-cite_distrib_data <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
+cite_distrib_data <- function(x, verbose=TRUE) {
     if (x$parameters$taxaType == 1) {
         tocite <- c()
         list_of_classes <- unique(stats::na.omit(x$inputs$pse[, 'Class_name']))
@@ -92,9 +92,9 @@ cite_distrib_data <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
 #'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @export
 #'
-cite_climate_data <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
+cite_climate_data <- function(x, verbose=TRUE) {
     if (x$parameters$taxaType == 0) {
-        if (verbose)  cat('You have used the example dataset. No climate data citations are required.\n')
+        if (verbose)  cat('You have not used the provided calibration dataset. No climate reference are required.\n')
         tocite <- NULL
     } else {
         tocite <- "Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302-4315."
@@ -123,7 +123,7 @@ cite_climate_data <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
 #'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @export
 #'
-cite_method <- function(x, dbname = "gbif4crest_02", verbose=TRUE) {
+cite_method <- function(x, verbose=TRUE) {
     tocite <- 'Chevalier, M., Cheddadi, R. and Chase, B.M., 2014, CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. Climate of the Past, 10, pp. 2081-2098. doi: 10.5194/cp-10-2081-2014'
     if (x$parameters$taxaType > 0) {
         tocite <- c(tocite, 'Chevalier, M., 2019, Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27-35. doi: 10.1016/j.gloplacha.2019.01.016')

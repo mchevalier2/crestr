@@ -51,11 +51,6 @@ crest.reconstruct <- function(x,
         x$parameters$taxWeight <- taxWeight
         x$parameters$presenceThreshold <- presenceThreshold
 
-        if (sum(x$inputs$taxa.name %in% x$inputs$pse$ProxyName) == 0) {
-            cat("[FAILED]\n\n")
-            stop(paste0('None of the recorded proxy were listed in the proxy_species_equivalency table. Reconstruction stopped.\n'))
-        }
-
         if(verbose) cat('[OK]\n  <> Defining taxa weights ................. ')
 
         if (tolower(x$parameters$taxWeight) == "normalisation") {

@@ -214,8 +214,10 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
 #' data1 <- raster::rasterFromXYZ(reconstr$modelling$climate_space[, 1:3], crs=raster::crs(M1))
 #' data2 <- raster::rasterFromXYZ(reconstr.cropped$modelling$climate_space[, 1:3], crs=raster::crs(M1))
 #' layout(matrix(c(1,2,3,4), byrow=FALSE, ncol=2), width=1, height=c(0.2, 0.8))
-#' plot_map_eqearth(data1, brks.pos=seq(13,29,2), colour_scale=TRUE, title='Full dataset', zlim=c(13, 29))
-#' plot_map_eqearth(data2, brks.pos=seq(13,29,2), colour_scale=TRUE, title='Cropped dataset', zlim=c(13, 29))
+#' plot_map_eqearth(data1, brks.pos=seq(13,29,2), colour_scale=TRUE,
+#'                  title='Full dataset', zlim=c(13, 29))
+#' plot_map_eqearth(data2, brks.pos=seq(13,29,2), colour_scale=TRUE,
+#'                  title='Cropped dataset', zlim=c(13, 29))
 #'
 crop <- function(x, shp) {
     dat.x <- x$modelling$climate_space[, 1]
@@ -266,6 +268,18 @@ crop <- function(x, shp) {
             taxalist <- c(taxalist, tax)
         }
     }
+
+    resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 1])))))[1] / 2.0
+    xx <- range(x$modelling$climate_space[, 1])
+    x$parameters$xmn <- xx[1] - resol
+    x$parameters$xmx <- xx[2] + resol
+
+    resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 2])))))[1] / 2.0
+    yy <- range(x$modelling$climate_space[, 2])
+    x$parameters$ymn <- yy[1] - resol
+    x$parameters$ymx <- yy[2] + resol
+
+
     if( length(taxalist ) > 0) {
         warning(paste0("One or more taxa were were lost due to the cropping of the study area. Check 'x$misc$taxa_notes' for details."))
         message <- 'Taxon excluded by the crop function.'

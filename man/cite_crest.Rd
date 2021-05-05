@@ -4,14 +4,12 @@
 \alias{cite_crest}
 \title{Returns the list of references associated to the reconstruction.}
 \usage{
-cite_crest(x, dbname = "gbif4crest_02", verbose = TRUE)
+cite_crest(x, verbose = TRUE)
 }
 \arguments{
 \item{x}{A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
 \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
 \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.}
-
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal
 (default \code{TRUE}).}

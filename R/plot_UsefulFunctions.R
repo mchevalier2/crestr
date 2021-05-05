@@ -110,7 +110,6 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])
     ext[3:4] <- ext[3:4] + c(-0.1, 0.02)*diff(ext[3:4])
 
-
     ## ...........................................................................
     ## Plotting colour scale .....................................................
 

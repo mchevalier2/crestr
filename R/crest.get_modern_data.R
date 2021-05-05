@@ -40,16 +40,17 @@ crest.get_modern_data <- function( pse, taxaType, climate,
 
     if(verbose) cat('  <> Checking pse .......................... ')
 
-    ## . Testing if the input variables are in the correct format ---------------
+    ##. Testing if the input variables are in the correct format ---------------
     if (!is.data.frame(pse)) {
-        cat("[FAILED]\n  ERROR: 'pse' (proxy_species_equivalency) must be a data frame.\n")
+        cat("[FAILED]\n\n")
+        stop("The 'pse' variable (proxy_species_equivalency) must be a data frame.\n")
         return()
     }
 
     pse <- pse[!is.na((pse[, 'ProxyName'])), ]
     pse <- pse[(pse[, 'ProxyName'] != ''), ]
 
-    taxa.name <- c(unique(as.character(pse[, 'ProxyName'])))
+    taxa.name <- unique(as.character(pse[, 'ProxyName']))
     if (is.data.frame(df)) taxa.name <- unique(c(taxa.name, colnames(df)[-1]))
 
     taxa_to_ignore=c()
@@ -439,7 +440,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
 
     if(verbose) {
       cat('[OK]\n')
-      cat(paste0('## Data extraction completed.\n'))
+      cat(paste0('## Data extraction completed.\n\n'))
     }
     crest
 }

@@ -4,14 +4,12 @@
 \alias{cite_climate_data}
 \title{Returns the references associated with the climate data used to fit the \code{pdfs}.}
 \usage{
-cite_climate_data(x, dbname = "gbif4crest_02", verbose = TRUE)
+cite_climate_data(x, verbose = TRUE)
 }
 \arguments{
 \item{x}{A \code{\link{crestObj}} produced by one of the \code{\link{crest}},
 \code{\link{crest.get_modern_data}}, \code{\link{crest.calibrate}},
 \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.}
-
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal
 (default \code{TRUE}).}

@@ -137,6 +137,7 @@ plot_climateSpace <- function( x,
         zlab[2] <- log10(clab[length(clab)])
 
         site_xy <- NA
+        if (is.na(x$misc$site_info$long) | is.na(x$misc$site_info$lat)) add_modern <- FALSE
         if(add_modern) {
             site_xy <- c(x$misc$site_info$long, x$misc$site_info$lat)
         }
