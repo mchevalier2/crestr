@@ -10,6 +10,9 @@
 #' @param climate_space A dataframe of climate values across the study area
 #'        useful to correct for a disbalanced sampling data (see
 #'        '\code{\link{crest.calibrate}} for more details). Default is \code{NA}.
+#' @param weight The records in the distributions can be weighted using the
+#'        percentages by setting weight=TRUE. Include a column called 'weight'
+#'        in the \code{distributions} table.
 #' @param site_climate The climate values at the location of the dataset
 #'        '(default \code{NA}).
 #' @param verbose A boolean to print non-essential comments on the terminal
@@ -34,16 +37,17 @@
 #' climate_space <- reconstr$modelling$climate_space
 #' print(head(climate_space))
 #'
-#' x <- crest.set_modern_data(distributions, df=crest_ex)
-#' x <- crest.set_modern_data(distributions, df=crest_ex, climate_space=climate_space)
+#' x <- crest.set_modern_data(distributions, df=crest_ex,
+#'                            climate = c("bio1", "bio12"))
+#' x <- crest.set_modern_data(distributions, df=crest_ex,
+#'                            climate_space=climate_space,
+#'                            climate = c("bio1", "bio12"))
 #'
 #'
-#'
-#'
-#'
-crest.set_modern_data <- function( distributions, df,
+crest.set_modern_data <- function( distributions, climate,
+                                   df = NA,
                                    climate_space = NA,
-                                   climate = colnames(distributions)[-(1:4)],
+                                   weight = FALSE,
                                    minGridCells = 0,
                                    selectedTaxa = NA,
                                    site_info = c(NA, NA),
@@ -54,6 +58,14 @@ crest.set_modern_data <- function( distributions, df,
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
     if(verbose) cat('  <> Checking distributions ................ ')
+
+    if(weight) {
+        if(! 'weight' %in% colnames(distributions) ) {
+            cat("[FAILED]\n\n")
+            stop("You selected 'weight=TRUE' but did not provide weights in your distribution data frame.\n")
+            return()
+        }
+    }
 
     taxa.name <- unique(as.character(distributions[, 'ProxyName']))
     if (is.data.frame(df)) taxa.name <- unique(c(taxa.name, colnames(df)[-1]))
@@ -165,16 +177,21 @@ crest.set_modern_data <- function( distributions, df,
     crest$modelling$distributions <- list()
     w <- which(colnames(distributions) %in% c('taxonid', 'longitude', 'latitude', climate))
     for (tax in crest$inputs$taxa.name) {
-        crest$modelling$distributions[[tax]] <- distributions[distributions[, 'ProxyName'] == tax, w]
+        if(weight) {
+            tax.rows <- which(distributions[, 'ProxyName'] == tax)
+            dupl.rows <- rep(tax.rows, times=base::ceiling(distributions[tax.rows, 'weight']))
+            crest$modelling$distributions[[tax]] <- distributions[dupl.rows, w]
+        } else {
+            crest$modelling$distributions[[tax]] <- distributions[distributions[, 'ProxyName'] == tax, w]
+        }
     }
-
 
     if(verbose) cat('[OK]\n  <> Checking the climate space ............ ')
     if(is.data.frame(climate_space)) {
         stats::na.omit(climate_space)
-        crest$modelling$climate_space <- unique(rbind(climate_space, distributions[, -(1:2)]))
+        crest$modelling$climate_space <- unique(rbind(climate_space, distributions[, -which(colnames(distributions) %in% c('taxonid', 'ProxyName', 'weight'))]))
     } else {
-        crest$modelling$climate_space <- unique(distributions[, -(1:2)])
+        crest$modelling$climate_space <- unique(distributions[, -which(colnames(distributions) %in% c('taxonid', 'ProxyName', 'weight'))])
     }
     crest$modelling$climate_space <- cbind(crest$modelling$climate_space[, c(1,2)], crest$modelling$climate_space[, climate])
 

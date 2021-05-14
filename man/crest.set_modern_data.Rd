@@ -6,9 +6,10 @@
 \usage{
 crest.set_modern_data(
   distributions,
-  df,
+  climate,
+  df = NA,
   climate_space = NA,
-  climate = colnames(distributions)[-(1:4)],
+  weight = FALSE,
   minGridCells = 0,
   selectedTaxa = NA,
   site_info = c(NA, NA),
@@ -21,6 +22,9 @@ crest.set_modern_data(
 \item{distributions}{A dataframe containing the presence records of the
 studied proxies and their associated climate values.}
 
+\item{climate}{A vector of the climate variables to extract. See
+\code{\link{accClimateVariables}} for the list of accepted values.}
+
 \item{df}{A data frame containing the data to reconstruct (counts,
 percentages or presence/absence data).}
 
@@ -28,8 +32,9 @@ percentages or presence/absence data).}
 useful to correct for a disbalanced sampling data (see
 '\code{\link{crest.calibrate}} for more details). Default is \code{NA}.}
 
-\item{climate}{A vector of the climate variables to extract. See
-\code{\link{accClimateVariables}} for the list of accepted values.}
+\item{weight}{The records in the distributions can be weighted using the
+percentages by setting weight=TRUE. Include a column called 'weight'
+in the \code{distributions} table.}
 
 \item{minGridCells}{The minimum number of unique presence data necessary to
 estimate a species' climate response. Default is 20.}
@@ -74,11 +79,11 @@ print(head(distributions))
 climate_space <- reconstr$modelling$climate_space
 print(head(climate_space))
 
-x <- crest.set_modern_data(distributions, df=crest_ex)
-x <- crest.set_modern_data(distributions, df=crest_ex, climate_space=climate_space)
-
-
-
+x <- crest.set_modern_data(distributions, df=crest_ex,
+                           climate = c("bio1", "bio12"))
+x <- crest.set_modern_data(distributions, df=crest_ex,
+                           climate_space=climate_space,
+                           climate = c("bio1", "bio12"))
 
 
 }
