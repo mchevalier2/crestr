@@ -22,7 +22,7 @@
 #' reconstr <- crest(
 #'   df = crest_ex, pse = crest_ex_pse, taxaType = 0,
 #'   site_info = c(7.5, 7.5), site_name = 'crest_example',
-#'   climate = c("bio1", "bio12"), bin_width = c(2, 20),
+#'   climate = c("bio1", "bio12"), bin_width = c(2, 50),
 #'   shape = c("normal", "lognormal"),
 #'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'   leave_one_out = TRUE,

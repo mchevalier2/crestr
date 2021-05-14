@@ -54,7 +54,7 @@ x <- crest.get_modern_data( df = crest_ex,
 )
 x <- crest.calibrate(x,
   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
-  bin_width = c(2, 20), shape = c("normal", "lognormal"),
+  bin_width = c(2, 50), shape = c("normal", "lognormal"),
   verbose = FALSE
 )
 x <- crest.reconstruct(x,
