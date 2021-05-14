@@ -74,7 +74,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
             if(is.numeric(x$inputs$x)) {
                 df[[x$inputs$x.name]] <- x$inputs$x
             } else {
-                warning('The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+                warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
                 df[[x$inputs$x.name]] <- 1:length(x$inputs$x)
             }
             loo_na <- rep(0, length(x$inputs$x))

@@ -45,7 +45,6 @@ loo <- function(x, verbose=TRUE) {
     recons_tmp <- x
     for(tax in taxa_list) {
         recons_tmp$inputs$selectedTaxa <- x$inputs$selectedTaxa
-        #recons_tmp$inputs$selectedTaxa[tax, x$parameters$climate] <- rep(0, length(x$parameters$climate))
         recons_tmp <- excludeTaxa(recons_tmp, tax, x$parameters$climate)
         recons_tmp <- crest.reconstruct(recons_tmp,
                                         presenceThreshold = x$parameters$presenceThreshold,

@@ -184,8 +184,7 @@ plot.crestObj <- function(x,
                           filename = 'Reconstruction.pdf',
                           ...) {
     if (length(x$reconstructions) == 0 || is.null(climate)) {
-        cat("No reconstruction available for plotting.\n")
-        return(invisible(x))
+        stop("No reconstruction available for plotting.\n")
     }
 
     idx <- 0
@@ -239,6 +238,7 @@ plot.crestObj <- function(x,
         climate_names <- accClimateVariables()
 
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+            if(simplify) warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
             xx <- seq_along(x$inputs$x)
         } else {
             xx <- x$inputs$x
@@ -335,10 +335,10 @@ plot.crestObj <- function(x,
                     return(c(w[1], w[length(w)]))
                     }
                 )
-                graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[1, ], 1],
+                graphics::points(xx, pdfter[val[1, ], 1],
                     type = "l", col = "white", lty = 3
                 )
-                graphics::points(x$reconstructions[[clim]][["optima"]][, 1], pdfter[val[2, ], 1],
+                graphics::points(xx, pdfter[val[2, ], 1],
                     type = "l", col = "white", lty = 3
                 )
             }

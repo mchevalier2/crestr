@@ -77,7 +77,7 @@ plot_diagram <- function(x, bars=FALSE,
     if(is.numeric(x[, 1])) {
         x <- x[order(x[, 1]), ]
     } else {
-        warning('The plotting function does not yet deal with non-numerical x values. Replacing x values by integers.\n')
+        warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
         x[, 1] <- 1:nrow(x)
     }
 

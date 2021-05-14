@@ -108,7 +108,6 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
                 graphics::par(mar=c(0,0,0,0))
                 graphics::plot(NA, NA, type='n', frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1))
-                graphics::text(0.5, 0.5, x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)], font=2, adj=c(0.5, 0.5), cex=1.3)
 
                 graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
                 graphics::segments(0,0,1,1, col='grey70', lty=3)
@@ -116,7 +115,16 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
 
                 if (is.data.frame(x$inputs$df)) {
-                    xval <- range(x$inputs$x)
+
+                    if(is.numeric(x$inputs$x)) {
+                        xval <- range(x$inputs$x)
+                        xx   <- x$inputs$x
+                    } else {
+                        warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
+                        xx   <- 1:length(x$inputs$x)
+                        xval <- range(xx)
+                    }
+
                     dX <- diff(xval)
                     xval <- xval + c(-0.07, 0.02)*dX
                     graphics::par(mar=c(0,0,1,0.25))
@@ -124,20 +132,20 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02 * max(x$inputs$df[, tax])), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
                         for(yval in graphics::axTicks(2)){
                             if (yval < max(x$inputs$df[, tax])) {
-                                graphics::segments(min(x$inputs$x)-dX*0.02, yval, max(x$inputs$x)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
-                                graphics::segments(min(x$inputs$x)-dX*0.02, yval, min(x$inputs$x), yval)
-                                graphics::segments(max(x$inputs$x)+dX*0.02, yval, max(x$inputs$x), yval)
-                                graphics::text(min(x$inputs$x)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
+                                graphics::segments(min(xx)-dX*0.02, yval, max(xx)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
+                                graphics::segments(min(xx)-dX*0.02, yval, min(xx), yval)
+                                graphics::segments(max(xx)+dX*0.02, yval, max(xx), yval)
+                                graphics::text(min(xx)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
                             }
                         }
-                        graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
-                        graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
+                        graphics::rect(min(xx)-dX*0.02,0,max(xx)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
+                        graphics::points(xx, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
 
                         graphics::par(mar=c(0.5,0.25,0,0.5))
                         graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-                        graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
+                        graphics::text(mean(range(xx)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
                         for(xval in graphics::axTicks(1)){
-                            if(xval >= min(x$inputs$x)) {
+                            if(xval >= min(xx)) {
                                 graphics::segments(xval, 1, xval, 0.9)
                                 graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
                             }
@@ -226,8 +234,15 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
                 ## Plot the time series ------------------------------------------------
                 if (is.data.frame(x$inputs$df)) {
-                    xval <- range(x$inputs$x)
-                    dX <- diff(xval)
+                    if(is.numeric(x$inputs$x)) {
+                        xval <- range(x$inputs$x)
+                        xx   <- x$inputs$x
+                    } else {
+                        warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
+                        xx   <- 1:length(x$inputs$x)
+                        xval <- range(xx)
+                    }
+                                        dX <- diff(xval)
                     xval <- xval + c(-0.07, 0.02)*dX
 
                     graphics::par(mar=c(0,0,1,0.25))
@@ -235,35 +250,35 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1.02 * max(x$inputs$df[, tax])), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
                         for(yval in graphics::axTicks(2)){
                             if (yval < max(x$inputs$df[, tax])) {
-                                graphics::segments(min(x$inputs$x)-dX*0.02, yval, max(x$inputs$x)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
-                                graphics::segments(min(x$inputs$x)-dX*0.02, yval, min(x$inputs$x), yval)
-                                graphics::segments(max(x$inputs$x)+dX*0.02, yval, max(x$inputs$x), yval)
-                                graphics::text(min(x$inputs$x)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
+                                graphics::segments(min(xx)-dX*0.02, yval, max(xx)+dX*0.02, yval, col=ifelse(yval==0, 'black', 'grey90'))
+                                graphics::segments(min(xx)-dX*0.02, yval, min(xx), yval)
+                                graphics::segments(max(xx)+dX*0.02, yval, max(xx), yval)
+                                graphics::text(min(xx)-dX*0.03, yval, yval, cex=0.5, adj=c(1,0.4))
                             }
                         }
-                        graphics::rect(min(x$inputs$x)-dX*0.02,0,max(x$inputs$x)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
-                        graphics::points(x$inputs$x, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
+                        graphics::rect(min(xx)-dX*0.02,0,max(xx)+dX*0.02, 1.02*max(x$inputs$df[, tax]))
+                        graphics::points(xx, x$inputs$df[, tax], type='o', pch=15, lwd=0.5)
                     }
 
                     graphics::par(mar=c(0.5,0.25,0,0.5))
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
-                    graphics::text(mean(range(x$inputs$x)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
+                    graphics::text(mean(range(xx)), 0.3, x$inputs$x.name, font=1, adj=c(0.5, 0.5), cex=0.6)
                     for(xval in graphics::axTicks(1)){
-                        if(xval >= min(x$inputs$x)) {
+                        if(xval >= min(xx)) {
                             graphics::segments(xval, 1, xval, 0.9)
                             graphics::text(xval, 0.85, xval, cex=0.5, adj=c(0.5,1))
                         }
                     }
 
                     graphics::par(opar)
-                  } else {
-                      graphics::par(mar=c(0.1,0.1,0.1,0.1))
-                      graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
-                      graphics::segments(0,0,1,1, col='grey70', lty=3)
-                      graphics::segments(0,1,1,0, col='grey70', lty=3)
-                      graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
-                      graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
-                  }
+                } else {
+                    graphics::par(mar=c(0.1,0.1,0.1,0.1))
+                    graphics::plot(NA, NA, frame=TRUE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
+                    graphics::segments(0,0,1,1, col='grey70', lty=3)
+                    graphics::segments(0,1,1,0, col='grey70', lty=3)
+                    graphics::text(0.5, 0.5, 'No data\navailable', adj=c(0.5, 0.5), cex=1)
+                    graphics::plot(NA, NA, frame=FALSE, axes=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i')
+                }
 
                 ## Plot the taxon name -------------------------------------------------
                 graphics::par(mar=c(0,0,0,0))
