@@ -4,7 +4,8 @@
 #'
 #' @inheritParams crestObj
 #' @param dataname The name of the site (default: \code{x$misc$site_info$site_name})
-#' @param climate The climate data to export.
+#' @param climate The climate data to export. Data for all climate variables are
+#'        saved by default.
 #' @param loc The path where to export the data (default: working directory)
 #' @param as.csv Boolean to indicate if the data should be exported as csv (\code{TRUE}) or xlsx (\code{FALSE}, default)
 #' @param fullPosterior A boolean to export the climate posterior probability (default \code{FALSE})
@@ -25,7 +26,8 @@
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = TRUE
 #'   )
-#'   export(reconstr, dataname='crest_example', fullPosterior=TRUE, weights=TRUE, loo=TRUE)
+#'   export(reconstr, dataname='crest_example',
+#'          fullPosterior=TRUE, weights=TRUE, loo=TRUE, pdfs=TRUE)
 #' }
 #'
 export <- function( x, dataname = x$misc$site_info$site_name,
@@ -42,8 +44,9 @@ export <- function( x, dataname = x$misc$site_info$site_name,
         }
 
         if(is.na(dataname)) dataname <- 'crest_outputs'
-        base::unlink(base::file.path(loc, dataname), recursive=TRUE)
-        base::dir.create(base::file.path(loc, dataname), showWarnings = FALSE)
+        if (!base::file.exists(base::file.path(loc, dataname))){
+            base::dir.create(base::file.path(loc, dataname), showWarnings = FALSE)
+        }
 
         if ((!'loo' %in% names(x$reconstructions[[climate[1]]])) & loo) {
             loo <- FALSE
@@ -260,6 +263,8 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             }
 
             if(!as.csv) openxlsx::saveWorkbook(wb, file.path(loc, dataname, clim, paste0(clim, '.xlsx')), overwrite = TRUE)
+
+            if(pdfs) export_pdfs(x, dataname, climate, taxa=x$inputs$taxa.name, loc, as.csv)
         }
     } else {
         stop("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
