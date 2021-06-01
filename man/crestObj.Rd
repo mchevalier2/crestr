@@ -23,12 +23,14 @@ crestObj(
   x = NA,
   x.name = "",
   minGridCells = 20,
+  weightedPresences = FALSE,
   bin_width = rep(1, length(climate)),
   shape = rep("normal", length(climate)),
   npoints = 200,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
   selectedTaxa = NA,
+  distributions = NA,
   presenceThreshold = 0,
   taxWeight = "normalisation",
   uncertainties = c(0.5, 0.95)
@@ -74,6 +76,9 @@ percentages or presence/absence data).}
 \item{minGridCells}{The minimum number of unique presence data necessary to
 estimate a species' climate response. Default is 20.}
 
+\item{weightedPresences}{A boolean to indicate whether the presence records
+should be weighted. Default is \code{FALSE}.}
+
 \item{bin_width}{The width of the bins used to correct for unbalanced climate
 state. Use values that split the studied climate gradient in
 15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
@@ -97,6 +102,9 @@ should be corrected for the modern distribution of the climate space
 variable (1 if the taxon should be used, 0 otherwise). The colnames
 should be the climate variables' names and the rownames the taxa
 names. Default is 1 for all taxa and all variables.}
+
+\item{distributions}{A dataframe containing the presence records of the
+studied proxies and their associated climate values.}
 
 \item{presenceThreshold}{All values above that threshold will be used in the
 reconstruction (e.g. if set at 1, all percentages below 1 will be set

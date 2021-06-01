@@ -10,6 +10,12 @@
 #'        first variable (\code{x$parameters$climate\[1\]}).
 #' @param optima A boolean to indicate whether to plot the optimum (\code{TRUE})
 #'        or the mean (\code{FALSE}) estimates.
+#' @param only.present A boolean to only add the names of the taxa recorded in
+#'        the sample (default \code{FALSE}).
+#' @param only.selected A boolean to only add the names of the selected taxa
+#'        (default \code{FALSE}).
+#' @param xlim The climate range to plot the pdfs on. Default is the full range
+#'        used to fit the \code{pdfs} (x$modelling$xrange$climate)
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
@@ -34,10 +40,10 @@
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
-#' plot_combinedPDFs(reconstr, samples=1:12, climate='bio12')
+#' plot_combinedPDFs(reconstr, samples=1:4, climate='bio12')
 #'
 plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parameters$climate[1],
-                               optima=TRUE,
+                               optima=TRUE, xlim=NA, only.present=FALSE, only.selected=FALSE,
                                save=FALSE, filename='samplePDFs.pdf',
                                width=7.48, height = 5
                               ) {
@@ -51,6 +57,10 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
         if (length(climate) > 1 ) {
             warning('The function only works for one variable at a time. Only the first value was used.\n')
             climate <- climate[1]
+        }
+
+        if (is.na(xlim)[1]) {
+            xlim <- range(x$modelling$xrange[[climate]])
         }
 
         par_usr <- list()
@@ -84,7 +94,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             graphics::par(ps=8)
 
             graphics::plot(0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
-                 xlim=range(x$modelling$xrange[[climate]]), ylim=c(0, ymx))
+                 xlim=xlim, ylim=c(0, ymx))
 
             graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
                     c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
@@ -127,12 +137,21 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             # taxa selected (ranked by weight), then taxa unselected, then taxa unavailable
             taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 1, ])
             weights <- x$modelling$weights[s, taxa]
-            ordered_tax <- names(weights)[order(weights, decreasing=TRUE)]
+            if(only.present) {
+                taxa <- taxa[weights > 0]
+                weights <- weights[, weights > 0]
+            }
+            ordered_tax <- taxa[order(weights, decreasing=TRUE)]
 
-            taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 0, ])
-            weights <- x$modelling$weights[s, taxa]
-            ordered_tax <- c(ordered_tax, names(weights)[order(weights, decreasing=FALSE)])
-
+            if(!only.selected) {
+                taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 0, ])
+                weights <- x$modelling$weights[s, taxa]
+                if(only.present) {
+                    taxa <- taxa[weights > 0]
+                    weights <- weights[, weights > 0]
+                }
+                ordered_tax <- c(ordered_tax, taxa[order(weights, decreasing=FALSE)])
+            }
 
             graphics::par(mar=c(0.1,0.1,0.1,0.1))
             graphics::par(ps=8)

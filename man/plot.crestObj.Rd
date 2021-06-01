@@ -17,6 +17,7 @@
   width = 5.51,
   height = 5.51,
   filename = "Reconstruction.pdf",
+  col = viridis::viridis(125)[26:125],
   ...
 )
 }
@@ -56,6 +57,8 @@ Default is \code{FALSE}.}
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
 \code{'Reconstruction_climate.pdf'}.}
+
+\item{col}{A colour gradient.}
 
 \item{...}{other \link[graphics]{graphical parameters} (see \code{\link[graphics]{par}} and
     section \sQuote{Details} below).}

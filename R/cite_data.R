@@ -75,7 +75,7 @@ cite_distrib_data <- function(x, verbose=TRUE) {
                         tocite <- 'GBIF.org (Date accessed: 24 September 2020) Rodentia occurrence data. https://doi.org/10.15468/dl.fscw6q.'
                         if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
                         } else {
-                            if (verbose)  cat('You have used the example dataset. No distribution data citations are required.\n')
+                            if (verbose)  cat('You did not use the gbif4crest dataset. No distribution data citations are required.\n')
                             tocite <- NULL
                         }
     invisible(tocite)

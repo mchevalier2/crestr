@@ -117,11 +117,11 @@ explore_calibration_dataset <- function( taxaType,
                      col=viridis::viridis(22)[3:22],
                      title='Number of unique species occurences per grid cell')
 
-                     if(save) {
-                         grDevices::dev.off()
-                     } else {
-                         graphics::par(par_usr)
-                     }
+    if(save) {
+        grDevices::dev.off()
+    } else {
+        graphics::par(par_usr)
+    }
 
     if (!plot.distrib)  {
         warning('No data were available for plotting.\n')

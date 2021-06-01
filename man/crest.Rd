@@ -6,9 +6,10 @@
 \usage{
 crest(
   df,
-  pse,
-  taxaType,
   climate,
+  pse = NA,
+  taxaType = 0,
+  distributions = NA,
   site_info = rep(NA, length(climate)),
   site_name = NA,
   xmn = NA,
@@ -40,6 +41,9 @@ crest(
 \item{df}{A data frame containing the data to reconstruct (counts,
 percentages or presence/absence data).}
 
+\item{climate}{A vector of the climate variables to extract. See
+\code{\link{accClimateVariables}} for the list of accepted values.}
+
 \item{pse}{A pollen-Species equivalency table. See \code{\link{createPSE}} for
 details.}
 
@@ -48,8 +52,8 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 4 for foraminifers, 5 for diatoms and 6 for rodents. The example
 dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
-\item{climate}{A vector of the climate variables to extract. See
-\code{\link{accClimateVariables}} for the list of accepted values.}
+\item{distributions}{A dataframe containing the presence records of the
+studied proxies and their associated climate values.}
 
 \item{site_info}{A vector containing the coordinates of the study site.
 Default \code{c(NA, NA)}.}

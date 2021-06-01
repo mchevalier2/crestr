@@ -31,7 +31,9 @@
 #' plot(reconstr)
 #' plot_loo(reconstr)
 #'
-crest <- function(df, pse, taxaType, climate,
+crest <- function(df, climate,
+                  pse = NA, taxaType = 0,
+                  distributions = NA,
                   site_info = rep(NA, length(climate)),
                   site_name = NA,
                   xmn = NA, xmx = NA, ymn = NA, ymx = NA,
@@ -53,19 +55,32 @@ crest <- function(df, pse, taxaType, climate,
                   dbname = "gbif4crest_02") {
 
 
-    x <- crest.get_modern_data(
-        pse = pse, taxaType = taxaType, climate = climate, df = df,
-        xmn = xmn, xmx = xmx, ymn = ymn, ymx = ymx,
-        continents = continents, countries = countries,
-        realms = realms, biomes = biomes, ecoregions = ecoregions,
-        minGridCells = minGridCells,
-        selectedTaxa = selectedTaxa,
-        verbose = verbose,
-        site_info = site_info,
-        site_name = site_name,
-        ai.sqrt = ai.sqrt,
-        dbname = dbname
-    )
+    if (is.null(nrow(distributions))) {
+        x <- crest.get_modern_data(
+            pse = pse, taxaType = taxaType, climate = climate, df = df,
+            xmn = xmn, xmx = xmx, ymn = ymn, ymx = ymx,
+            continents = continents, countries = countries,
+            realms = realms, biomes = biomes, ecoregions = ecoregions,
+            minGridCells = minGridCells,
+            selectedTaxa = selectedTaxa,
+            verbose = verbose,
+            site_info = site_info,
+            site_name = site_name
+        )
+    } else if (is.null(nrow(pse))){
+        x <- crest.set_modern_data(
+            distributions = distributions, climate = climate, df = df,
+            minGridCells = minGridCells,
+            selectedTaxa = selectedTaxa,
+            verbose = verbose,
+            site_info = site_info,
+            site_name = site_name,
+            ai.sqrt = ai.sqrt,
+            dbname = dbname
+        )
+    } else {
+        stop('You should either provide a PSE or a distribution file.')
+    }
 
     x <- crest.calibrate(x,
         npoints = npoints,

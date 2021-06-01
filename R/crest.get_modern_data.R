@@ -148,7 +148,8 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             warning(paste0("One or more taxa were are not in the proxy-species equivalence table and have been ignored. Check 'x$misc$taxa_notes' for details."))
         }
         taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
-        selectedTaxa[tax, climate] <- rep(-1, length(climate))
+        selectedTaxa <- rbind(selectedTaxa, rep(-1, length(climate)))
+        rownames(selectedTaxa)[nrow(selectedTaxa)] <- tax
     }
     taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa)[apply(selectedTaxa, 1, sum)>=0]]
 
@@ -175,7 +176,8 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     w <- (pse$Level == 4)
     if (sum(w) > 0) {
         for (tax in unique(pse$ProxyName[w])) {
-            selectedTaxa[tax, ] <- rep(-1, length(climate))
+            selectedTaxa <- rbind(selectedTaxa, rep(-1, length(climate)))
+            rownames(selectedTaxa)[nrow(selectedTaxa)] <- tax
             message <- "No association between the proxy names and species"
             if (! message %in% names(taxa_notes)) {
                 taxa_notes[[message]] <- c()
@@ -343,8 +345,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
               dbname
             )
             if (nrow(distributions[[tax]]) == 0) {
-                #cat(paste0("WARNING: Insufficient data points to calibrate a pdf for ", tax, "\n"))
-                #print(extent_taxa)
                 distributions[[tax]] <- NA
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
                 message <- "No data point available in the study area."

@@ -95,6 +95,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
         distribs <- list()
         for(tax in taxanames) {
+            print(tax)
             ## If data are unavailable
             if (sum(x$inputs$selectedTaxa[tax, x$parameters$climate]) < 0) {
 

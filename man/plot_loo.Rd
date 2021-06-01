@@ -8,6 +8,7 @@ plot_loo(
   x,
   optima = TRUE,
   climate = x$parameters$climate,
+  taxanames = x$inputs$taxa.name,
   save = FALSE,
   filename = "Diagram_loo.pdf",
   width = 3.54,
@@ -31,6 +32,9 @@ or the mean (\code{FALSE}) estimates.}
 
 \item{climate}{Climate variables to be used to generate the plot. By default
 all the variables are included.}
+
+\item{taxanames}{A list of taxa to use for the plot (default is all the
+recorded taxa).}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is \code{FALSE}.}

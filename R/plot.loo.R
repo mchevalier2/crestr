@@ -7,6 +7,8 @@
 #'        or the mean (\code{FALSE}) estimates.
 #' @param climate Climate variables to be used to generate the plot. By default
 #'        all the variables are included.
+#' @param taxanames A list of taxa to use for the plot (default is all the
+#'        recorded taxa).
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
@@ -38,6 +40,7 @@
 #'          col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
 #'
 plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
+                      taxanames=x$inputs$taxa.name,
                       save=FALSE, filename='Diagram_loo.pdf',
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width=1,
@@ -78,16 +81,24 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                 df[[x$inputs$x.name]] <- 1:length(x$inputs$x)
             }
             loo_na <- rep(0, length(x$inputs$x))
-            for( tax in names(x$reconstructions[[clim]]$loo)) {
-                if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {
-                    df[[tax]] <- loo_na
+            for( tax in taxanames ) {
+                if(tax %in% names(x$reconstructions[[clim]]$loo)) {
+                    if(is.na(x$reconstructions[[clim]]$loo[[tax]][1])) {
+                        df[[tax]] <- loo_na
+                    } else {
+                        df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]][, var_to_plot]
+                    }
                 } else {
-                    df[[tax]] <- x$reconstructions[[clim]]$loo[[tax]][, var_to_plot]
+                    df[[tax]] <- loo_na
                 }
             }
             df <- do.call(cbind, df)
 
-            xlim <- range(df[, 1])
+            if(is.na(xlim)[1]) {
+                xlim <- range(df[, 1])
+            } else {
+                df <- df[which(df[,1] >= xlim[1] & df[,1] <= xlim[2]), ]
+            }
             bar_width2 <- bar_width
             yax_incr2 <- yax_incr[clim]
             if(is.na(unique(yax_incr)[1])) yax_incr2 <- round(max(abs(df[, -1])))/10

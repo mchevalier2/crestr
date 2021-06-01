@@ -5,8 +5,6 @@
 #'
 #' @inheritParams crestObj
 #' @inheritParams crest
-#' @param distributions A dataframe containing the presence records of the
-#'        studied proxies and their associated climate values.
 #' @param climate_space A dataframe of climate values across the study area
 #'        useful to correct for a disbalanced sampling data (see
 #'        '\code{\link{crest.calibrate}} for more details). Default is \code{NA}.
@@ -181,10 +179,13 @@ crest.set_modern_data <- function( distributions, climate,
             tax.rows <- which(distributions[, 'ProxyName'] == tax)
             dupl.rows <- rep(tax.rows, times=base::ceiling(distributions[tax.rows, 'weight']))
             crest$modelling$distributions[[tax]] <- distributions[dupl.rows, w]
+            crest$parameters$weightedPresences <- TRUE
         } else {
             crest$modelling$distributions[[tax]] <- distributions[distributions[, 'ProxyName'] == tax, w]
+            crest$parameters$weightedPresences <- FALSE
         }
     }
+    crest$modelling$distributions <- distributions
 
     if(verbose) cat('[OK]\n  <> Checking the climate space ............ ')
     if(is.data.frame(climate_space)) {

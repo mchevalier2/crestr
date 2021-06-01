@@ -115,7 +115,9 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, c('SITE INFO:', NA, NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Longitude: ', x$misc$site_info$long, ' \u00B0N'), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Latitude: ', x$misc$site_info$lat, ' \u00B0E'), NA, NA, NA))
-            df <- rbind(df, c(NA, paste0(clim, ' modern value: ', x$misc$site_info$climate[, clim]), NA, NA, NA))
+            print(x$misc$site_info$climate)
+            print(clim)
+            df <- rbind(df, c(NA, paste0(clim, ' modern value: ', x$misc$site_info$climate[clim]), NA, NA, NA))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, c('DEFINITION OF THE STUDY AREA:', NA, NA, NA, NA))
@@ -130,6 +132,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, c('DEFINITION OF THE PDFS:', NA, NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Minimum number of presence records: ', x$parameters$minGridCells), NA, NA, NA))
+            if (is.null(nrow(x$inputs$pse))) df <- rbind(df, c(NA, paste0('Weighted presence records: ', ifelse(x$parameters$weightedPresences, 'Yes', 'No')), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Climate Space Weighting: ', ifelse(x$parameters$climateSpaceWeighting, 'Yes', 'No')), NA, NA, NA))
             if (x$parameters$climateSpaceWeighting) df <- rbind(df, c(NA, paste0('     - Bin width: ', x$parameters$bin_width[clim, ]), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Species weighted by abundance: ', ifelse(x$parameters$geoWeighting, 'Yes', 'No')), NA, NA, NA))
@@ -214,42 +217,56 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             }
 
 
-            df <- data.frame(ProxyName = x$inputs$taxa.name,
-                             Family = rep(NA, length(x$inputs$taxa.name)),
-                             Genus = rep(NA, length(x$inputs$taxa.name)),
-                             Species = rep(NA, length(x$inputs$taxa.name)),
-                             Selected = rep('Yes', length(x$inputs$taxa.name)),
-                             Comment = rep(NA, length(x$inputs$taxa.name)),
-                             stringsAsFactors = FALSE)
+            if (is.null(nrow(x$inputs$pse))) {
+                df <- data.frame(ProxyName = x$inputs$taxa.name,
+                                 Selected = rep('Yes', length(x$inputs$taxa.name)),
+                                 Comment = rep(NA, length(x$inputs$taxa.name)),
+                                 stringsAsFactors = FALSE)
 
-            for (tax in x$inputs$taxa.name) {
-                tmp <- x$inputs$pse[, 'ProxyName'] == tax
-                if(sum(tmp) > 1) {
-                    row = df[df[, 'ProxyName'] == tax, ]
-                    for(i in 2:sum(tmp)) {
-                        df <- rbind(df, row)
+                for (tax in x$inputs$taxa.name) {
+                    if (x$input$selectedTaxa[tax, clim] == 0) {
+                        df[df[, 'ProxyName'] == tax, 5:6] <- rep(c('No', paste0('Not sensitive to ', clim)), each=sum(tmp))
                     }
                 }
-                df[df[, 'ProxyName'] == tax, 2] <- as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 2])
-                df[df[, 'ProxyName'] == tax, 3] <- as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 3])
-                df[df[, 'ProxyName'] == tax, 4] <- as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 4])
-                if (x$input$selectedTaxa[tax, clim] == 0) {
-                    df[df[, 'ProxyName'] == tax, 5:6] <- rep(c('No', paste0('Not sensitive to ', clim)), each=sum(tmp))
-                }
-            }
 
-            for(n in names(x$misc$taxa_notes)) {
-                for(tax in x$misc$taxa_notes[[n]]) {
-                    if(tax %in% unique(x$inputs$pse[, 'ProxyName'])) {
-                        df <- rbind(df,
-                                    c(tax,
-                                      as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 2]),
-                                      as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 3]),
-                                      as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 4]),
-                                      'No',
-                                      n), stringsAsFactors=FALSE)
-                    } else {
-                        df <- rbind(df, c(tax, NA, NA, NA, 'No', n), stringsAsFactors=FALSE)
+            } else {
+                df <- data.frame(ProxyName = x$inputs$taxa.name,
+                                 Family = rep(NA, length(x$inputs$taxa.name)),
+                                 Genus = rep(NA, length(x$inputs$taxa.name)),
+                                 Species = rep(NA, length(x$inputs$taxa.name)),
+                                 Selected = rep('Yes', length(x$inputs$taxa.name)),
+                                 Comment = rep(NA, length(x$inputs$taxa.name)),
+                                 stringsAsFactors = FALSE)
+
+                for (tax in x$inputs$taxa.name) {
+                    tmp <- x$inputs$pse[, 'ProxyName'] == tax
+                    if(sum(tmp) > 1) {
+                        row = df[df[, 'ProxyName'] == tax, ]
+                        for(i in 2:sum(tmp)) {
+                            df <- rbind(df, row)
+                        }
+                    }
+                    df[df[, 'ProxyName'] == tax, 2] <- as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 2])
+                    df[df[, 'ProxyName'] == tax, 3] <- as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 3])
+                    df[df[, 'ProxyName'] == tax, 4] <- as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 4])
+                    if (x$input$selectedTaxa[tax, clim] == 0) {
+                        df[df[, 'ProxyName'] == tax, 5:6] <- rep(c('No', paste0('Not sensitive to ', clim)), each=sum(tmp))
+                    }
+                }
+
+                for(n in names(x$misc$taxa_notes)) {
+                    for(tax in x$misc$taxa_notes[[n]]) {
+                        if(tax %in% unique(x$inputs$pse[, 'ProxyName'])) {
+                            df <- rbind(df,
+                                        c(tax,
+                                          as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 2]),
+                                          as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 3]),
+                                          as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 4]),
+                                          'No',
+                                          n), stringsAsFactors=FALSE)
+                        } else {
+                            df <- rbind(df, c(tax, NA, NA, NA, 'No', n), stringsAsFactors=FALSE)
+                        }
                     }
                 }
             }

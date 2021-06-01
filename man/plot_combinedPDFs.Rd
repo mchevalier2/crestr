@@ -9,6 +9,9 @@ plot_combinedPDFs(
   samples = 1:length(x$inputs$x),
   climate = x$parameters$climate[1],
   optima = TRUE,
+  xlim = NA,
+  only.present = FALSE,
+  only.selected = FALSE,
   save = FALSE,
   filename = "samplePDFs.pdf",
   width = 7.48,
@@ -27,6 +30,15 @@ first variable (\code{x$parameters$climate\[1\]}).}
 
 \item{optima}{A boolean to indicate whether to plot the optimum (\code{TRUE})
 or the mean (\code{FALSE}) estimates.}
+
+\item{xlim}{The climate range to plot the pdfs on. Default is the full range
+used to fit the \code{pdfs} (x$modelling$xrange$climate)}
+
+\item{only.present}{A boolean to only add the names of the taxa recorded in
+the sample (default \code{FALSE}).}
+
+\item{only.selected}{A boolean to only add the names of the selected taxa
+(default \code{FALSE}).}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is \code{FALSE}.}
@@ -58,6 +70,6 @@ Plot representing how the \code{pdfs} combine to produce the reconstruction.
 }
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
-plot_combinedPDFs(reconstr, samples=1:12, climate='bio12')
+plot_combinedPDFs(reconstr, samples=1:4, climate='bio12')
 
 }

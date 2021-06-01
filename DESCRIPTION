@@ -19,7 +19,6 @@ RoxygenNote: 7.1.1
 Imports:
     DBI,
     RPostgreSQL,
-    rio,
     graphics,
     plot3D,
     viridis,

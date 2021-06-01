@@ -24,8 +24,12 @@
 #' @param biomes A vector of the studied botanical biomes defining the study area.
 #' @param ecoregions A vector of the studied botanical ecoregions defining the
 #'        study area.
+#' @param distributions A dataframe containing the presence records of the
+#'        studied proxies and their associated climate values.
 #' @param minGridCells The minimum number of unique presence data necessary to
 #'        estimate a species' climate response. Default is 20.
+#' @param weightedPresences A boolean to indicate whether the presence records
+#'        should be weighted. Default is \code{FALSE}.
 #' @param bin_width The width of the bins used to correct for unbalanced climate
 #'        state. Use values that split the studied climate gradient in
 #'        15-25 classes (e.g. 2°C for temperature variables). Default is 1.
@@ -61,13 +65,14 @@ crestObj <- function(taxa.name, taxaType, climate,
                      realms = NA, biomes = NA, ecoregions = NA,
                      xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                      df = NA, x = NA, x.name = "",
-                     minGridCells = 20,
+                     minGridCells = 20, weightedPresences = FALSE,
                      bin_width = rep(1, length(climate)),
                      shape = rep("normal", length(climate)),
                      npoints = 200,
                      geoWeighting = TRUE,
                      climateSpaceWeighting = TRUE,
                      selectedTaxa = NA,
+                     distributions = NA,
                      presenceThreshold = 0,
                      taxWeight = "normalisation",
                      uncertainties = c(0.5, 0.95)) {
@@ -95,6 +100,7 @@ crestObj <- function(taxa.name, taxaType, climate,
     ecoregions = ecoregions,
     taxWeight = taxWeight,
     minGridCells = minGridCells,
+    weightedPresences = weightedPresences,
     bin_width = bin_width,
     shape = shape,
     npoints = npoints,
@@ -104,7 +110,7 @@ crestObj <- function(taxa.name, taxaType, climate,
     uncertainties = uncertainties
   )
 
-  modelling <- list(taxonID2proxy = NA, climate_space = NA, pdfs = NA, weights = NA, xrange = NA)
+  modelling <- list(taxonID2proxy = NA, climate_space = NA, pdfs = NA, weights = NA, xrange = NA, distributions = distributions)
 
   reconstructions <- list()
 
@@ -153,6 +159,7 @@ print.crestObj <- function(x, ...) {
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
 #'        \code{'Reconstruction_climate.pdf'}.
+#' @param col A colour gradient.
 #' @export
 #' @examples
 #' \dontrun{
@@ -182,6 +189,7 @@ plot.crestObj <- function(x,
                           ylim = NA,
                           save = FALSE, width = 5.51, height = 5.51,
                           filename = 'Reconstruction.pdf',
+                          col=viridis::viridis(125)[26:125],
                           ...) {
     if (length(x$reconstructions) == 0 || is.null(climate)) {
         stop("No reconstruction available for plotting.\n")
@@ -190,7 +198,7 @@ plot.crestObj <- function(x,
     idx <- 0
     filename <- base::strsplit(filename, '.pdf')[[1]]
 
-    if(is.na(xlim)) {
+    if(unique(is.na(xlim))) {
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
             xlim <- c(1, length(x$inputs$x))
         } else {
@@ -239,9 +247,9 @@ plot.crestObj <- function(x,
 
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
             if(simplify) warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
-            xx <- seq_along(x$inputs$x)
+            xx <- base::seq_along(x$inputs$x)
         } else {
-            xx <- x$inputs$x
+            xx <- sort(base::jitter(x$inputs$x, 0.0001))
         }
 
 
@@ -310,7 +318,7 @@ plot.crestObj <- function(x,
               xlim = xlim,
               ylim = c(ymn, ymx),
               zlim = c(0, 1),
-              col = viridis::viridis(125)[26:125],
+              col = col,
               axes=FALSE,
               colkey = FALSE,
               resfac = 1,
@@ -361,7 +369,7 @@ plot.crestObj <- function(x,
               lwd = 0.1,
               cex.axis = 6 / 7,
               clim = c(1, 0),
-              col = viridis::viridis(125)[26:125],
+              col = col,
               clab = "Confidence level",
               font.clab = 1,
               line.clab = 1.3,

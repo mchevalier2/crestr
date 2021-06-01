@@ -33,7 +33,7 @@ loo <- function(x, verbose=TRUE) {
     if(verbose) cat('  <> Checking data ......................... ')
 
     if(verbose) cat('[OK]\n  <> Checking taxa ................... ......')
-    taxa_list <- rownames(x$inputs$selectedTaxa)[apply(x$inputs$selectedTaxa[, x$parameters$climate], 1, sum) > 0]
+    taxa_list <- rownames(x$inputs$selectedTaxa)[apply(as.data.frame(x$inputs$selectedTaxa[, x$parameters$climate]), 1, sum) > 0]
     estimated_time <- x$misc$reconstruction_time * length(taxa_list)
     if(verbose) cat(paste0('[OK]\n  *i Estimated time for the LOO reconstructions: ', estimated_time %/% 60, 'min ', round(estimated_time %% 60, 2), 's.\n'))
     if(verbose) cat('  <> LOO reconstructions ...................   0%\r')
