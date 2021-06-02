@@ -65,7 +65,9 @@ crest <- function(df, climate,
             selectedTaxa = selectedTaxa,
             verbose = verbose,
             site_info = site_info,
-            site_name = site_name
+            site_name = site_name,
+            ai.sqrt = ai.sqrt,
+            dbname = dbname
         )
     } else if (is.null(nrow(pse))){
         x <- crest.set_modern_data(
@@ -74,9 +76,7 @@ crest <- function(df, climate,
             selectedTaxa = selectedTaxa,
             verbose = verbose,
             site_info = site_info,
-            site_name = site_name,
-            ai.sqrt = ai.sqrt,
-            dbname = dbname
+            site_name = site_name
         )
     } else {
         stop('You should either provide a PSE or a distribution file.')
