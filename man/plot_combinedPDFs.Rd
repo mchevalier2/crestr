@@ -32,7 +32,7 @@ first variable (\code{x$parameters$climate\[1\]}).}
 or the mean (\code{FALSE}) estimates.}
 
 \item{xlim}{The climate range to plot the pdfs on. Default is the full range
-used to fit the \code{pdfs} (x$modelling$xrange$climate)}
+used to fit the \code{pdfs} (x$modelling$xrange).}
 
 \item{only.present}{A boolean to only add the names of the taxa recorded in
 the sample (default \code{FALSE}).}

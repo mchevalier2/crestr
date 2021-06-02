@@ -15,7 +15,7 @@
 #' @param only.selected A boolean to only add the names of the selected taxa
 #'        (default \code{FALSE}).
 #' @param xlim The climate range to plot the pdfs on. Default is the full range
-#'        used to fit the \code{pdfs} (x$modelling$xrange$climate)
+#'        used to fit the \code{pdfs} (x$modelling$xrange).
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
