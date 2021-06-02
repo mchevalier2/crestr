@@ -10,7 +10,7 @@ figures:
   fig.width: 7.2916667
   fig.height: ~
   fig.retina: 2
-  fig.asp: 1.618
+  fig.asp: 1
   bg: NA
 
 

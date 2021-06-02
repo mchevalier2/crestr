@@ -57,16 +57,16 @@ Plot the distribution and responses of the studied taxa
 \dontrun{
   data(crest_ex_pse)
   data(crest_ex_selection)
-  x <- crest.get_modern_data(
+  reconstr <- crest.get_modern_data(
     pse = crest_ex_pse, taxaType = 0, df = crest_ex,
     climate = c("bio1", "bio12"),
     selectedTaxa = crest_ex_selection, dbname = "crest_example"
   )
-  x <- crest.calibrate(x,
+  reconstr <- crest.calibrate(reconstr,
     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
     bin_width = c(2, 20), shape = c("normal", "lognormal")
   )
-  plot_taxaCharacteristics(x)
 }
+  plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 
 }

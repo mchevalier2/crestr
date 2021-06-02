@@ -27,12 +27,12 @@
 #' \dontrun{
 #'   data(crest_ex_pse)
 #'   data(crest_ex_selection)
-#'   x <- crest.get_modern_data(
+#'   reconstr <- crest.get_modern_data(
 #'     pse = crest_ex_pse, taxaType = 0,
 #'     climate = c("bio1", "bio12"),
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example"
 #'   )
-#'   x <- crest.calibrate(x,
+#'   reconstr <- crest.calibrate(reconstr,
 #'     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
 #'     bin_width = c(2, 20), shape = c("normal", "lognormal")
 #'   )
