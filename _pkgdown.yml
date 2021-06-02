@@ -81,6 +81,7 @@ reference:
       - '`explore_calibration_dataset`'
       - '`plot_map_eqearth`'
       - '`plot_taxaCharacteristics`'
+      - '`plot_violinPDFs`'
       - '`eqearth_get_ext`'
       - '`isColourStr`'
       - '`makeTransparent`'

@@ -166,12 +166,14 @@
   x <span class='op'>=</span> <span class='cn'>NA</span>,
   x.name <span class='op'>=</span> <span class='st'>""</span>,
   minGridCells <span class='op'>=</span> <span class='fl'>20</span>,
+  weightedPresences <span class='op'>=</span> <span class='cn'>FALSE</span>,
   bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>climate</span><span class='op'>)</span><span class='op'>)</span>,
   shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"normal"</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>climate</span><span class='op'>)</span><span class='op'>)</span>,
   npoints <span class='op'>=</span> <span class='fl'>200</span>,
   geoWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
   climateSpaceWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
   selectedTaxa <span class='op'>=</span> <span class='cn'>NA</span>,
+  distributions <span class='op'>=</span> <span class='cn'>NA</span>,
   presenceThreshold <span class='op'>=</span> <span class='fl'>0</span>,
   taxWeight <span class='op'>=</span> <span class='st'>"normalisation"</span>,
   uncertainties <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.5</span>, <span class='fl'>0.95</span><span class='op'>)</span>
@@ -250,6 +252,11 @@ percentages or presence/absence data).</p></td>
 estimate a species' climate response. Default is 20.</p></td>
     </tr>
     <tr>
+      <th>weightedPresences</th>
+      <td><p>A boolean to indicate whether the presence records
+should be weighted. Default is <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
       <th>bin_width</th>
       <td><p>The width of the bins used to correct for unbalanced climate
 state. Use values that split the studied climate gradient in
@@ -284,6 +291,11 @@ should be corrected for the modern distribution of the climate space
 variable (1 if the taxon should be used, 0 otherwise). The colnames
 should be the climate variables' names and the rownames the taxa
 names. Default is 1 for all taxa and all variables.</p></td>
+    </tr>
+    <tr>
+      <th>distributions</th>
+      <td><p>A dataframe containing the presence records of the
+studied proxies and their associated climate values.</p></td>
     </tr>
     <tr>
       <th>presenceThreshold</th>

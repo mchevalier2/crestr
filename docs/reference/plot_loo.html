@@ -151,6 +151,7 @@
   <span class='va'>x</span>,
   optima <span class='op'>=</span> <span class='cn'>TRUE</span>,
   climate <span class='op'>=</span> <span class='va'>x</span><span class='op'>$</span><span class='va'>parameters</span><span class='op'>$</span><span class='va'>climate</span>,
+  taxanames <span class='op'>=</span> <span class='va'>x</span><span class='op'>$</span><span class='va'>inputs</span><span class='op'>$</span><span class='va'>taxa.name</span>,
   save <span class='op'>=</span> <span class='cn'>FALSE</span>,
   filename <span class='op'>=</span> <span class='st'>"Diagram_loo.pdf"</span>,
   width <span class='op'>=</span> <span class='fl'>3.54</span>,
@@ -182,6 +183,11 @@ or the mean (<code>FALSE</code>) estimates.</p></td>
       <th>climate</th>
       <td><p>Climate variables to be used to generate the plot. By default
 all the variables are included.</p></td>
+    </tr>
+    <tr>
+      <th>taxanames</th>
+      <td><p>A list of taxa to use for the plot (default is all the
+recorded taxa).</p></td>
     </tr>
     <tr>
       <th>save</th>

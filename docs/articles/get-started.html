@@ -274,7 +274,9 @@
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon2'</span>, climate<span class="op">=</span><span class="st">'bio1'</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
+<span class="co">#&gt; [1] "Taxon2"</span>
+<span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span><span class="op">)</span>
+<span class="co">#&gt; [1] "Taxon6"</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-1.png" alt="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot." width="70%"><img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-2.png" alt="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot." width="70%"><p class="caption">
 <strong>Fig. 6</strong>: Distributions and responses of <em>Taxon2</em> and <em>Taxon6</em> to <em>bio1</em>. Again, ignore the coastline of Africa on this plot.
@@ -348,6 +350,10 @@
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; [1] "bio1"</span>
+<span class="co">#&gt; NULL</span>
+<span class="co">#&gt; [1] "bio12"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "bio1"             "bio12"            "crest-test.RData"</span></code></pre></div>
 <p><br></p>
