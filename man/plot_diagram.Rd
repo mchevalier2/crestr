@@ -13,6 +13,8 @@ plot_diagram(
   filename = "Diagram.pdf",
   width = 3.54,
   height = 9,
+  as.png = FALSE,
+  png.res = 300,
   yax_incr = 5,
   bar_width = 1,
   xlim = NA,
@@ -47,6 +49,11 @@ the file is saved in the working directory under the name
 \item{width}{The width of the output file in inches (default 3.54in ~ 9cm).}
 
 \item{height}{The height of the output file in inches (default 9in ~ 23cm).}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
 \item{yax_incr}{Graphical parameters describing the increment size on the
 y-axis (default 5).}

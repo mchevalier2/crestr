@@ -157,6 +157,9 @@ print.crestObj <- function(x, ...) {
 #' @param add_modern Adds the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is \code{FALSE}.
+#' @param as.png A boolean to indicate if the output should be saved as a png.
+#'        Default is \code{FALSE} and the figure is saved as a pdf file.
+#' @param png.res The resolution of the png file (default 300 pixels per inch).
 #' @param width,height The dimensions of the pdf file (default 5.51in ~14cm).
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
@@ -192,6 +195,7 @@ plot.crestObj <- function(x,
                           pt.cex = 0.8, pt.lwd = 0.8,
                           pt.col=ifelse(simplify, 'black', 'white'),
                           save = FALSE, width = 5.51, height = 5.51,
+                          as.png = FALSE, png.res=300,
                           filename = 'Reconstruction.pdf',
                           col=viridis::viridis(125)[26:125],
                           ...) {
@@ -268,8 +272,13 @@ plot.crestObj <- function(x,
         ylim2[1] <- max(ylim[1], ylim2[1], na.rm=TRUE)
         ylim2[2] <- min(ylim[2], ylim2[2], na.rm=TRUE)
 
-        if(save) pdf(paste0(filename,'_',clim,'.pdf'), width = width, height = height)
-
+        if(save) {
+            if(as.png) {
+                grDevices::png(paste0(strsplit(filename, '.png')[[1]],'_',clim,'.png'), width = width, height = height, units='in', res=png.res)
+            } else {
+                grDevices::pdf(paste0(strsplit(filename, '.pdf')[[1]],'_',clim,'.pdf'), width = width, height = height)
+            }
+        }
         graphics::par(ps=8)
 
         if(simplify) {

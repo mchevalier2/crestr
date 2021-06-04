@@ -12,6 +12,8 @@ plot_taxaCharacteristics(
   col.climate = viridis::viridis(22)[3:20],
   save = FALSE,
   filename = "taxaCharacteristics.pdf",
+  as.png = FALSE,
+  png.res = 300,
   width = 7.48,
   w0 = 0.3,
   height = 3 * length(climate),
@@ -43,6 +45,11 @@ Default is \code{FALSE}.}
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
 \code{'taxaCharacteristics.pdf'}.}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
 \item{width}{The width of the output file in inches (default 7.48in ~ 19cm).}
 

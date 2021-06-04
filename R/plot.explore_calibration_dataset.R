@@ -4,6 +4,7 @@
 #' This function will extract the distributions of all the studied climate proxy and plot the data on a map.
 #'
 #' @inheritParams crest
+#' @inheritParams plot.crestObj
 #' @inheritParams plot_climateSpace
 #' @inheritParams plot_map_eqearth
 #' @param width,height The dimensions of the pdf file (default 7.48in ~19cm).
@@ -20,6 +21,7 @@ explore_calibration_dataset <- function( taxaType,
                                          save = FALSE, filename = 'calibrationDataset.pdf',
                                          col = viridis::viridis(22)[3:22],
                                          width = 7.48, height = 7.48,
+                                         as.png = FALSE, png.res=300,
                                          xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                          continents = NA, countries = NA,
                                          realms = NA, biomes = NA, ecoregions = NA,
@@ -80,7 +82,11 @@ explore_calibration_dataset <- function( taxaType,
 
 
     if(save) {
-        grDevices::pdf(filename, width=width, height=height)
+        if(as.png) {
+            grDevices::png(filename, width = width, height = height, units='in', res=png.res)
+        } else {
+            grDevices::pdf(filename, width=width, height=height)
+        }
     } else {
         par_usr <- graphics::par(no.readonly = TRUE)
     }

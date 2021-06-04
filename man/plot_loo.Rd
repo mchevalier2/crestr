@@ -11,6 +11,8 @@ plot_loo(
   taxanames = x$inputs$taxa.name,
   save = FALSE,
   filename = "Diagram_loo.pdf",
+  as.png = FALSE,
+  png.res = 300,
   width = 3.54,
   height = 9,
   yax_incr = NA,
@@ -43,6 +45,11 @@ Default is \code{FALSE}.}
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
 \code{'Diagram_loo_climate.pdf'}.}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
 \item{width}{The width of the output file in inches (default 3.54in ~ 9cm).}
 

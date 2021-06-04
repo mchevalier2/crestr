@@ -11,6 +11,8 @@ explore_calibration_dataset(
   col = viridis::viridis(22)[3:22],
   width = 7.48,
   height = 7.48,
+  as.png = FALSE,
+  png.res = 300,
   xmn = NA,
   xmx = NA,
   ymn = NA,
@@ -29,17 +31,22 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 4 for foraminifers, 5 for diatoms and 6 for rodents. The example
 dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file
-(default \code{FALSE}).}
+\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
-\code{'Climate_space.pdf'}.}
+\code{'Reconstruction_climate.pdf'}.}
 
-\item{col}{The color gradient to use. (default is viridis)}
+\item{col}{A colour gradient.}
 
 \item{width, height}{The dimensions of the pdf file (default 7.48in ~19cm).}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
 \item{xmn}{The coordinates defining the study area.}
 

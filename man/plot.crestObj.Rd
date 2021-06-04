@@ -19,6 +19,8 @@
   save = FALSE,
   width = 5.51,
   height = 5.51,
+  as.png = FALSE,
+  png.res = 300,
   filename = "Reconstruction.pdf",
   col = viridis::viridis(125)[26:125],
   ...
@@ -61,6 +63,11 @@ simplified to the uncertainty range(s).}
 Default is \code{FALSE}.}
 
 \item{width, height}{The dimensions of the pdf file (default 5.51in ~14cm).}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:

@@ -13,7 +13,9 @@ plot_violinPDFs(
   save = FALSE,
   filename = "violinPDFs.pdf",
   width = 7.48,
-  height = 5
+  height = 5,
+  as.png = FALSE,
+  png.res = 300
 )
 }
 \arguments{
@@ -44,6 +46,11 @@ the file is saved in the working directory under the name
 
 \item{height}{The height of the output file in inches (default 3in ~ 7.6cm
 per variables).}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 }
 \description{
 Plot the pdfs as violins

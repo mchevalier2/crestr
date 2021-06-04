@@ -2,6 +2,7 @@
 #'
 #' This function plots stratigraphic data either as polygons or bars.
 #'
+#' @inheritParams plot.crestObj
 #' @param x A data frame of the data to plot (first column with age or depth)
 #'        and the taxa in the following columns. x can also be a
 #'        \code{\link{crestObj}}.
@@ -48,6 +49,7 @@ plot_diagram <- function(x, bars=FALSE,
                          amplif = 5,
                          save=FALSE, filename='Diagram.pdf',
                          width=3.54, height= 9,
+                         as.png = FALSE, png.res=300,
                          yax_incr = 5, bar_width=1,
                          xlim=NA, tickAtSample=TRUE,
                          col_pos = 'black', col_neg='grey80', title=NA) {
@@ -113,7 +115,11 @@ plot_diagram <- function(x, bars=FALSE,
     if(!is.na(title)) yrange <- yrange + c(0, 0.3*dY)
 
     if(save) {
-        grDevices::pdf(filename, width=width, height=height)
+        if(as.png) {
+            grDevices::png(filename, width = width, height = height, units='in', res=png.res)
+        } else {
+            grDevices::pdf(filename, width=width, height=height)
+        }
     } else {
         par_usr <- graphics::par(no.readonly = TRUE)
     }

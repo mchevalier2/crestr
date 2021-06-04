@@ -42,6 +42,7 @@
 plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       taxanames=x$inputs$taxa.name,
                       save=FALSE, filename='Diagram_loo.pdf',
+                      as.png = FALSE, png.res=300,
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width=1,
                       xlim=NA, tickAtSample=FALSE,
@@ -112,8 +113,8 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
             if (yax_incr2 == 0) yax_incr2 <- x$parameters$bin_width[clim, ] / 10
 
             plot_diagram(df, bars=TRUE,
-                       save=save, filename=paste0(filename,'_',clim,'.pdf'),
-                       width=width, height=height,
+                       save=save, filename=paste0(strsplit(filename, ifelse(as.png, '.png', '.pdf'))[[1]],'_',clim,ifelse(as.png, '.png', '.pdf')),
+                       width=width, height=height, as.png=as.png, png.res=png.res,
                        yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                        tickAtSample=tickAtSample,
                        col_pos=col_pos[clim], col_neg=col_neg[clim],
@@ -127,8 +128,8 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
         if(is.na(bar_width)) bar_width2 <- round(diff(xlim) / nrow(x))
 
         plot_diagram(x, bars=TRUE,
-                     save=save, filename=paste0(filename,'_',clim,'.pdf'),
-                     width=width, height=height,
+                     save=save, filename=paste0(strsplit(filename, ifelse(as.png, '.png', '.pdf'))[[1]],'_',clim,ifelse(as.png, '.png', '.pdf')),
+                     width=width, height=height, as.png=as.png, png.res=png.res,
                      yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                      tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,
                      title=title)

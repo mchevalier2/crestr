@@ -9,6 +9,8 @@ plot_climateSpace(
   climate = x$parameters$climate,
   save = FALSE,
   filename = "Climate_space.pdf",
+  as.png = FALSE,
+  png.res = 300,
   width = 7.48,
   height = min(9, 3.5 * length(climate)),
   y0 = 0.5,
@@ -30,6 +32,11 @@ all the variables are included.}
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
 \code{'Climate_space.pdf'}.}
+
+\item{as.png}{A boolean to indicate if the output should be saved as a png.
+Default is \code{FALSE} and the figure is saved as a pdf file.}
+
+\item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
 \item{width}{The width of the output file in inches (default 7.48in ~ 19cm).}
 
