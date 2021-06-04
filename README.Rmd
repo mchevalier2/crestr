@@ -32,8 +32,8 @@ knitr::opts_chunk$set(
 
 #
 
-The goal of crestr is to enable probabilistic reconstructions of past climate
-change from fossil assemblage data. The approach is based on the estimation of 
+The goal of crestr is to enable probabilistic reconstructions of past climate 
+change from fossil assemblage data. The approach is based on the estimation of
 conditional responses of different bioproxies to various climate parameters.
 Theseresponses take the form of probability density functions (*pdfs*). The
 detailsof the method have been described in

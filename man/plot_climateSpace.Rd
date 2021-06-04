@@ -10,8 +10,8 @@ plot_climateSpace(
   save = FALSE,
   filename = "Climate_space.pdf",
   width = 7.48,
-  height = min(9, 3 * length(climate)),
-  y0 = 0.3,
+  height = min(9, 3.5 * length(climate)),
+  y0 = 0.5,
   add_modern = FALSE,
   resol = 0.25
 )

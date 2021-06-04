@@ -233,6 +233,10 @@ in the future.
 
 ``` r
 export(recons, loc=getwd(), dataname='crest-test')
+#> NULL
+#> [1] "bio1"
+#> NULL
+#> [1] "bio12"
 list.files(file.path(getwd(), 'crest-test'))
 #> [1] "bio1"             "bio12"            "crest-test.RData"
 ```

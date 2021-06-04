@@ -32,7 +32,7 @@ documentation is sparse and the functionalities limited. If you notice any bug,
 or if you would like to see some specific functions implemented, feel free to contact
 me at <chevalier.manuel@gmail.com>. I will try to limit as much as possible
 modifying existing functions and/or function parameters, but at the moment it
-cannot be excluded. My apologies for this.
+cannot be excluded. My apologies for this. 
 
 ## Example
 

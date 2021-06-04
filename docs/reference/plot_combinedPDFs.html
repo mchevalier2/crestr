@@ -155,6 +155,7 @@
   xlim <span class='op'>=</span> <span class='cn'>NA</span>,
   only.present <span class='op'>=</span> <span class='cn'>FALSE</span>,
   only.selected <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  col <span class='op'>=</span> <span class='fu'>crestr</span><span class='fu'>::</span><span class='fu'><a href='colour_theme.html'>colour_theme</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>,
   save <span class='op'>=</span> <span class='cn'>FALSE</span>,
   filename <span class='op'>=</span> <span class='st'>"samplePDFs.pdf"</span>,
   width <span class='op'>=</span> <span class='fl'>7.48</span>,
@@ -198,6 +199,11 @@ the sample (default <code>FALSE</code>).</p></td>
       <th>only.selected</th>
       <td><p>A boolean to only add the names of the selected taxa
 (default <code>FALSE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>col</th>
+      <td><p>A range of colour values to colour the <code>pdfs</code>. Colours will
+be recycled to match the number of taxa.</p></td>
     </tr>
     <tr>
       <th>save</th>
