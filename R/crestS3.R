@@ -148,6 +148,9 @@ print.crestObj <- function(x, ...) {
 #'        bars that should be calculated (default are the values stored in x).
 #' @param optima A boolean to indicate whether to plot the optimum (\code{TRUE})
 #'        or the mean (\code{FALSE}) estimates.
+#' @param pt.cex The size of the points (default 0.8).
+#' @param pt.lwd The thickness of the lines (default 0.8).
+#' @param pt.col The colour of the points and lines.
 #' @param simplify A boolean to indicate if the full distribution of uncertainties
 #'        should be plooted (\code{FALSE}, default) or if they should be
 #'        simplified to the uncertainty range(s).
@@ -185,8 +188,9 @@ plot.crestObj <- function(x,
                           optima = TRUE,
                           add_modern = FALSE,
                           simplify = FALSE,
-                          xlim = NA,
-                          ylim = NA,
+                          xlim = NA, ylim = NA,
+                          pt.cex = 0.8, pt.lwd = 0.8,
+                          pt.col=ifelse(simplify, 'black', 'white'),
                           save = FALSE, width = 5.51, height = 5.51,
                           filename = 'Reconstruction.pdf',
                           col=viridis::viridis(125)[26:125],
@@ -261,11 +265,15 @@ plot.crestObj <- function(x,
             }
         )
         ylim2 <- pdfter[c(min(val[1, ], na.rm=TRUE),max(val[2, ], na.rm=TRUE)), 1]
+        ylim2[1] <- max(ylim[1], ylim2[1], na.rm=TRUE)
+        ylim2[2] <- min(ylim[2], ylim2[2], na.rm=TRUE)
 
         if(save) pdf(paste0(filename,'_',clim,'.pdf'), width = width, height = height)
 
+        graphics::par(ps=8)
+
         if(simplify) {
-            graphics::par(mar = c(2.5, 2.5, 0.4, 0.2))
+            graphics::par(mar = c(2, 2.2, 0.5, 0.5), ps=8, lwd=1)
             graphics::plot(0,0, type='n', xlim=xlim, ylim = ylim2,
                  xaxs='i', yaxs='i', frame = TRUE, axes=FALSE)
 
@@ -301,16 +309,24 @@ plot.crestObj <- function(x,
                     col = "grey70", cex = 0.5, lty = 2
                 )
             }
-            graphics::points(xx, x$reconstructions[[clim]]$optima[, var_to_plot], type='l', lwd=1)
-            graphics::mtext(climate_names[climate_names[, 2] == clim, 3], side=2, line=1.4, cex=0.9, font=2)
-            graphics::mtext(x$inputs$x.name, side=1, line=1.2, cex=0.9, font=2)
-            graphics::par(mgp=c(3,0.2,0))
-            graphics::axis(1, cex.axis=0.8, tck=-0.01)
-            graphics::par(mgp=c(3,0.3,0))
-            graphics::axis(2, cex.axis=0.8, tck=-0.01)
-        } else {
-            graphics::par(mar = c(3, 3, 3.2, 0.5))
+            graphics::points(xx, x$reconstructions[[clim]]$optima[, var_to_plot], type='o', pch=18, col=pt.col, cex=pt.cex, lwd=pt.lwd)
 
+            graphics::par(mgp=c(2,0.3,0), las=1)
+            graphics::axis(2, lwd.ticks=0.8, lwd=0, tck=-0.01, cex.axis=6/7)
+            graphics::par(las=0)
+            graphics::mtext(climate_names[climate_names[, 2] == clim, 3], side=2, line=1.3, cex=1, font=2)
+
+            graphics::par(mgp=c(1,0,0), las=1)
+            graphics::mtext(x$inputs$x.name, side=1, line=0.7, cex=1, font=2)
+            if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
+                graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7, lwd.ticks=0.8, tck=-0.01)
+            } else {
+                graphics::axis(1, cex.axis=6/7, lwd.ticks=0.8, tck=-0.01)
+            }
+
+        } else {
+
+            graphics::par(mar = c(2, 2.2, 3, 0.5), lwd=0.8)
             plot3D::image2D(
               z = (1 - as.matrix(t(pdfter[, -1]))),
               y = pdfter[, 1],
@@ -326,16 +342,25 @@ plot.crestObj <- function(x,
               mgp = c(2, .3, 0),
               las = 1,
               hadj = c(1, 1),
-              xlab = x$inputs$x.name,
-              ylab = climate_names[climate_names[, 2] == clim, 3],
+              xlab = "",
+              ylab = '',
               cex.lab = 6 / 7
             )
-            graphics::axis(2, cex.axis=6/7)
+
+            graphics::par(mgp=c(2,0.3,0), las=1)
+            graphics::axis(2, lwd.ticks=0.8, lwd=0, tck=-0.01, cex.axis=6/7)
+            graphics::par(las=0)
+            graphics::mtext(climate_names[climate_names[, 2] == clim, 3], side=2, line=1.3, cex=1, font=2)
+
+            graphics::par(mgp=c(1,0,0), las=1)
+            graphics::mtext(x$inputs$x.name, side=1, line=0.7, cex=1, font=2)
             if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
-                graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7)
+                graphics::axis(1, at=xx, labels=x$inputs$x, cex.axis=6/7, lwd.ticks=0.8, tck=-0.01)
             } else {
-                graphics::axis(1, cex.axis=6/7)
+                graphics::axis(1, cex.axis=6/7, lwd.ticks=0.8, tck=-0.01)
             }
+
+            graphics::par(lwd=pt.lwd)
             for (e in uncertainties) {
                 val <- apply(pdfter[, -1], 2, function(x) {
                     if(is.na(x[1])) return(c(NA, NA))
@@ -344,10 +369,10 @@ plot.crestObj <- function(x,
                     }
                 )
                 graphics::points(xx, pdfter[val[1, ], 1],
-                    type = "l", col = "white", lty = 3
+                    type = "l", col = pt.col, lty = 3
                 )
                 graphics::points(xx, pdfter[val[2, ], 1],
-                    type = "l", col = "white", lty = 3
+                    type = "l", col = pt.col, lty = 3
                 )
             }
             if(add_modern) {
@@ -356,11 +381,10 @@ plot.crestObj <- function(x,
                 )
             }
             graphics::points(x$reconstructions[[clim]][["optima"]],
-                pch = 18, col = "white", cex = 0.8
+                pch = 18, col = pt.col, cex = pt.cex, type='o'
             )
-            graphics::points(x$reconstructions[[clim]][["optima"]],
-                col = "white", cex = 0.5, type = "l"
-            )
+
+            graphics::par(mgp=c(2,0,0), las=1, lwd=0.8)
 
             plot3D::colkey(
               side = 3,
@@ -372,12 +396,12 @@ plot.crestObj <- function(x,
               col = col,
               clab = "Confidence level",
               font.clab = 1,
-              line.clab = 1.3,
+              line.clab = 1,
               adj.clab = 0.5,
               add = TRUE,
-              tck = -0.4,
-              mgp = c(3, .25, 0),
-              lwd.tick = 0.7
+              tck = -0.3,
+              mgp = c(0, .2, 0),
+              lwd.tick = 0.8
             )
         }
         if(save) grDevices::dev.off()

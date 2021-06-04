@@ -8,12 +8,14 @@ plot_taxaCharacteristics(
   x,
   taxanames = x$inputs$taxa.name,
   climate = x$parameters$climate,
+  col.density = viridis::plasma(20),
+  col.climate = viridis::viridis(22)[3:20],
   save = FALSE,
   filename = "taxaCharacteristics.pdf",
   width = 7.48,
   w0 = 0.3,
   height = 3 * length(climate),
-  h0 = 0.3,
+  h0 = 0.4,
   resol = 0.25
 )
 }
@@ -27,6 +29,12 @@ recorded taxa).}
 
 \item{climate}{Climate variables to be used to generate the plot. By default
 all the variables are included.}
+
+\item{col.density}{The colour gradient to use to map the density of species
+(topleft map).}
+
+\item{col.climate}{The colour gradient to use to map the climate gradients
+(left column).}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is \code{FALSE}.}

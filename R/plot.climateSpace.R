@@ -45,7 +45,7 @@ plot_climateSpace <- function( x,
                       climate = x$parameters$climate,
                       save = FALSE, filename = 'Climate_space.pdf',
                       width=  7.48,
-                      height = min(9, 3*length(climate)), y0 = 0.3,
+                      height = min(9, 3.5*length(climate)), y0 = 0.5,
                       add_modern = FALSE,
                       resol = 0.25
                       ) {
@@ -88,6 +88,7 @@ plot_climateSpace <- function( x,
         } else {
             par_usr <- graphics::par(no.readonly = TRUE)
         }
+        graphics::par(ps=8*3/2)
 
         distribs <- lapply(x$modelling$distributions,
                            function(x) { if(is.data.frame(x)) {
@@ -119,13 +120,11 @@ plot_climateSpace <- function( x,
                width  = c(x1, x2, x1),
                height = rep(c(y0, (y1-y3)/2, y3, (y1-y3)/2), times=length(climate)))
 
+               graphics::par(ps=8*3/2)
 
         ## Plot species abundance --------------------------------------------------
 
         zlab=c(0, ceiling(max(raster::values(veg_space), na.rm=TRUE)))
-
-        xlab <- c(-0.2,1.2)
-        xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
 
         clab=c()
         i <- 0
@@ -142,7 +141,11 @@ plot_climateSpace <- function( x,
             site_xy <- c(x$misc$site_info$long, x$misc$site_info$lat)
         }
 
-        plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab, col=viridis::plasma(20), title='Number of unique species occurences per grid cell', site_xy = site_xy)
+        plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab,
+                col=viridis::plasma(20), title='Number of unique species occurences',
+                site_xy = site_xy,
+                dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate)),
+                scale = 3 / 2)
 
         ## Plot climate spaces -----------------------------------------------------
         ll <- do.call(rbind, distribs)
@@ -178,9 +181,9 @@ plot_climateSpace <- function( x,
                 xlim <- c(minx, maxx) + c(-0.005, 0.1)*dX
                 ylim <- c(miny, maxy) + c(-0.1, 0.05**2)*dY
 
-                graphics::par(mar=c(0,0,0,0))
+                graphics::par(mar=c(0,0,0,0), ps=8*3/2)
                 plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlim, ylim=c(0,1), xaxs='i', yaxs='i')
-                graphics::text(mean(c(minx, maxx)),0.25, paste(climate[clim], '(x-axis) vs.', climate[clim+1], '(y-axis)'), adj=c(0.5,0), cex=0.8, font=1)
+                graphics::text(mean(c(minx, maxx)),0.25, paste(climate[clim], '(x-axis) vs.', climate[clim+1], '(y-axis)'), adj=c(0.5,0), cex=1, font=1)
 
 
                 graphics::par(mar=c(0,0.2,0,0.2))
@@ -191,14 +194,14 @@ plot_climateSpace <- function( x,
                          if (yval >= miny & yval <= maxy) {
                             graphics::segments(maxx, yval, minx, yval, col='grey90', lwd=0.5)
                             graphics::segments(maxx, yval, maxx-diff(xlim)*0.012, yval, lwd=0.5)
-                            graphics::text(maxx+diff(xlim)*0.015, yval, yval, cex=0.5, adj=c(0,0.4))
+                            graphics::text(maxx+diff(xlim)*0.015, yval, yval, cex=6/8, adj=c(0,0.4))
                         }
                     }
                     for(xval in graphics::axTicks(1)){
                         if(xval >= minx & xval <= maxx) {
                             graphics::segments(xval, miny, xval, maxy, col='grey90', lwd=0.5)
                             graphics::segments(xval, miny, xval, miny+diff(ylim)*0.012, lwd=0.5)
-                            graphics::text(xval, miny-diff(ylim)*0.015, xval, cex=0.5, adj=c(0.5,1))
+                            graphics::text(xval, miny-diff(ylim)*0.015, xval, cex=6/8, adj=c(0.5,1))
                         }
                     }
                     graphics::rect(minx, miny, maxx, maxy, lwd=0.5)
@@ -219,7 +222,11 @@ plot_climateSpace <- function( x,
             R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
                                               climate_space[, clim] ),
                                         crs = sp::CRS("+init=epsg:4326"))
-            plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1), brks.pos = brks, brks.lab = brks, title=accClimateVariables(clim)[3], site_xy = site_xy)
+            plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1),
+            brks.pos = brks, brks.lab = brks,
+            title=accClimateVariables(clim)[3], site_xy = site_xy,
+            dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate)),
+            scale = 3/2)
         }
 
         for( clim in climate) {
@@ -231,26 +238,34 @@ plot_climateSpace <- function( x,
                        plot=FALSE)
 
             xval <- range(h1$breaks)
-            xval <- xval + c(-1, 1)*diff(xval)*0.1
-            graphics::par(mar=c(0,0,0,0))
-            plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i') ; {
-                s1 <- graphics::strwidth('Observed', cex=0.8, font=2)
-                s2 <- graphics::strwidth(' vs. ', cex=0.8, font=1)
-                s3 <- graphics::strwidth('Sampled', cex=0.8, font=2)
 
-                graphics::text(0.5-(s1+s2+s3)/2, 0.5, 'Observed', cex=0.8, font=2, col='grey70', adj=c(0,0))
-                graphics::text(0.5-(s1+s2+s3)/2+s1, 0.5, '  vs.  ', cex=0.8, font=1, col='black', adj=c(0,0))
-                graphics::text(0.5-(s1+s2+s3)/2+s1+s2, 0.5, ' Sampled', cex=0.8, font=2, col='black', adj=c(0,0))
-                graphics::text(0.5, 0.3, paste(accClimateVariables(clim)[3],' [',clim,']',sep=''), cex=0.8, font=1, col='black', adj=c(0.5,1))
+            ext_factor_x <- graphics::strwidth(paste0('  ', max(c(h1$counts, h2$counts))), cex=6/8, units='inches')
+            w <- x2 - 2*ext_factor_x
+            ratio <- diff(xval) / w # units per inch
+            xval <- xval + c(-1, 1)*(x2*ratio - diff(xval))/2
+
+
+            graphics::par(mar=c(0,0,0,0), ps=8*3/2)
+            plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i') ; {
+                s1 <- graphics::strwidth('Observed', cex=1, font=2)
+                s2 <- graphics::strwidth(' vs. ', cex=1, font=1)
+                s3 <- graphics::strwidth('Sampled', cex=1, font=2)
+
+                graphics::text(0.5-(s1+s2+s3)/2, 0.5, 'Observed', cex=1, font=2, col='grey70', adj=c(0,0))
+                graphics::text(0.5-(s1+s2+s3)/2+s1, 0.5, '  vs.  ', cex=1, font=1, col='black', adj=c(0,0))
+                graphics::text(0.5-(s1+s2+s3)/2+s1+s2, 0.5, ' Sampled', cex=1, font=2, col='black', adj=c(0,0))
+                graphics::text(0.5, 0.3, paste(accClimateVariables(clim)[3],' [',clim,']',sep=''), cex=1, font=1, col='black', adj=c(0.5,1))
             }
 
             graphics::par(mar=c(0,0,0.1,0))
             opar <- graphics::par(lwd=0.5)
             plot(NA, NA, type='n', xlim=xval, ylim=c(0, max(h1$counts)), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
                 for(yval in graphics::axTicks(2)){
+                    if(yval+graphics::strheight(yval, cex=6/8)/2 < max(h1$counts)) {
+                        graphics::text(h1$breaks[1]-diff(xval)*0.015, yval, yval, cex=6/8, adj=c(1,ifelse(yval==0, 0, 0.4)))
+                    }
                     graphics::segments(h1$breaks[1], yval, max(h1$breaks), yval, col=ifelse(yval==0, 'black', 'grey90'))
                     graphics::segments(h1$breaks[1], yval, h1$breaks[1]+diff(xval)*0.012, yval)
-                    graphics::text(h1$breaks[1]-diff(xval)*0.015, yval, yval, cex=0.5, adj=c(1,0.4))
                 }
                 graphics::segments(h1$breaks[1],0,h1$breaks[1], max(h1$counts))
                 plot(h1, add=TRUE, col='grey70')
@@ -265,10 +280,10 @@ plot_climateSpace <- function( x,
                     graphics::points(x$misc$site_info$climate[, clim], 0.5, pch=23, col='white', bg='red', cex=1.5, lwd=1.5)
                 }
                 for(i in 1:length(h1$breaks)) {
-                    d2 <- h1$breaks[i] - graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=0.5, units='user')/2
+                    d2 <- h1$breaks[i] - graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=6/8, units='user')/2
                     if(d2 - d1 >= 0) {
-                        d1 <- h1$breaks[i] + graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=0.5, units='user')/2
-                        graphics::text(h1$breaks[i], 0.5, h1$breaks[i], cex=0.5, adj=c(0.5, 0.5))
+                        d1 <- h1$breaks[i] + graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=6/8, units='user')/2
+                        graphics::text(h1$breaks[i], 0.5, h1$breaks[i], cex=6/8, adj=c(0.5, 0.5))
                         graphics::segments(h1$breaks[i], 1, h1$breaks[i], 0.9, lwd=0.5)
                         graphics::segments(h1$breaks[i], 0, h1$breaks[i], 0.1, lwd=0.5)
                     }
@@ -280,9 +295,11 @@ plot_climateSpace <- function( x,
             plot(NA, NA, type='n', xlim=xval, ylim=c(max(h2$counts), 0), axes=FALSE, main='', xaxs='i', yaxs='i')  ;  {
                 M <- max(h2$breaks)
                 for(yval in graphics::axTicks(4)){
-                    graphics::segments(h2$breaks[1], yval, M, yval, col=ifelse(yval==0, 'black', 'grey90'))
+                    if(yval-graphics::strheight(yval, cex=6/8)/2 < max(h2$counts)) {
+                        graphics::text(M+diff(xval)*0.015, yval, yval, cex=6/8, adj=c(0,ifelse(yval==0, 1, 0.6)))
+                    }
                     graphics::segments(M, yval, M-diff(xval)*0.012, yval)
-                    graphics::text(M+diff(xval)*0.015, yval, yval, cex=0.5, adj=c(0,0.4))
+                    graphics::segments(h2$breaks[1], yval, M, yval, col=ifelse(yval==0, 'black', 'grey90'))
                 }
                 plot(h2, add=TRUE, col='black', border='grey70')
                 graphics::segments(M,0,M, max(h2$counts))

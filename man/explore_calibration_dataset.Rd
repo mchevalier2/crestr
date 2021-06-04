@@ -8,6 +8,7 @@ explore_calibration_dataset(
   taxaType,
   save = FALSE,
   filename = "calibrationDataset.pdf",
+  col = viridis::viridis(22)[3:22],
   width = 7.48,
   height = 7.48,
   xmn = NA,
@@ -35,6 +36,8 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.}
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
 \code{'Climate_space.pdf'}.}
+
+\item{col}{The color gradient to use. (default is viridis)}
 
 \item{width, height}{The dimensions of the pdf file (default 7.48in ~19cm).}
 
@@ -67,7 +70,7 @@ This function will extract the distributions of all the studied climate proxy an
 }
 \examples{
 \dontrun{
-  d = explore_calibration_dataset(1, xmn=-85, xmx=-30, ymn=-60, ymx=15,
+  d = explore_calibration_dataset(2, xmn=-85, xmx=-30, ymn=-60, ymx=15,
                                   save=TRUE, width = 4, height = 7.5)
   head(d)
 }

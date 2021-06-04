@@ -16,6 +16,8 @@
 #'        (default \code{FALSE}).
 #' @param xlim The climate range to plot the pdfs on. Default is the full range
 #'        used to fit the \code{pdfs} (x$modelling$xrange).
+#' @param col A range of colour values to colour the \code{pdfs}. Colours will
+#'        be recycled to match the number of taxa.
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
@@ -44,6 +46,7 @@
 #'
 plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parameters$climate[1],
                                optima=TRUE, xlim=NA, only.present=FALSE, only.selected=FALSE,
+                               col=crestr::colour_theme(1),
                                save=FALSE, filename='samplePDFs.pdf',
                                width=7.48, height = 5
                               ) {
@@ -80,7 +83,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
         }
         ymx <- ymx * 1.05
 
-        COLS <- rep(pals::alphabet(), length.out=length(x$inputs$taxa.name))
+        COLS <- rep(col, length.out=length(x$inputs$taxa.name))
         names(COLS) <- x$inputs$taxa.name
         LTYS <- 1:length(x$inputs$taxa.name)%/%26+1
         names(LTYS) <- x$inputs$taxa.name
@@ -90,7 +93,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
 
         for(s in samples) {
             graphics::layout(matrix(c(1,2), ncol=2), width=c(5,2), height=1)
-            graphics::par(mar=c(2,2,0.1,0))
+            graphics::par(mar=c(2,2,0.5,0))
             graphics::par(ps=8)
 
             graphics::plot(0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
@@ -110,7 +113,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             for(tax in x$inputs$taxa.name) {
                 if (x$inputs$selectedTaxa[tax, climate] == 1 & x$modelling$weights[s, tax] > 0) {
                     graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                      c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0), lwd=1.5*x$modelling$weights[s, tax], lty=LTYS[tax], col=NA, border=COLS[tax])
+                      c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0), lwd=max(0.2, log10(1+10*x$modelling$weights[s, tax])), lty=LTYS[tax], col=NA, border=COLS[tax])
                 }
             }
 
@@ -125,13 +128,13 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             graphics::box(lwd=0.5)
             graphics::par(mgp=c(3,0.31,0))
             graphics::axis(2,at=c(0,ymx),labels=c("",""),tck=0,lwd=0.5)
-            graphics::axis(2,lwd.ticks=0.5,lwd=0,tck=-0.01,cex.axis=6/7)
-            graphics::mtext('Density of probability',side=2,line=1, cex=1)
+            graphics::axis(2,lwd.ticks=0.5,lwd=0,tck=-0.01,cex.axis=6/8)
+            graphics::mtext('Density of probability',side=2,line=1.1, cex=7/8)
 
-            graphics::par(mgp=-c(3,0,0))
-            graphics::mtext(climate_name,side=1,line=0.8, cex=1)
+            graphics::par(mgp=-c(3,0.1,0))
+            graphics::mtext(climate_name,side=1,line=0.8, cex=7/8)
             graphics::axis(1,at=range(x$modelling$xrange[[climate]]),labels=c("",""),tck=0,lwd=0.5,pos=0)
-            graphics::axis(1, lwd.ticks=0.5,lwd=0,pos=0,tck=-0.01,cex.axis=6/7)
+            graphics::axis(1, lwd.ticks=0.5,lwd=0,pos=0,tck=-0.01,cex.axis=6/8)
 
 
             # taxa selected (ranked by weight), then taxa unselected, then taxa unavailable
@@ -153,14 +156,13 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
                 ordered_tax <- c(ordered_tax, taxa[order(weights, decreasing=FALSE)])
             }
 
-            graphics::par(mar=c(0.1,0.1,0.1,0.1))
+            graphics::par(mar=c(2,0.1,0.1,0.1))
             graphics::par(ps=8)
             graphics::plot( 0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
-                            xlim=c(-0.02,1), ylim=c(1+length(ordered_tax), 1))
-
+                            xlim=c(0,1), ylim=c(1+length(ordered_tax), 1))
 
             for(tax in 1:length(ordered_tax)) {
-                graphics::segments(0, tax+0.5, 0.20, tax+0.5, lwd=max(0.2, 1.5*x$modelling$weights[s, ordered_tax[tax]]), lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
+                graphics::segments(0, tax+0.5, 0.20, tax+0.5, lwd=max(0.2, log10(1+10*x$modelling$weights[s, ordered_tax[tax]])), lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
                 graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 7/8, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
             }
 

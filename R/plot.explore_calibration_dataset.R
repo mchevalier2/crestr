@@ -5,18 +5,20 @@
 #'
 #' @inheritParams crest
 #' @inheritParams plot_climateSpace
+#' @inheritParams plot_map_eqearth
 #' @param width,height The dimensions of the pdf file (default 7.48in ~19cm).
 #' @return The distribution data
 #' @export
 #' @examples
 #' \dontrun{
-#'   d = explore_calibration_dataset(1, xmn=-85, xmx=-30, ymn=-60, ymx=15,
+#'   d = explore_calibration_dataset(2, xmn=-85, xmx=-30, ymn=-60, ymx=15,
 #'                                   save=TRUE, width = 4, height = 7.5)
 #'   head(d)
 #' }
 #'
 explore_calibration_dataset <- function( taxaType,
                                          save = FALSE, filename = 'calibrationDataset.pdf',
+                                         col = viridis::viridis(22)[3:22],
                                          width = 7.48, height = 7.48,
                                          xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                          continents = NA, countries = NA,
@@ -97,9 +99,6 @@ explore_calibration_dataset <- function( taxaType,
     ## Plot species abundance --------------------------------------------------
     zlab=c(0, ifelse(plot.distrib, ceiling(max(raster::values(veg_space), na.rm=TRUE)), 1))
 
-    xlab <- c(-0.2,1.2)
-    xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
-
     clab=c()
     i <- 0
     while(i <= max(zlab)){
@@ -109,15 +108,18 @@ explore_calibration_dataset <- function( taxaType,
     if (plot.distrib)  clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
     zlab[2] <- log10(clab[length(clab)])
 
-    graphics::layout(c(1,2), height = c(0.15, 0.85))
+    graphics::layout(c(1,2), height = c(0.5, height-0.5))
     graphics::par(mar=c(0,0,0,0))
 
-    plot_map_eqearth(veg_space, ext, zlim = zlab,
+    ext <- plot_map_eqearth(veg_space, ext, zlim = zlab,
                      brks.pos=log10(clab), brks.lab=clab,
-                     col=viridis::viridis(22)[3:22],
+                     col=col,
                      title='Number of unique species occurences per grid cell')
 
     if(save) {
+        if(((ext[4]-ext[3])/(ext[2]-ext[1]) - (height-0.5)/width > 0.05) | ((ext[4]-ext[3])/(ext[2]-ext[1]) - (height-0.5)/width < -0.05 )) {
+            cat('SUGGEST: Using height =', round(width*(ext[4]-ext[3])/(ext[2]-ext[1])+0.5, 2), 'would get rid of all the white spaces.\n')
+        }
         grDevices::dev.off()
     } else {
         graphics::par(par_usr)

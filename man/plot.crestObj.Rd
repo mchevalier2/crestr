@@ -13,6 +13,9 @@
   simplify = FALSE,
   xlim = NA,
   ylim = NA,
+  pt.cex = 0.8,
+  pt.lwd = 0.8,
+  pt.col = ifelse(simplify, "black", "white"),
   save = FALSE,
   width = 5.51,
   height = 5.51,
@@ -47,6 +50,12 @@ simplified to the uncertainty range(s).}
     \link{finite} values to be plotted should be used.}
 
 \item{ylim}{the y limits of the plot.}
+
+\item{pt.cex}{The size of the points (default 0.8).}
+
+\item{pt.lwd}{The thickness of the lines (default 0.8).}
+
+\item{pt.col}{The colour of the points and lines.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is \code{FALSE}.}

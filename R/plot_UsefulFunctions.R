@@ -50,10 +50,14 @@ eqearth_get_ext <- function(ext, npoints=15) {
 #' @param colour_scale A boolean to add the colour scale to the plot (default
 #'        \code{TRUE}).
 #' @param top_layer A raster to overlay on top of the map (e.g. a distribution).
+#' @param top_layer.col A colour for plotting top_layer (default 'ghostwhite').
 #' @param site_xy Coordinates of a location to add to the plot.
+#' @param dim The dimension of the plotting window in inches (default dev.size()).
+#' @param scale A scaling parameter to correct for the change of font size
+#'        created by layout().
 #' @export
 #'
-plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos, brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, site_xy=NA) {
+plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos=c(0,1), brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, top_layer.col='ghostwhite', site_xy=NA, dim=NA, scale=1) {
 
     utils::data(M1, package='crestr', envir = environment())
     M1 <- raster::crop(M1, ext)
@@ -106,33 +110,40 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
 
     if (class(dat) == 'RasterLayer')  dat <- raster::mask(dat, bckg.eqearth)
 
+    graphics::par(mar = c(0, 0, 0, 0), ps=8*scale)
     ext <- raster::extent(bckg.eqearth)
-    ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])
-    ext[3:4] <- ext[3:4] + c(-0.1, 0.02)*diff(ext[3:4])
+    ext_factor_x <- max(graphics::strwidth(paste0(' ', round(as.numeric(names(horizontals.eqearth)),2),' '), units='inches', cex=6/8))
+    ext_factor_y <- max(graphics::strheight(paste0('\n', round(as.numeric(names(verticals.eqearth)),2)), units='inches', cex=6/8))
+
+    if(is.na(dim)[1]) dim <- grDevices::dev.size('in')
+
+    ext[1:2] <- ext[1:2] + (ext[2]-ext[1])/dim[1] * c(-ext_factor_x, 0.05)
+    ext[3:4] <- ext[3:4] + (ext[4]-ext[3])/dim[2] * c(-ext_factor_y, 0.05)
 
     ## ...........................................................................
     ## Plotting colour scale .....................................................
 
     if(colour_scale) {
-        graphics::par(mar=c(0,0,0,0))
+        graphics::par(mar=c(0,0,0,0), ps=8*scale)
         xlab <- c(-0.2,1.2)
-        xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
+        xlab <- xlab + diff(xlab)/dim[1] * c(-ext_factor_x, 0.05)
+
         plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlab, ylim=c(-0.05,1), xaxs='i', yaxs='i')
 
         brks2 <- (brks.pos - brks.pos[1]) / diff(range(brks.pos))
-        #for(i in 1:(length(brks2)-1)) {
-        #  graphics::rect(brks2[i], 0, brks2[i+1], 0.3, border=NA, col=viridis::viridis(length(brks.pos)-1)[i])
-        #}
         for(i in 1:length(col)) {
-          graphics::rect((i-1)/length(col), 0, i/length(col), 0.3, lwd=0.3, border=col[i], col=col[i])
+            graphics::rect((i-1)/length(col), 0, i/length(col), 0.3, lwd=0.3, border=col[i], col=col[i])
         }
+
+        cex <- 1
+        while(graphics::strwidth(title, font=2, cex=cex) >= 1.4) cex <- cex - 0.05
 
         cont <- TRUE
         res <- 1
         while(cont) {
             brks2.pos <- brks.pos[c(TRUE, rep(FALSE, res-1))]
             brks2.lab <- brks.lab[c(TRUE, rep(FALSE, res-1))]
-            sizes <- graphics::strwidth(paste(' ',brks2.lab,' ', sep=''), cex=0.5)
+            sizes <- graphics::strwidth(paste(' ',brks2.lab,' ', sep=''), cex=min(cex, 6/8))
             x1 = (brks2.pos - brks.pos[1]) / diff(range(brks.pos)) + sizes/2 ; x1 = x1[1:(length(x1)-1)]
             x2 = (brks2.pos - brks.pos[1]) / diff(range(brks.pos)) - sizes/2 ; x2 = x2[2:length(x2)]
             if(min(x2-x1) <= 0) {
@@ -143,16 +154,17 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         }
 
         for(i in 1:length(brks2.pos)) {
-            graphics::text((brks2.pos[i] - brks2.pos[1])/diff(range(brks.pos)), 0.35, brks2.lab[i] , cex=0.5, adj=c(0.5,0))
+            graphics::text((brks2.pos[i] - brks2.pos[1])/diff(range(brks.pos)), 0.35, brks2.lab[i] , cex=min(cex, 6/8), adj=c(0.5,0))
         }
         graphics::rect(0,0,1,0.3, lwd=0.5)
-        graphics::text(0.5, 0.85, title, font=1, cex=0.8, adj=c(0.5,1))
+
+        graphics::text(0.5, 0.85, title, font=2, cex=cex, adj=c(0.5,1))
     }
 
     ## ...........................................................................
     ## Plotting map ..............................................................
 
-    graphics::par(mar = c(0, 0, 0, 0))
+    graphics::par(mar = c(0, 0, 0, 0), ps=8*scale)
     plot(0, 0, type='n',
          xlim=c(ext[1], ext[2]), ylim=c(ext[3], ext[4]),
          main='', ylab='', xlab='', xaxs='i', yaxs='i',
@@ -169,21 +181,38 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         }
 
         if ('Raster' %in% methods::is(top_layer)) {
-            raster::image(top_layer, add=TRUE, col='ghostwhite')
+            raster::image(top_layer, add=TRUE, col=top_layer.col)
         }
 
         if(length(site_xy) == 2) {
             sp::plot(XY, col='white', bg='red', cex=2, lwd=2, pch=23, add=TRUE)
         }
-        for(v in 1:length(verticals.eqearth.x)) graphics::text(verticals.eqearth.x[v],
-                                                               min(horizontals.eqearth.xy[,2]),
-                                                               paste0('\n', round(as.numeric(names(verticals.eqearth))[v],2)),
-                                                               cex=0.5, adj=c(0.5,0.7))
+        labels <- rep(FALSE, length(verticals.eqearth.x))
+        for(v in 1:length(verticals.eqearth.x)) {
+            overlap <- FALSE
+            if(v > 1 ) {
+                if (labels[v-1]) {
+                    d1 <- graphics::strwidth(paste0('\n ', round(as.numeric(names(verticals.eqearth))[v-1],2), ' '), cex=6/8)
+                    d2 <- graphics::strwidth(paste0('\n ', round(as.numeric(names(verticals.eqearth))[v],2), ' '), cex=6/8)
+                    if (verticals.eqearth.x[v-1] + d1 / 2 >= verticals.eqearth.x[v] - d2 / 2) {
+                        overlap <- TRUE
+                    }
+                }
+            }
+            if (!overlap){
+                graphics::text(verticals.eqearth.x[v], min(horizontals.eqearth.xy[,2]),
+                                paste0('\n', round(as.numeric(names(verticals.eqearth))[v],2)),
+                                cex=6/8, adj=c(0.5,0.7)
+                )
+                labels[v] <- TRUE
+            }
+        }
         for(h in 1:nrow(horizontals.eqearth.xy)) graphics::text(horizontals.eqearth.xy[h,1],
                                                                 horizontals.eqearth.xy[h,2],
                                                                 paste0(round(as.numeric(names(horizontals.eqearth))[h],2),' '),
-                                                                cex=0.5, adj=c(1,0.4))
+                                                                cex=6/8, adj=c(1,0.4))
 
         sp::plot(bckg.eqearth, col=NA, border='black', cex=0.2, add=TRUE)
     }
+    invisible(ext)
 }

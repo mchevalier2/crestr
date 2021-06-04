@@ -9,14 +9,17 @@ plot_map_eqearth(
   ext = raster::extent(dat),
   zlim = range(raster::values(dat), na.rm = TRUE),
   col = viridis::viridis(20),
-  brks.pos,
+  brks.pos = c(0, 1),
   brks.lab = brks.pos,
   npoints = 15,
   nlines = 9,
   title = "",
   colour_scale = TRUE,
   top_layer = NA,
-  site_xy = NA
+  top_layer.col = "ghostwhite",
+  site_xy = NA,
+  dim = NA,
+  scale = 1
 )
 }
 \arguments{
@@ -46,7 +49,14 @@ each dimension. (default is 15 for a smooth result)}
 
 \item{top_layer}{A raster to overlay on top of the map (e.g. a distribution).}
 
+\item{top_layer.col}{A colour for plotting top_layer (default 'ghostwhite').}
+
 \item{site_xy}{Coordinates of a location to add to the plot.}
+
+\item{dim}{The dimension of the plotting window in inches (default dev.size()).}
+
+\item{scale}{A scaling parameter to correct for the change of font size
+created by layout().}
 }
 \description{
 Plots raster data in equal earth projection.

@@ -112,26 +112,24 @@ plot_diagram <- function(x, bars=FALSE,
     yrange <- yrange + c(-0.45*dY, 0)
     if(!is.na(title)) yrange <- yrange + c(0, 0.3*dY)
 
-
     if(save) {
         grDevices::pdf(filename, width=width, height=height)
-        plot(x[, 1], x[, 1], type='n', xlim=xrange, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
-        str_max_left <- 0.7*max(graphics::strwidth(colnames(x)[-1], cex=0.5, units='inches'))
-        str_max_right <- max(c(0.1, graphics::strwidth(as.character(max(seq(0, max(c(max(abs(x[, -1])), yax_incr)), 2*yax_incr))), cex=0.5, units='inches')))
-        grDevices::dev.off()
-        grDevices::pdf(filename, width=width, height=height)
-
-        wd <- width - str_max_left - str_max_right
-        k <- diff(xrange) / wd *2
-        xrange <- xrange + k * c(-str_max_left, str_max_right)
     } else {
-        xrange <- xrange + c(-2.5*dX, 0.9 *dX)
+        par_usr <- graphics::par(no.readonly = TRUE)
     }
 
-    parmar <- graphics::par(mar=c(0,0,0,0))
 
-    plot(x[, 1], x[, 1], type='n', xlim=xrange, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
-    if(!is.na(title)) graphics::text(mean(xlim), mean(c(max(cs), yrange[2])), title, cex=0.8, font=1, adj=c(0.5, 1))
+    graphics::par(mar=c(0,0,0,0), ps=8)
+
+    str_max_left <- max(graphics::strwidth(colnames(x)[-1], cex=6/8, units='inches'))
+    str_max_right <- max(c(0.1, graphics::strwidth(as.character(max(seq(0, max(c(max(abs(x[, -1])), yax_incr)), 2*yax_incr))), cex=6/8, units='inches')))
+
+    xrange2 <- xrange
+    xrange2[1] <- xrange[1] - str_max_left*diff(xrange)/(width-str_max_left-str_max_right) - 0.50*dX
+    xrange2[2] <- xrange[2] + str_max_right*diff(xrange)/(width-str_max_left-str_max_right) + 0.50*dX
+
+    plot(x[, 1], x[, 1], type='n', xlim=xrange2, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
+    if(!is.na(title)) graphics::text(mean(xlim), mean(c(max(cs), yrange[2])), title, cex=1, font=2, adj=c(0.5, 1))
     if(bars) {
         bar_width <- bar_width/2
         for(i in 2:ncol(x)) {
@@ -142,9 +140,9 @@ plot_diagram <- function(x, bars=FALSE,
             graphics::segments(xlim[2], cs[i], xlim[2], cs[i] + max(c(max(abs(x[, i])), yax_incr)), lwd=0.5)
             for(j in seq(0, max(c(max(abs(x[, i])), yax_incr)), yax_incr)) {
                 graphics::segments(xlim[2], cs[i] + j, xlim[2] + 0.1*dX, cs[i] + j, lwd=0.5)
-                if (j %% (2*yax_incr) == 0) graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=0.5, adj=c(0, 0.4))
+                if (j %% (2*yax_incr) == 0) graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=6/8, adj=c(0, 0.4))
             }
-            graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=0.5, adj=c(1,0.5))
+            graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=6/8, adj=c(1,0.5))
         }
     } else {
         for(i in 2:ncol(x)) {
@@ -162,9 +160,9 @@ plot_diagram <- function(x, bars=FALSE,
             graphics::segments(xlim[2], cs[i], xlim[2], cs[i] + max(c(max(abs(x[, i])), yax_incr)), lwd=0.5)
             for(j in seq(0, max(c(max(abs(x[, i])), yax_incr)), yax_incr)) {
                 graphics::segments(xlim[2], cs[i] + j, xlim[2] + 0.1*dX, cs[i] + j, lwd=0.5)
-                if (j %% (2*yax_incr) == 0) graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=0.5, adj=c(0, 0.4))
+                if (j %% (2*yax_incr) == 0) graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=6/8, adj=c(0, 0.4))
             }
-            graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=0.5, adj=c(1,0.5))
+            graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=6/8, adj=c(1,0.5))
         }
     }
     graphics::segments(xlim[1], -0.06*dY, xlim[2], -0.06*dY, lwd=0.5)
@@ -180,7 +178,7 @@ plot_diagram <- function(x, bars=FALSE,
             tck <- round(tck, 3)
         }
         graphics::segments(tck, -0.06*dY, tck, -0.1*dY, lwd=0.5)
-        graphics::text(tck, -0.12*dY, tck, adj=c(0.5, 1), cex=0.5)
+        graphics::text(tck, -0.12*dY, tck, adj=c(0.5, 1), cex=6/8)
     }
     if( tickAtSample ) {
         for( tck in x[, 1]) {
@@ -188,11 +186,11 @@ plot_diagram <- function(x, bars=FALSE,
         }
     }
 
-    graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=0.6, adj=c(0.5,0))
+    graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=1, adj=c(0.5,0))
     if(save) {
         grDevices::dev.off()
     } else {
-        graphics::par(parmar)
+        graphics::par(par_usr)
     }
     invisible()
 }

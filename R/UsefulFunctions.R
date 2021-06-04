@@ -287,3 +287,23 @@ crop <- function(x, shp) {
     }
     x
 }
+
+
+
+#' Returns a vector of colours
+#'
+#' Returns a vector of colours
+#'
+#' @param n An idex to select the colour theme
+#' @export
+#' @examples
+#' colour_theme(1)
+#'
+colour_theme <- function(n) {
+    if(n == 1) {
+        return(c("#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22AA99", "#AAAA11", "#6633CC", "#E67300", "#8B0707", "#651067", "#329262", "#5574A6", "#3B3EAC"))
+    } else {
+        warning("The selected colour theme does not exist.\n")
+        return(NA)
+    }
+}

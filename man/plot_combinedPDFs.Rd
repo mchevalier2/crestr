@@ -12,6 +12,7 @@ plot_combinedPDFs(
   xlim = NA,
   only.present = FALSE,
   only.selected = FALSE,
+  col = crestr::colour_theme(1),
   save = FALSE,
   filename = "samplePDFs.pdf",
   width = 7.48,
@@ -39,6 +40,9 @@ the sample (default \code{FALSE}).}
 
 \item{only.selected}{A boolean to only add the names of the selected taxa
 (default \code{FALSE}).}
+
+\item{col}{A range of colour values to colour the \code{pdfs}. Colours will
+be recycled to match the number of taxa.}
 
 \item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
 Default is \code{FALSE}.}
