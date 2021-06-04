@@ -163,6 +163,8 @@
   save <span class='op'>=</span> <span class='cn'>FALSE</span>,
   width <span class='op'>=</span> <span class='fl'>5.51</span>,
   height <span class='op'>=</span> <span class='fl'>5.51</span>,
+  as.png <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  png.res <span class='op'>=</span> <span class='fl'>300</span>,
   filename <span class='op'>=</span> <span class='st'>"Reconstruction.pdf"</span>,
   col <span class='op'>=</span> <span class='fu'>viridis</span><span class='fu'>::</span><span class='fu'><a href='https://sjmgarnier.github.io/viridisLite/reference/viridis.html'>viridis</a></span><span class='op'>(</span><span class='fl'>125</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>26</span><span class='op'>:</span><span class='fl'>125</span><span class='op'>]</span>,
   <span class='va'>...</span>
@@ -232,6 +234,15 @@ Default is <code>FALSE</code>.</p></td>
     <tr>
       <th>width, height</th>
       <td><p>The dimensions of the pdf file (default 5.51in ~14cm).</p></td>
+    </tr>
+    <tr>
+      <th>as.png</th>
+      <td><p>A boolean to indicate if the output should be saved as a png.
+Default is <code>FALSE</code> and the figure is saved as a pdf file.</p></td>
+    </tr>
+    <tr>
+      <th>png.res</th>
+      <td><p>The resolution of the png file (default 300 pixels per inch).</p></td>
     </tr>
     <tr>
       <th>filename</th>

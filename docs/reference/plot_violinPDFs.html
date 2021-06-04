@@ -156,7 +156,9 @@
   save <span class='op'>=</span> <span class='cn'>FALSE</span>,
   filename <span class='op'>=</span> <span class='st'>"violinPDFs.pdf"</span>,
   width <span class='op'>=</span> <span class='fl'>7.48</span>,
-  height <span class='op'>=</span> <span class='fl'>5</span>
+  height <span class='op'>=</span> <span class='fl'>5</span>,
+  as.png <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  png.res <span class='op'>=</span> <span class='fl'>300</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -207,6 +209,15 @@ the file is saved in the working directory under the name
       <th>height</th>
       <td><p>The height of the output file in inches (default 3in ~ 7.6cm
 per variables).</p></td>
+    </tr>
+    <tr>
+      <th>as.png</th>
+      <td><p>A boolean to indicate if the output should be saved as a png.
+Default is <code>FALSE</code> and the figure is saved as a pdf file.</p></td>
+    </tr>
+    <tr>
+      <th>png.res</th>
+      <td><p>The resolution of the png file (default 300 pixels per inch).</p></td>
     </tr>
     </table>
 

@@ -154,6 +154,8 @@
   col <span class='op'>=</span> <span class='fu'>viridis</span><span class='fu'>::</span><span class='fu'><a href='https://sjmgarnier.github.io/viridisLite/reference/viridis.html'>viridis</a></span><span class='op'>(</span><span class='fl'>22</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>3</span><span class='op'>:</span><span class='fl'>22</span><span class='op'>]</span>,
   width <span class='op'>=</span> <span class='fl'>7.48</span>,
   height <span class='op'>=</span> <span class='fl'>7.48</span>,
+  as.png <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  png.res <span class='op'>=</span> <span class='fl'>300</span>,
   xmn <span class='op'>=</span> <span class='cn'>NA</span>,
   xmx <span class='op'>=</span> <span class='cn'>NA</span>,
   ymn <span class='op'>=</span> <span class='cn'>NA</span>,
@@ -178,23 +180,32 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.</p></td>
     </tr>
     <tr>
       <th>save</th>
-      <td><p>A boolean to indicate if the diagram shoud be saved as a pdf file
-(default <code>FALSE</code>).</p></td>
+      <td><p>A boolean to indicate if the diagram shoud be saved as a pdf file.
+Default is <code>FALSE</code>.</p></td>
     </tr>
     <tr>
       <th>filename</th>
       <td><p>An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:
 the file is saved in the working directory under the name
-<code>'Climate_space.pdf'</code>.</p></td>
+<code>'Reconstruction_climate.pdf'</code>.</p></td>
     </tr>
     <tr>
       <th>col</th>
-      <td><p>The color gradient to use. (default is viridis)</p></td>
+      <td><p>A colour gradient.</p></td>
     </tr>
     <tr>
       <th>width, height</th>
       <td><p>The dimensions of the pdf file (default 7.48in ~19cm).</p></td>
+    </tr>
+    <tr>
+      <th>as.png</th>
+      <td><p>A boolean to indicate if the output should be saved as a png.
+Default is <code>FALSE</code> and the figure is saved as a pdf file.</p></td>
+    </tr>
+    <tr>
+      <th>png.res</th>
+      <td><p>The resolution of the png file (default 300 pixels per inch).</p></td>
     </tr>
     <tr>
       <th>xmn</th>
