@@ -9,7 +9,7 @@ dbRequest(request, dbname = "gbif4crest_02")
 \arguments{
 \item{request}{A SQL request to be executed.}
 
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
+\item{dbname}{The name of the data source database.}
 }
 \value{
 The result of the request.

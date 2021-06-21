@@ -4,9 +4,19 @@
 \alias{getRealmNames}
 \title{Return the list of the realms and associated biomes and ecoregions.}
 \usage{
-getRealmNames(ecoregion = TRUE, dbname = "gbif4crest_02")
+getRealmNames(
+  terr = NA,
+  biome = TRUE,
+  ecoregion = TRUE,
+  dbname = "gbif4crest_02"
+)
 }
 \arguments{
+\item{terr}{A boolean to choose whether to get the terrestrial or the marine
+names. Default value is \code{NA} and will return both.}
+
+\item{biome}{A boolean to choose whether to get the biome names.}
+
 \item{ecoregion}{A boolean to choose whether to get the ecoregions names.}
 
 \item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}

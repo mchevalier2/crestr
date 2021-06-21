@@ -20,6 +20,8 @@
 #' @param dbname The name of the data source database.
 #' @param continents A vector of the continent names defining the study area.
 #' @param countries A vector of the country names defining the study area.
+#' @param basins A vector of the ocean names defining the study area.
+#' @param sectors A vector of the marine sector names defining the study area.
 #' @param realms A vector of the studied botanical realms defining the study area.
 #' @param biomes A vector of the studied botanical biomes defining the study area.
 #' @param ecoregions A vector of the studied botanical ecoregions defining the

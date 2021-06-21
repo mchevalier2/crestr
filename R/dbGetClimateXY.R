@@ -2,12 +2,12 @@
 #'
 #' Extract The climate values associated to a set of coordinates.
 #'
+#' @inheritParams crestObj
 #' @param long The longitude of the site.
 #' @param lat The latitude of the site.
 #' @param climate The climate variables to extract the values from. Returns all
 #'        possible values by default.
 #' @param resol The resolution of the target climatology (default 0.25 degrees).
-#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A data frame containing the climate values.
 #' @export
 #' @examples

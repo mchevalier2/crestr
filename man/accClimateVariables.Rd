@@ -4,11 +4,15 @@
 \alias{accClimateVariables}
 \title{Describes all the variables available in the database.}
 \usage{
-accClimateVariables(v = NA)
+accClimateVariables(v = NA, domain = NA)
 }
 \arguments{
 \item{v}{The name of a variable to quickly access its description and ID
 (default \code{NA} returns all possible values).}
+
+\item{domain}{The domain ('Terrestrial' or 'Marine') of the variables.
+Default value is \cite{NA} and both terrestrial and marine climate
+variable names are returned.}
 }
 \value{
 A data frame descriptive of the climate variables available in the

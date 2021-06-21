@@ -22,7 +22,7 @@ possible values by default.}
 
 \item{resol}{The resolution of the target climatology (default 0.25 degrees).}
 
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
+\item{dbname}{The name of the data source database.}
 }
 \value{
 A data frame containing the climate values.

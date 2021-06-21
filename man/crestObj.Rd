@@ -12,6 +12,8 @@ crestObj(
   dbname = NA,
   continents = NA,
   countries = NA,
+  basins = NA,
+  sectors = NA,
   realms = NA,
   biomes = NA,
   ecoregions = NA,
@@ -55,6 +57,10 @@ details.}
 \item{continents}{A vector of the continent names defining the study area.}
 
 \item{countries}{A vector of the country names defining the study area.}
+
+\item{basins}{A vector of the ocean names defining the study area.}
+
+\item{sectors}{A vector of the marine sector names defining the study area.}
 
 \item{realms}{A vector of the studied botanical realms defining the study area.}
 

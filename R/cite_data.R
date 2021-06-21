@@ -97,10 +97,32 @@ cite_climate_data <- function(x, verbose=TRUE) {
         if (verbose)  cat('You have not used the provided calibration dataset. No climate reference are required.\n')
         tocite <- NULL
     } else {
-        tocite <- "Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302-4315."
-        if ('ai' %in% x$parameters$climate) {
-            tocite <- c(tocite, "Zomer, R.J., Trabucco, A., Bossio, D.A. and Verchot, L. V., 2008, Climate change mitigation: A spatial analysis of global land suitability for clean development mechanism afforestation and reforestation. Agriculture, Ecosystems \u0026 Environment, 126, pp. 67-80.")
+        ref1 <- "Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302-4315."
+        ref2 <- "Zomer, R.J., Trabucco, A., Bossio, D.A. and Verchot, L. V., 2008, Climate change mitigation: A spatial analysis of global land suitability for clean development mechanism afforestation and reforestation. Agriculture, Ecosystems \u0026 Environment, 126, pp. 67-80."
+        ref3 <- "Locarnini, R.A., Mishonov, A.V., Antonov, J.I., Boyer, T.P., Garcia, H.E., Baranova, O.K., Zweng, M.M., Paver, C.R., Reagan, J.R., Johnson, D.R., Hamilton, M. and Seidov, D., 2013. In: Levitus, S. (Ed.), World Ocean Atlas 2013, Volume 1: Temperature. In: Mishonov, A. (Ed.), 73. NOAA Atlas NESDIS, pp. 40 Technical Ed."
+        ref4 <- "Zweng, M.M., Reagan, J.R., Antonov, J.I., Locarnini, R.A., Mishonov, A.V., Boyer, T.P., Garcia, H.E., Baranova, O.K., Johnson, D.R., Seidov, D. and Biddle, M.M., 2013. In: Levitus, S. (Ed.), World Ocean Atlas 2013, Volume 2: Salinity. In: Technical, A.M. (Ed.), 74. NOAA Atlas NESDIS, pp. 39."
+        ref5 <- "Reynolds, R.W., Smith, T.M., Liu, C., Chelton, D.B., Casey, K.S. and Schlax, M.G., 2007, Daily high-resolution-blended analyses for sea surface temperature. Journal of climate, 20(22), pp. 5473-5496."
+        # 1 WorldClim
+        # 2 AI
+        # 3 & 4 SSTs, SSSs, and nutrients
+        # 5 Ice concentration
+        tocite <- c()
+        if (sum(paste0('bio', 1:19) %in% x$parameters$climate) > 0) {
+            tocite <- c(tocite, ref1)
         }
+        if ('ai' %in% x$parameters$climate) {
+            tocite <- c(tocite, ref2)
+        }
+        if (sum( paste(rep(c('sst', 'sss'), each=5), rep(c('ann', 'jfm', 'amj', 'jas', 'ond'), 2), sep='_') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref3, ref4)
+        }
+        if (sum( c('diss_oxy', 'nitrate', 'phosphate', 'silicate') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref3, ref4)
+        }
+        if (sum( paste(rep(c('icec'), each=5), rep(c('ann', 'jfm', 'amj', 'jas', 'ond'), 1), sep='_') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref5)
+        }                                                                                                                           
+
         if (verbose) {
             cat('Please cite the following dataset(s):\n')
             for (s in tocite)  {

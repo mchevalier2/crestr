@@ -12,6 +12,8 @@ getClimateSpace(
   ymx = NA,
   continents = NA,
   countries = NA,
+  basins = NA,
+  sectors = NA,
   realms = NA,
   biomes = NA,
   ecoregions = NA,
@@ -19,21 +21,33 @@ getClimateSpace(
 )
 }
 \arguments{
-\item{climate}{A vectof of the climate variables to extract.}
+\item{climate}{A vector of the climate variables to extract. See
+\code{\link{accClimateVariables}} for the list of accepted values.}
 
-\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
+\item{xmn}{The coordinates defining the study area.}
+
+\item{xmx}{The coordinates defining the study area.}
+
+\item{ymn}{The coordinates defining the study area.}
+
+\item{ymx}{The coordinates defining the study area.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 
 \item{countries}{A vector of the country names defining the study area.}
 
+\item{basins}{A vector of the ocean names defining the study area.}
+
+\item{sectors}{A vector of the marine sector names defining the study area.}
+
 \item{realms}{A vector of the studied botanical realms defining the study area.}
 
 \item{biomes}{A vector of the studied botanical biomes defining the study area.}
 
-\item{ecoregions}{A vector of the studied botanical ecoregions defining the study area.}
+\item{ecoregions}{A vector of the studied botanical ecoregions defining the
+study area.}
 
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
+\item{dbname}{The name of the data source database.}
 }
 \value{
 A matrix of occurrence records with the associated climate.
@@ -54,6 +68,7 @@ raster::plot(raster::rasterFromXYZ(climate), asp=1)
 \seealso{
 \code{\link{accClimateVariables}}
 for a list of accepted climate variable names, \code{\link{accCountryNames}}
-for a list of accepted continent and country names, \code{\link{accRealmNames}}
+for a list of accepted continent and country names, \code{\link{accBasinNames}}
+for a list of accepted basin and sector names, \code{\link{accRealmNames}}
 for a list of accepted realm, biome and ecoregion names.
 }

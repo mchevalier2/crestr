@@ -5,11 +5,11 @@
 \title{Connect to the gbif4crest calibration database}
 \usage{
 connect_online(
-  dbname = "GBIF_v3",
+  dbname = "gbif4crest_02",
   port = 5432,
-  host = "localhost",
-  user = "mchevali1",
-  password = ""
+  host = "gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com",
+  user = "guestuser",
+  password = "pwd12345"
 )
 }
 \arguments{

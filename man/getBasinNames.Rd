@@ -2,7 +2,7 @@
 % Please edit documentation in R/dbFixedNames.R
 \name{getBasinNames}
 \alias{getBasinNames}
-\title{Return the list of the oceans and associated seas.}
+\title{Return the list of oceans and seas.}
 \usage{
 getBasinNames(dbname = "gbif4crest_02")
 }
@@ -13,6 +13,6 @@ getBasinNames(dbname = "gbif4crest_02")
 A list where each element is a vector of corresponding ocean/sea names.
 }
 \description{
-Return the list of the oceans and associated seas.
+Return the list of oceans and seas.
 }
 \keyword{internal}

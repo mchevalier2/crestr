@@ -3,6 +3,7 @@
 #' Extract all possible TaxonIDs corresponding to the provided taxonomical
 #' description, which can be at the family, the genus or the species levels.
 #'
+#' @inheritParams crestObj
 #' @param family The name of the family.
 #' @param genus The name of the genus.
 #' @param species The name of the species.
@@ -12,7 +13,6 @@
 #' @param depth.out The taxonomic resolution of the output table. 1 for Kingdom,
 #'   2 for phylum, 3 for class_name, 4 for order_name, 5 for family, 6 for genus,
 #'   7 for species and 8 to also include the taxonID.
-#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples

@@ -7,7 +7,6 @@
 #' @param family The name of the family.
 #' @param genus The name of the genus.
 #' @param species The name of the species.
-#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples

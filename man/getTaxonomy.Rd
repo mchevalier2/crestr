@@ -28,7 +28,7 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 2 for phylum, 3 for class_name, 4 for order_name, 5 for family, 6 for genus,
 7 for species and 8 to also include the taxonID.}
 
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
+\item{dbname}{The name of the data source database.}
 }
 \value{
 A vector of unique taxonIDs.
