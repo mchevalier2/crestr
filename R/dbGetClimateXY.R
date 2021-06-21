@@ -27,7 +27,7 @@ climate_from_xy <- function(long, lat,
 
     req <- paste0(
       "  SELECT DISTINCT ", paste(climate, collapse=', '),
-      "    FROM wc_qdgc ",
+      "    FROM data_qdgc ",
       "   WHERE longitude = ", long, " AND latitude = ", lat
     )
 

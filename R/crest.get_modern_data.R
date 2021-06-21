@@ -28,6 +28,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                                    df = NA, ai.sqrt = FALSE,
                                    xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                                    continents = NA, countries = NA,
+                                   basins = NA, sectors = NA,
                                    realms = NA, biomes = NA, ecoregions = NA,
                                    minGridCells = 20,
                                    selectedTaxa = NA,
@@ -92,42 +93,137 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     estimate_xlim <- coords[5]
     estimate_ylim <- coords[6]
 
-    if(verbose) cat('[OK]\n  <> Checking continent and country names .. ')
-    cont.list <- accCountryNames()
-    if (!is.na(continents[1])) {
-        for (cont in continents) {
-            if (!cont %in% names(cont.list)) {
-                cat("[FAILED]\n\n")
-                stop(paste0("The continent '", cont, "' is not an accepted value. Please select a name from this list: '",paste(names(cont.list)[-1], collapse="', '"),"'.\n"))
+
+    #' @param taxaType A numerical index (between 1 and 6) to define the type of
+    #'        palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
+    #'        4 for foraminifers, 5 for diatoms and 6 for rodents. The example
+    #'        dataset uses taxaType=0 (pseudo-data). Default is 1.
+
+
+    if (taxaType %in% c(1, 2, 3, 6)) {
+        if(verbose) cat('[OK]\n  <> Checking continent and country names .. ')
+        cont.list <- accCountryNames()
+        if (!is.na(continents[1])) {
+            for (cont in continents) {
+                if (!cont %in% names(cont.list)) {
+                    stop(paste0("The continent '", cont, "' is not an accepted value. Please select a name from this list: '",paste(names(cont.list), collapse="', '"),"'.\n"))
+                }
             }
         }
-    }
-    if (!is.na(countries)[1]) {
-        for (country in countries) {
-            if (!country %in% unlist(cont.list)) {
-                cat("[FAILED]\n\n")
-                acc_vals <- ifelse(is.na(continents[1]), "", paste0("c('",paste(continents, collapse="', '"),"')"))
-                stop(paste0("The country '", country, "' is not an accepted value. Get the list of accepted values using 'accCountryNames(",acc_vals,")'.\n"))
+        if (!is.na(countries)[1]) {
+            for (country in countries) {
+                if (!country %in% unlist(cont.list)) {
+                    acc_vals <- ifelse(is.na(continents[1]), "", paste0("c('",paste(continents, collapse="', '"),"')"))
+                    stop(paste0("The country '", country, "' is not an accepted value. Get the list of accepted values using 'accCountryNames(",acc_vals,")'.\n"))
+                }
+            }
+        }
+
+        if (!is.na(countries[1]) | !is.na(continents[1])) {
+            res <- dbRequest(
+              paste0(
+                "SELECT DISTINCT continent, name, count(*) FROM geopolitical_units WHERE ",
+                ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
+                ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
+                ifelse(is.na(countries)[1], "", paste0("name IN ('", paste(countries, collapse = "', '"), "') ")),
+                " GROUP BY continent, name"
+              ),
+              dbname
+            )
+            if (length(res) == 0) {
+                cat(paste("Problem here. No result for any of the combination continent x country.\n", sep = ""))
+            } else {
+                res
+            }
+        }
+
+    } else {
+        if(verbose) cat('[OK]\n  <> Checking basin and sector names ....... ')
+        basin.list <- accBasinNames()
+        if (!is.na(basins[1])) {
+            for (bas in basins) {
+                if (!bas %in% names(basin.list)) {
+                    stop(paste0("The basin '", bas, "' is not an accepted value. Please select a name from this list: '",paste(names(basin.list), collapse="', '"),"'.\n"))
+                }
+            }
+        }
+        if (!is.na(sectors)[1]) {
+            for (sector in sectors) {
+                if (!sector %in% unlist(basin.list)) {
+                    acc_vals <- ifelse(is.na(sectors[1]), "", paste0("c('",paste(basins, collapse="', '"),"')"))
+                    stop(paste0("The sector '", sector, "' is not an accepted value. Get the list of accepted values using 'accBasinNames(",acc_vals,")'.\n"))
+                }
+            }
+        }
+
+        if (!is.na(basins[1]) | !is.na(sectors[1])) {
+            res <- dbRequest(
+              paste0(
+                "SELECT DISTINCT basin, name, count(*) FROM geopolitical_units WHERE ",
+                ifelse(is.na(basins)[1], "", paste0("basin IN ('", paste(basins, collapse = "', '"), "') ")),
+                ifelse(is.na(basins)[1] | is.na(sectors)[1], "", "AND "),
+                ifelse(is.na(sectors)[1], "", paste0("name IN ('", paste(sectors, collapse = "', '"), "') ")),
+                " GROUP BY basin, name"
+              ),
+              dbname
+            )
+            if (length(res) == 0) {
+                cat(paste("Problem here. No result for any of the combination basin x sector.\n", sep = ""))
+            } else {
+                res
             }
         }
     }
 
-    if (!is.na(countries[1]) | !is.na(continents[1])) {
-        res <- dbRequest(
-          paste0(
-            "SELECT DISTINCT continent, countryname, count(*) FROM geo_qdgc WHERE ",
-            ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
-            ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
-            ifelse(is.na(countries)[1], "", paste0("countryname IN ('", paste(countries, collapse = "', '"), "') ")),
-            " GROUP BY continent, countryname"
-          ),
-          dbname
-        )
-        if (length(res) == 0) {
-            cat(paste("Problem here. No result for any of the combination continent x country.\n", sep = ""))
-        } else {
-            #cat(paste("The database is composed of these countries.\n", sep = ""))
-            res
+    if(verbose) cat('[OK]\n  <> Checking realm/biome/ecoregion names .. ')
+    realm.list <- accRealmNames()
+    if (!is.na(realms[1])) {
+        for (realm in realms) {
+            if (!realm %in% names(realm.list)) {
+                stop(paste0("The realm '", realm, "' is not an accepted value. Please select a name from this list: '", paste(names(realm.list), collapse="', '"),"'.\n"))
+            }
+        }
+    }
+    if (taxaType %in% c(1, 2, 3, 6)){ # For all the terrestrial taxa
+        if (!is.na(biomes)[1]) {
+            for (biome in biomes) {
+                if (!biome %in% unique(unlist(lapply(realm.list, function(x) return(unique(x[, 1])))))) {
+                    acc_vals <- ifelse(is.na(realms[1]), "", paste0("c('",paste(realms, collapse="', '"),"')"))
+                    stop(paste0("The realm '", realm, "' is not an accepted value. Get the list of accepted values using 'accRealmNames(",acc_vals,")'.\n"))
+                }
+            }
+        }
+        if (!is.na(ecoregions)[1]) {
+            for (ecoregion in ecoregions) {
+                if (!ecoregion %in% unique(unlist(lapply(realm.list, function(x) return(unique(x[, 2])))))) {
+                    acc_vals <- ifelse(is.na(realms[1]), "", paste0("c('",paste(realms, collapse="', '"),"')"))
+                    stop(paste0("The ecoregion '", ecoregion, "' is not an accepted value. Get the list of accepted values using 'accRealmNames(",acc_vals,")'.\n"))
+                }
+            }
+        }
+
+        if (!is.na(realms[1]) | !is.na(biomes[1]) | !is.na(ecoregions[1])) {
+            s_realms     <- ifelse(is.na(realms)[1], '',  paste0("realm IN ('", paste(realms, collapse = "', '"), "') "))
+            s_biomes     <- ifelse(is.na(biomes)[1], '',  paste0("biome IN ('", paste(biomes, collapse = "', '"), "') "))
+            s_ecoregions <- ifelse(is.na(ecoregions)[1], '',  paste0("ecoregion IN ('", paste(ecoregions, collapse = "', '"), "') "))
+
+            res <- dbRequest(
+              paste0(
+                "SELECT DISTINCT realm, biome, ecoregion, count(*) FROM biogeography WHERE ",
+                s_realms,
+                ifelse(s_realms != '' & ( s_biomes != '' | s_ecoregions != ''), ' AND ', ''),
+                s_biomes,
+                ifelse(s_biomes != '' & s_ecoregions != '', ' AND ', ''),
+                s_ecoregions,
+                " GROUP BY realm, biome,ecoregion"
+              ),
+              dbname
+            )
+            if (length(res) == 0) {
+                cat(paste("Problem here. No result for any of the combination realm x biome x ecoregion .\n", sep = ""))
+            } else {
+                res
+            }
         }
     }
 
@@ -196,6 +292,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     crest <- crestObj(taxa.name, pse=pse, taxaType=taxaType, climate=climate,
         xmn=xmn, xmx=xmx, ymn=ymn, ymx=ymx,
         continents=continents, countries=countries,
+        basins=basins, sectors=sectors,
         realms=realms, biomes=biomes, ecoregions=ecoregions,
         selectedTaxa = selectedTaxa,
         dbname=dbname
@@ -341,6 +438,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
               taxIDs, climate,
               xmn, xmx, ymn, ymx,
               continents, countries,
+              basins, sectors,
               realms, biomes, ecoregions,
               dbname
             )
@@ -355,9 +453,9 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }else{
                 ##++> Clean data here. Or in the request before.
-                extent_taxa <- table(distributions[[tax]][, 1])
+                extent_taxa <- table(distributions[[tax]][, 'taxonid'])
                 extent_taxa_id <- as.numeric(names(extent_taxa)[extent_taxa >= minGridCells])
-                distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 1] %in% extent_taxa_id, ]
+                distributions[[tax]] <- distributions[[tax]][distributions[[tax]][, 'taxonid'] %in% extent_taxa_id, ]
                 if(nrow(distributions[[tax]]) == 0) {
                     distributions[[tax]] <- NA
                     crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
@@ -399,12 +497,12 @@ crest.get_modern_data <- function( pse, taxaType, climate,
       crest$parameters$climate,
       crest$parameters$xmn, crest$parameters$xmx, crest$parameters$ymn, crest$parameters$ymx,
       crest$parameters$continents, crest$parameters$countries,
+      crest$parameters$basins, crest$parameters$sectors,
       crest$parameters$realms, crest$parameters$biomes, crest$parameters$ecoregions,
       dbname
     )
 
     if(nrow(climate_space) == 0) {
-        cat("[FAILED]\n\n")
         stop(paste0("No climate values available in the defined study area N: ", crest$parameters$ymx," S: ", crest$parameters$ymn, " W: ",crest$parameters$xmn, " E: ",crest$parameters$xmx, ".\n\n"))
     }
 

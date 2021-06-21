@@ -4,15 +4,13 @@
 \alias{accRealmNames}
 \title{Return the list of the realms and associated biomes and ecoregions.}
 \usage{
-accRealmNames(realm = NA, ecoregion = TRUE, dbname = "gbif4crest_02")
+accRealmNames(realm = NA, ecoregion = TRUE)
 }
 \arguments{
 \item{realm}{A name of accepted realm. Default is \code{NA} and returns a
 list of all the biome and ecoregion names sorted by realm.}
 
 \item{ecoregion}{A boolean to choose whether to get the ecoregions names.}
-
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
 }
 \value{
 A list with elements that correspond to the biomes (and possibly

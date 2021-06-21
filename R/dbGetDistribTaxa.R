@@ -3,15 +3,8 @@
 #' Extract all possible TaxonIDs corresponding to the provided taxonomical
 #' description, which can be at the family, the genus or the species levels.
 #'
+#' @inheritParams crestObj
 #' @param taxIDs A vector of accepted Taxa IDs (as returned by \code{\link{getTaxonID}}).
-#' @param climate A vectof of the climate variables to extract.
-#' @param xmn,xmx,ymn,ymx The coordinates defining the study area.
-#' @param continents A vector of the continent names defining the study area.
-#' @param countries A vector of the country names defining the study area.
-#' @param realms A vector of the studied botanical realms defining the study area.
-#' @param biomes A vector of the studied botanical biomes defining the study area.
-#' @param ecoregions A vector of the studied botanical ecoregions defining the study area.
-#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
 #' @return A matrix of occurrence records with the associated climate.
 #' @seealso \code{\link{getTaxonID}} for taxIDs, \code{\link{accClimateVariables}}
 #'     for a list of accepted climate variable names, \code{\link{accCountryNames}}
@@ -30,6 +23,7 @@ getDistribTaxa <- function(taxIDs,
                            climate = NA,
                            xmn = NA, xmx = NA, ymn = NA, ymx = NA,
                            continents = NA, countries = NA,
+                           basins = NA, sectors = NA,
                            realms = NA, biomes = NA, ecoregions = NA,
                            dbname = "gbif4crest_02") {
 
@@ -38,16 +32,33 @@ getDistribTaxa <- function(taxIDs,
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
     if (is.na(continents)[1] & is.na(countries)[1]) {
-        GEO <- ""
+        GEO_terr <- ""
     } else {
-        GEO <- paste0(
-          "AND (distrib_qdgc.longitude, distrib_qdgc.latitude) IN ",
-          "  (SELECT distinct longitude, latitude ",
-          "     FROM geo_qdgc ",
+        GEO_terr <- paste0(
+          "AND countryID IN ",
+          "  (SELECT distinct geopoID ",
+          "     FROM geopolitical_units ",
           "    WHERE ",
           ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
           ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
-          ifelse(is.na(countries)[1], "", paste0("countryname IN ('", paste(countries, collapse = "', '"), "') ")),
+          ifelse(is.na(countries)[1], "", paste0("name IN ('", paste(countries, collapse = "', '"), "') ")),
+          "   ) "
+        )
+    }
+
+    # Formatting subsets of the request------------------------------------------
+    # Formatting the geographical subsetting
+    if (is.na(basins)[1] & is.na(sectors)[1]) {
+        GEO_mari <- ""
+    } else {
+        GEO_mari <- paste0(
+          "AND oceanID IN ",
+          "  (SELECT distinct geopoID ",
+          "     FROM geopolitical_units ",
+          "    WHERE ",
+          ifelse(is.na(basins)[1], "", paste0("basin IN ('", paste(basins, collapse = "', '"), "') ")),
+          ifelse(is.na(basins)[1] | is.na(sectors)[1], "", "AND "),
+          ifelse(is.na(sectors)[1], "", paste0("name IN ('", paste(sectors, collapse = "', '"), "') ")),
           "   ) "
         )
     }
@@ -57,14 +68,14 @@ getDistribTaxa <- function(taxIDs,
         WWF <- ""
     } else {
         WWF <- paste0(
-          "AND (distrib_qdgc.longitude, distrib_qdgc.latitude) IN ",
-          "  (SELECT distinct longitude, latitude ",
-          "     FROM wwf_qdgc ",
+          "AND terr_ecoID IN ",
+          "  (SELECT distinct ecoID ",
+          "     FROM biogeography ",
           "    WHERE ",
           ifelse(is.na(realms)[1], "", paste0("realm IN ('", paste(realms, collapse = "', '"), "') ")),
           ifelse(is.na(realms)[1] | is.na(biomes)[1], "", "AND "),
           ifelse(is.na(biomes)[1], "", paste0("biome IN ('", paste(biomes, collapse = "', '"), "') ")),
-          ifelse(is.na(biomes)[1] | is.na(ecoregions)[1], "", "AND "),
+          ifelse(is.na(biomes)[1] | is.na(ecoregions)[1], ifelse(is.na(realms)[1] | is.na(ecoregions)[1], "", "AND "), "AND "),
           ifelse(is.na(ecoregions)[1], "", paste0("ecoregion IN ('", paste(ecoregions, collapse = "', '"), "') ")),
           "   ) "
         )
@@ -76,30 +87,30 @@ getDistribTaxa <- function(taxIDs,
         CLIM2 <- " "
         CLIM3 <- " "
     } else {
-        CLIM1 <- ", wc_qdgc "
-        CLIM2 <- "     AND distrib_qdgc.longitude = wc_qdgc.longitude AND distrib_qdgc.latitude = wc_qdgc.latitude "
+        CLIM1 <- ", data_qdgc "
+        CLIM2 <- "     "
         CLIM3 <- paste(', ', paste(climate, collapse = ", "))
     }
 
     # Formatting the request-----------------------------------------------------
-    req <- paste0(
-      "  SELECT DISTINCT taxonid, distrib_qdgc.longitude, ",
-      "  distrib_qdgc.latitude ", CLIM3,
-      "    FROM distrib_qdgc ", CLIM1,
-      "   WHERE taxonID IN (", paste(taxIDs, collapse = ", "), ") ",
-      "     ", CLIM2, " ",
-      "     AND distrib_qdgc.longitude >= ", coords[1], " AND distrib_qdgc.longitude <= ", coords[2], " ",
-      "     AND distrib_qdgc.latitude >= ", coords[3], " AND distrib_qdgc.latitude <= ", coords[4], " ",
-      "     ", GEO, " ",
-      "     ", WWF, " ",
-      "ORDER BY taxonid, distrib_qdgc.longitude, distrib_qdgc.latitude"
-    )
+    req <- paste0("SELECT DISTINCT taxonid, locid FROM distrib_qdgc WHERE taxonID IN (", paste(taxIDs, collapse = ", "), ")")
+    res <- dbRequest(req, dbname)
 
+    req2 <- paste0(
+      "  SELECT DISTINCT locid, longitude, latitude", CLIM3,
+      "    FROM data_qdgc ",
+      "   WHERE locid IN (", paste(unique(res[, 2]), collapse = ", "), ")",
+      "     ", CLIM2, " ",
+      "     AND longitude >= ", coords[1], " AND longitude <= ", coords[2], " ",
+      "     AND latitude >= ", coords[3], " AND latitude <= ", coords[4], " ",
+      "     ", GEO_terr, " ",
+      "     ", GEO_mari, " ",
+      "     ", WWF, " "
+    )
+    res2 <- dbRequest(req2, dbname)
 
     # Executing the request------------------------------------------------------
-    res <- dbRequest(req, dbname)
-    if ('ai' %in% climate) {
-        res[, 'ai'] <- res[, 'ai'] / 10000
-    }
-    res
+
+    res <- merge(res, res2, by='locid')
+    res[, c('taxonid', 'longitude', 'latitude', climate)]
 }
