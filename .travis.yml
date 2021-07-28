@@ -19,11 +19,17 @@ addons:
       - libproj-dev
       - libgeos-dev
 
-os: linux
-arch:
-  - arm64
-  - ppc64le
-  - s390x
+os:
+  - linux
+  - osx
+
+
+osx_image: xcode12.5
+
+
+matrix:
+allow_failures:
+    - os: osx
 
 
 env:
