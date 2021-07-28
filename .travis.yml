@@ -19,16 +19,11 @@ addons:
       - libproj-dev
       - libgeos-dev
 
-os:
-  - linux
-  - osx
-
-
-disable_homebrew: true
-
-matrix:
-allow_failures:
-    - os: osx
+os: linux
+arch:
+  - arm64
+  - ppc64le
+  - s390x
 
 
 env:
