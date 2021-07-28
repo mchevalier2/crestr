@@ -1,7 +1,13 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
+language: r
+r:
+  - oldrel
+  - release
+  - devel
+
 cache: packages
+sudo: required
 
 addons:
   apt:
@@ -15,6 +21,8 @@ addons:
 
 os:
   - osx
+  - solaris
+  - linux
 
 
 matrix:
