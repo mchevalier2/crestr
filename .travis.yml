@@ -23,6 +23,7 @@ addons:
 os:
   - linux
   - osx
+  
 
 osx_image: xcode10
 #disable_homebrew: true
