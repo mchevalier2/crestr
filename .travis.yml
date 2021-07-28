@@ -22,6 +22,7 @@ addons:
 os:
   - solaris
   - linux
+  - osx
 
 
 matrix:
