@@ -12,6 +12,7 @@ sudo: required
 addons:
   apt:
     packages:
+      - PROJ
       - gdal-bin
       - proj-bin
       - libgdal-dev
@@ -20,10 +21,11 @@ addons:
       - libgeos-dev
 
 os:
-  - solaris
   - linux
   - osx
 
+osx_image: xcode10
+#disable_homebrew: true
 
 matrix:
 allow_failures:
