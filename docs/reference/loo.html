@@ -184,29 +184,15 @@ all the associated data.</p>
 <span class='op'>}</span>
 <span class='co'>## example using pre-saved reconstruction obtained with the previous command.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>)</span>
-<span class='va'>reconstr</span><span class='op'>$</span><span class='va'>reconstructions</span><span class='op'>$</span><span class='va'>bio12</span><span class='op'>$</span><span class='va'>loo</span>
+<span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>$</span><span class='va'>reconstructions</span><span class='op'>$</span><span class='va'>bio12</span><span class='op'>$</span><span class='va'>loo</span>, <span class='va'>head</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Taxon1
-#&gt;            optima        mean
-#&gt;  [1,]    0.000000    0.000000
-#&gt;  [2,]    0.000000    0.000000
-#&gt;  [3,]    0.000000    0.000000
-#&gt;  [4,]    0.000000    0.000000
-#&gt;  [5,]    0.000000    0.000000
-#&gt;  [6,] -182.364729 -197.771177
-#&gt;  [7,] -239.679359 -249.710754
-#&gt;  [8,]  -26.052104  -18.320965
-#&gt;  [9,]    7.815631    8.455766
-#&gt; [10,]   13.026052   14.290933
-#&gt; [11,]  -41.683367  -32.668605
-#&gt; [12,]  -96.392786 -112.524268
-#&gt; [13,]   44.288577   36.953037
-#&gt; [14,]   46.893788   40.625266
-#&gt; [15,]   41.683367   36.281960
-#&gt; [16,]   41.683367   35.819763
-#&gt; [17,]   41.683367   35.940248
-#&gt; [18,]   36.472946   31.458539
-#&gt; [19,]   41.683367   35.711446
-#&gt; [20,]   39.078156   34.421036
+#&gt;         optima      mean
+#&gt; [1,]    0.0000    0.0000
+#&gt; [2,]    0.0000    0.0000
+#&gt; [3,]    0.0000    0.0000
+#&gt; [4,]    0.0000    0.0000
+#&gt; [5,]    0.0000    0.0000
+#&gt; [6,] -182.3647 -197.7712
 #&gt; 
 #&gt; $Taxon2
 #&gt; [1] NA
@@ -215,50 +201,22 @@ all the associated data.</p>
 #&gt; [1] NA
 #&gt; 
 #&gt; $Taxon4
-#&gt;           optima       mean
-#&gt;  [1,] -164.12826 -183.51599
-#&gt;  [2,]    0.00000    0.00000
-#&gt;  [3,]    0.00000    0.00000
-#&gt;  [4,]    0.00000    0.00000
-#&gt;  [5,] -375.15030 -373.28380
-#&gt;  [6,]    0.00000    0.00000
-#&gt;  [7,]    0.00000    0.00000
-#&gt;  [8,] -171.94389 -145.27040
-#&gt;  [9,] -140.68136 -115.89239
-#&gt; [10,]  -91.18236  -77.58674
-#&gt; [11,] -208.41683 -187.06323
-#&gt; [12,]    0.00000    0.00000
-#&gt; [13,]  -52.10421  -46.95964
-#&gt; [14,]  -49.49900  -43.28741
-#&gt; [15,]  -54.70942  -47.63072
-#&gt; [16,]  -54.70942  -48.09292
-#&gt; [17,]  -54.70942  -47.97243
-#&gt; [18,]  -59.91984  -52.45414
-#&gt; [19,]  -54.70942  -48.20123
-#&gt; [20,]  -57.31463  -49.98661
+#&gt;         optima      mean
+#&gt; [1,] -164.1283 -183.5160
+#&gt; [2,]    0.0000    0.0000
+#&gt; [3,]    0.0000    0.0000
+#&gt; [4,]    0.0000    0.0000
+#&gt; [5,] -375.1503 -373.2838
+#&gt; [6,]    0.0000    0.0000
 #&gt; 
 #&gt; $Taxon5
-#&gt;          optima       mean
-#&gt;  [1,] 489.77956 408.219218
-#&gt;  [2,]   0.00000   0.000000
-#&gt;  [3,]   0.00000   0.000000
-#&gt;  [4,]   0.00000   0.000000
-#&gt;  [5,] 278.75752 218.451410
-#&gt;  [6,] 375.15030 310.051350
-#&gt;  [7,] 317.83567 258.111772
-#&gt;  [8,] 125.05010  95.597816
-#&gt;  [9,]  49.49900  36.934782
-#&gt; [10,]  36.47295  27.067142
-#&gt; [11,] 224.04810 174.894082
-#&gt; [12,] 461.12224 395.298259
-#&gt; [13,]   0.00000   0.000000
-#&gt; [14,]   0.00000   0.000000
-#&gt; [15,]   0.00000   0.000000
-#&gt; [16,]   0.00000   0.000000
-#&gt; [17,]   0.00000   0.000000
-#&gt; [18,]   0.00000   0.000000
-#&gt; [19,]   0.00000   0.000000
-#&gt; [20,]   2.60521   1.657055
+#&gt;        optima     mean
+#&gt; [1,] 489.7796 408.2192
+#&gt; [2,]   0.0000   0.0000
+#&gt; [3,]   0.0000   0.0000
+#&gt; [4,]   0.0000   0.0000
+#&gt; [5,] 278.7575 218.4514
+#&gt; [6,] 375.1503 310.0513
 #&gt; </div><div class='input'><span class='fu'><a href='plot_loo.html'>plot_loo</a></span><span class='op'>(</span><span class='va'>reconstr</span><span class='op'>)</span>
 </div><div class='img'><img src='loo-1.png' alt='' width='700' height='700' /></div><div class='img'><img src='loo-2.png' alt='' width='700' height='700' /></div><div class='input'>
 </div></pre>

@@ -158,9 +158,18 @@ description, which can be at the family, the genus or the species levels.</p>
   ymx <span class='op'>=</span> <span class='cn'>NA</span>,
   continents <span class='op'>=</span> <span class='cn'>NA</span>,
   countries <span class='op'>=</span> <span class='cn'>NA</span>,
+  basins <span class='op'>=</span> <span class='cn'>NA</span>,
+  sectors <span class='op'>=</span> <span class='cn'>NA</span>,
   realms <span class='op'>=</span> <span class='cn'>NA</span>,
   biomes <span class='op'>=</span> <span class='cn'>NA</span>,
   ecoregions <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_min <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_max <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_range <span class='op'>=</span> <span class='cn'>NA</span>,
+  year_min <span class='op'>=</span> <span class='fl'>1900</span>,
+  year_max <span class='op'>=</span> <span class='fl'>2021</span>,
+  nodate <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  type_of_obs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>8</span>, <span class='fl'>9</span><span class='op'>)</span>,
   dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span>
 <span class='op'>)</span></pre>
 
@@ -173,10 +182,23 @@ description, which can be at the family, the genus or the species levels.</p>
     </tr>
     <tr>
       <th>climate</th>
-      <td><p>A vectof of the climate variables to extract.</p></td>
+      <td><p>A vector of the climate variables to extract. See
+<code><a href='accClimateVariables.html'>accClimateVariables</a></code> for the list of accepted values.</p></td>
     </tr>
     <tr>
-      <th>xmn, xmx, ymn, ymx</th>
+      <th>xmn</th>
+      <td><p>The coordinates defining the study area.</p></td>
+    </tr>
+    <tr>
+      <th>xmx</th>
+      <td><p>The coordinates defining the study area.</p></td>
+    </tr>
+    <tr>
+      <th>ymn</th>
+      <td><p>The coordinates defining the study area.</p></td>
+    </tr>
+    <tr>
+      <th>ymx</th>
       <td><p>The coordinates defining the study area.</p></td>
     </tr>
     <tr>
@@ -188,6 +210,14 @@ description, which can be at the family, the genus or the species levels.</p>
       <td><p>A vector of the country names defining the study area.</p></td>
     </tr>
     <tr>
+      <th>basins</th>
+      <td><p>A vector of the ocean names defining the study area.</p></td>
+    </tr>
+    <tr>
+      <th>sectors</th>
+      <td><p>A vector of the marine sector names defining the study area.</p></td>
+    </tr>
+    <tr>
       <th>realms</th>
       <td><p>A vector of the studied botanical realms defining the study area.</p></td>
     </tr>
@@ -197,11 +227,51 @@ description, which can be at the family, the genus or the species levels.</p>
     </tr>
     <tr>
       <th>ecoregions</th>
-      <td><p>A vector of the studied botanical ecoregions defining the study area.</p></td>
+      <td><p>A vector of the studied botanical ecoregions defining the
+study area.</p></td>
+    </tr>
+    <tr>
+      <th>elev_min</th>
+      <td><p>Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'<code>NA</code> ).</p></td>
+    </tr>
+    <tr>
+      <th>elev_max</th>
+      <td><p>Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'<code>NA</code> ).</p></td>
+    </tr>
+    <tr>
+      <th>elev_range</th>
+      <td><p>Parameters discard the grid cell with a high elevational
+range (default is <code>NA</code>).</p></td>
+    </tr>
+    <tr>
+      <th>year_min</th>
+      <td><p>The oldest and youngest occurrences accepted
+(default is 1900-2021).</p></td>
+    </tr>
+    <tr>
+      <th>year_max</th>
+      <td><p>The oldest and youngest occurrences accepted
+(default is 1900-2021).</p></td>
+    </tr>
+    <tr>
+      <th>nodate</th>
+      <td><p>A boolean to accept occurrences without a date (can overlap
+with occurrences with a date; default <code>TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>type_of_obs</th>
+      <td><p>The type of observation to use in the study. 1: human
+observation, 2: observation, 3: preserved specimen, 4: living specimem,
+5: fossil specimen, 6: material sample, 7: machine observation, 8:
+literature, 9: unknown (Default <code><a href='https://rdrr.io/r/base/c.html'>c(1, 2, 3, 8, 9)</a></code>)</p></td>
     </tr>
     <tr>
       <th>dbname</th>
-      <td><p>The name of the database. Default is <code>'gbif4crest_02'</code>.</p></td>
+      <td><p>The name of the data source database.</p></td>
     </tr>
     </table>
 
@@ -224,13 +294,8 @@ for a list of accepted realm, biome and ecoregion names.</p></div>
 <span class='op'>)</span>
 <span class='va'>distrib</span>
 </div><div class='output co'>#&gt;   taxonid longitude latitude  bio1
-#&gt; 1 1000054    18.125   59.375 6.382
-#&gt; 2 1000183     4.375   52.125 9.908
-#&gt; 3 1000183    13.125   52.375 9.207
-#&gt; 4 1000183    13.125   55.625 8.143
-#&gt; 5 1000183    18.125   59.375 6.382
-#&gt; 6 1000356     8.375   50.125 9.251
-#&gt; 7 1000356     8.875   49.125 9.621</div></pre>
+#&gt; 1 1000183     4.375   52.125 9.734
+#&gt; 2 1000183    13.125   55.625 8.210</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

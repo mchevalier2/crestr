@@ -1,5 +1,5 @@
 Package: crestr
-Title: A probabilistic approach to reconstruct past climates from bioproxies
+Title: A Probabilistic Approach to Reconstruct Past Climates Using Biological Climate Proxies
 Version: 0.0.0.9000
 Authors@R:
     person(given = "Manuel",
@@ -7,10 +7,11 @@ Authors@R:
            role = c("aut", "cre"),
            email = "chevalier.manuel@gmail.com",
            comment = c(ORCID = "0000-0002-8183-9881"))
-Description: The packages applies the CREST climate reconstruction method. All
-             the necessary calibration data can be obtained through the package.
-             An ensemble of graphical outputs have been designed to facilitate
-             use of the package and interpretation of the results.
+Description: This package was designed to apply the CREST climate reconstruction
+             method. It can be used using the calibration data that can be obtained
+             through the package or by importing private data. An ensemble of
+             graphical outputs were designed to facilitate the use of the
+             package and the interpretation of the results.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

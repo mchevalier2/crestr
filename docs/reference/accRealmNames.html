@@ -147,7 +147,7 @@
     <p>Return the list of the realms and associated biomes and ecoregions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>accRealmNames</span><span class='op'>(</span>realm <span class='op'>=</span> <span class='cn'>NA</span>, ecoregion <span class='op'>=</span> <span class='cn'>TRUE</span>, dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>accRealmNames</span><span class='op'>(</span>realm <span class='op'>=</span> <span class='cn'>NA</span>, ecoregion <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -160,10 +160,6 @@ list of all the biome and ecoregion names sorted by realm.</p></td>
     <tr>
       <th>ecoregion</th>
       <td><p>A boolean to choose whether to get the ecoregions names.</p></td>
-    </tr>
-    <tr>
-      <th>dbname</th>
-      <td><p>The name of the database. Default is <code>'gbif4crest_02'</code>.</p></td>
     </tr>
     </table>
 
@@ -196,7 +192,7 @@ ecoregions) of each realm.</p>
 #&gt; 18                                  Deserts and xeric shrublands
 #&gt; 19                                  Deserts and xeric shrublands
 #&gt; 20                                  Deserts and xeric shrublands
-#&gt; 21                               Flooded grasslands and savannas
+#&gt; 21                                  Deserts and xeric shrublands
 #&gt; 22                               Flooded grasslands and savannas
 #&gt; 23                               Flooded grasslands and savannas
 #&gt; 24                               Flooded grasslands and savannas
@@ -204,16 +200,16 @@ ecoregions) of each realm.</p>
 #&gt; 26                               Flooded grasslands and savannas
 #&gt; 27                               Flooded grasslands and savannas
 #&gt; 28                               Flooded grasslands and savannas
-#&gt; 29                                                     Mangroves
-#&gt; 30                                                     Mangroves
+#&gt; 29                               Flooded grasslands and savannas
+#&gt; 30                                                         Lakes
 #&gt; 31                                                     Mangroves
 #&gt; 32                                                     Mangroves
 #&gt; 33                                                     Mangroves
-#&gt; 34                   Mediterranean Forests, woodlands and scrubs
-#&gt; 35                   Mediterranean Forests, woodlands and scrubs
+#&gt; 34                                                     Mangroves
+#&gt; 35                                                     Mangroves
 #&gt; 36                   Mediterranean Forests, woodlands and scrubs
-#&gt; 37                             Montane grasslands and shrublands
-#&gt; 38                             Montane grasslands and shrublands
+#&gt; 37                   Mediterranean Forests, woodlands and scrubs
+#&gt; 38                   Mediterranean Forests, woodlands and scrubs
 #&gt; 39                             Montane grasslands and shrublands
 #&gt; 40                             Montane grasslands and shrublands
 #&gt; 41                             Montane grasslands and shrublands
@@ -227,14 +223,14 @@ ecoregions) of each realm.</p>
 #&gt; 49                             Montane grasslands and shrublands
 #&gt; 50                             Montane grasslands and shrublands
 #&gt; 51                             Montane grasslands and shrublands
-#&gt; 52                 Temperate grasslands, savannas and shrublands
-#&gt; 53                 Temperate grasslands, savannas and shrublands
+#&gt; 52                             Montane grasslands and shrublands
+#&gt; 53                             Montane grasslands and shrublands
 #&gt; 54                 Temperate grasslands, savannas and shrublands
-#&gt; 55                Tropical and subtropical dry broadleaf forests
-#&gt; 56                Tropical and subtropical dry broadleaf forests
+#&gt; 55                 Temperate grasslands, savannas and shrublands
+#&gt; 56                 Temperate grasslands, savannas and shrublands
 #&gt; 57                Tropical and subtropical dry broadleaf forests
-#&gt; 58  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 59  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 58                Tropical and subtropical dry broadleaf forests
+#&gt; 59                Tropical and subtropical dry broadleaf forests
 #&gt; 60  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 61  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 62  Tropical and subtropical grasslands, savannas and shrublands
@@ -258,9 +254,9 @@ ecoregions) of each realm.</p>
 #&gt; 80  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 81  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 82  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 83              Tropical and subtropical moist broadleaf forests
-#&gt; 84              Tropical and subtropical moist broadleaf forests
-#&gt; 85              Tropical and subtropical moist broadleaf forests
+#&gt; 83  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 84  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 85  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 86              Tropical and subtropical moist broadleaf forests
 #&gt; 87              Tropical and subtropical moist broadleaf forests
 #&gt; 88              Tropical and subtropical moist broadleaf forests
@@ -287,6 +283,10 @@ ecoregions) of each realm.</p>
 #&gt; 109             Tropical and subtropical moist broadleaf forests
 #&gt; 110             Tropical and subtropical moist broadleaf forests
 #&gt; 111             Tropical and subtropical moist broadleaf forests
+#&gt; 112             Tropical and subtropical moist broadleaf forests
+#&gt; 113             Tropical and subtropical moist broadleaf forests
+#&gt; 114             Tropical and subtropical moist broadleaf forests
+#&gt; 115             Tropical and subtropical moist broadleaf forests
 #&gt;                                                 ecoregion
 #&gt; 1                              Aldabra Island xeric scrub
 #&gt; 2                    Arabian Peninsula coastal fog desert
@@ -295,110 +295,114 @@ ecoregions) of each realm.</p>
 #&gt; 5               Ethiopian xeric grasslands and shrublands
 #&gt; 6                     Gulf of Oman desert and semi-desert
 #&gt; 7                         Hobyo grasslands and shrublands
-#&gt; 8                                  Kalahari xeric savanna
-#&gt; 9                                        Kaokoveld desert
-#&gt; 10                              Madagascar spiny thickets
-#&gt; 11                         Madagascar succulent woodlands
-#&gt; 12                  Masai xeric grasslands and shrublands
-#&gt; 13                                             Nama Karoo
-#&gt; 14                                           Namib desert
-#&gt; 15                             Namibian savanna woodlands
-#&gt; 16                        Socotra Island xeric shrublands
-#&gt; 17                         Somali montane xeric woodlands
-#&gt; 18                 Southwestern Arabian foothills savanna
-#&gt; 19                 Southwestern Arabian montane woodlands
-#&gt; 20                                        Succulent Karoo
-#&gt; 21                               East African halophytics
-#&gt; 22                                 Etosha Pan halophytics
-#&gt; 23                      Inner Niger Delta flooded savanna
-#&gt; 24                              Lake Chad flooded savanna
-#&gt; 25                             Saharan flooded grasslands
-#&gt; 26                      Zambezian coastal flooded savanna
-#&gt; 27                           Zambezian flooded grasslands
-#&gt; 28                                  Zambezian halophytics
-#&gt; 29                              Central African mangroves
-#&gt; 30                                 East African mangroves
-#&gt; 31                                      Guinean mangroves
-#&gt; 32                                   Madagascar mangroves
-#&gt; 33                              Southern Africa mangroves
-#&gt; 34                                        Albany thickets
-#&gt; 35                        Lowland fynbos and renosterveld
-#&gt; 36                        Montane fynbos and renosterveld
-#&gt; 37                Angolan montane forest-grassland mosaic
-#&gt; 38                    Angolan scarp savanna and woodlands
-#&gt; 39      Drakensberg alti-montane grasslands and woodlands
-#&gt; 40  Drakensberg montane grasslands, woodlands and forests
-#&gt; 41                         East African montane moorlands
-#&gt; 42       Eastern Zimbabwe montane forest-grassland mosaic
-#&gt; 43             Ethiopian montane grasslands and woodlands
-#&gt; 44                            Ethiopian montane moorlands
-#&gt; 45                                    Highveld grasslands
-#&gt; 46                    Jos Plateau forest-grassland mosaic
-#&gt; 47                            Madagascar ericoid thickets
-#&gt; 48             Maputaland-Pondoland bushland and thickets
-#&gt; 49                     Rwenzori-Virunga montane moorlands
-#&gt; 50          Southern Rift montane forest-grassland mosaic
-#&gt; 51           South Malawi montane forest-grassland mosaic
-#&gt; 52                             Al Hajar montane woodlands
-#&gt; 53  Amsterdam and Saint-Paul Islands temperate grasslands
-#&gt; 54    Tristan Da Cunha-Gough Islands shrub and grasslands
-#&gt; 55                         Cape Verde Islands dry forests
-#&gt; 56                       Madagascar dry deciduous forests
-#&gt; 57                    Zambezian Cryptosepalum dry forests
-#&gt; 58                               Angolan Miombo woodlands
-#&gt; 59                               Angolan Mopane woodlands
-#&gt; 60                         Ascension scrub and grasslands
-#&gt; 61                     Central Zambezian Miombo woodlands
-#&gt; 62                               Eastern Miombo woodlands
-#&gt; 63                                  East Sudanian savanna
-#&gt; 64                          Guinean forest-savanna mosaic
-#&gt; 65                                    Itigi-Sumbu thicket
-#&gt; 66                     Kalahari Acacia-Baikiaea woodlands
-#&gt; 67                                 Mandara Plateau mosaic
-#&gt; 68      Northern Acacia-Commiphora bushlands and thickets
-#&gt; 69               Northern Congolian forest-savanna mosaic
-#&gt; 70                                Sahelian Acacia savanna
-#&gt; 71                          Serengeti volcanic grasslands
-#&gt; 72        Somali Acacia-Commiphora bushlands and thickets
-#&gt; 73      Southern Acacia-Commiphora bushlands and thickets
-#&gt; 74                               Southern Africa bushveld
-#&gt; 75               Southern Congolian forest-savanna mosaic
-#&gt; 76                              Southern Miombo woodlands
-#&gt; 77                   Victoria Basin forest-savanna mosaic
-#&gt; 78                Western Congolian forest-savanna mosaic
-#&gt; 79                           Western Zambezian grasslands
-#&gt; 80                                  West Sudanian savanna
-#&gt; 81                         Zambezian and Mopane woodlands
-#&gt; 82                           Zambezian Baikiaea woodlands
-#&gt; 83                         Albertine Rift montane forests
-#&gt; 84                    Atlantic Equatorial coastal forests
-#&gt; 85                          Cameroonian Highlands forests
-#&gt; 86                      Central Congolian lowland forests
-#&gt; 87                                        Comoros forests
-#&gt; 88                         Cross-Niger transition forests
-#&gt; 89                     Cross-Sanaga-Bioko coastal forests
-#&gt; 90                           East African montane forests
-#&gt; 91                                    Eastern Arc forests
-#&gt; 92                        Eastern Congolian swamp forests
-#&gt; 93                                Eastern Guinean forests
-#&gt; 94                              Ethiopian montane forests
-#&gt; 95                            Granitic Seychelles forests
-#&gt; 96                                Guinean montane forests
-#&gt; 97                     KwaZulu-Cape coastal forest mosaic
-#&gt; 98                             Madagascar lowland forests
-#&gt; 99                            Madagascar subhumid forests
-#&gt; 100                      Maputaland coastal forest mosaic
-#&gt; 101                                     Mascarene forests
-#&gt; 102              Mount Cameroon and Bioko montane forests
-#&gt; 103                             Niger Delta swamp forests
-#&gt; 104                              Nigerian lowland forests
-#&gt; 105                Northeastern Congolian lowland forests
-#&gt; 106     Northern Zanzibar-Inhambane coastal forest mosaic
-#&gt; 107                Northwestern Congolian lowland forests
-#&gt; 108  Sao Tome, Principe and Annobon moist lowland forests
-#&gt; 109     Southern Zanzibar-Inhambane coastal forest mosaic
-#&gt; 110                       Western Congolian swamp forests
-#&gt; 111                       Western Guinean lowland forests
+#&gt; 8              Ile Europa and Bassas da India xeric scrub
+#&gt; 9                                  Kalahari xeric savanna
+#&gt; 10                                       Kaokoveld desert
+#&gt; 11                              Madagascar spiny thickets
+#&gt; 12                         Madagascar succulent woodlands
+#&gt; 13                  Masai xeric grasslands and shrublands
+#&gt; 14                                             Nama Karoo
+#&gt; 15                                           Namib desert
+#&gt; 16                             Namibian savanna woodlands
+#&gt; 17                        Socotra Island xeric shrublands
+#&gt; 18                         Somali montane xeric woodlands
+#&gt; 19                 Southwestern Arabian foothills savanna
+#&gt; 20                 Southwestern Arabian montane woodlands
+#&gt; 21                                        Succulent Karoo
+#&gt; 22                               East African halophytics
+#&gt; 23                                 Etosha Pan halophytics
+#&gt; 24                      Inner Niger Delta flooded savanna
+#&gt; 25                              Lake Chad flooded savanna
+#&gt; 26                             Saharan flooded grasslands
+#&gt; 27                      Zambezian coastal flooded savanna
+#&gt; 28                           Zambezian flooded grasslands
+#&gt; 29                                  Zambezian halophytics
+#&gt; 30                                                   Lake
+#&gt; 31                              Central African mangroves
+#&gt; 32                                 East African mangroves
+#&gt; 33                                      Guinean mangroves
+#&gt; 34                                   Madagascar mangroves
+#&gt; 35                              Southern Africa mangroves
+#&gt; 36                                        Albany thickets
+#&gt; 37                        Lowland fynbos and renosterveld
+#&gt; 38                        Montane fynbos and renosterveld
+#&gt; 39                Angolan montane forest-grassland mosaic
+#&gt; 40                    Angolan scarp savanna and woodlands
+#&gt; 41      Drakensberg alti-montane grasslands and woodlands
+#&gt; 42  Drakensberg montane grasslands, woodlands and forests
+#&gt; 43                         East African montane moorlands
+#&gt; 44       Eastern Zimbabwe montane forest-grassland mosaic
+#&gt; 45             Ethiopian montane grasslands and woodlands
+#&gt; 46                            Ethiopian montane moorlands
+#&gt; 47                                    Highveld grasslands
+#&gt; 48                    Jos Plateau forest-grassland mosaic
+#&gt; 49                            Madagascar ericoid thickets
+#&gt; 50             Maputaland-Pondoland bushland and thickets
+#&gt; 51                     Rwenzori-Virunga montane moorlands
+#&gt; 52          Southern Rift montane forest-grassland mosaic
+#&gt; 53           South Malawi montane forest-grassland mosaic
+#&gt; 54                             Al Hajar montane woodlands
+#&gt; 55  Amsterdam and Saint-Paul Islands temperate grasslands
+#&gt; 56    Tristan Da Cunha-Gough Islands shrub and grasslands
+#&gt; 57                         Cape Verde Islands dry forests
+#&gt; 58                       Madagascar dry deciduous forests
+#&gt; 59                    Zambezian Cryptosepalum dry forests
+#&gt; 60                               Angolan Miombo woodlands
+#&gt; 61                               Angolan Mopane woodlands
+#&gt; 62                         Ascension scrub and grasslands
+#&gt; 63                     Central Zambezian Miombo woodlands
+#&gt; 64                               Eastern Miombo woodlands
+#&gt; 65                                  East Sudanian savanna
+#&gt; 66                          Guinean forest-savanna mosaic
+#&gt; 67                                    Itigi-Sumbu thicket
+#&gt; 68                     Kalahari Acacia-Baikiaea woodlands
+#&gt; 69                                 Mandara Plateau mosaic
+#&gt; 70      Northern Acacia-Commiphora bushlands and thickets
+#&gt; 71               Northern Congolian forest-savanna mosaic
+#&gt; 72                                Sahelian Acacia savanna
+#&gt; 73                          Serengeti volcanic grasslands
+#&gt; 74        Somali Acacia-Commiphora bushlands and thickets
+#&gt; 75      Southern Acacia-Commiphora bushlands and thickets
+#&gt; 76                               Southern Africa bushveld
+#&gt; 77               Southern Congolian forest-savanna mosaic
+#&gt; 78                              Southern Miombo woodlands
+#&gt; 79                         St. Helena scrub and woodlands
+#&gt; 80                   Victoria Basin forest-savanna mosaic
+#&gt; 81                Western Congolian forest-savanna mosaic
+#&gt; 82                           Western Zambezian grasslands
+#&gt; 83                                  West Sudanian savanna
+#&gt; 84                         Zambezian and Mopane woodlands
+#&gt; 85                           Zambezian Baikiaea woodlands
+#&gt; 86                         Albertine Rift montane forests
+#&gt; 87                    Atlantic Equatorial coastal forests
+#&gt; 88                          Cameroonian Highlands forests
+#&gt; 89                      Central Congolian lowland forests
+#&gt; 90                                        Comoros forests
+#&gt; 91                         Cross-Niger transition forests
+#&gt; 92                     Cross-Sanaga-Bioko coastal forests
+#&gt; 93                           East African montane forests
+#&gt; 94                                    Eastern Arc forests
+#&gt; 95                        Eastern Congolian swamp forests
+#&gt; 96                                Eastern Guinean forests
+#&gt; 97                              Ethiopian montane forests
+#&gt; 98                            Granitic Seychelles forests
+#&gt; 99                                Guinean montane forests
+#&gt; 100                        Knysna-Amatole montane forests
+#&gt; 101                    KwaZulu-Cape coastal forest mosaic
+#&gt; 102                            Madagascar lowland forests
+#&gt; 103                           Madagascar subhumid forests
+#&gt; 104                      Maputaland coastal forest mosaic
+#&gt; 105                                     Mascarene forests
+#&gt; 106              Mount Cameroon and Bioko montane forests
+#&gt; 107                             Niger Delta swamp forests
+#&gt; 108                              Nigerian lowland forests
+#&gt; 109                Northeastern Congolian lowland forests
+#&gt; 110     Northern Zanzibar-Inhambane coastal forest mosaic
+#&gt; 111                Northwestern Congolian lowland forests
+#&gt; 112  Sao Tome, Principe and Annobon moist lowland forests
+#&gt; 113     Southern Zanzibar-Inhambane coastal forest mosaic
+#&gt; 114                       Western Congolian swamp forests
+#&gt; 115                       Western Guinean lowland forests
 #&gt; 
 #&gt; $Antarctic
 #&gt;    biome                            ecoregion
@@ -406,6 +410,18 @@ ecoregions) of each realm.</p>
 #&gt; 2 Tundra          Maudlandia Antarctic desert
 #&gt; 3 Tundra            Scotia Sea Islands tundra
 #&gt; 4 Tundra Southern Indian Ocean Islands tundra
+#&gt; 
+#&gt; $Arctic
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Arctic Europe`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $Argentina
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
 #&gt; 
 #&gt; $Australian
 #&gt;                                                           biome
@@ -489,7 +505,9 @@ ecoregions) of each realm.</p>
 #&gt; 78             Tropical and subtropical moist broadleaf forests
 #&gt; 79             Tropical and subtropical moist broadleaf forests
 #&gt; 80             Tropical and subtropical moist broadleaf forests
-#&gt; 81                                                       Tundra
+#&gt; 81             Tropical and subtropical moist broadleaf forests
+#&gt; 82             Tropical and subtropical moist broadleaf forests
+#&gt; 83                                                       Tundra
 #&gt;                                                        ecoregion
 #&gt; 1                                     Carnarvon xeric shrublands
 #&gt; 2                                     Central Ranges xeric scrub
@@ -552,26 +570,36 @@ ecoregions) of each realm.</p>
 #&gt; 59                            Central Range montane rain forests
 #&gt; 60                                        Halmahera rain forests
 #&gt; 61                           Huon Peninsula montane rain forests
-#&gt; 62                            Louisiade Archipelago rain forests
-#&gt; 63                  New Britain-New Ireland lowland rain forests
-#&gt; 64                  New Britain-New Ireland montane rain forests
-#&gt; 65                                    New Caledonia rain forests
-#&gt; 66 Northern New Guinea lowland rain and freshwater swamp forests
-#&gt; 67                      Northern New Guinea montane rain forests
-#&gt; 68                              Queensland tropical rain forests
-#&gt; 69                                            Seram rain forests
-#&gt; 70                                  Solomon Islands rain forests
-#&gt; 71                              Southeastern Papuan rain forests
-#&gt; 72                  Southern New Guinea freshwater swamp forests
-#&gt; 73                      Southern New Guinea lowland rain forests
-#&gt; 74                                 Sulawesi lowland rain forests
-#&gt; 75                                 Sulawesi montane rain forests
-#&gt; 76                                Trobriand Islands rain forests
-#&gt; 77                                          Vanuatu rain forests
-#&gt; 78                             Vogelkop-Aru lowland rain forests
-#&gt; 79                                 Vogelkop montane rain forests
-#&gt; 80                                            Yapen rain forests
-#&gt; 81                         Antipodes Subantarctic Islands tundra
+#&gt; 62                          Lord Howe Island subtropical forests
+#&gt; 63                            Louisiade Archipelago rain forests
+#&gt; 64                  New Britain-New Ireland lowland rain forests
+#&gt; 65                  New Britain-New Ireland montane rain forests
+#&gt; 66                                    New Caledonia rain forests
+#&gt; 67                            Norfolk Island subtropical forests
+#&gt; 68 Northern New Guinea lowland rain and freshwater swamp forests
+#&gt; 69                      Northern New Guinea montane rain forests
+#&gt; 70                              Queensland tropical rain forests
+#&gt; 71                                            Seram rain forests
+#&gt; 72                                  Solomon Islands rain forests
+#&gt; 73                              Southeastern Papuan rain forests
+#&gt; 74                  Southern New Guinea freshwater swamp forests
+#&gt; 75                      Southern New Guinea lowland rain forests
+#&gt; 76                                 Sulawesi lowland rain forests
+#&gt; 77                                 Sulawesi montane rain forests
+#&gt; 78                                Trobriand Islands rain forests
+#&gt; 79                                          Vanuatu rain forests
+#&gt; 80                             Vogelkop-Aru lowland rain forests
+#&gt; 81                                 Vogelkop montane rain forests
+#&gt; 82                                            Yapen rain forests
+#&gt; 83                         Antipodes Subantarctic Islands tundra
+#&gt; 
+#&gt; $`Black Sea`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $Chile
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
 #&gt; 
 #&gt; $Indomalayan
 #&gt;                                                            biome
@@ -676,10 +704,11 @@ ecoregions) of each realm.</p>
 #&gt; 99              Tropical and subtropical moist broadleaf forests
 #&gt; 100             Tropical and subtropical moist broadleaf forests
 #&gt; 101             Tropical and subtropical moist broadleaf forests
-#&gt; 102                  Tropical and suptropical coniferous forests
+#&gt; 102             Tropical and subtropical moist broadleaf forests
 #&gt; 103                  Tropical and suptropical coniferous forests
 #&gt; 104                  Tropical and suptropical coniferous forests
 #&gt; 105                  Tropical and suptropical coniferous forests
+#&gt; 106                  Tropical and suptropical coniferous forests
 #&gt;                                                          ecoregion
 #&gt; 1                                       Deccan thorn scrub forests
 #&gt; 2                                              Indus Valley desert
@@ -760,32 +789,53 @@ ecoregions) of each realm.</p>
 #&gt; 77                         Peninsular Malaysian peat swamp forests
 #&gt; 78                               Peninsular Malaysian rain forests
 #&gt; 79                              Red River freshwater swamp forests
-#&gt; 80               South China-Vietnam subtropical evergreen forests
-#&gt; 81                         Southern Annamites montane rain forests
-#&gt; 82                               South Taiwan monsoon rain forests
-#&gt; 83                       Southwest Borneo freshwater swamp forests
-#&gt; 84                     South Western Ghats moist deciduous forests
-#&gt; 85                        South Western Ghats montane rain forests
-#&gt; 86                                  Sri Lanka lowland rain forests
-#&gt; 87                                  Sri Lanka montane rain forests
-#&gt; 88                                   Sulu Archipelago rain forests
-#&gt; 89                               Sumatran freshwater swamp forests
-#&gt; 90                                   Sumatran lowland rain forests
-#&gt; 91                                   Sumatran montane rain forests
-#&gt; 92                                     Sumatran peat swamp forests
-#&gt; 93                                         Sundaland heath forests
-#&gt; 94                             Sundarbans freshwater swamp forests
-#&gt; 95                            Taiwan subtropical evergreen forests
-#&gt; 96           Tenasserim-South Thailand semi-evergreen rain forests
-#&gt; 97                              Tonle Sap freshwater swamp forests
-#&gt; 98                             Tonle Sap-Mekong peat swamp forests
-#&gt; 99                   Upper Gangetic Plains moist deciduous forests
-#&gt; 100                              Western Java montane rain forests
-#&gt; 101                                      Western Java rain forests
-#&gt; 102                             Himalayan subtropical pine forests
-#&gt; 103                                    Luzon tropical pine forests
-#&gt; 104                           Northeast India-Myanmar pine forests
-#&gt; 105                                 Sumatran tropical pine forests
+#&gt; 80                                         South China Sea Islands
+#&gt; 81               South China-Vietnam subtropical evergreen forests
+#&gt; 82                         Southern Annamites montane rain forests
+#&gt; 83                               South Taiwan monsoon rain forests
+#&gt; 84                       Southwest Borneo freshwater swamp forests
+#&gt; 85                     South Western Ghats moist deciduous forests
+#&gt; 86                        South Western Ghats montane rain forests
+#&gt; 87                                  Sri Lanka lowland rain forests
+#&gt; 88                                  Sri Lanka montane rain forests
+#&gt; 89                                   Sulu Archipelago rain forests
+#&gt; 90                               Sumatran freshwater swamp forests
+#&gt; 91                                   Sumatran lowland rain forests
+#&gt; 92                                   Sumatran montane rain forests
+#&gt; 93                                     Sumatran peat swamp forests
+#&gt; 94                                         Sundaland heath forests
+#&gt; 95                             Sundarbans freshwater swamp forests
+#&gt; 96                            Taiwan subtropical evergreen forests
+#&gt; 97           Tenasserim-South Thailand semi-evergreen rain forests
+#&gt; 98                              Tonle Sap freshwater swamp forests
+#&gt; 99                             Tonle Sap-Mekong peat swamp forests
+#&gt; 100                  Upper Gangetic Plains moist deciduous forests
+#&gt; 101                              Western Java montane rain forests
+#&gt; 102                                      Western Java rain forests
+#&gt; 103                             Himalayan subtropical pine forests
+#&gt; 104                                    Luzon tropical pine forests
+#&gt; 105                           Northeast India-Myanmar pine forests
+#&gt; 106                                 Sumatran tropical pine forests
+#&gt; 
+#&gt; $`Inner Baltic Sea`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Mediterranean Sea`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Mid South Tropical Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Mid-tropical North Pacific Ocean`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`N Atlantic boreal`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
 #&gt; 
 #&gt; $Nearctic
 #&gt;                                                            biome
@@ -1027,6 +1077,10 @@ ecoregions) of each realm.</p>
 #&gt; 117       Pacific Coastal Mountain icefields and tundra
 #&gt; 118                             Torngat Mountain tundra
 #&gt; 
+#&gt; $`NE Atlantic`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
 #&gt; $Neotropical
 #&gt;                                                            biome
 #&gt; 1                                   Deserts and xeric shrublands
@@ -1042,41 +1096,41 @@ ecoregions) of each realm.</p>
 #&gt; 11                                  Deserts and xeric shrublands
 #&gt; 12                                  Deserts and xeric shrublands
 #&gt; 13                                  Deserts and xeric shrublands
-#&gt; 14                               Flooded grasslands and savannas
-#&gt; 15                               Flooded grasslands and savannas
+#&gt; 14                                  Deserts and xeric shrublands
+#&gt; 15                                  Deserts and xeric shrublands
 #&gt; 16                               Flooded grasslands and savannas
 #&gt; 17                               Flooded grasslands and savannas
 #&gt; 18                               Flooded grasslands and savannas
 #&gt; 19                               Flooded grasslands and savannas
 #&gt; 20                               Flooded grasslands and savannas
-#&gt; 21                                                     Mangroves
-#&gt; 22                                                     Mangroves
-#&gt; 23                                                     Mangroves
+#&gt; 21                               Flooded grasslands and savannas
+#&gt; 22                               Flooded grasslands and savannas
+#&gt; 23                               Flooded grasslands and savannas
 #&gt; 24                                                     Mangroves
 #&gt; 25                                                     Mangroves
 #&gt; 26                                                     Mangroves
 #&gt; 27                                                     Mangroves
-#&gt; 28                   Mediterranean Forests, woodlands and scrubs
-#&gt; 29                             Montane grasslands and shrublands
-#&gt; 30                             Montane grasslands and shrublands
-#&gt; 31                             Montane grasslands and shrublands
+#&gt; 28                                                     Mangroves
+#&gt; 29                                                     Mangroves
+#&gt; 30                                                     Mangroves
+#&gt; 31                   Mediterranean Forests, woodlands and scrubs
 #&gt; 32                             Montane grasslands and shrublands
 #&gt; 33                             Montane grasslands and shrublands
 #&gt; 34                             Montane grasslands and shrublands
 #&gt; 35                             Montane grasslands and shrublands
 #&gt; 36                             Montane grasslands and shrublands
 #&gt; 37                             Montane grasslands and shrublands
-#&gt; 38                         Temperate broadleaf and mixed forests
-#&gt; 39                         Temperate broadleaf and mixed forests
-#&gt; 40                         Temperate broadleaf and mixed forests
-#&gt; 41                 Temperate grasslands, savannas and shrublands
-#&gt; 42                 Temperate grasslands, savannas and shrublands
-#&gt; 43                 Temperate grasslands, savannas and shrublands
-#&gt; 44                 Temperate grasslands, savannas and shrublands
-#&gt; 45                Tropical and subtropical dry broadleaf forests
-#&gt; 46                Tropical and subtropical dry broadleaf forests
-#&gt; 47                Tropical and subtropical dry broadleaf forests
-#&gt; 48                Tropical and subtropical dry broadleaf forests
+#&gt; 38                             Montane grasslands and shrublands
+#&gt; 39                             Montane grasslands and shrublands
+#&gt; 40                             Montane grasslands and shrublands
+#&gt; 41                         Temperate broadleaf and mixed forests
+#&gt; 42                         Temperate broadleaf and mixed forests
+#&gt; 43                         Temperate broadleaf and mixed forests
+#&gt; 44                         Temperate broadleaf and mixed forests
+#&gt; 45                 Temperate grasslands, savannas and shrublands
+#&gt; 46                 Temperate grasslands, savannas and shrublands
+#&gt; 47                 Temperate grasslands, savannas and shrublands
+#&gt; 48                 Temperate grasslands, savannas and shrublands
 #&gt; 49                Tropical and subtropical dry broadleaf forests
 #&gt; 50                Tropical and subtropical dry broadleaf forests
 #&gt; 51                Tropical and subtropical dry broadleaf forests
@@ -1103,19 +1157,19 @@ ecoregions) of each realm.</p>
 #&gt; 72                Tropical and subtropical dry broadleaf forests
 #&gt; 73                Tropical and subtropical dry broadleaf forests
 #&gt; 74                Tropical and subtropical dry broadleaf forests
-#&gt; 75  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 76  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 77  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 78  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 75                Tropical and subtropical dry broadleaf forests
+#&gt; 76                Tropical and subtropical dry broadleaf forests
+#&gt; 77                Tropical and subtropical dry broadleaf forests
+#&gt; 78                Tropical and subtropical dry broadleaf forests
 #&gt; 79  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 80  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 81  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 82  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 83              Tropical and subtropical moist broadleaf forests
-#&gt; 84              Tropical and subtropical moist broadleaf forests
-#&gt; 85              Tropical and subtropical moist broadleaf forests
-#&gt; 86              Tropical and subtropical moist broadleaf forests
-#&gt; 87              Tropical and subtropical moist broadleaf forests
+#&gt; 83  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 84  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 85  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 86  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 87  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 88              Tropical and subtropical moist broadleaf forests
 #&gt; 89              Tropical and subtropical moist broadleaf forests
 #&gt; 90              Tropical and subtropical moist broadleaf forests
@@ -1190,188 +1244,216 @@ ecoregions) of each realm.</p>
 #&gt; 159             Tropical and subtropical moist broadleaf forests
 #&gt; 160             Tropical and subtropical moist broadleaf forests
 #&gt; 161             Tropical and subtropical moist broadleaf forests
-#&gt; 162                  Tropical and suptropical coniferous forests
-#&gt; 163                  Tropical and suptropical coniferous forests
-#&gt; 164                  Tropical and suptropical coniferous forests
-#&gt; 165                  Tropical and suptropical coniferous forests
-#&gt; 166                  Tropical and suptropical coniferous forests
-#&gt; 167                  Tropical and suptropical coniferous forests
-#&gt; 168                  Tropical and suptropical coniferous forests
-#&gt; 169                  Tropical and suptropical coniferous forests
+#&gt; 162             Tropical and subtropical moist broadleaf forests
+#&gt; 163             Tropical and subtropical moist broadleaf forests
+#&gt; 164             Tropical and subtropical moist broadleaf forests
+#&gt; 165             Tropical and subtropical moist broadleaf forests
+#&gt; 166             Tropical and subtropical moist broadleaf forests
+#&gt; 167             Tropical and subtropical moist broadleaf forests
+#&gt; 168             Tropical and subtropical moist broadleaf forests
+#&gt; 169             Tropical and subtropical moist broadleaf forests
 #&gt; 170                  Tropical and suptropical coniferous forests
 #&gt; 171                  Tropical and suptropical coniferous forests
-#&gt;                                            ecoregion
-#&gt; 1                        Araya and Paria xeric scrub
-#&gt; 2                                     Atacama desert
-#&gt; 3                                           Caatinga
-#&gt; 4                               Caribbean shrublands
-#&gt; 5                                 Cuban cactus scrub
-#&gt; 6                 Galápagos Islands scrubland mosaic
-#&gt; 7                   Guajira-Barranquilla xeric scrub
-#&gt; 8                          La Costa xeric shrublands
-#&gt; 9                          Motagua Valley thornscrub
-#&gt; 10                             Paraguana xeric scrub
-#&gt; 11                             San Lucan xeric scrub
-#&gt; 12                                    Sechura desert
-#&gt; 13                          Tehuacán Valley matorral
-#&gt; 14                                    Cuban wetlands
-#&gt; 15                                        Everglades
-#&gt; 16                      Guayaquil flooded grasslands
-#&gt; 17                                  Orinoco wetlands
-#&gt; 18                                          Pantanal
-#&gt; 19                            Paraná flooded savanna
-#&gt; 20                Southern Cone Mesopotamian savanna
-#&gt; 21       Amazon-Orinoco-Southern Caribbean mangroves
-#&gt; 22                      Bahamian-Antillean mangroves
-#&gt; 23             Mesoamerican Gulf-Caribbean mangroves
-#&gt; 24           Northern Mesoamerican Pacific mangroves
-#&gt; 25                  South American Pacific mangroves
-#&gt; 26                       Southern Atlantic mangroves
-#&gt; 27           Southern Mesoamerican Pacific mangroves
-#&gt; 28                                  Chilean matorral
-#&gt; 29                           Central Andean dry puna
-#&gt; 30                               Central Andean puna
-#&gt; 31                           Central Andean wet puna
-#&gt; 32                         Cordillera Central páramo
-#&gt; 33                       Cordillera de Merida páramo
-#&gt; 34                                        High Monte
-#&gt; 35                            Northern Andean páramo
-#&gt; 36                                Santa Marta páramo
-#&gt; 37                            Southern Andean steppe
-#&gt; 38          Juan Fernández Islands temperate forests
-#&gt; 39                       Magellanic subpolar forests
-#&gt; 40                       Valdivian temperate forests
-#&gt; 41                                           Espinal
-#&gt; 42                                      Humid Pampas
-#&gt; 43                                         Low Monte
-#&gt; 44                                 Patagonian steppe
-#&gt; 45                   Apure-Villavicencio dry forests
-#&gt; 46                              Atlantic dry forests
-#&gt; 47                                 Bajío dry forests
-#&gt; 48                                Balsas dry forests
-#&gt; 49                      Bolivian montane dry forests
-#&gt; 50                          Cauca Valley dry forests
-#&gt; 51                      Central American dry forests
-#&gt; 52                    Chiapas Depression dry forests
-#&gt; 53                            Chiquitano dry forests
-#&gt; 54                                 Cuban dry forests
-#&gt; 55                            Ecuadorian dry forests
-#&gt; 56                           Hispaniolan dry forests
-#&gt; 57                   Islas Revillagigedo dry forests
-#&gt; 58                               Jalisco dry forests
-#&gt; 59                              Jamaican dry forests
-#&gt; 60                           Lara-Falcón dry forests
-#&gt; 61                      Lesser Antillean dry forests
-#&gt; 62                      Magdalena Valley dry forests
-#&gt; 63                             Maracaibo dry forests
-#&gt; 64                               Marañón dry forests
-#&gt; 65                            Panamanian dry forests
-#&gt; 66                          Patía Valley dry forests
-#&gt; 67                          Puerto Rican dry forests
-#&gt; 68                   Sierra de la Laguna dry forests
-#&gt; 69                              Sinaloan dry forests
-#&gt; 70                           Sinú Valley dry forests
-#&gt; 71                      Southern Pacific dry forests
-#&gt; 72                          Tumbes-Piura dry forests
-#&gt; 73                              Veracruz dry forests
-#&gt; 74                               Yucatán dry forests
-#&gt; 75                                      Beni savanna
-#&gt; 76                  Campos Rupestres montane savanna
-#&gt; 77                                           Cerrado
-#&gt; 78                                         Dry Chaco
-#&gt; 79                                   Guianan savanna
-#&gt; 80                                       Humid Chaco
-#&gt; 81                                            Llanos
-#&gt; 82                                 Uruguayan savanna
-#&gt; 83                      Alto Paraná Atlantic forests
-#&gt; 84                           Araucaria moist forests
-#&gt; 85                          Atlantic Coast restingas
-#&gt; 86                             Bahia coastal forests
-#&gt; 87                            Bahia interior forests
-#&gt; 88                                   Bolivian Yungas
-#&gt; 89                   Caatinga Enclaves moist forests
-#&gt; 90                             Caqueta moist forests
-#&gt; 91                           Catatumbo moist forests
-#&gt; 92                      Cauca Valley montane forests
-#&gt; 93           Central American Atlantic moist forests
-#&gt; 94                  Central American montane forests
-#&gt; 95                           Chiapas montane forests
-#&gt; 96                        Chimalapas montane forests
-#&gt; 97                        Chocó-Darién moist forests
-#&gt; 98               Cordillera La Costa montane forests
-#&gt; 99               Cordillera Oriental montane forests
-#&gt; 100               Costa Rican seasonal moist forests
-#&gt; 101                              Cuban moist forests
-#&gt; 102          Eastern Cordillera real montane forests
-#&gt; 103               Eastern Panamanian montane forests
-#&gt; 104 Fernando de Noronha-Atol das Rocas moist forests
-#&gt; 105                 Guianan freshwater swamp forests
-#&gt; 106                  Guianan Highlands moist forests
-#&gt; 107                            Guianan moist forests
-#&gt; 108       Guianan piedmont and lowland moist forests
-#&gt; 109                                    Gurupa varzeá
-#&gt; 110                        Hispaniolan moist forests
-#&gt; 111                                   Iquitos varzeá
-#&gt; 112                  Isthmian-Atlantic moist forests
-#&gt; 113                   Isthmian-Pacific moist forests
-#&gt; 114                           Jamaican moist forests
-#&gt; 115              Japurá-Solimoes-Negro moist forests
-#&gt; 116                        Juruá-Purus moist forests
-#&gt; 117                    Leeward Islands moist forests
-#&gt; 118                    Madeira-Tapajós moist forests
-#&gt; 119                    Magdalena-Urabá moist forests
-#&gt; 120                 Magdalena Valley montane forests
-#&gt; 121                                    Marajó varzeá
-#&gt; 122                          Maranhão Babaçu forests
-#&gt; 123                     Mato Grosso seasonal forests
-#&gt; 124                              Monte Alegre varzeá
-#&gt; 125                               Napo moist forests
-#&gt; 126                       Negro-Branco moist forests
-#&gt; 127                    Northeastern Brazil restingas
-#&gt; 128              Northwestern Andean montane forests
-#&gt; 129                          Oaxacan montane forests
-#&gt; 130                      Orinoco Delta swamp forests
-#&gt; 131                               Pantanos de Centla
-#&gt; 132                                         Pantepui
-#&gt; 133                       Pernambuco coastal forests
-#&gt; 134                      Pernambuco interior forests
-#&gt; 135                                  Peruvian Yungas
-#&gt; 136                     Petén-Veracruz moist forests
-#&gt; 137                       Puerto Rican moist forests
-#&gt; 138                      Purus-Madeira moist forests
-#&gt; 139                                     Purus varzeá
-#&gt; 140                            Rio Negro campinarana
-#&gt; 141                      Santa Marta montane forests
-#&gt; 142                     Serra do Mar coastal forests
-#&gt; 143                            Sierra de los Tuxtlas
-#&gt; 144            Sierra Madre de Chiapas moist forests
-#&gt; 145                    Solimões-Japurá moist forests
-#&gt; 146                           Southern Andean Yungas
-#&gt; 147                          South Florida rocklands
-#&gt; 148                   Southwest Amazon moist forests
-#&gt; 149                       Talamancan montane forests
-#&gt; 150                      Tapajós-Xingu moist forests
-#&gt; 151                  Tocantins/Pindare moist forests
-#&gt; 152                Trinidad and Tobago moist forests
-#&gt; 153                   Uatuma-Trombetas moist forests
-#&gt; 154                            Ucayali moist forests
-#&gt; 155                 Venezuelan Andes montane forests
-#&gt; 156                           Veracruz moist forests
-#&gt; 157                         Veracruz montane forests
-#&gt; 158                    Western Ecuador moist forests
-#&gt; 159                   Windward Islands moist forests
-#&gt; 160           Xingu-Tocantins-Araguaia moist forests
-#&gt; 161                            Yucatán moist forests
-#&gt; 162                             Bahamian pine mosaic
-#&gt; 163                            Belizian pine forests
-#&gt; 164                Central American pine-oak forests
-#&gt; 165                               Cuban pine forests
-#&gt; 166                         Hispaniolan pine forests
-#&gt; 167                             Miskito pine forests
-#&gt; 168             Sierra de la Laguna pine-oak forests
-#&gt; 169            Sierra Madre del Sur pine-oak forests
-#&gt; 170          Sierra Madre de Oaxaca pine-oak forests
-#&gt; 171     Trans-Mexican Volcanic Belt pine-oak forests
+#&gt; 172                  Tropical and suptropical coniferous forests
+#&gt; 173                  Tropical and suptropical coniferous forests
+#&gt; 174                  Tropical and suptropical coniferous forests
+#&gt; 175                  Tropical and suptropical coniferous forests
+#&gt; 176                  Tropical and suptropical coniferous forests
+#&gt; 177                  Tropical and suptropical coniferous forests
+#&gt; 178                  Tropical and suptropical coniferous forests
+#&gt; 179                  Tropical and suptropical coniferous forests
+#&gt;                                                   ecoregion
+#&gt; 1                               Araya and Paria xeric scrub
+#&gt; 2                                            Atacama desert
+#&gt; 3                                                  Caatinga
+#&gt; 4                                      Caribbean shrublands
+#&gt; 5                                        Cuban cactus scrub
+#&gt; 6                        Galápagos Islands scrubland mosaic
+#&gt; 7                          Guajira-Barranquilla xeric scrub
+#&gt; 8                                 La Costa xeric shrublands
+#&gt; 9                                Malpelo Island xeric scrub
+#&gt; 10                                Motagua Valley thornscrub
+#&gt; 11                                    Paraguana xeric scrub
+#&gt; 12                                    San Lucan xeric scrub
+#&gt; 13                                           Sechura desert
+#&gt; 14                             St. Peter and St. Paul rocks
+#&gt; 15                                 Tehuacán Valley matorral
+#&gt; 16                                           Cuban wetlands
+#&gt; 17                                      Enriquillo wetlands
+#&gt; 18                                               Everglades
+#&gt; 19                             Guayaquil flooded grasslands
+#&gt; 20                                         Orinoco wetlands
+#&gt; 21                                                 Pantanal
+#&gt; 22                                   Paraná flooded savanna
+#&gt; 23                       Southern Cone Mesopotamian savanna
+#&gt; 24              Amazon-Orinoco-Southern Caribbean mangroves
+#&gt; 25                             Bahamian-Antillean mangroves
+#&gt; 26                    Mesoamerican Gulf-Caribbean mangroves
+#&gt; 27                  Northern Mesoamerican Pacific mangroves
+#&gt; 28                         South American Pacific mangroves
+#&gt; 29                              Southern Atlantic mangroves
+#&gt; 30                  Southern Mesoamerican Pacific mangroves
+#&gt; 31                                         Chilean matorral
+#&gt; 32                                  Central Andean dry puna
+#&gt; 33                                      Central Andean puna
+#&gt; 34                                  Central Andean wet puna
+#&gt; 35                                Cordillera Central páramo
+#&gt; 36                              Cordillera de Merida páramo
+#&gt; 37                                               High Monte
+#&gt; 38                                   Northern Andean páramo
+#&gt; 39                                       Santa Marta páramo
+#&gt; 40                                   Southern Andean steppe
+#&gt; 41                 Juan Fernández Islands temperate forests
+#&gt; 42                              Magellanic subpolar forests
+#&gt; 43         San Félix-San Ambrosio Islands temperate forests
+#&gt; 44                              Valdivian temperate forests
+#&gt; 45                                                  Espinal
+#&gt; 46                                             Humid Pampas
+#&gt; 47                                                Low Monte
+#&gt; 48                                        Patagonian steppe
+#&gt; 49                          Apure-Villavicencio dry forests
+#&gt; 50                                     Atlantic dry forests
+#&gt; 51                                        Bajío dry forests
+#&gt; 52                                       Balsas dry forests
+#&gt; 53                             Bolivian montane dry forests
+#&gt; 54                                 Cauca Valley dry forests
+#&gt; 55                             Central American dry forests
+#&gt; 56                           Chiapas Depression dry forests
+#&gt; 57                                   Chiquitano dry forests
+#&gt; 58                                        Cuban dry forests
+#&gt; 59                                   Ecuadorian dry forests
+#&gt; 60                                  Hispaniolan dry forests
+#&gt; 61                          Islas Revillagigedo dry forests
+#&gt; 62                                      Jalisco dry forests
+#&gt; 63                                     Jamaican dry forests
+#&gt; 64                                  Lara-Falcón dry forests
+#&gt; 65                             Lesser Antillean dry forests
+#&gt; 66                             Magdalena Valley dry forests
+#&gt; 67                                    Maracaibo dry forests
+#&gt; 68                                      Marañón dry forests
+#&gt; 69                                   Panamanian dry forests
+#&gt; 70                                 Patía Valley dry forests
+#&gt; 71                                 Puerto Rican dry forests
+#&gt; 72                          Sierra de la Laguna dry forests
+#&gt; 73                                     Sinaloan dry forests
+#&gt; 74                                  Sinú Valley dry forests
+#&gt; 75                             Southern Pacific dry forests
+#&gt; 76                                 Tumbes-Piura dry forests
+#&gt; 77                                     Veracruz dry forests
+#&gt; 78                                      Yucatán dry forests
+#&gt; 79                                             Beni savanna
+#&gt; 80                         Campos Rupestres montane savanna
+#&gt; 81                                                  Cerrado
+#&gt; 82                   Clipperton Island shrub and grasslands
+#&gt; 83                                                Dry Chaco
+#&gt; 84                                          Guianan savanna
+#&gt; 85                                              Humid Chaco
+#&gt; 86                                                   Llanos
+#&gt; 87                                        Uruguayan savanna
+#&gt; 88                             Alto Paraná Atlantic forests
+#&gt; 89                                  Araucaria moist forests
+#&gt; 90                                 Atlantic Coast restingas
+#&gt; 91                                    Bahia coastal forests
+#&gt; 92                                   Bahia interior forests
+#&gt; 93                                          Bolivian Yungas
+#&gt; 94                          Caatinga Enclaves moist forests
+#&gt; 95                                    Caqueta moist forests
+#&gt; 96                                  Catatumbo moist forests
+#&gt; 97                             Cauca Valley montane forests
+#&gt; 98  Cayos Miskitos-San Andrés and Providencia moist forests
+#&gt; 99                  Central American Atlantic moist forests
+#&gt; 100                        Central American montane forests
+#&gt; 101                                 Chiapas montane forests
+#&gt; 102                              Chimalapas montane forests
+#&gt; 103                              Chocó-Darién moist forests
+#&gt; 104                              Cocos Island moist forests
+#&gt; 105                     Cordillera La Costa montane forests
+#&gt; 106                     Cordillera Oriental montane forests
+#&gt; 107                      Costa Rican seasonal moist forests
+#&gt; 108                                     Cuban moist forests
+#&gt; 109                 Eastern Cordillera real montane forests
+#&gt; 110                      Eastern Panamanian montane forests
+#&gt; 111        Fernando de Noronha-Atol das Rocas moist forests
+#&gt; 112                        Guianan freshwater swamp forests
+#&gt; 113                         Guianan Highlands moist forests
+#&gt; 114                                   Guianan moist forests
+#&gt; 115              Guianan piedmont and lowland moist forests
+#&gt; 116                                           Gurupa varzeá
+#&gt; 117                               Hispaniolan moist forests
+#&gt; 118                                          Iquitos varzeá
+#&gt; 119                         Isthmian-Atlantic moist forests
+#&gt; 120                          Isthmian-Pacific moist forests
+#&gt; 121                                  Jamaican moist forests
+#&gt; 122                     Japurá-Solimoes-Negro moist forests
+#&gt; 123                               Juruá-Purus moist forests
+#&gt; 124                           Leeward Islands moist forests
+#&gt; 125                           Madeira-Tapajós moist forests
+#&gt; 126                           Magdalena-Urabá moist forests
+#&gt; 127                        Magdalena Valley montane forests
+#&gt; 128                                           Marajó varzeá
+#&gt; 129                                 Maranhão Babaçu forests
+#&gt; 130                            Mato Grosso seasonal forests
+#&gt; 131                                     Monte Alegre varzeá
+#&gt; 132                                      Napo moist forests
+#&gt; 133                              Negro-Branco moist forests
+#&gt; 134                           Northeastern Brazil restingas
+#&gt; 135                     Northwestern Andean montane forests
+#&gt; 136                                 Oaxacan montane forests
+#&gt; 137                             Orinoco Delta swamp forests
+#&gt; 138                                      Pantanos de Centla
+#&gt; 139                                                Pantepui
+#&gt; 140                              Pernambuco coastal forests
+#&gt; 141                             Pernambuco interior forests
+#&gt; 142                                         Peruvian Yungas
+#&gt; 143                            Petén-Veracruz moist forests
+#&gt; 144                              Puerto Rican moist forests
+#&gt; 145                             Purus-Madeira moist forests
+#&gt; 146                                            Purus varzeá
+#&gt; 147                                   Rio Negro campinarana
+#&gt; 148                             Santa Marta montane forests
+#&gt; 149                            Serra do Mar coastal forests
+#&gt; 150                                   Sierra de los Tuxtlas
+#&gt; 151                   Sierra Madre de Chiapas moist forests
+#&gt; 152                           Solimões-Japurá moist forests
+#&gt; 153                                  Southern Andean Yungas
+#&gt; 154                                 South Florida rocklands
+#&gt; 155                          Southwest Amazon moist forests
+#&gt; 156                              Talamancan montane forests
+#&gt; 157                             Tapajós-Xingu moist forests
+#&gt; 158                         Tocantins/Pindare moist forests
+#&gt; 159            Trindade-Martin Vaz Islands tropical forests
+#&gt; 160                       Trinidad and Tobago moist forests
+#&gt; 161                          Uatuma-Trombetas moist forests
+#&gt; 162                                   Ucayali moist forests
+#&gt; 163                        Venezuelan Andes montane forests
+#&gt; 164                                  Veracruz moist forests
+#&gt; 165                                Veracruz montane forests
+#&gt; 166                           Western Ecuador moist forests
+#&gt; 167                          Windward Islands moist forests
+#&gt; 168                  Xingu-Tocantins-Araguaia moist forests
+#&gt; 169                                   Yucatán moist forests
+#&gt; 170                                    Bahamian pine mosaic
+#&gt; 171                                   Belizian pine forests
+#&gt; 172                       Central American pine-oak forests
+#&gt; 173                                      Cuban pine forests
+#&gt; 174                                Hispaniolan pine forests
+#&gt; 175                                    Miskito pine forests
+#&gt; 176                    Sierra de la Laguna pine-oak forests
+#&gt; 177                   Sierra Madre del Sur pine-oak forests
+#&gt; 178                 Sierra Madre de Oaxaca pine-oak forests
+#&gt; 179            Trans-Mexican Volcanic Belt pine-oak forests
+#&gt; 
+#&gt; $`New Zealand`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`North Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`N W Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
 #&gt; 
 #&gt; $Oceanian
 #&gt;                                                           biome
@@ -1381,7 +1463,7 @@ ecoregions) of each realm.</p>
 #&gt; 4                Tropical and subtropical dry broadleaf forests
 #&gt; 5  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 6  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 7              Tropical and subtropical moist broadleaf forests
+#&gt; 7  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 8              Tropical and subtropical moist broadleaf forests
 #&gt; 9              Tropical and subtropical moist broadleaf forests
 #&gt; 10             Tropical and subtropical moist broadleaf forests
@@ -1397,29 +1479,53 @@ ecoregions) of each realm.</p>
 #&gt; 20             Tropical and subtropical moist broadleaf forests
 #&gt; 21             Tropical and subtropical moist broadleaf forests
 #&gt; 22             Tropical and subtropical moist broadleaf forests
-#&gt;                                    ecoregion
-#&gt; 1                  Fiji tropical dry forests
-#&gt; 2                Hawaii tropical dry forests
-#&gt; 3              Marianas tropical dry forests
-#&gt; 4                   Yap tropical dry forests
-#&gt; 5            Hawaii tropical high shrublands
-#&gt; 6             Hawaii tropical low shrublands
-#&gt; 7           Carolines tropical moist forests
-#&gt; 8  Central Polynesian tropical moist forests
-#&gt; 9        Cook Islands tropical moist forests
-#&gt; 10 Eastern Micronesia tropical moist forests
-#&gt; 11               Fiji tropical moist forests
-#&gt; 12             Hawaii tropical moist forests
-#&gt; 13          Marquesas tropical moist forests
-#&gt; 14       Ogasawara subtropical moist forests
-#&gt; 15              Palau tropical moist forests
-#&gt; 16    Rapa Nui subtropical broadleaf forests
-#&gt; 17             Samoan tropical moist forests
-#&gt; 18    Society Islands tropical moist forests
-#&gt; 19             Tongan tropical moist forests
-#&gt; 20            Tuamotu tropical moist forests
-#&gt; 21             Tubuai tropical moist forests
-#&gt; 22 Western Polynesian tropical moist forests
+#&gt; 23             Tropical and subtropical moist broadleaf forests
+#&gt; 24             Tropical and subtropical moist broadleaf forests
+#&gt;                                     ecoregion
+#&gt; 1                   Fiji tropical dry forests
+#&gt; 2                 Hawaii tropical dry forests
+#&gt; 3               Marianas tropical dry forests
+#&gt; 4                    Yap tropical dry forests
+#&gt; 5             Hawaii tropical high shrublands
+#&gt; 6              Hawaii tropical low shrublands
+#&gt; 7                   Northwestern Hawaii scrub
+#&gt; 8            Carolines tropical moist forests
+#&gt; 9   Central Polynesian tropical moist forests
+#&gt; 10        Cook Islands tropical moist forests
+#&gt; 11  Eastern Micronesia tropical moist forests
+#&gt; 12                Fiji tropical moist forests
+#&gt; 13              Hawaii tropical moist forests
+#&gt; 14 Kermadec Islands subtropical moist forests
+#&gt; 15           Marquesas tropical moist forests
+#&gt; 16        Ogasawara subtropical moist forests
+#&gt; 17               Palau tropical moist forests
+#&gt; 18     Rapa Nui subtropical broadleaf forests
+#&gt; 19              Samoan tropical moist forests
+#&gt; 20     Society Islands tropical moist forests
+#&gt; 21              Tongan tropical moist forests
+#&gt; 22             Tuamotu tropical moist forests
+#&gt; 23              Tubuai tropical moist forests
+#&gt; 24  Western Polynesian tropical moist forests
+#&gt; 
+#&gt; $`Offshore Indian Ocean`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Offshore mid-E Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Offshore &amp; NW North Atlantic`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Offshore S Atlantic`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Offshore W Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
 #&gt; 
 #&gt; $Palaearctic
 #&gt;                                                biome
@@ -1818,6 +1924,50 @@ ecoregions) of each realm.</p>
 #&gt; 195                                 Trans-Baikal Bald Mountain tundra
 #&gt; 196                                      Wrangel Island arctic desert
 #&gt; 197                                                Yamal-Gydan tundra
+#&gt; 
+#&gt; $`Red Sea`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`S Africa`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`S Australia`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`South-east Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Southern Ocean`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Tasman Sea to SW Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Tropical Australia &amp; Coral Sea`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Tropical E Atlantic`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Tropical E Pacific`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Tropical Indo-Pacific (East Indies) &amp; coastal Indian Ocean`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
+#&gt; 
+#&gt; $`Tropical W Atlantic`
+#&gt;   biome ecoregion
+#&gt; 1  &lt;NA&gt;      &lt;NA&gt;
 #&gt; </div><div class='input'><span class='fu'>accRealmNames</span><span class='op'>(</span>realm<span class='op'>=</span><span class='st'>'Africotropical'</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Africotropical
 #&gt;                                                            biome
@@ -1841,7 +1991,7 @@ ecoregions) of each realm.</p>
 #&gt; 18                                  Deserts and xeric shrublands
 #&gt; 19                                  Deserts and xeric shrublands
 #&gt; 20                                  Deserts and xeric shrublands
-#&gt; 21                               Flooded grasslands and savannas
+#&gt; 21                                  Deserts and xeric shrublands
 #&gt; 22                               Flooded grasslands and savannas
 #&gt; 23                               Flooded grasslands and savannas
 #&gt; 24                               Flooded grasslands and savannas
@@ -1849,16 +1999,16 @@ ecoregions) of each realm.</p>
 #&gt; 26                               Flooded grasslands and savannas
 #&gt; 27                               Flooded grasslands and savannas
 #&gt; 28                               Flooded grasslands and savannas
-#&gt; 29                                                     Mangroves
-#&gt; 30                                                     Mangroves
+#&gt; 29                               Flooded grasslands and savannas
+#&gt; 30                                                         Lakes
 #&gt; 31                                                     Mangroves
 #&gt; 32                                                     Mangroves
 #&gt; 33                                                     Mangroves
-#&gt; 34                   Mediterranean Forests, woodlands and scrubs
-#&gt; 35                   Mediterranean Forests, woodlands and scrubs
+#&gt; 34                                                     Mangroves
+#&gt; 35                                                     Mangroves
 #&gt; 36                   Mediterranean Forests, woodlands and scrubs
-#&gt; 37                             Montane grasslands and shrublands
-#&gt; 38                             Montane grasslands and shrublands
+#&gt; 37                   Mediterranean Forests, woodlands and scrubs
+#&gt; 38                   Mediterranean Forests, woodlands and scrubs
 #&gt; 39                             Montane grasslands and shrublands
 #&gt; 40                             Montane grasslands and shrublands
 #&gt; 41                             Montane grasslands and shrublands
@@ -1872,14 +2022,14 @@ ecoregions) of each realm.</p>
 #&gt; 49                             Montane grasslands and shrublands
 #&gt; 50                             Montane grasslands and shrublands
 #&gt; 51                             Montane grasslands and shrublands
-#&gt; 52                 Temperate grasslands, savannas and shrublands
-#&gt; 53                 Temperate grasslands, savannas and shrublands
+#&gt; 52                             Montane grasslands and shrublands
+#&gt; 53                             Montane grasslands and shrublands
 #&gt; 54                 Temperate grasslands, savannas and shrublands
-#&gt; 55                Tropical and subtropical dry broadleaf forests
-#&gt; 56                Tropical and subtropical dry broadleaf forests
+#&gt; 55                 Temperate grasslands, savannas and shrublands
+#&gt; 56                 Temperate grasslands, savannas and shrublands
 #&gt; 57                Tropical and subtropical dry broadleaf forests
-#&gt; 58  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 59  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 58                Tropical and subtropical dry broadleaf forests
+#&gt; 59                Tropical and subtropical dry broadleaf forests
 #&gt; 60  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 61  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 62  Tropical and subtropical grasslands, savannas and shrublands
@@ -1903,9 +2053,9 @@ ecoregions) of each realm.</p>
 #&gt; 80  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 81  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 82  Tropical and subtropical grasslands, savannas and shrublands
-#&gt; 83              Tropical and subtropical moist broadleaf forests
-#&gt; 84              Tropical and subtropical moist broadleaf forests
-#&gt; 85              Tropical and subtropical moist broadleaf forests
+#&gt; 83  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 84  Tropical and subtropical grasslands, savannas and shrublands
+#&gt; 85  Tropical and subtropical grasslands, savannas and shrublands
 #&gt; 86              Tropical and subtropical moist broadleaf forests
 #&gt; 87              Tropical and subtropical moist broadleaf forests
 #&gt; 88              Tropical and subtropical moist broadleaf forests
@@ -1932,6 +2082,10 @@ ecoregions) of each realm.</p>
 #&gt; 109             Tropical and subtropical moist broadleaf forests
 #&gt; 110             Tropical and subtropical moist broadleaf forests
 #&gt; 111             Tropical and subtropical moist broadleaf forests
+#&gt; 112             Tropical and subtropical moist broadleaf forests
+#&gt; 113             Tropical and subtropical moist broadleaf forests
+#&gt; 114             Tropical and subtropical moist broadleaf forests
+#&gt; 115             Tropical and subtropical moist broadleaf forests
 #&gt;                                                 ecoregion
 #&gt; 1                              Aldabra Island xeric scrub
 #&gt; 2                    Arabian Peninsula coastal fog desert
@@ -1940,121 +2094,126 @@ ecoregions) of each realm.</p>
 #&gt; 5               Ethiopian xeric grasslands and shrublands
 #&gt; 6                     Gulf of Oman desert and semi-desert
 #&gt; 7                         Hobyo grasslands and shrublands
-#&gt; 8                                  Kalahari xeric savanna
-#&gt; 9                                        Kaokoveld desert
-#&gt; 10                              Madagascar spiny thickets
-#&gt; 11                         Madagascar succulent woodlands
-#&gt; 12                  Masai xeric grasslands and shrublands
-#&gt; 13                                             Nama Karoo
-#&gt; 14                                           Namib desert
-#&gt; 15                             Namibian savanna woodlands
-#&gt; 16                        Socotra Island xeric shrublands
-#&gt; 17                         Somali montane xeric woodlands
-#&gt; 18                 Southwestern Arabian foothills savanna
-#&gt; 19                 Southwestern Arabian montane woodlands
-#&gt; 20                                        Succulent Karoo
-#&gt; 21                               East African halophytics
-#&gt; 22                                 Etosha Pan halophytics
-#&gt; 23                      Inner Niger Delta flooded savanna
-#&gt; 24                              Lake Chad flooded savanna
-#&gt; 25                             Saharan flooded grasslands
-#&gt; 26                      Zambezian coastal flooded savanna
-#&gt; 27                           Zambezian flooded grasslands
-#&gt; 28                                  Zambezian halophytics
-#&gt; 29                              Central African mangroves
-#&gt; 30                                 East African mangroves
-#&gt; 31                                      Guinean mangroves
-#&gt; 32                                   Madagascar mangroves
-#&gt; 33                              Southern Africa mangroves
-#&gt; 34                                        Albany thickets
-#&gt; 35                        Lowland fynbos and renosterveld
-#&gt; 36                        Montane fynbos and renosterveld
-#&gt; 37                Angolan montane forest-grassland mosaic
-#&gt; 38                    Angolan scarp savanna and woodlands
-#&gt; 39      Drakensberg alti-montane grasslands and woodlands
-#&gt; 40  Drakensberg montane grasslands, woodlands and forests
-#&gt; 41                         East African montane moorlands
-#&gt; 42       Eastern Zimbabwe montane forest-grassland mosaic
-#&gt; 43             Ethiopian montane grasslands and woodlands
-#&gt; 44                            Ethiopian montane moorlands
-#&gt; 45                                    Highveld grasslands
-#&gt; 46                    Jos Plateau forest-grassland mosaic
-#&gt; 47                            Madagascar ericoid thickets
-#&gt; 48             Maputaland-Pondoland bushland and thickets
-#&gt; 49                     Rwenzori-Virunga montane moorlands
-#&gt; 50          Southern Rift montane forest-grassland mosaic
-#&gt; 51           South Malawi montane forest-grassland mosaic
-#&gt; 52                             Al Hajar montane woodlands
-#&gt; 53  Amsterdam and Saint-Paul Islands temperate grasslands
-#&gt; 54    Tristan Da Cunha-Gough Islands shrub and grasslands
-#&gt; 55                         Cape Verde Islands dry forests
-#&gt; 56                       Madagascar dry deciduous forests
-#&gt; 57                    Zambezian Cryptosepalum dry forests
-#&gt; 58                               Angolan Miombo woodlands
-#&gt; 59                               Angolan Mopane woodlands
-#&gt; 60                         Ascension scrub and grasslands
-#&gt; 61                     Central Zambezian Miombo woodlands
-#&gt; 62                               Eastern Miombo woodlands
-#&gt; 63                                  East Sudanian savanna
-#&gt; 64                          Guinean forest-savanna mosaic
-#&gt; 65                                    Itigi-Sumbu thicket
-#&gt; 66                     Kalahari Acacia-Baikiaea woodlands
-#&gt; 67                                 Mandara Plateau mosaic
-#&gt; 68      Northern Acacia-Commiphora bushlands and thickets
-#&gt; 69               Northern Congolian forest-savanna mosaic
-#&gt; 70                                Sahelian Acacia savanna
-#&gt; 71                          Serengeti volcanic grasslands
-#&gt; 72        Somali Acacia-Commiphora bushlands and thickets
-#&gt; 73      Southern Acacia-Commiphora bushlands and thickets
-#&gt; 74                               Southern Africa bushveld
-#&gt; 75               Southern Congolian forest-savanna mosaic
-#&gt; 76                              Southern Miombo woodlands
-#&gt; 77                   Victoria Basin forest-savanna mosaic
-#&gt; 78                Western Congolian forest-savanna mosaic
-#&gt; 79                           Western Zambezian grasslands
-#&gt; 80                                  West Sudanian savanna
-#&gt; 81                         Zambezian and Mopane woodlands
-#&gt; 82                           Zambezian Baikiaea woodlands
-#&gt; 83                         Albertine Rift montane forests
-#&gt; 84                    Atlantic Equatorial coastal forests
-#&gt; 85                          Cameroonian Highlands forests
-#&gt; 86                      Central Congolian lowland forests
-#&gt; 87                                        Comoros forests
-#&gt; 88                         Cross-Niger transition forests
-#&gt; 89                     Cross-Sanaga-Bioko coastal forests
-#&gt; 90                           East African montane forests
-#&gt; 91                                    Eastern Arc forests
-#&gt; 92                        Eastern Congolian swamp forests
-#&gt; 93                                Eastern Guinean forests
-#&gt; 94                              Ethiopian montane forests
-#&gt; 95                            Granitic Seychelles forests
-#&gt; 96                                Guinean montane forests
-#&gt; 97                     KwaZulu-Cape coastal forest mosaic
-#&gt; 98                             Madagascar lowland forests
-#&gt; 99                            Madagascar subhumid forests
-#&gt; 100                      Maputaland coastal forest mosaic
-#&gt; 101                                     Mascarene forests
-#&gt; 102              Mount Cameroon and Bioko montane forests
-#&gt; 103                             Niger Delta swamp forests
-#&gt; 104                              Nigerian lowland forests
-#&gt; 105                Northeastern Congolian lowland forests
-#&gt; 106     Northern Zanzibar-Inhambane coastal forest mosaic
-#&gt; 107                Northwestern Congolian lowland forests
-#&gt; 108  Sao Tome, Principe and Annobon moist lowland forests
-#&gt; 109     Southern Zanzibar-Inhambane coastal forest mosaic
-#&gt; 110                       Western Congolian swamp forests
-#&gt; 111                       Western Guinean lowland forests
+#&gt; 8              Ile Europa and Bassas da India xeric scrub
+#&gt; 9                                  Kalahari xeric savanna
+#&gt; 10                                       Kaokoveld desert
+#&gt; 11                              Madagascar spiny thickets
+#&gt; 12                         Madagascar succulent woodlands
+#&gt; 13                  Masai xeric grasslands and shrublands
+#&gt; 14                                             Nama Karoo
+#&gt; 15                                           Namib desert
+#&gt; 16                             Namibian savanna woodlands
+#&gt; 17                        Socotra Island xeric shrublands
+#&gt; 18                         Somali montane xeric woodlands
+#&gt; 19                 Southwestern Arabian foothills savanna
+#&gt; 20                 Southwestern Arabian montane woodlands
+#&gt; 21                                        Succulent Karoo
+#&gt; 22                               East African halophytics
+#&gt; 23                                 Etosha Pan halophytics
+#&gt; 24                      Inner Niger Delta flooded savanna
+#&gt; 25                              Lake Chad flooded savanna
+#&gt; 26                             Saharan flooded grasslands
+#&gt; 27                      Zambezian coastal flooded savanna
+#&gt; 28                           Zambezian flooded grasslands
+#&gt; 29                                  Zambezian halophytics
+#&gt; 30                                                   Lake
+#&gt; 31                              Central African mangroves
+#&gt; 32                                 East African mangroves
+#&gt; 33                                      Guinean mangroves
+#&gt; 34                                   Madagascar mangroves
+#&gt; 35                              Southern Africa mangroves
+#&gt; 36                                        Albany thickets
+#&gt; 37                        Lowland fynbos and renosterveld
+#&gt; 38                        Montane fynbos and renosterveld
+#&gt; 39                Angolan montane forest-grassland mosaic
+#&gt; 40                    Angolan scarp savanna and woodlands
+#&gt; 41      Drakensberg alti-montane grasslands and woodlands
+#&gt; 42  Drakensberg montane grasslands, woodlands and forests
+#&gt; 43                         East African montane moorlands
+#&gt; 44       Eastern Zimbabwe montane forest-grassland mosaic
+#&gt; 45             Ethiopian montane grasslands and woodlands
+#&gt; 46                            Ethiopian montane moorlands
+#&gt; 47                                    Highveld grasslands
+#&gt; 48                    Jos Plateau forest-grassland mosaic
+#&gt; 49                            Madagascar ericoid thickets
+#&gt; 50             Maputaland-Pondoland bushland and thickets
+#&gt; 51                     Rwenzori-Virunga montane moorlands
+#&gt; 52          Southern Rift montane forest-grassland mosaic
+#&gt; 53           South Malawi montane forest-grassland mosaic
+#&gt; 54                             Al Hajar montane woodlands
+#&gt; 55  Amsterdam and Saint-Paul Islands temperate grasslands
+#&gt; 56    Tristan Da Cunha-Gough Islands shrub and grasslands
+#&gt; 57                         Cape Verde Islands dry forests
+#&gt; 58                       Madagascar dry deciduous forests
+#&gt; 59                    Zambezian Cryptosepalum dry forests
+#&gt; 60                               Angolan Miombo woodlands
+#&gt; 61                               Angolan Mopane woodlands
+#&gt; 62                         Ascension scrub and grasslands
+#&gt; 63                     Central Zambezian Miombo woodlands
+#&gt; 64                               Eastern Miombo woodlands
+#&gt; 65                                  East Sudanian savanna
+#&gt; 66                          Guinean forest-savanna mosaic
+#&gt; 67                                    Itigi-Sumbu thicket
+#&gt; 68                     Kalahari Acacia-Baikiaea woodlands
+#&gt; 69                                 Mandara Plateau mosaic
+#&gt; 70      Northern Acacia-Commiphora bushlands and thickets
+#&gt; 71               Northern Congolian forest-savanna mosaic
+#&gt; 72                                Sahelian Acacia savanna
+#&gt; 73                          Serengeti volcanic grasslands
+#&gt; 74        Somali Acacia-Commiphora bushlands and thickets
+#&gt; 75      Southern Acacia-Commiphora bushlands and thickets
+#&gt; 76                               Southern Africa bushveld
+#&gt; 77               Southern Congolian forest-savanna mosaic
+#&gt; 78                              Southern Miombo woodlands
+#&gt; 79                         St. Helena scrub and woodlands
+#&gt; 80                   Victoria Basin forest-savanna mosaic
+#&gt; 81                Western Congolian forest-savanna mosaic
+#&gt; 82                           Western Zambezian grasslands
+#&gt; 83                                  West Sudanian savanna
+#&gt; 84                         Zambezian and Mopane woodlands
+#&gt; 85                           Zambezian Baikiaea woodlands
+#&gt; 86                         Albertine Rift montane forests
+#&gt; 87                    Atlantic Equatorial coastal forests
+#&gt; 88                          Cameroonian Highlands forests
+#&gt; 89                      Central Congolian lowland forests
+#&gt; 90                                        Comoros forests
+#&gt; 91                         Cross-Niger transition forests
+#&gt; 92                     Cross-Sanaga-Bioko coastal forests
+#&gt; 93                           East African montane forests
+#&gt; 94                                    Eastern Arc forests
+#&gt; 95                        Eastern Congolian swamp forests
+#&gt; 96                                Eastern Guinean forests
+#&gt; 97                              Ethiopian montane forests
+#&gt; 98                            Granitic Seychelles forests
+#&gt; 99                                Guinean montane forests
+#&gt; 100                        Knysna-Amatole montane forests
+#&gt; 101                    KwaZulu-Cape coastal forest mosaic
+#&gt; 102                            Madagascar lowland forests
+#&gt; 103                           Madagascar subhumid forests
+#&gt; 104                      Maputaland coastal forest mosaic
+#&gt; 105                                     Mascarene forests
+#&gt; 106              Mount Cameroon and Bioko montane forests
+#&gt; 107                             Niger Delta swamp forests
+#&gt; 108                              Nigerian lowland forests
+#&gt; 109                Northeastern Congolian lowland forests
+#&gt; 110     Northern Zanzibar-Inhambane coastal forest mosaic
+#&gt; 111                Northwestern Congolian lowland forests
+#&gt; 112  Sao Tome, Principe and Annobon moist lowland forests
+#&gt; 113     Southern Zanzibar-Inhambane coastal forest mosaic
+#&gt; 114                       Western Congolian swamp forests
+#&gt; 115                       Western Guinean lowland forests
 #&gt; </div><div class='input'><span class='fu'>accRealmNames</span><span class='op'>(</span>realm<span class='op'>=</span><span class='st'>'Africotropical'</span>, ecoregion<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; $Africotropical
-#&gt; [1] "Deserts and xeric shrublands"                                
-#&gt; [2] "Flooded grasslands and savannas"                             
-#&gt; [3] "Mangroves"                                                   
-#&gt; [4] "Mediterranean Forests, woodlands and scrubs"                 
-#&gt; [5] "Montane grasslands and shrublands"                           
-#&gt; [6] "Temperate grasslands, savannas and shrublands"               
-#&gt; [7] "Tropical and subtropical dry broadleaf forests"              
-#&gt; [8] "Tropical and subtropical grasslands, savannas and shrublands"
-#&gt; [9] "Tropical and subtropical moist broadleaf forests"            
+#&gt;  [1] "Deserts and xeric shrublands"                                
+#&gt;  [2] "Flooded grasslands and savannas"                             
+#&gt;  [3] "Lakes"                                                       
+#&gt;  [4] "Mangroves"                                                   
+#&gt;  [5] "Mediterranean Forests, woodlands and scrubs"                 
+#&gt;  [6] "Montane grasslands and shrublands"                           
+#&gt;  [7] "Temperate grasslands, savannas and shrublands"               
+#&gt;  [8] "Tropical and subtropical dry broadleaf forests"              
+#&gt;  [9] "Tropical and subtropical grasslands, savannas and shrublands"
+#&gt; [10] "Tropical and subtropical moist broadleaf forests"            
 #&gt; </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

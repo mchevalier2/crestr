@@ -155,6 +155,8 @@
   dbname <span class='op'>=</span> <span class='cn'>NA</span>,
   continents <span class='op'>=</span> <span class='cn'>NA</span>,
   countries <span class='op'>=</span> <span class='cn'>NA</span>,
+  basins <span class='op'>=</span> <span class='cn'>NA</span>,
+  sectors <span class='op'>=</span> <span class='cn'>NA</span>,
   realms <span class='op'>=</span> <span class='cn'>NA</span>,
   biomes <span class='op'>=</span> <span class='cn'>NA</span>,
   ecoregions <span class='op'>=</span> <span class='cn'>NA</span>,
@@ -162,13 +164,20 @@
   xmx <span class='op'>=</span> <span class='cn'>NA</span>,
   ymn <span class='op'>=</span> <span class='cn'>NA</span>,
   ymx <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_min <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_max <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_range <span class='op'>=</span> <span class='cn'>NA</span>,
+  year_min <span class='op'>=</span> <span class='fl'>1900</span>,
+  year_max <span class='op'>=</span> <span class='fl'>2021</span>,
+  nodate <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  type_of_obs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fl'>2</span>, <span class='fl'>3</span>, <span class='fl'>8</span>, <span class='fl'>9</span><span class='op'>)</span>,
   df <span class='op'>=</span> <span class='cn'>NA</span>,
   x <span class='op'>=</span> <span class='cn'>NA</span>,
   x.name <span class='op'>=</span> <span class='st'>""</span>,
   minGridCells <span class='op'>=</span> <span class='fl'>20</span>,
   weightedPresences <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>climate</span><span class='op'>)</span><span class='op'>)</span>,
-  shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='st'>"normal"</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>climate</span><span class='op'>)</span><span class='op'>)</span>,
+  bin_width <span class='op'>=</span> <span class='cn'>NA</span>,
+  shape <span class='op'>=</span> <span class='cn'>NA</span>,
   npoints <span class='op'>=</span> <span class='fl'>200</span>,
   geoWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
   climateSpaceWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -216,6 +225,14 @@ details.</p></td>
       <td><p>A vector of the country names defining the study area.</p></td>
     </tr>
     <tr>
+      <th>basins</th>
+      <td><p>A vector of the ocean names defining the study area.</p></td>
+    </tr>
+    <tr>
+      <th>sectors</th>
+      <td><p>A vector of the marine sector names defining the study area.</p></td>
+    </tr>
+    <tr>
       <th>realms</th>
       <td><p>A vector of the studied botanical realms defining the study area.</p></td>
     </tr>
@@ -231,6 +248,34 @@ study area.</p></td>
     <tr>
       <th>xmn, xmx, ymn, ymx</th>
       <td><p>The coordinates defining the study area.</p></td>
+    </tr>
+    <tr>
+      <th>elev_min, elev_max</th>
+      <td><p>Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'<code>NA</code> ).</p></td>
+    </tr>
+    <tr>
+      <th>elev_range</th>
+      <td><p>Parameters discard the grid cell with a high elevational
+range (default is <code>NA</code>).</p></td>
+    </tr>
+    <tr>
+      <th>year_min, year_max</th>
+      <td><p>The oldest and youngest occurrences accepted
+(default is 1900-2021).</p></td>
+    </tr>
+    <tr>
+      <th>nodate</th>
+      <td><p>A boolean to accept occurrences without a date (can overlap
+with occurrences with a date; default <code>TRUE</code>).</p></td>
+    </tr>
+    <tr>
+      <th>type_of_obs</th>
+      <td><p>The type of observation to use in the study. 1: human
+observation, 2: observation, 3: preserved specimen, 4: living specimem,
+5: fossil specimen, 6: material sample, 7: machine observation, 8:
+literature, 9: unknown (Default <code><a href='https://rdrr.io/r/base/c.html'>c(1, 2, 3, 8, 9)</a></code>)</p></td>
     </tr>
     <tr>
       <th>df</th>
@@ -319,6 +364,10 @@ bars that should be calculated (default both 50 and 95% ranges).</p></td>
 
     <p>A <code>crestObj</code> object that is used to store data and information
 for reconstructing climate</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><a href='https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html'>https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html</a>
+for a detailed explanation of the types of observation.</p></div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

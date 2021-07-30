@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns a vector of colours — colour_theme • crestr</title>
+<title>Return the list of oceans and seas. — getBasinNames • crestr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Returns a vector of colours — colour_theme" />
-<meta property="og:description" content="Returns a vector of colours" />
+<meta property="og:title" content="Return the list of oceans and seas. — getBasinNames" />
+<meta property="og:description" content="Return the list of oceans and seas." />
 
 
 
@@ -138,33 +138,30 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns a vector of colours</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
-    <div class="hidden name"><code>colour_theme.Rd</code></div>
+    <h1>Return the list of oceans and seas.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/dbFixedNames.R'><code>R/dbFixedNames.R</code></a></small>
+    <div class="hidden name"><code>getBasinNames.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns a vector of colours</p>
+    <p>Return the list of oceans and seas.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>colour_theme</span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getBasinNames</span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>n</th>
-      <td><p>An idex to select the colour theme</p></td>
+      <th>dbname</th>
+      <td><p>The name of the database. Default is <code>'gbif4crest_02'</code>.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>colour_theme</span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] "#3366cc" "#dc3912" "#ff9900" "#109618" "#990099" "#0099c6" "#dd4477"
-#&gt;  [8] "#66aa00" "#b82e2e" "#316395" "#994499" "#22AA99" "#AAAA11" "#6633CC"
-#&gt; [15] "#E67300" "#8B0707" "#651067" "#329262" "#5574A6" "#3B3EAC"</div><div class='input'>
-</div></pre>
+    <p>A list where each element is a vector of corresponding ocean/sea names.</p>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

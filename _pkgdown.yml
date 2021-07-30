@@ -106,29 +106,33 @@ reference:
   - title: "Database"
     desc: "Functions for querying the calibration data database."
     contents:
+      - '`accBasinNames`'
       - '`accClimateVariables`'
       - '`accCountryNames`'
       - '`accRealmNames`'
+      - '`climate_from_xy`'
       - '`close_db_connection`'
       - '`connect_online`'
       - '`dbRequest`'
-      - '`getTaxonID`'
-      - '`getTaxonomy`'
       - '`getClimateSpace`'
       - '`getDistribTaxa`'
-      - '`climate_from_xy`'
+      - '`getTaxonID`'
+      - '`getTaxonomy`'
   - title: "Modelling functions"
     desc: "Functions used model the data. Not to be used."
     contents:
       - '`calib_clim_space`'
+      - '`check_coordinates`'
+      - '`colour_theme`'
       - '`convert2percentages`'
       - '`convert2presenceAbsence`'
       - '`createPSE`'
+      - '`find.original.name`'
       - '`fit_pdfsp`'
       - '`fit_xrange`'
+      - '`get_taxa_type`'
       - '`meanPositiveValues`'
       - '`normalise`'
-      - '`check_coordinates`'
   - title: "Datasets"
     contents:
       - '`M1`'

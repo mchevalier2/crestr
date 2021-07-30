@@ -240,7 +240,9 @@
 <span class="op">)</span>
 <span class="co">#&gt; Warning in crest.get_modern_data(df = crest_ex, pse = crest_ex_pse, taxaType</span>
 <span class="co">#&gt; = 0, : The classification of one or more taxa into species was not successful.</span>
-<span class="co">#&gt; Check 'x$misc$taxa_notes' for details.</span>
+<span class="co">#&gt; Check `x$misc$taxa_notes` for details.</span>
+
+
 
 <span class="va">reconstr</span><span class="op">$</span><span class="va">inputs</span><span class="op">$</span><span class="va">selectedTaxa</span>
 <span class="co">#&gt;        bio1 bio12</span>
@@ -273,8 +275,8 @@
 <p>Other graphical tools can be used to determine the specific sensitivities of each taxa to the selected climate variable. <strong>Fig. 6</strong> below represents the characteristic responses of <em>Taxon2</em> and <em>Taxon7</em> to <em>bio1</em>. By construction, we kow that <em>Taxon2</em> is sensitive to <em>bio1</em>, while <em>Taxon6</em> is not. This is visible on <strong>Fig. 6</strong> by comparing the histograms that represent the proportion of the climate space occupied by each taxon, but also from the width of the <em>pdfs</em>. The <em>pdfs</em> of sensitive taxa are narrower. In the case of <em>Taxon6</em>, its presence in almost every grid cell of the study area also indicates that its distribution is not constrained by either <em>bio1</em> or <em>bio12</em> at the studied scale.</p>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon2'</span>, climate<span class="op">=</span><span class="st">'bio1'</span><span class="op">)</span>
-<span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon2'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
+<span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-1.png" alt="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot." width="70%"><img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-2.png" alt="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot." width="70%"><p class="caption">
 <strong>Fig. 6</strong>: Distributions and responses of <em>Taxon2</em> and <em>Taxon6</em> to <em>bio1</em>. Again, ignore the coastline of Africa on this plot.
@@ -348,10 +350,6 @@
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span>
-<span class="co">#&gt; NULL</span>
-<span class="co">#&gt; [1] "bio1"</span>
-<span class="co">#&gt; NULL</span>
-<span class="co">#&gt; [1] "bio12"</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "bio1"             "bio12"            "crest-test.RData"</span></code></pre></div>
 <p><br></p>

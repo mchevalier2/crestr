@@ -147,11 +147,25 @@
     <p>Return the list of the realms and associated biomes and ecoregions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getRealmNames</span><span class='op'>(</span>ecoregion <span class='op'>=</span> <span class='cn'>TRUE</span>, dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getRealmNames</span><span class='op'>(</span>
+  terr <span class='op'>=</span> <span class='cn'>NA</span>,
+  biome <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  ecoregion <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>terr</th>
+      <td><p>A boolean to choose whether to get the terrestrial or the marine
+names. Default value is <code>NA</code> and will return both.</p></td>
+    </tr>
+    <tr>
+      <th>biome</th>
+      <td><p>A boolean to choose whether to get the biome names.</p></td>
+    </tr>
     <tr>
       <th>ecoregion</th>
       <td><p>A boolean to choose whether to get the ecoregions names.</p></td>

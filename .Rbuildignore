@@ -12,6 +12,7 @@
 ^index\.md$
 ^index\.Rmd$
 ^\.travis\.yml$
+^\.Rprofile
 ^vignettes_pdf$
 ^crest-test$
 ^appveyor\.yml$

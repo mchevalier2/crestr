@@ -116,7 +116,7 @@ with unknown taxa.
 
 <br >
 
-```{r pollen_diagram, echo=FALSE, out.width="60%", fig.height=5, fig.width=3, fig.align='center', fig.cap="**Fig. 3**: Stratigraphic diagram of the fossil record to be used as the base for temperature and precipitation reconstructions."}
+```{r pollen_diagram, echo=FALSE, out.width="60%", fig.height=6, fig.width=3, fig.align='center', fig.cap="**Fig. 3**: Stratigraphic diagram of the fossil record to be used as the base for temperature and precipitation reconstructions."}
 crestr::plot_diagram(crestr::crest_ex, bars=TRUE, bar_width=0.8, xlim=c(0,20))
 ```
 
@@ -212,6 +212,8 @@ reconstr <- crest.get_modern_data( df = crest_ex, # The fossil data
                                   verbose = FALSE # Print status messages
 )
 
+
+
 reconstr$inputs$selectedTaxa
 ```
 <br >
@@ -226,7 +228,7 @@ the intermediate values. The correction equalises the effect of this
 distribution by upweighting rare values and downweighting the most abundant ones.
 
 <br >
-```{r calibrating, out.width="100%", fig.height=4.5, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these."}
+```{r calibrating, out.width="100%", fig.height=6, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these."}
 reconstr <- crest.calibrate( reconstr, # A crestObj produced at the previous stage
          climateSpaceWeighting = TRUE, # Correct the pdfs for the heteregenous
                                        # distribution of the modern climate space
@@ -251,9 +253,9 @@ its distribution is not constrained by either _bio1_ or _bio12_ at the studied
 scale.
 
 <br >
-```{r plot-plot_taxaCharacteristics, fig.show="hold", fig.align='center', fig.height=4, fig.width=4.5, out.width="70%", fig.cap="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot."}
-plot_taxaCharacteristics(reconstr, taxanames='Taxon2', climate='bio1')
-plot_taxaCharacteristics(reconstr, taxanames='Taxon6', climate='bio1')
+```{r plot-plot_taxaCharacteristics, fig.show="hold", fig.align='center', fig.height=4.5, fig.width=4.5, out.width="70%", fig.cap="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot."}
+plot_taxaCharacteristics(reconstr, taxanames='Taxon2', climate='bio1', h0=0.2)
+plot_taxaCharacteristics(reconstr, taxanames='Taxon6', climate='bio1', h0=0.2)
 
 ```
 <br >
