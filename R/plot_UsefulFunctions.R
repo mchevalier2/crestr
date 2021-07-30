@@ -116,7 +116,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
 
     graphics::par(mar = c(0, 0, 0, 0), ps=8*scale)
     ext <- raster::extent(bckg.eqearth)
-    ext_factor_x <- max(graphics::strwidth(paste0('     ', round(as.numeric(names(horizontals.eqearth)),2),'      '), units='inches', cex=6/8))
+    ext_factor_x <- max(graphics::strwidth(paste0('     ', round(as.numeric(names(horizontals.eqearth)),2)), units='inches', cex=6/8))
     ext_factor_y <- max(graphics::strheight(paste0('\n', round(as.numeric(names(verticals.eqearth)),2)), units='inches', cex=6/8))
 
     if(is.na(dim)[1]) dim <- grDevices::dev.size('in')
