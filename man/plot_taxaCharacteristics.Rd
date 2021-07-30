@@ -18,6 +18,7 @@ plot_taxaCharacteristics(
   w0 = 0.3,
   height = 3 * length(climate),
   h0 = 0.4,
+  add_modern = FALSE,
   resol = 0.25
 )
 }
@@ -60,6 +61,9 @@ per variables).}
 
 \item{h0}{The vertical space used for the x-axes.}
 
+\item{add_modern}{A boolean to add the location and the modern climate values
+to the plot (default \code{FALSE}).}
+
 \item{resol}{For advanced users only: if higher resolution data are used to
 estimate the \code{pdfs}, use this parameter to define the resolution
 of the maps on the figures. (default is 0.25 degrees to match with the
@@ -82,6 +86,8 @@ Plot the distribution and responses of the studied taxa
     bin_width = c(2, 20), shape = c("normal", "lognormal")
   )
 }
-  plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
+## example using pre-saved reconstruction obtained with the previous command.
+data(reconstr)
+plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 
 }

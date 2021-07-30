@@ -3,7 +3,7 @@
 \docType{data}
 \name{reconstr}
 \alias{reconstr}
-\title{A \code{\link{crestObj}} ran with the pseudo data.}
+\title{A \code{\link{crestObj}} ran with the example dataset.}
 \format{
 An object of class \code{crestObj} of length 5.
 }
@@ -11,7 +11,7 @@ An object of class \code{crestObj} of length 5.
 reconstr
 }
 \description{
-A \code{\link{crestObj}} ran with the pseudo data. Useful to illustrate many
-functions of the package.
+A \code{\link{crestObj}} ran with the example dataset. Useful to illustrate
+many functions of the package.
 }
 \keyword{datasets}

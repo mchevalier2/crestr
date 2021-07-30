@@ -32,7 +32,7 @@ knitr::opts_chunk$set(
 
 #
 
-The goal of crestr is to enable probabilistic reconstructions of past climate 
+The goal of crestr is to enable probabilistic reconstructions of past climate
 change from fossil assemblage data. The approach is based on the estimation of
 conditional responses of different bioproxies to various climate parameters.
 Theseresponses take the form of probability density functions (*pdfs*). The
@@ -161,7 +161,7 @@ plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
 If satisfying, the results can be directly exported from the R environment in
-unique spreadsheets for each variables (or csv files) and the **crest** object
+unique spreadsheets for each variables (or csv files) and the **crest** object 
 is exported as an RData file to enable easy reuse in the future.
 
 ```{r export}

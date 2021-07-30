@@ -22,6 +22,13 @@ crest.get_modern_data(
   biomes = NA,
   ecoregions = NA,
   minGridCells = 20,
+  elev_min = NA,
+  elev_max = NA,
+  elev_range = NA,
+  year_min = 1900,
+  year_max = 2021,
+  nodate = TRUE,
+  type_of_obs = c(1, 2, 3, 8, 9),
   selectedTaxa = NA,
   site_info = c(NA, NA),
   site_name = NA,
@@ -72,6 +79,31 @@ study area.}
 
 \item{minGridCells}{The minimum number of unique presence data necessary to
 estimate a species' climate response. Default is 20.}
+
+\item{elev_min}{Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'\code{NA} ).}
+
+\item{elev_max}{Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'\code{NA} ).}
+
+\item{elev_range}{Parameters discard the grid cell with a high elevational
+range (default is \code{NA}).}
+
+\item{year_min}{The oldest and youngest occurrences accepted
+(default is 1900-2021).}
+
+\item{year_max}{The oldest and youngest occurrences accepted
+(default is 1900-2021).}
+
+\item{nodate}{A boolean to accept occurrences without a date (can overlap
+with occurrences with a date; default \code{TRUE}).}
+
+\item{type_of_obs}{The type of observation to use in the study. 1: human
+observation, 2: observation, 3: preserved specimen, 4: living specimem,
+5: fossil specimen, 6: material sample, 7: machine observation, 8:
+literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})}
 
 \item{selectedTaxa}{A data frame assigns which taxa should be used for each
 variable (1 if the taxon should be used, 0 otherwise). The colnames

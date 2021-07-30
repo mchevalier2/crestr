@@ -21,13 +21,20 @@ crestObj(
   xmx = NA,
   ymn = NA,
   ymx = NA,
+  elev_min = NA,
+  elev_max = NA,
+  elev_range = NA,
+  year_min = 1900,
+  year_max = 2021,
+  nodate = TRUE,
+  type_of_obs = c(1, 2, 3, 8, 9),
   df = NA,
   x = NA,
   x.name = "",
   minGridCells = 20,
   weightedPresences = FALSE,
-  bin_width = rep(1, length(climate)),
-  shape = rep("normal", length(climate)),
+  bin_width = NA,
+  shape = NA,
   npoints = 200,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
@@ -70,6 +77,24 @@ details.}
 study area.}
 
 \item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
+
+\item{elev_min, elev_max}{Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'\code{NA} ).}
+
+\item{elev_range}{Parameters discard the grid cell with a high elevational
+range (default is \code{NA}).}
+
+\item{year_min, year_max}{The oldest and youngest occurrences accepted
+(default is 1900-2021).}
+
+\item{nodate}{A boolean to accept occurrences without a date (can overlap
+with occurrences with a date; default \code{TRUE}).}
+
+\item{type_of_obs}{The type of observation to use in the study. 1: human
+observation, 2: observation, 3: preserved specimen, 4: living specimem,
+5: fossil specimen, 6: material sample, 7: machine observation, 8:
+literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})}
 
 \item{df}{A data frame containing the data to reconstruct (counts,
 percentages or presence/absence data).}
@@ -128,4 +153,8 @@ for reconstructing climate
 }
 \description{
 Creates a \code{crestObj} object with all default parameters.
+}
+\seealso{
+\url{https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html}
+for a detailed explanation of the types of observation.
 }

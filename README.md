@@ -151,7 +151,7 @@ recons <- crest(
 )
 #> Warning in crest.get_modern_data(pse = pse, taxaType = taxaType, climate
 #> = climate, : The classification of one or more taxa into species was not
-#> successful. Check 'x$misc$taxa_notes' for details.
+#> successful. Check `x$misc$taxa_notes` for details.
 ```
 
 The climate sampled by the data can be graphically represented for a
@@ -233,10 +233,6 @@ in the future.
 
 ``` r
 export(recons, loc=getwd(), dataname='crest-test')
-#> NULL
-#> [1] "bio1"
-#> NULL
-#> [1] "bio12"
 list.files(file.path(getwd(), 'crest-test'))
 #> [1] "bio1"             "bio12"            "crest-test.RData"
 ```

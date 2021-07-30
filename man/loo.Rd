@@ -35,7 +35,7 @@ Repeat the repetation by removing one taxon at a time.
 }
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
-reconstr$reconstructions$bio12$loo
+lapply(reconstr$reconstructions$bio12$loo, head)
 plot_loo(reconstr)
 
 }

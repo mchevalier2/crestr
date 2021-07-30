@@ -32,7 +32,7 @@ Connect to the gbif4crest_02 database by accessing the server on Amazon.
 }
 \examples{
 \dontrun{
-db <- connect_online()
+  db <- connect_online()
 }
 
 }
