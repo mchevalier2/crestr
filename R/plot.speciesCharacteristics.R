@@ -10,6 +10,8 @@
 #'        recorded taxa).
 #' @param climate Climate variables to be used to generate the plot. By default
 #'        all the variables are included.
+#' @param add_modern A boolean to add the location and the modern climate values
+#'        to the plot (default \code{FALSE}).
 #' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
 #'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
@@ -44,7 +46,9 @@
 #'     bin_width = c(2, 20), shape = c("normal", "lognormal")
 #'   )
 #' }
-#'   plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
+#' ## example using pre-saved reconstruction obtained with the previous command.
+#' data(reconstr)
+#' plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 #'
 plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                       climate = x$parameters$climate,
@@ -54,14 +58,30 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                       as.png = FALSE, png.res=300,
                                       width = 7.48, w0 = 0.3,
                                       height = 3*length(climate), h0 = 0.4,
+                                      add_modern = FALSE,
                                       resol = 0.25
                                       ) {
+
+    if(base::missing(x)) x
 
     if (methods::is(x)[1] == 'crestObj') {
         if (length(x$modelling$pdfs) == 1 ) {
             if(is.na(x$modelling$pdfs)) {
                 stop('The pdfs are required to generate the plot. Run crest.calibrate() on your data.\n')
             }
+        }
+
+
+        if(add_modern) {
+            if (length(x$misc$site_info) <= 3) {
+                add_modern <- FALSE
+            }
+        }
+
+        site_xy <- NA
+        if (is.na(x$misc$site_info$long) | is.na(x$misc$site_info$lat)) add_modern <- FALSE
+        if(add_modern) {
+            site_xy <- c(x$misc$site_info$long, x$misc$site_info$lat)
         }
 
         if(sum(taxanames %in% x$inputs$taxa.name) != length(taxanames)) {
@@ -250,7 +270,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 graphics::par(mar=c(0,0,0,0), ps=8*3/2)
                 plot_map_eqearth(veg_space, ext, zlim = zlab,
                                  brks.pos=log10(clab), brks.lab=clab,
-                                 col=col.density,
+                                 col=col.density, site_xy = site_xy,
                                  title='Number of unique species occurences per grid cell',
                                  dim=c(x1*width/(w0+x1+x2), y1*height/(y1+y2*length(climate))),
                                  scale=3/2)
@@ -339,6 +359,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                      zlim=range(brks), col=grDevices::colorRampPalette(col.climate)( length(brks)-1 ),
                                      brks.pos = brks, brks.lab = brks,
                                      title=accClimateVariables(clim)[3],
+                                     site_xy = site_xy,
                                      colour_scale=FALSE, top_layer=veg_space,
                                      dim=c(x3*width/(w0+x1+x2), y2*height/(y1+y2*length(climate))),
                                      scale=3/2)
@@ -372,13 +393,15 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     graphics::par(mar=c(0.5,0,0,0.25))
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
                     graphics::text(mean(range(h1$breaks)), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=6/8)
+                    if(add_modern) {
+                        graphics::points(x$misc$site_info$climate[, clim], 0.9, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                    }
                     for(xval in graphics::axTicks(1)){
                         if(xval >= h1$breaks[1]) {
                             graphics::segments(xval, 1, xval, 0.9)
                             graphics::text(xval, 0.85, xval, cex=6/8, adj=c(0.5,1))
                         }
                     }
-
 
                     ## Plot the pdfs -----------------------------------------------------
                     graphics::par(mar=c(0,0.25,0.5,0.5))
@@ -403,6 +426,9 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     graphics::par(mar=c(0.5,0.25,0,0.5))
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
                     graphics::text(mean(range(x$modelling$xrange[[clim]])), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=6/8)
+                    if(add_modern) {
+                        graphics::points(x$misc$site_info$climate[, clim], 0.9, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                    }
                     for(xval in graphics::axTicks(1)){
                         if(xval >= ifelse(x$parameters$shape[clim,]=='normal',x$modelling$xrange[[clim]][1], 0)) {
                             graphics::segments(xval, 1, xval, 0.9)

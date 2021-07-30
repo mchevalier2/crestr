@@ -52,6 +52,8 @@ plot_climateSpace <- function( x,
                       resol = 0.25
                       ) {
 
+    if(base::missing(x)) x
+
     if (methods::is(x)[1] == 'crestObj') {
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {
@@ -179,12 +181,12 @@ plot_climateSpace <- function( x,
 
                 dX <- maxx-minx
                 dY <- maxy-miny
-                minx <- minx - 0.02*dX
-                maxx <- maxx + 0.02*dX
+                minx <- minx - 0.03*dX
+                maxx <- maxx + 0.03*dX
                 miny <- miny - 0.03*dY
                 maxy <- maxy + 0.03*dY
 
-                xlim <- c(minx, maxx) + c(-0.005, 0.1)*dX
+                xlim <- c(minx, maxx) + c(-0.005, 0.15)*dX
                 ylim <- c(miny, maxy) + c(-0.1, 0.05**2)*dY
 
                 graphics::par(mar=c(0,0,0,0), ps=8*3/2)
@@ -245,11 +247,10 @@ plot_climateSpace <- function( x,
 
             xval <- range(h1$breaks)
 
-            ext_factor_x <- graphics::strwidth(paste0('  ', max(c(h1$counts, h2$counts))), cex=6/8, units='inches')
-            w <- x2 - 2*ext_factor_x
+            ext_factor_x <- max(graphics::strwidth(paste0('     ', c(h1$counts, h2$counts)), cex=6/8, units='inches'))
+            w <- x2 - 2*ext_factor_x # space allocated to the central part of the plot
             ratio <- diff(xval) / w # units per inch
-            xval <- xval + c(-1, 1)*(x2*ratio - diff(xval))/2
-
+            xval <- xval + c(-1, 1)*(ext_factor_x*ratio)
 
             graphics::par(mar=c(0,0,0,0), ps=8*3/2)
             plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=c(0,1), ylim=c(0,1), xaxs='i', yaxs='i') ; {
@@ -283,7 +284,10 @@ plot_climateSpace <- function( x,
             plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xval, ylim=c(0,1), xaxs='i', yaxs='i')  ;  {
                 d1 <- -9999999
                 if(add_modern) {
-                    graphics::points(x$misc$site_info$climate[, clim], 0.5, pch=23, col='white', bg='red', cex=1.5, lwd=1.5)
+                    #graphics::points(x$misc$site_info$climate[, clim], 0.5, pch=23, col='white', bg='red', cex=1.5, lwd=1.5)
+                    graphics::points(x$misc$site_info$climate[, clim], 0.83, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                    graphics::points(x$misc$site_info$climate[, clim], 0.17, pch=25, col=NA, bg='red', cex=0.9, lwd=1.5)
+
                 }
                 for(i in 1:length(h1$breaks)) {
                     d2 <- h1$breaks[i] - graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=6/8, units='user')/2

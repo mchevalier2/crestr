@@ -17,6 +17,19 @@
 #'        'Depth').
 #' @param x The name, age or depth of the rows of df (the samples).
 #' @param xmn,xmx,ymn,ymx The coordinates defining the study area.
+#' @param elev_min,elev_max Parameters to only selected grid cells with an
+#'        elevation higher than elev_min or lower than elev_max (default is
+#'        '\code{NA} ).
+#' @param elev_range Parameters discard the grid cell with a high elevational
+#'        range (default is \code{NA}).
+#' @param year_min,year_max The oldest and youngest occurrences accepted
+#'        (default is 1900-2021).
+#' @param nodate A boolean to accept occurrences without a date (can overlap
+#'        with occurrences with a date; default \code{TRUE}).
+#' @param type_of_obs The type of observation to use in the study. 1: human
+#'        observation, 2: observation, 3: preserved specimen, 4: living specimem,
+#'        5: fossil specimen, 6: material sample, 7: machine observation, 8:
+#'        literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})
 #' @param dbname The name of the data source database.
 #' @param continents A vector of the continent names defining the study area.
 #' @param countries A vector of the country names defining the study area.
@@ -60,17 +73,21 @@
 #' @return A \code{crestObj} object that is used to store data and information
 #'         for reconstructing climate
 #' @export
-
+#' @seealso \url{https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html}
+#'          for a detailed explanation of the types of observation.
 crestObj <- function(taxa.name, taxaType, climate,
                      pse = NA, dbname = NA,
                      continents = NA, countries = NA,
                      basins = NA, sectors = NA,
                      realms = NA, biomes = NA, ecoregions = NA,
                      xmn = NA, xmx = NA, ymn = NA, ymx = NA,
+                     elev_min = NA, elev_max = NA, elev_range = NA,
+                     year_min = 1900, year_max = 2021, nodate = TRUE,
+                     type_of_obs = c(1, 2, 3, 8, 9),
                      df = NA, x = NA, x.name = "",
                      minGridCells = 20, weightedPresences = FALSE,
-                     bin_width = rep(1, length(climate)),
-                     shape = rep("normal", length(climate)),
+                     bin_width = NA,
+                     shape = NA,
                      npoints = 200,
                      geoWeighting = TRUE,
                      climateSpaceWeighting = TRUE,
@@ -80,63 +97,170 @@ crestObj <- function(taxa.name, taxaType, climate,
                      taxWeight = "normalisation",
                      uncertainties = c(0.5, 0.95)) {
 
-  inputs <- list(
-    df = df,
-    taxa.name = taxa.name,
-    x = x,
-    pse = pse,
-    selectedTaxa = selectedTaxa,
-    x.name = x.name
-  )
+    if(base::missing(taxa.name)) taxa.name
+    if(base::missing(taxaType)) taxaType
+    if(base::missing(climate)) climate
 
-  parameters <- list(
-    climate = climate,
-    taxaType = taxaType,
-    xmn = xmn,
-    xmx = xmx,
-    ymn = ymn,
-    ymx = ymx,
-    continents = continents,
-    countries = countries,
-    basins = basins,
-    sectors = sectors,
-    realms = realms,
-    biomes = biomes,
-    ecoregions = ecoregions,
-    taxWeight = taxWeight,
-    minGridCells = minGridCells,
-    weightedPresences = weightedPresences,
-    bin_width = bin_width,
-    shape = shape,
-    npoints = npoints,
-    geoWeighting = geoWeighting,
-    climateSpaceWeighting = climateSpaceWeighting,
-    presenceThreshold = presenceThreshold,
-    uncertainties = uncertainties
-  )
+    if(is.na(bin_width)) {
+        bin_width <- as.data.frame(matrix(rep(1, length(climate)), ncol=1))
+        rownames(bin_width) <- climate
+    }
+    if(is.na(shape)) {
+        shape <- as.data.frame(matrix(rep("normal", length(climate)), ncol=1))
+        rownames(shape) <- climate
+    }
 
-  modelling <- list(taxonID2proxy = NA, climate_space = NA, pdfs = NA, weights = NA, xrange = NA, distributions = distributions)
+    inputs <- list(
+        df = df,
+        taxa.name = taxa.name,
+        x = x,
+        pse = pse,
+        selectedTaxa = selectedTaxa,
+        x.name = x.name
+    )
 
-  reconstructions <- list()
+    parameters <- list(
+        climate = climate,
+        taxaType = taxaType,
+        xmn = xmn,
+        xmx = xmx,
+        ymn = ymn,
+        ymx = ymx,
+        elev_min = elev_min,
+        elev_max = elev_max,
+        elev_range = elev_range,
+        year_min = year_min,
+        year_max = year_max,
+        nodate = nodate,
+        type_of_obs = type_of_obs,
+        continents = continents,
+        countries = countries,
+        basins = basins,
+        sectors = sectors,
+        realms = realms,
+        biomes = biomes,
+        ecoregions = ecoregions,
+        taxWeight = taxWeight,
+        minGridCells = minGridCells,
+        weightedPresences = weightedPresences,
+        bin_width = bin_width,
+        shape = shape,
+        npoints = npoints,
+        geoWeighting = geoWeighting,
+        climateSpaceWeighting = climateSpaceWeighting,
+        presenceThreshold = presenceThreshold,
+        uncertainties = uncertainties
+    )
 
-  misc <- list(dbname = dbname)
+    modelling <- list(taxonID2proxy = NA, climate_space = NA, pdfs = NA, weights = NA, xrange = NA, distributions = distributions)
 
-  value <- list(
-    inputs = inputs,
-    parameters = parameters,
-    modelling = modelling,
-    reconstructions = reconstructions,
-    misc = misc
-  )
-  # class can be set using class() or attr() function
-  attr(value, "class") <- "crestObj"
-  value
+    reconstructions <- list()
+
+    misc <- list(dbname = dbname, stage = 'init')
+
+    value <- list(
+        inputs = inputs,
+        parameters = parameters,
+        modelling = modelling,
+        reconstructions = reconstructions,
+        misc = misc
+    )
+    # class can be set using class() or attr() function
+    attr(value, "class") <- "crestObj"
+    value
 }
 
 
 #' @export
 print.crestObj <- function(x, ...) {
-  print(lapply(x, names))
+    if(base::missing(x)) x
+
+    name <- find.original.name(x)
+    is_formatted <- is_fitted <- is_reconstructed <- is_looed <- FALSE
+    if(x$misc$stage == 'data_extracted' | x$misc$stage == 'data_inserted') {
+        is_formatted <- TRUE
+    } else if (x$misc$stage == 'PDFs_fitted') {
+        is_formatted <- is_fitted <- TRUE
+    }else if (x$misc$stage == 'climate_reconstructed') {
+        is_formatted <- is_fitted <- is_reconstructed <- TRUE
+    } else if (x$misc$stage == 'leave_one_out') {
+        is_formatted <- is_fitted <- is_reconstructed <- is_looed <- TRUE
+    }
+
+    cat('*\n')
+    cat(paste0('* Summary of the crestObj named `',name,'`:\n'))
+    cat(paste0('*   x Calibration data formatted .. ', is_formatted,'\n'))
+    cat(paste0('*   x PDFs fitted ................. ', is_fitted,'\n'))
+    cat(paste0('*   x Climate reconstructed ....... ', is_reconstructed,'\n'))
+    cat(paste0('*   x Leave-One-Out analysis ...... ', is_looed,'\n'))
+    cat('*\n')
+    if(is_formatted) {
+        if(is.data.frame(x$inputs$df)) {
+            cat(paste0('* The dataset to be reconstructed (`df`) is composed of ', nrow(x$inputs$df),' samples with ',ncol(x$inputs$df)-1,' taxa.\n'))
+        }
+        cat(paste0('* Variable', ifelse(length(x$parameters$climate) > 1, 's', ''),' to analyse: ', paste(x$parameters$climate, collapse=', '),'\n'))
+        cat(paste0('*\n'))
+
+        taxa_type <- get_taxa_type(x$parameters$taxaType)
+        cat(paste0('* The calibration dataset was defined using the following set of parameters:\n'))
+        cat(paste0('*   x Proxy type ............ ', taxa_type, ifelse(x$parameters$taxaType == 0, '', 's'), '\n'))
+        if(!is.na(x$parameters$xmn) | !is.na(x$parameters$xmx)) cat(paste0('*   x Longitude ............. [', x$parameters$xmn, ' - ', x$parameters$xmx,']\n'))
+        if(!is.na(x$parameters$ymn) | !is.na(x$parameters$ymx)) cat(paste0('*   x Latitude .............. [', x$parameters$ymn, ' - ', x$parameters$ymx,']\n'))
+        if(x$parameters$taxaType > 0) {
+            if(!is.na(x$parameters$elev_min) | !is.na(x$parameters$elev_max)) cat(paste0('*   x Elevation ............. [', x$parameters$elev_min, ' - ', x$parameters$elev_max,']\n'))
+            if(!is.na(x$parameters$elev_range)) cat(paste0('*   x Elevation range ....... ',x$parameters$elev_range, '\n'))
+            if(!is.na(x$parameters$year_min) | !is.na(x$parameters$year_max)) cat(paste0('*   x Observation date ...... [', x$parameters$year_min, ' - ', x$parameters$year_max,']\n'))
+            if(!is.na(x$parameters$nodate)) cat(paste0('*   x Undated observations .. ', x$parameters$nodate, '\n'))
+            if(!unique(is.na(x$parameters$type_of_obs))) {
+                OBSTYPES <- dbRequest("SELECT * FROM typeofobservations ORDER BY type_of_obs", x$misc$dbname)
+                cat(paste0('*   x Type of observations .. ', paste(base::trimws(OBSTYPES[x$parameters$type_of_obs,2]), collapse=', '), '\n'))
+            }
+            if(!unique(is.na(x$parameters$continents))) cat(paste0('*   x Continents ............ ', paste(x$parameters$continents, collapse=', '), '\n'))
+            if(!unique(is.na(x$parameters$countries))) cat(paste0('*   x Countries ............. ', paste(x$parameters$countries, collapse=', '), '\n'))
+            if(!unique(is.na(x$parameters$basins))) cat(paste0('*   x Basins ................ ', paste(x$parameters$basins, collapse=', '), '\n'))
+            if(!unique(is.na(x$parameters$sectors))) cat(paste0('*   x Sectors ............... ', paste(x$parameters$sectors, collapse=', '), '\n'))
+            if(!unique(is.na(x$parameters$realms))) cat(paste0('*   x Realms ................ ', paste(x$parameters$realms, collapse=', '), '\n'))
+            if(!unique(is.na(x$parameters$biomes))) cat(paste0('*   x Biomes ................ ', paste(x$parameters$biomes, collapse=', '), '\n'))
+            if(!unique(is.na(x$parameters$ecoregions))) cat(paste0('*   x Ecoregions ............ ', paste(x$parameters$ecoregions, collapse=', '), '\n'))
+        }
+        cat(paste0('*\n'))
+        if(is_fitted) {
+            cat(paste0('* The PDFs were fitted using the following set of parameters:\n'))
+            if(!is.na(x$parameters$minGridCells)) cat(paste0('*   x Minimum distinct of distinct occurences .. ', x$parameters$minGridCells, '\n'))
+            if(!is.na(x$parameters$weightedPresences)) cat(paste0('*   x Weighted occurence data .................. ', x$parameters$weightedPresences, '\n'))
+            if(!is.na(x$parameters$npoints)) cat(paste0('*   x Number of points to fit the PDFs ......... ', x$parameters$npoints, '\n'))
+            if(!is.na(x$parameters$geoWeighting)) {
+                cat(paste0('*   x Geographical weighting ................... ',x$parameters$geoWeighting, '\n'))
+                cat(paste0('*       Using bins of width .................... ', x$parameters$climate[1], ': ', x$parameters$bin_width[x$parameters$climate[1], 1],'\n'))
+                for(clim in x$parameters$climate[-1]) {
+                    cat(paste0('*       ', paste(rep('_', nchar('Using bins of width ....................')), collapse=''), ' ', clim, ': ', x$parameters$bin_width[clim, 1],'\n'))
+                }
+            }
+            if(!is.na(x$parameters$climateSpaceWeighting)) cat(paste0('*   x Weighting of the climate space ........... ',x$parameters$climateSpaceWeighting, '\n'))
+            cat(paste0('*   x Shape of the PDFs ........................ ',x$parameters$climate[1], ': ', x$parameters$shape[x$parameters$climate[1], 1], '\n'))
+            for(clim in x$parameters$climate[-1]) {
+                cat(paste0('*     ', paste(rep('_', nchar('Shape of the PDFs ........................')), collapse=''), ' ',clim, ': ', x$parameters$shape[clim, 1], '\n'))
+            }
+            cat(paste0('*\n'))
+        }
+        excluded_taxa <- sum(unlist(lapply(x$misc$taxa_notes, function(x){if(is.data.frame(x)){return(nrow(x))}else{return(length(x))}})))
+        if(excluded_taxa > 0) {
+            cat(paste0('* Of the ',nrow(x$inputs$selectedTaxa), ' taxa provided in `df` and `PSE`, ', excluded_taxa,' cannot be analysed.\n'))
+            cat(paste0('* (This may be expected, but check `', name,'$misc$taxa_notes` for additional details.)\n'))
+            cat(paste0('*\n'))
+        }
+        if(is_reconstructed) {
+            cat(paste0('* The reconstructions were performed with the following set of parameters:\n'))
+            if(!is.na(x$parameters$presenceThreshold)) cat(paste0('*   x Minimum presence value .................. ',  x$parameters$presenceThreshold,'\n'))
+            if(!is.na(x$parameters$taxWeight)) cat(paste0('*   x Weighting of the taxa ................... ',  x$parameters$taxWeight,'\n'))
+            if(!unique(is.na(x$parameters$uncertainties))) cat(paste0('*   x Calculated uncertainties ................ ',  paste(x$parameters$uncertainties, collapse=', '),'\n'))
+            cat(paste0('*   x Number of taxa selected to reconstruct .. ', x$parameters$climate[1],': ', sum(x$inputs$selectedTaxa[, x$parameters$climate[1]] > 0),'\n'))
+            for(clim in x$parameters$climate[-1]) {
+                cat(paste0('*     ----------------------------------------- ', clim, ': ', sum(x$inputs$selectedTaxa[, clim] > 0),'\n'))
+            }
+            cat(paste0('*\n'))
+        }
+    }
 }
 
 
@@ -204,6 +328,9 @@ plot.crestObj <- function(x,
                           filename = 'Reconstruction.pdf',
                           col=viridis::viridis(125)[26:125],
                           ...) {
+
+    if(base::missing(x)) x
+
     if (length(x$reconstructions) == 0 || is.null(climate)) {
         stop("No reconstruction available for plotting.\n")
     }

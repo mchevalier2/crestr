@@ -38,6 +38,8 @@ export <- function( x, dataname = x$misc$site_info$site_name,
                     weights = FALSE,
                     pdfs = FALSE) {
 
+    if(base::missing(x)) x
+
     if (methods::is(x)[1] == 'crestObj') {
         if (length(x$reconstructions) == 0) {
             stop("No reconstruction available for export.\n")
@@ -115,19 +117,27 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, c('SITE INFO:', NA, NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Longitude: ', x$misc$site_info$long, ' \u00B0N'), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Latitude: ', x$misc$site_info$lat, ' \u00B0E'), NA, NA, NA))
-            print(x$misc$site_info$climate)
-            print(clim)
             df <- rbind(df, c(NA, paste0(clim, ' modern value: ', x$misc$site_info$climate[clim]), NA, NA, NA))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, c('DEFINITION OF THE STUDY AREA:', NA, NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Longitude: ', x$parameters$xmn, ' - ', x$parameters$xmx, ' \u00B0N'), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Latitude: ', x$parameters$ymn, ' - ', x$parameters$ymx, ' \u00B0E'), NA, NA, NA))
-            if(!unique(is.na(x$parameters$continents))) df <- rbind(df, c(NA, paste0('Data restricted to the following continent(s): ', paste(x$parameters$continents, collapse = ', ')), NA, NA, NA))
-            if(!unique(is.na(x$parameters$countries))) df <- rbind(df, c(NA, paste0('Data restricted to the following country(ies): ', paste(x$parameters$countries, collapse = ', ')), NA, NA, NA))
-            if(!unique(is.na(x$parameters$realms))) df <- rbind(df, c(NA, paste0('Data restricted to the following realm(s): ', paste(x$parameters$realms, collapse = ', ')), NA, NA, NA))
-            if(!unique(is.na(x$parameters$biomes))) df <- rbind(df, c(NA, paste0('Data restricted to the following biome(s): ', paste(x$parameters$biomes, collapse = ', ')), NA, NA, NA))
-            if(!unique(is.na(x$parameters$ecoregions))) df <- rbind(df, c(NA, paste0('Data restricted to the following ecoregion(s): ', paste(x$parameters$ecoregions, collapse = ', ')), NA, NA, NA))
+            if(x$parameters$taxaType > 0) { # Nothing necessary for the example or private data.
+                if(!is.na(x$parameters$elev_min) | !is.na(x$parameters$elev_max)) df <- rbind(df, c(NA, paste0('Elevation: ', x$parameters$elev_min, ' - ', x$parameters$elev_max, ' m'), NA, NA, NA))
+                if(!is.na(x$parameters$elev_range))df <- rbind(df, c(NA, paste0('Elevation range: ', x$parameters$elev_range, ' m'), NA, NA, NA))
+                if(!is.na(x$parameters$year_min) | !is.na(x$parameters$year_max)) df <- rbind(df, c(NA, paste0('Date of observations: ', x$parameters$year_min, ' - ', x$parameters$year_max), NA, NA, NA))
+                if(!is.na(x$parameters$nodate)) df <- rbind(df, c(NA, paste0('Inclusion of undated observations: ', x$parameters$nodate), NA, NA, NA))
+                res <- dbRequest("SELECT * FROM typeofobservations ORDER BY type_of_obs", x$misc$dbname)
+                df <- rbind(df, c(NA, paste0('Type of observations included: ', paste(base::trimws(res[x$parameters$type_of_obs, 2]), collapse=', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$continents))) df <- rbind(df, c(NA, paste0('Data restricted to the following continent(s): ', paste(x$parameters$continents, collapse = ', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$countries))) df <- rbind(df, c(NA, paste0('Data restricted to the following country(ies): ', paste(x$parameters$countries, collapse = ', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$basins))) df <- rbind(df, c(NA, paste0('Data restricted to the following basin(s): ', paste(x$parameters$basins, collapse = ', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$sectors))) df <- rbind(df, c(NA, paste0('Data restricted to the following sector(s): ', paste(x$parameters$sectors, collapse = ', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$realms))) df <- rbind(df, c(NA, paste0('Data restricted to the following realm(s): ', paste(x$parameters$realms, collapse = ', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$biomes))) df <- rbind(df, c(NA, paste0('Data restricted to the following biome(s): ', paste(x$parameters$biomes, collapse = ', ')), NA, NA, NA))
+                if(!unique(is.na(x$parameters$ecoregions))) df <- rbind(df, c(NA, paste0('Data restricted to the following ecoregion(s): ', paste(x$parameters$ecoregions, collapse = ', ')), NA, NA, NA))
+            }
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, c('DEFINITION OF THE PDFS:', NA, NA, NA, NA))

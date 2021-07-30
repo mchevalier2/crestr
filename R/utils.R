@@ -13,6 +13,8 @@
 #' convert2percentages(df)
 #' convert2percentages(df, col2convert = 3:5)
 convert2percentages <- function(df, col2convert = 2:ncol(df)) {
+    if(base::missing(df)) df
+
     df2 <- cbind(
       df[, -col2convert],
       100 * df[, col2convert] / apply(df[, col2convert], 1, sum)
@@ -40,6 +42,8 @@ convert2percentages <- function(df, col2convert = 2:ncol(df)) {
 #' convert2presenceAbsence(df, threshold = 15)
 #' convert2presenceAbsence(df, col2convert = 3:5)
 convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df)) {
+    if(base::missing(df)) df
+
     df2 <- cbind(
       df[, -col2convert],
       ifelse(df[, col2convert] >= threshold, 1, 0)
@@ -65,6 +69,8 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df))
 #' normalise(df)
 #' normalise(df, col2convert = 3:5)
 normalise <- function(df, col2convert = 2:ncol(df)) {
+    if(base::missing(df)) df
+
     df2 <- convert2percentages(df, col2convert)
     colweights <- apply(df2[, col2convert], 2, meanPositiveValues)
     for (i in 1:nrow(df2)) {
@@ -87,6 +93,8 @@ normalise <- function(df, col2convert = 2:ncol(df)) {
 #' @examples
 #' meanPositiveValues(-10:10)
 meanPositiveValues <- function(x) {
+    if(base::missing(x)) x
+
     base::mean(x[x > 0])
 }
 
@@ -119,6 +127,8 @@ meanPositiveValues <- function(x) {
 #' }
 #'
 copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FALSE, uncertainties=FALSE) {
+    if(base::missing(x)) x
+
     if(! requireNamespace('clipr', quietly=TRUE)) {
         stop("'copy_crest()' requires the 'clipr' package. You can install it using install.packages(\"clipr\").\n\n")
     }
@@ -163,30 +173,42 @@ copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FAL
 #' check_coordinates(20, 0, 90, 0)
 #'
 check_coordinates <- function(xmn, xmx, ymn, ymx) {
+    if(base::missing(xmn)) xmn
+    if(base::missing(xmx)) xmx
+    if(base::missing(ymn)) ymn
+    if(base::missing(ymx)) ymx
 
     estimate_xlim <- estimate_ylim <- FALSE
 
     if (xmn < -180 | is.na(xmn) | xmx > 180 | is.na(xmx)) {
+        if(!is.na(xmn) & !is.na(xmx)) {
+            if (xmn < -180 | xmx > 180) {
+                warning("[xmn; xmx] range larger than accepted values [-180; 180]. The limits were set to -180 and/or 180.\n")
+            }
+        }
         xmn <- max(xmn, -180, na.rm=TRUE)
         xmx <- min(xmx, 180, na.rm=TRUE)
         estimate_xlim <- TRUE
-        #cat("WARNING: [xmn; xmx] range larger than accepted values [-180; 180]. Adapting and continuing.\n")
     }
     if (xmn >= xmx) {
-        #cat("WARNING: xmn is larger than xmx. Inverting the two values and continuing.\n")
+        warning("xmn was larger than xmx. The two values were inverted.\n")
         tmp <- xmn
         xmn <- xmx
         xmx <- tmp
     }
 
     if (ymn < -90| is.na(ymn)  | ymx > 90 | is.na(ymx) ) {
+        if(!is.na(ymn) & !is.na(ymx)) {
+            if (ymn < -90 | ymn > 90) {
+                warning("[ymn; ymx] range larger than accepted values [-90; 90]. The limits were set to -90 and/or 90.\n")
+            }
+        }
         ymn <- max(ymn, -90, na.rm=TRUE)
         ymx <- min(ymx, 90, na.rm=TRUE)
         estimate_ylim <- TRUE
-        #cat("WARNING: [ymn; ymx] range larger than accepted values [-90; 90]. Adapting and continuing.\n")
     }
     if (ymn >= ymx) {
-        #cat("WARNING: ymn is larger than ymx. Inverting the two values and continuing.\n")
+        warning("ymn was larger than ymx. The two values were inverted.\n")
         tmp <- ymn
         ymn <- ymx
         ymx <- tmp
@@ -220,6 +242,9 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
 #'                  title='Cropped dataset', zlim=c(13, 29))
 #'
 crop <- function(x, shp) {
+    if(base::missing(x)) x
+    if(base::missing(shp)) shp
+
     dat.x <- x$modelling$climate_space[, 1]
     dat.y <- x$modelling$climate_space[, 2]
 
@@ -281,7 +306,8 @@ crop <- function(x, shp) {
 
 
     if( length(taxalist ) > 0) {
-        warning(paste0("One or more taxa were were lost due to the cropping of the study area. Check 'x$misc$taxa_notes' for details."))
+        name <- find.original.name(x)
+        warning(paste0("One or more taxa were were lost due to the cropping of the study area. Check `",name,"$misc$taxa_notes` for details."))
         message <- 'Taxon excluded by the crop function.'
         x$misc$taxa_notes[[message]] <- taxalist
     }
@@ -300,10 +326,53 @@ crop <- function(x, shp) {
 #' colour_theme(1)
 #'
 colour_theme <- function(n) {
+    if(base::missing(n)) n
+
     if(n == 1) {
         return(c("#3366cc", "#dc3912", "#ff9900", "#109618", "#990099", "#0099c6", "#dd4477", "#66aa00", "#b82e2e", "#316395", "#994499", "#22AA99", "#AAAA11", "#6633CC", "#E67300", "#8B0707", "#651067", "#329262", "#5574A6", "#3B3EAC"))
     } else {
         warning("The selected colour theme does not exist.\n")
         return(NA)
     }
+}
+
+
+
+#' Returns the name of the function argument in the global environment
+#'
+#' Returns the name of the function argument in the global environment
+#'
+#' @param x The function argument
+#' @export
+#'
+find.original.name <- function(x) {
+    if(base::missing(x)) x
+
+    objects <- ls(envir = .GlobalEnv)
+    for (i in objects) {
+        if (identical(x, get(i, envir = .GlobalEnv))) {
+            return(i)
+        }
+    }
+}
+
+
+
+#' Returns the taxa type corresponding to the index.
+#'
+#' Returns the taxa type corresponding to the index.
+#'
+#' @param taxaType An integer between 0 and 6
+#' @export
+#'
+get_taxa_type <- function(taxaType) {
+    if(base::missing(taxaType)) taxaType
+
+    if(taxaType == 0) return('Example dataset')
+    if(taxaType == 1) return('plant')
+    if(taxaType == 2) return('beetle')
+    if(taxaType == 3) return('chironomid')
+    if(taxaType == 4) return('foraminifer')
+    if(taxaType == 5) return('diatom')
+    if(taxaType == 6) return('rodent')
 }

@@ -54,9 +54,9 @@
 #'
 "M1"
 
-#' A \code{\link{crestObj}} ran with the pseudo data.
+#' A \code{\link{crestObj}} ran with the example dataset.
 #'
-#' A \code{\link{crestObj}} ran with the pseudo data. Useful to illustrate many
-#' functions of the package.
+#' A \code{\link{crestObj}} ran with the example dataset. Useful to illustrate
+#' many functions of the package.
 #'
 "reconstr"

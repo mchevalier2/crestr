@@ -38,6 +38,8 @@ crest.reconstruct <- function(x,
                               uncertainties = c(0.5, 0.95),
                               skip_for_loo = FALSE, verbose=TRUE) {
 
+    if(base::missing(x)) x
+    
     if(verbose) cat('\n## Last data checks and reconstruction\n')
     if(! skip_for_loo) {
 
@@ -154,5 +156,6 @@ crest.reconstruct <- function(x,
     }
     gc()
     x$reconstructions <- reconstructions
+    x$misc$stage <- 'climate_reconstructed'
     x
 }

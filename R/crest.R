@@ -54,6 +54,8 @@ crest <- function(df, climate,
                   verbose=TRUE,
                   dbname = "gbif4crest_02") {
 
+    if(base::missing(df)) df
+    if(base::missing(climate)) climate
 
     if (is.null(nrow(distributions))) {
         x <- crest.get_modern_data(

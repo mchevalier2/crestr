@@ -48,6 +48,8 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       xlim=NA, tickAtSample=FALSE,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
 
+    if(base::missing(x)) x
+
     if (methods::is(x)[1] == 'crestObj') {
 
         if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {

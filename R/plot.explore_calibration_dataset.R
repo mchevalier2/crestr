@@ -27,6 +27,8 @@ explore_calibration_dataset <- function( taxaType,
                                          realms = NA, biomes = NA, ecoregions = NA,
                                          dbname = "gbif4crest_02") {
 
+    if(base::missing(taxaType)) taxaType
+
     coords        <- check_coordinates(xmn, xmx, ymn, ymx)
     xmn           <- coords[1]
     xmx           <- coords[2]

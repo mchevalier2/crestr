@@ -25,8 +25,13 @@ getDistribTaxa <- function(taxIDs,
                            continents = NA, countries = NA,
                            basins = NA, sectors = NA,
                            realms = NA, biomes = NA, ecoregions = NA,
+                           elev_min = NA, elev_max = NA, elev_range = NA,
+                           year_min = 1900, year_max = 2021, nodate = TRUE,
+                           type_of_obs = c(1, 2, 3, 8, 9),
                            dbname = "gbif4crest_02") {
 
+    if(base::missing(taxIDs)) taxIDs
+    
     coords <- check_coordinates(xmn, xmx, ymn, ymx)
 
     # Formatting subsets of the request------------------------------------------
@@ -81,28 +86,65 @@ getDistribTaxa <- function(taxIDs,
         )
     }
 
-    # If no climate variables are provided
+    # If no climate variables are provided, return values for ALL variables.
     if (unique(is.na(climate))) {
-        CLIM1 <- " "
-        CLIM2 <- " "
-        CLIM3 <- " "
+        CLIM3 <- paste(', ', paste(accClimateVariables()[,2], collapse = ", "))
     } else {
-        CLIM1 <- ", data_qdgc "
-        CLIM2 <- "     "
         CLIM3 <- paste(', ', paste(climate, collapse = ", "))
     }
 
     # Formatting the request-----------------------------------------------------
-    req <- paste0("SELECT DISTINCT taxonid, locid FROM distrib_qdgc WHERE taxonID IN (", paste(taxIDs, collapse = ", "), ")")
+    if(dbname == 'crest_example') { # Some parameters are not availble in the example database
+        DATE <- ''
+        ELEVMIN <- ELEVMAX <- ELEVRANGE <- ''
+        TYPEOFOBS <- ''
+    } else {
+        DATEMIN   <- ifelse(is.na(year_min), '', paste0(" AND last_occ >= ", year_min))
+        DATEMAX   <- ifelse(is.na(year_max), '', paste0(" AND first_occ <=", year_max))
+        NODATE    <- ifelse(is.na(nodate), '', paste0(" no_date = ", nodate))
+        DATE <- paste0(DATEMIN, DATEMAX)
+        if(nchar(DATE) > 0)  DATE <- paste0('( ', substr(DATE, 5, nchar(DATE)), ') ')
+        if(nchar(NODATE) > 0) {
+            if(nchar(DATE) == 0) {
+                DATE <- paste0('AND ', NODATE)
+            } else {
+                DATE <- paste0('AND ( ', DATE, ' OR ', NODATE, ')')
+            }
+        } else {
+            DATE <- paste0('AND ', DATE)
+        }
+        ELEVMIN   <- ifelse(is.na(elev_min), '', paste0('    AND elevation >= ', elev_min))
+        ELEVMAX   <- ifelse(is.na(elev_max), '', paste0('    AND elevation <= ', elev_max))
+        ELEVRANGE <- ifelse(is.na(elev_range), '', paste0('    AND elev_range <= ', elev_range))
+        TYPEOFOBS <- ''
+        if(!unique(is.na(type_of_obs))) {
+            res <- dbRequest("SELECT * FROM typeofobservations ORDER BY type_of_obs", dbname)
+            for(i in type_of_obs) {
+                TYPEOFOBS <- paste(TYPEOFOBS, 'OR ', base::trimws(res[i,2]), '= TRUE ')
+            }
+            TYPEOFOBS <- paste('AND (', substr(TYPEOFOBS, 4, nchar(TYPEOFOBS)), ')')
+        }
+    }
+    req <- paste0(
+        "  SELECT DISTINCT taxonid, locid ",
+        "    FROM distrib_qdgc ",
+        "   WHERE taxonID IN (", paste(taxIDs, collapse = ", "), ")",
+        "    ", DATE, '   ',
+        "    ", TYPEOFOBS, '   '
+       )
     res <- dbRequest(req, dbname)
+
+    if(nrow(res) == 0) return(stats::setNames(data.frame(matrix(ncol = length(c('taxonid', 'longitude', 'latitude', climate)), nrow = 0)), c('taxonid', 'longitude', 'latitude', climate)))
 
     req2 <- paste0(
       "  SELECT DISTINCT locid, longitude, latitude", CLIM3,
       "    FROM data_qdgc ",
       "   WHERE locid IN (", paste(unique(res[, 2]), collapse = ", "), ")",
-      "     ", CLIM2, " ",
       "     AND longitude >= ", coords[1], " AND longitude <= ", coords[2], " ",
       "     AND latitude >= ", coords[3], " AND latitude <= ", coords[4], " ",
+      "     ", ELEVMIN, '   ',
+      "     ", ELEVMAX, '   ',
+      "     ", ELEVRANGE, '   ',
       "     ", GEO_terr, " ",
       "     ", GEO_mari, " ",
       "     ", WWF, " "

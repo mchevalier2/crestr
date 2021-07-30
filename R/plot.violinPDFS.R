@@ -53,6 +53,8 @@ plot_violinPDFs <- function( x,
                       as.png = FALSE, png.res=300
                       ) {
 
+    if(base::missing(x)) x
+    
     if (methods::is(x)[1] == 'crestObj') {
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {

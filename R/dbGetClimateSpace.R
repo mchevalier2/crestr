@@ -26,6 +26,8 @@ getClimateSpace <- function(climate,
                             realms = NA, biomes = NA, ecoregions = NA,
                             dbname = "gbif4crest_02") {
 
+    if(base::missing(climate)) climate
+
     coords <- check_coordinates(xmn, xmx, ymn, ymx)
 
     # Formatting subsets of the request------------------------------------------

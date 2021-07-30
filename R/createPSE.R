@@ -10,10 +10,13 @@
 #' @export
 #' @examples
 #' \dontrun{
+#'    data(crest_ex)
 #'    createPSE(taxa = colnames(crest_ex)[-1])
 #' }
 #'
 createPSE <- function(taxa, loc='proxy_species_equivalency.xlsx') {
+    if(base::missing(taxa)) taxa
+
     if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
         cat("This function requires the package 'openxlsx'. Install it using 'install.packages(\"openxlsx\")' to continue.\n\n")
     } else {

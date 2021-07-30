@@ -18,6 +18,9 @@ climate_from_xy <- function(long, lat,
                             climate = accClimateVariables()[, 2],
                             resol = 0.25, dbname = "gbif4crest_02") {
 
+    if(base::missing(long)) long
+    if(base::missing(lat)) lat
+
     if(!is.numeric(long) | !is.numeric(lat)) {
         stop('The coordinates are not numeric.\n')
     }

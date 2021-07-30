@@ -26,6 +26,12 @@
 #' all.equal(sum(pdfsp * (xrange[2] - xrange[1])), 1)
 #'
 fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
+    if(base::missing(climate)) climate
+    if(base::missing(ccs)) ccs
+    if(base::missing(bin_width)) bin_width
+    if(base::missing(shape)) shape
+    if(base::missing(xrange)) xrange
+
     climate <- climate[!is.na(climate)]
     if (use_ccs) {
         w <- (climate - ccs[["k1"]][1]) %/% bin_width
@@ -67,6 +73,9 @@ fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
 #' calib_clim_space(sample(0:300 / 10, 4000, replace = TRUE), 2)
 #'
 calib_clim_space <- function(climate, bin_width) {
+    if(base::missing(climate)) climate
+    if(base::missing(bin_width)) bin_width
+
     m <- base::min(climate, na.rm = TRUE) %/% bin_width
     nclass <- base::diff(base::range(climate, na.rm = TRUE)) %/% bin_width
     clim_norm <- (climate - m*bin_width) %/% bin_width
@@ -94,6 +103,10 @@ calib_clim_space <- function(climate, bin_width) {
 #' head(xrange)
 #'
 fit_xrange <- function(ccs, shape, bin_width, npoints = 500) {
+    if(base::missing(ccs)) ccs
+    if(base::missing(shape)) shape
+    if(base::missing(bin_width)) bin_width
+
     if (shape == "normal") {
         return(base::seq(ccs[["k1"]][1] - 5 * bin_width,
           ccs[["k1"]][base::length(ccs[["k1"]])] + 5 * bin_width,

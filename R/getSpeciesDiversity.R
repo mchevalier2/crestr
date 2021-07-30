@@ -11,6 +11,8 @@
 #' getSpeciesdiversity(reconstr)
 
 getSpeciesdiversity <- function(x) {
+    if(base::missing(x)) x
+
     div <- rep(0, length(x$inputs$taxa.name))
     names(div) <- x$inputs$taxa.name
 

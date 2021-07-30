@@ -13,5 +13,8 @@
 #' makeTransparent(rainbow(10), 1:10/10)
 
 makeTransparent <- function(colour, alpha) {
+    if(base::missing(colour)) colour
+    if(base::missing(alpha)) alpha
+
    scales::alpha(colour, alpha)
 }

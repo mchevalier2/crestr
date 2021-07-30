@@ -33,6 +33,8 @@ crest.calibrate <- function(x,
                             climateSpaceWeighting = x$parameters$climateSpaceWeighting,
                             verbose=TRUE) {
 
+    if(base::missing(x)) x
+
     if(verbose) cat('\n## Calibration of the taxon-climate relationships\n')
 
     if(verbose) cat('  <> Preparing data ........................ ')
@@ -141,6 +143,6 @@ crest.calibrate <- function(x,
         cat('  <> Fitting relationships ................. [OK]\n')
         cat(paste0('## Taxa-climate relationships fitted.\n'))
     }
-
+    x$misc$stage <- 'PDFs_fitted'
     x
 }

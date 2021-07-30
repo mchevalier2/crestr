@@ -17,6 +17,10 @@
 #' print(reconstr$inputs$selectedTaxa)
 #'
 includeTaxa <- function(x, taxa, climate) {
+    if(base::missing(x)) x
+    if(base::missing(taxa)) taxa
+    if(base::missing(climate)) climate
+
     for (tax in taxa) {
         for (clim in c(climate)) {
             if (x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)] >= 0 ) {
@@ -46,6 +50,10 @@ includeTaxa <- function(x, taxa, climate) {
 #' print(reconstr$inputs$selectedTaxa)
 #'
 excludeTaxa <- function(x, taxa, climate) {
+    if(base::missing(x)) x
+    if(base::missing(taxa)) taxa
+    if(base::missing(climate)) climate
+    
     for (tax in taxa) {
         for (clim in c(climate)) {
           if (x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)] >= 0 ) {

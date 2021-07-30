@@ -24,10 +24,12 @@
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
-#' reconstr$reconstructions$bio12$loo
+#' lapply(reconstr$reconstructions$bio12$loo, head)
 #' plot_loo(reconstr)
 #'
 loo <- function(x, verbose=TRUE) {
+    if(base::missing(x)) x
+
     if(verbose) cat('\n## Prepping data for LOO reconstructions\n')
 
     if(verbose) cat('  <> Checking data ......................... ')
@@ -73,5 +75,6 @@ loo <- function(x, verbose=TRUE) {
         cat('  <> LOO reconstructions ................... [OK]\n')
         cat(paste0('## LOO reconstruction completed in ', time1 %/% 60, 'min ', round(time1 %% 60, 2), 's.\n\n'))
     }
+    x$misc$stage <- 'leave_one_out'
     x
 }

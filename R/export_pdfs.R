@@ -27,6 +27,8 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
                     climate = x$parameters$climate, taxa = x$inputs$taxa.name,
                     loc = getwd(), as.csv = FALSE ) {
 
+    if(base::missing(x)) x
+
     if (methods::is(x)[1] == 'crestObj') {
         if (length(x$modelling$pdfs) == 0) {
             stop("\nNo pdfs available for export. You need to run crest.calibrate() first.\n\n")

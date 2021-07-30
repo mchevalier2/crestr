@@ -54,6 +54,8 @@ plot_diagram <- function(x, bars=FALSE,
                          xlim=NA, tickAtSample=TRUE,
                          col_pos = 'black', col_neg='grey80', title=NA) {
 
+    if(base::missing(x)) x
+
     if (! isColourStr(col_pos))  {
         warning("'",col_pos,"' is not a valid colour. Using 'black' instead.\n")
         col_pos='black'

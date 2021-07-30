@@ -53,6 +53,8 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
                                width=7.48, height = 5
                               ) {
 
+    if(base::missing(x)) x
+
     if (methods::is(x)[1] == 'crestObj') {
         if (length(x$reconstructions) == 0 ) {
             stop('The crestObj requires the fossil data. Run crest.reconstruct() on your data.\n\n')

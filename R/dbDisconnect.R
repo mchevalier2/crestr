@@ -8,8 +8,8 @@
 #' db <- connect_online()
 #' close_db_connection(db)
 #' \dontrun{
-#' db <- connect_online()
-#' close_db_connection(db)
+#'   db <- connect_online()
+#'   close_db_connection(db)
 #' }
 #'
 close_db_connection <- function(db) {

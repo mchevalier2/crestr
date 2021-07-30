@@ -11,10 +11,12 @@
 #' isColourStr('blakc')
 #'
 isColourStr <- function(col) {
-  sapply(col,
-         function(X) {
+    if(base::missing(col)) col
+
+    sapply(col,
+        function(X) {
             tryCatch(is.matrix(grDevices::col2rgb(X)),
-                     error = function(e) FALSE)
-          }
-        )
+                error = function(e) FALSE)
+        }
+    )
 }

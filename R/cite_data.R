@@ -9,6 +9,8 @@
 #' @export
 #'
 cite_crest <- function(x, verbose=TRUE) {
+    if(base::missing(x)) x
+
     tocite <- list()
     tocite$distrib <- cite_distrib_data(x, verbose=FALSE)
     tocite$climate <- cite_climate_data(x, verbose=FALSE)
@@ -41,6 +43,8 @@ cite_crest <- function(x, verbose=TRUE) {
 #' @export
 #'
 cite_distrib_data <- function(x, verbose=TRUE) {
+    if(base::missing(x)) x
+
     if (x$parameters$taxaType == 1) {
         tocite <- c()
         list_of_classes <- unique(stats::na.omit(x$inputs$pse[, 'Class_name']))
@@ -93,15 +97,21 @@ cite_distrib_data <- function(x, verbose=TRUE) {
 #' @export
 #'
 cite_climate_data <- function(x, verbose=TRUE) {
+    if(base::missing(x)) x
+
     if (x$parameters$taxaType == 0) {
         if (verbose)  cat('You have not used the provided calibration dataset. No climate reference are required.\n')
         tocite <- NULL
     } else {
         ref1 <- "Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302-4315."
         ref2 <- "Zomer, R.J., Trabucco, A., Bossio, D.A. and Verchot, L. V., 2008, Climate change mitigation: A spatial analysis of global land suitability for clean development mechanism afforestation and reforestation. Agriculture, Ecosystems \u0026 Environment, 126, pp. 67-80."
-        ref3 <- "Locarnini, R.A., Mishonov, A.V., Antonov, J.I., Boyer, T.P., Garcia, H.E., Baranova, O.K., Zweng, M.M., Paver, C.R., Reagan, J.R., Johnson, D.R., Hamilton, M. and Seidov, D., 2013. In: Levitus, S. (Ed.), World Ocean Atlas 2013, Volume 1: Temperature. In: Mishonov, A. (Ed.), 73. NOAA Atlas NESDIS, pp. 40 Technical Ed."
-        ref4 <- "Zweng, M.M., Reagan, J.R., Antonov, J.I., Locarnini, R.A., Mishonov, A.V., Boyer, T.P., Garcia, H.E., Baranova, O.K., Johnson, D.R., Seidov, D. and Biddle, M.M., 2013. In: Levitus, S. (Ed.), World Ocean Atlas 2013, Volume 2: Salinity. In: Technical, A.M. (Ed.), 74. NOAA Atlas NESDIS, pp. 39."
+        ref3 <- "Locarnini, R.A., Mishonov, A.V., Baranova, O.K., Boyer, T.P., Zweng, M.M., Garcia, H.E., Reagan, J.R., Seidov, D., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others, 2019, World ocean atlas 2018, volume 1: Temperature. NOAA Atlas NESDIS 81, pp. 52pp."
+        ref4 <- "Zweng, M.M., Seidov, D., Boyer, T.P., Locarnini, R.A., Garcia, H.E., Mishonov, A.V., Baranova, O.K., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others, 2018, World Ocean Atlas 2018, Volume 2: Salinity. NOAA Atlas NESDIS 82, pp. 50pp."
         ref5 <- "Reynolds, R.W., Smith, T.M., Liu, C., Chelton, D.B., Casey, K.S. and Schlax, M.G., 2007, Daily high-resolution-blended analyses for sea surface temperature. Journal of climate, 20(22), pp. 5473-5496."
+        ref6 <- "Garcia, H.E., Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini, R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D. and Reagan, J.R., 2019, World Ocean Atlas 2018, Volume 3: Dissolved Oxygen, Apparent Oxygen Utilization, and Dissolved Oxygen Saturation.. NOAA Atlas NESDIS 83, pp. 38pp."
+        ref7 <- "Garcia, H.E., Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini, R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D., Reagan, J.R. and Others, 2019, World Ocean Atlas 2018. Vol. 4: Dissolved Inorganic Nutrients (phosphate, nitrate and nitrate+nitrite, silicate). NOAA Atlas NESDIS 84, pp. 35pp."
+
+
         # 1 WorldClim
         # 2 AI
         # 3 & 4 SSTs, SSSs, and nutrients
@@ -113,15 +123,21 @@ cite_climate_data <- function(x, verbose=TRUE) {
         if ('ai' %in% x$parameters$climate) {
             tocite <- c(tocite, ref2)
         }
-        if (sum( paste(rep(c('sst', 'sss'), each=5), rep(c('ann', 'jfm', 'amj', 'jas', 'ond'), 2), sep='_') %in% x$parameters$climate ) > 0) {
-            tocite <- c(tocite, ref3, ref4)
+        if (sum( paste(rep('sst', 5), c('ann', 'jfm', 'amj', 'jas', 'ond'), sep='_') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref3)
         }
-        if (sum( c('diss_oxy', 'nitrate', 'phosphate', 'silicate') %in% x$parameters$climate ) > 0) {
-            tocite <- c(tocite, ref3, ref4)
+        if (sum( paste(rep('sss', 5), c('ann', 'jfm', 'amj', 'jas', 'ond'), sep='_') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref4)
+        }
+        if (sum( c('diss_oxy') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref6)
+        }
+        if (sum( c('nitrate', 'phosphate', 'silicate') %in% x$parameters$climate ) > 0) {
+            tocite <- c(tocite, ref7)
         }
         if (sum( paste(rep(c('icec'), each=5), rep(c('ann', 'jfm', 'amj', 'jas', 'ond'), 1), sep='_') %in% x$parameters$climate ) > 0) {
             tocite <- c(tocite, ref5)
-        }                                                                                                                           
+        }
 
         if (verbose) {
             cat('Please cite the following dataset(s):\n')
@@ -146,6 +162,8 @@ cite_climate_data <- function(x, verbose=TRUE) {
 #' @export
 #'
 cite_method <- function(x, verbose=TRUE) {
+    if(base::missing(x)) x
+
     tocite <- 'Chevalier, M., Cheddadi, R. and Chase, B.M., 2014, CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. Climate of the Past, 10, pp. 2081-2098. doi: 10.5194/cp-10-2081-2014'
     if (x$parameters$taxaType > 0) {
         tocite <- c(tocite, 'Chevalier, M., 2019, Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27-35. doi: 10.1016/j.gloplacha.2019.01.016')

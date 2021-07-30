@@ -53,6 +53,9 @@ crest.set_modern_data <- function( distributions, climate,
                                    site_climate = rep(NA, length(climate)),
                                    verbose=TRUE) {
 
+    if(base::missing(distributions)) distributions
+    if(base::missing(climate)) climate
+
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
     if(verbose) cat('  <> Checking distributions ................ ')
@@ -122,9 +125,10 @@ crest.set_modern_data <- function( distributions, climate,
 
 
     crest <- crestObj(taxa.name, taxaType=0, climate=climate,
-        selectedTaxa = selectedTaxa
+        selectedTaxa = selectedTaxa,
+        dbname=NA, year_min=NA, year_max=NA, nodate=NA,
+        type_of_obs=NA
     )
-
 
     if(verbose) cat('[OK]\n  <> Inserting the fossil data ............. ')
 
@@ -224,5 +228,6 @@ crest.set_modern_data <- function( distributions, climate,
       cat('[OK]\n')
       cat(paste0('## Data insertion completed.\n\n'))
     }
+    crest$misc$stage <- 'data_inserted'
     crest
 }
