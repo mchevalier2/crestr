@@ -11,6 +11,7 @@
 #' @return A data frame descriptive of the climate variables available in the
 #'         database (if \code{v=NA}) or the description of variable v.
 #' @export
+#' @seealso \url{https://www.worldclim.org/data/bioclim.html} for details on the 'bio' data, \url{https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/} for details on 'ai', \url{https://www.ncei.noaa.gov/products/world-ocean-atlas} for details on the sea surface temperature, sea surface salinity and nutrient Concentration data, or \url{https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html} for the sea ice concentration data.
 #' @examples
 #' accClimateVariables()
 #' accClimateVariables(v='bio12')
@@ -113,6 +114,7 @@ getCountryNames <- function(dbname = "gbif4crest_02") {
 #'        of all the country names sorted by continent.
 #' @return A list where each element is a vector of corresponding country names.
 #' @export
+#' @seealso \url{https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-0-countries/}
 #' @examples
 #' accCountryNames()
 #' accCountryNames('Europe')
@@ -163,6 +165,7 @@ getBasinNames <- function(dbname = "gbif4crest_02") {
 #'        of all the accpted names.
 #' @return A list of accepted names.
 #' @export
+#' @seealso \url{https://www.marineregions.org/downloads.php}
 #' @examples
 #' accBasinNames()
 #' accBasinNames('Indian Ocean')
@@ -237,6 +240,7 @@ getRealmNames <- function(terr = NA, biome = TRUE, ecoregion = TRUE, dbname = "g
 #' @return A list with elements that correspond to the biomes (and possibly
 #'         ecoregions) of each realm.
 #' @export
+#' @seealso \url{https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world}
 #' @examples
 #' accRealmNames()
 #' accRealmNames(realm='Africotropical')

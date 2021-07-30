@@ -24,3 +24,6 @@ accRealmNames()
 accRealmNames(realm='Africotropical')
 accRealmNames(realm='Africotropical', ecoregion=FALSE)
 }
+\seealso{
+\url{https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world}
+}
