@@ -15,3 +15,4 @@ A list where each element is a vector of corresponding country names.
 \description{
 Return the list of the continents and associated countries.
 }
+\keyword{internal}
