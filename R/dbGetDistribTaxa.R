@@ -31,7 +31,7 @@ getDistribTaxa <- function(taxIDs,
                            dbname = "gbif4crest_02") {
 
     if(base::missing(taxIDs)) taxIDs
-    
+
     coords <- check_coordinates(xmn, xmx, ymn, ymx)
 
     # Formatting subsets of the request------------------------------------------
@@ -89,6 +89,7 @@ getDistribTaxa <- function(taxIDs,
     # If no climate variables are provided, return values for ALL variables.
     if (unique(is.na(climate))) {
         CLIM3 <- paste(', ', paste(accClimateVariables()[,2], collapse = ", "))
+        climate <- accClimateVariables()[,2]
     } else {
         CLIM3 <- paste(', ', paste(climate, collapse = ", "))
     }
