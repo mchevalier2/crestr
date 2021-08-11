@@ -46,7 +46,7 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df))
 
     df2 <- cbind(
       df[, -col2convert],
-      ifelse(df[, col2convert] >= threshold, 1, 0)
+      ifelse(df[, col2convert] >= threshold & df[, col2convert] > 0, 1, 0)
     )
     colnames(df2) <- colnames(df)
     rownames(df2) <- rownames(df)
@@ -54,9 +54,9 @@ convert2presenceAbsence <- function(df, threshold = 2, col2convert = 2:ncol(df))
 }
 
 
-#' Convert data into presence/absence data.
+#' Normalises the percentages
 #'
-#' Convert data into presence/absence data.
+#' Normalises the percentages
 #'
 #' @param df The dataframe containing the data to convert.
 #' @param col2convert A vector of the columns to convert. Default is all the
