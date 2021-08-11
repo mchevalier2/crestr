@@ -45,6 +45,9 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if(base::missing(taxaType)) taxaType
     if(base::missing(climate)) climate
 
+    if(methods::is(pse, 'tbl'))          pse          <- as.data.frame(pse)
+    if(methods::is(df, 'tbl'))           df           <- as.data.frame(df)
+    if(methods::is(selectedTaxa, 'tbl')) selectedTaxa <- as.data.frame(selectedTaxa)
 
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
@@ -267,8 +270,12 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             warning(paste0("One or more taxa were are not in the proxy-species equivalence table and have been ignored. Check `x$misc$taxa_notes` for details."))
         }
         taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
-        selectedTaxa <- rbind(selectedTaxa, rep(-1, length(climate)))
-        rownames(selectedTaxa)[nrow(selectedTaxa)] <- tax
+        if(tax %in% rownames(selectedTaxa)) {
+            selectedTaxa[tax, ] <- rep(-1, length(climate))
+        } else {
+            selectedTaxa <- rbind(selectedTaxa, rep(-1, length(climate)))
+            rownames(selectedTaxa)[nrow(selectedTaxa)] <- tax
+        }
     }
     taxa.name <- taxa.name[taxa.name %in% rownames(selectedTaxa)[apply(selectedTaxa, 1, sum)>=0]]
 
