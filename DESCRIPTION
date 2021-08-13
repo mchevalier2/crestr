@@ -18,30 +18,24 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
+    clipr,
     DBI,
-    RPostgreSQL,
-    graphics,
-    plot3D,
-    viridis,
-    grDevices,
     methods,
-    stringr,
-    raster,
+    openxlsx,
+    plot3D,
     plyr,
-    sp,
+    raster,
     rgdal,
     RPostgres,
-    rgeos,
     scales,
+    sp,
+    stringr,
+    viridis,
     pals
 Depends:
     R (>= 2.10)
-Suggests:
-    testthat,
-    knitr,
-    rmarkdown,
-    clipr,
-    openxlsx
 VignetteBuilder: knitr
 URL: https://github.com/mchevalier2/crestr, https://mchevalier2.github.io/crestr/index.html
 BugReports: https://github.com/mchevalier2/crestr/issues
+Suggests:
+    knitr

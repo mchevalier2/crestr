@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{normalise}
 \alias{normalise}
-\title{Convert data into presence/absence data.}
+\title{Normalises the percentages}
 \usage{
 normalise(df, col2convert = 2:ncol(df))
 }
@@ -16,7 +16,7 @@ columns but the first, which contains an age, a depth or a sampleID.}
 A vector of unique taxonIDs.
 }
 \description{
-Convert data into presence/absence data.
+Normalises the percentages
 }
 \examples{
 df <- data.frame(matrix(1:25, ncol = 5))
