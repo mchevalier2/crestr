@@ -2,7 +2,7 @@
 
 language: r
 r:
-  - oldrel
+  #- oldrel
   - release
   - devel
 
@@ -21,7 +21,7 @@ addons:
 
 os:
   - linux
-  - osx
+  #- osx
 
 
 osx_image: xcode12.5
