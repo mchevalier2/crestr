@@ -26,7 +26,7 @@ os:
 
 osx_image: xcode12.5
 
-
+ 
 matrix:
 allow_failures:
     - os: osx
@@ -36,7 +36,7 @@ env:
   global:
     - R_BUILD_ARGS=" --no-build-vignettes --no-manual "
     - R_CHECK_ARGS=" --timings --as-cran --no-manual --no-vignettes --install-args=--build"
- 
+
 
 r_packages:
   - covr
