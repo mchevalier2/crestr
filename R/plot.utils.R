@@ -97,6 +97,8 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
     horizontals.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
     horizontals.eqearth.xy <- t(data.frame(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,]))))
+    horizontals.eqearth.y <- unlist(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,2])))
+
 
     if (length(site_xy) == 2) {
         Sl1 <- sp::SpatialPoints(matrix(site_xy, ncol=2))
@@ -191,11 +193,11 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         if(length(site_xy) == 2) {
             sp::plot(XY, col='white', bg='red', cex=2, lwd=2, pch=23, add=TRUE)
         }
-        labels <- rep(FALSE, length(verticals.eqearth.x))
+        labels.lon <- rep(FALSE, length(verticals.eqearth.x))
         for(v in 1:length(verticals.eqearth.x)) {
             overlap <- FALSE
             if(v > 1 ) {
-                if (labels[v-1]) {
+                if (labels.lon[v-1]) {
                     d1 <- graphics::strwidth(paste0('\n ', round(as.numeric(names(verticals.eqearth))[v-1],2), ' '), cex=6/8)
                     d2 <- graphics::strwidth(paste0('\n ', round(as.numeric(names(verticals.eqearth))[v],2), ' '), cex=6/8)
                     if (verticals.eqearth.x[v-1] + d1 / 2 >= verticals.eqearth.x[v] - d2 / 2) {
@@ -208,13 +210,30 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
                                 paste0('\n', round(as.numeric(names(verticals.eqearth))[v],2)),
                                 cex=6/8, adj=c(0.5,0.7)
                 )
-                labels[v] <- TRUE
+                labels.lon[v] <- TRUE
             }
         }
-        for(h in 1:nrow(horizontals.eqearth.xy)) graphics::text(horizontals.eqearth.xy[h,1],
-                                                                horizontals.eqearth.xy[h,2],
-                                                                paste0(round(as.numeric(names(horizontals.eqearth))[h],2),' '),
-                                                                cex=6/8, adj=c(1,0.4))
+
+        labels.lat <- rep(FALSE, length(horizontals.eqearth.xy))
+        for(h in nrow(horizontals.eqearth.xy):1) {
+            overlap <- FALSE
+            if(h < nrow(horizontals.eqearth.xy)) {
+                if (labels.lat[h+1]) {
+                    d1 <- graphics::strheight(paste0('', round(as.numeric(names(horizontals.eqearth))[h+1],2), ' '), cex=6/8)
+                    d2 <- graphics::strheight(paste0('', round(as.numeric(names(horizontals.eqearth))[h],2), ' '), cex=6/8)
+                    if (horizontals.eqearth.y[h+1] - d1 / 2 <= horizontals.eqearth.y[h] + d2 / 2) {
+                        overlap <- TRUE
+                    }
+                }
+            }
+            if (!overlap){
+                graphics::text(horizontals.eqearth.xy[h, 1], horizontals.eqearth.xy[h, 2],
+                                paste0(round(as.numeric(names(horizontals.eqearth))[h], 2),' '),
+                                cex=6/8, adj=c(1,0.4)
+                )
+                labels.lat[h] <- TRUE
+            }
+        }
 
         sp::plot(bckg.eqearth, col=NA, border='black', cex=0.2, add=TRUE)
     }
