@@ -24,6 +24,7 @@ Imports:
     plyr,
     raster,
     rgdal,
+    rgeos,
     RPostgres,
     scales,
     sp,

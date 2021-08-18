@@ -228,18 +228,22 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
 #'        centroid is within the shape.
 #' @export
 #' @examples
-#' data(M1)
-#' ## We want only the data covering Nigeria
-#' M2 <- M1[M1$COUNTRY == 'Nigeria', ]
-#' data(reconstr)
-#' reconstr.cropped <- crop(reconstr, M2)
-#' data1 <- raster::rasterFromXYZ(reconstr$modelling$climate_space[, 1:3], crs=raster::crs(M1))
-#' data2 <- raster::rasterFromXYZ(reconstr.cropped$modelling$climate_space[, 1:3], crs=raster::crs(M1))
-#' layout(matrix(c(1,2,3,4), byrow=FALSE, ncol=2), width=1, height=c(0.2, 0.8))
-#' plot_map_eqearth(data1, brks.pos=seq(13,29,2), colour_scale=TRUE,
-#'                  title='Full dataset', zlim=c(13, 29))
-#' plot_map_eqearth(data2, brks.pos=seq(13,29,2), colour_scale=TRUE,
-#'                  title='Cropped dataset', zlim=c(13, 29))
+#' \dontrun{
+#'   data(M1)
+#'   ## We want only the data covering Nigeria
+#'   M2 <- M1[M1$COUNTRY == 'Nigeria', ]
+#'   data(reconstr)
+#'   reconstr.cropped <- crop(reconstr, M2)
+#'   data1 <- raster::rasterFromXYZ(reconstr$modelling$climate_space[, 1:3],
+#'                                  crs=raster::crs(M1))
+#'   data2 <- raster::rasterFromXYZ(reconstr.cropped$modelling$climate_space[, 1:3],
+#'                                  crs=raster::crs(M1))
+#'   layout(matrix(c(1,2,3,4), byrow=FALSE, ncol=2), width=1, height=c(0.2, 0.8))
+#'   plot_map_eqearth(data1, brks.pos=seq(13,29,2), colour_scale=TRUE,
+#'                    title='Full dataset', zlim=c(13, 29))
+#'   plot_map_eqearth(data2, brks.pos=seq(13,29,2), colour_scale=TRUE,
+#'                    title='Cropped dataset', zlim=c(13, 29))
+#' }
 #'
 crop <- function(x, shp) {
     if(base::missing(x)) x
