@@ -17,7 +17,7 @@
 createPSE <- function(taxa, loc='proxy_species_equivalency.xlsx') {
     if(base::missing(taxa)) taxa
 
-    if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
+    if (!requireNamespace("openxlsx", quietly = TRUE)) {
         cat("This function requires the package 'openxlsx'. Install it using 'install.packages(\"openxlsx\")' to continue.\n\n")
     } else {
         wb <- openxlsx::createWorkbook()

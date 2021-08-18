@@ -413,6 +413,13 @@ plot.crestObj <- function(x,
         }
         graphics::par(ps=8)
 
+        if(!simplify) {
+            if (!requireNamespace("plot3D", quietly = TRUE)) {
+                warning("The package 'plot3D' is required to plot the full distributions of the data. The data are plotted using `simplify=TRUE` instead.\n")
+                simplify=TRUE
+            }
+        }
+
         if(simplify) {
             graphics::par(mar = c(2, 2.2, 0.5, 0.5), ps=8, lwd=1)
             graphics::plot(0,0, type='n', xlim=xlim, ylim = ylim2,

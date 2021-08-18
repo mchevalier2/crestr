@@ -16,6 +16,10 @@
 #' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
 #'
 getTaxonID <- function(family = "", genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
+    family  <- base::trimws(family, 'both')
+    genus   <- base::trimws(genus, 'both')
+    species <- base::trimws(species, 'both')
+
     family <- ifelse(is.na(family), "", tools::toTitleCase(base::tolower(family)))
     genus <- ifelse(is.na(genus), "", tools::toTitleCase(base::tolower(genus)))
     species <- ifelse(is.na(species), "", paste0(base::toupper(substr(species, 1, 1)), substr(base::tolower(species), 2, nchar(species))))

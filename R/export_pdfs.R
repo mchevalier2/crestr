@@ -34,9 +34,11 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
             stop("\nNo pdfs available for export. You need to run crest.calibrate() first.\n\n")
         }
 
-        if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
-            as.csv <- TRUE
-            warning("The package 'openxlsx' is required to export the data as xlsx. The data have been exported as csv.\n\n")
+        if(!as.csv) {
+            if (!requireNamespace("openxlsx", quietly = TRUE)) {
+                as.csv <- TRUE
+                warning("The package 'openxlsx' is required to export the data as excel spreadsheets. The data have been exported as csv.\n\n")
+            }
         }
 
         if (sum(! climate %in% x$parameters$climate) > 0) {

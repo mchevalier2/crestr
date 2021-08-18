@@ -58,9 +58,11 @@ export <- function( x, dataname = x$misc$site_info$site_name,
         save2<-function(recon, ...) { save(recon, ...)}
         save2(x, file = base::file.path(loc, dataname, paste0(dataname, '.RData')))
 
-        if (! 'openxlsx' %in% utils::installed.packages()[,"Package"]) {
-            as.csv <- TRUE
-            warning("The package 'openxlsx' is requred to export the data as xlsx. The data have been exported as csv.\n\n")
+        if(!as.csv) {
+            if (!requireNamespace("openxlsx", quietly = TRUE)) {
+                as.csv <- TRUE
+                warning("The package 'openxlsx' is required to export the data as excel spreadsheets. The data have been exported as csv.\n\n")
+            }
         }
 
         for (clim in climate) {
