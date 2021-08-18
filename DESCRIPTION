@@ -34,7 +34,8 @@ Imports:
 Suggests:
     knitr,
     openxlsx,
-    plot3D
+    plot3D,
+    rmarkdown
 Depends:
     R (>= 2.10)
 VignetteBuilder: knitr
