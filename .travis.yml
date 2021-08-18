@@ -41,6 +41,7 @@ env:
 r_packages:
   - covr
   - devtools
+  - rmarkdown
 
 after_success:
   - Rscript -e 'library(covr); codecov()'
