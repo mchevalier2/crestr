@@ -23,7 +23,6 @@ status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org
 ![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) <br > [![GitHub R
 package
 version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
-[![HitCount](http://hits.dwyl.com/mchevalier2/crestr.svg)](http://hits.dwyl.com/mchevalier2/crestr)
 [![Downloads](https://img.shields.io/github/downloads/mchevalier2/crestr/total)]()
 [![Last
 commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
@@ -66,8 +65,9 @@ please contact me at <chevalier.manuel@gmail.com> or open a discussion
 ## A Quick Example
 
 The following example illustrates the basics of **crestr** using
-pseudo-data (*i.e.* randomly generated data). More elaborate examples
-can be found at <https://mchevalier2.github.io/crestr/>.
+pseudo-data (*i.e.* randomly generated data). A more exhaustive
+documentation and different case studies are is available
+**<https://mchevalier2.github.io/crestr/>**.
 
 ``` r
 library(crestr)
@@ -124,7 +124,9 @@ Finally, unique sets of taxa can be specified to reconstruct each
 climate variable. In the example, *bio1* (mean annual temperature) and
 *bio12* (annual precipitation) will be reconstructed. The dataset has
 been designed so that Taxa 1, 2, 3 and 7 are sensitive to *bio1* while
-Taxa 1, 4, 5 and 7 are sensitive to *bio12*.
+Taxa 1, 4, 5 and 7 are sensitive to *bio12*. Check
+<https://mchevalier2.github.io/crestr/articles/get-started.html> for
+more details on this selection.
 
 ``` r
 crest_ex_selection
@@ -154,6 +156,48 @@ recons <- crest(
 #> successful. Check `x$misc$taxa_notes` for details.
 ```
 
+A specific print function was created to summarise the crestObj.
+
+``` r
+recons
+#> *
+#> * Summary of the crestObj named ``:
+#> *   x Calibration data formatted .. TRUE
+#> *   x PDFs fitted ................. TRUE
+#> *   x Climate reconstructed ....... TRUE
+#> *   x Leave-One-Out analysis ...... FALSE
+#> *
+#> * The dataset to be reconstructed (`df`) is composed of 20 samples with 6 taxa.
+#> * Variables to analyse: bio1, bio12
+#> *
+#> * The calibration dataset was defined using the following set of parameters:
+#> *   x Proxy type ............ Example dataset
+#> *   x Longitude ............. [0 - 15]
+#> *   x Latitude .............. [0 - 15]
+#> *
+#> * The PDFs were fitted using the following set of parameters:
+#> *   x Minimum distinct of distinct occurences .. 20
+#> *   x Weighted occurence data .................. FALSE
+#> *   x Number of points to fit the PDFs ......... 500
+#> *   x Geographical weighting ................... TRUE
+#> *       Using bins of width .................... bio1: 2
+#> *       ________________________________________ bio12: 50
+#> *   x Weighting of the climate space ........... TRUE
+#> *   x Shape of the PDFs ........................ bio1: normal
+#> *     __________________________________________ bio12: lognormal
+#> *
+#> * Of the 7 taxa provided in `df` and `PSE`, 1 cannot be analysed.
+#> * (This may be expected, but check `$misc$taxa_notes` for additional details.)
+#> *
+#> * The reconstructions were performed with the following set of parameters:
+#> *   x Minimum presence value .................. 0
+#> *   x Weighting of the taxa ................... normalisation
+#> *   x Calculated uncertainties ................ 0.5, 0.95
+#> *   x Number of taxa selected to reconstruct .. bio1: 3
+#> *     ----------------------------------------- bio12: 3
+#> *
+```
+
 The climate sampled by the data can be graphically represented for a
 quick assessment of the calibration dataset.
 
@@ -161,7 +205,7 @@ quick assessment of the calibration dataset.
 plot_climateSpace(recons)
 ```
 
-<img src="man/figures/README-plot-climate-space-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 Additional graphical tools can be used to assess which taxa should/could
 be used for each variable. On the following example, it is clear that

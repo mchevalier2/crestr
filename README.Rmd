@@ -25,7 +25,6 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
 ![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) <br >
 [![GitHub R package version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
-[![HitCount](http://hits.dwyl.com/mchevalier2/crestr.svg)](http://hits.dwyl.com/mchevalier2/crestr)
 [![Downloads](https://img.shields.io/github/downloads/mchevalier2/crestr/total)]()
 [![Last commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
 <!-- badges: end -->
@@ -66,8 +65,8 @@ additional functionalities to incorporate to the package, please contact me at
 ## A Quick Example
 
 The following example illustrates the basics of **crestr** using pseudo-data
-(*i.e.* randomly generated data). More elaborate examples can be found at
-<https://mchevalier2.github.io/crestr/>.
+(*i.e.* randomly generated data). A more exhaustive documentation and different
+case studies are is available **<https://mchevalier2.github.io/crestr/>**.
 
 
 ```{r example}
@@ -99,7 +98,8 @@ Finally, unique sets of taxa can be specified to reconstruct each climate
 variable. In the example, *bio1* (mean annual temperature) and *bio12* (annual
 precipitation) will be reconstructed. The dataset has been designed so that
 Taxa 1, 2, 3 and 7 are sensitive to *bio1* while Taxa 1, 4, 5 and 7 are sensitive
-to *bio12*.
+to *bio12*. Check <https://mchevalier2.github.io/crestr/articles/get-started.html>
+for more details on this selection.
 
 ```{r data_preview_selection}
 crest_ex_selection
@@ -118,13 +118,19 @@ recons <- crest(
 )
 ```
 
+A specific print function was created to summarise the crestObj.
+
+```{r showcase-print}
+recons
+```
 
 The climate sampled by the data can be graphically represented for a quick
 assessment of the calibration dataset.
 
-```{r plot-climate-space}
+```{r, out.width="100%", fig.height=6, fig.width=6}
 plot_climateSpace(recons)
 ```
+
 
 Additional graphical tools can be used to assess which taxa should/could be used
 for each variable. On the following example, it is clear that Taxon2 has a much
@@ -133,7 +139,6 @@ only.
 
 ```{r plot-plot_taxaCharacteristics, fig.width=7.5, fig.height=8.8}
 plot_taxaCharacteristics(recons, taxanames='Taxon2')
-
 ```
 
 The results can be quickly visualised using the plot function and the
@@ -161,7 +166,7 @@ plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
 If satisfying, the results can be directly exported from the R environment in
-unique spreadsheets for each variables (or csv files) and the **crest** object 
+unique spreadsheets for each variables (or csv files) and the **crest** object
 is exported as an RData file to enable easy reuse in the future.
 
 ```{r export}
