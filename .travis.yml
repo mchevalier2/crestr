@@ -4,7 +4,7 @@ language: r
 r:
   #- oldrel
   - release
-  - devel
+  #- devel
 
 cache: packages
 sudo: required
@@ -23,7 +23,7 @@ os:
   - linux
   #- osx
 
- 
+
 osx_image: xcode12.5
 
 

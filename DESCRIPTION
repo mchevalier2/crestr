@@ -37,6 +37,6 @@ Suggests:
     plot3D
 Depends:
     R (>= 2.10)
-VignetteBuilder: knitr
+VignetteBuilder: knitr, rmarkdown
 URL: https://github.com/mchevalier2/crestr, https://mchevalier2.github.io/crestr/index.html
 BugReports: https://github.com/mchevalier2/crestr/issues

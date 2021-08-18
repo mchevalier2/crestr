@@ -11,7 +11,7 @@ license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
-developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <br >
 [![codecov](https://codecov.io/gh/mchevalier2/crestr/branch/master/graph/badge.svg)](https://codecov.io/gh/mchevalier2/crestr)
 [![Travis build
@@ -20,13 +20,10 @@ status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://tra
 status](https://ci.appveyor.com/api/projects/status/github/mchevalier2/crestr?branch=master&svg=true)](https://ci.appveyor.com/project/mchevalier2/crestr)
 <br > [![CRAN
 status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
-![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) <br > [![GitHub R
+![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) [![GitHub R
 package
 version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
-[![Downloads](https://img.shields.io/github/downloads/mchevalier2/crestr/total)]()
-[![Last
-commit](https://img.shields.io/github/last-commit/mchevalier2/crestr)]()
-<!-- badges: end -->
+<br > <!-- badges: end -->
 
 # 
 
