@@ -24,7 +24,7 @@ eqearth_get_ext <- function(ext, npoints=15) {
                            " +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
                         )
 
-    bckg.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
+    bckg.eqearth <- sp::spTransform(Sl1, PROJ)
 
     ext <- raster::extent(bckg.eqearth)
     ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])
