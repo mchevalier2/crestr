@@ -135,7 +135,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                      yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                      tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,
                      title=title)
-    } 
+    }
     if(!save)  graphics::par(par_usr)
     invisible()
 }
