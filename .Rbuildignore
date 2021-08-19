@@ -18,3 +18,4 @@
 ^appveyor\.yml$
 ^codecov\.yml$
 ^webpage$
+^revdep$
