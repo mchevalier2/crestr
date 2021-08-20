@@ -157,18 +157,18 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             weights <- x$modelling$weights[s, taxa]
             if(only.present) {
                 taxa <- taxa[weights > 0]
-                weights <- weights[, weights > 0]
+                weights <- weights[weights > 0]
             }
-            ordered_tax <- taxa[order(weights, decreasing=TRUE)]
+            ordered_tax <- taxa[order(as.vector(weights), decreasing=TRUE)]
 
             if(!only.selected) {
                 taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 0, ])
                 weights <- x$modelling$weights[s, taxa]
                 if(only.present) {
                     taxa <- taxa[weights > 0]
-                    weights <- weights[, weights > 0]
+                    weights <- weights[weights > 0]
                 }
-                ordered_tax <- c(ordered_tax, taxa[order(weights, decreasing=FALSE)])
+                ordered_tax <- c(ordered_tax, taxa[order(as.vector(weights), decreasing=FALSE)])
             }
 
             graphics::par(mar=c(2,0.1,0.1,0.1))

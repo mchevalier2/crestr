@@ -5,6 +5,17 @@ date: "20/08/2021"
 output: github_document
 ---
 
+# Resubmission
+
+This is a resubmission. In this version I have tried to fix the error created by your automatic checks (see log at https://win-builder.r-project.org/incoming_pretest/crestr_1.0.0_20210820_170649/Debian/00check.log). However, I could not reproduce the error using the following:
+
+```{r eval = FALSE}
+rhub::check(platform='debian-gcc-devel')
+```
+
+By Googling the error, it seems that the error was caused by the use of order() on a dataframe. I have now made sure that order() is used on a vector. Hopefully, this should get rid of the error.
+
+
 # First submission
 
 `crestr 1.0.0` is a package designed to estimate climate parameters from fossil bio-prxoies. Its application will primarily (and uniquely?) for academic purposes.
