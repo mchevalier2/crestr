@@ -1,5 +1,4 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 
 
@@ -17,6 +16,19 @@ responses take the form of probability density functions (*pdfs*). The details
 of the method have been described in [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
 and the calibrated data presented in [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
 
+<br >
+
+
+> **_NOTE:_**  If you notice any bug, or if you would like to see some specific
+functions implemented, feel free to contact me at <chevalier.manuel@gmail.com>.
+
+<br >
+
+
+> **_NOTE:_**  This page is still under development.
+
+
+
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
@@ -27,15 +39,13 @@ if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
 
-> **_NOTE:_**  If you notice any bug, or if you would like to see some specific
-functions implemented, feel free to contact me at <chevalier.manuel@gmail.com>.
+
+## Example applications
 
 
-## Example
 
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" title="plot of chunk img1" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
-<br >
-
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/docs/articles/data-and-structure_files/figure-html/example-app.png" title="**Fig. 1**: (left) Climate variable to reconstruct (*e.g.* mean annual temperature). (Right) Four distinct plant taxa living in that region and having a preference for the darker climates (*e.g.* a preference for colder climates). These four species produce undistinguisable pollen grains and, therefore, define a 'pollen type'. This example is based on pseudo-data." alt="**Fig. 1**: (left) Climate variable to reconstruct (*e.g.* mean annual temperature). (Right) Four distinct plant taxa living in that region and having a preference for the darker climates (*e.g.* a preference for colder climates). These four species produce undistinguisable pollen grains and, therefore, define a 'pollen type'. This example is based on pseudo-data." width="80%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of pollen records used to generate the reconstructions presented in B-D and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey, (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048._
 
 <br >
