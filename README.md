@@ -12,12 +12,6 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-<br >
-[![codecov](https://codecov.io/gh/mchevalier2/crestr/branch/master/graph/badge.svg)](https://codecov.io/gh/mchevalier2/crestr)
-[![Travis build
-status](https://travis-ci.com/mchevalier2/crestr.svg?branch=master)](https://travis-ci.com/mchevalier2/crestr)
-[![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/mchevalier2/crestr?branch=master&svg=true)](https://ci.appveyor.com/project/mchevalier2/crestr)
 <br > [![CRAN
 status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
 ![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) [![GitHub R
