@@ -1,6 +1,8 @@
 ---
 title: "A bit of Theory"
-output: rmarkdown::html_vignette
+output:
+    rmarkdown::html_vignette:
+        self_contained: no
 vignette: >
   %\VignetteIndexEntry{A bit of Theory}
   %\VignetteEngine{knitr::rmarkdown}
