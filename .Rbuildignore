@@ -8,7 +8,6 @@
 ^Meta$
 ^personal_helpers$
 ^Things_to_add$
-^crestr_0\.0\.0\.9000\.pdf$
 ^index\.md$
 ^index\.Rmd$
 ^\.travis\.yml$
@@ -19,3 +18,5 @@
 ^codecov\.yml$
 ^webpage$
 ^revdep$
+cran-comments.md
+crestr_1.0.0.pdf
