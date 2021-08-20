@@ -32,3 +32,10 @@ functions implemented, feel free to contact me at <chevalier.manuel@gmail.com>.
 
 
 ## Example
+
+
+<br >
+
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/docs/articles/data-and-structure_files/figure-html/example-app.png" title="**Fig. 1**: (left) Climate variable to reconstruct (*e.g.* mean annual temperature). (Right) Four distinct plant taxa living in that region and having a preference for the darker climates (*e.g.* a preference for colder climates). These four species produce undistinguisable pollen grains and, therefore, define a 'pollen type'. This example is based on pseudo-data." alt="**Fig. 1**: (left) Climate variable to reconstruct (*e.g.* mean annual temperature). (Right) Four distinct plant taxa living in that region and having a preference for the darker climates (*e.g.* a preference for colder climates). These four species produce undistinguisable pollen grains and, therefore, define a 'pollen type'. This example is based on pseudo-data." width="80%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+
+<br >
