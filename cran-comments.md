@@ -13,7 +13,7 @@ This is a resubmission. In this version I have tried to fix the error created by
 rhub::check(platform='debian-gcc-devel')
 ```
 
-By Googling the error, it seems that the error was caused by the use of order() on a dataframe. I have now made sure that order() is used on a vector, which was the original intent anyway. Hopefully, this should get rid of the error.
+By Googling the error, it seems that the error was caused by the use of order() on a dataframe. I have now made sure that order() is used on a vector using as.numeric(), which was the original intent anyway. Hopefully, this should get rid of the error.
 
 
 # First submission
