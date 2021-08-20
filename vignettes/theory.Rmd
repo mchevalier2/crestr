@@ -1,5 +1,6 @@
 ---
 title: "A bit of Theory"
+author: "Manuel Chevalier"
 output:
     rmarkdown::html_vignette:
         self_contained: no

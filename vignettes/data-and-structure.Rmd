@@ -1,0 +1,22 @@
+---
+title: "The crestr package: data and structure"
+author: "Manuel Chevalier"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The `crestr`package: data and structure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(crestr)
+```
+
+> **_NOTE:_**  This vignette is still under development.

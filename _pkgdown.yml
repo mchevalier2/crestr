@@ -52,9 +52,10 @@ navbar:
     articles:
       text: Vignettes
       menu:
-      - text: my-vignette2
-        href: articles/theory.html
-
+      - text: Data & Structure of crestr
+        href: articles/data-and-structure.html
+      - text: MD96-2048 Reconstruction
+        href: articles/limpopo.html
 
 
 

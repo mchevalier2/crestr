@@ -1,0 +1,24 @@
+---
+title: "Limpopo test"
+author: "Manuel Chevalier"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Limpopo}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(crestr)
+```
+
+
+
+> **_NOTE:_**  This vignette is still under development.
