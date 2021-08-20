@@ -38,8 +38,9 @@ In this example, temperature and precipitation are reconstructed from a set
 of six climate proxies with different sensitivites to the observed climate
 gradients. For simplicity, the temperature data are constructed as an East - West
 climate gradient, while the precipitation data are designed as a North - South
-gradient. This results in, for instance, cold and rainy conditions in the bottomleft corner and warm
-and dry conditions in the opposite, topright corner (see **Fig. 1**). Such
+gradient. This results in, for instance, cold and rainy conditions in the
+bottom-left corner and warm
+and dry conditions in the opposite, top right corner (see **Fig. 1**). Such
 gradients are unrealistic, but they are good to explain different concepts, such
 as the _sensitivity_ of taxa to one or both variables.
 
@@ -159,7 +160,7 @@ For each reconstruction, a proxy-species equivalency ("pse") table must be
 provided. This table is used to associated distinct species to the fossil
 taxon. In the case of pollen data for example, this step is used to link all
 the species producing undifferentiated pollen morphotypes in a single
-_pollen-type_. Here, the 7 pseudo-taxa are 'identied' at the species level so
+_pollen-type_. Here, the 7 pseudo-taxa are 'identified' at the species level so
 that the table looks like the following:
 
 ```{r data_preview_pse}
@@ -171,7 +172,7 @@ crest_ex_pse
 By default, all the identified taxa are used to produce the reconstruction.
 However, it is sometimes useful to select a subset of taxa for each variable
 to improve the signal over noise ratio of the posterior reconstructions. This
-identification is usually not straighforward and requires a certain expertise.
+identification is usually not straightforward and requires a certain expertise.
 Here, this information is known because the pseudo-data were generated with clear
 sensitivities (see **Fig. 2**). In _crestr_, these known sensitivities are
 expressed in one single table containing 1s (meaning "use this taxon for this
@@ -238,11 +239,11 @@ reconstr
 
 The next step consists in fitting the _PDFs_ using the _crest.calibrate(_
 function. The climate space weighting is selected by default because it is
-really important to account for the possible heterogenous distribution of the
+really important to account for the possible heterogeneous distribution of the
 modern climate when fitting the _PDFs_. As can be seen on **Fig. 5** for
 temperature, the coldest and warmest values are underrepresented compared to
 the intermediate values. The correction diminishes the effect of this
-distribution by upweighting rare values and downweighting the most abundant ones.
+distribution by upweighting rare values and down-weighting the most abundant ones.
 
 <br >
 ```{r calibrating, out.width="100%", fig.height=6, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here."}

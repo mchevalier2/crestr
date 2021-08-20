@@ -82,13 +82,13 @@ normalise <- function(df, col2convert = 2:ncol(df)) {
 }
 
 
-#' Calculate the mean of all stricly positive values.
+#' Calculate the mean of all strictly positive values.
 #'
-#' Calculate the mean of all stricly positive values.
+#' Calculate the mean of all strictly positive values.
 #'
 #' @param x A vector of values.
 #' @return The average of all the positive values. Returns \code{NaN} is no
-#'         stricly positive values are found.
+#'         strictly positive values are found.
 #' @export
 #' @examples
 #' meanPositiveValues(-10:10)
@@ -324,7 +324,7 @@ crop <- function(x, shp) {
 #'
 #' Returns a vector of colours
 #'
-#' @param n An idex to select the colour theme
+#' @param n An index to select the colour theme
 #' @export
 #' @examples
 #' colour_theme(1)

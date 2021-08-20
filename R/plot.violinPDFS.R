@@ -11,8 +11,6 @@
 #'        recorded taxa).
 #' @param ylim The climate range to plot the pdfs on. Default is the full range
 #'        used to fit the \code{pdfs} (x$modelling$xrange)
-#' @param save A boolean to indicate if the diagram shoud be saved as a pdf file
-#'        (default \code{FALSE}).
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
@@ -54,7 +52,7 @@ plot_violinPDFs <- function( x,
                       ) {
 
     if(base::missing(x)) x
-    
+
     if (methods::is(x)[1] == 'crestObj') {
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {

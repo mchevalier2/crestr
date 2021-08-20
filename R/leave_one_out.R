@@ -1,6 +1,6 @@
 #' Performs the leave-one-out analysis
 #'
-#' Repeat the repetation by removing one taxon at a time.
+#' Repeat the reconstructions by removing one taxon at a time.
 #'
 #' @param x a \code{\link{crestObj}} produced by the
 #'        \code{\link{crest.reconstruct}} or \code{\link{crest}} functions.

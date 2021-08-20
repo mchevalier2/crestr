@@ -25,8 +25,8 @@ plot_climateSpace(
 \item{climate}{Climate variables to be used to generate the plot. By default
 all the variables are included.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file
-(default \code{FALSE}).}
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
+Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:

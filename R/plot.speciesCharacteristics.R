@@ -12,14 +12,12 @@
 #'        all the variables are included.
 #' @param add_modern A boolean to add the location and the modern climate values
 #'        to the plot (default \code{FALSE}).
-#' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
-#'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
 #'        \code{'taxaCharacteristics.pdf'}.
 #' @param col.density The colour gradient to use to map the density of species
-#'        (topleft map).
+#'        (top left map).
 #' @param col.climate The colour gradient to use to map the climate gradients
 #'        (left column).
 #' @param width The width of the output file in inches (default 7.48in ~ 19cm).

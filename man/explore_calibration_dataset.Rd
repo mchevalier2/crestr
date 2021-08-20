@@ -31,7 +31,7 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 4 for foraminifers, 5 for diatoms and 6 for rodents. The example
 dataset uses taxaType=0 (pseudo-data). Default is 1.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram

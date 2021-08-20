@@ -162,7 +162,7 @@ getBasinNames <- function(dbname = "gbif4crest_02") {
 #' Return the list of oceans and seas.
 #'
 #' @param basin A name of basin. Default is \code{NA} and returns a list
-#'        of all the accpted names.
+#'        of all the accepted names.
 #' @return A list of accepted names.
 #' @export
 #' @seealso \url{https://www.marineregions.org/downloads.php}

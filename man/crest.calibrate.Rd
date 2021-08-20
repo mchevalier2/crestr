@@ -29,7 +29,7 @@ precipitation or aridity. Default is 'normal' for all.}
 \item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
-by the squareroot of their extension when estimating a genus/family
+by the square root of their extension when estimating a genus/family
 level taxon-climate relationships.}
 
 \item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}

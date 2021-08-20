@@ -1,6 +1,6 @@
-#' Plot de results of the leave-one-out analysis.
+#' Plot the results of the leave-one-out analysis.
 #'
-#' Plot de results of the leave-one-out analysis.
+#' Plot the results of the leave-one-out analysis.
 #'
 #' @inheritParams plot_diagram
 #' @param optima A boolean to indicate whether to plot the optimum (\code{TRUE})

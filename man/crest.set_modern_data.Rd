@@ -29,7 +29,7 @@ studied proxies and their associated climate values.}
 percentages or presence/absence data).}
 
 \item{climate_space}{A dataframe of climate values across the study area
-useful to correct for a disbalanced sampling data (see
+useful to correct for the imbalance of the sampling data (see
 '\code{\link{crest.calibrate}} for more details). Default is \code{NA}.}
 
 \item{weight}{The records in the distributions can be weighted using the

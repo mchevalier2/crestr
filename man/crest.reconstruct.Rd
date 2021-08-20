@@ -28,7 +28,7 @@ to 0 and the associated presences discarded). Default is 0.}
 bars that should be calculated (default both 50 and 95\% ranges).}
 
 \item{skip_for_loo}{A boolean that tells the \code{\link{loo}} function to
-skip parts and fasten the process. Not for users, always leve to
+skip parts and fasten the process. Not for users, always leave to
 \code{FALSE}.}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal

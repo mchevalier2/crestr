@@ -8,7 +8,7 @@
 #' @param x A \code{\link{crestObj}} produced by the
 #'        \code{\link{crest.calibrate}} function.
 #' @param skip_for_loo A boolean that tells the \code{\link{loo}} function to
-#'        skip parts and fasten the process. Not for users, always leve to
+#'        skip parts and fasten the process. Not for users, always leave to
 #'        \code{FALSE}.
 #' @return A \code{\link{crestObj}} object containing the reconstructions and
 #'         all the associated data.
@@ -39,7 +39,7 @@ crest.reconstruct <- function(x,
                               skip_for_loo = FALSE, verbose=TRUE) {
 
     if(base::missing(x)) x
-    
+
     if(verbose) cat('\n## Last data checks and reconstruction\n')
     if(! skip_for_loo) {
 

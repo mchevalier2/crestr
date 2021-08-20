@@ -20,14 +20,14 @@
 #' @param elev_min,elev_max Parameters to only selected grid cells with an
 #'        elevation higher than elev_min or lower than elev_max (default is
 #'        '\code{NA} ).
-#' @param elev_range Parameters discard the grid cell with a high elevational
+#' @param elev_range Parameters discard the grid cell with a high elevation
 #'        range (default is \code{NA}).
 #' @param year_min,year_max The oldest and youngest occurrences accepted
 #'        (default is 1900-2021).
 #' @param nodate A boolean to accept occurrences without a date (can overlap
 #'        with occurrences with a date; default \code{TRUE}).
 #' @param type_of_obs The type of observation to use in the study. 1: human
-#'        observation, 2: observation, 3: preserved specimen, 4: living specimem,
+#'        observation, 2: observation, 3: preserved specimen, 4: living specimen,
 #'        5: fossil specimen, 6: material sample, 7: machine observation, 8:
 #'        literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})
 #' @param dbname The name of the data source database.
@@ -58,7 +58,7 @@
 #'        names. Default is 1 for all taxa and all variables.
 #' @param npoints The number of points to be used to fit the \code{pdfs}. Default 200.
 #' @param geoWeighting A boolean to indicate if the species should be weighting
-#'        by the squareroot of their extension when estimating a genus/family
+#'        by the square root of their extension when estimating a genus/family
 #'        level taxon-climate relationships.
 #' @param climateSpaceWeighting A boolean to indicate if the species \code{pdfs}
 #'        should be corrected for the modern distribution of the climate space
@@ -281,10 +281,10 @@ print.crestObj <- function(x, ...) {
 #' @param pt.lwd The thickness of the lines (default 0.8).
 #' @param pt.col The colour of the points and lines.
 #' @param simplify A boolean to indicate if the full distribution of uncertainties
-#'        should be plooted (\code{FALSE}, default) or if they should be
+#'        should be plotted (\code{FALSE}, default) or if they should be
 #'        simplified to the uncertainty range(s).
 #' @param add_modern Adds the modern climate values to the plot.
-#' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
+#' @param save A boolean to indicate if the diagram should be saved as a pdf file.
 #'        Default is \code{FALSE}.
 #' @param as.png A boolean to indicate if the output should be saved as a png.
 #'        Default is \code{FALSE} and the figure is saved as a pdf file.

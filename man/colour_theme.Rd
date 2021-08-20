@@ -7,7 +7,7 @@
 colour_theme(n)
 }
 \arguments{
-\item{n}{An idex to select the colour theme}
+\item{n}{An index to select the colour theme}
 }
 \description{
 Returns a vector of colours

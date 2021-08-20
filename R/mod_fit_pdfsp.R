@@ -7,7 +7,7 @@
 #' @param ccs A \code{ccs} object returned by \code{\link{calib_clim_space}}.
 #' @param xrange The climate gradient upon which the \code{pdf} with be defined.
 #' @param use_ccs Boolean to indicate if the \code{pdfsp} should be corrected by
-#'        the distributin of the modern climate space
+#'        the distribution of the modern climate space
 #' @return The pdf of the species.
 #' @export
 #' @examples

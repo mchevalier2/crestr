@@ -19,8 +19,6 @@
 #'        used to fit the \code{pdfs} (x$modelling$xrange).
 #' @param col A range of colour values to colour the \code{pdfs}. Colours will
 #'        be recycled to match the number of taxa.
-#' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
-#'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name

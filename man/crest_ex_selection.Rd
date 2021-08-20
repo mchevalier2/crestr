@@ -3,7 +3,7 @@
 \docType{data}
 \name{crest_ex_selection}
 \alias{crest_ex_selection}
-\title{Example dataset to associate taxa with climate varibles.}
+\title{Example dataset to associate taxa with climate variables.}
 \format{
 A data frame with 7 rows (taxa) and 2 columns (climate variables):
 \describe{

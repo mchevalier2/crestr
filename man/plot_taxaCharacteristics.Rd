@@ -34,12 +34,12 @@ recorded taxa).}
 all the variables are included.}
 
 \item{col.density}{The colour gradient to use to map the density of species
-(topleft map).}
+(top left map).}
 
 \item{col.climate}{The colour gradient to use to map the climate gradients
 (left column).}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram

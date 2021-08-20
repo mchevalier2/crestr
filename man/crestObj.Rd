@@ -82,7 +82,7 @@ study area.}
 elevation higher than elev_min or lower than elev_max (default is
 '\code{NA} ).}
 
-\item{elev_range}{Parameters discard the grid cell with a high elevational
+\item{elev_range}{Parameters discard the grid cell with a high elevation
 range (default is \code{NA}).}
 
 \item{year_min, year_max}{The oldest and youngest occurrences accepted
@@ -92,7 +92,7 @@ range (default is \code{NA}).}
 with occurrences with a date; default \code{TRUE}).}
 
 \item{type_of_obs}{The type of observation to use in the study. 1: human
-observation, 2: observation, 3: preserved specimen, 4: living specimem,
+observation, 2: observation, 3: preserved specimen, 4: living specimen,
 5: fossil specimen, 6: material sample, 7: machine observation, 8:
 literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})}
 
@@ -122,7 +122,7 @@ precipitation or aridity. Default is 'normal' for all.}
 \item{npoints}{The number of points to be used to fit the \code{pdfs}. Default 200.}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
-by the squareroot of their extension when estimating a genus/family
+by the square root of their extension when estimating a genus/family
 level taxon-climate relationships.}
 
 \item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}

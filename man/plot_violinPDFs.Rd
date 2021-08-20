@@ -34,8 +34,8 @@ unique colour to each taxon.}
 \item{ylim}{The climate range to plot the pdfs on. Default is the full range
 used to fit the \code{pdfs} (x$modelling$xrange)}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file
-(default \code{FALSE}).}
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
+Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
 should be saved. Also used to specify the name of the file. Default:

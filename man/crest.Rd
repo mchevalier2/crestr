@@ -102,7 +102,7 @@ precipitation or aridity. Default is 'normal' for all.}
 transformed (default \code{FALSE}).}
 
 \item{geoWeighting}{A boolean to indicate if the species should be weighting
-by the squareroot of their extension when estimating a genus/family
+by the square root of their extension when estimating a genus/family
 level taxon-climate relationships.}
 
 \item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}

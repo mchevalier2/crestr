@@ -46,7 +46,7 @@ the sample (default \code{FALSE}).}
 \item{col}{A range of colour values to colour the \code{pdfs}. Colours will
 be recycled to match the number of taxa.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram

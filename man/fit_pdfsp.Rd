@@ -23,7 +23,7 @@ precipitation or aridity. Default is 'normal' for all.}
 \item{xrange}{The climate gradient upon which the \code{pdf} with be defined.}
 
 \item{use_ccs}{Boolean to indicate if the \code{pdfsp} should be corrected by
-the distributin of the modern climate space}
+the distribution of the modern climate space}
 }
 \value{
 The pdf of the species.

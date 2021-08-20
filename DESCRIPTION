@@ -38,6 +38,7 @@ Suggests:
     pals
 Depends:
     R (>= 2.10)
+Language: en-us
 VignetteBuilder: knitr
 URL: https://github.com/mchevalier2/crestr, https://mchevalier2.github.io/crestr/index.html
 BugReports: https://github.com/mchevalier2/crestr/issues

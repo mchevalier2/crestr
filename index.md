@@ -7,11 +7,11 @@
 
 <br>
 
-# **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bioproxies
+# **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bio-proxies
 
 The goal of crestr is to produce probabilistic reconstructions of past  climate
 change from fossil assemblage data. The approach is based on the estimation of
-conditional responses of studies bioproxy studied to climate paramters. These
+conditional responses of studies bio-proxy studied to climate parameters. These
 responses take the form of probability density functions (*pdfs*). The details
 of the method have been described in [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
 and the calibrated data presented in [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).

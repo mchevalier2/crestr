@@ -8,7 +8,7 @@ accBasinNames(basin = NA)
 }
 \arguments{
 \item{basin}{A name of basin. Default is \code{NA} and returns a list
-of all the accpted names.}
+of all the accepted names.}
 }
 \value{
 A list of accepted names.

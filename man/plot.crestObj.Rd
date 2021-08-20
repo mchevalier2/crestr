@@ -42,7 +42,7 @@ or the mean (\code{FALSE}) estimates.}
 \item{add_modern}{Adds the modern climate values to the plot.}
 
 \item{simplify}{A boolean to indicate if the full distribution of uncertainties
-should be plooted (\code{FALSE}, default) or if they should be
+should be plotted (\code{FALSE}, default) or if they should be
 simplified to the uncertainty range(s).}
 
 \item{xlim}{the x limits (x1, x2) of the plot.  Note that \code{x1 > x2}
@@ -59,7 +59,7 @@ simplified to the uncertainty range(s).}
 
 \item{pt.col}{The colour of the points and lines.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}
 
 \item{width, height}{The dimensions of the pdf file (default 5.51in ~14cm).}

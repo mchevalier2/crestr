@@ -33,12 +33,12 @@ and the taxa in the following columns. x can also be a
 (default: \code{bars=FALSE}) or vertical bars (\code{bars=TRUE}).}
 
 \item{col}{Colours to be used for the polygons. If the number of colours does
-not match the number of taxa, colors will be recyled.}
+not match the number of taxa, colors will be recycled.}
 
-\item{amplif}{A factor the show exageration on the diagram. Only for polygon
+\item{amplif}{A factor the show exaggeration on the diagram. Only for polygon
 plot. Default 5.}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
@@ -60,8 +60,8 @@ y-axis (default 5).}
 
 \item{bar_width}{Width of the bars of the barplot (default 1).}
 
-\item{xlim}{The range covered by the x-axis. Canbe adjusted to get round
-numbers on the x-ais. If smaller than the range overed by the data,
+\item{xlim}{The range covered by the x-axis. Can be adjusted to get round
+numbers on the x-axis. If smaller than the range covered by the data,
 the data will be truncated (default: range of the data).}
 
 \item{tickAtSample}{Boolean that indicates whether a tick mark should be added

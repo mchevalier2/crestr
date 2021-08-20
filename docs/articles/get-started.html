@@ -120,7 +120,7 @@
 <h2 class="hasAnchor">
 <a href="#description-of-the-pseudo-data" class="anchor"></a>Description of the pseudo-data <a id="data"></a>
 </h2>
-<p>In this example, temperature and precipitation are reconstructed from a set of six climate proxies with different sensitivites to the observed climate gradients. For simplicity, the temperature data are constructed as an East - West climate gradient, while the precipitation data are designed as a North - South gradient. This results in, for instance, cold and rainy conditions in the bottomleft corner and warm and dry conditions in the opposite, topright corner (see <strong>Fig. 1</strong>). Such gradients are unrealistic, but they are good to explain different concepts, such as the <em>sensitivity</em> of taxa to one or both variables.</p>
+<p>In this example, temperature and precipitation are reconstructed from a set of six climate proxies with different sensitivites to the observed climate gradients. For simplicity, the temperature data are constructed as an East - West climate gradient, while the precipitation data are designed as a North - South gradient. This results in, for instance, cold and rainy conditions in the bottom-left corner and warm and dry conditions in the opposite, top right corner (see <strong>Fig. 1</strong>). Such gradients are unrealistic, but they are good to explain different concepts, such as the <em>sensitivity</em> of taxa to one or both variables.</p>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/climate_space-1.png" alt="**Fig. 1**: Randomly generated temperature (A) and precipitation (B) climate data." width="80%"><p class="caption">
 <strong>Fig. 1</strong>: Randomly generated temperature (A) and precipitation (B) climate data.
@@ -194,7 +194,7 @@
 <span class="co">#&gt;  $ Taxon6: int  32 27 26 36 40 50 53 47 37 38 ...</span>
 <span class="co">#&gt;  $ Taxon7: int  1 0 0 0 0 0 0 0 0 0 ...</span></code></pre></div>
 <p><br></p>
-<p>For each reconstruction, a proxy-species equivalency (“pse”) table must be provided. This table is used to associated distinct species to the fossil taxon. In the case of pollen data for example, this step is used to link all the species producing undifferentiated pollen morphotypes in a single <em>pollen-type</em>. Here, the 7 pseudo-taxa are ‘identied’ at the species level so that the table looks like the following:</p>
+<p>For each reconstruction, a proxy-species equivalency (“pse”) table must be provided. This table is used to associated distinct species to the fossil taxon. In the case of pollen data for example, this step is used to link all the species producing undifferentiated pollen morphotypes in a single <em>pollen-type</em>. Here, the 7 pseudo-taxa are ‘identified’ at the species level so that the table looks like the following:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">crest_ex_pse</span>
 <span class="co">#&gt;   Level      Family    Genus Species ProxyName</span>
@@ -206,7 +206,7 @@
 <span class="co">#&gt; 6     3 Randomaceae Randomus  Taxon6    Taxon6</span>
 <span class="co">#&gt; 7     3 Randomaceae Randomus  Taxon7    Taxon7</span></code></pre></div>
 <p><br></p>
-<p>By default, all the identified taxa are used to produce the reconstruction. However, it is sometimes useful to select a subset of taxa for each variable to improve the signal over noise ratio of the posterior reconstructions. This identification is usually not straighforward and requires a certain expertise. Here, this information is known because the pseudo-data were generated with clear sensitivities (see <strong>Fig. 2</strong>). In <em>crestr</em>, these known sensitivities are expressed in one single table containing 1s (meaning “use this taxon for this variable”) and 0s (meaning “do not use this taxon for this variable”). Based on the description of the sensitivities of the pseudo-taxa (see above), it translates as follow:</p>
+<p>By default, all the identified taxa are used to produce the reconstruction. However, it is sometimes useful to select a subset of taxa for each variable to improve the signal over noise ratio of the posterior reconstructions. This identification is usually not straightforward and requires a certain expertise. Here, this information is known because the pseudo-data were generated with clear sensitivities (see <strong>Fig. 2</strong>). In <em>crestr</em>, these known sensitivities are expressed in one single table containing 1s (meaning “use this taxon for this variable”) and 0s (meaning “do not use this taxon for this variable”). Based on the description of the sensitivities of the pseudo-taxa (see above), it translates as follow:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">crest_ex_selection</span>
 <span class="co">#&gt;        bio1 bio12</span>
@@ -277,7 +277,7 @@
 <span class="co">#&gt; * (This may be expected, but check `reconstr$misc$taxa_notes` for additional details.)</span>
 <span class="co">#&gt; *</span></code></pre></div>
 <p><br></p>
-<p>The next step consists in fitting the <em>PDFs</em> using the <em>crest.calibrate(</em> function. The climate space weighting is selected by default because it is really important to account for the possible heterogenous distribution of the modern climate when fitting the <em>PDFs</em>. As can be seen on <strong>Fig. 5</strong> for temperature, the coldest and warmest values are underrepresented compared to the intermediate values. The correction diminishes the effect of this distribution by upweighting rare values and downweighting the most abundant ones.</p>
+<p>The next step consists in fitting the <em>PDFs</em> using the <em>crest.calibrate(</em> function. The climate space weighting is selected by default because it is really important to account for the possible heterogeneous distribution of the modern climate when fitting the <em>PDFs</em>. As can be seen on <strong>Fig. 5</strong> for temperature, the coldest and warmest values are underrepresented compared to the intermediate values. The correction diminishes the effect of this distribution by upweighting rare values and down-weighting the most abundant ones.</p>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.calibrate.html">crest.calibrate</a></span><span class="op">(</span> <span class="va">reconstr</span>, <span class="co"># A crestObj produced at the previous stage</span>

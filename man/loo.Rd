@@ -18,7 +18,7 @@ A \code{\link{crestObj}} object containing the reconstructions and
 all the associated data.
 }
 \description{
-Repeat the repetation by removing one taxon at a time.
+Repeat the reconstructions by removing one taxon at a time.
 }
 \examples{
 \dontrun{

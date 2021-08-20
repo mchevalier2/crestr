@@ -9,11 +9,9 @@
 #' @param bars A boolean that indicates if the data should be plotted as polygons
 #'        (default: \code{bars=FALSE}) or vertical bars (\code{bars=TRUE}).
 #' @param col Colours to be used for the polygons. If the number of colours does
-#'        not match the number of taxa, colors will be recyled.
-#' @param amplif A factor the show exageration on the diagram. Only for polygon
+#'        not match the number of taxa, colors will be recycled.
+#' @param amplif A factor the show exaggeration on the diagram. Only for polygon
 #'        plot. Default 5.
-#' @param save A boolean to indicate if the diagram shoud be saved as a pdf file.
-#'        Default is \code{FALSE}.
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
@@ -23,8 +21,8 @@
 #' @param yax_incr Graphical parameters describing the increment size on the
 #'        y-axis (default 5).
 #' @param bar_width Width of the bars of the barplot (default 1).
-#' @param xlim The range covered by the x-axis. Canbe adjusted to get round
-#'        numbers on the x-ais. If smaller than the range overed by the data,
+#' @param xlim The range covered by the x-axis. Can be adjusted to get round
+#'        numbers on the x-axis. If smaller than the range covered by the data,
 #'        the data will be truncated (default: range of the data).
 #' @param tickAtSample Boolean that indicates whether a tick mark should be added
 #'         on the x-axis at the location of each sample (default \code{TRUE}).

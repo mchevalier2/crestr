@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot.loo.R
 \name{plot_loo}
 \alias{plot_loo}
-\title{Plot de results of the leave-one-out analysis.}
+\title{Plot the results of the leave-one-out analysis.}
 \usage{
 plot_loo(
   x,
@@ -38,7 +38,7 @@ all the variables are included.}
 \item{taxanames}{A list of taxa to use for the plot (default is all the
 recorded taxa).}
 
-\item{save}{A boolean to indicate if the diagram shoud be saved as a pdf file.
+\item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}
 
 \item{filename}{An absolute or relative path that indicates where the diagram
@@ -60,8 +60,8 @@ y-axis (default 5).}
 
 \item{bar_width}{Width of the bars of the barplot (default 1).}
 
-\item{xlim}{The range covered by the x-axis. Canbe adjusted to get round
-numbers on the x-ais. If smaller than the range overed by the data,
+\item{xlim}{The range covered by the x-axis. Can be adjusted to get round
+numbers on the x-axis. If smaller than the range covered by the data,
 the data will be truncated (default: range of the data).}
 
 \item{tickAtSample}{Boolean that indicates whether a tick mark should be added
@@ -76,7 +76,7 @@ negative values (default grey80).}
 \item{title}{Name to be added on top of the plot (default \code{NA}).}
 }
 \description{
-Plot de results of the leave-one-out analysis.
+Plot the results of the leave-one-out analysis.
 }
 \examples{
 \dontrun{

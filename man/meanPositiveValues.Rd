@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{meanPositiveValues}
 \alias{meanPositiveValues}
-\title{Calculate the mean of all stricly positive values.}
+\title{Calculate the mean of all strictly positive values.}
 \usage{
 meanPositiveValues(x)
 }
@@ -11,10 +11,10 @@ meanPositiveValues(x)
 }
 \value{
 The average of all the positive values. Returns \code{NaN} is no
-stricly positive values are found.
+strictly positive values are found.
 }
 \description{
-Calculate the mean of all stricly positive values.
+Calculate the mean of all strictly positive values.
 }
 \examples{
 meanPositiveValues(-10:10)
