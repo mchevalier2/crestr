@@ -27,11 +27,11 @@ version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://
 
 # 
 
-The goal of crestr is to enable probabilistic reconstructions of past
+The goal of `crestr` is to enable probabilistic reconstructions of past
 climate change from fossil assemblage data. The approach is based on the
-estimation of conditional responses of different bioproxies to various
-climate parameters. Theseresponses take the form of probability density
-functions (*pdfs*). The detailsof the method have been described in
+estimation of conditional responses of different bio-proxies to various
+climate parameters. These responses take the form of probability density
+functions (*PDFs*). The details of the method have been described in
 [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
 and the calibrated data presented in [Chevalier
 (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
@@ -52,19 +52,26 @@ devtools::install_github("mchevalier2/crestr")
 > system. Ample documentation exists online to guide you through the
 > installation of these two elements to your own system.
 
-## contact
+## Contact
 
-If you experience any trouble while using this package, or if you can
-think of additional functionalities to incorporate to the package,
-please contact me at <chevalier.manuel@gmail.com> or open a discussion
+If you experience any trouble while using this package, or if you think
+of additional functionalities to incorporate to the package, please
+contact me at <chevalier.manuel@gmail.com> or open a discussion
 [here](https://github.com/mchevalier2/crestr/issues).
 
-## A Quick Example
+## How to use `crestr`
 
-The following example illustrates the basics of **crestr** using
-pseudo-data (*i.e.* randomly generated data). A more exhaustive
-documentation and different case studies are is available
+### Online documentation
+
+The package is fully documented and the help of each function can be
+accessed with `?function`. More detailed information as well as
+documented examples are available from
 **<https://mchevalier2.github.io/crestr/>**.
+
+### A Quick Example
+
+The following example illustrates the basics of `crestr` using
+pseudo-data (*i.e.* randomly generated data).
 
 ``` r
 library(crestr)
