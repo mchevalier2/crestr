@@ -3,7 +3,6 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   get-started: get-started.html
-  limpopo: limpopo.html
   theory: theory.html
-last_built: 2021-08-20T08:22Z
+last_built: 2021-08-20T09:50Z
 

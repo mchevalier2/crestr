@@ -104,7 +104,7 @@ to *bio12*. Check <https://mchevalier2.github.io/crestr/articles/get-started.htm
 for more details on this selection.
 
 ```{r data_preview_selection}
-crest_ex_selection
+crest_ex_selection 
 ```
 
 These pseudo-data can be provided to the **crest** function and provided some
@@ -129,7 +129,7 @@ recons
 The climate sampled by the data can be graphically represented for a quick
 assessment of the calibration dataset.
 
-```{r, out.width="100%", fig.height=6, fig.width=6}
+```{r plot-climate-space, out.width="100%", fig.height=6, fig.width=6}
 plot_climateSpace(recons)
 ```
 

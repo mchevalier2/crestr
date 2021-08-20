@@ -127,7 +127,7 @@ Taxa 1, 4, 5 and 7 are sensitive to *bio12*. Check
 more details on this selection.
 
 ``` r
-crest_ex_selection
+crest_ex_selection 
 #>        bio1 bio12
 #> Taxon1    1     1
 #> Taxon2    1     0
@@ -203,7 +203,7 @@ quick assessment of the calibration dataset.
 plot_climateSpace(recons)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-plot-climate-space-1.png" width="100%" />
 
 Additional graphical tools can be used to assess which taxa should/could
 be used for each variable. On the following example, it is clear that

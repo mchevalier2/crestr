@@ -52,8 +52,6 @@ navbar:
     articles:
       text: Vignettes
       menu:
-      - text: my-vignette
-        href: articles/limpopo.html
       - text: my-vignette2
         href: articles/theory.html
 
