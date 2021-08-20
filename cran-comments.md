@@ -61,10 +61,10 @@ Status: 1 NOTE
 
 ## R-HUB
 
-Here, I have checked the package using five tests from the `rhub` package. The check_on_linux(), check_on_windows(), check_on_fedora() and check_on_rrelease() tests returned no ERRORs, WARNINGs or NOTEs. The check_for_cran() test consistently returned 2 NOTES:
+Here, I have checked the package using five tests from the `rhub` package. The check_on_linux(), check_on_windows(), check_on_fedora() and check_on_rrelease() tests returned no ERRORs, WARNINGs or NOTEs. The check_for_cran() tests returned no ERRORs or WARNINGs but consistently returned 2 NOTES:
 
     1. The first note is about this submission being a first submission.
-    2. The second note is about some examples taking more than 5seconds to run. All the examples that issued a note are actually connecting to a remote database to extract data and process them. It is a process that is expected to take a bit a time. As such, these notes are completely expected.
+    2. The second note is about some examples taking more than 5seconds to run. All the examples that issued a note are actually connecting to a remote database to extract data and process them. It is a process that is expected to take a bit a time. Considering the limit at 5s, these notes are completely natural and expected.
 
 ### `check_for_cran()`
 
@@ -119,51 +119,13 @@ NOTES:
     getTaxonomy           0.038  0.018   9.024
     getDistribTaxa        0.036  0.017  11.357
     getTaxonID            0.039  0.002   8.483
-
 ```
 
 ```
-Build ID:	crestr_1.0.0.tar.gz-f972dd37b0a6475c9319afa07b45d3dc
+Build ID:	crestr_1.0.0.tar.gz-f21eac230f424f598e18c98e723b299c
 Platform:	Ubuntu Linux 20.04.1 LTS, R-release, GCC
-Submitted:	20 minutes 21.3 seconds ago
-Build time:	20 minutes 19.9 seconds
-
-WARNINGS:
-
-* checking re-building of vignette outputs ... WARNING
-    Error(s) in re-building vignettes:
-    --- re-building ‘get-started.Rmd’ using rmarkdown
-    --- finished re-building ‘get-started.Rmd’
-
-    --- re-building ‘limpopo.Rmd’ using rmarkdown
-    --- finished re-building ‘limpopo.Rmd’
-
-    --- re-building ‘theory.Rmd’ using rmarkdown
-    Could not fetch https://raw.githubusercontent.com/mchevalier2/crestr/master/docs/articles/theory_files/figure-html/crest-01.png
-    HttpExceptionRequest Request {
-      host                 = "raw.githubusercontent.com"
-      port                 = 443
-      secure               = True
-      requestHeaders       = []
-      path                 = "/mchevalier2/crestr/master/docs/articles/theory_files/figure-html/crest-01.png"
-      queryString          = ""
-      method               = "GET"
-      proxy                = Nothing
-      rawBody              = False
-      redirectCount        = 10
-      responseTimeout      = ResponseTimeoutDefault
-      requestVersion       = HTTP/1.1
-    }
-     (ConnectionFailure Network.BSD.getProtocolByName: does not exist (no such protocol name: tcp))
-    Error: processing vignette 'theory.Rmd' failed with diagnostics:
-    pandoc document conversion failed with error 61
-    --- failed re-building ‘theory.Rmd’
-
-    SUMMARY: processing the following file failed:
-      ‘theory.Rmd’
-
-    Error: Vignette re-building failed.
-    Execution halted
+Submitted:	21 minutes 10.5 seconds ago
+Build time:	21 minutes 0.8 seconds
 
 NOTES:
 
@@ -174,14 +136,14 @@ NOTES:
 * checking examples ... NOTE
     Examples with CPU (user + system) or elapsed time > 5s
                            user system elapsed
-    crest                 1.005  0.156  60.803
-    climate_from_xy       0.461  0.015   6.140
-    crest.reconstruct     0.366  0.090  57.109
-    crest.get_modern_data 0.211  0.096  57.397
-    crest.calibrate       0.210  0.083  56.846
-    getDistribTaxa        0.036  0.021  11.276
-    getTaxonomy           0.038  0.016   8.930
-    getTaxonID            0.037  0.006   8.643
+    crest                 1.129  0.097  62.427
+    climate_from_xy       0.548  0.012   6.493
+    crest.reconstruct     0.325  0.065  58.695
+    crest.calibrate       0.182  0.065  63.599
+    crest.get_modern_data 0.186  0.045  58.604
+    getTaxonomy           0.034  0.012   9.208
+    getDistribTaxa        0.038  0.003  11.673
+    getTaxonID            0.027  0.007   8.743
 ```
 
 ### `check_on_linux()`

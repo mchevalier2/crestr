@@ -34,35 +34,8 @@ if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
 
-> **_NOTE:_**  This package is still in an **early phase of development**. The
-documentation is sparse and the functionalities limited. If you notice any bug,
-or if you would like to see some specific functions implemented, feel free to contact
-me at <chevalier.manuel@gmail.com>. I will try to limit as much as possible
-modifying existing functions and/or function parameters, but at the moment it
-cannot be excluded. My apologies for this.
+> **_NOTE:_**  If you notice any bug, or if you would like to see some specific
+functions implemented, feel free to contact me at <chevalier.manuel@gmail.com>.
+
 
 ## Example
-
-This is a basic example which shows you how to run crest with randomly generated
-data:
-
-```{r example}
-library(crestr)
-## loading example data
-data(crest_ex)
-data(crest_ex_pse)
-data(crest_ex_selection)
-```
-
-Let's first have a look at the data. We have 20 fossil samples from which 7 taxa
-have been identified. The data are already expressed in percentages.
-
-```{r data_preview_fossil}
-## the first 6 samples
-head(crest_ex)
-```
-
-```{r data_preview_fossil2}
-## the structure of the data frame
-str(crest_ex)
-```
