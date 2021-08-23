@@ -9,7 +9,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-<!-- badges: start -->f
+<!-- badges: start -->
 <!-- badges: end -->
 
 <br>
