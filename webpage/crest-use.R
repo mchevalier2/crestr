@@ -26,10 +26,10 @@ sites.eqearth=sp::spTransform(sites, sp::CRS("+proj=eqearth +lon_0=0 +x_0=0 +y_0
 
 
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
-    par(mar=c(2,2,2,2), cex=1.5, ps=8, xaxs='i', yaxs='i', cex.axis=1.5)
+    par(mar=c(2,2,2,2), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     layout(matrix(c(1,2), ncol=2, byrow=TRUE), width=1, height=1)
 
-    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(2013, 2021.1), ylim=c(0, 3)*1.05, main='# Studies / Year', cex.main=2, xlab='', ylab='')
+    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(2013, 2021.1), ylim=c(0, 3)*1.05, main='# Studies / Year', cex.main=1.5, xlab='', ylab='')
     hist(unique(dat[, c('Publication', 'Year')])[, 2], breaks=2013:2021, add=TRUE)
     par(mgp=c(0,0.5,0))
     axis(1, at=2013:2021)
@@ -37,7 +37,7 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8
     axis(2, at=seq(0, 3, 1), las=2)
 
 
-    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 6)*1.05, ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=2, xlab='', ylab='')
+    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 6)*1.05, ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=1.5, xlab='', ylab='')
     pos <- 0
     for(r in c('Africa', 'Asia', 'Europe', 'N. America', 'S. America', 'Oceania')) {
         rect(pos+0.1, 0, pos+0.9, sum(dat.unique.site[, 'Continent'] == r))
@@ -58,11 +58,11 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=8
 }  ;  dev.off()
 
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8, height=4, units='in', res=150)  ;  {
-    par(mar=c(2,2,2,2), cex=1.5, ps=8, xaxs='i', yaxs='i', cex.axis=1.5)
+    par(mar=c(2,2,2,2), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     layout(matrix(c(1,2), ncol=1, byrow=TRUE), width=1, height=1)
 
     w <- timecov[, 1] <= 50000
-    plot(1,0, type='n', frame=FALSE, axes=FALSE, ylim=c(0, max(timecov[w, 2]))*1.05, xlim=c(0, 50000), main='\n# Reconstructions across time (years BP)', cex.main=2, xlab='', ylab='')
+    plot(1,0, type='n', frame=FALSE, axes=FALSE, ylim=c(0, max(timecov[w, 2]))*1.05, xlim=c(0, 50000), main='\n# Reconstructions across time (years BP)', cex.main=1.5, xlab='', ylab='')
     polygon(c(1, timecov[w, 1],max(timecov[w, 1])), c(0,timecov[w, 2], 0))
     par(mgp=c(0,0.5,0))
     axis(1, at=seq(0, 50000, 2500), labels=seq(0, 50000, 2500))
@@ -73,7 +73,7 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8
 
 
     w <- timecov[, 1] >= 1000
-    plot(1,0, type='n', frame=FALSE, axes=FALSE, ylim=c(0, max(timecov[w, 2]))*1.05, xlim=range(timecov[w, 1]), log='x', main='\n# Reconstructions across time (years BP)', cex.main=2, xlab='', ylab='')
+    plot(1,0, type='n', frame=FALSE, axes=FALSE, ylim=c(0, max(timecov[w, 2]))*1.05, xlim=range(timecov[w, 1]), log='x', main='\n# Reconstructions across time (years BP)', cex.main=1.5, xlab='', ylab='')
     polygon(c(1000, timecov[w, 1], max(timecov[w, 1])), c(0, timecov[w, 2], 0))
     par(mgp=c(0,0.5,0))
     axis(1, at=c(1001, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000), labels=c('1000', '2000', '5000', '10,000', '20,000', '50,000', '100,000', '200,000', '500,000', '1,000,000', '2,000,000', '5,000,000', '10,000,000', '20,000,000'))
