@@ -7,6 +7,7 @@ dat <- rio::import("https://raw.githubusercontent.com/mchevalier2/crestr/master/
 dat$Continent <- as.factor(dat$Continent)
 
 dat.unique.site <- unique(dat[, -c(1, 2)])
+dat.unique.study <- unique(dat[, c(1, 2)])
 
 timecov <- rep(0, max(dat.unique.site[, 'End']) / 100)
 pos <- 1
@@ -26,21 +27,30 @@ sites.eqearth=sp::spTransform(sites, sp::CRS("+proj=eqearth +lon_0=0 +x_0=0 +y_0
 
 
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
-    par(mar=c(2,4,2,1), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     layout(matrix(c(1,2), ncol=2, byrow=TRUE), width=1, height=1)
 
-    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(2013, 2021.1), ylim=c(0, 3)*1.05, main='# Studies / Year', cex.main=1.5, xlab='', ylab='')
-    hist(unique(dat[, c('Publication', 'Year')])[, 2], breaks=2013:2021, add=TRUE)
+    par(mar=c(2,4,2,1), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
+    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(2013, 2022.1), ylim=c(0, max(table(dat.unique.study[, 'Year'])))*1.05, main='# Studies / Year', cex.main=1.5, xlab='', ylab='')
+    pos <- 2013
+    for(r in 2013:2021) {
+        rect(pos+0.1, 0, pos+0.9, sum(dat.unique.study[, 'Year'] == r), col='cornflowerblue')
+        pos <- pos + 1
+    }
     par(mgp=c(0,0.5,0))
-    axis(1, at=2013:2021)
+    axis(1, at=c(2013, 2022), labels=FALSE, tck=0)
+    axis(1, at=seq(2013.5, 2021.5, 1), labels=2013:2021)
+
     par(mgp=c(0.5,0.7,0))
-    axis(2, at=seq(0, 3, 1), las=2)
+    axis(2, at=seq(0, max(table(dat.unique.study[, 'Year'])), 1), las=2)
+    axis(2, at=c(0, max(table(dat.unique.study[, 'Year']))), labels=FALSE, tck=0)
+
+
 
     par(mar=c(2,1,2,4), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
-    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 6)*1.05, ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=1.5, xlab='', ylab='')
+    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 6), ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=1.5, xlab='', ylab='')
     pos <- 0
     for(r in c('Africa', 'Asia', 'Europe', 'N. America', 'S. America', 'Oceania')) {
-        rect(pos+0.1, 0, pos+0.9, sum(dat.unique.site[, 'Continent'] == r))
+        rect(pos+0.1, 0, pos+0.9, sum(dat.unique.site[, 'Continent'] == r), col='goldenrod3')
         pos <- pos + 1
     }
     par(mgp=c(0,0.5,0))
@@ -57,8 +67,8 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=10, height=4.5, units='in', res=150)  ;  {
     layout(matrix(c(2,1,3), ncol=3), width=c(0.95,10,1.05))
     par(mar=c(0,0,0,0))
-    plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30, scale=1.5)
-    points(sites.eqearth, pch=23, col='red', bg='beige')
+    plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30, scale=2)
+    points(sites.eqearth, pch=23, col='red', bg='beige', cex=2, lwd=1.2)
 }  ;  dev.off()
 
 

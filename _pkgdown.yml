@@ -54,6 +54,8 @@ navbar:
       menu:
       - text: Data & Structure of crestr
         href: articles/data-and-structure.html
+      - text: Get started
+        href: articles/get-started.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
 
