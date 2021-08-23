@@ -26,7 +26,7 @@ sites.eqearth=sp::spTransform(sites, sp::CRS("+proj=eqearth +lon_0=0 +x_0=0 +y_0
 
 
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
-    par(mar=c(2,2,2,2), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
+    par(mar=c(2,4,2,1), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     layout(matrix(c(1,2), ncol=2, byrow=TRUE), width=1, height=1)
 
     plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(2013, 2021.1), ylim=c(0, 3)*1.05, main='# Studies / Year', cex.main=1.5, xlab='', ylab='')
@@ -36,7 +36,7 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8
     par(mgp=c(0.5,0.7,0))
     axis(2, at=seq(0, 3, 1), las=2)
 
-
+    par(mar=c(2,1,2,4), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 6)*1.05, ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=1.5, xlab='', ylab='')
     pos <- 0
     for(r in c('Africa', 'Asia', 'Europe', 'N. America', 'S. America', 'Oceania')) {
@@ -52,13 +52,17 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8
 
 }  ;  dev.off()
 
+
+
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=8, height=4.5, units='in', res=150)  ;  {
-    plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30, scale=2)
+    plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30, scale=1.5)
     points(sites.eqearth, pch=23, col='red', bg='beige')
 }  ;  dev.off()
 
+
+
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8, height=4, units='in', res=150)  ;  {
-    par(mar=c(2,2,2,2), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
+    par(mar=c(2,4,2,4), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     layout(matrix(c(1,2), ncol=1, byrow=TRUE), width=1, height=1)
 
     w <- timecov[, 1] <= 50000
@@ -69,7 +73,6 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8
     par(mgp=c(0.5,0.7,0))
     axis(2, at=seq(0, 16, 2), las=2)
     axis(2, at=c(0,17), labels=FALSE, tck=0)
-
 
 
     w <- timecov[, 1] >= 1000
