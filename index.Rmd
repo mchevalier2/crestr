@@ -96,7 +96,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 
 Last update: 23/08/2021
 
-N.B.: This list is has exhaustive as possible but some studies may be missing. Contact me if you want your study to be added.
+N.B.: This list is as exhaustive as possible but some studies may be missing. Contact me if you want your study to be added.
 
 <br >
 

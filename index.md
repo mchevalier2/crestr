@@ -81,7 +81,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 Last update: 23/08/2021
 
-N.B.: This list is has exhaustive as possible but some studies may be missing. Contact me if you want your study to be added.
+N.B.: This list is as exhaustive as possible but some studies may be missing. Contact me if you want your study to be added.
 
 <br >
 
