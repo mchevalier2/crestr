@@ -19,8 +19,9 @@ knitr::opts_chunk$set(
 ```
 
 
+## Source of the calibration data
 
-A multiproxy calibration dataset to estimate PDFs from a global collection of geolocalised presence-only data (hereafter proxy distributions) was first presented in [[4]](#chevalier2019). These data were obtained from the [Global Biodiversity Information Facility (GBIF) database](www.gbif.org), an online collection of geolocalised observations of biological entities. The calibration dataset (hereafter _gbif4crest_) contains the species distributions of six common palaeoecological fossil: the five taxa presented in the original version of the dataset --- plants [@gbif_lycopodiopsida20, @gbif_antheceropsida20, @gbif_liliopsida20, @gbif_Cycadopsida20, @gbif_Magnoliopsida20, @gbif_pinopsida20, @gbif_gingkoopsida20, @gbif_polypodiopsida20, @gbif_gnetopsida20, @gbif_bryophyta21, @gbif_marchantiophyta21] for fossil pollen and macrofossils, chironomids [@GBIF_chironomids20], beetles [@GBIF_beetles20], diatoms [@GBIF_diatoms20] and foraminifera [@GBIF_forams20] -- to which rodents [@GBIF_rodents20] were recently added (**Fig. 1**). All these data were curated in a relational database to ensure the consistency of the data (**Fig. 2**).
+A multiproxy calibration dataset to estimate PDFs from a global collection of geolocalised presence-only data (hereafter proxy distributions) was first presented in [[4]](#chevalier2019). These data were obtained from the [Global Biodiversity Information Facility (GBIF) database](http://www.gbif.org){target="_blank"}, an online collection of geolocalised observations of biological entities. The calibration dataset (hereafter _gbif4crest_) contains the species distributions of six common palaeoecological fossil: the five taxa presented in the original version of the dataset --- plants [@gbif_lycopodiopsida20, @gbif_antheceropsida20, @gbif_liliopsida20, @gbif_Cycadopsida20, @gbif_Magnoliopsida20, @gbif_pinopsida20, @gbif_gingkoopsida20, @gbif_polypodiopsida20, @gbif_gnetopsida20, @gbif_bryophyta21, @gbif_marchantiophyta21] for fossil pollen and macrofossils, chironomids [@GBIF_chironomids20], beetles [@GBIF_beetles20], diatoms [@GBIF_diatoms20] and foraminifera [@GBIF_forams20] -- to which rodents [@GBIF_rodents20] were recently added (**Fig. 1**).
 
 
 
@@ -35,8 +36,10 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 
 The coordinates of all the presence records of these six common palaeoecological fossil proxies were upscaled at a spatial resolution of 0.25 x 0.25° (hereafter QDGC for Quarter-Degree Grid Cell) and subsequently associated with terrestrial and oceanic environmental variables at the same resolution [@Fick_Hijmans_2017, @Zomer2008, @WOA_2018_temp, @WOA_2018_salinity, @WOA_2018_oxy, @WOA_2018_nutrients, @Reynolds2007, see details in **Table 1**]. The QDGC spatial resolution is an empirical trade-off between numerous factors, including the resolution of the presence data, the quality of the data or the spatial representatitivity of the studied proxy (see discussions in @Chevalier_etal_2014 and @Chevalier2019). However, this tradeoff may be suboptimal in some situations and for that reason `crestr` can also be used with the raw GBIF data and even alternative calibration datasets.
 
-<br >
+In its current version (V2), the _gbif4crest_ calibration dataset contains about 25.3 millions unique presence data for the six proxies. Unfortunately, the density of data available varies strongly between proxies and regions (**Fig. 1**). Plant data dominate the calibration dataset (>22 million unique occurrences) and allow for a use of `crestr` across all landmasses where vegetation currently grows. For the five other proxies, the datasets are still incomplete in many regions, which restricts the use of `crestr` (_e.g._ chironomids). However, these datasets are regularly updated by GBIF. For example, the first version of the _gbif4crest_ dataset released in 2018 contained about 17.5 million QDGC entries, but the new version presented here contains about 25.3 million entries (~44% increase). The range of 'reconstructible' areas is thus rapidly broadening (see for instance the coverage of Russia by plant data compared to the first version of the _gbif4crest_ dataset [[4]](#chevalier2019).
 
+
+<br >
 
 **Table 1** List of terrestrial and marine variables available in the _gbif4crest_ database. Each one can be selected in crestr using its associated code. List of abbreviations: (Temp.) Temperature, (Precip.) Precipitation, (SST) Sea Surface Temperature, (SSS) Sea Surface Salinity.
 
@@ -82,14 +85,14 @@ The coordinates of all the presence records of these six common palaeoecological
 | phosphate | Phosphate Concentration (\textmu mol/L)        | Garcia et al. (2018b)   |
 | silicate  | Silicate Concentration (\textmu mol/L)         | Garcia et al. (2018b)   |
 
+
 <br >
 
 
 
-In its current version (V2), the _gbif4crest_ calibration dataset contains about 25.3 millions unique presence data for the six proxies. Unfortunately, the density of data available varies strongly between proxies and regions (**Fig. 1**). Plant data dominate the calibration dataset (>22 million unique occurrences) and allow for a use of `crestr` across all landmasses where vegetation currently grows. For the five other proxies, the datasets are still incomplete in many regions, which restricts the use of `crestr` (_e.g._ chironomids). However, these datasets are regularly updated by GBIF. For example, the first version of the _gbif4crest_ dataset released in 2018 contained about 17.5 million QDGC entries, but the new version presented here contains about 25.3 million entries (~44% increase). The range of 'reconstructible' areas is thus rapidly broadening (see for instance the coverage of Russia by plant data compared to the first version of the _gbif4crest_ dataset [[4]](#chevalier2019).
+## Processing and storage of the calibration data
 
-
-The _gbif4crest_ database is composed of three main types of data: taxonomic data (`TAXA` table on **Fig. 2**), distribution data (`DISTRIB` and `DISTRIB_QDGC` tables) and diverse geopolitical, climatological and environmental data (`DATA_QDGC` table). Its structure is slightly different compared to the first version with a grouping of all the distinct QDGC tables in a unique `DATA_QDGC` table to enable a faster extraction of the data. Additional environmental and geographical discriptors were also added to characterise each grid cell and enable a more refined data selection. These include elevation and elevation variability @ETOPO, the country (https://www.naturalearthdata.com) or ocean (https://www.marineregions.org) names, as well as different levels of ecological classification for the terrestrial @olson2001 and marine @Costello2017 realms. The first and last date of observation are also now included, along with the type of observation, as reported by GBIF (see `DISTRIB_QDGC` table on **Fig. 2**). Finally, the `DATA` table was entirely recalculated using a new protocol that better accounts for coastal margins so that climate values at some locations are expected to be slighty different from the first version of the _gbif4crest_ dataset.
+All these data were curated in a relational database to ensure the consistency of the data (**Fig. 2**). The _gbif4crest_ database is composed of three main types of data: taxonomic data (`TAXA` table on **Fig. 2**), distribution data (`DISTRIB` and `DISTRIB_QDGC` tables) and diverse geopolitical, climatological and environmental data (`DATA_QDGC` table). Its structure is slightly different compared to the first version with a grouping of all the distinct QDGC tables in a unique `DATA_QDGC` table to enable a faster extraction of the data. Additional environmental and geographical discriptors were also added to characterise each grid cell and enable a more refined data selection. These include elevation and elevation variability @ETOPO, the country ([www.naturalearthdata.com](https://www.naturalearthdata.com){target="_blank"}) or ocean ([www.marineregions.org](https://www.marineregions.org){target="_blank"}) names, as well as different levels of ecological classification for the terrestrial @olson2001 and marine @Costello2017 realms. The first and last date of observation are also now included, along with the type of observation, as reported by GBIF (see `DISTRIB_QDGC` table on **Fig. 2**). Finally, the `DATA` table was entirely recalculated using a new protocol that better accounts for coastal margins so that climate values at some locations are expected to be slighty different from the first version of the _gbif4crest_ dataset.
 
 <br >
 
@@ -101,10 +104,10 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 <br >
 
 
-Due to its large size (about 15 Gb), this database is not downloaded when installing the package, but it can be assessed in different ways. First, the data are stored in an open-access, cloud-based PostgreSQL database that can be dynamically accessed via `crestr`. This is the recommanded option, as users without any _a priori_ SQL knowledge can benefit from the package's interface to automatically query the database simply by providing study-specific parameters, such as the name of the taxa or boundaries for the study area, to import all the necessary data in the correct format to the R environment. Second, advanced users can also directly query the database to extract and curate data from the `DISTRIB` or `DISTRIB_QDGC` tables using the [dbRequest()](https://mchevalier2.github.io/crestr/reference/dbRequest.html) function, and subsequently associate these data with climate variables. Finally, the complete _gbif4crest_ calibration dataset can also be downloaded as a SQLite3 portable database file from [here](https://figshare.com/articles/GBIF_for_CREST_database/6743207).
+Due to its large size (about 15 Gb), this database is not downloaded when installing the package, but it can be assessed in different ways. First, the data are stored in an open-access, cloud-based PostgreSQL database that can be dynamically accessed via `crestr`. This is the recommanded option, as users without any _a priori_ SQL knowledge can benefit from the package's interface to automatically query the database simply by providing study-specific parameters, such as the name of the taxa or boundaries for the study area, to import all the necessary data in the correct format to the R environment. Second, advanced users can also directly query the database to extract and curate data from the `DISTRIB` or `DISTRIB_QDGC` tables using the [dbRequest()](https://mchevalier2.github.io/crestr/reference/dbRequest.html) function, and subsequently associate these data with climate variables. Finally, the complete _gbif4crest_ calibration dataset can also be downloaded as a SQLite3 portable database file from [here](https://figshare.com/articles/GBIF_for_CREST_database/6743207){target="_blank"}.
 
 
-
+<br >
 
 
 
@@ -117,3 +120,5 @@ Due to its large size (about 15 Gb), this database is not downloaded when instal
 **[3]** <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](www.doi.org/10.1017/qua.2021.31){target="_blank"}.
 
 **[4]** <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. [doi:10.1016/j.earscirev.2020.103384](http://www.doi.org/10.1016/j.earscirev.2020.103384){target="_blank"}.
+
+<br >

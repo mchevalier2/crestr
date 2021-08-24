@@ -38,10 +38,10 @@ navbar:
       href: articles/theory.html
     calibration:
       text: Calibration data
-      href: articles/data-and-structure.html
+      href: articles/calibration-data.html
     structure:
       text: Technicalities
-      href: articles/data-and-structure.html
+      href: articles/technicalities.html
     start:
       text: Get started
       href: articles/get-started.html

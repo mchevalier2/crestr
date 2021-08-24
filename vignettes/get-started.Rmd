@@ -22,9 +22,29 @@ knitr::opts_chunk$set(
 
 <br >
 
-The `crestr` package has been designed for two independent but complementary modelling purposes. The probabilitic proxy-climate responses can be used to quantivatively reconstruct climate from their statistical combination [[1](#ChevalierLimpopo)-[2](#cc15)], or, alternatively, they can be used in a more quantitative way to determine the (relative) climate sensitivities of different taxa in a given area to characterise past ecological changes [[3]](#quick20201).
+The `crestr` package has been designed for two independent but complementary
+modelling purposes. The probabilitic proxy-climate responses can be used to
+quantivatively reconstruct climate from their statistical combination
+[[1](#ChevalierLimpopo)-[2](#cc15)], or, alternatively, they can be used in a
+more quantitative way to determine the (relative) climate sensitivities of
+different taxa in a given area to characterise past ecological changes
+[[3]](#quick20201).
 
-In both cases, the difficulty of running a CREST analysis lies in the definition of the study-specific parameters of the algorithm, which can make the learning curve a bit steep at the beginning. However, default values are provided for all parameters to enable an easy and rapid generation of preliminary results that users can then use as a reasonable first estimate to start adapting the model to their data. To guide users in this task and avoid the common 'black box' criticism faced by many complex statistical tools, a large array of publication-ready, graphical diagnostic tools was designed to automatically represent CREST data in a standardised way. These tools include plots of the calibration data, the estimated climate responses, the reconstructions and many more. They can be used to look at the data from different perspectives to help understanding why the results are what they are and possibly help identifying potential issues or biases in the selected data and/or parameters. Such diagnostic tools are available for every step of the process and, as examplified with this example, they can be generated with a single line of R code.
+In both cases, the difficulty of running a CREST analysis lies in the definition
+of the study-specific parameters of the algorithm, which can make the learning
+curve a bit steep at the beginning. However, default values are provided for all
+parameters to enable an easy and rapid generation of preliminary results that
+users can then use as a reasonable first estimate to start adapting the model
+to their data. To guide users in this task and avoid the common 'black box'
+criticism faced by many complex statistical tools, a large array of
+publication-ready, graphical diagnostic tools was designed to automatically
+represent CREST data in a standardised way. These tools include plots of the
+calibration data, the estimated climate responses, the reconstructions and many
+more. They can be used to look at the data from different perspectives to help
+understanding why the results are what they are and possibly help identifying
+potential issues or biases in the selected data and/or parameters. Such
+diagnostic tools are available for every step of the process and, as examplified
+with this example, they can be generated with a single line of R code.
 
 In this basic tutorial, the most important steps of a CREST reconstruction
 are presented using pseudo-data. The different modelling assumptions are
@@ -339,19 +359,6 @@ unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
 ```
 <br >
 
-## References
-
- - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction
-   SofTware): a probability density function (PDF)-based quantitative climate
-   reconstruction method. *Clim. Past* 10, 2081–2098.
-   [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
- - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
-   fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35.
-   [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
-
-
-<br >
-
 
 
 
@@ -363,4 +370,5 @@ unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
 
 **[3]** <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](www.doi.org/10.1017/qua.2021.31){target="_blank"}.
 
-**[4]** <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. [doi:10.1016/j.earscirev.2020.103384](http://www.doi.org/10.1016/j.earscirev.2020.103384){target="_blank"}.
+
+<br >
