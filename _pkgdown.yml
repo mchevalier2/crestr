@@ -46,7 +46,7 @@ navbar:
       text: Get started
       href: articles/get-started.html
     reference:
-      text: Manual
+      text: Reference
       href: reference/index.html
     news:
       text: News

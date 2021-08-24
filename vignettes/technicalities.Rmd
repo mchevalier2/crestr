@@ -44,7 +44,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 
 
 
-## Input data for `crestr`
+## Formatting the input data for `crestr`
 
 Four different input data files are compatible with `crestr`. However, only one up to three of these inputs may be required for any application depending on the modelling objectives and assumptions. These files can be prepared outside the R environment and imported using standard R functions.
 

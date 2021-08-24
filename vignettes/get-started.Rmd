@@ -1,6 +1,7 @@
 ---
 title: "Get started"
 author: "Manuel Chevalier"
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get started}
@@ -219,7 +220,7 @@ into "-1".
 ### Data extraction and calibration
 
 To illustrate the process, we will reconstruct _bio1_ (mean annual temperature)
-and _bio12_ (annual precipitation) from these fake data. The complete
+and _bio12_ (annual precipitation) from these pseudo data. The complete
 description of the different parameters is available
 [here](https://mchevalier2.github.io/crestr/reference/index.html).
 

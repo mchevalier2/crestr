@@ -56,7 +56,7 @@
   <a href="../articles/get-started.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Manual</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -103,6 +103,7 @@
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Manuel Chevalier</h4>
             
+            <h4 class="date">2021-08-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/get-started.Rmd"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -232,7 +233,7 @@
 <div id="data-extraction-and-calibration" class="section level3">
 <h3 class="hasAnchor">
 <a href="#data-extraction-and-calibration" class="anchor"></a>Data extraction and calibration</h3>
-<p>To illustrate the process, we will reconstruct <em>bio1</em> (mean annual temperature) and <em>bio12</em> (annual precipitation) from these fake data. The complete description of the different parameters is available <a href="https://mchevalier2.github.io/crestr/reference/index.html">here</a>.</p>
+<p>To illustrate the process, we will reconstruct <em>bio1</em> (mean annual temperature) and <em>bio12</em> (annual precipitation) from these pseudo data. The complete description of the different parameters is available <a href="https://mchevalier2.github.io/crestr/reference/index.html">here</a>.</p>
 <p>The first step of any reconstruction is to extract the species distribution data. This is done with the <em>crest.get_modern_data()</em> function. This function creates a nested R object <code>reconstr</code> that contains all the information and that will be updated in all the following steps. All the functions from the package require such an object. For more details, check the <em>crestObj</em> vignette. We can also verify that the <em>selectedTaxa</em> table has been modified for <em>Taxon7</em>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">

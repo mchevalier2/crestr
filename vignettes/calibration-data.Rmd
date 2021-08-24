@@ -21,8 +21,7 @@ knitr::opts_chunk$set(
 
 ## Source of the calibration data
 
-A multiproxy calibration dataset to estimate PDFs from a global collection of geolocalised presence-only data (hereafter proxy distributions) was first presented in [[4]](#chevalier2019). These data were obtained from the [Global Biodiversity Information Facility (GBIF) database](http://www.gbif.org){target="_blank"}, an online collection of geolocalised observations of biological entities. The calibration dataset (hereafter _gbif4crest_) contains the species distributions of six common palaeoecological fossil: the five taxa presented in the original version of the dataset --- plants [@gbif_lycopodiopsida20, @gbif_antheceropsida20, @gbif_liliopsida20, @gbif_Cycadopsida20, @gbif_Magnoliopsida20, @gbif_pinopsida20, @gbif_gingkoopsida20, @gbif_polypodiopsida20, @gbif_gnetopsida20, @gbif_bryophyta21, @gbif_marchantiophyta21] for fossil pollen and macrofossils, chironomids [@GBIF_chironomids20], beetles [@GBIF_beetles20], diatoms [@GBIF_diatoms20] and foraminifera [@GBIF_forams20] -- to which rodents [@GBIF_rodents20] were recently added (**Fig. 1**).
-
+A multiproxy calibration dataset to estimate PDFs from a global collection of geolocalised presence-only data (hereafter proxy distributions) was first presented in [[1]](#chevalier2019). These data were obtained from the [Global Biodiversity Information Facility (GBIF) database](http://www.gbif.org){target="_blank"}, an online collection of geolocalised observations of biological entities. The calibration dataset (hereafter _gbif4crest_) contains the species distributions of six common palaeoecological fossil: the five taxa presented in the original version of the dataset --- plants [[2](#gbif_antheceropsida20)-[12](#gbif_polypodiopsida20)] for fossil pollen and macrofossils, chironomids [[13]](#GBIF_chironomids20), beetles [[14]](#GBIF_beetles20), diatoms [[15]](#GBIF_diatoms20) and foraminifera [[16]](#GBIF_forams20) -- to which rodents [[17]](#GBIF_rodents20) were recently added (**Fig. 1**).
 
 
 ```{r gbif, echo = FALSE, fig.cap = "**Fig. 1** Data density of the six climate proxies available in the gbif4crest calibration database. The total number of unique species occurrences (N) is indicated for each proxy. The maps are based on the ‘Equal Earth’ map projection to better account for the relative sizes of the different continents.", out.width = '90%', fig.align = 'center'}
@@ -34,57 +33,57 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 
 
 
-The coordinates of all the presence records of these six common palaeoecological fossil proxies were upscaled at a spatial resolution of 0.25 x 0.25° (hereafter QDGC for Quarter-Degree Grid Cell) and subsequently associated with terrestrial and oceanic environmental variables at the same resolution [@Fick_Hijmans_2017, @Zomer2008, @WOA_2018_temp, @WOA_2018_salinity, @WOA_2018_oxy, @WOA_2018_nutrients, @Reynolds2007, see details in **Table 1**]. The QDGC spatial resolution is an empirical trade-off between numerous factors, including the resolution of the presence data, the quality of the data or the spatial representatitivity of the studied proxy (see discussions in @Chevalier_etal_2014 and @Chevalier2019). However, this tradeoff may be suboptimal in some situations and for that reason `crestr` can also be used with the raw GBIF data and even alternative calibration datasets.
+The coordinates of all the presence records of these six common palaeoecological fossil proxies were upscaled at a spatial resolution of 0.25 x 0.25° (hereafter QDGC for Quarter-Degree Grid Cell) and subsequently associated with terrestrial and oceanic environmental variables at the same resolution [[18](#Fick_Hijmans_2017)-[24](#Reynolds2007)] (see details in **Table 1**). The QDGC spatial resolution is an empirical trade-off between numerous factors, including the resolution of the presence data, the quality of the data or the spatial representatitivity of the studied proxy. However, this tradeoff may be suboptimal in some situations and for that reason `crestr` can also be used with the raw GBIF data and even alternative calibration datasets.
 
-In its current version (V2), the _gbif4crest_ calibration dataset contains about 25.3 millions unique presence data for the six proxies. Unfortunately, the density of data available varies strongly between proxies and regions (**Fig. 1**). Plant data dominate the calibration dataset (>22 million unique occurrences) and allow for a use of `crestr` across all landmasses where vegetation currently grows. For the five other proxies, the datasets are still incomplete in many regions, which restricts the use of `crestr` (_e.g._ chironomids). However, these datasets are regularly updated by GBIF. For example, the first version of the _gbif4crest_ dataset released in 2018 contained about 17.5 million QDGC entries, but the new version presented here contains about 25.3 million entries (~44% increase). The range of 'reconstructible' areas is thus rapidly broadening (see for instance the coverage of Russia by plant data compared to the first version of the _gbif4crest_ dataset [[4]](#chevalier2019).
+In its current version (V2), the _gbif4crest_ calibration dataset contains about 25.3 millions unique presence data for the six proxies. Unfortunately, the density of data available varies strongly between proxies and regions (**Fig. 1**). Plant data dominate the calibration dataset (>22 million unique occurrences) and allow for a use of `crestr` across all landmasses where vegetation currently grows. For the five other proxies, the datasets are still incomplete in many regions, which restricts the use of `crestr` (_e.g._ chironomids). However, these datasets are regularly updated by GBIF. For example, the first version of the _gbif4crest_ dataset released in 2018 contained about 17.5 million QDGC entries, but the new version presented here contains about 25.3 million entries (~44% increase). The range of 'reconstructible' areas is thus rapidly broadening (see for instance the coverage of Russia by plant data compared to the first version of the _gbif4crest_ dataset [[1]](#chevalier2019).
 
 
 <br >
 
 **Table 1** List of terrestrial and marine variables available in the _gbif4crest_ database. Each one can be selected in crestr using its associated code. List of abbreviations: (Temp.) Temperature, (Precip.) Precipitation, (SST) Sea Surface Temperature, (SSS) Sea Surface Salinity.
 
+
 | Code      | Full name                                      | Source                  |
 |-----------|------------------------------------------------|-------------------------|
-| bio1  | Mean Annual Temp. (°C)                              | Fick and Hijmans (2017) |
-| bio2  | Mean Diurnal Range (°C)                             | Fick and Hijmans (2017) |
-| bio3  | Isothermality (x100)                                | Fick and Hijmans (2017) |
-| bio4  | Temp. Seasonality  (standard deviation x100) (°C)   | Fick and Hijmans (2017) |
-| bio5  | Max Temp. of the Warmest Month (°C)                 | Fick and Hijmans (2017) |
-| bio6  | Min Temp. of the Coldest Month (°C)                 | Fick and Hijmans (2017) |
-| bio7  | Temp. Annual Range (°C)                             | Fick and Hijmans (2017) |
-| bio8  | Mean Temp. of the Wettest Quarter (°C)              | Fick and Hijmans (2017) |
-| bio9  | Mean Temp. of the Driest Quarter (°C)               | Fick and Hijmans (2017) |
-| bio10 | Mean Temp. of the Warmest Quarter (°C)              | Fick and Hijmans (2017) |
-| bio11 | Mean Temp. of the Coldest Quarter (°C)              | Fick and Hijmans (2017) |
-| bio12 | Annual precip. (mm)                                 | Fick and Hijmans (2017) |
-| bio13 | Precip. of the Wettest Month (mm)                   | Fick and Hijmans (2017) |
-| bio14 | Precip. of the Driest Month (mm)                    | Fick and Hijmans (2017) |
-| bio15 | Precip. Seasonality (Coefficient of Variation) (mm) | Fick and Hijmans (2017) |
-| bio16 | Precip. of the Wettest Quarter (mm)                 | Fick and Hijmans (2017) |
-| bio17 | Precip. of the Driest Quarter (mm)                  | Fick and Hijmans (2017) |
-| bio18 | Precip. of the Warmest Quarter (mm)                 | Fick and Hijmans (2017) |
-| bio19 | Precip. of the Coldest Quarter (mm)                 | Fick and Hijmans (2017) |
-| ai    | Aridity Index (unitless)                            | Zomer et al. (2008)     |
-| sst\_ann  | Mean Annual SST (°C)                           | Locarnini et al. (2018) |
-| sst\_jfm  | Mean Winter SST (°C)                           | Locarnini et al. (2018) |
-| sst\_amj  | Mean Spring SST (°C)                           | Locarnini et al. (2018) |
-| sst\_jas  | Mean Summer SST (°C)                           | Locarnini et al. (2018) |
-| sst\_ond  | Mean Fall SST (°C)                             | Locarnini et al. (2018) |
-| sss\_ann  | Mean Annual SSS (PSU)                          | Zweng et al. (2018)     |
-| sss\_jfm  | Mean Winter SSS (PSU)                          | Zweng et al. (2018)     |
-| sss\_amj  | Mean Spring SSS (PSU)                          | Zweng et al. (2018)     |
-| sss\_jas  | Mean Summer SSS (PSU)                          | Zweng et al. (2018)     |
-| sss\_ond  | Mean Fall SSS (PSU)                            | Zweng et al. (2018)     |
-| icec\_ann | Mean Annual Sea Ice Concentration (\%)         | Reynolds et al. (2007)  |
-| icec\_jfm | Mean Winter Sea Ice Concentration (\%)         | Reynolds et al. (2007)  |
-| icec\_amj | Mean Spring Sea Ice Concentration (\%)         | Reynolds et al. (2007)  |
-| icec\_jas | Mean Summer Ice Concentration (\%)             | Reynolds et al. (2007)  |
-| icec\_ond | Mean Fall Sea Ice Concentration (\%)           | Reynolds et al. (2007)  |
-| diss\_oxy | Dissolved Oxygen Concentration (\textmu mol/L) | Garcia et al. (2018a)   |
-| nitrate   | Nitrate Concentration (\textmu mol/L)          | Garcia et al. (2018b)   |
-| phosphate | Phosphate Concentration (\textmu mol/L)        | Garcia et al. (2018b)   |
-| silicate  | Silicate Concentration (\textmu mol/L)         | Garcia et al. (2018b)   |
-
+| bio1  | Mean Annual Temp. (°C)                              | [[18]](#Fick_Hijmans_2017) |
+| bio2  | Mean Diurnal Range (°C)                             | [[18]](#Fick_Hijmans_2017) |
+| bio3  | Isothermality (x100)                                | [[18]](#Fick_Hijmans_2017) |
+| bio4  | Temp. Seasonality  (standard deviation x100) (°C)   | [[18]](#Fick_Hijmans_2017) |
+| bio5  | Max Temp. of the Warmest Month (°C)                 | [[18]](#Fick_Hijmans_2017) |
+| bio6  | Min Temp. of the Coldest Month (°C)                 | [[18]](#Fick_Hijmans_2017) |
+| bio7  | Temp. Annual Range (°C)                             | [[18]](#Fick_Hijmans_2017) |
+| bio8  | Mean Temp. of the Wettest Quarter (°C)              | [[18]](#Fick_Hijmans_2017) |
+| bio9  | Mean Temp. of the Driest Quarter (°C)               | [[18]](#Fick_Hijmans_2017) |
+| bio10 | Mean Temp. of the Warmest Quarter (°C)              | [[18]](#Fick_Hijmans_2017) |
+| bio11 | Mean Temp. of the Coldest Quarter (°C)              | [[18]](#Fick_Hijmans_2017) |
+| bio12 | Annual precip. (mm)                                 | [[18]](#Fick_Hijmans_2017) |
+| bio13 | Precip. of the Wettest Month (mm)                   | [[18]](#Fick_Hijmans_2017) |
+| bio14 | Precip. of the Driest Month (mm)                    | [[18]](#Fick_Hijmans_2017) |
+| bio15 | Precip. Seasonality (Coefficient of Variation) (mm) | [[18]](#Fick_Hijmans_2017) |
+| bio16 | Precip. of the Wettest Quarter (mm)                 | [[18]](#Fick_Hijmans_2017) |
+| bio17 | Precip. of the Driest Quarter (mm)                  | [[18]](#Fick_Hijmans_2017) |
+| bio18 | Precip. of the Warmest Quarter (mm)                 | [[18]](#Fick_Hijmans_2017) |
+| bio19 | Precip. of the Coldest Quarter (mm)                 | [[18]](#Fick_Hijmans_2017) |
+| ai    | Aridity Index (unitless)                            | [[19]](#Zomer2008)     |
+| sst\_ann  | Mean Annual SST (°C)                           | [[20]](#WOA_2018_temp) |
+| sst\_jfm  | Mean Winter SST (°C)                           | [[20]](#WOA_2018_temp) |
+| sst\_amj  | Mean Spring SST (°C)                           | [[20]](#WOA_2018_temp) |
+| sst\_jas  | Mean Summer SST (°C)                           | [[20]](#WOA_2018_temp) |
+| sst\_ond  | Mean Fall SST (°C)                             | [[20]](#WOA_2018_temp) |
+| sss\_ann  | Mean Annual SSS (PSU)                          | [[21]](#WOA_2018_salinity)     |
+| sss\_jfm  | Mean Winter SSS (PSU)                          | [[21]](#WOA_2018_salinity)     |
+| sss\_amj  | Mean Spring SSS (PSU)                          | [[21]](#WOA_2018_salinity)     |
+| sss\_jas  | Mean Summer SSS (PSU)                          | [[21]](#WOA_2018_salinity)     |
+| sss\_ond  | Mean Fall SSS (PSU)                            | [[21]](#WOA_2018_salinity)     |
+| diss\_oxy | Dissolved Oxygen Concentration (\textmu mol/L) | [[22]](#WOA_2018_oxy)  |
+| nitrate   | Nitrate Concentration (\textmu mol/L)          | [[23]](#WOA_2018_nutrients)  |
+| phosphate | Phosphate Concentration (\textmu mol/L)        | [[23]](#WOA_2018_nutrients)  |
+| silicate  | Silicate Concentration (\textmu mol/L)         | [[23]](#WOA_2018_nutrients)  |
+| icec\_ann | Mean Annual Sea Ice Concentration (\%)         | [[24]](#Reynolds2007)  |
+| icec\_jfm | Mean Winter Sea Ice Concentration (\%)         | [[24]](#Reynolds2007)  |
+| icec\_amj | Mean Spring Sea Ice Concentration (\%)         | [[24]](#Reynolds2007)  |
+| icec\_jas | Mean Summer Ice Concentration (\%)             | [[24]](#Reynolds2007)  |
+| icec\_ond | Mean Fall Sea Ice Concentration (\%)           | [[24]](#Reynolds2007)  |
 
 <br >
 
@@ -92,7 +91,7 @@ In its current version (V2), the _gbif4crest_ calibration dataset contains about
 
 ## Processing and storage of the calibration data
 
-All these data were curated in a relational database to ensure the consistency of the data (**Fig. 2**). The _gbif4crest_ database is composed of three main types of data: taxonomic data (`TAXA` table on **Fig. 2**), distribution data (`DISTRIB` and `DISTRIB_QDGC` tables) and diverse geopolitical, climatological and environmental data (`DATA_QDGC` table). Its structure is slightly different compared to the first version with a grouping of all the distinct QDGC tables in a unique `DATA_QDGC` table to enable a faster extraction of the data. Additional environmental and geographical discriptors were also added to characterise each grid cell and enable a more refined data selection. These include elevation and elevation variability @ETOPO, the country ([www.naturalearthdata.com](https://www.naturalearthdata.com){target="_blank"}) or ocean ([www.marineregions.org](https://www.marineregions.org){target="_blank"}) names, as well as different levels of ecological classification for the terrestrial @olson2001 and marine @Costello2017 realms. The first and last date of observation are also now included, along with the type of observation, as reported by GBIF (see `DISTRIB_QDGC` table on **Fig. 2**). Finally, the `DATA` table was entirely recalculated using a new protocol that better accounts for coastal margins so that climate values at some locations are expected to be slighty different from the first version of the _gbif4crest_ dataset.
+All these data were curated in a relational database to ensure the consistency of the data (**Fig. 2**). The _gbif4crest_ database is composed of three main types of data: taxonomic data (`TAXA` table on **Fig. 2**), distribution data (`DISTRIB` and `DISTRIB_QDGC` tables) and diverse geopolitical, climatological and environmental data (`DATA_QDGC` table). Its structure is slightly different compared to the first version with a grouping of all the distinct QDGC tables in a unique `DATA_QDGC` table to enable a faster extraction of the data. Additional environmental and geographical discriptors were also added to characterise each grid cell and enable a more refined data selection. These include elevation and elevation variability [[25]](#ETOPO), the country ([www.naturalearthdata.com](https://www.naturalearthdata.com){target="_blank"}) or ocean ([www.marineregions.org](https://www.marineregions.org){target="_blank"}) names, as well as different levels of ecological classification for the terrestrial [[26]](#olson2001) and marine [[27]](#Costello2017) realms. The first and last date of observation are also now included, along with the type of observation, as reported by GBIF (see `DISTRIB_QDGC` table on **Fig. 2**). Finally, the `DATA` table was entirely recalculated using a new protocol that better accounts for coastal margins so that climate values at some locations are expected to be slighty different from the first version of the _gbif4crest_ dataset.
 
 <br >
 
@@ -113,12 +112,58 @@ Due to its large size (about 15 Gb), this database is not downloaded when instal
 
 ## References {#ref}
 
-**[1]** <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. [10.1130/G47841.1](http://www.doi.org/10.1130/G47841.1){target="_blank"}.
+**[1]** <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. [doi:10.1016/j.earscirev.2020.103384](http://www.doi.org/10.1016/j.earscirev.2020.103384){target="_blank"}.
 
-**[2]** <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. [doi:10.1016/j.quascirev.2015.07.009](http://www.doi.org/10.1016/j.quascirev.2015.07.009){target="_blank"}.
+**[2]** <a id="gbif_antheceropsida20"></a> GBIF, 2020, Anthocerotopsida occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.t9zenf](https://doi.org/10.15468/dl.t9zenf){target="_blank"}.
 
-**[3]** <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](www.doi.org/10.1017/qua.2021.31){target="_blank"}.
+**[3]** <a id="gbif_bryophyta21"></a> GBIF, 2021, Bryophyta occurrence data downloaded on August 2nd, 2021. [doi:10.15468/DL.WD527G](https://doi.org/10.15468/DL.WD527G){target="_blank"}.
 
-**[4]** <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. [doi:10.1016/j.earscirev.2020.103384](http://www.doi.org/10.1016/j.earscirev.2020.103384){target="_blank"}.
+**[4]** <a id="gbif_Cycadopsida20"></a> GBIF, 2020, Cycadopsidae occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.sfjzxu](https://doi.org/10.15468/dl.sfjzxu){target="_blank"}.
+
+**[5]** <a id="gbif_gingkoopsida20"></a> GBIF, 2020, Gingkoopsidae occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.da9wz8](https://doi.org/10.15468/dl.da9wz8){target="_blank"}.
+
+**[6]** <a id="gbif_gnetopsida20"></a> GBIF, 2020, Gnetopsidae occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.h2kjnc](https://doi.org/10.15468/dl.h2kjnc){target="_blank"}.
+
+**[7]** <a id="gbif_liliopsida20"></a> GBIF, 2020, Liliopsida occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.axv3yd](https://doi.org/10.15468/dl.axv3yd){target="_blank"}.
+
+**[8]** <a id="gbif_lycopodiopsida20"></a> GBIF, 2020, Lycopodiopsida occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.ydhyhz](https://doi.org/10.15468/dl.ydhyhz){target="_blank"}.
+
+**[9]** <a id="gbif_Magnoliopsida20"></a> GBIF, 2020, Magnoliopsida occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.ra49dt](https://doi.org/10.15468/dl.ra49dt){target="_blank"}.
+
+**[10]** <a id="gbif_marchantiophyta21"></a> GBIF, 2021, Marchantiophyta occurrence data downloaded on August 2nd, 2021. [doi:10.15468/DL.M2SSE4](https://doi.org/10.15468/DL.M2SSE4){target="_blank"}.
+
+**[11]** <a id="gbif_pinopsida20"></a> GBIF, 2020, Pinopsidae occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.x2r7pa](https://doi.org/10.15468/dl.x2r7pa){target="_blank"}.
+
+**[12]** <a id="gbif_polypodiopsida20"></a> GBIF, 2020, Polypodiopsida occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.87tbp6](https://doi.org/10.15468/dl.87tbp6){target="_blank"}.
+
+**[13]** <a id="GBIF_chironomids20"></a> GBIF, 2020, Chironomids occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.jv3wsh](https://doi.org/10.15468/dl.jv3wsh){target="_blank"}.
+
+**[14]** <a id="GBIF_beetles20"></a> GBIF, 2020, Beetles occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.nteruy](https://doi.org/10.15468/dl.nteruy){target="_blank"}.
+
+**[15]** <a id="GBIF_diatoms20"></a> GBIF, 2020, Diatoms occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.vfr257](https://doi.org/10.15468/dl.vfr257){target="_blank"}.
+
+**[16]** <a id="GBIF_forams20"></a> GBIF, 2020, Foraminifera occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.692yg6](https://doi.org/10.15468/dl.692yg6){target="_blank"}.
+
+**[17]** <a id="GBIF_rodents20"></a> GBIF, 2020, Rodentia occurrence data downloaded on September 24th, 2020. [doi:10.15468/dl.fscw6q](https://doi.org/10.15468/dl.fscw6q){target="_blank"}.
+
+**[18]** <a id="Fick_Hijmans_2017"></a> Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302–4315. [doi:10.1002/joc.5086](https://doi.org/10.1002/joc.5086){target="_blank"}.
+
+**[19]** <a id="Zomer2008"></a> Zomer, R.J., Trabucco, A., Bossio, D.A. and Verchot, L. V., 2008, Climate change mitigation: A spatial analysis of global land suitability for clean development mechanism afforestation and reforestation. Agriculture, Ecosystems & Environment, 126, pp. 67–80. [doi:10.1016/j.agee.2008.01.014](https://doi.org/10.1016/j.agee.2008.01.014){target="_blank"}.
+
+**[20]** <a id="WOA_2018_temp"></a> Locarnini, R.A., Mishonov, A.V., Baranova, O.K., Boyer, T.P., Zweng, M.M., Garcia, H.E., Reagan, J.R., Seidov, D., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others, 2019, World ocean atlas 2018, volume 1: Temperature. NOAA Atlas NESDIS 81, pp. 52pp. [data access](https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/){target="_blank"}.
+
+**[21]** <a id="WOA_2018_salinity"></a> Zweng, M.M., Seidov, D., Boyer, T.P., Locarnini, R.A., Garcia, H.E., Mishonov, A.V., Baranova, O.K., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others, 2018, World Ocean Atlas 2018, Volume 2: Salinity. NOAA Atlas NESDIS 82, pp. 50pp. [data access](https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/){target="_blank"}.
+
+**[22]** <a id="WOA_2018_oxy"></a> Garcia, H.E., Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini, R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D. and Reagan, J.R., 2019, World Ocean Atlas 2018, Volume 3: Dissolved Oxygen, Apparent Oxygen Utilization, and Dissolved Oxygen Saturation.. NOAA Atlas NESDIS 83, pp. 38pp. [data access](https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/){target="_blank"}.
+
+**[23]** <a id="WOA_2018_nutrients"></a> Garcia, H.E., Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini, R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D., Reagan, J.R. and Others, 2019, World Ocean Atlas 2018. Vol. 4: Dissolved Inorganic Nutrients (phosphate, nitrate and nitrate+nitrite, silicate). NOAA Atlas NESDIS 84, pp. 35pp. [data access](https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/){target="_blank"}.
+
+**[24]** <a id="Reynolds2007"></a> Reynolds, R.W., Smith, T.M., Liu, C., Chelton, D.B., Casey, K.S. and Schlax, M.G., 2007, Daily high-resolution-blended analyses for sea surface temperature. Journal of Climate, 20, pp. 5473–5496. [doi:10.1175/2007JCLI1824.1](https://doi.org/10.1175/2007JCLI1824.1){target="_blank"}.
+
+**[25]** <a id="ETOPO"></a> Amante, C. and Eakins, B.W., 2009, Etopo1 1 Arc-Minute Global Relief Model: Procedures, Data Sources and Analysis. NOAA Technical Memorandum NESDIS NGDC-24. National Geophysical Data Center, NOAA. [doi:10.7289/V5C8276M](https://doi.org/10.7289/V5C8276M){target="_blank"}.
+
+**[26]** <a id="olson2001"></a> Olson, D.M., Dinerstein, E., Wikramanayake, E.D., Burgess, N.D., Powell, G.V.N., Underwood, E.C., D’amico, J.A., Itoua, I., Strand, H.E., Morrison, J.C., Loucks, C.J., Allnutt, T.F., Ricketts, T.H., Kura, Y., Lamoreux, J.F., Wettengel, W.W., Hedao, P. and Kassem, K.R., 2001, Terrestrial Ecoregions of the World: A New Map of Life on Earth: A new global map of terrestrial ecoregions provides an innovative tool for conserving biodiversity. BioScience, 51, pp. 933. [doi:10.1641/0006-3568(2001)051[0933:TEOTWA]2.0.CO;2](https://doi.org/10.1641/0006-3568(2001)051[0933:TEOTWA]2.0.CO;2){target="_blank"}.
+
+**[27]** <a id="Costello2017"></a> Costello, M.J., Tsai, P., Wong, P.S., Cheung, A.K.L., Basher, Z. and Chaudhary, C., 2017, Marine biogeographic realms and species endemicity. Nature Communications, 8, pp. 1–9. [doi:10.1038/s41467-017-01121-2](https://doi.org/10.1038/s41467-017-01121-2){target="_blank"}.
 
 <br >
