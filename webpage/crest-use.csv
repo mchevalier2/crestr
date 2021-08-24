@@ -1,36 +1,37 @@
-﻿Publication,Year,Continent,Site Name,Longitude,Latitude,Start,End
-Truc_etal_2013,2013,Africa,Wonderkrater Borehole 3,28.74,-24.43,0,20000
-CC15,2015,Africa,Blydefontein,25.08,-31.15,0,12000
-CC15,2015,Africa,Braamhoek,29.58,-28.23,0,15500
-CC15,2015,Africa,Equus Cave,24.61,-27.61,0,33000
-CC15,2015,Africa,Lake Eteza,32.15,-28.52,0,10500
-CC15,2015,Africa,Florisbad,26.07,-28.77,1600,8000
-CC15,2015,Africa,Mahwaqa,29.72,-29.8,0,18000
-CC15,2015,Africa,Mfabeni,32.51,-28.15,0,44000
-CC15,2015,Africa,Rietvlei Dam,29.33,-25.83,1700,12000
-CC15,2015,Africa,Tate Vondo,30.33,-22.9,500,20000
-CC15,2015,Africa,Tswaing Crater 1,28.03,-25.42,0,8000
-CC15,2015,Africa,Tswaing Crater 2,28.03,-25.42,1700,10500
-CC15,2015,Africa,Wonderkrater Borehole 3,28.74,-24.43,0,20000
-CC15,2015,Africa,Wonderkrater Borehole 4,28.74,-24.43,10000,42000
-CC16,2016,Africa,Blydefontein,25.08,-31.15,0,12000
-CC16,2016,Africa,Braamhoek,29.58,-28.23,0,15500
-CC16,2016,Africa,Equus Cave,24.61,-27.61,0,33000
-CC16,2016,Africa,Lake Eteza,32.15,-28.52,0,10500
-CC16,2016,Africa,Florisbad,26.07,-28.77,1600,8000
-CC16,2016,Africa,Mahwaqa,29.72,-29.8,0,18000
-CC16,2016,Africa,Mfabeni,32.51,-28.15,0,44000
-CC16,2016,Africa,Rietvlei Dam,29.33,-25.83,1700,12000
-CC16,2016,Africa,Tate Vondo,30.33,-22.9,500,20000
-CC16,2016,Africa,Tswaing Crater 1,28.03,-25.42,0,8000
-CC16,2016,Africa,Tswaing Crater 2,28.03,-25.42,1700,10500
-CC16,2016,Africa,Wonderkrater Borehole 3,28.74,-24.43,0,20000
-CC16,2016,Africa,Wonderkrater Borehole 4,28.74,-24.43,10000,42000
-Chase_etal_2015a,2015,Africa,De Rif,19.22083333,-32.44583333,500,15500
-Chase_etal_2015b,2015,Africa,Katbakkies,19.561,-32.896,500,6800
-Lim_etal_2016,2016,Africa,Pella,19.135,-29.00111111,0,50000
-Cordova_etal_2017,2017,Africa,Lake Ngami,22.76083333,-20.48028333,0,16500
-Chevalier_etal_2021,2021,Africa,MD96-2048,34.0167,-26.1667,0,790000
-Chevalier_2019,2019,Asia,Lake Van,42.8,38.6,10200,133900
-Hui_etal_2021,2021,Asia,Yanwan,105.5666667,34.96666667,6100000,17100000
-Yi_etal_2020,2020,Asia,GG19-2-1,128.1608333,36.51277778,0,1300
+﻿Publication,Year,Continent,Site Name,Longitude,Latitude,Start,End,Study
+Truc_etal_2013,2013,Africa,Wonderkrater Borehole 3,28.74,-24.43,0,20000,Quantitative
+CC15,2015,Africa,Blydefontein,25.08,-31.15,0,12000,Quantitative
+CC15,2015,Africa,Braamhoek,29.58,-28.23,0,15500,Quantitative
+CC15,2015,Africa,Equus Cave,24.61,-27.61,0,33000,Quantitative
+CC15,2015,Africa,Lake Eteza,32.15,-28.52,0,10500,Quantitative
+CC15,2015,Africa,Florisbad,26.07,-28.77,1600,8000,Quantitative
+CC15,2015,Africa,Mahwaqa,29.72,-29.8,0,18000,Quantitative
+CC15,2015,Africa,Mfabeni,32.51,-28.15,0,44000,Quantitative
+CC15,2015,Africa,Rietvlei Dam,29.33,-25.83,1700,12000,Quantitative
+CC15,2015,Africa,Tate Vondo,30.33,-22.9,500,20000,Quantitative
+CC15,2015,Africa,Tswaing Crater 1,28.03,-25.42,0,8000,Quantitative
+CC15,2015,Africa,Tswaing Crater 2,28.03,-25.42,1700,10500,Quantitative
+CC15,2015,Africa,Wonderkrater Borehole 3,28.74,-24.43,0,20000,Quantitative
+CC15,2015,Africa,Wonderkrater Borehole 4,28.74,-24.43,10000,42000,Quantitative
+CC16,2016,Africa,Blydefontein,25.08,-31.15,0,12000,Quantitative
+CC16,2016,Africa,Braamhoek,29.58,-28.23,0,15500,Quantitative
+CC16,2016,Africa,Equus Cave,24.61,-27.61,0,33000,Quantitative
+CC16,2016,Africa,Lake Eteza,32.15,-28.52,0,10500,Quantitative
+CC16,2016,Africa,Florisbad,26.07,-28.77,1600,8000,Quantitative
+CC16,2016,Africa,Mahwaqa,29.72,-29.8,0,18000,Quantitative
+CC16,2016,Africa,Mfabeni,32.51,-28.15,0,44000,Quantitative
+CC16,2016,Africa,Rietvlei Dam,29.33,-25.83,1700,12000,Quantitative
+CC16,2016,Africa,Tate Vondo,30.33,-22.9,500,20000,Quantitative
+CC16,2016,Africa,Tswaing Crater 1,28.03,-25.42,0,8000,Quantitative
+CC16,2016,Africa,Tswaing Crater 2,28.03,-25.42,1700,10500,Quantitative
+CC16,2016,Africa,Wonderkrater Borehole 3,28.74,-24.43,0,20000,Quantitative
+CC16,2016,Africa,Wonderkrater Borehole 4,28.74,-24.43,10000,42000,Quantitative
+Chase_etal_2015a,2015,Africa,De Rif,19.22083333,-32.44583333,500,15500,Quantitative
+Chase_etal_2015b,2015,Africa,Katbakkies,19.561,-32.896,500,6800,Quantitative
+Lim_etal_2016,2016,Africa,Pella,19.135,-29.00111111,0,50000,Quantitative
+Cordova_etal_2017,2017,Africa,Lake Ngami,22.76083333,-20.48028333,0,16500,Quantitative
+Chevalier_etal_2021,2021,Africa,MD96-2048,34.0167,-26.1667,0,790000,Quantitative
+Chevalier_2019,2019,Asia,Lake Van,42.8,38.6,10200,133900,Quantitative
+Hui_etal_2021,2021,Asia,Yanwan,105.5666667,34.96666667,6100000,17100000,Quantitative
+Yi_etal_2020,2020,Asia,GG19-2-1,128.1608333,36.51277778,0,1300,Quantitative
+Quick_etal_2021,2021,Africa,Paerly Beach,19.50833333,-34.87777778,0,25300,Qualitative
