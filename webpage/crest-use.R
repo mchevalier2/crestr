@@ -1,7 +1,7 @@
 library(crestr)
 
 
-dat <- rio::import("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use.csv")
+dat <- rio::import("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use.csv")
 
 
 dat$Continent <- as.factor(dat$Continent)
@@ -83,8 +83,8 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8
     par(mgp=c(0,0.5,0))
     axis(1, at=seq(0, 50000, 2500), labels=seq(0, 50000, 2500))
     par(mgp=c(0.5,0.7,0))
-    axis(2, at=seq(0, 16, 2), las=2)
-    axis(2, at=c(0,17), labels=FALSE, tck=0)
+    axis(2, at=seq(0, max(timecov[w, 2]), 2), las=2)
+    axis(2, at=c(0, max(timecov[w, 2])), labels=FALSE, tck=0)
 
 
     w <- timecov[, 1] >= 1000
@@ -93,8 +93,8 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8
     par(mgp=c(0,0.5,0))
     axis(1, at=c(1001, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000), labels=c('1000', '2000', '5000', '10,000', '20,000', '50,000', '100,000', '200,000', '500,000', '1,000,000', '2,000,000', '5,000,000', '10,000,000', '20,000,000'))
     par(mgp=c(0.5,0.7,0))
-    axis(2, at=seq(0, 16, 2), las=2)
-    axis(2, at=c(0,17), labels=FALSE, tck=0)
+    axis(2, at=seq(0, max(timecov[w, 2]), 2), las=2)
+    axis(2, at=c(0, max(timecov[w, 2])), labels=FALSE, tck=0)
 
 }  ;  dev.off()
 

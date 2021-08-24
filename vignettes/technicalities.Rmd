@@ -1,0 +1,125 @@
+---
+title: "Formatting the data for crestr"
+author: "Manuel Chevalier"
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_vignette:
+        self_contained: no
+vignette: >
+  %\VignetteIndexEntry{Formatting the data for crestr}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## The central element of the package: the `crestObj` object
+
+In `crestr`, all the CREST-related data are stored within a single S3 object of the class `crestObj`. Most functions of the package will take a `crestObj` as their main input and will return an updated version of the object. In practice, a `crestObj` is a nested list that contains five sub-lists, each one grouping a specific type of information, such as the calibration data, the fitted climate responses and the reconstructions (see **Fig. 1**). Wrapper functions have been implemented to manipulate and/or modify the information contained in a `crestObj` so that, users are never expected to manually modify their `crestObj` --- even if it is possible. The five sub-lists contain the following information:
+
+- `inputs`: contains the raw data (_e.g._ the counts/percentages, the ages of the samples or the names of the fossil taxa).
+
+- `parameters`: contains the parameters provided at the different stages of the analysis (_e.g._ the data extraction or the fitting and combination of the PDFs)
+
+- `modelling`: contains all the data related to the modelling part (_e.g._ the distribution data for calibration, the background climate space or the PDFs).
+
+- `reconstructions`: contains all the results of the reconstruction (_e.g._ best estimates, synthetic error measurements as well as the full posterior distribution of the uncertainties).
+
+- `misc`: contains some additional metadata relative to the reconstruction (_e.g._ the site location or, most importantly, information relative to the proxy-species equivalency described above).
+
+<br >
+
+```{r crestobj, echo=FALSE, fig.cap = "**Fig. 1** Structure of a crestObj, here called 'rcnstrctn', with the five main sub-lists in colour. For simplicity, lists with many elements ('tax' or 'clim') are represented with double framed boxes. The unframed terminal nodes on the right-hand side of each branch are simple R objects, such as numbers, strings, vectors or data frames. The names of the functions that modify these obsjects are indicated on the right.", out.width = '100%', out.extra='style="background:none; border:none; box-shadow:none;"'}
+knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/fig-crestrobj_v1.png")
+```
+
+<br >
+
+
+
+
+## Input data for `crestr`
+
+Four different input data files are compatible with `crestr`. However, only one up to three of these inputs may be required for any application depending on the modelling objectives and assumptions. These files can be prepared outside the R environment and imported using standard R functions.
+
+<br >
+
+
+
+
+### The fossil data (`df`)
+
+The `df` data frame is only required if `crestr` is used for reconstucting climate and can be omitted if the objective is to model the climate response(s) of different taxa. `df` should be a data frame with the different samples entered as rows, with either the age, depth or sample ID as first column and the fossil data in the subsequent columns. `df` can countain raw counts, percentages, presence/absence (1s and 0s) or even relative weights to be used in the reconstruction. In the case study presented [here](https://mchevalier2.github.io/crestr/articles/limpopo.html), 215 terrestrial and aquatic pollen taxa were observed in 181 samples, so that `df` is a data frame with 216 columns (the age of the samples followed by the pollen taxa) and 181 rows containing pollen percentages of terrestrial taxa.
+
+<br >
+
+
+
+
+### The proxy-species equivalency (`PSE`) table
+
+The `PSE` data frame is required to use the _gbif4crest_ calibration dataset. It is used to associate fossil taxon names to the species distributions of various species stored in the `TAXA` and `DISTRIB_QDGC` tables (**Fig. 2** [here]() **ADD LINK HERE**). When all the fossil taxa are identified at the species level, the `PSE` table should be a simple data frame with one row per taxon. In most cases, however, fossil taxa are identified at a higher taxonomic level (sub-genus, genus, sub-family, family) and these varying levels of identification should be encoded in the `PSE` file to link one or more (groups of) species to their common fossil taxon name.
+
+
+A `PSE` file is composed of five columns (see **Table 1**). The first one (_Level_) contains an integer that indicates the level of taxonomic resolution of the row (1 for Family, 2 for Genus, 3 for Species and 4 for taxa that should be excluded from the reconstruction, _e.g._ 'Triletes spores' in the example case study below). The fifth column 'ProxyName' contains the name of the taxon and columns two to four contain the taxonomic classification of that taxon as 'Family', 'Genus' and 'Species', respectively. For simplicity, a pre-formatted version of the `PSE` table with the names of all the taxa to study can be generated by `crestr` using the [createPSE(list_of_taxa)](https://mchevalier2.github.io/crestr/reference/createPSE.html) function that generates a spreadsheet with the correct structure and with the Level and ProxyName columns automatically filled in.
+
+<br >
+
+**Table 1** Example classification of four pollen taxa from the example case study, each one with a different level of taxonomic resolution. The last column 'Taxonomic resolution' is added here for illustrative purposes and should not included in the `PSE` table.
+
+
+| Level | Family     | Genus                 | Species                    | ProxyName                  | Taxonomic resolution |
+|-------|------------|-----------------------|----------------------------|----------------------------|----------------------|
+| 1     | Asteraceae |                       |                            | Asteracae undiff.          | Family               |
+| 2     | Asteraceae | _Stoebe_              |                            | _Stoebe_-type              | Subfamily            |
+| 2     | Asteraceae | _Elytropappus_        |                            | _Stoebe_-type              | Subfamily            |
+| 2     | Asteraceae | _Artemisia_           |                            | _Artemisia_                | Genus level          |
+| 3     | Arecaceae  | _Elaeis_              | _Elaeis guineensis_        | _Elaeis guineensis_        | Species              |
+| 4     |            |                       |                            | Triletes spores            | To be excluded       |
+
+
+<br >
+
+
+
+
+When performing the classification with the [crest.get_modern_data()](https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html) function, `crestr` first classifies the taxa with the lowest taxonomical resolution (_i.e._ when _Level_ is equal to one), and then increases the resolution _Level_ by _Level_. In the example represented on **Table 1**, different taxonomic resolution levels are provided for different plant species belonging to the highly diverse Asteraceae family (the daisy family). To distribute all the Asteraceae species observed across the study area to their appropriate category, all the species are first classified as 'Asteraceae undiff.'. In a second time, the classification of some of these Asteraceae species is refined when reaching the better resolved sub-groups (_Stoebe_-type and _Artemisia_ at _Level_ 2). At the end of the process, the 'Asteraceae undiff.' group only contains Asteraceae species that live in the study area but are not part of the genuses _Stoebe_, _Elytropappus_ or _Artemisia_. The latter are categorised separately as _Stoebe_-type or _Artemisia_. Additional names can also be included to the `PSE` file to exclude species that are known to not be part of a group. For instance, this could have been used to simplify the climate response of the 'Asteraceae undiff.' group by excluding more species from it. This categorisation process can be time-consuming, as all the taxa must be classified in the same `PSE` table, and will often require many iterations to be optimised. The results of the different assignments are stored in the `crestObj` returned by the [crest.get_modern_data()](https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html) function and can be evaluated by checking `rcnstrctn$misc$taxa_notes`.
+
+<br >
+
+
+
+
+### The alternative modern calibration dataset (`distributions`) {#sec:inputs:distributions}
+
+Users that prefer fitting proxy-climate relationships from their own calibration data should prepare a `distributions` dataset following the specific structure presented in **Table 2**. The first two columns should contain the species names (or unique identifiers) and the corresponding proxy name. If more than one species correspond to one taxon, the PDFs will be fitted in two steps, as explained [here](https://mchevalier2.github.io/crestr/articles/theory.html). The following two columns contain the coordinates of the species occurrence data. Finally, the last columns contain the climate values to be reconstructed. An optional column called `weight` can be added to `distributions` in fifth position (_i.e._ between the coordinates and the climate variables) if one wants to weight the different observations. For example, the (relative) abundance of taxa observed from modern data can be used when fitting the PDFs to give more importance to the observations where that abundance is highest.
+
+<br >
+
+**Table 2** Template for the \textit{distributions} data frame. The weights column, here indicated with a '*', is optional and can be omitted or its values all set to 1 to assign the same weight to each observation. The number of rows the of table should correspond to the number of unique occurrences available.
+
+| Species name                       | Taxon Name                 | Longitude | Latitude | Weight* | clim\_1 | ... | clim\_n |
+|------------------------------------|----------------------------|-----------|----------|---------|---------|-----|---------|
+| _Stoebe plumosa_                   | _Stoebe_-type              | 18.875    | -34.375  | 20      | 15.8    | ... | 711     |
+| _Elytropappus rhinocerotis_        | _Stoebe_-type              | 18.375    | -33.625  | 32      | 16.9    | ... | 477     |
+| ...                                | ...                        | ...       | ...      | ...     | ...     | ... | ...     |
+| _Elaeis guineensis_                | _Elaeis guineensis_        | -4.375    | 10.875   | 4       | 27.4    | ... | 1020    |
+
+
+<br >
+
+
+
+
+
+### The `selectedTaxa` data frame {#sec:inputs:selectedTaxa}
+
+The last data frame that can be used to inform the reconstruction is a data frame of ones and zeros called `selectedTaxa`. This data frame has as many rows and columns as there are taxa and climate variables, respectively. Each entry should be either 1 or 0 and is used to indicate if the taxon should be used to reconstruct the climate variable (value = 1) or not (value = 0). If it is not provided, a default `selectedTaxa` data frame with all entries set to 1 is added to the `crestObj`. Users can modify this information at any point using the [includeTaxa()](https://mchevalier2.github.io/crestr/reference/includeTaxa.html) and [excludeTaxa()](https://mchevalier2.github.io/crestr/reference/excludeTaxa.html) built-in functions. The [crest.get_modern_data()](https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html) function also modifies this data frame by setting the value to -1 when the `PSE` classification failed for a taxon or when the amount of data in the study area is insufficient to fit a reliable PDF.
+
+<br >

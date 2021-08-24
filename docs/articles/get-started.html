@@ -47,25 +47,25 @@
   <a href="../articles/theory.html">A bit of theory</a>
 </li>
 <li>
+  <a href="../articles/data-and-structure.html">Calibration data</a>
+</li>
+<li>
+  <a href="../articles/data-and-structure.html">Technicalities</a>
+</li>
+<li>
   <a href="../articles/get-started.html">Get started</a>
 </li>
 <li>
-  <a href="../reference/index.html">Functions and Data</a>
+  <a href="../reference/index.html">Manual</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Vignettes
+    Applications
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/data-and-structure.html">Data &amp; Structure of crestr</a>
-    </li>
-    <li>
-      <a href="../articles/get-started.html">Get started</a>
-    </li>
-    <li>
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
     </li>
   </ul>
@@ -112,6 +112,9 @@
     
     
 <hr>
+<p>The <code>crestr</code> package has been designed for two independent but complementary modelling purposes. The probabilitic proxy-climate responses can be used to quantivatively reconstruct climate from their statistical combination [<a href="#ChevalierLimpopo">1</a>-<a href="#cc15">2</a>], or, alternatively, they can be used in a more quantitative way to determine the (relative) climate sensitivities of different taxa in a given area to characterise past ecological changes <a href="#quick20201">[3]</a>.</p>
+<p>In both cases, the difficulty of running a CREST analysis lies in the definition of the study-specific parameters of the algorithm, which can make the learning curve a bit steep at the beginning. However, default values are provided for all parameters to enable an easy and rapid generation of preliminary results that users can then use as a reasonable first estimate to start adapting the model to their data. To guide users in this task and avoid the common ‘black box’ criticism faced by many complex statistical tools, a large array of publication-ready, graphical diagnostic tools was designed to automatically represent CREST data in a standardised way. These tools include plots of the calibration data, the estimated climate responses, the reconstructions and many more. They can be used to look at the data from different perspectives to help understanding why the results are what they are and possibly help identifying potential issues or biases in the selected data and/or parameters. Such diagnostic tools are available for every step of the process and, as examplified <a href="https://mchevalier2.github.io/crestr/articles/get-started.html">here</a>, they can be generated with a single line of R code. However, before jumping to modelling data, it is important to understand the structure and philosophy of the package to maximise the quality of the results.</p>
+<p><br></p>
 <div id="introduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
@@ -391,6 +394,14 @@
 </li>
 </ul>
 <p><br></p>
+</div>
+<div id="ref" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ref" class="anchor"></a>References</h2>
+<p><strong>[1]</strong> <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. <a href="http://www.doi.org/10.1130/G47841.1" target="_blank">10.1130/G47841.1</a>.</p>
+<p><strong>[2]</strong> <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. <a href="http://www.doi.org/10.1016/j.quascirev.2015.07.009" target="_blank">doi:10.1016/j.quascirev.2015.07.009</a>.</p>
+<p><strong>[3]</strong> <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. <a href="www.doi.org/10.1017/qua.2021.31" target="_blank">10.1017/qua.2021.31</a>.</p>
+<p><strong>[4]</strong> <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. <a href="http://www.doi.org/10.1016/j.earscirev.2020.103384" target="_blank">doi:10.1016/j.earscirev.2020.103384</a>.</p>
 </div>
   </div>
 

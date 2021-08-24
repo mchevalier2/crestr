@@ -1,6 +1,7 @@
 ---
 title: "A bit of Theory"
 author: "Manuel Chevalier"
+date: "`r Sys.Date()`"
 output:
     rmarkdown::html_vignette:
         self_contained: no
@@ -54,7 +55,7 @@ Compared to other existing climate reconstruction methods, the probabilistic nat
 
 <br >
 
-# References {#ref}
+## References {#ref}
 
 **[1]** <a id="chevalier_2014"></a> Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. Clim. Past 10, 2081–2098. [doi:10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014){target="_blank"}.
 
@@ -73,3 +74,5 @@ Compared to other existing climate reconstruction methods, the probabilistic nat
 **[8]** <a id="cordova2017"></a> Cordova, C.E., Scott, L., Chase, B.M., Chevalier, M., 2017. Late Pleistocene-Holocene vegetation and climate change in the Middle Kalahari, Lake Ngami, Botswana. Quat. Sci. Rev. 171, 199–215. [doi:10.1016/j.quascirev.2017.06.036](http://www.doi.org/10.1016/j.quascirev.2017.06.036){target="_blank"}.
 
 **[9]** <a id="chevalier2020"></a> Chevalier, M., Davis, B.A.S., Heiri, O., Seppä, H., Chase, B.M., Gajewski, K., Lacourse, T., Telford, R.J., Finsinger, W., Guiot, J., Kühl, N., Maezumi, S.Y., Tipton, J.R., Carter, V.A., Brussel, T., Phelps, L.N., Dawson, A., Zanon, M., Vallé, F., Nolan, C., Mauri, A., de Vernal, A., Izumi, K., Holmström, L., Marsicek, J., Goring, S., Sommer, P.S., Chaput, M. and Kupriyanov, D., 2020. Pollen-based climate reconstruction techniques for late Quaternary studies. Earth-Science Reviews, 210, pp. 103384. [doi:10.1016/j.earscirev.2020.103384](http://www.doi.org/10.1016/j.earscirev.2020.103384){target="_blank"}.
+
+<br >

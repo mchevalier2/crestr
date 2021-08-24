@@ -1,9 +1,12 @@
 ---
-title: "Limpopo test"
+title: "Mean Annual Temperature reconstruction from marine core MD96-2048"
 author: "Manuel Chevalier"
-output: rmarkdown::html_vignette
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_vignette:
+        self_contained: no
 vignette: >
-  %\VignetteIndexEntry{Limpopo}
+  %\VignetteIndexEntry{Mean Annual Temperature reconstruction from marine core MD96-2048}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

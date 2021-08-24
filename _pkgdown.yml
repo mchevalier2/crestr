@@ -19,7 +19,9 @@ navbar:
     left:
     - home
     - theory
-    - intro
+    - calibration
+    - structure
+    - start
     - reference
     - articles
     - tutorials
@@ -34,11 +36,17 @@ navbar:
     theory:
       text: A bit of theory
       href: articles/theory.html
-    intro:
+    calibration:
+      text: Calibration data
+      href: articles/data-and-structure.html
+    structure:
+      text: Technicalities
+      href: articles/data-and-structure.html
+    start:
       text: Get started
       href: articles/get-started.html
     reference:
-      text: Functions and Data
+      text: Manual
       href: reference/index.html
     news:
       text: News
@@ -50,12 +58,8 @@ navbar:
        icon: "fab fa-twitter fa-lg"
        href: https://twitter.com/ChevalierManu
     articles:
-      text: Vignettes
+      text: Applications
       menu:
-      - text: Data & Structure of crestr
-        href: articles/data-and-structure.html
-      - text: Get started
-        href: articles/get-started.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
 
