@@ -56,6 +56,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 - **2021**
     - Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021, Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology, 49, pp. 71–75. [10.1016/j.palaeo.2021.110609](www.doi.org/10.1016/j.palaeo.2021.110609)
     - Hui, Z., Zhou, X., Chevalier, M., Wei, X., Pan, Y. and Chen, Y., 2021, Miocene East Asia summer monsoon precipitation variability and its possible driving forces. Palaeogeography, Palaeoclimatology, Palaeoecology, pp. 110609. [10.1130/G47841.1](www.doi.org/10.1130/G47841.1)
+    - Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](www.doi.org/10.1017/qua.2021.31)
 - **2020**
     - Yi, S., Jun, C.P., Jo, K. nam, Lee, H., Kim, M.S., Lee, S.D., Cao, X. and Lim, J., 2020, Asynchronous multi-decadal time-scale series of biotic and abiotic responses to precipitation during the last 1300 years. Scientific Reports, 10, pp. 1–10. [10.1038/s41598-020-74994-x](www.doi.org/10.1038/s41598-020-74994-x)
 - **2019**
@@ -79,7 +80,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" title="plot of chunk img4" alt="plot of chunk img4" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
-Last update: 23/08/2021
+Last update: 24/08/2021
 
 N.B.: This list is as exhaustive as possible but some studies may be missing. Contact me if you want your study to be added.
 
