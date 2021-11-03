@@ -179,89 +179,12 @@ database (if <code>v=NA</code>) or the description of variable v.</p>
     <div class='dont-index'><p><a href='https://www.worldclim.org/data/bioclim.html'>https://www.worldclim.org/data/bioclim.html</a> for details on the 'bio' data, <a href='https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/'>https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/</a> for details on 'ai', <a href='https://www.ncei.noaa.gov/products/world-ocean-atlas'>https://www.ncei.noaa.gov/products/world-ocean-atlas</a> for details on the sea surface temperature, sea surface salinity and nutrient Concentration data, or <a href='https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html'>https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html</a> for the sea ice concentration data.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>accClimateVariables</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;    Variable ID Variable name
-#&gt; 1            1          bio1
-#&gt; 2            2          bio2
-#&gt; 3            3          bio3
-#&gt; 4            4          bio4
-#&gt; 5            5          bio5
-#&gt; 6            6          bio6
-#&gt; 7            7          bio7
-#&gt; 8            8          bio8
-#&gt; 9            9          bio9
-#&gt; 10          10         bio10
-#&gt; 11          11         bio11
-#&gt; 12          12         bio12
-#&gt; 13          13         bio13
-#&gt; 14          14         bio14
-#&gt; 15          15         bio15
-#&gt; 16          16         bio16
-#&gt; 17          17         bio17
-#&gt; 18          18         bio18
-#&gt; 19          19         bio19
-#&gt; 20          20            ai
-#&gt; 21          21       sst_ann
-#&gt; 22          22       sst_jfm
-#&gt; 23          23       sst_amj
-#&gt; 24          24       sst_jas
-#&gt; 25          25       sst_ond
-#&gt; 26          26       sss_ann
-#&gt; 27          27       sss_jfm
-#&gt; 28          28       sss_amj
-#&gt; 29          29       sss_jas
-#&gt; 30          30       sss_ond
-#&gt; 31          31      icec_ann
-#&gt; 32          32      icec_jfm
-#&gt; 33          33      icec_amj
-#&gt; 34          34      icec_jas
-#&gt; 35          35      icec_ond
-#&gt; 36          36      diss_oxy
-#&gt; 37          37       nitrate
-#&gt; 38          38     phosphate
-#&gt; 39          39      silicate
-#&gt;                                                  Description      Domain
-#&gt; 1                               Mean Annual Temperature (°C) Terrestrial
-#&gt; 2                                    Mean Diurnal Range (°C) Terrestrial
-#&gt; 3                                       Isothermality (x100) Terrestrial
-#&gt; 4     Temperature Seasonality (standard deviation x100) (°C) Terrestrial
-#&gt; 5                      Max Temperature of Warmest Month (°C) Terrestrial
-#&gt; 6                      Min Temperature of Coldest Month (°C) Terrestrial
-#&gt; 7                              Temperature Annual Range (°C) Terrestrial
-#&gt; 8                   Mean Temperature of Wettest Quarter (°C) Terrestrial
-#&gt; 9                    Mean Temperature of Driest Quarter (°C) Terrestrial
-#&gt; 10                  Mean Temperature of Warmest Quarter (°C) Terrestrial
-#&gt; 11                  Mean Temperature of Coldest Quarter (°C) Terrestrial
-#&gt; 12                                 Annual Precipitation (mm) Terrestrial
-#&gt; 13                       Precipitation of Wettest Month (mm) Terrestrial
-#&gt; 14                        Precipitation of Driest Month (mm) Terrestrial
-#&gt; 15 Precipitation Seasonality (Coefficient of Variation) (mm) Terrestrial
-#&gt; 16                     Precipitation of Wettest Quarter (mm) Terrestrial
-#&gt; 17                      Precipitation of Driest Quarter (mm) Terrestrial
-#&gt; 18                     Precipitation of Warmest Quarter (mm) Terrestrial
-#&gt; 19                     Precipitation of Coldest Quarter (mm) Terrestrial
-#&gt; 20                                             Aridity Index Terrestrial
-#&gt; 21                  Mean Annual Sea Surface Temperature (°C)      Marine
-#&gt; 22            Mean Winter (JFM) Sea Surface Temperature (°C)      Marine
-#&gt; 23            Mean Spring (AMJ) Sea Surface Temperature (°C)      Marine
-#&gt; 24            Mean Summer (JAS) Sea Surface Temperature (°C)      Marine
-#&gt; 25              Mean Fall (OND) Sea Surface Temperature (°C)      Marine
-#&gt; 26                    Mean Annual Sea Surface Salinity (PSU)      Marine
-#&gt; 27              Mean Winter (JFM) Sea Surface Salinity (PSU)      Marine
-#&gt; 28              Mean Spring (AMJ) Sea Surface Salinity (PSU)      Marine
-#&gt; 29              Mean Summer (JAS) Sea Surface Salinity (PSU)      Marine
-#&gt; 30                Mean Fall (OND) Sea Surface Salinity (PSU)      Marine
-#&gt; 31                     Mean Annual Sea Ice Concentration (%)      Marine
-#&gt; 32               Mean Winter (JFM) Sea Ice Concentration (%)      Marine
-#&gt; 33               Mean Spring (AMJ) Sea Ice Concentration (%)      Marine
-#&gt; 34                   Mean Summer (JAS) Ice Concentration (%)      Marine
-#&gt; 35                     Mean Fall (OND) Ice Concentration (%)      Marine
-#&gt; 36                   Dissolved Oxygen Concentration (umol/L)      Marine
-#&gt; 37                            Nitrate Concentration (umol/L)      Marine
-#&gt; 38                          Phosphate Concentration (umol/L)      Marine
-#&gt; 39                           Silicate Concentration (umol/L)      Marine</div><div class='input'><span class='fu'>accClimateVariables</span><span class='op'>(</span>v<span class='op'>=</span><span class='st'>'bio12'</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "12"                        "bio12"                    
-#&gt; [3] "Annual Precipitation (mm)" "Terrestrial"              </div></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>accClimateVariables</span><span class='op'>(</span><span class='op'>)</span>
+  <span class='fu'>accClimateVariables</span><span class='op'>(</span>v<span class='op'>=</span><span class='st'>'bio12'</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

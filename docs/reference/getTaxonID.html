@@ -193,40 +193,13 @@ dataset uses taxaType=0 (pseudo-data). Default is 1.</p></td>
     <p>A vector of unique taxonIDs.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>getTaxonID</span><span class='op'>(</span><span class='st'>"Zamiaceae"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;   [1] 1000038 1000039 1000040 1000041 1000042 1000043 1000045 1000047 1000049
-#&gt;  [10] 1000050 1000051 1000052 1000054 1000056 1000057 1000058 1000059 1000060
-#&gt;  [19] 1000061 1000063 1000064 1000065 1000066 1000067 1000069 1000075 1000076
-#&gt;  [28] 1000077 1000078 1000079 1000080 1000081 1000083 1000086 1000087 1000088
-#&gt;  [37] 1000089 1000090 1000091 1000095 1000097 1000098 1000099 1000100 1000101
-#&gt;  [46] 1000102 1000103 1000104 1000105 1000106 1000108 1000109 1000111 1000112
-#&gt;  [55] 1000114 1000115 1000118 1000123 1000125 1000126 1000128 1000130 1000132
-#&gt;  [64] 1000142 1000143 1000144 1000146 1000147 1000148 1000149 1000150 1000151
-#&gt;  [73] 1000152 1000154 1000155 1000157 1000158 1000160 1000161 1000162 1000163
-#&gt;  [82] 1000164 1000165 1000166 1000167 1000168 1000169 1000170 1000171 1000172
-#&gt;  [91] 1000173 1000174 1000175 1000176 1000177 1000178 1000179 1000180 1000181
-#&gt; [100] 1000182 1000183 1000184 1000185 1000186 1000187 1000188 1000189 1000190
-#&gt; [109] 1000191 1000192 1000193 1000194 1000195 1000196 1000197 1000198 1000199
-#&gt; [118] 1000200 1000201 1000202 1000203 1000204 1000205 1000206 1000207 1000208
-#&gt; [127] 1000209 1000210 1000211 1000212 1000213 1000214 1000215 1000216 1000218
-#&gt; [136] 1000219 1000220 1000221 1000222 1000223 1000224 1000225 1000226 1000230
-#&gt; [145] 1000232 1000233 1000236 1000237 1000238 1000239 1000240 1000241 1000242
-#&gt; [154] 1000243 1000244 1000247 1000251 1000256 1000257 1000258 1000261 1000265
-#&gt; [163] 1000266 1000267 1000268 1000269 1000270 1000271 1000272 1000273 1000274
-#&gt; [172] 1000275 1000276 1000277 1000278 1000279 1000280 1000293 1000294 1000295
-#&gt; [181] 1000296 1000297 1000298 1000299 1000300 1000301 1000302 1000303 1000304
-#&gt; [190] 1000305 1000306 1000307 1000308 1000309 1000310 1000311 1000312 1000313
-#&gt; [199] 1000314 1000316 1000317 1000318 1000319 1000320 1000322 1000323 1000324
-#&gt; [208] 1000325 1000331 1000333 1000334 1000335 1000338 1000339 1000341 1000343
-#&gt; [217] 1000344 1000345 1000346 1000347 1000348 1000349 1000350 1000351 1000356
-#&gt; [226] 1000358 1000359 1000360 1000361 1000362 1000363 1000364 1000365 1000366
-#&gt; [235] 1000370 1000373 1000374 1000386 1000387 1000388 1000391 1000425</div><div class='input'><span class='fu'>getTaxonID</span><span class='op'>(</span><span class='st'>"Zamiaceae"</span>, <span class='st'>"Ceratozamia"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  [1] 1000054 1000057 1000077 1000147 1000148 1000157 1000158 1000167 1000171
-#&gt; [10] 1000172 1000175 1000178 1000183 1000184 1000185 1000186 1000187 1000191
-#&gt; [19] 1000192 1000194 1000196 1000198 1000199 1000201 1000208 1000210 1000334
-#&gt; [28] 1000343 1000356</div><div class='input'><span class='co'>## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.</span>
-<span class='fu'>getTaxonID</span><span class='op'>(</span><span class='st'>"Zamiaceae"</span>, <span class='st'>"Ceratozamia"</span>, taxaType <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; integer(0)</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'>getTaxonID</span><span class='op'>(</span><span class='st'>"Zamiaceae"</span><span class='op'>)</span>
+  <span class='fu'>getTaxonID</span><span class='op'>(</span><span class='st'>"Zamiaceae"</span>, <span class='st'>"Ceratozamia"</span><span class='op'>)</span>
+  <span class='co'>## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.</span>
+  <span class='fu'>getTaxonID</span><span class='op'>(</span><span class='st'>"Zamiaceae"</span>, <span class='st'>"Ceratozamia"</span>, taxaType <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
+<span class='op'>}</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

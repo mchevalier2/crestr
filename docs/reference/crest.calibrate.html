@@ -211,20 +211,22 @@ should be corrected for the modern distribution of the climate space
 and the climate space.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex_pse</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex_selection</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex</span><span class='op'>)</span>
-<span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='crest.get_modern_data.html'>crest.get_modern_data</a></span><span class='op'>(</span> df <span class='op'>=</span> <span class='va'>crest_ex</span>,
-  pse <span class='op'>=</span> <span class='va'>crest_ex_pse</span>, taxaType <span class='op'>=</span> <span class='fl'>0</span>,
-  climate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bio1"</span>, <span class='st'>"bio12"</span><span class='op'>)</span>,
-  selectedTaxa <span class='op'>=</span> <span class='va'>crest_ex_selection</span>, dbname <span class='op'>=</span> <span class='st'>"crest_example"</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: The classification of one or more taxa into species was not successful. Check `x$misc$taxa_notes` for details.</span></div><div class='input'><span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>crest.calibrate</span><span class='op'>(</span><span class='va'>x</span>,
-  geoWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>, climateSpaceWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>50</span><span class='op'>)</span>, shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"normal"</span>, <span class='st'>"lognormal"</span><span class='op'>)</span>,
-  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
-<span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex_pse</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex_selection</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>crest_ex</span><span class='op'>)</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'><a href='crest.get_modern_data.html'>crest.get_modern_data</a></span><span class='op'>(</span> df <span class='op'>=</span> <span class='va'>crest_ex</span>,
+    pse <span class='op'>=</span> <span class='va'>crest_ex_pse</span>, taxaType <span class='op'>=</span> <span class='fl'>0</span>,
+    climate <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"bio1"</span>, <span class='st'>"bio12"</span><span class='op'>)</span>,
+    selectedTaxa <span class='op'>=</span> <span class='va'>crest_ex_selection</span>, dbname <span class='op'>=</span> <span class='st'>"crest_example"</span>,
+    verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+  <span class='op'>)</span>
+  <span class='va'>x</span> <span class='op'>&lt;-</span> <span class='fu'>crest.calibrate</span><span class='op'>(</span><span class='va'>x</span>,
+    geoWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>, climateSpaceWeighting <span class='op'>=</span> <span class='cn'>TRUE</span>,
+    bin_width <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fl'>50</span><span class='op'>)</span>, shape <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"normal"</span>, <span class='st'>"lognormal"</span><span class='op'>)</span>,
+    verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+  <span class='op'>)</span>
+<span class='op'>}</span>
 
 </div></pre>
   </div>
