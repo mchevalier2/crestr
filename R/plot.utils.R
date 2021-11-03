@@ -7,7 +7,9 @@
 #' @return The set of coordinates ext projected in equal earth.
 #' @export
 #' @examples
-#' eqearth_get_ext(c(-15, 50, 30, 70))
+#' \dontrun{
+#'   eqearth_get_ext(c(-15, 50, 30, 70))
+#' }
 #'
 eqearth_get_ext <- function(ext, npoints=15) {
     if(base::missing(ext)) ext

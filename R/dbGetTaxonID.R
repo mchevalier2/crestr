@@ -10,10 +10,12 @@
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
-#' getTaxonID("Zamiaceae")
-#' getTaxonID("Zamiaceae", "Ceratozamia")
-#' ## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
-#' getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+#' \dontrun{
+#'   getTaxonID("Zamiaceae")
+#'   getTaxonID("Zamiaceae", "Ceratozamia")
+#'   ## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
+#'   getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+#' }
 #'
 getTaxonID <- function(family = "", genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
     family  <- base::trimws(family, 'both')

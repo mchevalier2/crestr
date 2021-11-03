@@ -56,13 +56,15 @@ A matrix of occurrence records with the associated climate.
 Extract the distribution of the studied climate gradient(s) across the study area.
 }
 \examples{
-climate <- getClimateSpace("bio1", -90, 90, -90, 90,
-  continents = "Europe",
-  countries = c("Germany", "Netherlands", "Sweden"),
-  realms = "Palaearctic"
-)
-head(climate)
-raster::plot(raster::rasterFromXYZ(climate), asp=1)
+\dontrun{
+  climate <- getClimateSpace("bio1", -90, 90, -90, 90,
+    continents = "Europe",
+    countries = c("Germany", "Netherlands", "Sweden"),
+    realms = "Palaearctic"
+  )
+  head(climate)
+  raster::plot(raster::rasterFromXYZ(climate), asp=1)
+}
 
 }
 \seealso{

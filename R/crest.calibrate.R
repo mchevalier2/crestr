@@ -10,20 +10,22 @@
 #'         and the climate space.
 #' @export
 #' @examples
-#' data(crest_ex_pse)
-#' data(crest_ex_selection)
-#' data(crest_ex)
-#' x <- crest.get_modern_data( df = crest_ex,
-#'   pse = crest_ex_pse, taxaType = 0,
-#'   climate = c("bio1", "bio12"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
-#'   verbose = FALSE
-#' )
-#' x <- crest.calibrate(x,
-#'   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
-#'   bin_width = c(2, 50), shape = c("normal", "lognormal"),
-#'   verbose = FALSE
-#' )
+#' \dontrun{
+#'   data(crest_ex_pse)
+#'   data(crest_ex_selection)
+#'   data(crest_ex)
+#'   x <- crest.get_modern_data( df = crest_ex,
+#'     pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'     verbose = FALSE
+#'   )
+#'   x <- crest.calibrate(x,
+#'     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
+#'     bin_width = c(2, 50), shape = c("normal", "lognormal"),
+#'     verbose = FALSE
+#'   )
+#' }
 #'
 crest.calibrate <- function(x,
                             bin_width = x$parameters$bin_width,

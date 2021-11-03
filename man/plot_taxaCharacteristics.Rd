@@ -85,9 +85,7 @@ Plot the distribution and responses of the studied taxa
     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
     bin_width = c(2, 20), shape = c("normal", "lognormal")
   )
+  plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 }
-## example using pre-saved reconstruction obtained with the previous command.
-data(reconstr)
-plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 
 }

@@ -11,13 +11,15 @@
 #'     for a list of accepted realm, biome and ecoregion names.
 #' @export
 #' @examples
-#' climate <- getClimateSpace("bio1", -90, 90, -90, 90,
-#'   continents = "Europe",
-#'   countries = c("Germany", "Netherlands", "Sweden"),
-#'   realms = "Palaearctic"
-#' )
-#' head(climate)
-#' raster::plot(raster::rasterFromXYZ(climate), asp=1)
+#' \dontrun{
+#'   climate <- getClimateSpace("bio1", -90, 90, -90, 90,
+#'     continents = "Europe",
+#'     countries = c("Germany", "Netherlands", "Sweden"),
+#'     realms = "Palaearctic"
+#'   )
+#'   head(climate)
+#'   raster::plot(raster::rasterFromXYZ(climate), asp=1)
+#' }
 #'
 getClimateSpace <- function(climate,
                             xmn = NA, xmx = NA, ymn = NA, ymx = NA,

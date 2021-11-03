@@ -11,8 +11,10 @@
 #' @return A data frame containing the climate values.
 #' @export
 #' @examples
-#' climate_from_xy(50, 10, c('bio1', 'ai'))
-#' climate_from_xy(50, 10)
+#' \dontrun{
+#'   climate_from_xy(50, 10, c('bio1', 'ai'))
+#'   climate_from_xy(50, 10)
+#' }
 #'
 climate_from_xy <- function(long, lat,
                             climate = accClimateVariables()[, 2],

@@ -12,13 +12,16 @@
 #'     for a list of accepted realm, biome and ecoregion names.
 #' @export
 #' @examples
-#' taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
-#' distrib <- getDistribTaxa(taxIDs, "bio1", -90, 90, -90, 90,
-#'   continents = "Europe",
-#'   countries = c("Germany", "Netherlands", "Sweden"),
-#'   realms = "Palaearctic"
-#' )
-#' distrib
+#' \dontrun{
+#'   taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
+#'   distrib <- getDistribTaxa(taxIDs, "bio1", -90, 90, -90, 90,
+#'     continents = "Europe",
+#'     countries = c("Germany", "Netherlands", "Sweden"),
+#'     realms = "Palaearctic"
+#'   )
+#'   distrib
+#' }
+#'
 getDistribTaxa <- function(taxIDs,
                            climate = NA,
                            xmn = NA, xmx = NA, ymn = NA, ymx = NA,

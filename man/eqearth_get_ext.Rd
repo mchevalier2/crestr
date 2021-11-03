@@ -18,6 +18,8 @@ The set of coordinates ext projected in equal earth.
 Calculates the extent of the plot in the equal earth projection.
 }
 \examples{
-eqearth_get_ext(c(-15, 50, 30, 70))
+\dontrun{
+  eqearth_get_ext(c(-15, 50, 30, 70))
+}
 
 }

@@ -31,7 +31,9 @@ A data frame containing the climate values.
 Extract The climate values associated to a set of coordinates.
 }
 \examples{
-climate_from_xy(50, 10, c('bio1', 'ai'))
-climate_from_xy(50, 10)
+\dontrun{
+  climate_from_xy(50, 10, c('bio1', 'ai'))
+  climate_from_xy(50, 10)
+}
 
 }

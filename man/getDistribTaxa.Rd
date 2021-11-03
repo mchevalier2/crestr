@@ -92,13 +92,16 @@ Extract all possible TaxonIDs corresponding to the provided taxonomical
 description, which can be at the family, the genus or the species levels.
 }
 \examples{
-taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
-distrib <- getDistribTaxa(taxIDs, "bio1", -90, 90, -90, 90,
-  continents = "Europe",
-  countries = c("Germany", "Netherlands", "Sweden"),
-  realms = "Palaearctic"
-)
-distrib
+\dontrun{
+  taxIDs <- getTaxonID("Zamiaceae", "Ceratozamia")
+  distrib <- getDistribTaxa(taxIDs, "bio1", -90, 90, -90, 90,
+    continents = "Europe",
+    countries = c("Germany", "Netherlands", "Sweden"),
+    realms = "Palaearctic"
+  )
+  distrib
+}
+
 }
 \seealso{
 \code{\link{getTaxonID}} for taxIDs, \code{\link{accClimateVariables}}

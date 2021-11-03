@@ -43,10 +43,8 @@
 #'     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
 #'     bin_width = c(2, 20), shape = c("normal", "lognormal")
 #'   )
+#'   plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 #' }
-#' ## example using pre-saved reconstruction obtained with the previous command.
-#' data(reconstr)
-#' plot_taxaCharacteristics(reconstr, taxanames='Taxon1')
 #'
 plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                       climate = x$parameters$climate,

@@ -128,16 +128,18 @@ This function will extract the distributions of all the species composing each
 taxon and return them as a list.
 }
 \examples{
-data(crest_ex_pse)
-data(crest_ex_selection)
-data(crest_ex)
-x <- crest.get_modern_data( df = crest_ex,
-  pse = crest_ex_pse, taxaType = 0,
-  climate = c("bio1", "bio12"),
-  selectedTaxa = crest_ex_selection, dbname = "crest_example",
-  verbose = FALSE
-)
-x
-lapply(x$modelling$distributions, head)
+\dontrun{
+  data(crest_ex_pse)
+  data(crest_ex_selection)
+  data(crest_ex)
+  x <- crest.get_modern_data( df = crest_ex,
+    pse = crest_ex_pse, taxaType = 0,
+    climate = c("bio1", "bio12"),
+    selectedTaxa = crest_ex_selection, dbname = "crest_example",
+    verbose = FALSE
+  )
+  x
+  lapply(x$modelling$distributions, head)
+}
 
 }

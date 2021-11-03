@@ -18,11 +18,11 @@ The result of the request.
 Connect to the gbif4crest_02 database by accessing the server on Amazon.
 }
 \examples{
-# Extracting the number of taxa recorded in the database
-dbRequest("SELECT count(*) FROM taxa")
-
-# Extracting all the taxa that have at least one occurrence in South Africa.
 \dontrun{
+  # Extracting the number of taxa recorded in the database
+  dbRequest("SELECT count(*) FROM taxa")
+
+  # Extracting all the taxa that have at least one occurrence in South Africa.
   southAfricaTaxa <- dbRequest(paste0(
     "SELECT DISTINCT taxa.* ",
     "FROM taxa, distrib_qdgc, geo_qdgc ",

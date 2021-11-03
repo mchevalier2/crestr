@@ -13,8 +13,11 @@
 #' @export
 #' @seealso \url{https://www.worldclim.org/data/bioclim.html} for details on the 'bio' data, \url{https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/} for details on 'ai', \url{https://www.ncei.noaa.gov/products/world-ocean-atlas} for details on the sea surface temperature, sea surface salinity and nutrient Concentration data, or \url{https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html} for the sea ice concentration data.
 #' @examples
-#' accClimateVariables()
-#' accClimateVariables(v='bio12')
+#' \dontrun{
+#'   accClimateVariables()
+#'   accClimateVariables(v='bio12')
+#' }
+#'
 accClimateVariables <- function(v=NA, domain=NA) {
     res <- data.frame(
       1:39,

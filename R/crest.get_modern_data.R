@@ -12,17 +12,19 @@
 #' @return A \code{\link{crestObj}} object containing the spatial distributions.
 #' @export
 #' @examples
-#' data(crest_ex_pse)
-#' data(crest_ex_selection)
-#' data(crest_ex)
-#' x <- crest.get_modern_data( df = crest_ex,
-#'   pse = crest_ex_pse, taxaType = 0,
-#'   climate = c("bio1", "bio12"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
-#'   verbose = FALSE
-#' )
-#' x
-#' lapply(x$modelling$distributions, head)
+#' \dontrun{
+#'   data(crest_ex_pse)
+#'   data(crest_ex_selection)
+#'   data(crest_ex)
+#'   x <- crest.get_modern_data( df = crest_ex,
+#'     pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'     verbose = FALSE
+#'   )
+#'   x
+#'   lapply(x$modelling$distributions, head)
+#' }
 #'
 crest.get_modern_data <- function( pse, taxaType, climate,
                                    df = NA, ai.sqrt = FALSE,

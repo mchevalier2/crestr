@@ -17,21 +17,23 @@
 #' data(crest_ex_pse)
 #' data(crest_ex_selection)
 #' data(crest_ex)
-#' x <- crest.get_modern_data( df = crest_ex,
-#'   pse = crest_ex_pse, taxaType = 0,
-#'   climate = c("bio1", "bio12"),
-#'   selectedTaxa = crest_ex_selection, dbname = "crest_example",
-#'   verbose = FALSE
-#' )
-#' x <- crest.calibrate(x,
-#'   geoWeighting = TRUE, climateSpaceWeighting = TRUE,
-#'   bin_width = c(2, 50), shape = c("normal", "lognormal"),
-#'   verbose = FALSE
-#' )
-#' x <- crest.reconstruct(x,
-#'   verbose = FALSE)
-#' plot(x)
-
+#' \dontrun{
+#'   x <- crest.get_modern_data( df = crest_ex,
+#'     pse = crest_ex_pse, taxaType = 0,
+#'     climate = c("bio1", "bio12"),
+#'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
+#'     verbose = FALSE
+#'   )
+#'   x <- crest.calibrate(x,
+#'     geoWeighting = TRUE, climateSpaceWeighting = TRUE,
+#'     bin_width = c(2, 50), shape = c("normal", "lognormal"),
+#'     verbose = FALSE
+#'   )
+#'   x <- crest.reconstruct(x,
+#'     verbose = FALSE)
+#'   plot(x)
+#' }
+#'
 crest.reconstruct <- function(x,
                               presenceThreshold = 0,
                               taxWeight = "normalisation",

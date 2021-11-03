@@ -34,9 +34,11 @@ Extract all possible TaxonIDs corresponding to the provided taxonomical
 description, which can be at the family, the genus or the species levels.
 }
 \examples{
-getTaxonID("Zamiaceae")
-getTaxonID("Zamiaceae", "Ceratozamia")
-## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
-getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+\dontrun{
+  getTaxonID("Zamiaceae")
+  getTaxonID("Zamiaceae", "Ceratozamia")
+  ## \code{taxaType = 2} searches for beetles and not plants, so the next line returns nothing.
+  getTaxonID("Zamiaceae", "Ceratozamia", taxaType = 2)
+}
 
 }
