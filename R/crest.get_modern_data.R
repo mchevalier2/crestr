@@ -302,8 +302,12 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     w <- (pse$Level == 4)
     if (sum(w) > 0) {
         for (tax in unique(pse$ProxyName[w])) {
-            selectedTaxa <- rbind(selectedTaxa, rep(-1, length(climate)))
-            rownames(selectedTaxa)[nrow(selectedTaxa)] <- tax
+            if(tax %in% rownames(selectedTaxa)) {
+                selectedTaxa[tax, ] <- rep(-1, length(climate))
+            } else {
+                selectedTaxa <- rbind(selectedTaxa, rep(-1, length(climate)))
+                rownames(selectedTaxa)[nrow(selectedTaxa)] <- tax
+            }
             message <- "No association between the proxy names and species"
             if (! message %in% names(taxa_notes)) {
                 taxa_notes[[message]] <- c()
