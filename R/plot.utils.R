@@ -17,10 +17,7 @@ eqearth_get_ext <- function(ext, npoints=15) {
                                                 c(seq(ext[3], ext[4], length.out=npoints),
                                                   seq(ext[4], ext[3], length.out=npoints))))), ID = as.character(1))
     Sl1 <- sp::SpatialPolygons(list(bckg))
-
-    wkt <- sf::st_crs(4326)[[2]]
-    raster::crs(Sl1) <- sp::CRS(wkt)
-
+    raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
 
     PROJ <- sp::CRS(paste0("+proj=eqearth +lon_0=", mean(c(ext[2], ext[1])),
                            " +x_0=", mean(c(ext[2], ext[1])),
