@@ -5,6 +5,9 @@ date: "03/11/2021"
 output: github_document
 ---
 
+# Re-submission
+
+The issues with the URLs as shown below (section WIN_DEVEL) have been fixed.
 
 
 # First submission
@@ -84,10 +87,8 @@ Found the following (possibly) invalid URLs:
 
 ## R-HUB
 
-Here, I have checked the package using five tests from the `rhub` package. The check_on_linux(), check_on_windows(), check_on_fedora() and check_with_rrelease() tests returned no ERRORs, WARNINGs or NOTEs. The check_for_cran() tests returned no ERRORs or WARNINGs but consistently returned 1 NOTE about this being a `New Submission.:
+Here, I have checked the package using five tests from the `rhub` package. The check_on_linux(), check_on_windows(), check_on_fedora() and check_with_rrelease() tests returned no ERRORs, WARNINGs or NOTEs. The check_for_cran() tests returned no ERRORs or WARNINGs but consistently returned 1 NOTE about this being a `New Submission.
 
-    1. The first note is about this submission being a first submission.
-    2. The second note is about some examples taking more than 5seconds to run. All the examples that issued a note are actually connecting to a remote database to extract data and process them. It is a process that is expected to take a bit a time. Considering the limit at 5s, these notes are completely natural and expected.
 
 ### `check_for_cran()`
 
