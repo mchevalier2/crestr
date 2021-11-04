@@ -61,7 +61,7 @@ Compared to other existing climate reconstruction methods, the probabilistic nat
 
 **[2]** <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. [doi:10.1016/j.earscirev.2020.103384](http://www.doi.org/10.1016/j.earscirev.2020.103384){target="_blank"}.
 
-**[3]** <a id="kuhl2002"></a> Kühl, N., Gebhardt, C., Litt, T., Hense, A., 2002. Probability Density Functions as Botanical-Climatological Transfer Functions for Climate Reconstruction. Quat. Res. 58, 381–392. [doi:10.1006/qres.2002.2380](http://www.doi.org/10.1006/qres.2002.2380){target="_blank"}.
+**[3]** <a id="kuhl2002"></a> Kühl, N., Gebhardt, C., Litt, T., Hense, A., 2002. Probability Density Functions as Botanical-Climatological Transfer Functions for Climate Reconstruction. Quat. Res. 58, 381–392. [doi:10.1006/qres.2002.2380](https://www.sciencedirect.com/science/article/abs/pii/S003358940292380X){target="_blank"}.
 
 **[4]** <a id="bray2006"></a> Bray, P.J., Blockley, S.P.E., Coope, G.R., Dadswell, L.F., Elias, S.A., Lowe, J.J., Pollard, A.M., 2006. Refining mutual climatic range (MCR) quantitative estimates of palaeotemperature using ubiquity analysis. Quat. Sci. Rev. 25, 1865–1876. [doi:10.1016/j.quascirev.2006.01.023](http://www.doi.org/10.1016/j.quascirev.2006.01.023){target="_blank"}.
 
