@@ -60,7 +60,7 @@ the data are used to reconstruct both temperature and precipitation.
 ## Description of the pseudo-data <a id="data"></a>
 
 In this example, temperature and precipitation are reconstructed from a set
-of six climate proxies with different sensitivites to the observed climate
+of six climate proxies with different sensitivities to the observed climate
 gradients. For simplicity, the temperature data are constructed as an East - West
 climate gradient, while the precipitation data are designed as a North - South
 gradient. This results in, for instance, cold and rainy conditions in the

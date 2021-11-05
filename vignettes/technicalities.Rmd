@@ -76,7 +76,7 @@ A `PSE` file is composed of five columns (see **Table 1**). The first one (_Leve
 
 | Level | Family     | Genus                 | Species                    | ProxyName                  | Taxonomic resolution |
 |-------|------------|-----------------------|----------------------------|----------------------------|----------------------|
-| 1     | Asteraceae |                       |                            | Asteracae undiff.          | Family               |
+| 1     | Asteraceae |                       |                            | Asteraceae undiff.          | Family               |
 | 2     | Asteraceae | _Stoebe_              |                            | _Stoebe_-type              | Subfamily            |
 | 2     | Asteraceae | _Elytropappus_        |                            | _Stoebe_-type              | Subfamily            |
 | 2     | Asteraceae | _Artemisia_           |                            | _Artemisia_                | Genus level          |
