@@ -7,7 +7,10 @@ output: github_document
 
 # Re-submission
 
-The issues with the URLs as shown below (section WIN_DEVEL) have been fixed.
+- I have now replaced all the http by https.
+- The webpage (https://journals.ametsoc.org/view/journals/clim/20/22/2007jcli1824.1.xml) still seems to create some issues with windows builts, but I have no idea how to fix this. So I have replaced it by an alternative one.
+- This other address (https://www.ncei.noaa.gov/products/world-ocean-atlas) seems to _sometimes_ create problems (Message: libcurl error code 35:). Sometimes it passes the tests, sometimes it doesn't. Since I really don't know much in this area, I have no idea how to fix this. If you have any suggestion on how to fix this, please let me know how. Otherwise, it will have to stay as it is since there is no alternative link I can use.
+
 
 
 # First submission
@@ -34,6 +37,13 @@ devtools::build(manual = TRUE)
 ```{bash eval=FALSE}
 R CMD CHECK /Users/mchevali1/GitHub/Rpackages/crestr_1.0.0.tar.gz
 Status: OK
+```
+
+* Package checked by
+```{bash eval=FALSE}
+R CMD CHECK --as-cran /Users/mchevali1/GitHub/Rpackages/crestr_1.0.0.tar.gz
+Status: OK
+Notes: New Submission
 ```
 
 ## WIN_DEVEL

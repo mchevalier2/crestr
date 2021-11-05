@@ -13,8 +13,8 @@ The goal of crestr is to produce probabilistic reconstructions of past  climate
 change from fossil assemblage data. The approach is based on the estimation of
 conditional responses of studies bio-proxy studied to climate parameters using
 probability density functions (_PDFs_; see
-[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014) and
-[Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The
+[Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and
+[Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The
 theory underpinning this package is explained in section
 [_A bit of theory_](https://mchevalier2.github.io/crestr/articles/theory.html)
 and is illustrated with an application based on pseudo-data in section
@@ -45,7 +45,7 @@ devtools::install_github("mchevalier2/crestr")
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" title="plot of chunk img1" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
-_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of pollen records used to generate the reconstructions presented in B-D and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](http://www.doi.org/10.1130/G47841.1))._
+_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of pollen records used to generate the reconstructions presented in B-D and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
 
 ## CREST in the scientific litterature
@@ -91,10 +91,10 @@ N.B.: This list is as exhaustive as possible but some studies may be missing. Co
  - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction
    SofTware): a probability density function (PDF)-based quantitative climate
    reconstruction method. *Clim. Past* 10, 2081–2098.
-   [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
+   [10.5194/cp-10-2081-2014](https://www.doi.org/10.5194/cp-10-2081-2014)
  - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
    fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35.
-   [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+   [10.1016/j.gloplacha.2019.01.016](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)
  - Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021.
    Temperature change in subtropical southeastern Africa during the past 790,000 yr.
-   _Geology_ 49, 71–75. [10.1130/G47841.1](http://www.doi.org/10.1130/G47841.1)
+   _Geology_ 49, 71–75. [10.1130/G47841.1](https://www.doi.org/10.1130/G47841.1)

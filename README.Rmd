@@ -35,6 +35,7 @@ details of the method have been described in
 calibrated data presented in
 [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
 
+
 ## Installation
 
 You can install the development version from [GitHub](https://github.com/) with:
@@ -104,7 +105,7 @@ to *bio12*. Check <https://mchevalier2.github.io/crestr/articles/get-started.htm
 for more details on this selection.
 
 ```{r data_preview_selection}
-crest_ex_selection 
+crest_ex_selection
 ```
 
 These pseudo-data can be provided to the **crest** function and provided some

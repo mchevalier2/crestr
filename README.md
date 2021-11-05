@@ -127,7 +127,7 @@ Taxa 1, 4, 5 and 7 are sensitive to *bio12*. Check
 more details on this selection.
 
 ``` r
-crest_ex_selection 
+crest_ex_selection
 #>        bio1 bio12
 #> Taxon1    1     1
 #> Taxon2    1     0

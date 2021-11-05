@@ -365,11 +365,11 @@ unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
 
 ## References {#ref}
 
-**[1]** <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. [10.1130/G47841.1](http://www.doi.org/10.1130/G47841.1){target="_blank"}.
+**[1]** <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. [10.1130/G47841.1](https://www.doi.org/10.1130/G47841.1){target="_blank"}.
 
-**[2]** <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. [doi:10.1016/j.quascirev.2015.07.009](http://www.doi.org/10.1016/j.quascirev.2015.07.009){target="_blank"}.
+**[2]** <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. [doi:10.1016/j.quascirev.2015.07.009](https://www.doi.org/10.1016/j.quascirev.2015.07.009){target="_blank"}.
 
-**[3]** <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](www.doi.org/10.1017/qua.2021.31){target="_blank"}.
+**[3]** <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](https://www.doi.org/10.1017/qua.2021.31){target="_blank"}.
 
 
 <br >
