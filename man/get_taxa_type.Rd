@@ -9,6 +9,9 @@ get_taxa_type(taxaType)
 \arguments{
 \item{taxaType}{An integer between 0 and 6}
 }
+\value{
+Returns the taxa type corresponding to the index.
+}
 \description{
 Returns the taxa type corresponding to the index.
 }

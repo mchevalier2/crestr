@@ -66,8 +66,8 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8
 
 png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=10, height=4.5, units='in', res=150)  ;  {
     layout(matrix(c(2,1,3), ncol=3), width=c(0.95,10,1.05))
-    par(mar=c(0,0,0,0))
-    plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30, scale=2)
+    par(mar=c(0,0,0,0), ps=8*2)
+    plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30)
     points(sites.eqearth, pch=23, col='red', bg='beige', cex=2, lwd=1.2)
 }  ;  dev.off()
 

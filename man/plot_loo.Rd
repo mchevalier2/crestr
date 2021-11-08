@@ -75,6 +75,9 @@ negative values (default grey80).}
 
 \item{title}{Name to be added on top of the plot (default \code{NA}).}
 }
+\value{
+No return value, this function is used to plot.
+}
 \description{
 Plot the results of the leave-one-out analysis.
 }

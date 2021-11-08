@@ -77,8 +77,11 @@ This function will extract the distributions of all the studied climate proxy an
 }
 \examples{
 \dontrun{
+  #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
   d = explore_calibration_dataset(2, xmn=-85, xmx=-30, ymn=-60, ymx=15,
-                                  save=TRUE, width = 4, height = 7.5)
+                                  save=TRUE, width = 4, height = 7.5,
+                                  filename=file.path(tempdir(), 'calibrationDataset.pdf')
+  )
   head(d)
 }
 

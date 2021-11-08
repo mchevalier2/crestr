@@ -11,6 +11,9 @@ getSpeciesdiversity(x)
 \code{\link{crest.reconstruct}}, \code{\link{loo}} or
 \code{\link{crest}} functions.}
 }
+\value{
+Return the number of composing species of each taxon.
+}
 \description{
 Calculates how many species compose the response of each taxon.
 }

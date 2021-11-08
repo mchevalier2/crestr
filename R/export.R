@@ -12,6 +12,7 @@
 #' @param loo A boolean to export the leave-one-out data if they exist (default \code{FALSE})
 #' @param weights A boolean to export the weights derived from the percentages (default \code{FALSE})
 #' @param pdfs A boolean to export the taxa's \code{pdfs} (default \code{FALSE})
+#' @return No return value, function called to export the results.
 #' @export
 #' @examples
 #' \dontrun{
@@ -26,8 +27,10 @@
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = TRUE
 #'   )
+#'   #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
 #'   export(reconstr, dataname='crest_example',
-#'          fullPosterior=TRUE, weights=TRUE, loo=TRUE, pdfs=TRUE)
+#'          fullPosterior=TRUE, weights=TRUE, loo=TRUE, pdfs=TRUE,
+#'          loc=tempdir())
 #' }
 #'
 export <- function( x, dataname = x$misc$site_info$site_name,
@@ -47,7 +50,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
         if(is.na(dataname)) dataname <- 'crest_outputs'
         if (!base::file.exists(base::file.path(loc, dataname))){
-            base::dir.create(base::file.path(loc, dataname), showWarnings = FALSE)
+            base::dir.create(base::file.path(loc, dataname), showWarnings = TRUE)
         }
 
         if ((!'loo' %in% names(x$reconstructions[[climate[1]]])) & loo) {
@@ -66,7 +69,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
         }
 
         for (clim in climate) {
-            base::dir.create(base::file.path(loc, dataname, clim), showWarnings = FALSE)
+            base::dir.create(base::file.path(loc, dataname, clim), showWarnings = TRUE)
 
             df <- rep(NA, 5)
             df <- rbind(df, c(paste0('NAME OF THE DATASET: ', x$misc$site_info$site_name), NA, NA, NA, NA))

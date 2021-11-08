@@ -6,6 +6,7 @@
 #' @inheritParams export
 #' @param taxa The names of the taxa of interest. All the pdfs are saved by
 #'        default.
+#' @return No return value, function called to export the PDFs as files.
 #' @export
 #' @examples
 #' \dontrun{
@@ -20,7 +21,11 @@
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = TRUE
 #'   )
-#'   export_pdfs(reconstr, dataname='crest_example')
+#'   #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+#'   export_pdfs(reconstr,
+#'               dataname='crest_example',
+#'               loc=tempdir()
+#'   )
 #' }
 #'
 export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
@@ -52,7 +57,7 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
 
         if(is.na(dataname)) dataname <- 'crest_outputs'
         if (!base::file.exists(base::file.path(loc, dataname))){
-            base::dir.create(base::file.path(loc, dataname), showWarnings = FALSE)
+            base::dir.create(base::file.path(loc, dataname), showWarnings = TRUE)
         }
 
         idx <- 1

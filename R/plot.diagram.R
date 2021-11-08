@@ -31,16 +31,17 @@
 #' @param col_neg Graphical parameter for the barplot. Colour of all the
 #'        negative values (default light grey).
 #' @param title Name to be added on top of the plot (default \code{NA}).
+#' @return No return value, this function is used to plot.
 #' @export
 #' @examples
 #' data(crest_ex)
 #' plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 #' plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
-#' \dontrun{
-#'   plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
-#'                bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
-#'                bar_width=0.8, xlim=c(3,15))
-#' }
+#' #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+#' plot_diagram(crest_ex, save=TRUE,
+#'              filename=file.path(tempdir(), 'testDiagram.pdf'),
+#'              bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
+#'              bar_width=0.8, xlim=c(3,15))
 #'
 plot_diagram <- function(x, bars=FALSE,
                          col = 'black',
@@ -114,14 +115,15 @@ plot_diagram <- function(x, bars=FALSE,
     yrange <- yrange + c(-0.45*dY, 0)
     if(!is.na(title)) yrange <- yrange + c(0, 0.3*dY)
 
+    par_usr <- graphics::par(no.readonly = TRUE)
+    on.exit(graphics::par(par_usr))
+
     if(save) {
         if(as.png) {
             grDevices::png(filename, width = width, height = height, units='in', res=png.res)
         } else {
             grDevices::pdf(filename, width=width, height=height)
         }
-    } else {
-        par_usr <- graphics::par(no.readonly = TRUE)
     }
 
 
@@ -195,8 +197,7 @@ plot_diagram <- function(x, bars=FALSE,
     graphics::text(mean(xlim), -0.40*dY, colnames(x)[1], cex=1, adj=c(0.5,0))
     if(save) {
         grDevices::dev.off()
-    } else {
-        graphics::par(par_usr)
     }
+
     invisible()
 }

@@ -7,12 +7,13 @@
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
 #'        \code{proxy_species_equivalency.xlsx}.
+#' @return No return value, called to create a PSE file.
 #' @export
 #' @examples
-#' \dontrun{
-#'    data(crest_ex)
-#'    createPSE(taxa = colnames(crest_ex)[-1])
-#' }
+#' data(crest_ex)
+#' createPSE(taxa = colnames(crest_ex)[-1],
+#'           loc=file.path(tempdir(), 'pse.xlsx')
+#' )
 #'
 createPSE <- function(taxa, loc='proxy_species_equivalency.xlsx') {
     if(base::missing(taxa)) taxa

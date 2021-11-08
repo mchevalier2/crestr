@@ -9,6 +9,9 @@ find.original.name(x)
 \arguments{
 \item{x}{The function argument}
 }
+\value{
+The name of the function argument in the global environment.
+}
 \description{
 Returns the name of the function argument in the global environment
 }

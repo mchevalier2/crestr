@@ -53,6 +53,9 @@ estimate the \code{pdfs}, use this parameter to define the resolution
 of the maps maps on the figures. (default is 0.25 degrees to match
 with the default database).}
 }
+\value{
+No return value, this function is used to plot.
+}
 \description{
 Plot the studied climate space.
 }

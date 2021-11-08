@@ -29,6 +29,7 @@
 #'        estimate the \code{pdfs}, use this parameter to define the resolution
 #'        of the maps on the figures. (default is 0.25 degrees to match with the
 #'        default database)
+#' @return No return value, this function is used to plot.
 #' @export
 #' @examples
 #' \dontrun{
@@ -84,7 +85,6 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
             warning(paste0("Data are not available for the following names: '", paste(taxanames[!(taxanames %in% x$inputs$taxa.name)], collapse="', '"), "'.\n"))
         }
         taxanames <- taxanames[taxanames %in% x$inputs$taxa.name]
-        par_usr <- list()
 
         ext <- c(x$parameters$xmn, x$parameters$xmx, x$parameters$ymn, x$parameters$ymx)
         ext_eqearth <- eqearth_get_ext(ext)
@@ -98,6 +98,8 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
         x1 <- min(x1, 2 * x3 - 0.1)
         x2 <- x0 - x1
 
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
 
         if(save) {
             y1.tmp <- x1 / xy_ratio
@@ -108,7 +110,6 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
         }
 
         if(!save) {
-            par_usr <- graphics::par(no.readonly = TRUE)
             if(length(taxanames) > 1)  graphics::par(ask = TRUE)
         }
 
@@ -268,8 +269,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                  brks.pos=log10(clab), brks.lab=clab,
                                  col=col.density, site_xy = site_xy,
                                  title='Number of unique species occurences per grid cell',
-                                 dim=c(x1*width/(w0+x1+x2), y1*height/(y1+y2*length(climate))),
-                                 scale=3/2)
+                                 dim=c(x1*width/(w0+x1+x2), y1*height/(y1+y2*length(climate))))
 
 
                 ## Plot the time series ------------------------------------------------
@@ -350,15 +350,14 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                                       climate_space[, clim] ),
                                                 crs = sp::CRS("+init=epsg:4326"))
 
-
+                    graphics::par(mar = c(0, 0, 0, 0), ps=8*3/2)
                     plot_map_eqearth(R1, ext,
                                      zlim=range(brks), col=grDevices::colorRampPalette(col.climate)( length(brks)-1 ),
                                      brks.pos = brks, brks.lab = brks,
                                      title=accClimateVariables(clim)[3],
                                      site_xy = site_xy,
                                      colour_scale=FALSE, top_layer=veg_space,
-                                     dim=c(x3*width/(w0+x1+x2), y2*height/(y1+y2*length(climate))),
-                                     scale=3/2)
+                                     dim=c(x3*width/(w0+x1+x2), y2*height/(y1+y2*length(climate))))
 
 
                     ## Plot the histogram ------------------------------------------------
@@ -439,8 +438,6 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
         if(save) {
             if(!as.png) grDevices::dev.off()
-        } else {
-            graphics::par(par_usr)
         }
     } else {
       stop('This function only works with a crestObj.\n\n')

@@ -63,6 +63,9 @@ Default is \code{FALSE} and the figure is saved as a pdf file.}
 
 \item{height}{The height of the output file in inches (default 5in ~ 12.7cm).}
 }
+\value{
+No return value, this function is used to plot.
+}
 \description{
 Plot representing how the \code{pdfs} combine to produce the reconstruction.
 }

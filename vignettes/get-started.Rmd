@@ -351,12 +351,8 @@ object is exported as a RData file to simplify future reuse of the data.
 
 <br >
 ```{r export}
-export(reconstr, loc=getwd(), dataname='crest-test')
-list.files(file.path(getwd(), 'crest-test'))
-```
-
-```{r delete export example, echo = FALSE, results = "hide"}
-unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
+export(reconstr, loc=tempdir(), dataname='crest-test')
+list.files(file.path(tempdir(), 'crest-test'))
 ```
 <br >
 

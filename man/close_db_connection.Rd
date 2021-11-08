@@ -9,15 +9,14 @@ close_db_connection(db)
 \arguments{
 \item{db}{An active database connection}
 }
+\value{
+No return value, function called to close the connection to the database.
+}
 \description{
 Disconnect the database connection.
 }
 \examples{
 db <- connect_online()
 close_db_connection(db)
-\dontrun{
-  db <- connect_online()
-  close_db_connection(db)
-}
 
 }

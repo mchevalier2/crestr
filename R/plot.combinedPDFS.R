@@ -25,6 +25,7 @@
 #'        \code{'samplePDFs.pdf'}.
 #' @param width The width of the output file in inches (default 7.48in ~ 19cm).
 #' @param height The height of the output file in inches (default 5in ~ 12.7cm).
+#' @return No return value, this function is used to plot.
 #' @export
 #' @examples
 #' \dontrun{
@@ -68,10 +69,10 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             xlim <- range(x$modelling$xrange[[climate]])
         }
 
-        par_usr <- list()
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
 
         if(!save) {
-            par_usr <- graphics::par(no.readonly = TRUE)
             graphics::par(ask=TRUE)
         }
 
@@ -186,8 +187,6 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
 
         if(save) {
             if(!as.png) grDevices::dev.off()
-        } else {
-            graphics::par(par_usr)
         }
     } else {
       stop('This function only works with a crestObj.\n\n')

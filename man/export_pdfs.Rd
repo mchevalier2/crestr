@@ -28,6 +28,9 @@ default.}
 
 \item{as.csv}{Boolean to indicate if the data should be exported as csv (\code{TRUE}) or xlsx (\code{FALSE}, default)}
 }
+\value{
+No return value, function called to export the PDFs as files.
+}
 \description{
 Export the pdfs fitted for the different taxa.
 }
@@ -44,7 +47,11 @@ Export the pdfs fitted for the different taxa.
     selectedTaxa = crest_ex_selection, dbname = "crest_example",
     leave_one_out = TRUE
   )
-  export_pdfs(reconstr, dataname='crest_example')
+  #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+  export_pdfs(reconstr,
+              dataname='crest_example',
+              loc=tempdir()
+  )
 }
 
 }

@@ -12,8 +12,11 @@
 #' @export
 #' @examples
 #' \dontrun{
+#'   #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
 #'   d = explore_calibration_dataset(2, xmn=-85, xmx=-30, ymn=-60, ymx=15,
-#'                                   save=TRUE, width = 4, height = 7.5)
+#'                                   save=TRUE, width = 4, height = 7.5,
+#'                                   filename=file.path(tempdir(), 'calibrationDataset.pdf')
+#'   )
 #'   head(d)
 #' }
 #'
@@ -82,6 +85,8 @@ explore_calibration_dataset <- function( taxaType,
     ext_eqearth <- eqearth_get_ext(ext)
     xy_ratio <- diff(ext_eqearth[1:2]) / diff(ext_eqearth[3:4])
 
+    par_usr <- graphics::par(no.readonly = TRUE)
+    on.exit(graphics::par(par_usr))
 
     if(save) {
         if(as.png) {
@@ -89,8 +94,6 @@ explore_calibration_dataset <- function( taxaType,
         } else {
             grDevices::pdf(filename, width=width, height=height)
         }
-    } else {
-        par_usr <- graphics::par(no.readonly = TRUE)
     }
 
     if (plot.distrib) {
@@ -117,7 +120,7 @@ explore_calibration_dataset <- function( taxaType,
     zlab[2] <- log10(clab[length(clab)])
 
     graphics::layout(c(1,2), height = c(0.5, height-0.5))
-    graphics::par(mar=c(0,0,0,0))
+    graphics::par(mar = c(0, 0, 0, 0), ps=8)
 
     ext <- plot_map_eqearth(veg_space, ext, zlim = zlab,
                      brks.pos=log10(clab), brks.lab=clab,
@@ -129,8 +132,6 @@ explore_calibration_dataset <- function( taxaType,
             cat('SUGGEST: Using height =', round(width*(ext[4]-ext[3])/(ext[2]-ext[1])+0.5, 2), 'would get rid of all the white spaces.\n')
         }
         grDevices::dev.off()
-    } else {
-        graphics::par(par_usr)
     }
 
     if (!plot.distrib)  {

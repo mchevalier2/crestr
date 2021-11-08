@@ -57,11 +57,10 @@ eqearth_get_ext <- function(ext, npoints=15) {
 #' @param top_layer.col A colour for plotting top_layer (default 'ghostwhite').
 #' @param site_xy Coordinates of a location to add to the plot.
 #' @param dim The dimension of the plotting window in inches (default dev.size()).
-#' @param scale A scaling parameter to correct for the change of font size
-#'        created by layout().
+#' @return The set of coordinates ext projected in equal earth.
 #' @export
 #'
-plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos=c(0,1), brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, top_layer.col='ghostwhite', site_xy=NA, dim=NA, scale=1) {
+plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos=c(0,1), brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, top_layer.col='ghostwhite', site_xy=NA, dim=NA) {
 
     if(base::missing(dat)) dat
 
@@ -123,7 +122,6 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
 
     if (class(dat) == 'RasterLayer')  dat <- raster::mask(dat, bckg.eqearth)
 
-    graphics::par(mar = c(0, 0, 0, 0), ps=8*scale)
     ext <- raster::extent(bckg.eqearth)
     ext_factor_x <- max(graphics::strwidth(paste0('     ', round(as.numeric(names(horizontals.eqearth)),2)), units='inches', cex=6/8))
     ext_factor_y <- max(graphics::strheight(paste0('\n', round(as.numeric(names(verticals.eqearth)),2)), units='inches', cex=6/8))
@@ -137,7 +135,6 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     ## Plotting colour scale .....................................................
 
     if(colour_scale) {
-        graphics::par(mar=c(0,0,0,0), ps=8*scale)
         xlab <- c(-0.2,1.2)
         xlab <- xlab + diff(xlab)/dim[1] * c(-ext_factor_x, 0.05)
 
@@ -177,7 +174,6 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     ## ...........................................................................
     ## Plotting map ..............................................................
 
-    graphics::par(mar = c(0, 0, 0, 0), ps=8*scale)
     plot(0, 0, type='n',
          xlim=c(ext[1], ext[2]), ylim=c(ext[3], ext[4]),
          main='', ylab='', xlab='', xaxs='i', yaxs='i',

@@ -75,6 +75,9 @@ negative values (default light grey).}
 
 \item{title}{Name to be added on top of the plot (default \code{NA}).}
 }
+\value{
+No return value, this function is used to plot.
+}
 \description{
 This function plots stratigraphic data either as polygons or bars.
 }
@@ -82,10 +85,10 @@ This function plots stratigraphic data either as polygons or bars.
 data(crest_ex)
 plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
-\dontrun{
-  plot_diagram(crest_ex, save=TRUE, filename='testDiagram.pdf',
-               bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
-               bar_width=0.8, xlim=c(3,15))
-}
+#> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+plot_diagram(crest_ex, save=TRUE,
+             filename=file.path(tempdir(), 'testDiagram.pdf'),
+             bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
+             bar_width=0.8, xlim=c(3,15))
 
 }

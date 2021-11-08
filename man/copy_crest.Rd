@@ -24,6 +24,9 @@ copy_crest(
 
 \item{uncertainties}{A boolean value to indicate if the uncertainties should be copied to the clipboard.}
 }
+\value{
+No return value. This function is called to copy the crest data to the clipboard.
+}
 \description{
 Copy crest data to the clipboard for an easy extraction of the data from the
 R environment.

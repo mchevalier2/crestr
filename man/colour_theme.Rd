@@ -9,6 +9,9 @@ colour_theme(n)
 \arguments{
 \item{n}{An index to select the colour theme}
 }
+\value{
+A vector of colours.
+}
 \description{
 Returns a vector of colours
 }

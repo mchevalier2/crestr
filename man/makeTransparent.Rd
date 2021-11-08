@@ -12,6 +12,9 @@ makeTransparent(colour, alpha)
 \item{alpha}{A value between 0 and 1 that defines the transparency
 0 for full transparency and 1 for no transparency}
 }
+\value{
+Return a colour with the provided level of transparency.
+}
 \description{
 Add transparency to the selected colours.
 }

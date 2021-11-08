@@ -5,7 +5,18 @@ date: "03/11/2021"
 output: github_document
 ---
 
-# Re-submission
+# Re-submission #2
+
+Thank you for the tips on how to ameliorate the package. I have now included all your suggestions, including:
+
+- I have now added one reference to the DESCRIPTION file. The DOI has been fetched but might not yet be active.
+- I have used suppressWarnings() instead of options(warn=-1)
+- I have now moved all the example and vignette outputs to tempdir()
+- I have replaced my code by the suggested code to protect the user's par() options.
+- I have added a return value for all the functions, even when they do not return anything (eg. plot functions)
+
+
+# Re-submission #1
 
 - I have now replaced all the http by https.
 - The webpage (https://journals.ametsoc.org/view/journals/clim/20/22/2007jcli1824.1.xml) still seems to create some issues with windows builts, but I have no idea how to fix this. So I have replaced it by an alternative one.

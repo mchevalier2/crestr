@@ -15,6 +15,9 @@ check_coordinates(xmn, xmx, ymn, ymx)
 
 \item{ymx}{The coordinates defining the study area.}
 }
+\value{
+Return a set of valid coordinates.
+}
 \description{
 Check if the coordinates are correct.
 }

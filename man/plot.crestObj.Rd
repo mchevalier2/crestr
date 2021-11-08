@@ -79,6 +79,9 @@ the file is saved in the working directory under the name
 \item{...}{other \link[graphics]{graphical parameters} (see \code{\link[graphics]{par}} and
     section \sQuote{Details} below).}
 }
+\value{
+No return value, this function is used to plot.
+}
 \description{
 Plot the reconstructions and their uncertainties if they exist.
 }

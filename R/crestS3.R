@@ -295,6 +295,7 @@ print.crestObj <- function(x, ...) {
 #'        the file is saved in the working directory under the name
 #'        \code{'Reconstruction_climate.pdf'}.
 #' @param col A colour gradient.
+#' @return No return value, this function is used to plot.
 #' @export
 #' @examples
 #' \dontrun{

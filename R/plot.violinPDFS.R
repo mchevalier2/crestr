@@ -20,7 +20,7 @@
 #'        per variables).
 #' @param col A vector of colours that will be linearly interpolated to give a
 #'        unique colour to each taxon.
-
+#' @return The set of coordinates ext projected in equal earth.
 #' @export
 #' @examples
 #' \dontrun{
@@ -59,14 +59,15 @@ plot_violinPDFs <- function( x,
             stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
         }
 
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
+
         if(save) {
             if(as.png) {
                 grDevices::png(filename, width = width, height = height, units='in', res=png.res)
             } else {
                 grDevices::pdf(filename, width=width, height=height)
             }
-        } else {
-            par_usr <- graphics::par(no.readonly = TRUE)
         }
 
         ntaxa   <- length(taxanames)
@@ -129,9 +130,8 @@ plot_violinPDFs <- function( x,
 
         if(save) {
             grDevices::dev.off()
-        } else {
-            graphics::par(par_usr)
         }
+
     } else {
         stop('This function only works with a crestObj.\n\n')
     }

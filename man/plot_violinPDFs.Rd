@@ -52,6 +52,9 @@ Default is \code{FALSE} and the figure is saved as a pdf file.}
 
 \item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 }
+\value{
+The set of coordinates ext projected in equal earth.
+}
 \description{
 Plot the pdfs as violins
 }

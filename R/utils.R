@@ -110,6 +110,7 @@ meanPositiveValues <- function(x) {
 #' @param optima A boolean value to indicate if the optima should be copied to the clipboard.
 #' @param mean A boolean value to indicate if the means should be copied to the clipboard.
 #' @param uncertainties A boolean value to indicate if the uncertainties should be copied to the clipboard.
+#' @return No return value. This function is called to copy the crest data to the clipboard.
 #' @export
 #' @examples
 #' \dontrun{
@@ -166,6 +167,7 @@ copy_crest <- function(x,  climate = x$parameters$climate, optima=TRUE, mean=FAL
 #' Check if the coordinates are correct.
 #'
 #' @inheritParams crest
+#' @return Return a set of valid coordinates.
 #' @export
 #' @examples
 #' check_coordinates(NA, NA, NA, NA)
@@ -226,6 +228,7 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
 #' @inheritParams crest.calibrate
 #' @param shp A shapefile to crop the data. Data points will be kept if their
 #'        centroid is within the shape.
+#' @return An updated version of the \code{\link{crest.get_modern_data}}.
 #' @export
 #' @examples
 #' \dontrun{
@@ -325,6 +328,7 @@ crop <- function(x, shp) {
 #' Returns a vector of colours
 #'
 #' @param n An index to select the colour theme
+#' @return A vector of colours.
 #' @export
 #' @examples
 #' colour_theme(1)
@@ -347,6 +351,7 @@ colour_theme <- function(n) {
 #' Returns the name of the function argument in the global environment
 #'
 #' @param x The function argument
+#' @return The name of the function argument in the global environment.
 #' @export
 #'
 find.original.name <- function(x) {
@@ -367,6 +372,7 @@ find.original.name <- function(x) {
 #' Returns the taxa type corresponding to the index.
 #'
 #' @param taxaType An integer between 0 and 6
+#' @return Returns the taxa type corresponding to the index.
 #' @export
 #'
 get_taxa_type <- function(taxaType) {

@@ -21,6 +21,7 @@
 #'        estimate the \code{pdfs}, use this parameter to define the resolution
 #'        of the maps maps on the figures. (default is 0.25 degrees to match
 #'        with the default database).
+#' @return No return value, this function is used to plot.
 #' @export
 #' @examples
 #' \dontrun{
@@ -89,10 +90,10 @@ plot_climateSpace <- function( x,
             } else {
                 grDevices::pdf(filename, width=width, height=height)
             }
-        } else {
-            par_usr <- graphics::par(no.readonly = TRUE)
         }
-        graphics::par(ps=8*3/2)
+
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
 
         distribs <- lapply(x$modelling$distributions,
                            function(x) { if(is.data.frame(x)) {
@@ -124,7 +125,7 @@ plot_climateSpace <- function( x,
                width  = c(x1, x2, x1),
                height = rep(c(y0, (y1-y3)/2, y3, (y1-y3)/2), times=length(climate)))
 
-               graphics::par(ps=8*3/2)
+        graphics::par(ps=8*3/2)
 
         ## Plot species abundance --------------------------------------------------
 
@@ -145,11 +146,11 @@ plot_climateSpace <- function( x,
             site_xy <- c(x$misc$site_info$long, x$misc$site_info$lat)
         }
 
+        graphics::par(mar = c(0, 0, 0, 0), ps=8*3/2)
         plot_map_eqearth(veg_space, ext, zlim = zlab, brks.pos=log10(clab), brks.lab=clab,
                 col=viridis::plasma(20), title='Number of unique species occurences',
                 site_xy = site_xy,
-                dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate)),
-                scale = 3 / 2)
+                dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate)))
 
         ## Plot climate spaces -----------------------------------------------------
         ll <- do.call(rbind, distribs)
@@ -226,11 +227,11 @@ plot_climateSpace <- function( x,
             R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
                                               climate_space[, clim] ),
                                         crs = sp::CRS("+init=epsg:4326"))
+            graphics::par(mar = c(0, 0, 0, 0), ps=8*3/2)
             plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1),
             brks.pos = brks, brks.lab = brks,
             title=accClimateVariables(clim)[3], site_xy = site_xy,
-            dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate)),
-            scale = 3/2)
+            dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate)))
         }
 
         for( clim in climate) {
@@ -316,8 +317,6 @@ plot_climateSpace <- function( x,
 
         if(save) {
           grDevices::dev.off()
-        } else {
-          graphics::par(par_usr)
         }
     } else {
         stop('This function only works with a crestObj.\n\n')

@@ -20,6 +20,7 @@
 #'        positive values (default black).
 #' @param col_neg Graphical parameter for the barplot. Colour of all the
 #'        negative values (default grey80).
+#' @return No return value, this function is used to plot.
 #' @export
 #' @examples
 #' \dontrun{
@@ -56,8 +57,6 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
             stop('No leave-one-out data available. Run the loo() function first.\n')
         }
 
-        par_usr <- list()
-
         var_to_plot <- ifelse(optima, 1, 2)
 
         filename <- base::strsplit(filename, '.pdf')[[1]]
@@ -70,8 +69,10 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
         names(col_pos) = names(col_neg) = names(yax_incr) = climate
         if(!is.na(title[1])) names(title) = climate
 
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
+
         if(!save) {
-            par_usr <- graphics::par(no.readonly = TRUE)
             graphics::par(mfrow=c(1, length(climate)))
         }
 
@@ -136,6 +137,6 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                      tickAtSample=tickAtSample, col_pos=col_pos, col_neg=col_neg,
                      title=title)
     }
-    if(!save)  graphics::par(par_usr)
+
     invisible()
 }

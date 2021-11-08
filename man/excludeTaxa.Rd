@@ -15,6 +15,9 @@ excludeTaxa(x, taxa, climate)
 
 \item{climate}{A vector of climate variables to unlink the taxa with.}
 }
+\value{
+Return the updated \code{\link{crestObj}}.
+}
 \description{
 Excludes the list of taxa from the reconstructions.
 }

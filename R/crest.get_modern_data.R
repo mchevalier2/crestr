@@ -82,12 +82,9 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             cat("[FAILED]\n\n")
             stop(paste0("The variable '", climate[clim], "' is not an accepted value. Check the list of accepted values using 'accClimateVariables()'.\n"))
         } else {
-            defaultW <- getOption("warn")
-            options(warn = -1)
-            if (!is.na(as.numeric(climate[clim]))) {
+            if (suppressWarnings(!is.na(as.numeric(climate[clim])))) {
                 new_clim[clim] <- as.character(climVar[which(climVar[, 1] == as.numeric(climate[clim])), 2])
             }
-            options(warn = defaultW)
         }
     }
     climate <- new_clim

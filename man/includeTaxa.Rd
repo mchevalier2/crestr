@@ -15,6 +15,9 @@ includeTaxa(x, taxa, climate)
 
 \item{climate}{A vector of climate variables to link the taxa with.}
 }
+\value{
+Return the updated \code{\link{crestObj}}.
+}
 \description{
 Includes the list of taxa into the reconstructions.
 }

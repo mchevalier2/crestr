@@ -7,6 +7,7 @@
 #'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @param taxa A vector of taxa to include.
 #' @param climate A vector of climate variables to link the taxa with.
+#' @return Return the updated \code{\link{crestObj}}.
 #' @export
 #' @examples
 #' data(reconstr)
@@ -41,6 +42,7 @@ includeTaxa <- function(x, taxa, climate) {
 #'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @param taxa A vector of taxa to exclude.
 #' @param climate A vector of climate variables to unlink the taxa with.
+#' @return Return the updated \code{\link{crestObj}}.
 #' @export
 #' @examples
 #' data(reconstr)
@@ -53,7 +55,7 @@ excludeTaxa <- function(x, taxa, climate) {
     if(base::missing(x)) x
     if(base::missing(taxa)) taxa
     if(base::missing(climate)) climate
-    
+
     for (tax in taxa) {
         for (clim in c(climate)) {
           if (x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)] >= 0 ) {
