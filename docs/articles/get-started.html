@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Manuel Chevalier</h4>
             
-            <h4 class="date">2021-11-05</h4>
+            <h4 class="date">2021-11-08</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/get-started.Rmd"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -378,8 +378,8 @@
 <p>If satisfying, the results can be directly exported from the R environment in individual spreadsheets for each variables (or csv files) and the <code>reconstruct</code> object is exported as a RData file to simplify future reuse of the data.</p>
 <p><br></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "bio1"             "bio12"            "crest-test.RData"</span></code></pre></div>
 <p><br></p>
 </div>

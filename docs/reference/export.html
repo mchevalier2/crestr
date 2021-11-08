@@ -204,6 +204,9 @@ saved by default.</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>No return value, function called to export the results.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
@@ -218,8 +221,10 @@ saved by default.</p></td>
     selectedTaxa <span class='op'>=</span> <span class='va'>crest_ex_selection</span>, dbname <span class='op'>=</span> <span class='st'>"crest_example"</span>,
     leave_one_out <span class='op'>=</span> <span class='cn'>TRUE</span>
   <span class='op'>)</span>
+  <span class='co'>#&gt; Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')</span>
   <span class='fu'>export</span><span class='op'>(</span><span class='va'>reconstr</span>, dataname<span class='op'>=</span><span class='st'>'crest_example'</span>,
-         fullPosterior<span class='op'>=</span><span class='cn'>TRUE</span>, weights<span class='op'>=</span><span class='cn'>TRUE</span>, loo<span class='op'>=</span><span class='cn'>TRUE</span>, pdfs<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+         fullPosterior<span class='op'>=</span><span class='cn'>TRUE</span>, weights<span class='op'>=</span><span class='cn'>TRUE</span>, loo<span class='op'>=</span><span class='cn'>TRUE</span>, pdfs<span class='op'>=</span><span class='cn'>TRUE</span>,
+         loc<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>

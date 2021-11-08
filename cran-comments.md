@@ -13,7 +13,7 @@ Thank you for the tips on how to ameliorate the package. I have now included all
 - I have used suppressWarnings() instead of options(warn=-1)
 - I have now moved all the example and vignette outputs to tempdir()
 - I have replaced my code by the suggested code to protect the user's par() options.
-- I have added a return value for all the functions, even when they do not return anything (eg. plot functions)
+- I have added a return value for all the functions, even when they do not return anything (eg. plot functions). Five .Rd files have no \value{} because they are datasets.
 
 
 # Re-submission #1
