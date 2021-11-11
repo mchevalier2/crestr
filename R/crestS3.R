@@ -73,7 +73,8 @@
 #' @return A \code{crestObj} object that is used to store data and information
 #'         for reconstructing climate
 #' @export
-#' @seealso \url{https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html}
+#' @seealso See \code{vignette('technicalities')} for details about the structure
+#'          of the object. See also \url{https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html}
 #'          for a detailed explanation of the types of observation.
 crestObj <- function(taxa.name, taxaType, climate,
                      pse = NA, dbname = NA,

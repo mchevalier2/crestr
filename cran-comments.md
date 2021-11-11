@@ -15,6 +15,7 @@ Thank you for the tips on how to ameliorate the package. I have now included all
 - I have replaced my code by the suggested code to protect the user's par() options.
 - I have added a return value for all the functions, even when they do not return anything (eg. plot functions). Five .Rd files have no \value{} because they are datasets.
 
+I re-run all the test indicated below with the adapted code and I similarly get no ERRORS, no WARNINGS and no NOTES, except the 'CRAN first submission' NOTE.
 
 # Re-submission #1
 

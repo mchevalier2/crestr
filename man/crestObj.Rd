@@ -155,6 +155,7 @@ for reconstructing climate
 Creates a \code{crestObj} object with all default parameters.
 }
 \seealso{
-\url{https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html}
+See vignette('technicalities') for details about the structure
+of the object. See also \url{https://gbif.github.io/parsers/apidocs/org/gbif/api/vocabulary/BasisOfRecord.html}
 for a detailed explanation of the types of observation.
 }

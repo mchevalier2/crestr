@@ -21,3 +21,4 @@
 cran-comments.md
 crestr_1.0.0.pdf
 ^CRAN-RELEASE$
+^vignettes/limpopo.Rmd
