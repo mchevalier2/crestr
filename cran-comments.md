@@ -9,7 +9,7 @@ output: github_document
 
 Thank you for the tips on how to ameliorate the package. I have now included all your suggestions, including:
 
-- I have not added any reference to the DESCRIPTION file because the associated publication is currently in review. The package will have a propre CITATION file as soon as possible.
+- I have added a reference to the associated scientific publication in the DESCRIPTION file.
 - I have used suppressWarnings() instead of options(warn=-1)
 - I have now moved all the example and vignette outputs to tempdir()
 - I have replaced my code by the suggested code to protect the user's par() options.
