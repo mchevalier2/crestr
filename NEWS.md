@@ -1,3 +1,5 @@
+# crestr 1.0.1
+
 # crestr 1.0.0
 
 * Release of the first stable version of `crestr`
