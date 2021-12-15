@@ -169,13 +169,15 @@ cite_method <- function(x, verbose=TRUE) {
     if(base::missing(x)) x
 
     tocite <- 'Chevalier, M., Cheddadi, R. and Chase, B.M., 2014, CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. Climate of the Past, 10, pp. 2081-2098. doi: 10.5194/cp-10-2081-2014'
+    tocite <- c(tocite, 'Chevalier, M., 2021, crestr An R package to perform probabilistic climate reconstructions using fossil proxies. Climate of the Past Discussion. doi: 10.5194/cp-2021-153')
     if (x$parameters$taxaType > 0) {
         tocite <- c(tocite, 'Chevalier, M., 2019, Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27-35. doi: 10.1016/j.gloplacha.2019.01.016')
     }
     if (verbose) {
         cat('Please cite the following papers(s):\n')
         cat(' -->  Method: ', tocite[1], '\n')
-        if (length(tocite) > 1)  cat(' -->  Calibration dataset: ', tocite[2], '\n')
+        cat(' -->  Package: ', tocite[2], '\n')
+        if (length(tocite) > 2)  cat(' -->  Calibration dataset: ', tocite[2], '\n')
     }
     invisible(tocite)
 }
