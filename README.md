@@ -26,13 +26,22 @@ climate change from fossil assemblage data. The approach is based on the
 estimation of conditional responses of different bio-proxies to various
 climate parameters. These responses take the form of probability density
 functions (*PDFs*). The details of the method have been described in
-[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014)
-and the calibrated data presented in [Chevalier
-(2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016).
+[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014),
+the calibrated data are presented in [Chevalier
+(2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the
+package is fully described in [Chevalier
+(2021)](https://cp.copernicus.org/preprints/cp-2021-153/).
 
 ## Installation
 
-You can install the development version from
+You can install the package from
+[CRAN](https://cran.r-project.org/web/packages/crestr/index.html).
+
+``` r
+install.packages("crestr")
+```
+
+You can also install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -290,3 +299,6 @@ list.files(file.path(getwd(), 'crest-test'))
     from fossil assemblages at a global scale. *Glob. Planet. Change*
     175, 27–35.
     [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+-   Chevalier, M., 2021. *crestr* An R package to perform probabilistic
+    climate reconstructions using fossil proxies. *Clim. Past Disc.*.
+    [10.5194/cp-2021-153](http://www.doi.org/10.5194/cp-2021-153)

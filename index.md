@@ -9,8 +9,8 @@
 
 # **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bio-proxies
 
-The goal of crestr is to produce probabilistic reconstructions of past  climate
-change from fossil assemblage data. The approach is based on the estimation of
+The goal of crestr is to produce probabilistic reconstructions of past climate
+change from fossil assemblage data [(Chevalier, 2021)](https://cp.copernicus.org/preprints/cp-2021-153/). The approach is based on the estimation of
 conditional responses of studies bio-proxy studied to climate parameters using
 probability density functions (_PDFs_; see
 [Chevalier *et al.* (2014)](http://https://www.doi.org/10.5194/cp-10-2081-2014) and
@@ -30,8 +30,12 @@ functions implemented, you can contact me at <chevalier.manuel@gmail.com>.
 
 ## Installation
 
-You can install the development version from [GitHub](https://github.com/) with:
+You can install the package from [CRAN](https://cran.r-project.org/web/packages/crestr/index.html).
+``` r
+install.packages("crestr")
+```
 
+You can also install the development version from [GitHub](https://github.com/) with:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
@@ -99,3 +103,4 @@ N.B.: This list is as exhaustive as possible but some studies may be missing. Co
  - Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021.
    Temperature change in subtropical southeastern Africa during the past 790,000 yr.
    _Geology_ 49, 71–75. [10.1130/G47841.1](http://https://www.doi.org/10.1130/G47841.1)
+ - Chevalier, M., 2021. crestr An R package to perform probabilistic climate reconstructions using fossil proxies. *Clim. Past Disc.*. [10.5194/cp-2021-153](http://www.doi.org/10.5194/cp-2021-153)

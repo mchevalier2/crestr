@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Manuel Chevalier</h4>
             
-            <h4 class="date">2021-12-13</h4>
+            <h4 class="date">2021-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/get-started.Rmd"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -117,7 +117,7 @@
 <h2 class="hasAnchor">
 <a href="#introduction" class="anchor"></a>Introduction</h2>
 <p><br></p>
-<p>The <code>crestr</code> package has been designed for two independent but complementary modelling purposes. The probabilitic proxy-climate responses can be used to quantivatively reconstruct climate from their statistical combination [<a href="#ChevalierLimpopo">1</a>-<a href="#cc15">2</a>], or, alternatively, they can be used in a more quantitative way to determine the (relative) climate sensitivities of different taxa in a given area to characterise past ecological changes <a href="#quick20201">[3]</a>.</p>
+<p>The <code>crestr</code> package has been designed for two independent but complementary modelling purposes <a href="#crestr">[1]</a>. The probabilitic proxy-climate responses can be used to quantivatively reconstruct climate from their statistical combination [<a href="#ChevalierLimpopo">2</a>-<a href="#cc15">3</a>], or, alternatively, they can be used in a more quantitative way to determine the (relative) climate sensitivities of different taxa in a given area to characterise past ecological changes [<a href="#quick20201">4</a>-<a href="#chevalierAtlas">5</a>].</p>
 <p>In both cases, the difficulty of running a CREST analysis lies in the definition of the study-specific parameters of the algorithm, which can make the learning curve a bit steep at the beginning. However, default values are provided for all parameters to enable an easy and rapid generation of preliminary results that users can then use as a reasonable first estimate to start adapting the model to their data. To guide users in this task and avoid the common ‘black box’ criticism faced by many complex statistical tools, a large array of publication-ready, graphical diagnostic tools was designed to automatically represent CREST data in a standardised way. These tools include plots of the calibration data, the estimated climate responses, the reconstructions and many more. They can be used to look at the data from different perspectives to help understanding why the results are what they are and possibly help identifying potential issues or biases in the selected data and/or parameters. Such diagnostic tools are available for every step of the process and, as examplified with this example, they can be generated with a single line of R code.</p>
 <p>In this basic tutorial, the most important steps of a CREST reconstruction are presented using pseudo-data. The different modelling assumptions are illustrated using the different graphical diagnostic tools proposed by the package. In the <a href="#data">first part</a>, the pseudo-data and their different characteristics are presented, the <a href="#data-crestr">second part</a> describes how to access to the pseudo-data from <em>crestr</em> and in the <a href="#reconstructions">last part</a>, the data are used to reconstruct both temperature and precipitation.</p>
 <p><br></p>
@@ -387,9 +387,11 @@
 <div id="ref" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ref" class="anchor"></a>References</h2>
-<p><strong>[1]</strong> <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. <a href="https://www.doi.org/10.1130/G47841.1" target="_blank">10.1130/G47841.1</a>.</p>
-<p><strong>[2]</strong> <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. <a href="https://www.doi.org/10.1016/j.quascirev.2015.07.009" target="_blank">doi:10.1016/j.quascirev.2015.07.009</a>.</p>
-<p><strong>[3]</strong> <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. <a href="https://www.doi.org/10.1017/qua.2021.31" target="_blank">10.1017/qua.2021.31</a>.</p>
+<p><strong>[1]</strong> <a id="crestr"></a> Chevalier, M., 2021. <em>crestr</em> An R package to perform probabilistic climate reconstructions using fossil proxies. Clim. Past Disc. <a href="https://www.doi.org/10.5194/cp-2021-153" target="_blank">doi:10.5194/cp-2021-153</a>.</p>
+<p><strong>[2]</strong> <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. <a href="https://www.doi.org/10.1130/G47841.1" target="_blank">10.1130/G47841.1</a>.</p>
+<p><strong>[3]</strong> <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. <a href="https://www.doi.org/10.1016/j.quascirev.2015.07.009" target="_blank">doi:10.1016/j.quascirev.2015.07.009</a>.</p>
+<p><strong>[4]</strong> <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. <a href="https://www.doi.org/10.1017/qua.2021.31" target="_blank">10.1017/qua.2021.31</a>.</p>
+<p><strong>[5]</strong> <a id="chevalierAtlas"></a> Chevalier, M., Chase, B. M., Quick, L. J. and Scott, L.: An atlas of southern African pollen types and their climatic affinities, in Palaeoecology of Africa, vol. 35, pp. 239–258, CRC Press, London., 2021. <a href="https://www.doi.org/10.1201/9781003162766-15" target="_blank">10.1201/9781003162766-15</a>.</p>
 <p><br></p>
 </div>
   </div>
