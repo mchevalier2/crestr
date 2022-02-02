@@ -1,0 +1,283 @@
+---
+title: "Get started"
+author: "Manuel Chevalier"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+----------------------
+
+## Introduction
+
+<br >
+
+The `crestr` package has been designed for two independent but complementary
+modelling purposes [[1]](#crestr). The probabilistic proxy-climate responses can be used to quantitatively reconstruct climate from their statistical combination [[2](#ChevalierLimpopo)-[3](#cc15)], or they can be used in a more quantitative way to determine the (relative) climate sensitivities of different taxa in a given area to characterise past ecological changes [[4](#quick2021)-[5](#chevalierAtlas)].
+
+In both cases, the difficulty of running a CREST analysis lies in the definition of the study-specific parameters of the algorithm, which can make the learning curve a bit steep at the beginning. However, default values are provided for all parameters to enable an easy and rapid generation of preliminary results that users can then use as a reasonable first estimate before adapting the model to their data. To guide users in this task and avoid the standard 'black box' criticism faced by many complex statistical tools, a large array of publication-ready, graphical diagnostic tools was designed to represent CREST data in a standardised way automatically. These tools include plots of the calibration data, the estimated climate responses, the reconstructions and many more. They can be used to look at the data from different perspectives to help understand why the results are what they are and possibly help identify potential issues or biases in the selected data and parameters. Such diagnostic tools are available for every step of the process, and, as exemplified by this example, they can be generated with a single line of R code.
+
+This introductory tutorial presents the most important steps of a CREST reconstruction using pseudo-data. The different modelling assumptions are illustrated using the various graphical diagnostic tools proposed by the package. In the [first part](#data), the pseudo-data and their different characteristics are presented, the [second part](#data-crestr) describes how to access the pseudo-data from _crestr_ and in the [last part](#reconstructions), the data are used to reconstruct both temperature and precipitation.
+
+<br >
+
+## Description of the pseudo-data <a id="data"></a>
+
+This example reconstructs temperature and precipitation from six taxa with different sensitivities to the observed climate gradients. For simplicity, the temperature data are constructed as an East-West climate gradient, while the precipitation data are designed as a North-South gradient. This results in, for instance, cold and rainy conditions in the bottom-left corner and warm and dry conditions in the opposite, top right corner (see **Fig. 1**). Such gradients are unrealistic, but they explain different concepts, such as the _sensitivity_ of taxa to one or both variables.
+
+
+```{r climate_space, echo=FALSE, out.width="80%", fig.height=3, fig.width=6, fig.align='center', fig.cap="**Fig. 1**: Randomly generated temperature (A) and precipitation (B) climate data."}
+    climate <- read.csv('https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/clim.csv')
+    par(mfrow = c(1,2))
+
+    temp_col <- pals::coolwarm(20)[(climate$Temperature-10) %/% 1]
+    par(mar=c(1.5,1,1.5,0.3))
+    plot(0, 0, type='n', axes=FALSE, frame=FALSE, xlim=c(0, 30), ylim=c(0, 30), asp=1, xaxs='i', yaxs='i')
+    for (i in 1:nrow(climate)) {
+        rect(climate[i, 'Lon'] - 1, climate[i, 'Lat'] - 1, climate[i, 'Lon'], climate[i, 'Lat'], col=temp_col[i], border=temp_col[i], lwd=0.2)
+    }
+    rect(0,0,30,30, lwd=0.5)
+    mtext('A. Temperature', 3, line=0.2, font=2)
+    mtext('Cold  <\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014> Warm', 1, cex=0.8)
+
+    climate[climate[, 'Precipitation'] > 1000, 'Precipitation'] <- 1000
+    prec_col <- pals::kovesi.linear_bgyw_15_100_c68(25)[6:25][(climate$Precipitation-2) %/% 50 + 1]
+    par(mar=c(1.5,0.3,1.5,1))
+    plot(0, 0, type='n', axes=FALSE, frame=FALSE, xlim=c(0, 30), ylim=c(0, 30), asp=1, xaxs='i', yaxs='i')
+    for (i in 1:nrow(climate)) {
+        rect(climate[i, 'Lon'] - 1, climate[i, 'Lat'] - 1, climate[i, 'Lon'], climate[i, 'Lat'], col=prec_col[i], border=prec_col[i], lwd=0.2)
+    }
+    rect(0,0,30,30, lwd=0.5)
+    mtext('B. Precipitation', 3, line=0.2, font=2)
+    mtext('Humid  <\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014> Dry', 4, cex=0.8, line=-0.5)
+```
+<br >
+
+In this environment, six different pseudo-species have been created, each one with specific climate preferences (**Fig. 2**):
+
+- **Taxon1** is adapted to hot and dry conditions.
+- **Taxon2** is adapted to hot conditions and tolerates a large range of rainfall values.
+- **Taxon3** is adapted to cold conditions and tolerates a large range of rainfall values.
+- **Taxon4** is adapted to dry conditions and tolerates a large range of temperature values.
+- **Taxon5** is adapted to humid conditions and tolerates a large range of temperature values.
+- **Taxon6** tolerates all the climate conditions observed in the study area.
+
+<br >
+
+
+```{r species_distrib, echo=FALSE, out.width="90%", fig.height=5.2, fig.width=6, fig.align='center', fig.cap="**Fig. 2**: Distributions of our six taxa of interest (black dots) against the two studied climate gradients."}
+distribs <- read.csv('https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/distrib.csv')
+par(mfrow = c(3, 2))
+par(mar=c(0,0.7,1,0.7))
+
+for (tax in 1:6) {
+    w <- which(distribs[, 'CODE'] == tax)
+    plot(0, 0, type='n', axes=FALSE, frame=FALSE, xlim=c(0, 61), ylim=c(0, 30), asp=1, xaxs='i', yaxs='i')
+    for (i in 1:nrow(climate)) {
+      rect(climate[i, 'Lon'] - 1, climate[i, 'Lat'] - 1, climate[i, 'Lon'], climate[i, 'Lat'], col=temp_col[i], border=temp_col[i], lwd=0.2)
+    }
+    points(distribs[w, 1:2] - 0.5, pch=20, cex=0.7)
+    rect(0,0,30,30, lwd=0.5)
+
+    for (i in 1:nrow(climate)) {
+      rect(climate[i, 'Lon'] + 30, climate[i, 'Lat'] - 1, climate[i, 'Lon'] + 31, climate[i, 'Lat'], col=prec_col[i], border=prec_col[i], lwd=0.2)
+    }
+    mtext(paste0('Taxon', tax), 3, line=-.3, font=2)
+    points(distribs[w, 1] + 30.5, distribs[w, 2] - 0.5, pch=20, cex=0.7)
+    rect(31,0, 61, 30, lwd=0.5)
+}
+```
+
+<br >
+
+Finally, we have also created a fossil record composed of 20 samples where the percentages of the different taxa vary (**Fig. 3**). We selected percentages so that the climate is relatively cold and dry in the first samples, then temperature and precipitation increase. A cold and dry reversal occurs around the middle of the records (samples 11 and 12), and stable humid and warm conditions prevail in the last samples. The top sample also contains a seventh taxon (_Taxon7_) that doesn't grow across the study area. It was added to illustrate that _crestr_ can deal with unknown taxa.
+
+<br >
+
+```{r pollen_diagram, echo=FALSE, out.width="60%", fig.height=6, fig.width=3, fig.align='center', fig.cap="**Fig. 3**: Stratigraphic diagram of the fossil record to be used as the base for temperature and precipitation reconstructions."}
+crestr::plot_diagram(crestr::crest_ex, bars=TRUE, bar_width=0.8, xlim=c(0,20))
+```
+
+<br >
+
+## The pseudo-data within `crestr`  <a id="data-crestr"></a>
+
+The pseudo-data are stored in _crestr_ in different datasets and can be loaded as follow:
+
+```{r example}
+library(crestr)
+## loading example data
+data(crest_ex)
+data(crest_ex_pse)
+data(crest_ex_selection)
+```
+
+<br >
+
+The fossil data are contained in `crest_ex` ("crest example"). The data frame comprises 20 fossil samples from which the seven taxa have been identified. The data are already expressed in percentages.
+
+```{r data_preview_fossil}
+## the first 6 samples
+head(crest_ex)
+
+## the structure of the data frame
+str(crest_ex)
+```
+
+<br >
+
+A proxy-species equivalency ("pse") table must be provided for each reconstruction. This table is used to associate distinct species to the fossil taxon. For example, in the case of pollen data, this step is used to link all the species producing undifferentiated pollen morphotypes in a single _pollen-type_. Here, the seven pseudo-taxa are 'identified' at the species level so that the table looks like the following:
+
+```{r data_preview_pse}
+crest_ex_pse
+```
+
+<br >
+
+By default, all the identified taxa are used to produce the reconstruction. However, it is sometimes helpful to select a subset of taxa for each variable to improve the signal over noise ratio of the reconstructions. This identification is usually not straightforward and requires some expertise. Here, this information is known because the pseudo-data were generated with apparent sensitivities (see **Fig. 2**). In _crestr_, these known sensitivities are expressed in one single table containing 1s (meaning "use this taxon for this variable") and 0s (meaning "do not use this taxon for this variable"). Based on the description of the sensitivities of the pseudo-taxa (see above), it translates as follow:
+
+```{r data_preview_selection}
+crest_ex_selection
+```
+
+Note that _Taxon7_ is indicated with 1s but, as no data are available to calibrate its relationship with climate, these values will later be transformed into "-1".
+
+<br >
+
+## Application: Reconstructions using pseudo-data <a id="reconstructions"></a>
+
+### Data extraction and calibration
+
+To illustrate the process, we will reconstruct _bio1_ (mean annual temperature) and _bio12_ (annual precipitation) from these pseudo data. The complete description of the different parameters is available [here](https://mchevalier2.github.io/crestr/reference/index.html).
+
+
+The first step of any reconstruction is to extract the species distribution data. This is done with the _crest.get\_modern\_data()_ function. This function creates a nested R object `reconstr` that contains all the information that will be updated in the following steps. All the functions from the package require such an object. For more details, check the _crestObj_ vignette. We can also verify that the _selectedTaxa_ table has been modified for _Taxon7_.
+
+
+<br >
+```{r extracting_data}
+reconstr <- crest.get_modern_data( df = crest_ex, # The fossil data
+                              pse = crest_ex_pse, # The proxy-species equivalency table
+                                    taxaType = 0, # The type of taxa is 0 for the example
+                    climate = c("bio1", "bio12"), # The climate variables to reconstruct
+               selectedTaxa = crest_ex_selection, # The taxa to use for each variable
+                        dbname = "crest_example", # The database to extract the data
+                                  verbose = FALSE # Print status messages
+)
+
+
+reconstr$inputs$selectedTaxa
+```
+<br >
+
+
+At every step of the process, the content of the _crestObj_ can be checked by printing the object. The information displayed is updated based on the reconstruction step.
+
+
+<br >
+```{r print_crestobj}
+reconstr
+```
+<br >
+
+
+The next step consists in fitting the _PDFs_ using the _crest.calibrate()_ function. The climate space weighting is selected by default because it is essential to account for the possible heterogeneous distribution of the modern climate when fitting the _PDFs_. As can be seen in **Fig. 5** for temperature, the coldest and warmest values are underrepresented compared to the intermediate values. The correction diminishes the effect of this distribution by upweighting rare values and down-weighting the most abundant ones.
+
+<br >
+```{r calibrating, out.width="100%", fig.height=6, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here."}
+reconstr <- crest.calibrate( reconstr, # A crestObj produced at the previous stage
+         climateSpaceWeighting = TRUE, # Correct the PDFs for the heteregenous
+                                       # distribution of the modern climate space
+                 bin_width = c(2, 50), # The size of bins used for the correction
+     shape = c("normal", "lognormal"), # The shape of the species PDFs
+                       verbose = FALSE # Print status messages
+)
+
+plot_climateSpace(reconstr)
+```
+<br >
+
+Other graphical tools can be used to determine the specific sensitivities of each taxon to the selected climate variable. **Fig. 6** below represents the characteristic responses of _Taxon2_ and _Taxon7_ to _bio1_. By construction, we know that _Taxon2_ is sensitive to _bio1_, while _Taxon6_ is not. This can be inferred from **Fig. 6** by comparing the histograms that represent the proportion of the climate space occupied by each taxon, but also from the width of the _PDFs_. The _PDFs_ of sensitive taxa are narrower. In the case of _Taxon6_, its presence in almost every grid cell of the study area indicates that its distribution is not constrained by either _bio1_ or _bio12_ at least in this study area. If the spatial scale of the study were changed, some trends in the distribution would ultimately appear.
+
+<br >
+```{r plot-plot_taxaCharacteristics, fig.show="hold", fig.align='center', fig.height=6, fig.width=6, out.width="70%", fig.cap="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot."}
+plot_taxaCharacteristics(reconstr, taxanames='Taxon2', climate='bio1', h0=0.2)
+plot_taxaCharacteristics(reconstr, taxanames='Taxon6', climate='bio1', h0=0.2)
+
+```
+<br >
+
+### Reconstruction and interpretation
+
+The last step of the process is the reconstruction itself, which is done with the _crest.reconstruct()_ function. The results can be accessed from `reconstr` as follow:
+
+<br >
+```{r reconstructing}
+reconstr <- crest.reconstruct( reconstr, # A crestObj produced at the previous stage
+                         verbose = FALSE # Print status messages
+)
+
+names(reconstr)
+
+lapply(reconstr$reconstructions, names)
+
+head(reconstr$reconstructions$bio1$optima)
+
+str(reconstr$reconstructions$bio1$optima)
+
+signif(reconstr$reconstructions$bio1$likelihood[1:6, 1:6], 3)
+
+str(reconstr$reconstructions$bio1$likelihood)
+```
+<br >
+
+
+The results can also be visualised in different forms using the plot function (**Fig. 7**). As per the design, the first samples are rather cold and dry, while the last ones are relatively warm and humid. A cold and dry event interrupted the transition between the two states.
+
+
+```{r plot, fig.show="hold", fig.width="50%", fig.width=5, fig.height=3, fig.align='center', fig.cap="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided."}
+plot(reconstr, climate = 'bio1')
+plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
+```
+<br >
+
+### Exporting the results
+
+If satisfying, the results can be directly exported from the R environment in individual spreadsheets for each variable (or CSV files). The `reconstruct` object is exported as an RData file to simplify future data reuse. In the following lines of code, replace 'tempdir()' with the location where the files should be saved.
+
+<br >
+```{r export}
+export(reconstr, loc=tempdir(), dataname='crest-test')
+list.files(file.path(tempdir(), 'crest-test'))
+```
+<br >
+
+
+
+
+## References {#ref}
+
+**[1]** <a id="crestr"></a> Chevalier, M., 2021. _crestr_ An R package to perform probabilistic climate reconstructions using fossil proxies. Clim. Past Disc. [doi:10.5194/cp-2021-153](https://www.doi.org/10.5194/cp-2021-153){target="_blank"}.
+
+**[2]** <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. [10.1130/G47841.1](https://www.doi.org/10.1130/G47841.1){target="_blank"}.
+
+**[3]** <a id="cc15"></a> Chevalier, M., Chase, B.M., 2015. Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quat. Sci. Rev. 125, 117–130. [doi:10.1016/j.quascirev.2015.07.009](https://www.doi.org/10.1016/j.quascirev.2015.07.009){target="_blank"}.
+
+**[4]** <a id="quick2021"></a> Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. [10.1017/qua.2021.31](https://www.doi.org/10.1017/qua.2021.31){target="_blank"}.
+
+**[5]** <a id="chevalierAtlas"></a> Chevalier, M., Chase, B. M., Quick, L. J. and Scott, L.: An atlas of southern African pollen types and their climatic affinities, in Palaeoecology of Africa, vol. 35, pp. 239–258, CRC Press, London., 2021. [10.1201/9781003162766-15](https://www.doi.org/10.1201/9781003162766-15){target="_blank"}.
+
+
+
+<br >
