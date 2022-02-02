@@ -8,7 +8,7 @@
 #'        saved by default.
 #' @param loc The path where to export the data (default: working directory)
 #' @param as.csv Boolean to indicate if the data should be exported as csv (\code{TRUE}) or xlsx (\code{FALSE}, default)
-#' @param fullPosterior A boolean to export the climate posterior probability (default \code{FALSE})
+#' @param fullUncertainties A boolean to export the full climate uncertainty distribution (default \code{FALSE})
 #' @param loo A boolean to export the leave-one-out data if they exist (default \code{FALSE})
 #' @param weights A boolean to export the weights derived from the percentages (default \code{FALSE})
 #' @param pdfs A boolean to export the taxa's \code{pdfs} (default \code{FALSE})
@@ -27,16 +27,16 @@
 #'     selectedTaxa = crest_ex_selection, dbname = "crest_example",
 #'     leave_one_out = TRUE
 #'   )
-#'   #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+#'   #> Replace 'tempdir()' by the location where the sample should be saved (e.g. 'getwd()')
 #'   export(reconstr, dataname='crest_example',
-#'          fullPosterior=TRUE, weights=TRUE, loo=TRUE, pdfs=TRUE,
+#'          fullUncertainties=TRUE, weights=TRUE, loo=TRUE, pdfs=TRUE,
 #'          loc=tempdir())
 #' }
 #'
 export <- function( x, dataname = x$misc$site_info$site_name,
                     climate = x$parameters$climate,
                     loc = getwd(), as.csv = FALSE,
-                    fullPosterior = FALSE,
+                    fullUncertainties = FALSE,
                     loo = FALSE,
                     weights = FALSE,
                     pdfs = FALSE) {
@@ -85,7 +85,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, c('DESCRIPTION:', NA, NA, NA, NA))
             df <- rbind(df, c(NA, 'Parameters: List of parameters used in this study', NA, NA, NA))
             df <- rbind(df, c(NA, 'Reconstruction: The reconstructed values for each samples and the levels of uncertainties', NA, NA, NA))
-            if(fullPosterior)  df <- rbind(df, c(NA, 'fullPosterior: The posterior distribution of uncertainties for each sample', NA, NA, NA))
+            if(fullUncertainties)  df <- rbind(df, c(NA, 'fullUncertainties: The distribution of uncertainties for each sample', NA, NA, NA))
             df <- rbind(df, c(NA, 'taxa_percentage: The percentage data used to generate the reconstructions', NA, NA, NA))
             if(weights)  df <- rbind(df, c(NA, 'taxa_weights: The weights derived from the percentage', NA, NA, NA))
             if(loo)  df <- rbind(df, c(NA, 'leave_one_out: Results of the leave-one-out analysis', NA, NA, NA))
@@ -179,14 +179,14 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             }
 
 
-            if (fullPosterior) {
-                df <- cbind(t(x$reconstructions[[clim]]$posterior))
+            if (fullUncertainties) {
+                df <- cbind(t(x$reconstructions[[clim]]$likelihood))
                 colnames(df) <- c(clim, x$inputs$x)
                 if(as.csv) {
-                    utils::write.csv(df, base::file.path(loc, dataname, clim, 'fullPosterior.csv'), row.names=FALSE, quote=FALSE, na='')
+                    utils::write.csv(df, base::file.path(loc, dataname, clim, 'fullUncertainties.csv'), row.names=FALSE, quote=FALSE, na='')
                 } else {
-                    openxlsx::addWorksheet(wb, "fullPosterior")
-                    openxlsx::writeData(wb, sheet = "fullPosterior", x = df)
+                    openxlsx::addWorksheet(wb, "fullUncertainties")
+                    openxlsx::writeData(wb, sheet = "fullUncertainties", x = df)
                 }
             }
 

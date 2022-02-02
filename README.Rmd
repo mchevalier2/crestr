@@ -30,7 +30,7 @@ The goal of `crestr` is to enable probabilistic reconstructions of past climate
 change from fossil assemblage data. The approach is based on the estimation of
 conditional responses of different bio-proxies to various climate parameters.
 These responses take the form of probability density functions (*PDFs*). The
-details of the method have been described in 
+details of the method have been described in
 [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014), the
 calibrated data are presented in
 [Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the package is fully described in [Chevalier (2021)](https://cp.copernicus.org/preprints/cp-2021-153/).
@@ -38,7 +38,7 @@ calibrated data are presented in
 
 ## Installation
 
-You can install the package from [CRAN](https://cran.r-project.org/web/packages/crestr/index.html).
+You can install the package from [CRAN](https://CRAN.R-project.org/package=crestr).
 ``` r
 install.packages("crestr")
 ```
@@ -163,8 +163,8 @@ str(recons$reconstructions$bio1$optima)
 ```
 
 ```{r extract_results2}
-signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
-str(recons$reconstructions$bio1$posterior)
+signif(recons$reconstructions$bio1$likelihood[1:6, 1:6], 3)
+str(recons$reconstructions$bio1$likelihood)
 ```
 
 
@@ -185,6 +185,7 @@ list.files(file.path(getwd(), 'crest-test'))
 ```{r delete export example, echo = FALSE, results = "hide"}
 unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
 ```
+
 
 ## References
 

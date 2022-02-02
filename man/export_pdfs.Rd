@@ -47,7 +47,7 @@ Export the pdfs fitted for the different taxa.
     selectedTaxa = crest_ex_selection, dbname = "crest_example",
     leave_one_out = TRUE
   )
-  #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+  #> Replace 'tempdir()' by the location where the sample should be saved (e.g. 'getwd()')
   export_pdfs(reconstr,
               dataname='crest_example',
               loc=tempdir()

@@ -7,20 +7,9 @@
 
 <br>
 
-# **crestr** A R package to perform probabilistic palaeoclimate reconstructions from fossil bio-proxies
+# **crestr** An R package to perform probabilistic palaeoclimate reconstructions from palaeoecological datasets
 
-The goal of crestr is to produce probabilistic reconstructions of past climate
-change from fossil assemblage data [(Chevalier, 2021)](https://cp.copernicus.org/preprints/cp-2021-153/). The approach is based on the estimation of
-conditional responses of studies bio-proxy studied to climate parameters using
-probability density functions (_PDFs_; see
-[Chevalier *et al.* (2014)](http://https://www.doi.org/10.5194/cp-10-2081-2014) and
-[Chevalier (2019)](http://https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The
-theory underpinning this package is explained in section
-[_A bit of theory_](https://mchevalier2.github.io/crestr/articles/theory.html)
-and is illustrated with an application based on pseudo-data in section
-[_Get Started_](https://mchevalier2.github.io/crestr/articles/get-started.html).
-The different vignettes present different aspects of the structure of the
-package and the data it contains, along with applications based on real data.
+The goal of `crestr` is to produce probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2021)](https://cp.copernicus.org/preprints/cp-2021-153/). The approach is based on the estimation of responses of studies bio-proxy studied to climate parameters using probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://mchevalier2.github.io/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://mchevalier2.github.io/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
 
 <br >
 
@@ -30,12 +19,12 @@ functions implemented, you can contact me at <chevalier.manuel@gmail.com>.
 
 ## Installation
 
-You can install the package from [CRAN](https://cran.r-project.org/web/packages/crestr/index.html).
+You can install the package from [CRAN](https://cran.r-project.org/package=crestr).
 ``` r
 install.packages("crestr")
 ```
 
-You can also install the development version from [GitHub](https://github.com/) with:
+You can also install the development version from [GitHub](https://github.com/mchevalier2/crestr/) with:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
@@ -49,10 +38,10 @@ devtools::install_github("mchevalier2/crestr")
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" title="plot of chunk img1" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
-_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of pollen records used to generate the reconstructions presented in B-D and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](http://https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](http://https://www.doi.org/10.1130/G47841.1))._
+_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
 
-## CREST in the scientific litterature
+## CREST in the scientific literature
 
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" title="plot of chunk img3" alt="plot of chunk img3" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
@@ -87,7 +76,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 Last update: 24/08/2021
 
-N.B.: This list is as exhaustive as possible but some studies may be missing. Contact me if you want your study to be added.
+N.B.: This list is as exhaustive as possible, but some studies may be missing. Contact me if you want your study to be added.
 
 <br >
 

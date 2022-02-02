@@ -85,7 +85,7 @@ This function plots stratigraphic data either as polygons or bars.
 data(crest_ex)
 plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
-#> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+#> Replace 'tempdir()' by the location where the sample should be saved (e.g. 'getwd()')
 plot_diagram(crest_ex, save=TRUE,
              filename=file.path(tempdir(), 'testDiagram.pdf'),
              bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',

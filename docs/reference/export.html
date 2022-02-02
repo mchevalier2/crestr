@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.1</span>
       </span>
     </div>
 
@@ -156,7 +156,7 @@
   climate <span class='op'>=</span> <span class='va'>x</span><span class='op'>$</span><span class='va'>parameters</span><span class='op'>$</span><span class='va'>climate</span>,
   loc <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/getwd.html'>getwd</a></span><span class='op'>(</span><span class='op'>)</span>,
   as.csv <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  fullPosterior <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  fullUncertainties <span class='op'>=</span> <span class='cn'>FALSE</span>,
   loo <span class='op'>=</span> <span class='cn'>FALSE</span>,
   weights <span class='op'>=</span> <span class='cn'>FALSE</span>,
   pdfs <span class='op'>=</span> <span class='cn'>FALSE</span>
@@ -187,8 +187,8 @@ saved by default.</p></td>
       <td><p>Boolean to indicate if the data should be exported as csv (<code>TRUE</code>) or xlsx (<code>FALSE</code>, default)</p></td>
     </tr>
     <tr>
-      <th>fullPosterior</th>
-      <td><p>A boolean to export the climate posterior probability (default <code>FALSE</code>)</p></td>
+      <th>fullUncertainties</th>
+      <td><p>A boolean to export the full climate uncertainty distribution (default <code>FALSE</code>)</p></td>
     </tr>
     <tr>
       <th>loo</th>
@@ -221,9 +221,9 @@ saved by default.</p></td>
     selectedTaxa <span class='op'>=</span> <span class='va'>crest_ex_selection</span>, dbname <span class='op'>=</span> <span class='st'>"crest_example"</span>,
     leave_one_out <span class='op'>=</span> <span class='cn'>TRUE</span>
   <span class='op'>)</span>
-  <span class='co'>#&gt; Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')</span>
+  <span class='co'>#&gt; Replace 'tempdir()' by the location where the sample should be saved (e.g. 'getwd()')</span>
   <span class='fu'>export</span><span class='op'>(</span><span class='va'>reconstr</span>, dataname<span class='op'>=</span><span class='st'>'crest_example'</span>,
-         fullPosterior<span class='op'>=</span><span class='cn'>TRUE</span>, weights<span class='op'>=</span><span class='cn'>TRUE</span>, loo<span class='op'>=</span><span class='cn'>TRUE</span>, pdfs<span class='op'>=</span><span class='cn'>TRUE</span>,
+         fullUncertainties<span class='op'>=</span><span class='cn'>TRUE</span>, weights<span class='op'>=</span><span class='cn'>TRUE</span>, loo<span class='op'>=</span><span class='cn'>TRUE</span>, pdfs<span class='op'>=</span><span class='cn'>TRUE</span>,
          loc<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempdir</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span>
 <span class='op'>}</span>
 

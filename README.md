@@ -35,7 +35,7 @@ package is fully described in [Chevalier
 ## Installation
 
 You can install the package from
-[CRAN](https://cran.r-project.org/web/packages/crestr/index.html).
+[CRAN](https://CRAN.R-project.org/package=crestr).
 
 ``` r
 install.packages("crestr")
@@ -235,10 +235,10 @@ names(recons)
 #> [5] "misc"
 lapply(recons$reconstructions, names)
 #> $bio1
-#> [1] "posterior"     "uncertainties" "optima"       
+#> [1] "likelihood"    "uncertainties" "optima"       
 #> 
 #> $bio12
-#> [1] "posterior"     "uncertainties" "optima"
+#> [1] "likelihood"    "uncertainties" "optima"
 ```
 
 ``` r
@@ -258,7 +258,7 @@ str(recons$reconstructions$bio1$optima)
 ```
 
 ``` r
-signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
+signif(recons$reconstructions$bio1$likelihood[1:6, 1:6], 3)
 #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
 #> [1,] 0.00e+00 8.02e-02 1.60e-01 2.40e-01 3.21e-01 4.01e-01
 #> [2,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14
@@ -266,7 +266,7 @@ signif(recons$reconstructions$bio1$posterior[1:6, 1:6], 3)
 #> [4,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14
 #> [5,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14
 #> [6,] 1.45e-18 2.09e-18 3.01e-18 4.32e-18 6.19e-18 8.86e-18
-str(recons$reconstructions$bio1$posterior)
+str(recons$reconstructions$bio1$likelihood)
 #>  num [1:21, 1:500] 0.00 8.41e-15 8.41e-15 8.41e-15 8.41e-15 ...
 ```
 

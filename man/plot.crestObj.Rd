@@ -16,6 +16,7 @@
   pt.cex = 0.8,
   pt.lwd = 0.8,
   pt.col = ifelse(simplify, "black", "white"),
+  col.hiatus = "white",
   save = FALSE,
   width = 5.51,
   height = 5.51,
@@ -58,6 +59,8 @@ simplified to the uncertainty range(s).}
 \item{pt.lwd}{The thickness of the lines (default 0.8).}
 
 \item{pt.col}{The colour of the points and lines.}
+
+\item{col.hiatus}{A colour for the hiatus(es) of the record (default white)}
 
 \item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}

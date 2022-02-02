@@ -296,6 +296,7 @@ print.crestObj <- function(x, ...) {
 #'        the file is saved in the working directory under the name
 #'        \code{'Reconstruction_climate.pdf'}.
 #' @param col A colour gradient.
+#' @param col.hiatus A colour for the hiatus(es) of the record (default white)
 #' @return No return value, this function is used to plot.
 #' @export
 #' @examples
@@ -325,6 +326,7 @@ plot.crestObj <- function(x,
                           xlim = NA, ylim = NA,
                           pt.cex = 0.8, pt.lwd = 0.8,
                           pt.col=ifelse(simplify, 'black', 'white'),
+                          col.hiatus = 'white',
                           save = FALSE, width = 5.51, height = 5.51,
                           as.png = FALSE, png.res=300,
                           filename = 'Reconstruction.pdf',
@@ -356,6 +358,7 @@ plot.crestObj <- function(x,
 
     if(!save) {
         par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
     }
 
     for (clim in climate) {
@@ -363,7 +366,7 @@ plot.crestObj <- function(x,
             graphics::par(mfrow = grDevices::n2mfrow(length(climate)))[[1]]
         }
         idx <- idx + 1
-        pdf <- t(x$reconstructions[[clim]][["posterior"]])[-1, ]
+        pdf <- t(x$reconstructions[[clim]][["likelihood"]])[-1, ]
         pdfter <- pdf
 
         for (i in 2:ncol(pdf)) {
@@ -481,6 +484,7 @@ plot.crestObj <- function(x,
               z = (1 - as.matrix(t(pdfter[, -1]))),
               y = pdfter[, 1],
               x = xx,
+              NAcol = col.hiatus,
               xlim = xlim,
               ylim = c(ymn, ymx),
               zlim = c(0, 1),
@@ -556,6 +560,5 @@ plot.crestObj <- function(x,
         }
         if(save) grDevices::dev.off()
     }
-    if(!save)  graphics::par(par_usr)
     invisible(x)
 }

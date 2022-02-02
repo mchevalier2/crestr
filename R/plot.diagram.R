@@ -37,7 +37,7 @@
 #' data(crest_ex)
 #' plot_diagram(crest_ex, bars=TRUE, col='black', bar_width=0.8)
 #' plot_diagram(crest_ex,  col=1:7, tickAtSample=FALSE)
-#' #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+#' #> Replace 'tempdir()' by the location where the sample should be saved (e.g. 'getwd()')
 #' plot_diagram(crest_ex, save=TRUE,
 #'              filename=file.path(tempdir(), 'testDiagram.pdf'),
 #'              bars=TRUE, col_pos='cornflowerblue', col_neg='darkgreen',
@@ -113,17 +113,19 @@ plot_diagram <- function(x, bars=FALSE,
     yrange = range(cs)
     dY <- 0.1*(yrange[2]-yrange[1])
     yrange <- yrange + c(-0.45*dY, 0)
-    if(!is.na(title)) yrange <- yrange + c(0, 0.3*dY)
+    if(bars & is.na(title)) title=' ' # If there is no title, but plotting bars I need the space for the caption
+    if(!is.na(title)) yrange <- yrange + c(0, 0.3*dY*(0.3+length(strsplit(title, '\n')[[1]]))) ## Counts how many lines the title has.
 
-    par_usr <- graphics::par(no.readonly = TRUE)
-    on.exit(graphics::par(par_usr))
 
     if(save) {
         if(as.png) {
-            grDevices::png(filename, width = width, height = height, units='in', res=png.res)
+            grDevices::png(paste0(strsplit(filename, '.png')[[1]], '.png'), width = width, height = height, units='in', res=png.res)
         } else {
             grDevices::pdf(filename, width=width, height=height)
         }
+    } else {
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
     }
 
 
@@ -137,7 +139,7 @@ plot_diagram <- function(x, bars=FALSE,
     xrange2[2] <- xrange[2] + str_max_right*diff(xrange)/(width-str_max_left-str_max_right) + 0.50*dX
 
     plot(x[, 1], x[, 1], type='n', xlim=xrange2, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
-    if(!is.na(title)) graphics::text(mean(xlim), mean(c(max(cs), yrange[2])), title, cex=1, font=2, adj=c(0.5, 1))
+
     if(bars) {
         bar_width <- bar_width/2
         for(i in 2:ncol(x)) {
@@ -146,12 +148,24 @@ plot_diagram <- function(x, bars=FALSE,
             }
             graphics::segments(xlim[1], cs[i], xlim[2], cs[i], lwd=0.5)
             graphics::segments(xlim[2], cs[i], xlim[2], cs[i] + max(c(max(abs(x[, i])), yax_incr)), lwd=0.5)
+            add.axs <- TRUE
             for(j in seq(0, max(c(max(abs(x[, i])), yax_incr)), yax_incr)) {
                 graphics::segments(xlim[2], cs[i] + j, xlim[2] + 0.1*dX, cs[i] + j, lwd=0.5)
-                if (j %% (2*yax_incr) == 0) graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=6/8, adj=c(0, 0.4))
+                if (add.axs) {
+                    graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=6/8, adj=c(0, 0.4))
+                    add.axs <- FALSE
+                } else {
+                    add.axs <- TRUE
+                }
             }
             graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=6/8, adj=c(1,0.5))
         }
+        dX <- diff(xrange2)
+        graphics::rect(xrange2[1] + 0.02*dX, mean(c(max(cs), yrange[2])) + 0.03*dY, xrange2[1] + 0.08*dX, mean(c(max(cs), yrange[2])) + 0.13*dY, col=col_pos)
+        graphics::text(xrange2[1] + 0.10*dX, mean(c(max(cs), yrange[2])) + 0.08*dY, '(+) anomaly', cex=6/8, adj=c(0, 0.45))
+        graphics::rect(xrange2[1] + 0.02*dX, mean(c(max(cs), yrange[2])) - 0.03*dY, xrange2[1] + 0.08*dX, mean(c(max(cs), yrange[2])) - 0.13*dY, col=col_neg)
+        graphics::text(xrange2[1] + 0.10*dX, mean(c(max(cs), yrange[2])) - 0.08*dY, '(-) anomaly', cex=6/8, adj=c(0, 0.45))
+
     } else {
         for(i in 2:ncol(x)) {
             if(amplif > 1) {
@@ -166,13 +180,22 @@ plot_diagram <- function(x, bars=FALSE,
               )
             graphics::segments(xlim[1], cs[i], xlim[2], cs[i], lwd=0.5)
             graphics::segments(xlim[2], cs[i], xlim[2], cs[i] + max(c(max(abs(x[, i])), yax_incr)), lwd=0.5)
+            add.axs <- TRUE
             for(j in seq(0, max(c(max(abs(x[, i])), yax_incr)), yax_incr)) {
                 graphics::segments(xlim[2], cs[i] + j, xlim[2] + 0.1*dX, cs[i] + j, lwd=0.5)
-                if (j %% (2*yax_incr) == 0) graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=6/8, adj=c(0, 0.4))
+                if (add.axs) {
+                    graphics::text(xlim[2] + 0.15*dX, cs[i] + j, j, cex=6/8, adj=c(0, 0.4))
+                    add.axs <- FALSE
+                } else {
+                    add.axs <- TRUE
+                }
             }
             graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=6/8, adj=c(1,0.5))
         }
     }
+
+    if(!is.na(title)) graphics::text(mean(xlim), mean(c(max(cs), yrange[2])), title, cex=1, font=2, adj=c(0.5, 0.5))
+
     graphics::segments(xlim[1], -0.06*dY, xlim[2], -0.06*dY, lwd=0.5)
     for( tck in graphics::axTicks(1)) {
         if( tck < xlim[1] ) {

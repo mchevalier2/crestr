@@ -86,14 +86,14 @@ plot_climateSpace <- function( x,
 
         if(save) {
             if(as.png) {
-                grDevices::png(filename, width = width, height = height, units='in', res=png.res)
+                grDevices::png(paste0(strsplit(filename, '.png')[[1]], '.png'), width = width, height = height, units='in', res=png.res)
             } else {
                 grDevices::pdf(filename, width=width, height=height)
             }
+        } else {
+            par_usr <- graphics::par(no.readonly = TRUE)
+            on.exit(graphics::par(par_usr))
         }
-
-        par_usr <- graphics::par(no.readonly = TRUE)
-        on.exit(graphics::par(par_usr))
 
         distribs <- lapply(x$modelling$distributions,
                            function(x) { if(is.data.frame(x)) {
@@ -244,7 +244,7 @@ plot_climateSpace <- function( x,
 
             xval <- range(h1$breaks)
 
-            ext_factor_x <- max(graphics::strwidth(paste0('     ', c(h1$counts, h2$counts)), cex=6/8, units='inches'))
+            ext_factor_x <- max(graphics::strwidth(paste0('     ', c(h1$counts, h2$counts)) , cex=6/8, units='inches')) + graphics::strheight('Number of occurrences', cex=6/8, units='inches')
             w <- x2 - 2*ext_factor_x # space allocated to the central part of the plot
             ratio <- diff(xval) / w # units per inch
             xval <- xval + c(-1, 1)*(ext_factor_x*ratio)
@@ -273,6 +273,7 @@ plot_climateSpace <- function( x,
                 }
                 graphics::segments(h1$breaks[1],0,h1$breaks[1], max(h1$counts))
                 plot(h1, add=TRUE, col='grey70')
+                graphics::text(xval[1], max(h1$counts)/2, 'Number of occurrences', cex=6/8, adj=c(0.5, 1), srt=90)
             }
             graphics::par(opar)
 
@@ -313,6 +314,7 @@ plot_climateSpace <- function( x,
                 graphics::segments(h1$breaks[1],0,max(h1$breaks),0)
                 graphics::par(opar)
             }
+            graphics::text(xval[2], max(h2$counts)/2, 'Numer of occurrences', cex=6/8, adj=c(0.5, 1), srt=-90)
         }
 
         if(save) {

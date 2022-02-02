@@ -85,39 +85,39 @@ crest.reconstruct <- function(x,
     reconstructions <- list()
     for (clim in x$parameters$climate) {
         if (sum(x$inputs$selectedTaxa[, clim]>0) > 0) {
-            reconstructions[[clim]][["posterior"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
+            reconstructions[[clim]][["likelihood"]] <- matrix(rep(0, x$parameters$npoints * nrow(x$inputs$df)), ncol = x$parameters$npoints)
             reconstructions[[clim]][["uncertainties"]] <- matrix(rep(0, 2 * length(x$parameters$uncertainties) * nrow(x$inputs$df)), nrow = nrow(x$inputs$df))
             reconstructions[[clim]][["optima"]] <- matrix(rep(NA, 2 * nrow(x$inputs$df)), nrow = nrow(x$inputs$df))
             for (s in 1:nrow(x$inputs$df)) {
                 if (is.na(x$modelling$weights[s, names(x$modelling$pdfs)[1]])) {
-                    reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
+                    reconstructions[[clim]][["likelihood"]][s, ] <- rep(NA, x$parameters$npoints)
                     reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
                 } else if (sum((x$inputs$selectedTaxa[x$inputs$taxa.name, clim]>0) * ifelse(x$modelling$weights[s, x$inputs$taxa.name]>0, 1, 0)) == 0) {
-                    reconstructions[[clim]][["posterior"]][s, ] <- rep(NA, x$parameters$npoints)
+                    reconstructions[[clim]][["likelihood"]][s, ] <- rep(NA, x$parameters$npoints)
                     reconstructions[[clim]][["uncertainties"]][s, ] <- rep(NA, 2 * length(x$parameters$uncertainties))
                 } else {
                     norm_factor <- 0
                     for (tax in x$inputs$taxa.name) {
                         if (x$modelling$weights[s, tax] > 0 & x$inputs$selectedTaxa[tax, clim] > 0) {
                             norm_factor <- norm_factor + x$modelling$weights[s, tax]
-                            reconstructions[[clim]][["posterior"]][s, ] <-
-                              reconstructions[[clim]][["posterior"]][s, ] +
+                            reconstructions[[clim]][["likelihood"]][s, ] <-
+                              reconstructions[[clim]][["likelihood"]][s, ] +
                               x$modelling$pdfs[[tax]][[clim]][["pdfpol_log"]] * x$modelling$weights[s, tax]
                         }
                     }
-                    reconstructions[[clim]][["posterior"]][s, ] <-
-                      reconstructions[[clim]][["posterior"]][s, ] * (1 / norm_factor)
-                    reconstructions[[clim]][["posterior"]][s, ] <- exp(reconstructions[[clim]][["posterior"]][s, ])
-                    reconstructions[[clim]][["posterior"]][s, ] <-
-                      reconstructions[[clim]][["posterior"]][s, ] /
-                        (sum(reconstructions[[clim]][["posterior"]][s, ]) *
+                    reconstructions[[clim]][["likelihood"]][s, ] <-
+                      reconstructions[[clim]][["likelihood"]][s, ] * (1 / norm_factor)
+                    reconstructions[[clim]][["likelihood"]][s, ] <- exp(reconstructions[[clim]][["likelihood"]][s, ])
+                    reconstructions[[clim]][["likelihood"]][s, ] <-
+                      reconstructions[[clim]][["likelihood"]][s, ] /
+                        (sum(reconstructions[[clim]][["likelihood"]][s, ]) *
                           (x$modelling$xrange[[clim]][2] - x$modelling$xrange[[clim]][1])
                         )
-                    reconstructions[[clim]][["optima"]][s, 1] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["posterior"]][s, ])]
-                    reconstructions[[clim]][["optima"]][s, 2] <- sum(x$modelling$xrange[[clim]] * reconstructions[[clim]][["posterior"]][s, ]) / sum(reconstructions[[clim]][["posterior"]][s, ])
+                    reconstructions[[clim]][["optima"]][s, 1] <- x$modelling$xrange[[clim]][which.max(reconstructions[[clim]][["likelihood"]][s, ])]
+                    reconstructions[[clim]][["optima"]][s, 2] <- sum(x$modelling$xrange[[clim]] * reconstructions[[clim]][["likelihood"]][s, ]) / sum(reconstructions[[clim]][["likelihood"]][s, ])
 
-                    oo <- order(reconstructions[[clim]][["posterior"]][s, ], decreasing=TRUE)
-                    tmp2 <- reconstructions[[clim]][["posterior"]][s, ][oo]
+                    oo <- order(reconstructions[[clim]][["likelihood"]][s, ], decreasing=TRUE)
+                    tmp2 <- reconstructions[[clim]][["likelihood"]][s, ][oo]
                     tmp1 <- x$modelling$xrange[[clim]][oo]
                     oo <- order(tmp1)
                     pdfter <- cumsum(tmp2 / sum(tmp2))[oo]
@@ -138,7 +138,7 @@ crest.reconstruct <- function(x,
                     pbi <- pbi + 100
                 }
             }
-            reconstructions[[clim]][["posterior"]] <- rbind(x$modelling$xrange[[clim]], reconstructions[[clim]][["posterior"]])
+            reconstructions[[clim]][["likelihood"]] <- rbind(x$modelling$xrange[[clim]], reconstructions[[clim]][["likelihood"]])
             reconstructions[[clim]][["uncertainties"]] <- cbind('x'=x$inputs$x, reconstructions[[clim]][["uncertainties"]])
             reconstructions[[clim]][["optima"]] <- data.frame('x'=x$inputs$x,
                                                               'optima'=reconstructions[[clim]][["optima"]][, 1],

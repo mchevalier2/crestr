@@ -65,18 +65,27 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             climate <- climate[1]
         }
 
+        climVar <- accClimateVariables()
+        new_clim <- climate
+        if (!(climate %in% climVar[, 1] | climate %in% climVar[, 2])) {
+            stop(paste0("The variable '", climate, "' is not an accepted value. Check the list of accepted values using 'accClimateVariables()'.\n\n"))
+        } else {
+            if (suppressWarnings(!is.na(as.numeric(climate)))) {
+                new_clim <- as.character(climVar[which(climVar[, 1] == as.numeric(climate)), 2])
+            }
+        }
+
         if (is.na(xlim)[1]) {
             xlim <- range(x$modelling$xrange[[climate]])
         }
 
-        par_usr <- graphics::par(no.readonly = TRUE)
-        on.exit(graphics::par(par_usr))
-
         if(!save) {
+            par_usr <- graphics::par(no.readonly = TRUE)
+            on.exit(graphics::par(par_usr))
             graphics::par(ask=TRUE)
         }
 
-        ymx <- max(x$reconstructions[[climate]]$posterior[-1, ], na.rm=TRUE)
+        ymx <- max(x$reconstructions[[climate]]$likelihood[-1, ], na.rm=TRUE)
         for(tax in x$inputs$taxa.name) {
             if (x$inputs$selectedTaxa[tax, climate] > 0) {
                 ymx <- max(ymx, ifelse(is.na(x$modelling$pdfs[[tax]][[climate]]), 0, max(x$modelling$pdfs[[tax]][[climate]]$pdfpol, na.rm=TRUE)))
@@ -110,13 +119,13 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
 
             graphics::layout(matrix(c(1,2), ncol=2), width=c(5,2), height=1)
             graphics::par(mar=c(2,2,0.5,0))
-            graphics::par(ps=8)
+            graphics::par(ps=8, cex=1)
 
             graphics::plot(0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
                  xlim=xlim, ylim=c(0, ymx))
 
             graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                    c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
+                    c(0, x$reconstructions[[climate]]$likelihood[s+1, ], 0),
                     col='black', border=NA)
 
             for(tax in x$inputs$taxa.name) {
@@ -129,14 +138,17 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             for(tax in x$inputs$taxa.name) {
                 if (x$inputs$selectedTaxa[tax, climate] == 1 & x$modelling$weights[s, tax] > 0) {
                     graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                      c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0), lwd=max(0.2, log10(1+10*x$modelling$weights[s, tax])), lty=LTYS[tax], col=NA, border=COLS[tax])
+                      c(0, x$modelling$pdfs[[tax]][[climate]]$pdfpol, 0),
+                      #lwd=max(0.2, log10(1+10*x$modelling$weights[s, tax])),
+                      lwd=max(0.2, 1.5*sqrt(x$modelling$weights[s, tax])),
+                      lty=LTYS[tax], col=NA, border=COLS[tax])
                 }
             }
 
             graphics::polygon(x$modelling$xrange[[climate]][c(1, 1:x$parameters$npoints, x$parameters$npoints)],
-                    c(0, x$reconstructions[[climate]]$posterior[s+1, ], 0),
+                    c(0, x$reconstructions[[climate]]$likelihood[s+1, ], 0),
                     col='black', border=NA)
-            graphics::segments(x$reconstructions[[climate]]$optima[s, var_to_plot], 0, x$reconstructions[[climate]]$optima[s, var_to_plot], ymx, col='white', lwd=1.5, lty=3)
+            graphics::segments(x$reconstructions[[climate]]$optima[s, var_to_plot], 0, x$reconstructions[[climate]]$optima[s, var_to_plot], ymx, col='grey70', lwd=1.5, lty=3)
 
             graphics::rect(xlim[2]*0.99, ymx*0.98, xlim[2]*0.98 - graphics::strwidth(x$inputs$x[s], cex=10/8, lwd=2), ymx*0.99-graphics::strheight(x$inputs$x[s], cex=1.5, lwd=2)*2, col='white', border=NA)
             graphics::text(xlim[2]*0.99, ymx*0.98, x$inputs$x[s], cex=10/8, lwd=2, adj=c(1, 1))
@@ -172,13 +184,17 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
                 ordered_tax <- c(ordered_tax, taxa[order(weights, decreasing=FALSE)])
             }
 
-            graphics::par(mar=c(2,0.1,0.1,0.1))
-            graphics::par(ps=8)
+
+            graphics::par(mar=c(2,0.1,0.5,0.1))
+            graphics::par(ps=8, cex=1)
             graphics::plot( 0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
                             xlim=c(0,1), ylim=c(1+length(ordered_tax), 1))
 
             for(tax in 1:length(ordered_tax)) {
-                graphics::segments(0, tax+0.5, 0.20, tax+0.5, lwd=max(0.2, log10(1+10*x$modelling$weights[s, ordered_tax[tax]])), lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
+                graphics::segments(0, tax+0.5, 0.20, tax+0.5,
+                #lwd=max(0.2, log10(1+10*x$modelling$weights[s, ordered_tax[tax]])),
+                lwd=max(0.2, 1.5*sqrt(x$modelling$weights[s, ordered_tax[tax]])),
+                lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
                 graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 7/8, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
             }
             if(save & as.png) grDevices::dev.off()

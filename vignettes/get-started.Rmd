@@ -24,49 +24,17 @@ knitr::opts_chunk$set(
 <br >
 
 The `crestr` package has been designed for two independent but complementary
-modelling purposes [[1]](#crestr). The probabilitic proxy-climate responses can be used to quantivatively reconstruct climate from their statistical combination
-[[2](#ChevalierLimpopo)-[3](#cc15)], or, alternatively, they can be used in a
-more quantitative way to determine the (relative) climate sensitivities of
-different taxa in a given area to characterise past ecological changes
-[[4](#quick20201)-[5](#chevalierAtlas)].
+modelling purposes [[1]](#crestr). The probabilistic proxy-climate responses can be used to quantitatively reconstruct climate from their statistical combination [[2](#ChevalierLimpopo)-[3](#cc15)], or they can be used in a more quantitative way to determine the (relative) climate sensitivities of different taxa in a given area to characterise past ecological changes [[4](#quick2021)-[5](#chevalierAtlas)].
 
-In both cases, the difficulty of running a CREST analysis lies in the definition
-of the study-specific parameters of the algorithm, which can make the learning
-curve a bit steep at the beginning. However, default values are provided for all
-parameters to enable an easy and rapid generation of preliminary results that
-users can then use as a reasonable first estimate to start adapting the model
-to their data. To guide users in this task and avoid the common 'black box'
-criticism faced by many complex statistical tools, a large array of
-publication-ready, graphical diagnostic tools was designed to automatically
-represent CREST data in a standardised way. These tools include plots of the
-calibration data, the estimated climate responses, the reconstructions and many
-more. They can be used to look at the data from different perspectives to help
-understanding why the results are what they are and possibly help identifying
-potential issues or biases in the selected data and/or parameters. Such
-diagnostic tools are available for every step of the process and, as examplified
-with this example, they can be generated with a single line of R code.
+In both cases, the difficulty of running a CREST analysis lies in the definition of the study-specific parameters of the algorithm, which can make the learning curve a bit steep at the beginning. However, default values are provided for all parameters to enable an easy and rapid generation of preliminary results that users can then use as a reasonable first estimate before adapting the model to their data. To guide users in this task and avoid the standard 'black box' criticism faced by many complex statistical tools, a large array of publication-ready, graphical diagnostic tools was designed to represent CREST data in a standardised way automatically. These tools include plots of the calibration data, the estimated climate responses, the reconstructions and many more. They can be used to look at the data from different perspectives to help understand why the results are what they are and possibly help identify potential issues or biases in the selected data and parameters. Such diagnostic tools are available for every step of the process, and, as exemplified by this example, they can be generated with a single line of R code.
 
-In this basic tutorial, the most important steps of a CREST reconstruction
-are presented using pseudo-data. The different modelling assumptions are
-illustrated using the different graphical diagnostic tools proposed by the
-package. In the [first part](#data), the pseudo-data and their different
-characteristics are presented, the [second part](#data-crestr) describes how
-to access to the pseudo-data from _crestr_ and in the [last part](#reconstructions),
-the data are used to reconstruct both temperature and precipitation.
+This introductory tutorial presents the most important steps of a CREST reconstruction using pseudo-data. The different modelling assumptions are illustrated using the various graphical diagnostic tools proposed by the package. In the [first part](#data), the pseudo-data and their different characteristics are presented, the [second part](#data-crestr) describes how to access the pseudo-data from _crestr_ and in the [last part](#reconstructions), the data are used to reconstruct both temperature and precipitation.
 
 <br >
 
 ## Description of the pseudo-data <a id="data"></a>
 
-In this example, temperature and precipitation are reconstructed from a set
-of six climate proxies with different sensitivities to the observed climate
-gradients. For simplicity, the temperature data are constructed as an East - West
-climate gradient, while the precipitation data are designed as a North - South
-gradient. This results in, for instance, cold and rainy conditions in the
-bottom-left corner and warm
-and dry conditions in the opposite, top right corner (see **Fig. 1**). Such
-gradients are unrealistic, but they are good to explain different concepts, such
-as the _sensitivity_ of taxa to one or both variables.
+This example reconstructs temperature and precipitation from six taxa with different sensitivities to the observed climate gradients. For simplicity, the temperature data are constructed as an East-West climate gradient, while the precipitation data are designed as a North-South gradient. This results in, for instance, cold and rainy conditions in the bottom-left corner and warm and dry conditions in the opposite, top right corner (see **Fig. 1**). Such gradients are unrealistic, but they explain different concepts, such as the _sensitivity_ of taxa to one or both variables.
 
 
 ```{r climate_space, echo=FALSE, out.width="80%", fig.height=3, fig.width=6, fig.align='center', fig.cap="**Fig. 1**: Randomly generated temperature (A) and precipitation (B) climate data."}
@@ -96,14 +64,13 @@ as the _sensitivity_ of taxa to one or both variables.
 ```
 <br >
 
-In this environment, six different pseudo-species have been created, each one
-with specific climate preferences (**Fig. 2**):
+In this environment, six different pseudo-species have been created, each one with specific climate preferences (**Fig. 2**):
 
 - **Taxon1** is adapted to hot and dry conditions.
 - **Taxon2** is adapted to hot conditions and tolerates a large range of rainfall values.
-- **Taxon3**is adapted to cold conditions and tolerates a large range of rainfall values.
-- **Taxon4**is adapted to dry conditions and tolerates a large range of temperature values.
-- **Taxon5**is adapted to humid conditions and tolerates a large range of temperature values.
+- **Taxon3** is adapted to cold conditions and tolerates a large range of rainfall values.
+- **Taxon4** is adapted to dry conditions and tolerates a large range of temperature values.
+- **Taxon5** is adapted to humid conditions and tolerates a large range of temperature values.
 - **Taxon6** tolerates all the climate conditions observed in the study area.
 
 <br >
@@ -134,14 +101,7 @@ for (tax in 1:6) {
 
 <br >
 
-Finally, we have also created a fossil record composed of 20 samples where the
-percentages of the different taxa vary (**Fig. 3**). We selected percentages so
-that in the first samples climate are relatively cold and dry, then temperature
-and precipitation increase. A cold and dry reversal occurs around the middle of
-the records (samples 11 and 12), and then stable humid and warm conditions
-prevail in the last samples. The top sample also contains a seventh taxon
-(_Taxon7_) that doesn't grow across the study area. It was added to illustrate
-that _crestr_ can deal with unknown taxa.
+Finally, we have also created a fossil record composed of 20 samples where the percentages of the different taxa vary (**Fig. 3**). We selected percentages so that the climate is relatively cold and dry in the first samples, then temperature and precipitation increase. A cold and dry reversal occurs around the middle of the records (samples 11 and 12), and stable humid and warm conditions prevail in the last samples. The top sample also contains a seventh taxon (_Taxon7_) that doesn't grow across the study area. It was added to illustrate that _crestr_ can deal with unknown taxa.
 
 <br >
 
@@ -153,8 +113,7 @@ crestr::plot_diagram(crestr::crest_ex, bars=TRUE, bar_width=0.8, xlim=c(0,20))
 
 ## The pseudo-data within `crestr`  <a id="data-crestr"></a>
 
-The pseudo-data are stored in _crestr_ in different datasets and can be loaded
-as follow:
+The pseudo-data are stored in _crestr_ in different datasets and can be loaded as follow:
 
 ```{r example}
 library(crestr)
@@ -166,9 +125,7 @@ data(crest_ex_selection)
 
 <br >
 
-The fossil data are contained in `crest_ex` ("crest example"). The data frame
-is composed of 20 fossil samples from which the 7 taxa have been identified. The
-data are already expressed in percentages.
+The fossil data are contained in `crest_ex` ("crest example"). The data frame comprises 20 fossil samples from which the seven taxa have been identified. The data are already expressed in percentages.
 
 ```{r data_preview_fossil}
 ## the first 6 samples
@@ -180,12 +137,7 @@ str(crest_ex)
 
 <br >
 
-For each reconstruction, a proxy-species equivalency ("pse") table must be
-provided. This table is used to associated distinct species to the fossil
-taxon. In the case of pollen data for example, this step is used to link all
-the species producing undifferentiated pollen morphotypes in a single
-_pollen-type_. Here, the 7 pseudo-taxa are 'identified' at the species level so
-that the table looks like the following:
+A proxy-species equivalency ("pse") table must be provided for each reconstruction. This table is used to associate distinct species to the fossil taxon. For example, in the case of pollen data, this step is used to link all the species producing undifferentiated pollen morphotypes in a single _pollen-type_. Here, the seven pseudo-taxa are 'identified' at the species level so that the table looks like the following:
 
 ```{r data_preview_pse}
 crest_ex_pse
@@ -193,24 +145,13 @@ crest_ex_pse
 
 <br >
 
-By default, all the identified taxa are used to produce the reconstruction.
-However, it is sometimes useful to select a subset of taxa for each variable
-to improve the signal over noise ratio of the posterior reconstructions. This
-identification is usually not straightforward and requires a certain expertise.
-Here, this information is known because the pseudo-data were generated with clear
-sensitivities (see **Fig. 2**). In _crestr_, these known sensitivities are
-expressed in one single table containing 1s (meaning "use this taxon for this
-variable") and 0s (meaning "do not use this taxon for this variable"). Based
-on the description of the sensitivities of the pseudo-taxa (see above), it
-translates as follow:
+By default, all the identified taxa are used to produce the reconstruction. However, it is sometimes helpful to select a subset of taxa for each variable to improve the signal over noise ratio of the reconstructions. This identification is usually not straightforward and requires some expertise. Here, this information is known because the pseudo-data were generated with apparent sensitivities (see **Fig. 2**). In _crestr_, these known sensitivities are expressed in one single table containing 1s (meaning "use this taxon for this variable") and 0s (meaning "do not use this taxon for this variable"). Based on the description of the sensitivities of the pseudo-taxa (see above), it translates as follow:
 
 ```{r data_preview_selection}
 crest_ex_selection
 ```
 
-Note that _Taxon7_ is indicated with 1s but, as no data are available to
-calibrate its relationship with climate, these values will later be transformed
-into "-1".
+Note that _Taxon7_ is indicated with 1s but, as no data are available to calibrate its relationship with climate, these values will later be transformed into "-1".
 
 <br >
 
@@ -218,18 +159,10 @@ into "-1".
 
 ### Data extraction and calibration
 
-To illustrate the process, we will reconstruct _bio1_ (mean annual temperature)
-and _bio12_ (annual precipitation) from these pseudo data. The complete
-description of the different parameters is available
-[here](https://mchevalier2.github.io/crestr/reference/index.html).
+To illustrate the process, we will reconstruct _bio1_ (mean annual temperature) and _bio12_ (annual precipitation) from these pseudo data. The complete description of the different parameters is available [here](https://mchevalier2.github.io/crestr/reference/index.html).
 
 
-The first step of any reconstruction is to extract the species distribution
-data. This is done with the _crest.get\_modern\_data()_ function. This function
-creates a nested R object `reconstr` that contains all the information and that
-will be updated in all the following steps. All the functions from the package
-require such an object. For more details, check the _crestObj_ vignette.
-We can also verify that the _selectedTaxa_ table has been modified for _Taxon7_.
+The first step of any reconstruction is to extract the species distribution data. This is done with the _crest.get\_modern\_data()_ function. This function creates a nested R object `reconstr` that contains all the information that will be updated in the following steps. All the functions from the package require such an object. For more details, check the _crestObj_ vignette. We can also verify that the _selectedTaxa_ table has been modified for _Taxon7_.
 
 
 <br >
@@ -249,9 +182,7 @@ reconstr$inputs$selectedTaxa
 <br >
 
 
-At every step of the process, the content of the _crestObj_ can be check by
-printing the object. The information displayed is updated based on the
-reconstruction step.
+At every step of the process, the content of the _crestObj_ can be checked by printing the object. The information displayed is updated based on the reconstruction step.
 
 
 <br >
@@ -261,13 +192,7 @@ reconstr
 <br >
 
 
-The next step consists in fitting the _PDFs_ using the _crest.calibrate(_
-function. The climate space weighting is selected by default because it is
-really important to account for the possible heterogeneous distribution of the
-modern climate when fitting the _PDFs_. As can be seen on **Fig. 5** for
-temperature, the coldest and warmest values are underrepresented compared to
-the intermediate values. The correction diminishes the effect of this
-distribution by upweighting rare values and down-weighting the most abundant ones.
+The next step consists in fitting the _PDFs_ using the _crest.calibrate()_ function. The climate space weighting is selected by default because it is essential to account for the possible heterogeneous distribution of the modern climate when fitting the _PDFs_. As can be seen in **Fig. 5** for temperature, the coldest and warmest values are underrepresented compared to the intermediate values. The correction diminishes the effect of this distribution by upweighting rare values and down-weighting the most abundant ones.
 
 <br >
 ```{r calibrating, out.width="100%", fig.height=6, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here."}
@@ -283,20 +208,10 @@ plot_climateSpace(reconstr)
 ```
 <br >
 
-Other graphical tools can be used to determine the specific sensitivities of
-each taxa to the selected climate variable. **Fig. 6** below represents the
-characteristic responses of _Taxon2_ and _Taxon7_ to _bio1_. By construction,
-we kow that _Taxon2_ is sensitive to _bio1_, while _Taxon6_ is not. This can be
-inferred fromn **Fig. 6** by comparing the histograms that represent the
-proportion of the climate space occupied by each taxon, but also from the width
-of the _PDFs_. The _PDFs_ of sensitive taxa are narrower. In the case of
-_Taxon6_, its presence in almost every grid cell of the study area also
-indicates that its distribution is not constrained by either _bio1_ or _bio12_
-at least in this study area. If the spatial scale of the study was changed,
-some trends in the distribution would ultimately appear.
+Other graphical tools can be used to determine the specific sensitivities of each taxon to the selected climate variable. **Fig. 6** below represents the characteristic responses of _Taxon2_ and _Taxon7_ to _bio1_. By construction, we know that _Taxon2_ is sensitive to _bio1_, while _Taxon6_ is not. This can be inferred from **Fig. 6** by comparing the histograms that represent the proportion of the climate space occupied by each taxon, but also from the width of the _PDFs_. The _PDFs_ of sensitive taxa are narrower. In the case of _Taxon6_, its presence in almost every grid cell of the study area indicates that its distribution is not constrained by either _bio1_ or _bio12_ at least in this study area. If the spatial scale of the study were changed, some trends in the distribution would ultimately appear.
 
 <br >
-```{r plot-plot_taxaCharacteristics, fig.show="hold", fig.align='center', fig.height=4.5, fig.width=4.5, out.width="70%", fig.cap="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot."}
+```{r plot-plot_taxaCharacteristics, fig.show="hold", fig.align='center', fig.height=6, fig.width=6, out.width="70%", fig.cap="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot."}
 plot_taxaCharacteristics(reconstr, taxanames='Taxon2', climate='bio1', h0=0.2)
 plot_taxaCharacteristics(reconstr, taxanames='Taxon6', climate='bio1', h0=0.2)
 
@@ -305,9 +220,7 @@ plot_taxaCharacteristics(reconstr, taxanames='Taxon6', climate='bio1', h0=0.2)
 
 ### Reconstruction and interpretation
 
-The last step of the process is the reconstruction itself, which is done with
-the _crest.reconstruct()_ function. The results can be accessed from `reconstr`
-as follow:
+The last step of the process is the reconstruction itself, which is done with the _crest.reconstruct()_ function. The results can be accessed from `reconstr` as follow:
 
 <br >
 ```{r reconstructing}
@@ -323,17 +236,14 @@ head(reconstr$reconstructions$bio1$optima)
 
 str(reconstr$reconstructions$bio1$optima)
 
-signif(reconstr$reconstructions$bio1$posterior[1:6, 1:6], 3)
+signif(reconstr$reconstructions$bio1$likelihood[1:6, 1:6], 3)
 
-str(reconstr$reconstructions$bio1$posterior)
+str(reconstr$reconstructions$bio1$likelihood)
 ```
 <br >
 
 
-The results can also be visualised in different forms using the plot function
-(**Fig. 7**). As per design, the first samples are rather cold and dry, while
-the last ones are rather warm and humid. A cold and dry event interupted the
-transition from the early state to the final state.
+The results can also be visualised in different forms using the plot function (**Fig. 7**). As per the design, the first samples are rather cold and dry, while the last ones are relatively warm and humid. A cold and dry event interrupted the transition between the two states.
 
 
 ```{r plot, fig.show="hold", fig.width="50%", fig.width=5, fig.height=3, fig.align='center', fig.cap="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided."}
@@ -344,9 +254,7 @@ plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 
 ### Exporting the results
 
-If satisfying, the results can be directly exported from the R environment in
-individual spreadsheets for each variables (or csv files) and the `reconstruct`
-object is exported as a RData file to simplify future reuse of the data.
+If satisfying, the results can be directly exported from the R environment in individual spreadsheets for each variable (or CSV files). The `reconstruct` object is exported as an RData file to simplify future data reuse. In the following lines of code, replace 'tempdir()' with the location where the files should be saved.
 
 <br >
 ```{r export}

@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'   #> Replace 'tempdir()' by the location where yo save the sample (e.g. 'getwd()')
+#'   #> Replace 'tempdir()' by the location where to save the sample (e.g. 'getwd()')
 #'   d = explore_calibration_dataset(2, xmn=-85, xmx=-30, ymn=-60, ymx=15,
 #'                                   save=TRUE, width = 4, height = 7.5,
 #'                                   filename=file.path(tempdir(), 'calibrationDataset.pdf')
@@ -85,15 +85,16 @@ explore_calibration_dataset <- function( taxaType,
     ext_eqearth <- eqearth_get_ext(ext)
     xy_ratio <- diff(ext_eqearth[1:2]) / diff(ext_eqearth[3:4])
 
-    par_usr <- graphics::par(no.readonly = TRUE)
-    on.exit(graphics::par(par_usr))
 
     if(save) {
         if(as.png) {
-            grDevices::png(filename, width = width, height = height, units='in', res=png.res)
+            grDevices::png(paste0(strsplit(filename, '.png')[[1]], '.png'), width = width, height = height, units='in', res=png.res)
         } else {
             grDevices::pdf(filename, width=width, height=height)
         }
+    } else {
+        par_usr <- graphics::par(no.readonly = TRUE)
+        on.exit(graphics::par(par_usr))
     }
 
     if (plot.distrib) {

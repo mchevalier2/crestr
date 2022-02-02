@@ -59,15 +59,16 @@ plot_violinPDFs <- function( x,
             stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
         }
 
-        par_usr <- graphics::par(no.readonly = TRUE)
-        on.exit(graphics::par(par_usr))
 
         if(save) {
             if(as.png) {
-                grDevices::png(filename, width = width, height = height, units='in', res=png.res)
+                grDevices::png(paste0(strsplit(filename, '.png')[[1]], '.png'), width = width, height = height, units='in', res=png.res)
             } else {
                 grDevices::pdf(filename, width=width, height=height)
             }
+        } else {
+            par_usr <- graphics::par(no.readonly = TRUE)
+            on.exit(graphics::par(par_usr))
         }
 
         ntaxa   <- length(taxanames)
