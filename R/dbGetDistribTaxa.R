@@ -97,6 +97,13 @@ getDistribTaxa <- function(taxIDs,
         CLIM3 <- paste(', ', paste(climate, collapse = ", "))
     }
 
+    ## Excluding grid cells without any climate values (eg. marine plant observations)
+    CLIM4 <- paste0('AND (', climate[1], ' IS NOT NULL')
+    for(clim in climate[-1]){
+        CLIM4 <- paste(CLIM4, " OR ", clim, " IS NOT NULL")
+    }
+    CLIM4 <- paste0(CLIM4, ')')
+
     # Formatting the request-----------------------------------------------------
     if(dbname == 'crest_example') { # Some parameters are not availble in the example database
         DATE <- ''
@@ -151,7 +158,8 @@ getDistribTaxa <- function(taxIDs,
       "     ", ELEVRANGE, '   ',
       "     ", GEO_terr, " ",
       "     ", GEO_mari, " ",
-      "     ", WWF, " "
+      "     ", WWF, " ",
+      "     ", CLIM4, " "
     )
     res2 <- dbRequest(req2, dbname)
 

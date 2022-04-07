@@ -1,3 +1,4 @@
+
 # crestr 1.0.1
 
 * Minor bugs fixed on the plots
@@ -9,15 +10,18 @@
     * Adding caption on LOO diagram (+ and - anomalies)
     * Fixing title problem on plot_diagram()
     * Adding a colouring option for hiatus(es) on plot.crestObj()
+    * Fixed problem of opening empty plotting windows when exporting the figures to files
 
 
 * Replacing the parameter fullPosterior by fullUncertainties in export().
 
 * Typos in the documentation have been fixed.
 
-* Fixed problem of opening empty plotting windows when exporting the figures to files
-
 * The text of the vignettes was updated to reflect changes in the manuscript. Nothing really significant.
+
+* Fixing bug related to ai.sqrt in crest.get_modern_data(). Only the cliate space data were transformed.
+
+* Excluding all the distribution grid cells without any climate data.
 
 
 # crestr 1.0.0
