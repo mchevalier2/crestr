@@ -11,6 +11,7 @@
     * Fixing title problem on plot_diagram()
     * Adding a colouring option for hiatus(es) on plot.crestObj()
     * Fixed problem of opening empty plotting windows when exporting the figures to files
+    * Changing default value for bar_width in plot_loo() and plot_diagram()
 
 
 * Replacing the parameter fullPosterior by fullUncertainties in export().
@@ -19,7 +20,7 @@
 
 * The text of the vignettes was updated to reflect changes in the manuscript. Nothing really significant.
 
-* Fixing bug related to ai.sqrt in crest.get_modern_data(). Only the cliate space data were transformed.
+* Fixing bug related to ai.sqrt in crest.get_modern_data(). Only the climate space data were transformed.
 
 * Excluding all the distribution grid cells without any climate data.
 

@@ -16,7 +16,7 @@ plot_diagram(
   as.png = FALSE,
   png.res = 300,
   yax_incr = 5,
-  bar_width = 1,
+  bar_width = diff(range(x$inputs$x))/50,
   xlim = NA,
   tickAtSample = TRUE,
   col_pos = "black",
@@ -58,7 +58,7 @@ Default is \code{FALSE} and the figure is saved as a pdf file.}
 \item{yax_incr}{Graphical parameters describing the increment size on the
 y-axis (default 5).}
 
-\item{bar_width}{Width of the bars of the barplot (default 1).}
+\item{bar_width}{Width of the bars of the barplot (default 1/50th of the x range).}
 
 \item{xlim}{The range covered by the x-axis. Can be adjusted to get round
 numbers on the x-axis. If smaller than the range covered by the data,

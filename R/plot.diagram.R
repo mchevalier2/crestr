@@ -20,7 +20,7 @@
 #' @param height The height of the output file in inches (default 9in ~ 23cm).
 #' @param yax_incr Graphical parameters describing the increment size on the
 #'        y-axis (default 5).
-#' @param bar_width Width of the bars of the barplot (default 1).
+#' @param bar_width Width of the bars of the barplot (default 1/50th of the x range).
 #' @param xlim The range covered by the x-axis. Can be adjusted to get round
 #'        numbers on the x-axis. If smaller than the range covered by the data,
 #'        the data will be truncated (default: range of the data).
@@ -49,7 +49,7 @@ plot_diagram <- function(x, bars=FALSE,
                          save=FALSE, filename='Diagram.pdf',
                          width=3.54, height= 9,
                          as.png = FALSE, png.res=300,
-                         yax_incr = 5, bar_width=1,
+                         yax_incr = 5, bar_width = diff(range(x$inputs$x))/50,
                          xlim=NA, tickAtSample=TRUE,
                          col_pos = 'black', col_neg='grey80', title=NA) {
 
@@ -141,6 +141,8 @@ plot_diagram <- function(x, bars=FALSE,
     plot(x[, 1], x[, 1], type='n', xlim=xrange2, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
 
     if(bars) {
+        print(x[,1])
+        print(cs)
         bar_width <- bar_width/2
         for(i in 2:ncol(x)) {
             for(j in 1:nrow(x)) {

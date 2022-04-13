@@ -45,7 +45,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       save=FALSE, filename='Diagram_loo.pdf',
                       as.png = FALSE, png.res=300,
                       width=3.54, height= 9,
-                      yax_incr = NA, bar_width=1,
+                      yax_incr = NA, bar_width = diff(range(x$inputs$x))/50,
                       xlim=NA, tickAtSample=FALSE,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
 

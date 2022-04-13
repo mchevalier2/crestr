@@ -564,6 +564,9 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         for (tax in crest$inputs$taxa.name) {
             crest$modelling$distributions[[tax]][, 'ai'] <- sqrt(crest$modelling$distributions[[tax]][, 'ai'])
         }
+        if((!is.na(crest$misc$site_info[['long']])) & (!is.na(crest$misc$site_info[['lat']]))) {
+            crest$misc$site_info$climate$'ai' <- sqrt(crest$misc$site_info$climate$'ai')
+        }
     }
 
     resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[, 1])))))[1] / 2.0
