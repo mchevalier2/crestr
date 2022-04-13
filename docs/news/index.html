@@ -99,7 +99,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Applications
      
     <span class="caret"></span>
@@ -152,20 +152,34 @@
 <li>
 <p>Minor bugs fixed on the plots</p>
 <ul>
-<li>Title of the LOO plot adapted from ‘variable name [unit]’ to ‘Leave-one-out anomalies for\nvariable name [unit]’</li>
-<li>Title of stratigraphic diagrams can spread across many lines now</li>
-<li>The thickness of the lines on the samplePDFs plot has been revised to show a greater range.</li>
-<li>Labels added to the y-axes on the histograms of the climate space plot.</li>
-<li>Labels added to the y-axis of the histograms and pdf plots of the taxaCharacteristics figure.</li>
+<li>Title of the LOO plot adapted from ‘variable name [unit]’ to
+‘Leave-one-out anomalies for\nvariable name [unit]’</li>
+<li>Title of stratigraphic diagrams can spread across many lines
+now</li>
+<li>The thickness of the lines on the samplePDFs plot has been revised
+to show a greater range.</li>
+<li>Labels added to the y-axes on the histograms of the climate space
+plot.</li>
+<li>Labels added to the y-axis of the histograms and pdf plots of the
+taxaCharacteristics figure.</li>
 <li>Adding caption on LOO diagram (+ and - anomalies)</li>
 <li>Fixing title problem on plot_diagram()</li>
 <li>Adding a colouring option for hiatus(es) on plot.crestObj()</li>
+<li>Fixed problem of opening empty plotting windows when exporting the
+figures to files</li>
+<li>Changing default value for bar_width in plot_loo() and
+plot_diagram()</li>
 </ul>
 </li>
-<li><p>Replacing the parameter fullPosterior by fullUncertainties in export().</p></li>
+<li><p>Replacing the parameter fullPosterior by fullUncertainties in
+export().</p></li>
 <li><p>Typos in the documentation have been fixed.</p></li>
-<li><p>Fixed problem of opening empty plotting windows when exporting the figures to files</p></li>
-<li><p>The text of the vignettes was updated to reflect changes in the manuscript. Nothing really significant.</p></li>
+<li><p>The text of the vignettes was updated to reflect changes in the
+manuscript. Nothing really significant.</p></li>
+<li><p>Fixing bug related to ai.sqrt in crest.get_modern_data(). Only
+the climate space data were transformed.</p></li>
+<li><p>Excluding all the distribution grid cells without any climate
+data.</p></li>
 </ul>
 </div>
     <div id="crestr-100" class="section level1">
@@ -182,7 +196,8 @@
 <a href="#crestr-0009000" class="anchor"></a>crestr 0.0.0.9000<small> Unreleased </small>
 </h1>
 <ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Added a <code>NEWS.md</code> file to track changes to the
+package.</li>
 </ul>
 </div>
   </div>

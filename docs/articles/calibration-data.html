@@ -59,7 +59,7 @@
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Applications
      
     <span class="caret"></span>
@@ -97,13 +97,13 @@
 
       
 
-      </header><script src="calibration-data_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><script src="calibration-data_files/header-attrs-2.13/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Calibration data for CREST</h1>
                         <h4 class="author">Manuel Chevalier</h4>
             
-            <h4 class="date">2022-02-02</h4>
+            <h4 class="date">2022-04-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/calibration-data.Rmd"><code>vignettes/calibration-data.Rmd</code></a></small>
       <div class="hidden name"><code>calibration-data.Rmd</code></div>
@@ -115,18 +115,67 @@
 <div id="source-of-the-calibration-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#source-of-the-calibration-data" class="anchor"></a>Source of the calibration data</h2>
-<p>A multiproxy calibration dataset to estimate PDFs from a global collection of geolocalised presence-only data (hereafter proxy distributions) was first presented in <a href="#chevalier2019">[1]</a>. These data were obtained from the <a href="https://www.gbif.org/" target="_blank">Global Biodiversity Information Facility (GBIF) database</a>, an online collection of geolocalised observations of biological entities. The calibration dataset (hereafter <em>gbif4crest</em>) contains the species distributions of six common palaeoecological fossil: the five taxa presented in the original version of the dataset — plants [<a href="#gbif_antheceropsida20">2</a>-<a href="#gbif_polypodiopsida20">12</a>] for fossil pollen and macrofossils, chironomids <a href="#GBIF_chironomids20">[13]</a>, beetles <a href="#GBIF_beetles20">[14]</a>, diatoms <a href="#GBIF_diatoms20">[15]</a> and foraminifera <a href="#GBIF_forams20">[16]</a> – to which rodents <a href="#GBIF_rodents20">[17]</a> were recently added (<strong>Fig. 1</strong>).</p>
+<p>A multiproxy calibration dataset to estimate PDFs from a global
+collection of geolocalised presence-only data (hereafter proxy
+distributions) was first presented in <a href="#chevalier2019">[1]</a>.
+These data were obtained from the <a href="https://www.gbif.org/" target="_blank">Global Biodiversity Information Facility (GBIF)
+database</a>, an online collection of geolocalised observations of
+biological entities. The calibration dataset (hereafter
+<em>gbif4crest</em>) contains the species distributions of six common
+palaeoecological fossil: the five taxa presented in the original version
+of the dataset — plants [<a href="#gbif_antheceropsida20">2</a>-<a href="#gbif_polypodiopsida20">12</a>] for fossil pollen and
+macrofossils, chironomids <a href="#GBIF_chironomids20">[13]</a>,
+beetles <a href="#GBIF_beetles20">[14]</a>, diatoms <a href="#GBIF_diatoms20">[15]</a> and foraminifera <a href="#GBIF_forams20">[16]</a> – to which rodents <a href="#GBIF_rodents20">[17]</a> were recently added (<strong>Fig.
+1</strong>).</p>
 <div class="figure" style="text-align: center">
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/fig-gbif_v1.png" alt="**Fig. 1** Data density of the six climate proxies available in the gbif4crest calibration database. The total number of unique species occurrences (N) is indicated for each proxy. The maps are based on the ‘Equal Earth’ map projection to better account for the relative sizes of the different continents." width="90%"><p class="caption">
-<strong>Fig. 1</strong> Data density of the six climate proxies available in the gbif4crest calibration database. The total number of unique species occurrences (N) is indicated for each proxy. The maps are based on the ‘Equal Earth’ map projection to better account for the relative sizes of the different continents.
+<strong>Fig. 1</strong> Data density of the six climate proxies
+available in the gbif4crest calibration database. The total number of
+unique species occurrences (N) is indicated for each proxy. The maps are
+based on the ‘Equal Earth’ map projection to better account for the
+relative sizes of the different continents.
 </p>
 </div>
 <p><br></p>
-<p>The coordinates of all the presence records of these six common palaeoecological fossil proxies were upscaled at a spatial resolution of 0.25 x 0.25° (hereafter QDGC for Quarter-Degree Grid Cell) and subsequently associated with terrestrial and oceanic environmental variables at the same resolution [<a href="#Fick_Hijmans_2017">18</a>-<a href="#Reynolds2007">24</a>] (see details in <strong>Table 1</strong>). The QDGC spatial resolution is an empirical trade-off between numerous factors, including the resolution of the presence data, the quality of the data or the spatial representativity of the studied proxy. However, this tradeoff may be suboptimal in some situations, and for that reason, <code>crestr</code> can also be used with the raw GBIF data and even alternative calibration datasets.</p>
-<p>In its current version (V2), the <em>gbif4crest</em> calibration dataset contains about 25.3 million unique presence data for the six proxies. Unfortunately, the density of available data varies strongly between proxies and regions (<strong>Fig. 1</strong>). Plant data dominate the calibration dataset (&gt;22 million unique occurrences) and allow for the use of <code>crestr</code> across all landmasses where vegetation currently grows. For the five other proxies, the datasets are still incomplete in many regions, restricting the use of <code>crestr</code> (<em>e.g.</em> chironomids). However, these datasets are regularly updated by GBIF. For example, the first version of the <em>gbif4crest</em> dataset released in 2018 contained about 17.5 million QDGC entries, but the new version presented here contains nearly 25.3 million entries (~44% increase). The range of ‘reconstructible’ areas is thus rapidly broadening (see, for instance, the coverage of Russia by plant data compared to the first version of the <em>gbif4crest</em> dataset <a href="#chevalier2019">[1]</a>.</p>
+<p>The coordinates of all the presence records of these six common
+palaeoecological fossil proxies were upscaled at a spatial resolution of
+0.25 x 0.25° (hereafter QDGC for Quarter-Degree Grid Cell) and
+subsequently associated with terrestrial and oceanic environmental
+variables at the same resolution [<a href="#Fick_Hijmans_2017">18</a>-<a href="#Reynolds2007">24</a>] (see details in <strong>Table 1</strong>).
+The QDGC spatial resolution is an empirical trade-off between numerous
+factors, including the resolution of the presence data, the quality of
+the data or the spatial representativity of the studied proxy. However,
+this tradeoff may be suboptimal in some situations, and for that reason,
+<code>crestr</code> can also be used with the raw GBIF data and even
+alternative calibration datasets.</p>
+<p>In its current version (V2), the <em>gbif4crest</em> calibration
+dataset contains about 25.3 million unique presence data for the six
+proxies. Unfortunately, the density of available data varies strongly
+between proxies and regions (<strong>Fig. 1</strong>). Plant data
+dominate the calibration dataset (&gt;22 million unique occurrences) and
+allow for the use of <code>crestr</code> across all landmasses where
+vegetation currently grows. For the five other proxies, the datasets are
+still incomplete in many regions, restricting the use of
+<code>crestr</code> (<em>e.g.</em> chironomids). However, these datasets
+are regularly updated by GBIF. For example, the first version of the
+<em>gbif4crest</em> dataset released in 2018 contained about 17.5
+million QDGC entries, but the new version presented here contains nearly
+25.3 million entries (~44% increase). The range of ‘reconstructible’
+areas is thus rapidly broadening (see, for instance, the coverage of
+Russia by plant data compared to the first version of the
+<em>gbif4crest</em> dataset <a href="#chevalier2019">[1]</a>.</p>
 <p><br></p>
-<p><strong>Table 1</strong> List of terrestrial and marine variables available in the <em>gbif4crest</em> database. Each one can be selected in crestr using its associated code. List of abbreviations: (Temp.) Temperature, (Precip.) Precipitation, (SST) Sea Surface Temperature, (SSS) Sea Surface Salinity.</p>
+<p><strong>Table 1</strong> List of terrestrial and marine variables
+available in the <em>gbif4crest</em> database. Each one can be selected
+in crestr using its associated code. List of abbreviations: (Temp.)
+Temperature, (Precip.) Precipitation, (SST) Sea Surface Temperature,
+(SSS) Sea Surface Salinity.</p>
 <table class="table">
+<colgroup>
+<col width="13%">
+<col width="57%">
+<col width="29%">
+</colgroup>
 <thead><tr class="header">
 <th>Code</th>
 <th>Full name</th>
@@ -335,47 +384,143 @@
 <div id="processing-and-storage-of-the-calibration-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#processing-and-storage-of-the-calibration-data" class="anchor"></a>Processing and storage of the calibration data</h2>
-<p>All these data were curated in a relational database to ensure the consistency of the data (<strong>Fig. 2</strong>). The <em>gbif4crest</em> database is composed of three main types of data: taxonomic data (<code>TAXA</code> table on <strong>Fig. 2</strong>), distribution data (<code>DISTRIB</code> and <code>DISTRIB_QDGC</code> tables) and diverse geopolitical, climatological and environmental data (<code>DATA_QDGC</code> table). Its structure is slightly different from the first version, with a grouping of all the distinct QDGC tables in a unique <code>DATA_QDGC</code> table to enable a faster data extraction. Additional environmental and geographical descriptors were added to characterise each grid cell and enable a more refined data selection. These include elevation and elevation variability <a href="#ETOPO">[25]</a>, the country (<a href="https://www.naturalearthdata.com" target="_blank">www.naturalearthdata.com</a>) or ocean (<a href="https://www.marineregions.org" target="_blank">www.marineregions.org</a>) names, as well as different levels of ecological classification for the terrestrial <a href="#olson2001">[26]</a> and marine <a href="#Costello2017">[27]</a> realms. The first and last observation dates are also now included, along with the type of observation, as reported by GBIF (see <code>DISTRIB_QDGC</code> table on <strong>Fig. 2</strong>). Finally, the <code>DATA</code> table was entirely recalculated using a new protocol that better accounts for coastal margins. Climate values at some locations are thus expected to be slightly different from the first version of the <em>gbif4crest</em> dataset.</p>
+<p>All these data were curated in a relational database to ensure the
+consistency of the data (<strong>Fig. 2</strong>). The
+<em>gbif4crest</em> database is composed of three main types of data:
+taxonomic data (<code>TAXA</code> table on <strong>Fig. 2</strong>),
+distribution data (<code>DISTRIB</code> and <code>DISTRIB_QDGC</code>
+tables) and diverse geopolitical, climatological and environmental data
+(<code>DATA_QDGC</code> table). Its structure is slightly different from
+the first version, with a grouping of all the distinct QDGC tables in a
+unique <code>DATA_QDGC</code> table to enable a faster data extraction.
+Additional environmental and geographical descriptors were added to
+characterise each grid cell and enable a more refined data selection.
+These include elevation and elevation variability <a href="#ETOPO">[25]</a>, the country (<a href="https://www.naturalearthdata.com" target="_blank">www.naturalearthdata.com</a>) or ocean (<a href="https://www.marineregions.org" target="_blank">www.marineregions.org</a>) names, as well as different
+levels of ecological classification for the terrestrial <a href="#olson2001">[26]</a> and marine <a href="#Costello2017">[27]</a>
+realms. The first and last observation dates are also now included,
+along with the type of observation, as reported by GBIF (see
+<code>DISTRIB_QDGC</code> table on <strong>Fig. 2</strong>). Finally,
+the <code>DATA</code> table was entirely recalculated using a new
+protocol that better accounts for coastal margins. Climate values at
+some locations are thus expected to be slightly different from the first
+version of the <em>gbif4crest</em> dataset.</p>
 <p><br></p>
 <div class="figure">
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/fig-gbiftables_v1.png" alt="**FiG. 2** Structure of the gbif4crest PostgreSQL database. By default, the package extracts data from the TAXA, DISTRIB-QDGC and DATA-QDGC tables. The DISTRIB table contains the raw occurrence data and can be used to process the data at a different spatial resolution for example." width="100%" style="background:none; border:none; box-shadow:none;"><p class="caption">
-<strong>FiG. 2</strong> Structure of the gbif4crest PostgreSQL database. By default, the package extracts data from the TAXA, DISTRIB-QDGC and DATA-QDGC tables. The DISTRIB table contains the raw occurrence data and can be used to process the data at a different spatial resolution for example.
+<strong>FiG. 2</strong> Structure of the gbif4crest PostgreSQL database.
+By default, the package extracts data from the TAXA, DISTRIB-QDGC and
+DATA-QDGC tables. The DISTRIB table contains the raw occurrence data and
+can be used to process the data at a different spatial resolution for
+example.
 </p>
 </div>
 <p><br></p>
-<p>Due to its large size (about 15 Gb), this database is not downloaded when installing the package, but it can be assessed differently. First, the data are stored in an open-access, cloud-based PostgreSQL database that can be dynamically accessed via <code>crestr</code>. This is the recommended option, as users without any <em>a priori</em> SQL knowledge can benefit from the package’s interface to automatically query the database simply by providing study-specific parameters, such as the name of the taxa or boundaries for the study area, to import all the necessary data in the correct format to the R environment. Second, advanced users can also directly query the database to extract and curate data from the <code>DISTRIB</code> or <code>DISTRIB_QDGC</code> tables using the <a href="https://mchevalier2.github.io/crestr/reference/dbRequest.html">dbRequest()</a> function, and subsequently associate these data with climate variables. Finally, the complete <em>gbif4crest</em> calibration dataset can also be downloaded as a SQLite3 portable database file from <a href="https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207" target="_blank">here</a>.</p>
+<p>Due to its large size (about 15 Gb), this database is not downloaded
+when installing the package, but it can be assessed differently. First,
+the data are stored in an open-access, cloud-based PostgreSQL database
+that can be dynamically accessed via <code>crestr</code>. This is the
+recommended option, as users without any <em>a priori</em> SQL knowledge
+can benefit from the package’s interface to automatically query the
+database simply by providing study-specific parameters, such as the name
+of the taxa or boundaries for the study area, to import all the
+necessary data in the correct format to the R environment. Second,
+advanced users can also directly query the database to extract and
+curate data from the <code>DISTRIB</code> or <code>DISTRIB_QDGC</code>
+tables using the <a href="https://mchevalier2.github.io/crestr/reference/dbRequest.html">dbRequest()</a>
+function, and subsequently associate these data with climate variables.
+Finally, the complete <em>gbif4crest</em> calibration dataset can also
+be downloaded as a SQLite3 portable database file from <a href="https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207" target="_blank">here</a>.</p>
 <p><br></p>
 </div>
 <div id="ref" class="section level2">
 <h2 class="hasAnchor">
 <a href="#ref" class="anchor"></a>References</h2>
-<p><strong>[1]</strong> <a id="chevalier2019"></a> Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. <a href="https://www.doi.org/10.1016/j.earscirev.2020.103384" target="_blank">doi:10.1016/j.earscirev.2020.103384</a>.</p>
-<p><strong>[2]</strong> <a id="gbif_antheceropsida20"></a> GBIF, 2020, Anthocerotopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.t9zenf" target="_blank">doi:10.15468/dl.t9zenf</a>.</p>
-<p><strong>[3]</strong> <a id="gbif_bryophyta21"></a> GBIF, 2021, Bryophyta occurrence data downloaded on August 2nd, 2021. <a href="https://doi.org/10.15468/DL.WD527G" target="_blank">doi:10.15468/DL.WD527G</a>.</p>
-<p><strong>[4]</strong> <a id="gbif_Cycadopsida20"></a> GBIF, 2020, Cycadopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.sfjzxu" target="_blank">doi:10.15468/dl.sfjzxu</a>.</p>
-<p><strong>[5]</strong> <a id="gbif_gingkoopsida20"></a> GBIF, 2020, Gingkoopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.da9wz8" target="_blank">doi:10.15468/dl.da9wz8</a>.</p>
-<p><strong>[6]</strong> <a id="gbif_gnetopsida20"></a> GBIF, 2020, Gnetopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.h2kjnc" target="_blank">doi:10.15468/dl.h2kjnc</a>.</p>
-<p><strong>[7]</strong> <a id="gbif_liliopsida20"></a> GBIF, 2020, Liliopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.axv3yd" target="_blank">doi:10.15468/dl.axv3yd</a>.</p>
-<p><strong>[8]</strong> <a id="gbif_lycopodiopsida20"></a> GBIF, 2020, Lycopodiopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.ydhyhz" target="_blank">doi:10.15468/dl.ydhyhz</a>.</p>
-<p><strong>[9]</strong> <a id="gbif_Magnoliopsida20"></a> GBIF, 2020, Magnoliopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.ra49dt" target="_blank">doi:10.15468/dl.ra49dt</a>.</p>
-<p><strong>[10]</strong> <a id="gbif_marchantiophyta21"></a> GBIF, 2021, Marchantiophyta occurrence data downloaded on August 2nd, 2021. <a href="https://doi.org/10.15468/DL.M2SSE4" target="_blank">doi:10.15468/DL.M2SSE4</a>.</p>
-<p><strong>[11]</strong> <a id="gbif_pinopsida20"></a> GBIF, 2020, Pinopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.x2r7pa" target="_blank">doi:10.15468/dl.x2r7pa</a>.</p>
-<p><strong>[12]</strong> <a id="gbif_polypodiopsida20"></a> GBIF, 2020, Polypodiopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.87tbp6" target="_blank">doi:10.15468/dl.87tbp6</a>.</p>
-<p><strong>[13]</strong> <a id="GBIF_chironomids20"></a> GBIF, 2020, Chironomids occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.jv3wsh" target="_blank">doi:10.15468/dl.jv3wsh</a>.</p>
-<p><strong>[14]</strong> <a id="GBIF_beetles20"></a> GBIF, 2020, Beetles occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.nteruy" target="_blank">doi:10.15468/dl.nteruy</a>.</p>
-<p><strong>[15]</strong> <a id="GBIF_diatoms20"></a> GBIF, 2020, Diatoms occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.vfr257" target="_blank">doi:10.15468/dl.vfr257</a>.</p>
-<p><strong>[16]</strong> <a id="GBIF_forams20"></a> GBIF, 2020, Foraminifera occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.692yg6" target="_blank">doi:10.15468/dl.692yg6</a>.</p>
-<p><strong>[17]</strong> <a id="GBIF_rodents20"></a> GBIF, 2020, Rodentia occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.fscw6q" target="_blank">doi:10.15468/dl.fscw6q</a>.</p>
-<p><strong>[18]</strong> <a id="Fick_Hijmans_2017"></a> Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302–4315. <a href="https://doi.org/10.1002/joc.5086" target="_blank">doi:10.1002/joc.5086</a>.</p>
-<p><strong>[19]</strong> <a id="Zomer2008"></a> Zomer, R.J., Trabucco, A., Bossio, D.A. and Verchot, L. V., 2008, Climate change mitigation: A spatial analysis of global land suitability for clean development mechanism afforestation and reforestation. Agriculture, Ecosystems &amp; Environment, 126, pp. 67–80. <a href="https://doi.org/10.1016/j.agee.2008.01.014" target="_blank">doi:10.1016/j.agee.2008.01.014</a>.</p>
-<p><strong>[20]</strong> <a id="WOA_2018_temp"></a> Locarnini, R.A., Mishonov, A.V., Baranova, O.K., Boyer, T.P., Zweng, M.M., Garcia, H.E., Reagan, J.R., Seidov, D., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others, 2019, World ocean atlas 2018, volume 1: Temperature. NOAA Atlas NESDIS 81, pp. 52pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
-<p><strong>[21]</strong> <a id="WOA_2018_salinity"></a> Zweng, M.M., Seidov, D., Boyer, T.P., Locarnini, R.A., Garcia, H.E., Mishonov, A.V., Baranova, O.K., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others, 2018, World Ocean Atlas 2018, Volume 2: Salinity. NOAA Atlas NESDIS 82, pp. 50pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
-<p><strong>[22]</strong> <a id="WOA_2018_oxy"></a> Garcia, H.E., Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini, R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D. and Reagan, J.R., 2019, World Ocean Atlas 2018, Volume 3: Dissolved Oxygen, Apparent Oxygen Utilization, and Dissolved Oxygen Saturation.. NOAA Atlas NESDIS 83, pp. 38pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
-<p><strong>[23]</strong> <a id="WOA_2018_nutrients"></a> Garcia, H.E., Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini, R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D., Reagan, J.R. and Others, 2019, World Ocean Atlas 2018. Vol. 4: Dissolved Inorganic Nutrients (phosphate, nitrate and nitrate+nitrite, silicate). NOAA Atlas NESDIS 84, pp. 35pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
-<p><strong>[24]</strong> <a id="Reynolds2007"></a> Reynolds, R.W., Smith, T.M., Liu, C., Chelton, D.B., Casey, K.S. and Schlax, M.G., 2007, Daily high-resolution-blended analyses for sea surface temperature. Journal of Climate, 20, pp. 5473–5496. <a href="https://www.researchgate.net/publication/235641869_Daily_High-Resolution-Blended_Analyses_for_Sea_Surface_Temperature" target="_blank">doi:10.1175/2007JCLI1824.1</a>.</p>
-<p><strong>[25]</strong> <a id="ETOPO"></a> Amante, C. and Eakins, B.W., 2009, Etopo1 1 Arc-Minute Global Relief Model: Procedures, Data Sources and Analysis. NOAA Technical Memorandum NESDIS NGDC-24. National Geophysical Data Center, NOAA. <a href="https://doi.org/10.7289/V5C8276M" target="_blank">doi:10.7289/V5C8276M</a>.</p>
-<p><strong>[26]</strong> <a id="olson2001"></a> Olson, D.M., Dinerstein, E., Wikramanayake, E.D., Burgess, N.D., Powell, G.V.N., Underwood, E.C., D’amico, J.A., Itoua, I., Strand, H.E., Morrison, J.C., Loucks, C.J., Allnutt, T.F., Ricketts, T.H., Kura, Y., Lamoreux, J.F., Wettengel, W.W., Hedao, P. and Kassem, K.R., 2001, Terrestrial Ecoregions of the World: A New Map of Life on Earth: A new global map of terrestrial ecoregions provides an innovative tool for conserving biodiversity. BioScience, 51, pp. 933. <a href="https://doi.org/10.1641/0006-3568(2001)051%5B0933:TEOTWA%5D2.0.CO;2" target="_blank">doi:10.1641/0006-3568(2001)051[0933:TEOTWA]2.0.CO;2</a>.</p>
-<p><strong>[27]</strong> <a id="Costello2017"></a> Costello, M.J., Tsai, P., Wong, P.S., Cheung, A.K.L., Basher, Z. and Chaudhary, C., 2017, Marine biogeographic realms and species endemicity. Nature Communications, 8, pp. 1–9. <a href="https://doi.org/10.1038/s41467-017-01121-2" target="_blank">doi:10.1038/s41467-017-01121-2</a>.</p>
+<p><strong>[1]</strong> <a id="chevalier2019"></a> Chevalier, M., 2019.
+Enabling possibilities to quantify past climate from fossil assemblages
+at a global scale. Global and Planetary Change, 175, pp. 27–35. <a href="https://www.doi.org/10.1016/j.earscirev.2020.103384" target="_blank">doi:10.1016/j.earscirev.2020.103384</a>.</p>
+<p><strong>[2]</strong> <a id="gbif_antheceropsida20"></a> GBIF, 2020,
+Anthocerotopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.t9zenf" target="_blank">doi:10.15468/dl.t9zenf</a>.</p>
+<p><strong>[3]</strong> <a id="gbif_bryophyta21"></a> GBIF, 2021,
+Bryophyta occurrence data downloaded on August 2nd, 2021. <a href="https://doi.org/10.15468/DL.WD527G" target="_blank">doi:10.15468/DL.WD527G</a>.</p>
+<p><strong>[4]</strong> <a id="gbif_Cycadopsida20"></a> GBIF, 2020,
+Cycadopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.sfjzxu" target="_blank">doi:10.15468/dl.sfjzxu</a>.</p>
+<p><strong>[5]</strong> <a id="gbif_gingkoopsida20"></a> GBIF, 2020,
+Gingkoopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.da9wz8" target="_blank">doi:10.15468/dl.da9wz8</a>.</p>
+<p><strong>[6]</strong> <a id="gbif_gnetopsida20"></a> GBIF, 2020,
+Gnetopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.h2kjnc" target="_blank">doi:10.15468/dl.h2kjnc</a>.</p>
+<p><strong>[7]</strong> <a id="gbif_liliopsida20"></a> GBIF, 2020,
+Liliopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.axv3yd" target="_blank">doi:10.15468/dl.axv3yd</a>.</p>
+<p><strong>[8]</strong> <a id="gbif_lycopodiopsida20"></a> GBIF, 2020,
+Lycopodiopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.ydhyhz" target="_blank">doi:10.15468/dl.ydhyhz</a>.</p>
+<p><strong>[9]</strong> <a id="gbif_Magnoliopsida20"></a> GBIF, 2020,
+Magnoliopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.ra49dt" target="_blank">doi:10.15468/dl.ra49dt</a>.</p>
+<p><strong>[10]</strong> <a id="gbif_marchantiophyta21"></a> GBIF, 2021,
+Marchantiophyta occurrence data downloaded on August 2nd, 2021. <a href="https://doi.org/10.15468/DL.M2SSE4" target="_blank">doi:10.15468/DL.M2SSE4</a>.</p>
+<p><strong>[11]</strong> <a id="gbif_pinopsida20"></a> GBIF, 2020,
+Pinopsidae occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.x2r7pa" target="_blank">doi:10.15468/dl.x2r7pa</a>.</p>
+<p><strong>[12]</strong> <a id="gbif_polypodiopsida20"></a> GBIF, 2020,
+Polypodiopsida occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.87tbp6" target="_blank">doi:10.15468/dl.87tbp6</a>.</p>
+<p><strong>[13]</strong> <a id="GBIF_chironomids20"></a> GBIF, 2020,
+Chironomids occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.jv3wsh" target="_blank">doi:10.15468/dl.jv3wsh</a>.</p>
+<p><strong>[14]</strong> <a id="GBIF_beetles20"></a> GBIF, 2020, Beetles
+occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.nteruy" target="_blank">doi:10.15468/dl.nteruy</a>.</p>
+<p><strong>[15]</strong> <a id="GBIF_diatoms20"></a> GBIF, 2020, Diatoms
+occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.vfr257" target="_blank">doi:10.15468/dl.vfr257</a>.</p>
+<p><strong>[16]</strong> <a id="GBIF_forams20"></a> GBIF, 2020,
+Foraminifera occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.692yg6" target="_blank">doi:10.15468/dl.692yg6</a>.</p>
+<p><strong>[17]</strong> <a id="GBIF_rodents20"></a> GBIF, 2020,
+Rodentia occurrence data downloaded on September 24th, 2020. <a href="https://doi.org/10.15468/dl.fscw6q" target="_blank">doi:10.15468/dl.fscw6q</a>.</p>
+<p><strong>[18]</strong> <a id="Fick_Hijmans_2017"></a> Fick, S.E. and
+Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate
+surfaces for global land areas. International Journal of Climatology,
+37, pp. 4302–4315. <a href="https://doi.org/10.1002/joc.5086" target="_blank">doi:10.1002/joc.5086</a>.</p>
+<p><strong>[19]</strong> <a id="Zomer2008"></a> Zomer, R.J., Trabucco,
+A., Bossio, D.A. and Verchot, L. V., 2008, Climate change mitigation: A
+spatial analysis of global land suitability for clean development
+mechanism afforestation and reforestation. Agriculture, Ecosystems &amp;
+Environment, 126, pp. 67–80. <a href="https://doi.org/10.1016/j.agee.2008.01.014" target="_blank">doi:10.1016/j.agee.2008.01.014</a>.</p>
+<p><strong>[20]</strong> <a id="WOA_2018_temp"></a> Locarnini, R.A.,
+Mishonov, A.V., Baranova, O.K., Boyer, T.P., Zweng, M.M., Garcia, H.E.,
+Reagan, J.R., Seidov, D., Weathers, K.W., Paver, C.R., Smolyar, I.V. and
+Others, 2019, World ocean atlas 2018, volume 1: Temperature. NOAA Atlas
+NESDIS 81, pp. 52pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
+<p><strong>[21]</strong> <a id="WOA_2018_salinity"></a> Zweng, M.M.,
+Seidov, D., Boyer, T.P., Locarnini, R.A., Garcia, H.E., Mishonov, A.V.,
+Baranova, O.K., Weathers, K.W., Paver, C.R., Smolyar, I.V. and Others,
+2018, World Ocean Atlas 2018, Volume 2: Salinity. NOAA Atlas NESDIS 82,
+pp. 50pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
+<p><strong>[22]</strong> <a id="WOA_2018_oxy"></a> Garcia, H.E.,
+Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini,
+R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D. and
+Reagan, J.R., 2019, World Ocean Atlas 2018, Volume 3: Dissolved Oxygen,
+Apparent Oxygen Utilization, and Dissolved Oxygen Saturation.. NOAA
+Atlas NESDIS 83, pp. 38pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
+<p><strong>[23]</strong> <a id="WOA_2018_nutrients"></a> Garcia, H.E.,
+Weathers, K.W., Paver, C.R., Smolyar, I.V., Boyer, T.P., Locarnini,
+R.A., Zweng, M.M., Mishonov, A.V., Baranova, O.K., Seidov, D., Reagan,
+J.R. and Others, 2019, World Ocean Atlas 2018. Vol. 4: Dissolved
+Inorganic Nutrients (phosphate, nitrate and nitrate+nitrite, silicate).
+NOAA Atlas NESDIS 84, pp. 35pp. <a href="https://www.ncei.noaa.gov/access/world-ocean-atlas-2018/" target="_blank">data access</a>.</p>
+<p><strong>[24]</strong> <a id="Reynolds2007"></a> Reynolds, R.W.,
+Smith, T.M., Liu, C., Chelton, D.B., Casey, K.S. and Schlax, M.G., 2007,
+Daily high-resolution-blended analyses for sea surface temperature.
+Journal of Climate, 20, pp. 5473–5496. <a href="https://www.researchgate.net/publication/235641869_Daily_High-Resolution-Blended_Analyses_for_Sea_Surface_Temperature" target="_blank">doi:10.1175/2007JCLI1824.1</a>.</p>
+<p><strong>[25]</strong> <a id="ETOPO"></a> Amante, C. and Eakins, B.W.,
+2009, Etopo1 1 Arc-Minute Global Relief Model: Procedures, Data Sources
+and Analysis. NOAA Technical Memorandum NESDIS NGDC-24. National
+Geophysical Data Center, NOAA. <a href="https://doi.org/10.7289/V5C8276M" target="_blank">doi:10.7289/V5C8276M</a>.</p>
+<p><strong>[26]</strong> <a id="olson2001"></a> Olson, D.M., Dinerstein,
+E., Wikramanayake, E.D., Burgess, N.D., Powell, G.V.N., Underwood, E.C.,
+D’amico, J.A., Itoua, I., Strand, H.E., Morrison, J.C., Loucks, C.J.,
+Allnutt, T.F., Ricketts, T.H., Kura, Y., Lamoreux, J.F., Wettengel,
+W.W., Hedao, P. and Kassem, K.R., 2001, Terrestrial Ecoregions of the
+World: A New Map of Life on Earth: A new global map of terrestrial
+ecoregions provides an innovative tool for conserving biodiversity.
+BioScience, 51, pp. 933. <a href="https://doi.org/10.1641/0006-3568(2001)051%5B0933:TEOTWA%5D2.0.CO;2" target="_blank">doi:10.1641/0006-3568(2001)051[0933:TEOTWA]2.0.CO;2</a>.</p>
+<p><strong>[27]</strong> <a id="Costello2017"></a> Costello, M.J., Tsai,
+P., Wong, P.S., Cheung, A.K.L., Basher, Z. and Chaudhary, C., 2017,
+Marine biogeographic realms and species endemicity. Nature
+Communications, 8, pp. 1–9. <a href="https://doi.org/10.1038/s41467-017-01121-2" target="_blank">doi:10.1038/s41467-017-01121-2</a>.</p>
 <p><br></p>
 </div>
   </div>

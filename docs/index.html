@@ -64,7 +64,7 @@
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Applications
      
     <span class="caret"></span>
@@ -108,11 +108,26 @@
 <p><br></p>
 <div id="crestr-an-r-package-to-perform-probabilistic-palaeoclimate-reconstructions-from-palaeoecological-datasets" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#crestr-an-r-package-to-perform-probabilistic-palaeoclimate-reconstructions-from-palaeoecological-datasets" class="anchor"></a><strong>crestr</strong> An R package to perform probabilistic palaeoclimate reconstructions from palaeoecological datasets</h1></div>
-<p>The goal of <code>crestr</code> is to produce probabilistic reconstructions of past climate change from fossil assemblage data <a href="https://cp.copernicus.org/preprints/cp-2021-153/">(Chevalier, 2021)</a>. The approach is based on the estimation of responses of studies bio-proxy studied to climate parameters using probability density functions (<em>PDFs</em>; see <a href="https://www.doi.org/10.5194/cp-10-2081-2014">Chevalier <em>et al.</em> (2014)</a> and <a href="https://www.doi.org/10.1016/j.gloplacha.2019.01.016">Chevalier (2019)</a>). The theory underpinning this package is explained in section <a href="https://mchevalier2.github.io/crestr/articles/theory.html"><em>A bit of theory</em></a> and is illustrated with an application based on pseudo-data in section <a href="https://mchevalier2.github.io/crestr/articles/get-started.html"><em>Get Started</em></a>. The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.</p>
+<a href="#crestr-an-r-package-to-perform-probabilistic-palaeoclimate-reconstructions-from-palaeoecological-datasets" class="anchor"></a><strong>crestr</strong> An R package to perform probabilistic
+palaeoclimate reconstructions from palaeoecological datasets</h1></div>
+<p>The goal of <code>crestr</code> is to produce probabilistic
+reconstructions of past climate change from fossil assemblage data <a href="https://cp.copernicus.org/preprints/cp-2021-153/">(Chevalier,
+2021)</a>. The approach is based on the estimation of responses of
+studies bio-proxy studied to climate parameters using probability
+density functions (<em>PDFs</em>; see <a href="https://www.doi.org/10.5194/cp-10-2081-2014">Chevalier <em>et
+al.</em> (2014)</a> and <a href="https://www.doi.org/10.1016/j.gloplacha.2019.01.016">Chevalier
+(2019)</a>). The theory underpinning this package is explained in
+section <a href="https://mchevalier2.github.io/crestr/articles/theory.html"><em>A
+bit of theory</em></a> and is illustrated with an application based on
+pseudo-data in section <a href="https://mchevalier2.github.io/crestr/articles/get-started.html"><em>Get
+Started</em></a>. The different vignettes present different aspects of
+the structure of the package and the data it contains, along with
+applications based on real data.</p>
 <p><br></p>
 <blockquote>
-<p><strong><em>NOTE:</em></strong> If you notice any bug, or if you would like to see some specific functions implemented, you can contact me at <a href="mailto:chevalier.manuel@gmail.com" class="email">chevalier.manuel@gmail.com</a>.</p>
+<p><strong><em>NOTE:</em></strong> If you notice any bug, or if you
+would like to see some specific functions implemented, you can contact
+me at <a href="mailto:chevalier.manuel@gmail.com" class="email">chevalier.manuel@gmail.com</a>.</p>
 </blockquote>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -130,7 +145,16 @@
 <a href="#example-applications" class="anchor"></a>Example applications</h2>
 <p><br></p>
 <p><img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" title="plot of chunk img1" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;"></p>
-<p><em>(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey (<a href="https://www.doi.org/10.1016/j.gloplacha.2019.01.016">Chevalier, 2019</a>), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 (<a href="https://www.doi.org/10.1130/G47841.1">Chevalier et al., 2021</a>).</em></p>
+<p><em>(A) density of presence records available in my calibration
+dataset upscaled at a 1° resolution. The diamonds represent the location
+of the pollen records used to generate the reconstructions presented in
+B-D, and the coloured boxes represent the extent of their respective
+calibration zones. (B) Annual precipitation reconstructions from Lake
+Van, Turkey (<a href="https://www.doi.org/10.1016/j.gloplacha.2019.01.016">Chevalier,
+2019</a>), (C) Mean annual temperature reconstruction from Laguna de
+Fùquene, Colombia (unpublished) and (D) Mean Annual temperature
+reconstruction from marine core MD96-2048 (<a href="https://www.doi.org/10.1130/G47841.1">Chevalier et al.,
+2021</a>).</em></p>
 </div>
 <div id="crest-in-the-scientific-literature" class="section level2">
 <h2 class="hasAnchor">
@@ -140,61 +164,100 @@
 <li>
 <strong>2021</strong>
 <ul>
-<li>Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021, Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology, 49, pp. 71–75. <a href="https://www.doi.org/10.1016/j.palaeo.2021.110609">10.1016/j.palaeo.2021.110609</a>
+<li>Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson,
+T.C., 2021, Temperature change in subtropical southeastern Africa during
+the past 790,000 yr. Geology, 49, pp. 71–75. <a href="https://www.doi.org/10.1016/j.palaeo.2021.110609">10.1016/j.palaeo.2021.110609</a>
 </li>
-<li>Hui, Z., Zhou, X., Chevalier, M., Wei, X., Pan, Y. and Chen, Y., 2021, Miocene East Asia summer monsoon precipitation variability and its possible driving forces. Palaeogeography, Palaeoclimatology, Palaeoecology, pp. 110609. <a href="https://www.doi.org/10.1130/G47841.1">10.1130/G47841.1</a>
+<li>Hui, Z., Zhou, X., Chevalier, M., Wei, X., Pan, Y. and Chen, Y.,
+2021, Miocene East Asia summer monsoon precipitation variability and its
+possible driving forces. Palaeogeography, Palaeoclimatology,
+Palaeoecology, pp. 110609. <a href="https://www.doi.org/10.1130/G47841.1">10.1130/G47841.1</a>
 </li>
-<li>Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A. and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation change from the southwestern Cape coast, South Africa. Quaternary Research, pp. 1–18. <a href="https://www.doi.org/10.1017/qua.2021.31">10.1017/qua.2021.31</a>
+<li>Quick, L.J., Chase, B.M., Carr, A.S., Chevalier, M., Grobler, B.A.
+and Meadows, M.E., 2021, A 25,000 year record of climate and vegetation
+change from the southwestern Cape coast, South Africa. Quaternary
+Research, pp. 1–18. <a href="https://www.doi.org/10.1017/qua.2021.31">10.1017/qua.2021.31</a>
 </li>
-<li>Romero, I. C., Nuñez Otaño, N. B., Gibson, M. E., Spears, T. M., Fairchild, C. J., Tarlton, L., Jones, S., Belkin, H. E., Warny, S., Pound, M. J. and O’Keefe, J. M. K., 2021, First Record of Fungal Diversity in the Tropical and Warm-Temperate Middle Miocene Climate Optimum Forests of Eurasia, Frontiers in Forests and Global Change, 1–18. <a href="https://www.doi.org/10.3389/ffgc.2021.768405">10.3389/ffgc.2021.768405</a>
+<li>Romero, I. C., Nuñez Otaño, N. B., Gibson, M. E., Spears, T. M.,
+Fairchild, C. J., Tarlton, L., Jones, S., Belkin, H. E., Warny, S.,
+Pound, M. J. and O’Keefe, J. M. K., 2021, First Record of Fungal
+Diversity in the Tropical and Warm-Temperate Middle Miocene Climate
+Optimum Forests of Eurasia, Frontiers in Forests and Global Change,
+1–18. <a href="https://www.doi.org/10.3389/ffgc.2021.768405">10.3389/ffgc.2021.768405</a>
 </li>
 </ul>
 </li>
 <li>
 <strong>2020</strong>
 <ul>
-<li>Yi, S., Jun, C.P., Jo, K. nam, Lee, H., Kim, M.S., Lee, S.D., Cao, X. and Lim, J., 2020, Asynchronous multi-decadal time-scale series of biotic and abiotic responses to precipitation during the last 1300 years. Scientific Reports, 10, pp. 1–10. <a href="https://www.doi.org/10.1038/s41598-020-74994-x">10.1038/s41598-020-74994-x</a>
+<li>Yi, S., Jun, C.P., Jo, K. nam, Lee, H., Kim, M.S., Lee, S.D., Cao,
+X. and Lim, J., 2020, Asynchronous multi-decadal time-scale series of
+biotic and abiotic responses to precipitation during the last 1300
+years. Scientific Reports, 10, pp. 1–10. <a href="https://www.doi.org/10.1038/s41598-020-74994-x">10.1038/s41598-020-74994-x</a>
 </li>
 </ul>
 </li>
 <li>
 <strong>2019</strong>
 <ul>
-<li>Chevalier, M., 2019, Enabling possibilities to quantify past climate from fossil assemblages at a global scale. Global and Planetary Change, 175, pp. 27–35. <a href="https://www.doi.org/10.1016/j.gloplacha.2019.01.016">10.1016/j.gloplacha.2019.01.016</a>
+<li>Chevalier, M., 2019, Enabling possibilities to quantify past climate
+from fossil assemblages at a global scale. Global and Planetary Change,
+175, pp. 27–35. <a href="https://www.doi.org/10.1016/j.gloplacha.2019.01.016">10.1016/j.gloplacha.2019.01.016</a>
 </li>
 </ul>
 </li>
 <li>
 <strong>2017</strong>
 <ul>
-<li>Cordova, C.E., Scott, L., Chase, B.M. and Chevalier, M., 2017, Late Pleistocene-Holocene vegetation and climate change in the Middle Kalahari, Lake Ngami, Botswana. Quaternary Science Reviews, 171, pp. 199–215. <a href="https://www.doi.org/10.1016/j.quascirev.2017.06.036">10.1016/j.quascirev.2017.06.036</a>
+<li>Cordova, C.E., Scott, L., Chase, B.M. and Chevalier, M., 2017, Late
+Pleistocene-Holocene vegetation and climate change in the Middle
+Kalahari, Lake Ngami, Botswana. Quaternary Science Reviews, 171,
+pp. 199–215. <a href="https://www.doi.org/10.1016/j.quascirev.2017.06.036">10.1016/j.quascirev.2017.06.036</a>
 </li>
 </ul>
 </li>
 <li>
 <strong>2016</strong>
 <ul>
-<li>Lim, S., Chase, B.M., Chevalier, M. and Reimer, P.J., 2016, 50,000 years of climate in the Namib Desert, Pella, South Africa. Palaeogeography, Palaeoclimatology, Palaeoecology, 451, pp. 197–209. <a href="https://www.doi.org/10.1016/j.palaeo.2016.03.001">10.1016/j.palaeo.2016.03.001</a>
+<li>Lim, S., Chase, B.M., Chevalier, M. and Reimer, P.J., 2016, 50,000
+years of climate in the Namib Desert, Pella, South Africa.
+Palaeogeography, Palaeoclimatology, Palaeoecology, 451, pp. 197–209. <a href="https://www.doi.org/10.1016/j.palaeo.2016.03.001">10.1016/j.palaeo.2016.03.001</a>
 </li>
-<li>Chevalier, M. and Chase, B.M., 2016, Determining the drivers of long-term aridity variability: a southern African case study. Journal of Quaternary Science, 31, pp. 143–151. <a href="https://www.doi.org/10.1002/jqs.2850">10.1002/jqs.2850</a>
+<li>Chevalier, M. and Chase, B.M., 2016, Determining the drivers of
+long-term aridity variability: a southern African case study. Journal of
+Quaternary Science, 31, pp. 143–151. <a href="https://www.doi.org/10.1002/jqs.2850">10.1002/jqs.2850</a>
 </li>
 </ul>
 </li>
 <li>
 <strong>2015</strong>
 <ul>
-<li>Chase, B.M., Lim, S., Chevalier, M., Boom, A., Carr, A.S., Meadows, M.E. and Reimer, P.J., 2015, Influence of tropical easterlies in the southwestern Cape of Africa during the Holocene. Quaternary Science Reviews, 107, pp. 138–148.<a href="https://www.doi.org/10.1016/j.quascirev.2014.10.011">10.1016/j.quascirev.2014.10.011</a>
+<li>Chase, B.M., Lim, S., Chevalier, M., Boom, A., Carr, A.S., Meadows,
+M.E. and Reimer, P.J., 2015, Influence of tropical easterlies in the
+southwestern Cape of Africa during the Holocene. Quaternary Science
+Reviews, 107, pp. 138–148.<a href="https://www.doi.org/10.1016/j.quascirev.2014.10.011">10.1016/j.quascirev.2014.10.011</a>
 </li>
-<li>Chase, B.M., Boom, A., Carr, A.S., Carré, M., Chevalier, M., Meadows, M.E., Pedro, J.B., Stager, J.C. and Reimer, P.J., 2015, Evolving southwest African response to abrupt deglacial North Atlantic climate change events. Quaternary Science Reviews, 121, pp. 132–136. <a href="https://www.doi.org/10.1016/j.quascirev.2015.05.023">10.1016/j.quascirev.2015.05.023</a>
+<li>Chase, B.M., Boom, A., Carr, A.S., Carré, M., Chevalier, M.,
+Meadows, M.E., Pedro, J.B., Stager, J.C. and Reimer, P.J., 2015,
+Evolving southwest African response to abrupt deglacial North Atlantic
+climate change events. Quaternary Science Reviews, 121, pp. 132–136. <a href="https://www.doi.org/10.1016/j.quascirev.2015.05.023">10.1016/j.quascirev.2015.05.023</a>
 </li>
-<li>Chevalier, M. and Chase, B.M., 2015, Southeast African records reveal a coherent shift from high- to low-latitude forcing mechanisms along the east African margin across last glacial–interglacial transition. Quaternary Science Reviews, 125, pp. 117–130. <a href="https://www.doi.org/10.1016/j.quascirev.2015.07.009">10.1016/j.quascirev.2015.07.009</a>
+<li>Chevalier, M. and Chase, B.M., 2015, Southeast African records
+reveal a coherent shift from high- to low-latitude forcing mechanisms
+along the east African margin across last glacial–interglacial
+transition. Quaternary Science Reviews, 125, pp. 117–130. <a href="https://www.doi.org/10.1016/j.quascirev.2015.07.009">10.1016/j.quascirev.2015.07.009</a>
 </li>
 </ul>
 </li>
 <li>
 <strong>2013</strong>
 <ul>
-<li>Truc, L., Chevalier, M., Favier, C., Cheddadi, R., Meadows, M.E., Scott, L., Carr, A.S., Smith, G.F. and Chase, B.M., 2013, Quantification of climate change for the last 20,000 years from Wonderkrater, South Africa: implications for the long-term dynamics of the Intertropical Convergence Zone. Palaeogeography, Palaeoclimatology, Palaeoecology, 386, pp. 575–587. <a href="https://www.doi.org/10.1016/j.palaeo">10.1016/j.palaeo</a>
+<li>Truc, L., Chevalier, M., Favier, C., Cheddadi, R., Meadows, M.E.,
+Scott, L., Carr, A.S., Smith, G.F. and Chase, B.M., 2013, Quantification
+of climate change for the last 20,000 years from Wonderkrater, South
+Africa: implications for the long-term dynamics of the Intertropical
+Convergence Zone. Palaeogeography, Palaeoclimatology, Palaeoecology,
+386, pp. 575–587. <a href="https://www.doi.org/10.1016/j.palaeo">10.1016/j.palaeo</a>
 </li>
 </ul>
 </li>
@@ -203,20 +266,30 @@
 <p><img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-01.png" title="plot of chunk img2" alt="plot of chunk img2" width="100%" style="background:none; border:none; box-shadow:none;"></p>
 <p><img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" title="plot of chunk img4" alt="plot of chunk img4" width="100%" style="background:none; border:none; box-shadow:none;"></p>
 <p>Last update: 24/08/2021</p>
-<p>N.B.: This list is as exhaustive as possible, but some studies may be missing. Contact me if you want your study to be added.</p>
+<p>N.B.: This list is as exhaustive as possible, but some studies may be
+missing. Contact me if you want your study to be added.</p>
 <p><br></p>
 </div>
 <div id="references" class="section level2">
 <h2 class="hasAnchor">
 <a href="#references" class="anchor"></a>References</h2>
 <ul>
-<li>Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction SofTware): a probability density function (PDF)-based quantitative climate reconstruction method. <em>Clim. Past</em> 10, 2081–2098. <a href="http://https://www.doi.org/10.5194/cp-10-2081-2014">10.5194/cp-10-2081-2014</a>
+<li>Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate
+REconstruction SofTware): a probability density function (PDF)-based
+quantitative climate reconstruction method. <em>Clim. Past</em> 10,
+2081–2098. <a href="http://https://www.doi.org/10.5194/cp-10-2081-2014">10.5194/cp-10-2081-2014</a>
 </li>
-<li>Chevalier, M., 2019. Enabling possibilities to quantify past climate from fossil assemblages at a global scale. <em>Glob. Planet. Change</em> 175, 27–35. <a href="http://https://www.doi.org/10.1016/j.gloplacha.2019.01.016">10.1016/j.gloplacha.2019.01.016</a>
+<li>Chevalier, M., 2019. Enabling possibilities to quantify past climate
+from fossil assemblages at a global scale. <em>Glob. Planet. Change</em>
+175, 27–35. <a href="http://https://www.doi.org/10.1016/j.gloplacha.2019.01.016">10.1016/j.gloplacha.2019.01.016</a>
 </li>
-<li>Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. <em>Geology</em> 49, 71–75. <a href="http://https://www.doi.org/10.1130/G47841.1">10.1130/G47841.1</a>
+<li>Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson,
+T.C., 2021. Temperature change in subtropical southeastern Africa during
+the past 790,000 yr. <em>Geology</em> 49, 71–75. <a href="http://https://www.doi.org/10.1130/G47841.1">10.1130/G47841.1</a>
 </li>
-<li>Chevalier, M., 2021. crestr An R package to perform probabilistic climate reconstructions using fossil proxies. <em>Clim. Past Disc.</em>. <a href="http://www.doi.org/10.5194/cp-2021-153">10.5194/cp-2021-153</a>
+<li>Chevalier, M., 2021. crestr An R package to perform probabilistic
+climate reconstructions using fossil proxies. <em>Clim. Past Disc.</em>.
+<a href="http://www.doi.org/10.5194/cp-2021-153">10.5194/cp-2021-153</a>
 </li>
 </ul>
 </div>

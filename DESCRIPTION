@@ -12,7 +12,7 @@ Description: Applies the CREST climate reconstruction
              through the package or by importing private data. An ensemble of
              graphical outputs were designed to facilitate the use of the
              package and the interpretation of the results. More information can
-             be found form Chevalier (2021) <doi:10.5194/cp-2021-153>.
+             be obtained from Chevalier (2021) <doi:10.5194/cp-2021-153>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
