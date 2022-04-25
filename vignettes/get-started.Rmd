@@ -268,7 +268,7 @@ list.files(file.path(tempdir(), 'crest-test'))
 
 ## References {#ref}
 
-**[1]** <a id="crestr"></a> Chevalier, M., 2021. _crestr_ An R package to perform probabilistic climate reconstructions using fossil proxies. Clim. Past Disc. [doi:10.5194/cp-2021-153](https://www.doi.org/10.5194/cp-2021-153){target="_blank"}.
+**[1]** <a id="crestr"></a> Chevalier, M., 2022. _crestr_ an R package to perform probabilistic climate reconstructions from palaeoecological datasets. Clim. Past. [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022){target="_blank"}.
 
 **[2]** <a id="ChevalierLimpopo"></a> Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021. Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology 49, 71–75. [10.1130/G47841.1](https://www.doi.org/10.1130/G47841.1){target="_blank"}.
 

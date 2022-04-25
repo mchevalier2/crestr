@@ -1,9 +1,60 @@
 ---
 title: "cran-comments"
 author: "Manuel Chevalier"
-date: "03/11/2021"
+date: "25/04/2022"
 output: github_document
 ---
+
+
+
+# Submission of crestr v1.0.2 (25/04/2022)
+
+This version contains very small adjustements of the package, as described below. Most changes are aestetic in nature and relate to the design of the plots.
+
+## List of changes
+
+* Minor bugs fixed on the plots
+    * Title of the LOO plot adapted from 'variable name [unit]' to 'Leave-one-out anomalies for\nvariable name [unit]'
+    * Title of stratigraphic diagrams can spread across many lines now
+    * The thickness of the lines on the samplePDFs plot has been revised to show a greater range.
+    * Labels added to the y-axes on the histograms of the climate space plot.
+    * Labels added to the y-axis of the histograms and pdf plots of the taxaCharacteristics figure.
+    * Adding caption on LOO diagram (+ and - anomalies)
+    * Fixing title problem on plot_diagram()
+    * Adding a colouring option for hiatus(es) on plot.crestObj()
+    * Fixed problem of opening empty plotting windows when exporting the figures to files
+    * Changing default value for bar_width in plot_loo() and plot_diagram()
+
+* Replacing the parameter fullPosterior by fullUncertainties in export().
+
+* Typos in the documentation have been fixed.
+
+* The text of the vignettes was updated to reflect changes in the manuscript. Nothing really significant.
+
+* Fixing bug related to ai.sqrt in crest.get_modern_data(). Only the climate space data were transformed.
+
+* Excluding all the distribution grid cells without any climate data.
+
+* Replaced class(dat) == 'RasterLayer' by inherits(dat, 'RasterLayer')
+
+* Improved documentation
+
+## Tests
+
+I ran the same tests as I did to release v1.0.0, and did not get any ERRORS or WARNINGS. Some tests gave NOTES, but these are not things I can or should fix.
+
+* Possibly misspelled words in DESCRIPTION: Palaeoecological (3:9)
+    * This is the proper spelling of the word in British English, and it is in the title of the reference. It cannot be changed.
+* Found the following (possibly) invalid URLs: URL: https://doi.org/10.1002/joc.5086 and URL: https://www.doi.org/10.1002/jqs.2850. Status: 503. Message: Service Unavailable
+    * These links function perfectly. The note only appeared for one test.
+* checking for detritus in the temp directory ... NOTE Found the following files/directories: lastMiKTeXException'
+    * Not sure how to act on that.
+
+
+
+
+
+
 
 # Re-submission #2
 

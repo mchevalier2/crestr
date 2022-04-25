@@ -24,6 +24,10 @@
 
 * Excluding all the distribution grid cells without any climate data.
 
+* Replaced class(dat) == 'RasterLayer' by inherits(dat, 'RasterLayer')
+
+* Improved documentation
+
 
 # crestr 1.0.0
 

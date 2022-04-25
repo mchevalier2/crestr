@@ -1,6 +1,6 @@
 Package: crestr
 Title: A Probabilistic Approach to Reconstruct Past Climates Using Palaeoecological Datasets
-Version: 1.0.1
+Version: 1.0.2
 Authors@R:
     person(given = "Manuel",
            family = "Chevalier",
@@ -12,7 +12,7 @@ Description: Applies the CREST climate reconstruction
              through the package or by importing private data. An ensemble of
              graphical outputs were designed to facilitate the use of the
              package and the interpretation of the results. More information can
-             be obtained from Chevalier (2021) <doi:10.5194/cp-2021-153>.
+             be obtained from Chevalier (2022) <doi:10.5194/cp-18-821-2022>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

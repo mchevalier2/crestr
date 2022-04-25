@@ -33,7 +33,7 @@ These responses take the form of probability density functions (*PDFs*). The
 details of the method have been described in
 [Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014), the
 calibrated data are presented in
-[Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the package is fully described in [Chevalier (2021)](https://cp.copernicus.org/preprints/cp-2021-153/).
+[Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the package is fully described in [Chevalier (2022)](https://cp.copernicus.org/articles/18/821/2022/).
 
 
 ## Installation
@@ -193,5 +193,8 @@ unlink(file.path(getwd(), 'crest-test'), recursive=TRUE)
    SofTware): a probability density function (PDF)-based quantitative climate
    reconstruction method. *Clim. Past* 10, 2081–2098. [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
  - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
-   fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35. [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
- - Chevalier, M., 2021. _crestr_ An R package to perform probabilistic climate reconstructions using fossil proxies. *Clim. Past Disc.*. [10.5194/cp-2021-153](http://www.doi.org/10.5194/cp-2021-153)
+   fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35.
+   [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+ - Chevalier, M., 2022. _crestr_ an R package to perform probabilistic climate
+   reconstructions from palaeoecological datasets. Clim. Past
+   [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)

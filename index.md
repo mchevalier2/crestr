@@ -9,7 +9,7 @@
 
 # **crestr** An R package to perform probabilistic palaeoclimate reconstructions from palaeoecological datasets
 
-The goal of `crestr` is to produce probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2021)](https://cp.copernicus.org/preprints/cp-2021-153/). The approach is based on the estimation of responses of studies bio-proxy studied to climate parameters using probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://mchevalier2.github.io/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://mchevalier2.github.io/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
+The goal of `crestr` is to produce probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2022)](https://cp.copernicus.org/articles/18/821/2022/). The approach is based on the estimation of responses of studies bio-proxy studied to climate parameters using probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://mchevalier2.github.io/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://mchevalier2.github.io/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
 
 <br >
 
@@ -92,4 +92,6 @@ N.B.: This list is as exhaustive as possible, but some studies may be missing. C
  - Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021.
    Temperature change in subtropical southeastern Africa during the past 790,000 yr.
    _Geology_ 49, 71–75. [10.1130/G47841.1](http://https://www.doi.org/10.1130/G47841.1)
- - Chevalier, M., 2021. crestr An R package to perform probabilistic climate reconstructions using fossil proxies. *Clim. Past Disc.*. [10.5194/cp-2021-153](http://www.doi.org/10.5194/cp-2021-153)
+ - Chevalier, M., 2022. _crestr_ an R package to perform probabilistic climate
+   reconstructions from palaeoecological datasets. Clim. Past
+   [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)

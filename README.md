@@ -30,7 +30,7 @@ functions (*PDFs*). The details of the method have been described in
 the calibrated data are presented in [Chevalier
 (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the
 package is fully described in [Chevalier
-(2021)](https://cp.copernicus.org/preprints/cp-2021-153/).
+(2022)](https://cp.copernicus.org/articles/18/821/2022/).
 
 ## Installation
 
@@ -299,6 +299,6 @@ list.files(file.path(getwd(), 'crest-test'))
     from fossil assemblages at a global scale. *Glob. Planet. Change*
     175, 27–35.
     [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
--   Chevalier, M., 2021. *crestr* An R package to perform probabilistic
-    climate reconstructions using fossil proxies. *Clim. Past Disc.*.
-    [10.5194/cp-2021-153](http://www.doi.org/10.5194/cp-2021-153)
+-   Chevalier, M., 2022. *crestr* an R package to perform probabilistic
+    climate reconstructions from palaeoecological datasets. Clim. Past
+    [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)
