@@ -1,6 +1,6 @@
 Package: crestr
 Title: A Probabilistic Approach to Reconstruct Past Climates Using Palaeoecological Datasets
-Version: 1.0.2
+Version: 1.0.3.9000
 Authors@R:
     person(given = "Manuel",
            family = "Chevalier",

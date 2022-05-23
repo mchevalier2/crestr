@@ -261,6 +261,17 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         colnames(selectedTaxa) <- climate
     }
 
+    sendWarning <- FALSE
+    for(clim in climate) {
+        if( !clim %in% colnames(selectedTaxa) ) {
+            selectedTaxa <- cbind(selectedTaxa, rep(1, nrow(selectedTaxa)))
+            colnames(selectedTaxa)[ncol(selectedTaxa)] <- clim
+            sendWarning <- TRUE
+        }
+    }
+    if(sendWarning)  warning("One or more of the selected variables were not in the selectedTaxa table (check for typos?). Missing columns have been added with a default value of 1.\n")
+
+
     taxa_notes <- list()
     for (tax in taxa_to_ignore) {
         message <- 'Taxon not in the proxy_species_equivalency table.'

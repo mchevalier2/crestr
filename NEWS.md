@@ -1,3 +1,10 @@
+# creste 1.0.3
+
+* Fixing minor bugs, including:
+    * If the `climate` field didn't match the column names of `selectedTaxa`, some functions were crashing (at least `plot_climateSpace`) because no distribution data were extracted.
+
+
+
 # creste 1.0.2
 
 * Replaced class(dat) == 'RasterLayer' by inherits(dat, 'RasterLayer')
