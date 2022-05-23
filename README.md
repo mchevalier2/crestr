@@ -17,9 +17,9 @@ status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org
 ![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) [![GitHub R
 package
 version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
-<br > \[![Total
-downloads](https://cranlogs.r-pkg.org/badges/grand-total/crestr)
-\[![Monthly dowloads](https://cranlogs.r-pkg.org/badges/crestr) <br >
+<br > ![Total
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/crestr) ![Last
+month dowloads](https://cranlogs.r-pkg.org/badges/crestr) <br >
 
 <!-- badges: end -->
 
