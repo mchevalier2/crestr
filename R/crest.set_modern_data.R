@@ -64,7 +64,33 @@ crest.set_modern_data <- function( distributions, climate,
         if(! 'weight' %in% colnames(distributions) ) {
             cat("[FAILED]\n\n")
             stop("You selected 'weight=TRUE' but did not provide weights in your distribution data frame.\n")
-            return()
+        }
+    }
+
+    if(colnames(distributions)[1] != 'taxonid') {
+        warning("The first column of 'distributions' was renamed 'taxonid'.")
+        colnames(distributions)[1] = 'taxonid'
+    }
+    if(colnames(distributions)[2] != 'ProxyName') {
+        warning("The second column of 'distributions' was renamed 'ProxyName'.")
+        colnames(distributions)[2] = 'ProxyName'
+    }
+    if(colnames(distributions)[3] != 'longitude') {
+        warning("The third column of 'distributions' was renamed 'longitude'.")
+        colnames(distributions)[3] = 'longitude'
+    }
+    if(colnames(distributions)[4] != 'latitude') {
+        warning("The fourth column of 'distributions' was renamed 'latitude'.")
+        colnames(distributions)[4] = 'latitude'
+    }
+    if(is.data.frame(climate_space)) {
+        if(colnames(climate_space)[1] != 'longitude') {
+            warning("The first column of 'climate_space' was renamed 'longitude'.")
+            colnames(climate_space)[1] = 'longitude'
+        }
+        if(colnames(climate_space)[2] != 'latitude') {
+            warning("The second column of 'climate_space' was renamed 'latitude'.")
+            colnames(climate_space)[2] = 'latitude'
         }
     }
 
@@ -189,7 +215,6 @@ crest.set_modern_data <- function( distributions, climate,
             crest$parameters$weightedPresences <- FALSE
         }
     }
-    crest$modelling$distributions <- distributions
 
     if(verbose) cat('[OK]\n  <> Checking the climate space ............ ')
     if(is.data.frame(climate_space)) {
@@ -199,6 +224,7 @@ crest.set_modern_data <- function( distributions, climate,
         crest$modelling$climate_space <- unique(distributions[, -which(colnames(distributions) %in% c('taxonid', 'ProxyName', 'weight'))])
     }
     crest$modelling$climate_space <- cbind(crest$modelling$climate_space[, c(1,2)], crest$modelling$climate_space[, climate])
+    colnames(crest$modelling$climate_space)[-(1:2)] <- climate
 
     resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[, 1])))))[1] / 2.0
     xx <- range(crest$modelling$climate_space[, 1])
