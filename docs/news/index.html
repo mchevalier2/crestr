@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.3.9000</span>
       </span>
     </div>
 
@@ -144,6 +144,34 @@
       <small>Source: <a href='https://github.com/mchevalier2/crestr/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="crestr-103" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.3">
+<a href="#crestr-103" class="anchor"></a>crestr 1.0.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fixing minor bugs, including:
+<ul>
+<li>If the <code>climate</code> field didn’t match the column names of
+<code>selectedTaxa</code>, some functions were crashing (at least
+<code>plot_climateSpace</code>) because no distribution data were
+extracted.</li>
+<li>Checks to ensure the column names of climate_space and distributions
+are correct for <code><a href="../reference/crest.set_modern_data.html">crest.set_modern_data()</a></code>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+    <div id="crestr-102" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.2">
+<a href="#crestr-102" class="anchor"></a>crestr 1.0.2<small> 2022-04-25 </small>
+</h1>
+<ul>
+<li><p>Replaced class(dat) == ‘RasterLayer’ by inherits(dat,
+‘RasterLayer’)</p></li>
+<li><p>Improved documentation</p></li>
+</ul>
+</div>
     <div id="crestr-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">
 <a href="#crestr-101" class="anchor"></a>crestr 1.0.1<small> Unreleased </small>
@@ -180,9 +208,6 @@ manuscript. Nothing really significant.</p></li>
 the climate space data were transformed.</p></li>
 <li><p>Excluding all the distribution grid cells without any climate
 data.</p></li>
-<li><p>Replaced class(dat) == ‘RasterLayer’ by inherits(dat,
-‘RasterLayer’)</p></li>
-<li><p>Improved documentation</p></li>
 </ul>
 </div>
     <div id="crestr-100" class="section level1">
