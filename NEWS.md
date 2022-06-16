@@ -3,6 +3,7 @@
 * Fixing minor bugs, including:
     * If the `climate` field didn't match the column names of `selectedTaxa`, some functions were crashing (at least `plot_climateSpace`) because no distribution data were extracted.
     * Checks to ensure the column names of climate_space and distributions are correct for `crest.set_modern_data()`
+    * Check to ensure the `selectedTaxa` has default values for all selected variables.
 
 
 

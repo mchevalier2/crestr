@@ -113,6 +113,21 @@ crest.set_modern_data <- function( distributions, climate,
         colnames(selectedTaxa) <- climate
     }
 
+    ##> Checking if all variables are represented in selectedTaxa
+    var_to_add <- c()
+    for(clim in climate) {
+        if(!clim %in% colnames(selectedTaxa)){
+            var_to_add <- c(var_to_add, clim)
+        }
+    }
+    if(length(var_to_add) > 0){
+        warning(paste0("The following variable", ifelse(length(var_to_add) == 1, ' was', 's were'), ' not included in selectedTaxa. Now added with the default value of 1 for all taxa.'))
+        for(clim in var_to_add) {
+            selectedTaxa <- cbind(selectedTaxa, 1)
+            colnames(selectedTaxa)[ncol(selectedTaxa)] <- clim
+        }
+    }
+
     taxa_notes <- list()
     for (tax in taxa_to_ignore) {
         message <- 'Taxon not in the distribution table.'
