@@ -118,6 +118,7 @@ reference:
       - '`climate_from_xy`'
       - '`close_db_connection`'
       - '`connect_online`'
+      - '`connect_local_sqlite3`'
       - '`dbRequest`'
       - '`getClimateSpace`'
       - '`getDistribTaxa`'

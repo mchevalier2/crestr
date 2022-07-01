@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Describes all the variables available in the database. — accClimateVariables • crestr</title>
+<title>Connect to the gbif4crest calibration database — connect_local_sqlite3 • crestr</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Describes all the variables available in the database. — accClimateVariables" />
-<meta property="og:description" content="Provides the index and the short and full names of all the variables
-available in the database." />
+<meta property="og:title" content="Connect to the gbif4crest calibration database — connect_local_sqlite3" />
+<meta property="og:description" content="Connect to the gbif4crest_02 database using a local SQLite3 copy." />
 
 
 
@@ -142,46 +141,36 @@ available in the database." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Describes all the variables available in the database.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/dbFixedNames.R'><code>R/dbFixedNames.R</code></a></small>
-    <div class="hidden name"><code>accClimateVariables.Rd</code></div>
+    <h1>Connect to the gbif4crest calibration database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/mchevalier2/crestr/blob/master/R/dbConnect.R'><code>R/dbConnect.R</code></a></small>
+    <div class="hidden name"><code>connect_local_sqlite3.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Provides the index and the short and full names of all the variables
-available in the database.</p>
+    <p>Connect to the gbif4crest_02 database using a local SQLite3 copy.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>accClimateVariables</span><span class='op'>(</span>v <span class='op'>=</span> <span class='cn'>NA</span>, domain <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>connect_local_sqlite3</span><span class='op'>(</span>dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02.sqlite3"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>v</th>
-      <td><p>The name of a variable to quickly access its description and ID
-(default <code>NA</code> returns all possible values).</p></td>
-    </tr>
-    <tr>
-      <th>domain</th>
-      <td><p>The domain ('Terrestrial' or 'Marine') of the variables.
-Default value is <cite>NA</cite> and both terrestrial and marine climate
-variable names are returned.</p></td>
+      <th>dbname</th>
+      <td><p>The complete path to the SQLite3 file. The name should end by '.sqlite3'</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame descriptive of the climate variables available in the
-database (if <code>v=NA</code>) or the description of variable v.</p>
+    <p>An active connection to a database</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><a href='https://www.worldclim.org/data/bioclim.html'>https://www.worldclim.org/data/bioclim.html</a> for details on the 'bio' data, <a href='https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/'>https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/</a> for details on 'ai', <a href='https://www.ncei.noaa.gov/products/world-ocean-atlas'>https://www.ncei.noaa.gov/products/world-ocean-atlas</a> for details on the sea surface temperature, sea surface salinity and nutrient Concentration data, or <a href='https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html'>https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html</a> for the sea ice concentration data.</p></div>
+    <div class='dont-index'><p>The SQLite3 database can be downloaded from <a href='https://figshare.com/articles/GBIF_for_CREST_database/6743207'>https://figshare.com/articles/GBIF_for_CREST_database/6743207</a>.</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>accClimateVariables</span><span class='op'>(</span><span class='op'>)</span>
-  <span class='fu'>accClimateVariables</span><span class='op'>(</span>v<span class='op'>=</span><span class='st'>'bio12'</span><span class='op'>)</span>
+  <span class='va'>db</span> <span class='op'>&lt;-</span> <span class='fu'><a href='connect_online.html'>connect_online</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>}</span>
 
 </div></pre>
