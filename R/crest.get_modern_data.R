@@ -14,7 +14,7 @@
 #'        (default \code{TRUE}).
 #' @return A \code{\link{crestObj}} object containing the spatial distributions.
 #' @export
-#' @seealso The SQLite3 database can be downloaded from \url{https://figshare.com/articles/GBIF_for_CREST_database/6743207}.
+#' @seealso The SQLite3 database can be downloaded from \url{https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207}.
 #' @examples
 #' \dontrun{
 #'   data(crest_ex_pse)

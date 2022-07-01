@@ -10,6 +10,42 @@ output: github_document
 
 # Submission of crestr 1.1.0 (01/07/2022)
 
+## Resubmission
+
+* First NOTE about incorrect links (see below):
+    * The two links with changes have been corrected. The other three are correct and I do not know why they trigger a NOTE. They are valid URLs.
+
+```
+Found the following (possibly) invalid URLs:
+  URL: https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/ (moved to https://csidotinfo.wordpress.com/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/)
+    From: man/accClimateVariables.Rd
+    Status: 200
+    Message: OK
+  URL: https://doi.org/10.1002/joc.5086
+    From: inst/doc/calibration-data.html
+    Status: 503
+    Message: Service Unavailable
+  URL: https://figshare.com/articles/GBIF_for_CREST_database/6743207 (moved to https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207)
+    From: man/connect_local_sqlite3.Rd
+          man/crest.get_modern_data.Rd
+    Status: 200
+    Message: OK
+  URL: https://www.doi.org/10.1002/jqs.2850
+    From: inst/doc/theory.html
+    Status: 503
+    Message: Service Unavailable
+  URL: https://www.researchgate.net/publication/235641869_Daily_High-Resolution-Blended_Analyses_for_Sea_Surface_Temperature
+    From: inst/doc/calibration-data.html
+    Status: 403
+    Message: Forbidden
+```
+
+* Second NOTE about the present of an undesired file ('crestr_1.1.0.pdf')
+    * The file was removed.
+
+
+## First submission
+
 I have run several tests for windows, linux and osx, similarly to what I did for the previous version. No ERRORS or WARNINGS. Some tests generated a NOTE about the accessibility of some webpages. These links are correct and identifical to the previous versions of the package.
 
 * crestr is now compatible with the SQLite3 gbif4crest database. It is therefore usable offline.

@@ -36,7 +36,7 @@ connect_online <- function(dbname = "gbif4crest_02", port = 5432, host = "gbif4c
 #' @param dbname The complete path to the SQLite3 file. The name should end by '.sqlite3'
 #' @return An active connection to a database
 #' @export
-#' @seealso The SQLite3 database can be downloaded from \url{https://figshare.com/articles/GBIF_for_CREST_database/6743207}.
+#' @seealso The SQLite3 database can be downloaded from \url{https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207}.
 #' @examples
 #' \dontrun{
 #'   db <- connect_online()

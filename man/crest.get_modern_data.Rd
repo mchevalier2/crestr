@@ -147,5 +147,5 @@ taxon and return them as a list.
 
 }
 \seealso{
-The SQLite3 database can be downloaded from \url{https://figshare.com/articles/GBIF_for_CREST_database/6743207}.
+The SQLite3 database can be downloaded from \url{https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207}.
 }
