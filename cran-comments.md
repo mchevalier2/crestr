@@ -12,8 +12,8 @@ output: github_document
 
 I have run several tests for windows, linux and osx, similarly to what I did for the previous version. No ERRORS or WARNINGS. Some tests generated a NOTE about the accessibility of some webpages. These links are correct and identifical to the previous versions of the package.
 
-* crestr is now compatible with the SQLite3 gbif4crest database
-
+* crestr is now compatible with the SQLite3 gbif4crest database. It is therefore usable offline.
+    * Access: https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207
 
 
 # crestr 1.0.3
