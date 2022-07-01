@@ -24,7 +24,11 @@
 #' }
 #'
 dbRequest <- function(request, dbname = "gbif4crest_02") {
-    db <- connect_online(dbname)
+    if(stringr::str_detect(base::tolower(dbname), '.sqlite3')) {
+        db <- connect_local_sqlite3(dbname)
+    } else {
+        db <- connect_online(dbname)
+    }
     res <- DBI::dbGetQuery(db, request)
     close_db_connection(db)
     res

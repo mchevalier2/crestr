@@ -1,3 +1,8 @@
+# crestr 1.1.0
+
+* crestr is now compatible with the SQLite3 gbif4crest database
+
+
 # crestr 1.0.3
 
 * Fixing minor bugs, including:

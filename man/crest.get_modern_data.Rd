@@ -115,7 +115,10 @@ Default \code{c(NA, NA)}.}
 
 \item{site_name}{The name of the dataset (default \code{NA}).}
 
-\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'}.}
+\item{dbname}{The name of the database. Default is \code{'gbif4crest_02'} and
+data will be extracted from the online database. The SQLite3 version
+of the database can also be used here by providing the complete path
+to a file ending by \code{.sqlite3}, e.g. \code{/path/to/file/gbif4crest_02.sqlite3}}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal
 (default \code{TRUE}).}
@@ -142,4 +145,7 @@ taxon and return them as a list.
   lapply(x$modelling$distributions, head)
 }
 
+}
+\seealso{
+The SQLite3 database can be downloaded from \url{https://figshare.com/articles/GBIF_for_CREST_database/6743207}.
 }

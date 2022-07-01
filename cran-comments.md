@@ -1,10 +1,37 @@
 ---
 title: "cran-comments"
 author: "Manuel Chevalier"
-date: "25/04/2022"
+date: "01/07/2022"
 output: github_document
 ---
 
+
+
+
+# Submission of crestr 1.1.0 (01/07/2022)
+
+I have run several tests for windows, linux and osx, similarly to what I did for the previous version. No ERRORS or WARNINGS. Some tests generated a NOTE about the accessibility of some webpages. These links are correct and identifical to the previous versions of the package.
+
+* crestr is now compatible with the SQLite3 gbif4crest database
+
+
+
+# crestr 1.0.3
+
+This version has not been submitted to CRAN yet
+
+* Fixing minor bugs, including:
+    * If the `climate` field didn't match the column names of `selectedTaxa`, some functions were crashing (at least `plot_climateSpace`) because no distribution data were extracted.
+    * Checks to ensure the column names of climate_space and distributions are correct for `crest.set_modern_data()`
+    * Check to ensure the `selectedTaxa` has default values for all selected variables.
+
+
+
+
+
+
+<---------------------------------------------
+Previous submissions. Versions already on CRAN
 
 
 # Submission of crestr v1.0.2 (25/04/2022)

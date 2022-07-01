@@ -82,6 +82,14 @@ getClimateSpace <- function(climate,
         )
     }
 
+    # Removing the 'NULL' when using the SQLite3 database
+    NULLS <- ""
+    if(stringr::str_detect(base::tolower(dbname), '.sqlite3')) {
+        for(clim in climate) {
+            NULLS <- paste0(NULLS, paste0("  AND ", clim, " IS NOT 'NULL' ") )
+        }
+    } 
+
     # Formatting the request-----------------------------------------------------
     req <- paste0(
       "  SELECT DISTINCT longitude, latitude, ",
@@ -92,6 +100,7 @@ getClimateSpace <- function(climate,
       "     ", GEO_terr, " ",
       "     ", GEO_mari, " ",
       "     ", WWF, " ",
+      "     ", NULLS,
       "ORDER BY longitude, latitude"
     )
 

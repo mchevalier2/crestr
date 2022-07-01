@@ -6,11 +6,15 @@
 #'
 #' @inheritParams crestObj
 #' @inheritParams crest
-#' @param dbname The name of the database. Default is \code{'gbif4crest_02'}.
+#' @param dbname The name of the database. Default is \code{'gbif4crest_02'} and
+#'        data will be extracted from the online database. The SQLite3 version
+#'        of the database can also be used here by providing the complete path
+#'        to a file ending by \code{.sqlite3}, e.g. \code{/path/to/file/gbif4crest_02.sqlite3}
 #' @param verbose A boolean to print non-essential comments on the terminal
 #'        (default \code{TRUE}).
 #' @return A \code{\link{crestObj}} object containing the spatial distributions.
 #' @export
+#' @seealso The SQLite3 database can be downloaded from \url{https://figshare.com/articles/GBIF_for_CREST_database/6743207}.
 #' @examples
 #' \dontrun{
 #'   data(crest_ex_pse)
@@ -244,6 +248,15 @@ crest.get_modern_data <- function( pse, taxaType, climate,
               ),
               dbname
             )
+            print(              paste0(
+                            "SELECT DISTINCT realm, biome, ecoregion, count(*) FROM biogeography WHERE ",
+                            s_realms,
+                            ifelse(s_realms != '' & ( s_biomes != '' | s_ecoregions != ''), ' AND ', ''),
+                            s_biomes,
+                            ifelse(s_biomes != '' & s_ecoregions != '', ' AND ', ''),
+                            s_ecoregions,
+                            " GROUP BY realm, biome,ecoregion"
+                          ))
             if (length(res) == 0) {
                 cat(paste("Problem here. No result for any of the combination realm x biome x ecoregion .\n", sep = ""))
             } else {
@@ -533,12 +546,13 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             cat(paste0('  <> Postprocessing plant data ............. ', stringr::str_pad(paste0(round(pbi / length(crest$inputs$taxa.name)),'%\r'), width=4, side='left')))
             utils::flush.console()
             for(w in which(crest$inputs$pse[ ,'ProxyName'] == tax)) {
-                class_names[w] <- getTaxonomy(    family = crest$inputs$pse[w, 'Family'],
+                taxonomy <- getTaxonomy(    family = crest$inputs$pse[w, 'Family'],
                                                    genus = crest$inputs$pse[w, 'Genus'],
                                                  species = crest$inputs$pse[w, 'Species'],
                                                 taxaType = crest$parameters$taxaType,
                                                depth.out = 3,
-                                                  dbname = dbname)[, 'class_name']
+                                                  dbname = dbname)
+                class_names[w] <- taxonomy[1, 'class_name']
             }
         pbi <- pbi + 100
         }
