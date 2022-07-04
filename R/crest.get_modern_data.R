@@ -248,15 +248,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
               ),
               dbname
             )
-            print(              paste0(
-                            "SELECT DISTINCT realm, biome, ecoregion, count(*) FROM biogeography WHERE ",
-                            s_realms,
-                            ifelse(s_realms != '' & ( s_biomes != '' | s_ecoregions != ''), ' AND ', ''),
-                            s_biomes,
-                            ifelse(s_biomes != '' & s_ecoregions != '', ' AND ', ''),
-                            s_ecoregions,
-                            " GROUP BY realm, biome,ecoregion"
-                          ))
             if (length(res) == 0) {
                 cat(paste("Problem here. No result for any of the combination realm x biome x ecoregion .\n", sep = ""))
             } else {
