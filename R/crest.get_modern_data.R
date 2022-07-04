@@ -609,6 +609,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
       cat('[OK]\n')
       cat(paste0('## Data extraction completed.\n\n'))
     }
+
+    if(length(distributions) == 0) {
+        warning(paste0("No distributions available in the defined study area N: ", crest$parameters$ymx," S: ", crest$parameters$ymn, " W: ",crest$parameters$xmn, " E: ",crest$parameters$xmx, ".\n\n"))
+    }
+    
     crest$misc$stage <- 'data_extracted'
     crest
 }

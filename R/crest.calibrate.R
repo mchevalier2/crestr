@@ -37,6 +37,10 @@ crest.calibrate <- function(x,
 
     if(base::missing(x)) x
 
+    if (length(x$modelling$distributions) == 0) {
+        stop("No distributions available for calibration.\n")
+    }
+
     if(verbose) cat('\n## Calibration of the taxon-climate relationships\n')
 
     if(verbose) cat('  <> Preparing data ........................ ')
