@@ -164,9 +164,8 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
             graphics::axis(1,at=range(x$modelling$xrange[[climate]]),labels=c("",""),tck=0,lwd=0.5,pos=0)
             graphics::axis(1, lwd.ticks=0.5,lwd=0,pos=0,tck=-0.01,cex.axis=6/8)
 
-
             # taxa selected (ranked by weight), then taxa unselected, then taxa unavailable
-            taxa <- rownames(x$inputs$selectedTaxa[x$inputs$selectedTaxa[, climate] == 1, ])
+            taxa <- rownames(x$inputs$selectedTaxa)[x$inputs$selectedTaxa[, climate] == 1 ]
             weights <- as.numeric(x$modelling$weights[s, taxa])
             if(only.present) {
                 taxa <- taxa[weights > 0]

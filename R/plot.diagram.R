@@ -141,8 +141,6 @@ plot_diagram <- function(x, bars=FALSE,
     plot(x[, 1], x[, 1], type='n', xlim=xrange2, ylim=yrange, axes=FALSE, frame=FALSE, xaxs='i', yaxs='i', main='', xlab='', ylab='')
 
     if(bars) {
-        print(x[,1])
-        print(cs)
         bar_width <- bar_width/2
         for(i in 2:ncol(x)) {
             for(j in 1:nrow(x)) {

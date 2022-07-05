@@ -103,7 +103,7 @@
       <h1 data-toc-skip>Get started</h1>
                         <h4 class="author">Manuel Chevalier</h4>
             
-            <h4 class="date">2022-07-04</h4>
+            <h4 class="date">2022-07-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/get-started.Rmd"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -217,9 +217,6 @@ added to illustrate that <em>crestr</em> can deal with unknown taxa.</p>
 be used as the base for temperature and precipitation reconstructions.
 </p>
 </div>
-<pre><code>#&gt;  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
-#&gt;               Taxon1 Taxon2 Taxon3 Taxon4 Taxon5 Taxon6 Taxon7 
-#&gt;   0.00   0.00  37.24  68.48 120.72 147.96 177.20 232.44 239.68</code></pre>
 <p><br></p>
 </div>
 <div id="the-pseudo-data-within-crestr" class="section level2">
@@ -229,7 +226,7 @@ be used as the base for temperature and precipitation reconstructions.
 </h2>
 <p>The pseudo-data are stored in <em>crestr</em> in different datasets
 and can be loaded as follow:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mchevalier2/crestr">crestr</a></span><span class="op">)</span>
 <span class="co">## loading example data</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="va">crest_ex</span><span class="op">)</span>
@@ -240,7 +237,7 @@ and can be loaded as follow:</p>
 example”). The data frame comprises 20 fossil samples from which the
 seven taxa have been identified. The data are already expressed in
 percentages.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## the first 6 samples</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">crest_ex</span><span class="op">)</span>
 <span class="co">#&gt;          Age Taxon1 Taxon2 Taxon3 Taxon4 Taxon5 Taxon6 Taxon7</span>
@@ -270,7 +267,7 @@ to link all the species producing undifferentiated pollen morphotypes in
 a single <em>pollen-type</em>. Here, the seven pseudo-taxa are
 ‘identified’ at the species level so that the table looks like the
 following:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">crest_ex_pse</span>
 <span class="co">#&gt;   Level      Family    Genus Species ProxyName</span>
 <span class="co">#&gt; 1     3 Randomaceae Randomus  Taxon1    Taxon1</span>
@@ -292,7 +289,7 @@ in one single table containing 1s (meaning “use this taxon for this
 variable”) and 0s (meaning “do not use this taxon for this variable”).
 Based on the description of the sensitivities of the pseudo-taxa (see
 above), it translates as follow:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">crest_ex_selection</span>
 <span class="co">#&gt;        bio1 bio12</span>
 <span class="co">#&gt; Taxon1    1     1</span>
@@ -328,7 +325,7 @@ package require such an object. For more details, check the
 <em>crestObj</em> vignette. We can also verify that the
 <em>selectedTaxa</em> table has been modified for <em>Taxon7</em>.</p>
 <p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span> df <span class="op">=</span> <span class="va">crest_ex</span>, <span class="co"># The fossil data</span>
                               pse <span class="op">=</span> <span class="va">crest_ex_pse</span>, <span class="co"># The proxy-species equivalency table</span>
                                     taxaType <span class="op">=</span> <span class="fl">0</span>, <span class="co"># The type of taxa is 0 for the example</span>
@@ -356,7 +353,7 @@ package require such an object. For more details, check the
 can be checked by printing the object. The information displayed is
 updated based on the reconstruction step.</p>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reconstr</span>
 <span class="co">#&gt; *</span>
 <span class="co">#&gt; * Summary of the crestObj named `reconstr`:</span>
@@ -387,7 +384,7 @@ compared to the intermediate values. The correction diminishes the
 effect of this distribution by upweighting rare values and
 down-weighting the most abundant ones.</p>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.calibrate.html">crest.calibrate</a></span><span class="op">(</span> <span class="va">reconstr</span>, <span class="co"># A crestObj produced at the previous stage</span>
          climateSpaceWeighting <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Correct the PDFs for the heteregenous</span>
                                        <span class="co"># distribution of the modern climate space</span>
@@ -424,7 +421,7 @@ study area indicates that its distribution is not constrained by either
 spatial scale of the study were changed, some trends in the distribution
 would ultimately appear.</p>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon2'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span>
 <span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
@@ -443,7 +440,7 @@ Africa on this plot.
 done with the <em>crest.reconstruct()</em> function. The results can be
 accessed from <code>reconstr</code> as follow:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.reconstruct.html">crest.reconstruct</a></span><span class="op">(</span> <span class="va">reconstr</span>, <span class="co"># A crestObj produced at the previous stage</span>
                          verbose <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># Print status messages</span>
 <span class="op">)</span>
@@ -491,7 +488,7 @@ function (<strong>Fig. 7</strong>). As per the design, the first samples
 are rather cold and dry, while the last ones are relatively warm and
 humid. A cold and dry event interrupted the transition between the two
 states.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>, uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="figure" style="text-align: center">
@@ -513,7 +510,7 @@ The <code>reconstruct</code> object is exported as an RData file to
 simplify future data reuse. In the following lines of code, replace
 ‘tempdir()’ with the location where the files should be saved.</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; [1] "bio1"             "bio12"            "crest-test.RData"</span></code></pre></div>

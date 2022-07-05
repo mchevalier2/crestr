@@ -1,8 +1,10 @@
 # crestr 1.1.1.9000
 
-* Removing some unnecessary prints
+* Removing some unnecessary debugging prints
+* Adapting the crestr reference
 * Minor bugs fixed
-    * If no distributions are extrated, the calibration could be used.
+    * If no distributions are extracted, the calibration could be used.
+    * combinedPDFs() could bug if only one variable
 
 
 # crestr 1.1.0
