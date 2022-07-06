@@ -386,3 +386,9 @@ get_taxa_type <- function(taxaType) {
     if(taxaType == 5) return('diatom')
     if(taxaType == 6) return('rodent')
 }
+
+
+#' @export
+.sqlite <- function(){
+    return('/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3')
+}

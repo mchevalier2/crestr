@@ -534,7 +534,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if (crest$parameters$taxaType == 1) {
         pbi <- 100
         for (tax in crest$inputs$taxa.name) {
-            cat(paste0('  <> Postprocessing plant data ............. ', stringr::str_pad(paste0(round(pbi / length(crest$inputs$taxa.name)),'%\r'), width=4, side='left')))
+            if(verbose) cat(paste0('  <> Postprocessing plant data ............. ', stringr::str_pad(paste0(round(pbi / length(crest$inputs$taxa.name)),'%\r'), width=4, side='left')))
             utils::flush.console()
             for(w in which(crest$inputs$pse[ ,'ProxyName'] == tax)) {
                 taxonomy <- getTaxonomy(    family = crest$inputs$pse[w, 'Family'],
@@ -547,7 +547,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             }
         pbi <- pbi + 100
         }
-        cat('  <> Postprocessing plant data ............. [OK]\n')
+        if(verbose) cat('  <> Postprocessing plant data ............. [OK]\n')
     }
     crest$inputs$pse <- cbind( crest$inputs$pse, 'Class_name' = class_names)
 
@@ -613,7 +613,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if(length(distributions) == 0) {
         warning(paste0("No distributions available in the defined study area N: ", crest$parameters$ymx," S: ", crest$parameters$ymn, " W: ",crest$parameters$xmn, " E: ",crest$parameters$xmx, ".\n\n"))
     }
-    
+
     crest$misc$stage <- 'data_extracted'
     crest
 }
