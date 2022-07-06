@@ -1,0 +1,79 @@
+---
+title: "Using the _gbif4crest_ database"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{using-gbif4crest}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r create-data, echo=FALSE}
+library(crestr)
+#attach(crest_ex_pse)
+PSE <-rbind( c(1, 'Ericaceae', NA, NA, 'Ericaceae'),
+             c(2, 'Asteraceae', 'Artemisia', NA, 'Artemisia'),
+             c(2, 'Oleaceae', 'Olea', NA, 'Olea')
+          )
+colnames(PSE) <- colnames(crest_ex_pse)
+rownames(PSE) <- 1:3
+PSE <- as.data.frame(PSE)
+
+#cbind(as.factor(c(1,2,2)), c('Ericaceae', 'Asteraceae', 'Oleaceae'))
+
+```
+
+
+There are two ways to access and use the _gbif4crest_ calibration dataset, which are illustrated here with a simple PSE file.
+
+```{r show-pse, echo=TRUE, eval=TRUE}
+PSE
+```
+
+<br >
+
+## The cloud-based option (online)
+
+The first option consists in using the default option: connecting to the online _gbif4crest_. This is the simplest option and users only have to provide the name of the database to the field `dbname = "gbif4crest_02"`.
+
+```{r online-option, echo=TRUE, eval=TRUE}
+
+reconstr <- crest.get_modern_data(  pse = PSE,
+                               taxaType = 1,
+                                climate = c("bio1", "bio12"),
+                                # The name of the online database to extract the data from
+                                 dbname = "gbif4crest_02",
+                                verbose = FALSE
+)
+
+tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
+```
+
+
+<br >
+
+## The SQLite3 option (offline) [only in crestr v > 1.1.0]
+
+This option is usually much faster but it requires downloading the full database in a zipped format from [[here]](https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207){target="_blank"}. Once unzipped, the file, which is about ~23Gb, should be saved in a location of interest.
+
+```{r offline-option, echo=TRUE, eval=TRUE}
+
+reconstr <- crest.get_modern_data(  pse = PSE,
+                               taxaType = 1,
+                                climate = c("bio1", "bio12"),
+                                # The full path to the local gbif4crest database
+                                 dbname = "/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3",
+                                verbose = FALSE
+)
+
+tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
+
+```
+
+The file can be saved anywhere and named in any way. However. the inclusion of the file extension '.sqlite3' is key for the package to be guided to the right option.

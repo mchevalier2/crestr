@@ -60,10 +60,10 @@ navbar:
     articles:
       text: Applications
       menu:
+      - text: Using gbif4crest
+        href: articles/using-gbif4crest.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
-
-
 
 reference:
   - title: "Reconstructing"
