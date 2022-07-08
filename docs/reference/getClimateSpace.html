@@ -166,6 +166,9 @@
   realms <span class='op'>=</span> <span class='cn'>NA</span>,
   biomes <span class='op'>=</span> <span class='cn'>NA</span>,
   ecoregions <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_min <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_max <span class='op'>=</span> <span class='cn'>NA</span>,
+  elev_range <span class='op'>=</span> <span class='cn'>NA</span>,
   dbname <span class='op'>=</span> <span class='st'>"gbif4crest_02"</span>
 <span class='op'>)</span></pre>
 
@@ -221,6 +224,23 @@
       <th>ecoregions</th>
       <td><p>A vector of the studied botanical ecoregions defining the
 study area.</p></td>
+    </tr>
+    <tr>
+      <th>elev_min</th>
+      <td><p>Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'<code>NA</code> ).</p></td>
+    </tr>
+    <tr>
+      <th>elev_max</th>
+      <td><p>Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'<code>NA</code> ).</p></td>
+    </tr>
+    <tr>
+      <th>elev_range</th>
+      <td><p>Parameters discard the grid cell with a high elevation
+range (default is <code>NA</code>).</p></td>
     </tr>
     <tr>
       <th>dbname</th>
