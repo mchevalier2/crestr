@@ -565,6 +565,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
       basins=crest$parameters$basins, sectors=crest$parameters$sectors,
       realms=crest$parameters$realms, biomes=crest$parameters$biomes,
       ecoregions=crest$parameters$ecoregions,
+      elev_min=elev_min, elev_max=elev_max, elev_range=elev_range,
       dbname
     )
 

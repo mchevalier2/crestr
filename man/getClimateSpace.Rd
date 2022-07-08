@@ -17,6 +17,9 @@ getClimateSpace(
   realms = NA,
   biomes = NA,
   ecoregions = NA,
+  elev_min = NA,
+  elev_max = NA,
+  elev_range = NA,
   dbname = "gbif4crest_02"
 )
 }
@@ -46,6 +49,17 @@ getClimateSpace(
 
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the
 study area.}
+
+\item{elev_min}{Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'\code{NA} ).}
+
+\item{elev_max}{Parameters to only selected grid cells with an
+elevation higher than elev_min or lower than elev_max (default is
+'\code{NA} ).}
+
+\item{elev_range}{Parameters discard the grid cell with a high elevation
+range (default is \code{NA}).}
 
 \item{dbname}{The name of the data source database.}
 }

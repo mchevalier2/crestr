@@ -26,6 +26,7 @@ getClimateSpace <- function(climate,
                             continents = NA, countries = NA,
                             basins = NA, sectors = NA,
                             realms = NA, biomes = NA, ecoregions = NA,
+                            elev_min = NA, elev_max = NA, elev_range = NA,
                             dbname = "gbif4crest_02") {
 
     if(base::missing(climate)) climate
@@ -82,13 +83,22 @@ getClimateSpace <- function(climate,
         )
     }
 
+    # Formatting the elevation data
+    if(dbname == 'crest_example') { # Some parameters are not availble in the example database
+        ELEVMIN <- ELEVMAX <- ELEVRANGE <- ''
+    } else {
+        ELEVMIN   <- ifelse(is.na(elev_min), '', paste0('    AND elevation >= ', elev_min))
+        ELEVMAX   <- ifelse(is.na(elev_max), '', paste0('    AND elevation <= ', elev_max))
+        ELEVRANGE <- ifelse(is.na(elev_range), '', paste0('    AND elev_range <= ', elev_range))
+    }
+
     # Removing the 'NULL' when using the SQLite3 database
     NULLS <- ""
     if(stringr::str_detect(base::tolower(dbname), '.sqlite3')) {
         for(clim in climate) {
             NULLS <- paste0(NULLS, paste0("  AND ", clim, " IS NOT 'NULL' ") )
         }
-    } 
+    }
 
     # Formatting the request-----------------------------------------------------
     req <- paste0(
@@ -100,6 +110,9 @@ getClimateSpace <- function(climate,
       "     ", GEO_terr, " ",
       "     ", GEO_mari, " ",
       "     ", WWF, " ",
+      "     ", ELEVMIN, '   ',
+      "     ", ELEVMAX, '   ',
+      "     ", ELEVRANGE, '   ',
       "     ", NULLS,
       "ORDER BY longitude, latitude"
     )
