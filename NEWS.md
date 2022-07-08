@@ -5,6 +5,7 @@
 * Minor bugs fixed
     * If no distributions are extracted, the calibration could be used.
     * combinedPDFs() could bug if only one variable
+    * Filters by elevation added to getClimateSpace()
 
 
 # crestr 1.1.0
