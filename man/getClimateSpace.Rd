@@ -27,13 +27,7 @@ getClimateSpace(
 \item{climate}{A vector of the climate variables to extract. See
 \code{\link{accClimateVariables}} for the list of accepted values.}
 
-\item{xmn}{The coordinates defining the study area.}
-
-\item{xmx}{The coordinates defining the study area.}
-
-\item{ymn}{The coordinates defining the study area.}
-
-\item{ymx}{The coordinates defining the study area.}
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 
@@ -50,11 +44,7 @@ getClimateSpace(
 \item{ecoregions}{A vector of the studied botanical ecoregions defining the
 study area.}
 
-\item{elev_min}{Parameters to only selected grid cells with an
-elevation higher than elev_min or lower than elev_max (default is
-'\code{NA} ).}
-
-\item{elev_max}{Parameters to only selected grid cells with an
+\item{elev_min, elev_max}{Parameters to only selected grid cells with an
 elevation higher than elev_min or lower than elev_max (default is
 '\code{NA} ).}
 

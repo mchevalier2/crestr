@@ -11,7 +11,7 @@
 #' @return A data frame descriptive of the climate variables available in the
 #'         database (if \code{v=NA}) or the description of variable v.
 #' @export
-#' @seealso \url{https://www.worldclim.org/data/bioclim.html} for details on the 'bio' data, \url{https://csidotinfo.wordpress.com/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/} for details on 'ai', \url{https://www.ncei.noaa.gov/products/world-ocean-atlas} for details on the sea surface temperature, sea surface salinity and nutrient Concentration data, or \url{https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html} for the sea ice concentration data.
+#' @seealso \url{https://www.worldclim.org/data/bioclim.html} for details on the 'bio' data, \url{https://cgiarcsi.community/2019/01/24/global-aridity-index-and-potential-evapotranspiration-climate-database-v2/} for details on 'ai', \url{https://www.ncei.noaa.gov/products/world-ocean-atlas} for details on the sea surface temperature, sea surface salinity and nutrient Concentration data, or \url{https://psl.noaa.gov/data/gridded/data.noaa.oisst.v2.highres.html} for the sea ice concentration data.
 #' @examples
 #' \dontrun{
 #'   accClimateVariables()

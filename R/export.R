@@ -270,7 +270,10 @@ export <- function( x, dataname = x$misc$site_info$site_name,
                 }
 
                 for(n in names(x$misc$taxa_notes)) {
-                    for(tax in x$misc$taxa_notes[[n]]) {
+                    list_of_tax <- x$misc$taxa_notes[[n]]
+                    if(is.data.frame(list_of_tax))  list_of_tax <- list_of_tax[, 5]
+
+                    for(tax in list_of_tax) {
                         if(tax %in% unique(x$inputs$pse[, 'ProxyName'])) {
                             df <- rbind(df,
                                         c(tax,

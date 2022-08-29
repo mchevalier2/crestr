@@ -53,7 +53,7 @@ Default is \code{FALSE} and the figure is saved as a pdf file.}
 \item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 }
 \value{
-The set of coordinates ext projected in equal earth.
+A table with the climate tolerances of all the taxa
 }
 \description{
 Plot the pdfs as violins
@@ -74,8 +74,9 @@ Plot the pdfs as violins
 }
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
-plot_violinPDFs(reconstr, save=FALSE, ylim=c(5,35),
-   taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'),
-   col=c('darkblue', 'firebrick3'))
+ranges <- plot_violinPDFs(reconstr, save=FALSE, ylim=c(5,35),
+                taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'),
+                col=c('darkblue', 'firebrick3'))
+lapply(ranges, head)
 
 }

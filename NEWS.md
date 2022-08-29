@@ -1,11 +1,21 @@
-# crestr 1.1.1.9000
+# crestr 1.2.0
 
 * Removing some unnecessary debugging prints
 * Adapting the crestr reference
+* Adding a check on the column names of PSE
+* Fastening the LOO function
+* Adding a sorting parameter to the `LOO()` function
+* Adding the `pdf_ranges()` function.
+    * Also included as an invisible output of the `plot_violinPDFs()`
+* Adding the `plot.scatterPDFs()` graphical output.
+* Adding `taxonComposition()` to get the size distribution of the composing species.
 * Minor bugs fixed
     * If no distributions are extracted, the calibration could be used.
-    * combinedPDFs() could bug if only one variable
-    * Filters by elevation added to getClimateSpace()
+    * `combinedPDFs()` could bug if only one variable
+    * Filters by elevation added to `getClimateSpace()`
+    * print(ntaxa) was 1 off
+    * Minor naming issues with `export()`
+    * `plot_climateSpace()` and `plot_taxaCharacteristics()` were issuing a warning when no climate values are available and add_modern is TRUE (coordinates are available but no climate)
 
 
 # crestr 1.1.0

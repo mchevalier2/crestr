@@ -19,6 +19,8 @@ plot_loo(
   bar_width = diff(range(x$inputs$x))/50,
   xlim = NA,
   tickAtSample = FALSE,
+  sort = NA,
+  filter = 0,
   col_pos = "black",
   col_neg = "grey80",
   title = NA
@@ -67,6 +69,14 @@ the data will be truncated (default: range of the data).}
 \item{tickAtSample}{Boolean that indicates whether a tick mark should be added
 on the x-axis at the location of each sample (default \code{TRUE}).}
 
+\item{sort}{A string to sort the order of the taxa from the highest to lowest
+anomalies (sort='incr') or from the lowest to highest (sort='decr').
+Use the default value \code{NA} to keep the taxa unsorted.}
+
+\item{filter}{A threshold value that determines the mean absolute anomaly
+value required for the taxon to be plotted (default 0 means that all
+taxa are plotted)}
+
 \item{col_pos}{Graphical parameter for the barplot. Colour of all the
 positive values (default black).}
 
@@ -76,7 +86,8 @@ negative values (default grey80).}
 \item{title}{Name to be added on top of the plot (default \code{NA}).}
 }
 \value{
-No return value, this function is used to plot.
+When used with a crestObj, it returns the average leave-one-out
+values for each selected taxa
 }
 \description{
 Plot the results of the leave-one-out analysis.
@@ -96,7 +107,8 @@ Plot the results of the leave-one-out analysis.
 }
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
-plot_loo(reconstr, yax_incr=c(0.5, 50), bar_width=0.8,
-         col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
+loo_vals <- plot_loo(reconstr, yax_incr=c(0.5, 50), bar_width=0.8,
+                     col_pos=c('blue','cornflowerblue'),
+                     col_neg=c('red', 'goldenrod3'))
 
 }

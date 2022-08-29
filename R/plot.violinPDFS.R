@@ -20,7 +20,7 @@
 #'        per variables).
 #' @param col A vector of colours that will be linearly interpolated to give a
 #'        unique colour to each taxon.
-#' @return The set of coordinates ext projected in equal earth.
+#' @return A table with the climate tolerances of all the taxa
 #' @export
 #' @examples
 #' \dontrun{
@@ -38,9 +38,10 @@
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
-#' plot_violinPDFs(reconstr, save=FALSE, ylim=c(5,35),
-#'    taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'),
-#'    col=c('darkblue', 'firebrick3'))
+#' ranges <- plot_violinPDFs(reconstr, save=FALSE, ylim=c(5,35),
+#'                 taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'),
+#'                 col=c('darkblue', 'firebrick3'))
+#' lapply(ranges, head)
 #'
 plot_violinPDFs <- function( x,
                       climate = x$parameters$climate[1],
@@ -136,5 +137,5 @@ plot_violinPDFs <- function( x,
     } else {
         stop('This function only works with a crestObj.\n\n')
     }
-    invisible()
+    invisible(pdf_ranges(x, climate=climate, taxanames=taxanames))
 }

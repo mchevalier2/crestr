@@ -66,7 +66,7 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
             for(tax in taxa) {
                 df <- cbind(df, x$modelling$pdfs[[tax]][[clim]]$pdfpol)
             }
-            colnames(df) <- c(x$inputs$x.name, taxa)
+            colnames(df) <- c(clim, taxa)
 
             if(as.csv) {
                 utils::write.table(df, base::file.path(loc, dataname, paste0(clim,'.csv')), col.names=TRUE, row.names=FALSE, quote=FALSE, na='', sep=',')

@@ -197,7 +197,7 @@ print.crestObj <- function(x, ...) {
     cat('*\n')
     if(is_formatted) {
         if(is.data.frame(x$inputs$df)) {
-            cat(paste0('* The dataset to be reconstructed (`df`) is composed of ', nrow(x$inputs$df),' samples with ',ncol(x$inputs$df)-1,' taxa.\n'))
+            cat(paste0('* The dataset to be reconstructed (`df`) is composed of ', nrow(x$inputs$df),' samples with ',ncol(x$inputs$df),' taxa.\n'))
         }
         cat(paste0('* Variable', ifelse(length(x$parameters$climate) > 1, 's', ''),' to analyse: ', paste(x$parameters$climate, collapse=', '),'\n'))
         cat(paste0('*\n'))

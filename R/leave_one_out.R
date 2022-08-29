@@ -36,7 +36,7 @@ loo <- function(x, verbose=TRUE) {
 
     if(verbose) cat('[OK]\n  <> Checking taxa ................... ......')
     taxa_list <- rownames(x$inputs$selectedTaxa)[apply(as.data.frame(x$inputs$selectedTaxa[, x$parameters$climate]), 1, sum) > 0]
-    estimated_time <- x$misc$reconstruction_time * length(taxa_list)
+    estimated_time <- x$misc$reconstruction_time / nrow(x$inputs$df) * sum(ifelse(x$modelling$weights > 0, 1, 0))
     if(verbose) cat(paste0('[OK]\n  *i Estimated time for the LOO reconstructions: ', estimated_time %/% 60, 'min ', round(estimated_time %% 60, 2), 's.\n'))
     if(verbose) cat('  <> LOO reconstructions ...................   0%\r')
     pbi <- 100
@@ -46,17 +46,25 @@ loo <- function(x, verbose=TRUE) {
     }
     recons_tmp <- x
     for(tax in taxa_list) {
-        recons_tmp$inputs$selectedTaxa <- x$inputs$selectedTaxa
-        recons_tmp <- excludeTaxa(recons_tmp, tax, x$parameters$climate)
+        #recons_tmp$inputs$selectedTaxa <- x$inputs$selectedTaxa
+        #recons_tmp <- excludeTaxa(recons_tmp, tax, x$parameters$climate)
+        recons_tmp$inputs$df <- x$modelling$weights ## We do not recalculate the weight matrix. We assign it as the 'default' data
+        recons_tmp$inputs$x <- x$inputs$x[recons_tmp$inputs$df[, tax] > 0 ]# Only re-runnig for the samples that contain the taxon
+        recons_tmp$inputs$df <- recons_tmp$inputs$df[recons_tmp$inputs$df[, tax] > 0, ]
+        recons_tmp$inputs$df[, tax] <- 0 # Excluding the taxon from the recon
+        recons_tmp$modelling$weights <- recons_tmp$inputs$df # Seeting df as the weight matrix since this is not updateed with skip_for_loo=TRUE
         recons_tmp <- crest.reconstruct(recons_tmp,
-                                        presenceThreshold = x$parameters$presenceThreshold,
-                                        taxWeight = x$parameters$taxWeight,
+                                        presenceThreshold = 0,
+                                        taxWeight = 'originalData',
                                         skip_for_loo = TRUE, verbose=FALSE
                                       )
         for(clim in x$parameters$climate) {
             if(x$inputs$selectedTaxa[tax, clim] > 0) {
-                x$reconstructions[[clim]][['loo']][[tax]] <- cbind('optima' = recons_tmp$reconstructions[[clim]]$optima[, 2] - x$reconstructions[[clim]]$optima[, 2],
-                                                                   'mean'   = recons_tmp$reconstructions[[clim]]$optima[, 3] - x$reconstructions[[clim]]$optima[, 3]
+                tmp_opt <- tmp_mean <- rep(NA, nrow(x$reconstructions[[clim]]$optima))
+                tmp_opt[x$modelling$weights[, tax] > 0] <- recons_tmp$reconstructions[[clim]]$optima[, 2]
+                tmp_mean[x$modelling$weights[, tax] > 0] <- recons_tmp$reconstructions[[clim]]$optima[, 3]
+                x$reconstructions[[clim]][['loo']][[tax]] <- cbind('optima' = tmp_opt - x$reconstructions[[clim]]$optima[, 2],
+                                                                   'mean'   = tmp_mean - x$reconstructions[[clim]]$optima[, 3]
                                                                   )
                 x$reconstructions[[clim]][['loo']][[tax]][is.na(x$reconstructions[[clim]][['loo']][[tax]])] <- 0
             } else {

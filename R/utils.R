@@ -392,3 +392,17 @@ get_taxa_type <- function(taxaType) {
 .sqlite <- function(){
     return('/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3')
 }
+
+
+
+#' Returns the taxa type corresponding to the taxID.
+#'
+#' Returns the taxa type corresponding to the taxID.
+#'
+#' @param taxID An integer between 0 and 6
+#' @return Returns the taxa type ID corresponding to the taxon ID.
+#' @export
+#'
+getTaxaTypeFromTaxID <- function(taxID) {
+    return(taxID %/% 1000000)
+}

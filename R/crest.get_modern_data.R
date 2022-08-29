@@ -313,6 +313,12 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if(verbose) cat('[OK]\n  <> Checking the pse table ................ ')
     ## . Formatting data in the expected format ---------------------------------
 
+    if(!('Level' %in% colnames(pse) & 'Family' %in% colnames(pse) & 'Genus' %in% colnames(pse) & 'Species' %in% colnames(pse) & 'ProxyName' %in% colnames(pse) )) {
+        stop(paste0("\nThe PSE data frame should contain columns with the following 5 names: 'Level', 'Family', 'Genus', 'Species' and 'ProxyName' .\n\n"))
+    } else {
+        pse <- pse[, c('Level', 'Family', 'Genus', 'Species', 'ProxyName')]
+    }
+
     w <- (pse$Level == 4)
     if (sum(w) > 0) {
         for (tax in unique(pse$ProxyName[w])) {
@@ -371,6 +377,8 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         if(unique(is.numeric(crest$inputs$x))) {
             crest$inputs$df <- crest$inputs$df[order(crest$inputs$x), ]
             crest$inputs$x  <- crest$inputs$x[order(crest$inputs$x)]
+            crest$inputs$x[is.na(crest$inputs$x)] <- 0
+
         }
 
         w <- (apply(crest$inputs$df, 2, sum) == 0)

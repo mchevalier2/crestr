@@ -16,11 +16,18 @@
 #' @param yax_incr Graphical parameters describing the increment size on the
 #'        y-axis (default 5).
 #' @param bar_width Width of the bars of the barplot (default 1).
+#' @param sort A string to sort the order of the taxa from the highest to lowest
+#'        anomalies (sort='incr') or from the lowest to highest (sort='decr').
+#'        Use the default value \code{NA} to keep the taxa unsorted.
+#' @param filter A threshold value that determines the mean absolute anomaly
+#'        value required for the taxon to be plotted (default 0 means that all
+#'        taxa are plotted)
 #' @param col_pos Graphical parameter for the barplot. Colour of all the
 #'        positive values (default black).
 #' @param col_neg Graphical parameter for the barplot. Colour of all the
 #'        negative values (default grey80).
-#' @return No return value, this function is used to plot.
+#' @return When used with a crestObj, it returns the average leave-one-out
+#'         values for each selected taxa
 #' @export
 #' @examples
 #' \dontrun{
@@ -37,8 +44,9 @@
 #' }
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
-#' plot_loo(reconstr, yax_incr=c(0.5, 50), bar_width=0.8,
-#'          col_pos=c('blue','cornflowerblue'), col_neg=c('red', 'goldenrod3'))
+#' loo_vals <- plot_loo(reconstr, yax_incr=c(0.5, 50), bar_width=0.8,
+#'                      col_pos=c('blue','cornflowerblue'),
+#'                      col_neg=c('red', 'goldenrod3'))
 #'
 plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       taxanames=x$inputs$taxa.name,
@@ -47,10 +55,11 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       width=3.54, height= 9,
                       yax_incr = NA, bar_width = diff(range(x$inputs$x))/50,
                       xlim=NA, tickAtSample=FALSE,
+                      sort=NA, filter = 0,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
 
     if(base::missing(x)) x
-
+print(climate)
     if (methods::is(x)[1] == 'crestObj') {
 
         if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {
@@ -76,7 +85,10 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
             graphics::par(mfrow=c(1, length(climate)))
         }
 
+        rs <- list()
+
         for( clim in climate ) {
+            print(clim)
             df <- list()
             if(is.numeric(x$inputs$x)) {
                 df[[x$inputs$x.name]] <- x$inputs$x
@@ -115,6 +127,12 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
 
             if (yax_incr2 == 0) yax_incr2 <- x$parameters$bin_width[clim, ] / 10
 
+            if(!is.na(sort)) {
+                df <- df[, c(1, order(apply(df[, -1], 2, function(x) mean(x[abs(x)>0])), decreasing = ifelse(sort=='incr', FALSE, TRUE)) + 1)]
+            }
+
+            df <- df[, c(1, which(apply(df[, -1], 2, function(x) mean(abs(x)[abs(x)>0])) >= filter) + 1)]
+
             plot_diagram(df, bars=TRUE,
                        save=save, filename=paste0(strsplit(filename, ifelse(as.png, '.png', '.pdf'))[[1]],'_',clim,ifelse(as.png, '.png', '.pdf')),
                        width=width, height=height, as.png=as.png, png.res=png.res,
@@ -122,7 +140,11 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                        tickAtSample=tickAtSample,
                        col_pos=col_pos[clim], col_neg=col_neg[clim],
                        title=title2)
+
+            rs[[clim]] <- sort(unlist(lapply(x$reconstructions[[clim]]$loo, function(x) return(mean(x[abs(x)>0])))))
         }
+        return(invisible(rs))
+
     } else {
         xlim <- range(x[, 1])
         bar_width2 <- bar_width

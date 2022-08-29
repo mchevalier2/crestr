@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -66,7 +68,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/using-gbif4crest.html">Using gbif4crest</a>
+      <a href="../articles/using-gbif4crest.html">Using the _gbif4crest_ database</a>
     </li>
     <li>
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
@@ -79,13 +81,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://twitter.com/ChevalierManu">
+  <a href="https://twitter.com/ChevalierManu" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/mchevalier2/crestr/">
+  <a href="https://github.com/mchevalier2/crestr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,25 +102,26 @@
 
       
 
-      </header><script src="technicalities_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Formatting the data for crestr</h1>
-                        <h4 class="author">Manuel Chevalier</h4>
+                        <h4 data-toc-skip class="author">Manuel
+Chevalier</h4>
             
-            <h4 class="date">2022-07-08</h4>
+            <h4 data-toc-skip class="date">2022-08-29</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/technicalities.Rmd"><code>vignettes/technicalities.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/technicalities.Rmd" class="external-link"><code>vignettes/technicalities.Rmd</code></a></small>
       <div class="hidden name"><code>technicalities.Rmd</code></div>
 
     </div>
 
     
     
-<div id="the-central-element-of-the-package-the-crestobj-object" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-central-element-of-the-package-the-crestobj-object" class="anchor"></a>The central element of the package: the <code>crestObj</code>
-object</h2>
+<div class="section level2">
+<h2 id="the-central-element-of-the-package-the-crestobj-object">The central element of the package: the <code>crestObj</code>
+object<a class="anchor" aria-label="anchor" href="#the-central-element-of-the-package-the-crestobj-object"></a>
+</h2>
 <p>In <code>crestr</code>, all the CREST-related data are stored within
 a single S3 object of the class <code>crestObj</code>. Most package
 functions will take a <code>crestObj</code> as their primary input and
@@ -165,9 +168,8 @@ indicated on the right.
 </div>
 <p><br></p>
 </div>
-<div id="formatting-the-input-data-for-crestr" class="section level2">
-<h2 class="hasAnchor">
-<a href="#formatting-the-input-data-for-crestr" class="anchor"></a>Formatting the input data for <code>crestr</code>
+<div class="section level2">
+<h2 id="formatting-the-input-data-for-crestr">Formatting the input data for <code>crestr</code><a class="anchor" aria-label="anchor" href="#formatting-the-input-data-for-crestr"></a>
 </h2>
 <p>Five different input data files are compatible with <em>crestr</em>.
 However, most applications will only require two files (the
@@ -176,9 +178,9 @@ More specific applications may require up to four of these files. All
 the files can be prepared outside the R environment and imported using
 standard R functions.</p>
 <p><br></p>
-<div id="the-fossil-data-df" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-fossil-data-df" class="anchor"></a>The fossil data (<code>df</code>)</h3>
+<div class="section level3">
+<h3 id="the-fossil-data-df">The fossil data (<code>df</code>)<a class="anchor" aria-label="anchor" href="#the-fossil-data-df"></a>
+</h3>
 <p>The <code>df</code> data frame is only required if
 <code>crestr</code> is used for reconstucting climate and can be omitted
 if the objective is to model the climate response(s) of different taxa.
@@ -194,16 +196,16 @@ limited to modelling the climate response(s) of different taxa.
 either the age, depth, or sample ID as the first column and the fossil
 data in the subsequent columns. <code>df</code> can contain raw counts,
 percentages, presence/absence (1s and 0s) or even relative weights to be
-used in the reconstruction. In the case study presented <a href="https://mchevalier2.github.io/crestr/articles/limpopo.html">here</a>,
+used in the reconstruction. In the case study presented <a href="https://mchevalier2.github.io/crestr/articles/limpopo.html" class="external-link">here</a>,
 215 terrestrial and aquatic pollen taxa were observed in 181 samples, so
 that <code>df</code> is a data frame with 216 columns (the age of the
 samples followed by the pollen taxa) and 181 rows containing pollen
 percentages of terrestrial taxa.</p>
 <p><br></p>
 </div>
-<div id="the-proxy-species-equivalency-pse-table" class="section level3">
-<h3 class="hasAnchor">
-<a href="#the-proxy-species-equivalency-pse-table" class="anchor"></a>The proxy-species equivalency (<code>PSE</code>) table</h3>
+<div class="section level3">
+<h3 id="the-proxy-species-equivalency-pse-table">The proxy-species equivalency (<code>PSE</code>) table<a class="anchor" aria-label="anchor" href="#the-proxy-species-equivalency-pse-table"></a>
+</h3>
 <p>The <code>PSE</code> data frame is required to use the
 <em>gbif4crest</em> calibration dataset. It is used to associate
 individual species available in the <code>TAXA</code> table with their
@@ -230,7 +232,7 @@ should be listed here, or they will be excluded. Columns two to four
 contain the taxonomic classification of that taxon as <em>Family</em>,
 <em>Genus</em> and <em>Species</em>, respectively. For simplicity, a
 pre-formatted version of the <code>PSE</code> table with the names of
-all the taxa to study can be generated by <em>crestr</em> using the <a href="https://mchevalier2.github.io/crestr/reference/createPSE.html">createPSE(list_of_taxa)</a>
+all the taxa to study can be generated by <em>crestr</em> using the <a href="https://mchevalier2.github.io/crestr/reference/createPSE.html" class="external-link">createPSE(list_of_taxa)</a>
 function that generates a spreadsheet with the correct structure and
 with the Level and ProxyName columns automatically.</p>
 <p><br></p>
@@ -311,7 +313,7 @@ here for illustrative purposes and should not included in the
 </table>
 <p><br></p>
 <p>The species - taxon associated is performed in sequential steps by
-the <a href="https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html">crest.get_modern_data()</a>
+the <a href="https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html" class="external-link">crest.get_modern_data()</a>
 function. First, <em>crestr</em> classifies the taxa with the lowest
 taxonomical resolution (<em>i.e.</em> when <em>Level</em> is equal to
 one) and then increases the resolution <em>Level</em> by <em>Level</em>.
@@ -337,15 +339,15 @@ This categorisation process can be time-consuming, as all the taxa must
 be classified in a unique <code>PSE</code> table, and this process will
 often require many iterations to be optimised. The results of the
 different assignments are stored in the <code>crestObj</code> returned
-by the <a href="https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html">crest.get_modern_data()</a>
+by the <a href="https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html" class="external-link">crest.get_modern_data()</a>
 function and can be evaluated by checking
 <code>rcnstrctn$misc$taxa_notes</code>.</p>
 <p><br></p>
 </div>
-<div id="sec:inputs:distributions" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sec:inputs:distributions" class="anchor"></a>The alternative modern calibration dataset
-(<code>distributions</code>)</h3>
+<div class="section level3">
+<h3 id="sec:inputs:distributions">The alternative modern calibration dataset
+(<code>distributions</code>)<a class="anchor" aria-label="anchor" href="#sec:inputs:distributions"></a>
+</h3>
 <p>Users that prefer fitting proxy-climate responses from their own
 calibration data instead of the proposed <em>gbif4crest</em> dataset
 should prepare a <code>distributions</code> dataset following the
@@ -436,9 +438,9 @@ occurrences available.</p>
 </table>
 <p><br></p>
 </div>
-<div id="sec:inputs:climate_space" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sec:inputs:climate_space" class="anchor"></a>The <code>climate_space</code> data frame</h3>
+<div class="section level3">
+<h3 id="sec:inputs:climate_space">The <code>climate_space</code> data frame<a class="anchor" aria-label="anchor" href="#sec:inputs:climate_space"></a>
+</h3>
 <p>This data frame is only necessary if the users use a personal
 calibration dataset (<code>distributions</code>) instead of the
 <em>gbif4crest</em> dataset. This data frame enables 1) using the
@@ -450,9 +452,9 @@ resolution and the ordering of the climate variables should be identical
 to the <code>distributions</code> table (<strong>Table 2</strong>).
 However, the arrangement of the rows is not important.</p>
 </div>
-<div id="sec:inputs:selectedTaxa" class="section level3">
-<h3 class="hasAnchor">
-<a href="#sec:inputs:selectedTaxa" class="anchor"></a>The <code>selectedTaxa</code> data frame</h3>
+<div class="section level3">
+<h3 id="sec:inputs:selectedTaxa">The <code>selectedTaxa</code> data frame<a class="anchor" aria-label="anchor" href="#sec:inputs:selectedTaxa"></a>
+</h3>
 <p>The last data frame that may be used to inform the reconstruction is
 a data frame of ones and zeros called <code>selectedTaxa</code>. This
 data frame has as many rows and columns as there are taxa and climate
@@ -461,9 +463,9 @@ indicates if the taxon should be used to reconstruct the climate
 variable (value = 1) or not (value = 0). If a <code>selectedTaxa</code>
 data frame is not provided, a default data frame with all entries set to
 1 is added to the <code>crestObj</code> at initialisation. Users can
-then modify this information at any point using the <a href="https://mchevalier2.github.io/crestr/reference/includeTaxa.html">includeTaxa()</a>
-and <a href="https://mchevalier2.github.io/crestr/reference/excludeTaxa.html">excludeTaxa()</a>
-built-in functions. The <a href="https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html">crest.get_modern_data()</a>
+then modify this information at any point using the <a href="https://mchevalier2.github.io/crestr/reference/includeTaxa.html" class="external-link">includeTaxa()</a>
+and <a href="https://mchevalier2.github.io/crestr/reference/excludeTaxa.html" class="external-link">excludeTaxa()</a>
+built-in functions. The <a href="https://mchevalier2.github.io/crestr/reference/crest.get_modern_data.html" class="external-link">crest.get_modern_data()</a>
 function also modifies this data frame by setting the value to -1 when
 the <code>PSE</code> classification failed for a taxon or when the
 amount of data in the study area is insufficient to fit a reliable
@@ -484,11 +486,13 @@ PDF.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by Manuel Chevalier.</p>
+  <p></p>
+<p>Developed by Manuel Chevalier.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -496,6 +500,8 @@ PDF.</p>
 
   
 
+
+  
 
   </body>
 </html>

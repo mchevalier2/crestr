@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -66,7 +68,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/using-gbif4crest.html">Using gbif4crest</a>
+      <a href="../articles/using-gbif4crest.html">Using the _gbif4crest_ database</a>
     </li>
     <li>
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
@@ -79,13 +81,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://twitter.com/ChevalierManu">
+  <a href="https://twitter.com/ChevalierManu" class="external-link">
     <span class="fab fa-twitter fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/mchevalier2/crestr/">
+  <a href="https://github.com/mchevalier2/crestr/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -100,13 +102,13 @@
 
       
 
-      </header><script src="using-gbif4crest_files/header-attrs-2.14/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the <em>gbif4crest</em> database</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/master/vignettes/using-gbif4crest.Rmd"><code>vignettes/using-gbif4crest.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/using-gbif4crest.Rmd" class="external-link"><code>vignettes/using-gbif4crest.Rmd</code></a></small>
       <div class="hidden name"><code>using-gbif4crest.Rmd</code></div>
 
     </div>
@@ -117,53 +119,53 @@
 calibration dataset, which are illustrated here with a simple PSE
 file.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">PSE</span>
-<span class="co">#&gt;   Level     Family     Genus Species ProxyName</span>
-<span class="co">#&gt; 1     1  Ericaceae      &lt;NA&gt;    &lt;NA&gt; Ericaceae</span>
-<span class="co">#&gt; 2     2 Asteraceae Artemisia    &lt;NA&gt; Artemisia</span>
-<span class="co">#&gt; 3     2   Oleaceae      Olea    &lt;NA&gt;      Olea</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">PSE</span></span>
+<span><span class="co">#&gt;   Level     Family     Genus Species ProxyName</span></span>
+<span><span class="co">#&gt; 1     1  Ericaceae      &lt;NA&gt;    &lt;NA&gt; Ericaceae</span></span>
+<span><span class="co">#&gt; 2     2 Asteraceae Artemisia    &lt;NA&gt; Artemisia</span></span>
+<span><span class="co">#&gt; 3     2   Oleaceae      Olea    &lt;NA&gt;      Olea</span></span></code></pre></div>
 <p><br></p>
-<div id="the-cloud-based-option-online" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-cloud-based-option-online" class="anchor"></a>The cloud-based option (online)</h2>
+<div class="section level2">
+<h2 id="the-cloud-based-option-online">The cloud-based option (online)<a class="anchor" aria-label="anchor" href="#the-cloud-based-option-online"></a>
+</h2>
 <p>The first option consists in using the default option: connecting to
 the online <em>gbif4crest</em>. This is the simplest option and users
 only have to provide the name of the database to the field
 <code>dbname = "gbif4crest_02"</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,
-                               taxaType <span class="op">=</span> <span class="fl">1</span>,
-                                climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,
-                                <span class="co"># The name of the online database to extract the data from</span>
-                                 dbname <span class="op">=</span> <span class="st">"gbif4crest_02"</span>,
-                                verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="va">length</span><span class="op">)</span>
-<span class="co">#&gt; Artemisia Ericaceae      Olea </span>
-<span class="co">#&gt;       347      4300        35</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,</span>
+<span>                               taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                                climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,</span>
+<span>                                <span class="co"># The name of the online database to extract the data from</span></span>
+<span>                                 dbname <span class="op">=</span> <span class="st">"gbif4crest_02"</span>,</span>
+<span>                                verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html" class="external-link">tapply</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="va">length</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Artemisia Ericaceae      Olea </span></span>
+<span><span class="co">#&gt;       347      4300        35</span></span></code></pre></div>
 <p><br></p>
 </div>
-<div id="the-sqlite3-option-offline-only-in-crestr-v-1-1-0" class="section level2">
-<h2 class="hasAnchor">
-<a href="#the-sqlite3-option-offline-only-in-crestr-v-1-1-0" class="anchor"></a>The SQLite3 option (offline) [only in crestr v &gt; 1.1.0]</h2>
+<div class="section level2">
+<h2 id="the-sqlite3-option-offline-only-in-crestr-v-1-1-0">The SQLite3 option (offline) [only in crestr v &gt; 1.1.0]<a class="anchor" aria-label="anchor" href="#the-sqlite3-option-offline-only-in-crestr-v-1-1-0"></a>
+</h2>
 <p>This option is usually much faster but it requires downloading the
-full database in a zipped format from <a href="https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207" target="_blank">[here]</a>. Once unzipped, the file, which is about
+full database in a zipped format from <a href="https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207" target="_blank" class="external-link">[here]</a>. Once unzipped, the file, which is about
 ~23Gb, should be saved in a location of interest.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,
-                               taxaType <span class="op">=</span> <span class="fl">1</span>,
-                                climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,
-                                <span class="co"># The full path to the local gbif4crest database</span>
-                                 dbname <span class="op">=</span> <span class="st">"/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3"</span>,
-                                verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/tapply.html">tapply</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="va">length</span><span class="op">)</span>
-<span class="co">#&gt; Artemisia Ericaceae      Olea </span>
-<span class="co">#&gt;       347      4300        35</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,</span>
+<span>                               taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                                climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,</span>
+<span>                                <span class="co"># The full path to the local gbif4crest database</span></span>
+<span>                                 dbname <span class="op">=</span> <span class="st">"/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3"</span>,</span>
+<span>                                verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/tapply.html" class="external-link">tapply</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>, <span class="va">reconstr</span><span class="op">$</span><span class="va">modelling</span><span class="op">$</span><span class="va">taxonID2proxy</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="va">length</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Artemisia Ericaceae      Olea </span></span>
+<span><span class="co">#&gt;       347      4300        35</span></span></code></pre></div>
 <p>The file can be saved anywhere and named in any way. However. the
 inclusion of the file extension ‘.sqlite3’ is key for the package to be
 guided to the right option.</p>
@@ -181,11 +183,13 @@ guided to the right option.</p>
 
 
       <footer><div class="copyright">
-  <p>Developed by Manuel Chevalier.</p>
+  <p></p>
+<p>Developed by Manuel Chevalier.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -193,6 +197,8 @@ guided to the right option.</p>
 
   
 
+
+  
 
   </body>
 </html>

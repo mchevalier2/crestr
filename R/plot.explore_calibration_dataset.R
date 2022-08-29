@@ -41,19 +41,17 @@ explore_calibration_dataset <- function( taxaType,
     estimate_ylim <- coords[6]
 
     taxonIDs <- getTaxonID( taxaType = taxaType, dbname = dbname )
-
     distributions <- getDistribTaxa( taxonIDs,
                                      xmn = xmn, xmx = xmx, ymn = ymn, ymx = ymx,
                                      continents = continents, countries = countries,
                                      realms = realms, biomes = biomes, ecoregions = ecoregions,
                                      dbname = dbname)
 
-
     plot.distrib <- ifelse(nrow(distributions) == 0, FALSE, TRUE)
 
     # Climate_space useful to estimate the extent of selected region
     climate_space <- getClimateSpace(
-      'bio1',
+      ifelse(taxaType %in% c(1, 2, 3, 6), 'bio1', 'sst_ann'), # Get any random climate variable, but this depends on terrestrial or marine.
       xmn, xmx, ymn, ymx,
       continents, countries,
       realms, biomes, ecoregions,

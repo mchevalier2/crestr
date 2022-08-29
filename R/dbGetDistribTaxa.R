@@ -91,8 +91,13 @@ getDistribTaxa <- function(taxIDs,
 
     # If no climate variables are provided, return values for ALL variables.
     if (unique(is.na(climate))) {
-        CLIM3 <- paste(', ', paste(accClimateVariables()[,2], collapse = ", "))
-        climate <- accClimateVariables()[,2]
+        taxaType <- getTaxaTypeFromTaxID(taxIDs[1])
+        if(taxaType %in% c(1, 2, 3, 6)) {
+            climate <- accClimateVariables(domain='Terrestrial')[, 2]
+        } else {
+            climate <- accClimateVariables(domain='Marine')[, 2]
+        }
+        CLIM3 <- paste(', ', paste(climate, collapse = ", "))
     } else {
         CLIM3 <- paste(', ', paste(climate, collapse = ", "))
     }

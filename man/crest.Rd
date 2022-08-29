@@ -60,13 +60,7 @@ Default \code{c(NA, NA)}.}
 
 \item{site_name}{The name of the dataset (default \code{NA}).}
 
-\item{xmn}{The coordinates defining the study area.}
-
-\item{xmx}{The coordinates defining the study area.}
-
-\item{ymn}{The coordinates defining the study area.}
-
-\item{ymx}{The coordinates defining the study area.}
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 

@@ -27,7 +27,7 @@ knitr::opts_chunk$set(
  <br >
 
 <!-- badges: end -->
-
+ 
 #
 
 The goal of `crestr` is to enable probabilistic reconstructions of past climate

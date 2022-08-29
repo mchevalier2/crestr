@@ -215,7 +215,9 @@ plot_climateSpace <- function( x,
                         col=cs_colour[oo], pch=20, cex=0.5)
 
                     if (add_modern) {
-                        graphics::points(x$misc$site_info$climate[, climate[clim]], x$misc$site_info$climate[, climate[clim+1]], pch=23, cex=2, lwd=2, col='white', bg='red')
+                        if (is.numeric(x$misc$site_info$climate[, climate[clim]]) & is.numeric(x$misc$site_info$climate[, climate[clim + 1]])) {
+                            graphics::points(x$misc$site_info$climate[, climate[clim]], x$misc$site_info$climate[, climate[clim+1]], pch=23, cex=2, lwd=2, col='white', bg='red')
+                        }
                     }
                 }
             }
@@ -283,9 +285,10 @@ plot_climateSpace <- function( x,
                 d1 <- -9999999
                 if(add_modern) {
                     #graphics::points(x$misc$site_info$climate[, clim], 0.5, pch=23, col='white', bg='red', cex=1.5, lwd=1.5)
-                    graphics::points(x$misc$site_info$climate[, clim], 0.83, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
-                    graphics::points(x$misc$site_info$climate[, clim], 0.17, pch=25, col=NA, bg='red', cex=0.9, lwd=1.5)
-
+                    if (is.numeric(x$misc$site_info$climate[, clim]) ) {
+                        graphics::points(x$misc$site_info$climate[, clim], 0.83, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                        graphics::points(x$misc$site_info$climate[, clim], 0.17, pch=25, col=NA, bg='red', cex=0.9, lwd=1.5)
+                    }
                 }
                 for(i in 1:length(h1$breaks)) {
                     d2 <- h1$breaks[i] - graphics::strwidth(paste0(' ', h1$breaks[i], ' '), cex=6/8, units='user')/2

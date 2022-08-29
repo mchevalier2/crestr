@@ -36,7 +36,7 @@ devtools::install_github("mchevalier2/crestr")
 
 <br >
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" title="plot of chunk img1" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 _(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
@@ -44,8 +44,10 @@ _(A) density of presence records available in my calibration dataset upscaled at
 ## CREST in the scientific literature
 
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" title="plot of chunk img3" alt="plot of chunk img3" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" alt="plot of chunk img3" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
+- **2022**
+    - Gibson, M.E., McCoy, J., O’Keefe, J.M.K., Nuñez Otaño, N.B., Warny, S., Pound, M.J., 2022, Reconstructing Terrestrial Paleoclimates: A Comparison of the Co‐Existence Approach, Bayesian and Probability Reconstruction Techniques Using the UK Neogene. Paleoceanog. and Paleoclimatol. 37, e2021PA004358. [10.1029/2021PA004358](https://doi.org/10.1029/2021PA004358)
 - **2021**
     - Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021, Temperature change in subtropical southeastern Africa during the past 790,000 yr. Geology, 49, pp. 71–75. [10.1016/j.palaeo.2021.110609](https://www.doi.org/10.1016/j.palaeo.2021.110609)
     - Hui, Z., Zhou, X., Chevalier, M., Wei, X., Pan, Y. and Chen, Y., 2021, Miocene East Asia summer monsoon precipitation variability and its possible driving forces. Palaeogeography, Palaeoclimatology, Palaeoecology, pp. 110609. [10.1130/G47841.1](https://www.doi.org/10.1130/G47841.1)
@@ -69,10 +71,10 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 <br >
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-01.png" title="plot of chunk img2" alt="plot of chunk img2" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-01.png" alt="plot of chunk img2" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" title="plot of chunk img4" alt="plot of chunk img4" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" alt="plot of chunk img4" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 Last update: 24/08/2021
 

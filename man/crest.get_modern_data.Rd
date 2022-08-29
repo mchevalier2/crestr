@@ -54,13 +54,7 @@ percentages or presence/absence data).}
 \item{ai.sqrt}{A boolean to indicate whether ai values should be square-root
 transformed (default \code{FALSE}).}
 
-\item{xmn}{The coordinates defining the study area.}
-
-\item{xmx}{The coordinates defining the study area.}
-
-\item{ymn}{The coordinates defining the study area.}
-
-\item{ymx}{The coordinates defining the study area.}
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 
@@ -80,21 +74,14 @@ study area.}
 \item{minGridCells}{The minimum number of unique presence data necessary to
 estimate a species' climate response. Default is 20.}
 
-\item{elev_min}{Parameters to only selected grid cells with an
-elevation higher than elev_min or lower than elev_max (default is
-'\code{NA} ).}
-
-\item{elev_max}{Parameters to only selected grid cells with an
+\item{elev_min, elev_max}{Parameters to only selected grid cells with an
 elevation higher than elev_min or lower than elev_max (default is
 '\code{NA} ).}
 
 \item{elev_range}{Parameters discard the grid cell with a high elevation
 range (default is \code{NA}).}
 
-\item{year_min}{The oldest and youngest occurrences accepted
-(default is 1900-2021).}
-
-\item{year_max}{The oldest and youngest occurrences accepted
+\item{year_min, year_max}{The oldest and youngest occurrences accepted
 (default is 1900-2021).}
 
 \item{nodate}{A boolean to accept occurrences without a date (can overlap

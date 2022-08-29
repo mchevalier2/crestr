@@ -60,7 +60,7 @@ navbar:
     articles:
       text: Applications
       menu:
-      - text: Using gbif4crest
+      - text: Using the _gbif4crest_ database
         href: articles/using-gbif4crest.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
@@ -73,41 +73,45 @@ reference:
       - '`crest.set_modern_data`'
       - '`crest.calibrate`'
       - '`crest.reconstruct`'
-      - '`loo`'
       - '`crest`'
+      - '`loo`'
   - title: "Plotting"
     desc: "Functions for generating plots."
     contents:
+      - '`eqearth_get_ext`'
+      - '`explore_calibration_dataset`'
+      - '`isColourStr`'
+      - '`makeTransparent`'
       - '`plot.crestObj`'
       - '`plot_climateSpace`'
       - '`plot_combinedPDFs`'
       - '`plot_diagram`'
       - '`plot_loo`'
-      - '`explore_calibration_dataset`'
       - '`plot_map_eqearth`'
+      - '`plot_scatterPDFs`'
       - '`plot_taxaCharacteristics`'
       - '`plot_violinPDFs`'
-      - '`eqearth_get_ext`'
-      - '`isColourStr`'
-      - '`makeTransparent`'
   - title: "CrestObj Manipulation"
     desc: "Functions for creating, reading and modifying crestObj objects."
     contents:
+      - '`copy_crest`'
+      - '`createPSE`'
       - '`crestObj`'
+      - '`crop`'
       - '`export`'
       - '`export_pdfs`'
-      - '`copy_crest`'
       - '`excludeTaxa`'
       - '`includeTaxa`'
       - '`getSpeciesdiversity`'
-      - '`crop`'
+      - '`pdf_ranges`'
+      - '`taxonComposition`'
   - title: "Citing sources"
     desc: "Functions for generating the list of references to cite when publishing reconstructions."
     contents:
       - '`cite_climate_data`'
+      - '`cite_crest`'
       - '`cite_distrib_data`'
       - '`cite_method`'
-      - '`cite_crest`'
   - title: "Database"
     desc: "Functions for querying the calibration data database."
     contents:
@@ -132,11 +136,11 @@ reference:
       - '`colour_theme`'
       - '`convert2percentages`'
       - '`convert2presenceAbsence`'
-      - '`createPSE`'
       - '`find.original.name`'
       - '`fit_pdfsp`'
       - '`fit_xrange`'
       - '`get_taxa_type`'
+      - '`getTaxaTypeFromTaxID`'
       - '`meanPositiveValues`'
       - '`normalise`'
   - title: "Datasets"

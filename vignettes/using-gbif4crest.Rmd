@@ -45,10 +45,10 @@ The first option consists in using the default option: connecting to the online 
 ```{r online-option, echo=TRUE, eval=TRUE}
 
 reconstr <- crest.get_modern_data(  pse = PSE,
-                               taxaType = 1,
+                                taxaType = 1,
                                 climate = c("bio1", "bio12"),
                                 # The name of the online database to extract the data from
-                                 dbname = "gbif4crest_02",
+                                dbname = "gbif4crest_02",
                                 verbose = FALSE
 )
 
@@ -65,10 +65,10 @@ This option is usually much faster but it requires downloading the full database
 ```{r offline-option, echo=TRUE, eval=TRUE}
 
 reconstr <- crest.get_modern_data(  pse = PSE,
-                               taxaType = 1,
+                                taxaType = 1,
                                 climate = c("bio1", "bio12"),
                                 # The full path to the local gbif4crest database
-                                 dbname = "/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3",
+                                dbname = "gbif4crest_02",
                                 verbose = FALSE
 )
 

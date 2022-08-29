@@ -392,7 +392,9 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
                     graphics::text(mean(range(h1$breaks)), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=6/8)
                     if(add_modern) {
-                        graphics::points(x$misc$site_info$climate[, clim], 0.9, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                        if(is.numeric(x$misc$site_info$climate[, clim])) {
+                            graphics::points(x$misc$site_info$climate[, clim], 0.9, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                        }
                     }
                     for(xvl in graphics::axTicks(1)){
                         if(xvl >= h1$breaks[1]) {
@@ -431,7 +433,9 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     graphics::plot(NA, NA, type='n', xlim=xval, ylim=c(0, 1), axes=FALSE, main='', xaxs='i', yaxs='i')
                     graphics::text(mean(range(x$modelling$xrange[[clim]])), 0.3, accClimateVariables(clim)[3], font=1, adj=c(0.5, 0.5), cex=6/8)
                     if(add_modern) {
-                        graphics::points(x$misc$site_info$climate[, clim], 0.9, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                        if(is.numeric(x$misc$site_info$climate[, clim])) {
+                            graphics::points(x$misc$site_info$climate[, clim], 0.9, pch=24, col=NA, bg='red', cex=0.9, lwd=1.5)
+                        }
                     }
                     for(xvl in graphics::axTicks(1)){
                         if(xvl >= ifelse(x$parameters$shape[clim,]=='normal',x$modelling$xrange[[clim]][1], 0)) {

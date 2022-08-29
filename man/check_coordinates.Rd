@@ -7,13 +7,7 @@
 check_coordinates(xmn, xmx, ymn, ymx)
 }
 \arguments{
-\item{xmn}{The coordinates defining the study area.}
-
-\item{xmx}{The coordinates defining the study area.}
-
-\item{ymn}{The coordinates defining the study area.}
-
-\item{ymx}{The coordinates defining the study area.}
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
 }
 \value{
 Return a set of valid coordinates.

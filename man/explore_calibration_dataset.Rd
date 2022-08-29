@@ -48,13 +48,7 @@ Default is \code{FALSE} and the figure is saved as a pdf file.}
 
 \item{png.res}{The resolution of the png file (default 300 pixels per inch).}
 
-\item{xmn}{The coordinates defining the study area.}
-
-\item{xmx}{The coordinates defining the study area.}
-
-\item{ymn}{The coordinates defining the study area.}
-
-\item{ymx}{The coordinates defining the study area.}
+\item{xmn, xmx, ymn, ymx}{The coordinates defining the study area.}
 
 \item{continents}{A vector of the continent names defining the study area.}
 
