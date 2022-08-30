@@ -26,6 +26,7 @@ knitr::opts_chunk$set(
 ![Last month dowloads](https://cranlogs.r-pkg.org/badges/crestr)
  <br >
 
+[![R-CMD-check](https://github.com/mchevalier2/crestr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mchevalier2/crestr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
  
 #

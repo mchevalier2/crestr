@@ -6,6 +6,77 @@ output: github_document
 ---
 
 
+# Submission of crestr 1.2.0 (01/09/2022)
+
+
+## Tests run
+
+* First, I ran local test:
+```
+devtools::check()
+devtools::check(manual = TRUE, remote = TRUE, incoming = TRUE)
+```
+These two tests returned No ERRORs, No WARNINGs, No NOTEs.
+
+* Then I did the following:
+```
+devtools::build(manual = TRUE)
+R CMD CHECK /Users/mchevali1/GitHub/Rpackages/crestr_1.2.0.tar.gz
+R CMD CHECK --as-cran /Users/mchevali1/GitHub/Rpackages/crestr_1.2.0.tar.gz
+```
+Status: OK. No ERROR, No WARNING, No NOTE.
+
+* Then, I ran the following tests for Windows:
+```
+devtools::check_win_release('/Users/mchevali1/GitHub/Rpackages/crestr', quiet=TRUE)
+devtools::check_win_devel('/Users/mchevali1/GitHub/Rpackages/crestr', quiet=TRUE)
+devtools::check_win_oldrelease('/Users/mchevali1/GitHub/Rpackages/crestr', quiet=TRUE)
+```
+This returns some NOTEs about webpages listed in the documentation. The links were tested and are fully functional (there were already present in previous versions). The one also one NOTE about a possibly misspelled word, but I checked it and it is correctly spellt.
+
+
+* Finally, I ran the following tests
+
+```
+devtools::check_rhub('/Users/mchevali1/GitHub/Rpackages/crestr')
+rhub::check_for_cran('/Users/mchevali1/GitHub/Rpackages/crestr_1.2.0.tar.gz')
+```
+I got the following NOTEs, which I cannot act on. Some of them were already prsent in the previous versions of the package I sbumitted.
+
+    * checking for detritus in the temp directory ... NOTE Found the following files/directories:   'lastMiKTeXException'
+    * checking HTML version of manual ... NOTE Skipping checking HTML validation: no command 'tidy' found
+
+
+
+## What's new in v1.2.0?
+
+An array of new functions has been added and some minor bugs have also been corrected.
+
+* Removing some unnecessary debugging prints
+* Adapting the crestr reference
+* Adding a check on the column names of PSE
+* Fastening the LOO function
+* Adding a sorting parameter to the `LOO()` function
+* Adding the `pdf_ranges()` function.
+    * Also included as an invisible output of the `plot_violinPDFs()`
+* Adding the `plot.scatterPDFs()` graphical output.
+* Adding `taxonComposition()` to get the size distribution of the composing species.
+* Minor bugs fixed
+    * If no distributions are extracted, the calibration could be used.
+    * `combinedPDFs()` could bug if only one variable
+    * Filters by elevation added to `getClimateSpace()`
+    * print(ntaxa) was 1 off
+    * Minor naming issues with `export()`
+    * `plot_climateSpace()` and `plot_taxaCharacteristics()` were issuing a warning when no climate values are available and add_modern is TRUE (coordinates are available but no climate)
+
+
+
+<--------------------------------------------->
+
+Previous submissions. Versions already on CRAN
+
+<--------------------------------------------->
+
 
 
 # Submission of crestr 1.1.0 (01/07/2022)
@@ -64,10 +135,6 @@ This version has not been submitted to CRAN yet
 
 
 
-
-
-<---------------------------------------------
-Previous submissions. Versions already on CRAN
 
 
 # Submission of crestr v1.0.2 (25/04/2022)

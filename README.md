@@ -1,81 +1,87 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-
 
 # crestr
 
 <!-- badges: start -->
-[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://lifecycle.r-lib.org/articles/stages.html) <br >
-[![CRAN status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
-![CRAN/METACRAN](https://img.shields.io/cran/v/crestr)
-[![GitHub R package version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr) <br >
-![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/crestr)
-![Last month dowloads](https://cranlogs.r-pkg.org/badges/crestr)
- <br >
 
+[![MIT
+license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![Lifecycle:
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+<br > [![CRAN
+status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
+![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) [![GitHub R
+package
+version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
+<br > ![Total
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/crestr) ![Last
+month dowloads](https://cranlogs.r-pkg.org/badges/crestr) <br >
+
+[![R-CMD-check](https://github.com/mchevalier2/crestr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mchevalier2/crestr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
- 
-#
 
-The goal of `crestr` is to enable probabilistic reconstructions of past climate
-change from fossil assemblage data. The approach is based on the estimation of
-conditional responses of different bio-proxies to various climate parameters.
-These responses take the form of probability density functions (*PDFs*). The
-details of the method have been described in
-[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014), the
-calibrated data are presented in
-[Chevalier (2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the package is fully described in [Chevalier (2022)](https://cp.copernicus.org/articles/18/821/2022/).
+# 
 
+The goal of `crestr` is to enable probabilistic reconstructions of past
+climate change from fossil assemblage data. The approach is based on the
+estimation of conditional responses of different bio-proxies to various
+climate parameters. These responses take the form of probability density
+functions (*PDFs*). The details of the method have been described in
+[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014),
+the calibrated data are presented in [Chevalier
+(2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the
+package is fully described in [Chevalier
+(2022)](https://cp.copernicus.org/articles/18/821/2022/).
 
 ## Installation
 
-You can install the package from [CRAN](https://CRAN.R-project.org/package=crestr).
+You can install the package from
+[CRAN](https://CRAN.R-project.org/package=crestr).
+
 ``` r
 install.packages("crestr")
 ```
 
-You can also install the development version from [GitHub](https://github.com/) with:
+You can also install the development version from
+[GitHub](https://github.com/) with:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
 
-> **_NOTE:_**  If the install fails, it is possible that
-[**gdal**](https://gdal.org/download.html) or [**PROJ**](https://proj.org/install.html)
-are not installed on your system. Ample documentation exists online to guide you
-through the installation of these two elements to your own system.
-
+> ***NOTE:*** If the install fails, it is possible that
+> [**gdal**](https://gdal.org/download.html) or
+> [**PROJ**](https://proj.org/install.html) are not installed on your
+> system. Ample documentation exists online to guide you through the
+> installation of these two elements to your own system.
 
 ## Contact
 
-If you experience any trouble while using this package, or if you think of
-additional functionalities to incorporate to the package, please contact me at
-<chevalier.manuel@gmail.com> or open a discussion [here](https://github.com/mchevalier2/crestr/issues).
-
+If you experience any trouble while using this package, or if you think
+of additional functionalities to incorporate to the package, please
+contact me at <chevalier.manuel@gmail.com> or open a discussion
+[here](https://github.com/mchevalier2/crestr/issues).
 
 ## How to use `crestr`
 
 ### Online documentation
 
-The package is fully documented and the help of each function can be accessed
-with `?function`. More detailed information as well as documented examples are
-available from **<https://mchevalier2.github.io/crestr/>**.
+The package is fully documented and the help of each function can be
+accessed with `?function`. More detailed information as well as
+documented examples are available from
+**<https://mchevalier2.github.io/crestr/>**.
 
 ### A Quick Example
 
-The following example illustrates the basics of `crestr` using pseudo-data
-(_i.e._ randomly generated data).
+The following example illustrates the basics of `crestr` using
+pseudo-data (*i.e.* randomly generated data).
 
-
-
-```r
+``` r
 library(crestr)
 ## loading example data
 data(crest_ex)
@@ -83,11 +89,11 @@ data(crest_ex_pse)
 data(crest_ex_selection)
 ```
 
-Let's first have a look at the data. The dataset is composed of 20 fossil
-samples from which 7 taxa have been identified. The data are expressed in percentages.
+Let’s first have a look at the data. The dataset is composed of 20
+fossil samples from which 7 taxa have been identified. The data are
+expressed in percentages.
 
-
-```r
+``` r
 ## the first 6 samples
 head(crest_ex)
 #>          Age Taxon1 Taxon2 Taxon3 Taxon4 Taxon5 Taxon6 Taxon7
@@ -100,7 +106,7 @@ head(crest_ex)
 ##
 ## the structure of the data frame
 str(crest_ex)
-#> 'data.frame':	20 obs. of  8 variables:
+#> 'data.frame':    20 obs. of  8 variables:
 #>  $ Age   : int  1 2 3 4 5 6 7 8 9 10 ...
 #>  $ Taxon1: int  0 0 0 0 0 2 3 5 10 15 ...
 #>  $ Taxon2: int  0 0 0 0 3 2 5 5 12 8 ...
@@ -111,10 +117,10 @@ str(crest_ex)
 #>  $ Taxon7: int  1 0 0 0 0 0 0 0 0 0 ...
 ```
 
-For each reconstruction, a proxy-species equivalency ('pse') table must be provided.
-Here, with the 7 pseudo-taxa, it looks like:
+For each reconstruction, a proxy-species equivalency (‘pse’) table must
+be provided. Here, with the 7 pseudo-taxa, it looks like:
 
-```r
+``` r
 crest_ex_pse
 #>   Level      Family    Genus Species ProxyName
 #> 1     3 Randomaceae Randomus  Taxon1    Taxon1
@@ -126,15 +132,15 @@ crest_ex_pse
 #> 7     3 Randomaceae Randomus  Taxon7    Taxon7
 ```
 
-Finally, unique sets of taxa can be specified to reconstruct each climate
-variable. In the example, *bio1* (mean annual temperature) and *bio12* (annual
-precipitation) will be reconstructed. The dataset has been designed so that
-Taxa 1, 2, 3 and 7 are sensitive to *bio1* while Taxa 1, 4, 5 and 7 are sensitive
-to *bio12*. Check <https://mchevalier2.github.io/crestr/articles/get-started.html>
-for more details on this selection.
+Finally, unique sets of taxa can be specified to reconstruct each
+climate variable. In the example, *bio1* (mean annual temperature) and
+*bio12* (annual precipitation) will be reconstructed. The dataset has
+been designed so that Taxa 1, 2, 3 and 7 are sensitive to *bio1* while
+Taxa 1, 4, 5 and 7 are sensitive to *bio12*. Check
+<https://mchevalier2.github.io/crestr/articles/get-started.html> for
+more details on this selection.
 
-
-```r
+``` r
 crest_ex_selection
 #>        bio1 bio12
 #> Taxon1    1     1
@@ -146,12 +152,11 @@ crest_ex_selection
 #> Taxon7    1     1
 ```
 
-These pseudo-data can be provided to the **crest** function and provided some
-parameters (see the full vignettes for a detail of these parameters), the
-reconstructions will be processed.
+These pseudo-data can be provided to the **crest** function and provided
+some parameters (see the full vignettes for a detail of these
+parameters), the reconstructions will be processed.
 
-
-```r
+``` r
 recons <- crest(
    df = crest_ex, pse = crest_ex_pse, taxaType = 0,
    climate = c("bio1", "bio12"), bin_width = c(2, 50),
@@ -165,11 +170,10 @@ recons <- crest(
 
 A specific print function was created to summarise the crestObj.
 
-
-```r
+``` r
 recons
 #> *
-#> * Summary of the crestObj named `recons`:
+#> * Summary of the crestObj named ``:
 #> *   x Calibration data formatted .. TRUE
 #> *   x PDFs fitted ................. TRUE
 #> *   x Climate reconstructed ....... TRUE
@@ -195,7 +199,7 @@ recons
 #> *     __________________________________________ bio12: lognormal
 #> *
 #> * Of the 7 taxa provided in `df` and `PSE`, 1 cannot be analysed.
-#> * (This may be expected, but check `recons$misc$taxa_notes` for additional details.)
+#> * (This may be expected, but check `$misc$taxa_notes` for additional details.)
 #> *
 #> * The reconstructions were performed with the following set of parameters:
 #> *   x Minimum presence value .................. 0
@@ -206,34 +210,31 @@ recons
 #> *
 ```
 
-The climate sampled by the data can be graphically represented for a quick
-assessment of the calibration dataset.
+The climate sampled by the data can be graphically represented for a
+quick assessment of the calibration dataset.
 
-
-```r
+``` r
 plot_climateSpace(recons)
 ```
 
-<img src="man/figures/README-plot-climate-space-1.png" alt="plot of chunk plot-climate-space" width="100%" />
+<img src="man/figures/README-plot-climate-space-1.png" width="100%" />
 
+Additional graphical tools can be used to assess which taxa should/could
+be used for each variable. On the following example, it is clear that
+Taxon2 has a much stronger correlation with *bio1* than to *bio12*,
+hence its selection for *bio1* only.
 
-Additional graphical tools can be used to assess which taxa should/could be used
-for each variable. On the following example, it is clear that Taxon2 has a much
-stronger correlation with *bio1* than to *bio12*, hence its selection for *bio1*
-only.
-
-
-```r
+``` r
 plot_taxaCharacteristics(recons, taxanames='Taxon2')
 ```
 
-<img src="man/figures/README-plot-plot_taxaCharacteristics-1.png" alt="plot of chunk plot-plot_taxaCharacteristics" width="100%" />
+<img src="man/figures/README-plot-plot_taxaCharacteristics-1.png" width="100%" />
 
 The results can be quickly visualised using the plot function and the
-reconstructed climate values can be accessed from the nested `recons` object:
+reconstructed climate values can be accessed from the nested `recons`
+object:
 
-
-```r
+``` r
 names(recons)
 #> [1] "inputs"          "parameters"      "modelling"       "reconstructions"
 #> [5] "misc"
@@ -245,8 +246,7 @@ lapply(recons$reconstructions, names)
 #> [1] "likelihood"    "uncertainties" "optima"
 ```
 
-
-```r
+``` r
 head(recons$reconstructions$bio1$optima)
 #>   Age   optima     mean
 #> 1   1 15.71142 15.69949
@@ -256,14 +256,13 @@ head(recons$reconstructions$bio1$optima)
 #> 5   5 17.31463 17.29054
 #> 6   6 18.11623 18.12464
 str(recons$reconstructions$bio1$optima)
-#> 'data.frame':	20 obs. of  3 variables:
+#> 'data.frame':    20 obs. of  3 variables:
 #>  $ Age   : num  1 2 3 4 5 6 7 8 9 10 ...
 #>  $ optima: num  15.7 15.7 15.7 15.7 17.3 ...
 #>  $ mean  : num  15.7 15.7 15.7 15.7 17.3 ...
 ```
 
-
-```r
+``` r
 signif(recons$reconstructions$bio1$likelihood[1:6, 1:6], 3)
 #>          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]
 #> [1,] 0.00e+00 8.02e-02 1.60e-01 2.40e-01 3.21e-01 4.01e-01
@@ -276,37 +275,35 @@ str(recons$reconstructions$bio1$likelihood)
 #>  num [1:21, 1:500] 0.00 8.41e-15 8.41e-15 8.41e-15 8.41e-15 ...
 ```
 
-
-
-```r
+``` r
 plot(recons, climate = 'bio1')
 plot(recons, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
 ```
 
-<img src="man/figures/README-plot-1.png" alt="plot of chunk plot" width="50%" /><img src="man/figures/README-plot-2.png" alt="plot of chunk plot" width="50%" />
+<img src="man/figures/README-plot-1.png" width="50%" /><img src="man/figures/README-plot-2.png" width="50%" />
 
-If satisfying, the results can be directly exported from the R environment in
-unique spreadsheets for each variables (or csv files) and the **crest** object
-is exported as an RData file to enable easy reuse in the future.
+If satisfying, the results can be directly exported from the R
+environment in unique spreadsheets for each variables (or csv files) and
+the **crest** object is exported as an RData file to enable easy reuse
+in the future.
 
-
-```r
+``` r
 export(recons, loc=getwd(), dataname='crest-test')
 list.files(file.path(getwd(), 'crest-test'))
 #> [1] "bio1"             "bio12"            "crest-test.RData"
 ```
 
-
-
-
 ## References
 
- - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction
-   SofTware): a probability density function (PDF)-based quantitative climate
-   reconstruction method. *Clim. Past* 10, 2081–2098. [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
- - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
-   fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35.
-   [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
- - Chevalier, M., 2022. _crestr_ an R package to perform probabilistic climate
-   reconstructions from palaeoecological datasets. Clim. Past
-   [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)
+- Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate
+  REconstruction SofTware): a probability density function (PDF)-based
+  quantitative climate reconstruction method. *Clim. Past* 10,
+  2081–2098.
+  [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
+- Chevalier, M., 2019. Enabling possibilities to quantify past climate
+  from fossil assemblages at a global scale. *Glob. Planet. Change* 175,
+  27–35.
+  [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+- Chevalier, M., 2022. *crestr* an R package to perform probabilistic
+  climate reconstructions from palaeoecological datasets. Clim. Past
+  [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)
