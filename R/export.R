@@ -190,7 +190,6 @@ export <- function( x, dataname = x$misc$site_info$site_name,
                 }
             }
 
-
             df <- cbind(x$inputs$x, x$inputs$df, stringsAsFactors=FALSE)
             colnames(df)[1] <- c(x$inputs$x.name)
             if(as.csv) {
@@ -199,7 +198,6 @@ export <- function( x, dataname = x$misc$site_info$site_name,
                 openxlsx::addWorksheet(wb, "taxa_percentage")
                 openxlsx::writeData(wb, sheet = "taxa_percentage", x = df)
             }
-
 
             if (weights) {
                 df <- cbind(x$inputs$x, x$modelling$weights, stringsAsFactors=FALSE)
@@ -211,7 +209,6 @@ export <- function( x, dataname = x$misc$site_info$site_name,
                     openxlsx::writeData(wb, sheet = "taxa_weights", x = df)
                 }
             }
-
 
             if (loo) {
                 df <- x$inputs$x
@@ -275,13 +272,15 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
                     for(tax in list_of_tax) {
                         if(tax %in% unique(x$inputs$pse[, 'ProxyName'])) {
-                            df <- rbind(df,
-                                        c(tax,
-                                          as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 2]),
-                                          as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 3]),
-                                          as.character(x$inputs$pse[x$inputs$pse[, 'ProxyName'] == tax, 4]),
-                                          'No',
-                                          n), stringsAsFactors=FALSE)
+                            for(w in which(x$inputs$pse[, 'ProxyName'] == tax)) {
+                                df <- rbind(df,
+                                            c(tax,
+                                              as.character(x$inputs$pse[w, 2]),
+                                              as.character(x$inputs$pse[w, 3]),
+                                              as.character(x$inputs$pse[w, 4]),
+                                              'No',
+                                              n), stringsAsFactors=FALSE)
+                            }
                         } else {
                             df <- rbind(df, c(tax, NA, NA, NA, 'No', n), stringsAsFactors=FALSE)
                         }

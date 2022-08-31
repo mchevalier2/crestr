@@ -1,3 +1,10 @@
+# crestr 1.2.1.9000
+
+* Getting rid of one warning in `export()`
+* Minor corrections
+    * Removing unnecessary prints
+
+
 # crestr 1.2.0
 
 * Removing some unnecessary debugging prints

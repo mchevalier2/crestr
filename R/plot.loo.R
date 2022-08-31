@@ -59,7 +59,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
 
     if(base::missing(x)) x
-print(climate)
+
     if (methods::is(x)[1] == 'crestObj') {
 
         if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {
@@ -88,7 +88,6 @@ print(climate)
         rs <- list()
 
         for( clim in climate ) {
-            print(clim)
             df <- list()
             if(is.numeric(x$inputs$x)) {
                 df[[x$inputs$x.name]] <- x$inputs$x
