@@ -3,6 +3,7 @@
 * Getting rid of one warning in `export()`
 * Minor corrections
     * Removing unnecessary prints
+    * Improved documentation
 
 
 # crestr 1.2.0

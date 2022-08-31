@@ -1,6 +1,6 @@
-#' Returns the citations associated to the GBIF data used to fit the pdfs.
+#' Creates a spreadsheet with the format required for a PSE.
 #'
-#' Returns the citations associated to the GBIF data used to fit the pdfs.
+#' Creates a spreadsheet with the format required for a PSE from a list of taxa.
 #'
 #' @param taxa A list of taxa to include in the PSE file.
 #' @param loc An absolute or relative path that indicates where the spreadsheet

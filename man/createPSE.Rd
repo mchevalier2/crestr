@@ -2,7 +2,7 @@
 % Please edit documentation in R/createPSE.R
 \name{createPSE}
 \alias{createPSE}
-\title{Returns the citations associated to the GBIF data used to fit the pdfs.}
+\title{Creates a spreadsheet with the format required for a PSE.}
 \usage{
 createPSE(taxa, loc = "proxy_species_equivalency.xlsx")
 }
@@ -18,7 +18,7 @@ the file is saved in the working directory under the name
 No return value, called to create a PSE file.
 }
 \description{
-Returns the citations associated to the GBIF data used to fit the pdfs.
+Creates a spreadsheet with the format required for a PSE from a list of taxa.
 }
 \examples{
 data(crest_ex)
