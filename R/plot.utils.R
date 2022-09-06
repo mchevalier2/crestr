@@ -19,7 +19,7 @@ eqearth_get_ext <- function(ext, npoints=15) {
                                                 c(seq(ext[3], ext[4], length.out=npoints),
                                                   seq(ext[4], ext[3], length.out=npoints))))), ID = as.character(1))
     Sl1 <- sp::SpatialPolygons(list(bckg))
-    raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
+    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
 
     PROJ <- sp::CRS(paste0("+proj=eqearth +lon_0=", mean(c(ext[2], ext[1])),
                            " +x_0=", mean(c(ext[2], ext[1])),
@@ -89,7 +89,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         idx = idx  +1
     }
     Sl1 <- sp::SpatialLines(ll)
-    raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
+    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
     verticals.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
     verticals.eqearth.x <- unlist(lapply(sp::coordinates(verticals.eqearth), function(x) return(x[[1]][1,1])))
 
@@ -100,7 +100,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
         idx = idx  +1
     }
     Sl1 <- sp::SpatialLines(ll)
-    raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
+    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
     horizontals.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
     horizontals.eqearth.xy <- t(data.frame(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,]))))
     horizontals.eqearth.y <- unlist(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,2])))
@@ -108,7 +108,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
 
     if (length(site_xy) == 2) {
         Sl1 <- sp::SpatialPoints(matrix(site_xy, ncol=2))
-        raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
+        raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
         XY <- sp::spTransform(Sl1, raster::crs(PROJ))
     }
 
@@ -117,7 +117,7 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
                                                 c(seq(ext[3], ext[4], length.out=npoints),
                                                   seq(ext[4], ext[3], length.out=npoints))))), ID = as.character(1))
     Sl1 <- sp::SpatialPolygons(list(bckg))
-    raster::crs(Sl1) <- sp::CRS("+init=epsg:4326")
+    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
     bckg.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
 
     if (inherits(dat, 'RasterLayer'))  dat <- raster::mask(dat, bckg.eqearth)

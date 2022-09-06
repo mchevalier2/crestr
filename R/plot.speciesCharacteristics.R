@@ -242,7 +242,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 veg_space      <- plyr::count(veg_space)
                 veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
                 veg_space[, 3] <- base::log10(veg_space[, 3])
-                veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+init=epsg:4326"))
+                veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
 
 
@@ -347,7 +347,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
                     R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
                                                       climate_space[, clim] ),
-                                                crs = sp::CRS("+init=epsg:4326"))
+                                                crs = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
 
                     graphics::par(mar = c(0, 0, 0, 0), ps=8*3/2)
                     plot_map_eqearth(R1, ext,
