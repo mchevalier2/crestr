@@ -1,6 +1,7 @@
 # crestr 1.2.1.9000
 
 * Getting rid of one warning in `export()`
+* Replacing epsg:4326 by  `+proj=longlat +datum=WGS84 +no_defs` to potentially avoid bugs when plotting maps (problem ultimately related to latest version of gdal and proj)
 * Minor corrections
     * Removing unnecessary prints
     * Improved documentation
