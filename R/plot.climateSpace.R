@@ -317,7 +317,7 @@ plot_climateSpace <- function( x,
                 graphics::segments(h1$breaks[1],0,max(h1$breaks),0)
                 graphics::par(opar)
             }
-            graphics::text(xval[2], max(h2$counts)/2, 'Numer of occurrences', cex=6/8, adj=c(0.5, 1), srt=-90)
+            graphics::text(xval[2], max(h2$counts)/2, 'Number of occurrences', cex=6/8, adj=c(0.5, 1), srt=-90)
         }
 
         if(save) {

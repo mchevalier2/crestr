@@ -2,6 +2,7 @@
 
 * Getting rid of one warning in `export()`
 * Replacing epsg:4326 by  `+proj=longlat +datum=WGS84 +no_defs` to potentially avoid bugs when plotting maps (problem ultimately related to latest version of gdal and proj)
+* Problem of non-recorded taxa in selectedtaxa caused the final plots to crash. they are now excluded and set a value of -2.
 * Minor corrections
     * Removing unnecessary prints
     * Improved documentation

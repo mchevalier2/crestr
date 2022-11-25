@@ -177,7 +177,6 @@ getDistribTaxa <- function(taxIDs,
       "     ", CLIM4, " "
     )
     res2 <- dbRequest(req2, dbname)
-
     # Executing the request------------------------------------------------------
     res <- merge(res, res2, by='locid')
     res[, c('taxonid', 'longitude', 'latitude', climate)]

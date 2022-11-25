@@ -82,7 +82,7 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
         if(!save) {
             par_usr <- graphics::par(no.readonly = TRUE)
             on.exit(graphics::par(par_usr))
-            graphics::par(ask=TRUE)
+            if(length(samples) > 1) graphics::par(ask=TRUE)
         }
 
         ymx <- max(x$reconstructions[[climate]]$likelihood[-1, ], na.rm=TRUE)
@@ -182,7 +182,6 @@ plot_combinedPDFs <- function( x, samples=1:length(x$inputs$x), climate=x$parame
                 }
                 ordered_tax <- c(ordered_tax, taxa[order(weights, decreasing=FALSE)])
             }
-
 
             graphics::par(mar=c(2,0.1,0.5,0.1))
             graphics::par(ps=8, cex=1)

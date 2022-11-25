@@ -397,7 +397,7 @@ plot.crestObj <- function(x,
             xx <- sort(base::jitter(x$inputs$x, 0.0001))
         }
 
-
+        uncertainties <- sort(uncertainties)
 
         val <- apply(pdfter[, -1], 2, function(x) {
             if(is.na(x[1])) return(c(NA, NA))

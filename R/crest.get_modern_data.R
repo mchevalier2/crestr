@@ -263,6 +263,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         ))
         rownames(selectedTaxa) <- taxa.name
         colnames(selectedTaxa) <- climate
+    } else {
+        if(length(which(! rownames(selectedTaxa) %in% taxa.name )) > 0) {
+            selectedTaxa[which(! rownames(selectedTaxa) %in% taxa.name ), ] <- -2
+            warning("One or more taxa recorded in the selectedTaxa were not recorded in either PSE or df. They are excluded for the rest of the study (their value is set to -2 is `x$inputs$selectedTaxa`.)\n")
+        }
     }
 
     sendWarning <- FALSE
