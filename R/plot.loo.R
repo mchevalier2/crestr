@@ -60,7 +60,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
 
         if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {
             stop('No leave-one-out data available. Run the loo() function first.\n')

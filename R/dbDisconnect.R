@@ -6,8 +6,10 @@
 #' @return No return value, function called to close the connection to the database.
 #' @export
 #' @examples
-#' db <- connect_online()
-#' close_db_connection(db)
+#' \dontrun{
+#'   db <- connect_online()
+#'   close_db_connection(db)
+#' }
 #'
 close_db_connection <- function(db) {
     DBI::dbDisconnect(db)

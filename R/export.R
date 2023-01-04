@@ -43,7 +43,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         if (length(x$reconstructions) == 0) {
             stop("No reconstruction available for export.\n")
         }
@@ -301,7 +301,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             if(pdfs) export_pdfs(x, dataname, climate, taxa=x$inputs$taxa.name, loc, as.csv)
         }
     } else {
-        stop("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
+        cat("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
     }
     invisible(x)
 }

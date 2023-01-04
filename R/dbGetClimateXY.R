@@ -27,6 +27,12 @@ climate_from_xy <- function(long, lat,
         stop('The coordinates are not numeric.\n')
     }
 
+    db <- connect_online(dbname = dbname)
+    if(!methods::is(db, 'DBIConnection')) {
+        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
+        return(NA)
+    }
+
     long <- resol * (long %/% resol) + resol/2;
     lat  <- resol * (lat %/% resol) + resol/2;
 

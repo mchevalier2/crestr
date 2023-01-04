@@ -18,6 +18,13 @@
 #' }
 #'
 getTaxonID <- function(family = "", genus = "", species = "", taxaType = 1, dbname = "gbif4crest_02") {
+
+    db <- connect_online(dbname = dbname)
+    if(!methods::is(db, 'DBIConnection')) {
+        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
+        return(NA)
+    }
+    
     family  <- base::trimws(family, 'both')
     genus   <- base::trimws(genus, 'both')
     species <- base::trimws(species, 'both')

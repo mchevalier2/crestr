@@ -34,7 +34,7 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         if (length(x$modelling$pdfs) == 0) {
             stop("\nNo pdfs available for export. You need to run crest.calibrate() first.\n\n")
         }
@@ -83,7 +83,7 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
         if(!as.csv) openxlsx::saveWorkbook(wb, file.path(loc, dataname, paste0('taxa_pdfs.xlsx')), overwrite = TRUE)
 
     } else {
-        stop("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
+        cat("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
     }
     invisible(x)
 }

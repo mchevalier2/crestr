@@ -30,6 +30,11 @@
 loo <- function(x, verbose=TRUE) {
     if(base::missing(x)) x
 
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
     if(verbose) cat('\n## Prepping data for LOO reconstructions\n')
 
     if(verbose) cat('  <> Checking data ......................... ')

@@ -61,7 +61,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         if (length(x$modelling$pdfs) == 1 ) {
             if(is.na(x$modelling$pdfs)) {
                 stop('The pdfs are required to generate the plot. Run crest.calibrate() on your data.\n')
@@ -455,7 +455,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
             if(!as.png) grDevices::dev.off()
         }
     } else {
-      stop('This function only works with a crestObj.\n\n')
+        cat('This function only works with a crestObj.\n\n')
     }
     invisible()
 }

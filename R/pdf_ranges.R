@@ -28,7 +28,7 @@ pdf_ranges <- function( x,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {
             stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
@@ -74,7 +74,7 @@ pdf_ranges <- function( x,
             rs[[paste0('Range = ', 100*uncer, '%')]] <- res
         }
     } else {
-        stop('This function only works with a crestObj.\n\n')
+        cat('This function only works with a crestObj.\n\n')
     }
     rs
 }

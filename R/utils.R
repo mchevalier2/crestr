@@ -406,3 +406,16 @@ get_taxa_type <- function(taxaType) {
 getTaxaTypeFromTaxID <- function(taxID) {
     return(taxID %/% 1000000)
 }
+
+
+#' Test if x is a crestObj.
+#'
+#' Test if x is a crestObj.
+#'
+#' @param x The object to be tested
+#' @return \code{TRUE} (x is a crestObj) or \code{FALSE} (not a crestObj).
+#' @export
+#'
+is.crestObj <- function(x) {
+    return(methods::is(x, "crestObj"))
+}

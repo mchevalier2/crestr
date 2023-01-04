@@ -335,6 +335,11 @@ plot.crestObj <- function(x,
 
     if(base::missing(x)) x
 
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
     if (length(x$reconstructions) == 0 || is.null(climate)) {
         stop("No reconstruction available for plotting.\n")
     }

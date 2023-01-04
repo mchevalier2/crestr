@@ -92,6 +92,12 @@ accClimateVariables <- function(v=NA, domain=NA) {
 #' @return A list where each element is a vector of corresponding country names.
 #' @keywords internal
 getCountryNames <- function(dbname = "gbif4crest_02") {
+    db <- connect_online(dbname = dbname)
+    if(!methods::is(db, 'DBIConnection')) {
+        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
+        return(NA)
+    }
+
     res <- list()
     req <- "SELECT DISTINCT continent FROM geopolitical_units WHERE continent IS NOT NULL ORDER BY continent"
     continents <- dbRequest(req, dbname)[, 1]
@@ -143,6 +149,12 @@ accCountryNames <- function(continent=NA) {
 #' @return A list where each element is a vector of corresponding ocean/sea names.
 #' @keywords internal
 getBasinNames <- function(dbname = "gbif4crest_02") {
+    db <- connect_online(dbname = dbname)
+    if(!methods::is(db, 'DBIConnection')) {
+        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
+        return(NA)
+    }
+
     res <- list()
     req <- "SELECT DISTINCT basin FROM geopolitical_units WHERE basin IS NOT NULL ORDER BY basin"
     basin <- dbRequest(req, dbname)[, 1]
@@ -200,6 +212,12 @@ accBasinNames <- function(basin=NA) {
 #'         ecoregions) of each realm.
 #' @keywords internal
 getRealmNames <- function(terr = NA, biome = TRUE, ecoregion = TRUE, dbname = "gbif4crest_02") {
+    db <- connect_online(dbname = dbname)
+    if(!methods::is(db, 'DBIConnection')) {
+        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
+        return(NA)
+    }
+    
     res <- list()
     if(is.na(terr)) {
         s <- ''

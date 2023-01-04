@@ -21,7 +21,7 @@ taxonComposition <- function( x,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         rs <- list()
         for(tax in taxanames){
             taxonID = x$modelling$taxonID2proxy[x$modelling$taxonID2proxy[, 2] == tax, 'taxonID']
@@ -45,7 +45,7 @@ taxonComposition <- function( x,
             rs[[tax]] <- sort(tapply(distrib$taxonid, distrib$taxonid, length))
         }
     } else {
-        stop('This function only works with a crestObj.\n\n')
+        cat('This function only works with a crestObj.\n\n')
     }
     rs
 }

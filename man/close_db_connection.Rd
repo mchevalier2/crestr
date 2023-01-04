@@ -16,7 +16,9 @@ No return value, function called to close the connection to the database.
 Disconnect the database connection.
 }
 \examples{
-db <- connect_online()
-close_db_connection(db)
+\dontrun{
+  db <- connect_online()
+  close_db_connection(db)
+}
 
 }

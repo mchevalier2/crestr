@@ -57,13 +57,22 @@ crest.get_modern_data <- function( pse, taxaType, climate,
 
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
-    if(verbose) cat('  <> Checking pse .......................... ')
+    if(verbose) cat('  <> Checking database connection .......... ')
+    ##. Testing if the input variables are in the correct format ---------------
+
+    db <- connect_online(dbname = dbname)
+    if(!methods::is(db, 'DBIConnection')) {
+        cat("[FAILED]\n")
+        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
+        return(NA)
+    }
+
+    if(verbose) cat('[OK]\n  <> Checking pse .......................... ')
 
     ##. Testing if the input variables are in the correct format ---------------
     if (!is.data.frame(pse)) {
-        cat("[FAILED]\n\n")
-        stop("The 'pse' variable (proxy_species_equivalency) must be a data frame.\n")
-        return()
+        cat("[FAILED]\n")
+        stop("The 'pse' variable (proxy_species_equivalency) must be a data frame.\n\n")
     }
 
     pse <- pse[!is.na((pse[, 'ProxyName'])), ]

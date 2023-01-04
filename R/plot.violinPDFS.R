@@ -54,7 +54,7 @@ plot_violinPDFs <- function( x,
 
     if(base::missing(x)) x
 
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {
             stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
@@ -135,7 +135,7 @@ plot_violinPDFs <- function( x,
         }
 
     } else {
-        stop('This function only works with a crestObj.\n\n')
+        cat('This function only works with a crestObj.\n\n')
     }
     invisible(pdf_ranges(x, climate=climate, taxanames=taxanames))
 }

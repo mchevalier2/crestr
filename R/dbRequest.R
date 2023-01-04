@@ -29,6 +29,7 @@ dbRequest <- function(request, dbname = "gbif4crest_02") {
     } else {
         db <- connect_online(dbname)
     }
+    if(!methods::is(db, 'DBIConnection')) return(NA)
     res <- DBI::dbGetQuery(db, request)
     close_db_connection(db)
     res

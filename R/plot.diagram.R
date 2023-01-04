@@ -65,7 +65,7 @@ plot_diagram <- function(x, bars=FALSE,
     }
 
     #x.w <- NA
-    if (methods::is(x)[1] == 'crestObj') {
+    if (is.crestObj(x)) {
         #if (!unique(is.na(x$modelling$weights))) {
         #  x.w <- cbind(x=x$inputs$x, x$modelling$weights)
         #  x.w <- x.w[order(x$inputs$x), ]

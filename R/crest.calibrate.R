@@ -37,6 +37,11 @@ crest.calibrate <- function(x,
 
     if(base::missing(x)) x
 
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
     if (length(x$modelling$distributions) == 0) {
         stop("No distributions available for calibration.\n")
     }

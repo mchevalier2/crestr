@@ -42,10 +42,15 @@ crest.reconstruct <- function(x,
 
     if(base::missing(x)) x
 
-    if(verbose) cat('\n## Last data checks and reconstruction\n')
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
+    if(verbose) cat('\n## Final data checks and reconstruction\n')
     if(! skip_for_loo) {
 
-        if(verbose) cat('  <> Checking data ......................... ')
+        if(verbose) cat('  <> Checking fossil data .................. ')
         if (!is.data.frame(x$inputs$df)) {
             cat("[FAILED]\n\n")
             stop(paste0("Fossil data not provided. Check the 'df' parameter in crest.get_modern_data().\n"))

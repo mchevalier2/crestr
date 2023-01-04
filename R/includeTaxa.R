@@ -22,6 +22,11 @@ includeTaxa <- function(x, taxa, climate) {
     if(base::missing(taxa)) taxa
     if(base::missing(climate)) climate
 
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
     for (tax in taxa) {
         for (clim in c(climate)) {
             if (x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)] >= 0 ) {
@@ -55,6 +60,11 @@ excludeTaxa <- function(x, taxa, climate) {
     if(base::missing(x)) x
     if(base::missing(taxa)) taxa
     if(base::missing(climate)) climate
+
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
 
     for (tax in taxa) {
         for (clim in c(climate)) {
