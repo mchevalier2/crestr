@@ -5,6 +5,69 @@ date: "01/07/2022"
 output: github_document
 ---
 
+# Submission of crestr 1.2.1 (04/01/2023)
+
+I release this version to address the request of Prof. Ripley:
+
+***
+For the record, the current failure is
+
+   --- re-building ‘using-gbif4crest.Rmd’ using rmarkdown
+    Quitting from lines 66-77 (using-gbif4crest.Rmd)
+    Error: processing vignette 'using-gbif4crest.Rmd' failed with diagnostics:
+    could not translate host name "gbif4crest.cvqgy2mnjwtg.eu-west-3.rds.amazonaws.com" to address: Name or service not known
+
+    --- failed re-building ‘using-gbif4crest.Rmd’
+
+and I have seen it several times this month.
+
+--
+Brian D. Ripley,                  ripley@stats.ox.ac.uk
+Emeritus Professor of Applied Statistics, University of Oxford
+***
+
+I have added a more proper way of dealing with the connection problem when it arises. This new package version also contains some minor fixes (cf NEWS.md).
+
+## Tests run
+
+* First, I ran local test:
+```
+devtools::check()
+devtools::check(manual = TRUE, remote = TRUE, incoming = TRUE)
+```
+These two tests returned No ERRORs, No WARNINGs, No NOTEs.
+
+* Then I did the following:
+```
+devtools::build(manual = TRUE)
+R CMD CHECK /Users/mchevali1/GitHub/Rpackages/crestr_1.2.0.tar.gz
+R CMD CHECK --as-cran /Users/mchevali1/GitHub/Rpackages/crestr_1.2.0.tar.gz
+```
+Status: OK. No ERROR, No WARNING, No NOTE.
+
+* Then, I ran the following tests for Windows:
+```
+devtools::check_win_release('/Users/mchevali1/GitHub/Rpackages/crestr', quiet=TRUE)
+devtools::check_win_devel('/Users/mchevali1/GitHub/Rpackages/crestr', quiet=TRUE)
+devtools::check_win_oldrelease('/Users/mchevali1/GitHub/Rpackages/crestr', quiet=TRUE)
+```
+This returns some NOTEs about webpages listed in the documentation. The links were tested and are fully functional (there were already present in previous versions). The one also one NOTE about a possibly misspelled word, but I checked it and it is correctly spellt.
+
+
+* Finally, I ran the following tests
+
+```
+devtools::check_rhub('/Users/mchevali1/GitHub/Rpackages/crestr')
+rhub::check_for_cran('/Users/mchevali1/GitHub/Rpackages/crestr_1.2.1.tar.gz')
+rhub::check_on_linux('/Users/mchevali1/GitHub/Rpackages/crestr_1.2.1.tar.gz')
+rhub::check_with_rdevel('/Users/mchevali1/GitHub/Rpackages/crestr_1.2.1.tar.gz')
+rhub::check_with_rrelease('/Users/mchevali1/GitHub/Rpackages/crestr_1.2.1.tar.gz')
+```
+
+All tests ran without any ERROR or WARNING. I got the following NOTE for the Fedora environments: _checking HTML version of manual ... NOTE Skipping checking HTML validation: no command 'tidy' found._ I cannot change that Tidy is not on the path, or update Tidy on the external Fedora Linux server.
+
+
+
 
 # Submission of crestr 1.2.0 (01/09/2022)
 
