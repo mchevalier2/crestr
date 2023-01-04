@@ -64,7 +64,6 @@ navbar:
         href: articles/using-gbif4crest.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
-
 reference:
   - title: "Reconstructing"
     desc: "Functions for running the CREST reconstructions."
@@ -101,8 +100,9 @@ reference:
       - '`export`'
       - '`export_pdfs`'
       - '`excludeTaxa`'
-      - '`includeTaxa`'
       - '`getSpeciesdiversity`'
+      - '`includeTaxa`'
+      - '`is.crestObj`'
       - '`pdf_ranges`'
       - '`taxonComposition`'
   - title: "Citing sources"

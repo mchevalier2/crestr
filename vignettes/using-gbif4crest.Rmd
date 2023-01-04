@@ -52,7 +52,7 @@ reconstr <- crest.get_modern_data(  pse = PSE,
                                 verbose = FALSE
 )
 
-tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
+if(is.crestObj(reconstr)) tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
 ```
 
 
@@ -62,18 +62,15 @@ tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2
 
 This option is usually much faster but it requires downloading the full database in a zipped format from [[here]](https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207){target="_blank"}. Once unzipped, the file, which is about ~23Gb, should be saved in a location of interest.
 
-```{r offline-option, echo=TRUE, eval=TRUE}
+```{r offline-option, echo=TRUE, eval=FALSE}
 
-reconstr <- crest.get_modern_data(  pse = PSE,
+reconstr <- crest.set_modern_data(  pse = PSE,
                                 taxaType = 1,
                                 climate = c("bio1", "bio12"),
                                 # The full path to the local gbif4crest database
-                                dbname = "gbif4crest_02",
+                                dbname = "path/to/gbif4crest_02.sqlite3",
                                 verbose = FALSE
 )
-
-tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
-
 ```
 
 The file can be saved anywhere and named in any way. However. the inclusion of the file extension '.sqlite3' is key for the package to be guided to the right option.

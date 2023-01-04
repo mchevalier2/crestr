@@ -46,6 +46,8 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" alt="plot of chunk img3" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
+- **2023**
+    - Hui, Z., Liu, J., Chevalier, M., Wei, X., Chen, P., Zhan, J., Peng, T., Zhou, X., 2023, Multiple forcing on Late Miocene East Asian Summer Monsoon Precipitation Variability in NE Tibetan Plateau. CATENA 221, 106752. [10.1016/j.catena.2022.106752](https://doi.org/10.1016/j.catena.2022.106752).
 - **2022**
     - Gibson, M.E., McCoy, J., O’Keefe, J.M.K., Nuñez Otaño, N.B., Warny, S., Pound, M.J., 2022, Reconstructing Terrestrial Paleoclimates: A Comparison of the Co‐Existence Approach, Bayesian and Probability Reconstruction Techniques Using the UK Neogene. Paleoceanog. and Paleoclimatol. 37, e2021PA004358. [10.1029/2021PA004358](https://doi.org/10.1029/2021PA004358)
 - **2021**
@@ -76,7 +78,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" alt="plot of chunk img4" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
-Last update: 24/08/2021
+Last update: 03/01/2023
 
 N.B.: This list is as exhaustive as possible, but some studies may be missing. Contact me if you want your study to be added.
 

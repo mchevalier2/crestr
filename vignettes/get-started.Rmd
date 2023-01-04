@@ -176,8 +176,7 @@ reconstr <- crest.get_modern_data( df = crest_ex, # The fossil data
                                   verbose = FALSE # Print status messages
 )
 
-
-reconstr$inputs$selectedTaxa
+if(is.crestObj(reconstr)) reconstr$inputs$selectedTaxa
 ```
 <br >
 
@@ -228,17 +227,14 @@ reconstr <- crest.reconstruct( reconstr, # A crestObj produced at the previous s
                          verbose = FALSE # Print status messages
 )
 
-names(reconstr)
-
-lapply(reconstr$reconstructions, names)
-
-head(reconstr$reconstructions$bio1$optima)
-
-str(reconstr$reconstructions$bio1$optima)
-
-signif(reconstr$reconstructions$bio1$likelihood[1:6, 1:6], 3)
-
-str(reconstr$reconstructions$bio1$likelihood)
+if(is.crestObj(reconstr)) {
+    names(reconstr)
+    lapply(reconstr$reconstructions, names)
+    head(reconstr$reconstructions$bio1$optima)
+    str(reconstr$reconstructions$bio1$optima)
+    signif(reconstr$reconstructions$bio1$likelihood[1:6, 1:6], 3)
+    str(reconstr$reconstructions$bio1$likelihood)
+}
 ```
 <br >
 
@@ -247,8 +243,10 @@ The results can also be visualised in different forms using the plot function (*
 
 
 ```{r plot, fig.show="hold", fig.width="50%", fig.width=5, fig.height=3, fig.align='center', fig.cap="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided."}
-plot(reconstr, climate = 'bio1')
-plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
+if(is.crestObj(reconstr)) {
+    plot(reconstr, climate = 'bio1')
+    plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
+}
 ```
 <br >
 
