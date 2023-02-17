@@ -115,6 +115,9 @@
     <loc>/reference/crest.set_modern_data.html</loc>
   </url>
   <url>
+    <loc>/reference/crest.simplify.html</loc>
+  </url>
+  <url>
     <loc>/reference/crestObj.html</loc>
   </url>
   <url>
@@ -131,6 +134,9 @@
   </url>
   <url>
     <loc>/reference/dbRequest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/dbSubset.html</loc>
   </url>
   <url>
     <loc>/reference/eqearth_get_ext.html</loc>
@@ -245,5 +251,8 @@
   </url>
   <url>
     <loc>/reference/taxonComposition.html</loc>
+  </url>
+  <url>
+    <loc>/reference/testConnection.html</loc>
   </url>
 </urlset>

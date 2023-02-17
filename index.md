@@ -19,16 +19,18 @@ functions implemented, you can contact me at <chevalier.manuel@gmail.com>.
 
 ## Installation
 
-You can install the package from [CRAN](https://cran.r-project.org/package=crestr).
-``` r
-install.packages("crestr")
-```
-
-You can also install the development version from [GitHub](https://github.com/mchevalier2/crestr/) with:
+The package is currently unavailable from CRAN. However, you can install the latest development version (1.3.0) from [GitHub](https://github.com/) with:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
+```
+
+Or the latest stable version archived by CRAN. If you use that version, keep in mind that not all functionalities will be available (See News page).
+
+``` r
+if(!require(devtools)) install.packages("devtools")
+devtools::install_version("crestr", version = "1.2.0", repos = "http://cran.us.r-project.org")
 ```
 
 

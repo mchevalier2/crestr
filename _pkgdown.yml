@@ -96,6 +96,7 @@ reference:
       - '`copy_crest`'
       - '`createPSE`'
       - '`crestObj`'
+      - '`crest.simplify`'
       - '`crop`'
       - '`export`'
       - '`export_pdfs`'
@@ -124,10 +125,12 @@ reference:
       - '`connect_online`'
       - '`connect_local_sqlite3`'
       - '`dbRequest`'
+      - '`dbSubset`'
       - '`getClimateSpace`'
       - '`getDistribTaxa`'
       - '`getTaxonID`'
       - '`getTaxonomy`'
+      - '`testConnection`'
   - title: "Modelling functions"
     desc: "Functions used model the data. Not to be used."
     contents:
