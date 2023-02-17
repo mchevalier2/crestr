@@ -33,7 +33,7 @@ PSE <- as.data.frame(PSE)
 There are two ways to access and use the _gbif4crest_ calibration dataset, which are illustrated here with a simple PSE file.
 
 ```{r show-pse, echo=TRUE, eval=TRUE}
-PSE
+crest_ex_pse
 ```
 
 <br >
@@ -42,17 +42,18 @@ PSE
 
 The first option consists in using the default option: connecting to the online _gbif4crest_. This is the simplest option and users only have to provide the name of the database to the field `dbname = "gbif4crest_02"`.
 
-```{r online-option, echo=TRUE, eval=TRUE}
-
+```{r online-option, echo=TRUE, eval=FALSE}
 reconstr <- crest.get_modern_data(  pse = PSE,
-                                taxaType = 1,
-                                climate = c("bio1", "bio12"),
-                                # The name of the online database to extract the data from
-                                dbname = "gbif4crest_02",
-                                verbose = FALSE
+                                    taxaType = 1,
+                                    climate = c("bio1", "bio12"),
+                                    # The name of the online database
+                                    dbname = "crest_example",
+                                    verbose = FALSE
 )
+```
 
-if(is.crestObj(reconstr)) tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
+```{r online-option2, echo=TRUE, eval=TRUE}
+tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$modelling$taxonID2proxy[,2], length)
 ```
 
 
@@ -63,14 +64,15 @@ if(is.crestObj(reconstr)) tapply(reconstr$modelling$taxonID2proxy[,1], reconstr$
 This option is usually much faster but it requires downloading the full database in a zipped format from [[here]](https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207){target="_blank"}. Once unzipped, the file, which is about ~23Gb, should be saved in a location of interest.
 
 ```{r offline-option, echo=TRUE, eval=FALSE}
-
-reconstr <- crest.set_modern_data(  pse = PSE,
-                                taxaType = 1,
-                                climate = c("bio1", "bio12"),
-                                # The full path to the local gbif4crest database
-                                dbname = "path/to/gbif4crest_02.sqlite3",
-                                verbose = FALSE
+reconstr <- crest.get_modern_data(  pse = PSE,
+                                    taxaType = 1,
+                                    climate = c("bio1", "bio12"),
+                                    # The full path to the local database
+                                    # Or place the database in the working
+                                    #   directory.
+                                    dbname = "path/to/gbif4crest_02.sqlite3",
+                                    verbose = FALSE
 )
 ```
 
-The file can be saved anywhere and named in any way. However. the inclusion of the file extension '.sqlite3' is key for the package to be guided to the right option.
+The local calibration database file can be saved anywhere and named in any way. The file extension '.sqlite3' is, however, the only difference between the online and the offline options. It is thus crucial to call the file database.sqlite3 to orient the package in the right direction.

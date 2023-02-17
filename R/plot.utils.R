@@ -65,8 +65,8 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     if(base::missing(dat)) dat
 
     ## Useless lines to avoid WARNINGs ------------------------- #
-    slss <- rgdal::projInfo(type = "proj") # ------------------- #
-    p1 = rgeos::readWKT("POLYGON((0 0,3 0,3 3,0 3,0 0))") # ---- #
+    #slss <- rgdal::projInfo(type = "proj") # ------------------- #
+    #p1 = rgeos::readWKT("POLYGON((0 0,3 0,3 3,0 3,0 0))") # ---- #
     ## --------------------------------------------------------- #
 
     utils::data(M1, package='crestr', envir = environment())

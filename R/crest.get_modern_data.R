@@ -60,12 +60,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if(verbose) cat('  <> Checking database connection .......... ')
     ##. Testing if the input variables are in the correct format ---------------
 
-    db <- connect_online(dbname = dbname)
-    if(!methods::is(db, 'DBIConnection')) {
-        cat("[FAILED]\n")
-        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
-        return(NA)
-    }
+    if(!testConnection(dbname)) return(NA)
 
     if(verbose) cat('[OK]\n  <> Checking pse .......................... ')
 
@@ -332,7 +327,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     } else {
         pse <- pse[, c('Level', 'Family', 'Genus', 'Species', 'ProxyName')]
     }
-
     w <- (pse$Level == 4)
     if (sum(w) > 0) {
         for (tax in unique(pse$ProxyName[w])) {
@@ -383,6 +377,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     }
 
     if (is.data.frame(df)) {
+        df[is.na(df)] <- 0
         crest$inputs$x <- df[, 1]
         crest$inputs$x.name <- colnames(df)[1]
         crest$inputs$taxa.name <- taxa.name

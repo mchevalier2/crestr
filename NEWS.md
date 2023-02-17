@@ -1,5 +1,13 @@
-# crestr 1.2.2.9000
+# crestr 1.3.0.9000
 
+* Removal of dependencies to rgdal and rgeos
+* Updating vignettes (reducing the amount of code actually ran to create the vignette)
+* Adding a new function: crest.simplify() to transform a crestObj into a simple data frame with only the main reconstructed values.
+* Fixing a major stability issue regarding the connection test (does not impact any result derived from the package)
+* Enabling plotting the results as anomalies (only if simplify=TRUE for now).
+* Adding the `dbSubset()` function to extract a subset of the calibration dataset and fasten analyses.
+* Minor issues:
+    * If the input `df` contained NA, `crest.get_modern_data()` was crashing. Default value now set to 0.
 
 
 # crestr 1.2.1

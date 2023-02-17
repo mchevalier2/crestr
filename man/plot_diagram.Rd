@@ -21,7 +21,8 @@ plot_diagram(
   tickAtSample = TRUE,
   col_pos = "black",
   col_neg = "grey80",
-  title = NA
+  title = NA,
+  src = NA
 )
 }
 \arguments{
@@ -74,6 +75,8 @@ positive values (default black).}
 negative values (default light grey).}
 
 \item{title}{Name to be added on top of the plot (default \code{NA}).}
+
+\item{src}{A graphical parameter used by the \code{plot_loo()} function.}
 }
 \value{
 No return value, this function is used to plot.

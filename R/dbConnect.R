@@ -56,9 +56,10 @@ connect_local_sqlite3 <- function(dbname = "gbif4crest_02.sqlite3") {
     if (!requireNamespace("RSQLite", quietly = TRUE)) {
         stop("The package 'RSQLite' is required. Use install.packages('RSQLite').\n")
     }
+    if(!file.exists(dbname)) return(NA)
     db <- DBI::dbConnect(
       drv = RSQLite::SQLite(),
       dbname
     )
-    return(db)
+    db
 }

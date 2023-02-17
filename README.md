@@ -39,19 +39,22 @@ package is fully described in [Chevalier
 
 ## Installation
 
-You can install the package from
-[CRAN](https://CRAN.R-project.org/package=crestr).
-
-``` r
-install.packages("crestr")
-```
-
-You can also install the development version from
+The package is currently unavailable from CRAN. However, you can install
+the latest development version (1.3.0) from
 [GitHub](https://github.com/) with:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
+```
+
+Or the latest stable version archived by CRAN. If you use that version,
+keep in mind that not all functionalities will be available (See News
+page).
+
+``` r
+if(!require(devtools)) install.packages("devtools")
+devtools::install_version("crestr", version = "1.2.0", repos = "http://cran.us.r-project.org")
 ```
 
 > ***NOTE:*** If the install fails, it is possible that
@@ -163,8 +166,8 @@ recons <- crest(
    shape = c("normal", "lognormal"),
    selectedTaxa = crest_ex_selection, dbname = "crest_example"
 )
-#> Warning in crest.get_modern_data(pse = pse, taxaType = taxaType, climate
-#> = climate, : The classification of one or more taxa into species was not
+#> Warning in crest.get_modern_data(pse = pse, taxaType = taxaType, climate =
+#> climate, : The classification of one or more taxa into species was not
 #> successful. Check `x$misc$taxa_notes` for details.
 ```
 

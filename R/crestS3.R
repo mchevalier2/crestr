@@ -173,18 +173,18 @@ crestObj <- function(taxa.name, taxaType, climate,
 
 
 #' @export
-print.crestObj <- function(x, ...) {
+print.crestObj <- function(x, as=x$misc$stage, ...) {
     if(base::missing(x)) x
 
     name <- find.original.name(x)
     is_formatted <- is_fitted <- is_reconstructed <- is_looed <- FALSE
-    if(x$misc$stage == 'data_extracted' | x$misc$stage == 'data_inserted') {
+    if(as == 'data_extracted' | as == 'data_inserted') {
         is_formatted <- TRUE
-    } else if (x$misc$stage == 'PDFs_fitted') {
+    } else if (as == 'PDFs_fitted') {
         is_formatted <- is_fitted <- TRUE
-    }else if (x$misc$stage == 'climate_reconstructed') {
+    }else if (as == 'climate_reconstructed') {
         is_formatted <- is_fitted <- is_reconstructed <- TRUE
-    } else if (x$misc$stage == 'leave_one_out') {
+    } else if (as == 'leave_one_out') {
         is_formatted <- is_fitted <- is_reconstructed <- is_looed <- TRUE
     }
 
@@ -270,8 +270,8 @@ print.crestObj <- function(x, ...) {
 #' Plot the reconstructions and their uncertainties if they exist.
 #'
 #' @inheritParams graphics::plot
-#' @param x A \code{\link{crestObj}} produced by either the
-#'        \code{\link{crest.reconstruct}} or \code{\link{crest}}) functions.
+#' @param x A \code{\link{crestObj}} produced by the \code{\link{crest}},
+#'        \code{\link{crest.reconstruct}} or \code{\link{loo}} functions.
 #' @param climate The climate variables to plot (default is all the
 #'        reconstructed variables from x)
 #' @param uncertainties A (vector of) threshold value(s) indicating the error
@@ -284,6 +284,13 @@ print.crestObj <- function(x, ...) {
 #' @param simplify A boolean to indicate if the full distribution of uncertainties
 #'        should be plotted (\code{FALSE}, default) or if they should be
 #'        simplified to the uncertainty range(s).
+#' @param as.anomaly A boolean to indicate if the reconstructions should be
+#'        plotted as absolute values (Default, \code{FALSE}) or anomalies
+#'        '(\code{TRUE}).
+#' @param anomaly.base The anomaly value. Should be a vector with the same
+#'        length as \code{climate}. Default values are the climate values
+#'        correpsonding to the location of the record (\code{site_info} in
+#'        \code{crest.get_modern_data}).
 #' @param add_modern Adds the modern climate values to the plot.
 #' @param save A boolean to indicate if the diagram should be saved as a pdf file.
 #'        Default is \code{FALSE}.
@@ -315,7 +322,7 @@ print.crestObj <- function(x, ...) {
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
 #' plot(reconstr)
-#' plot(reconstr, climate='bio1', simplify = TRUE)
+#' plot(reconstr, climate='bio1', simplify = TRUE, as.anomaly=TRUE)
 #'
 plot.crestObj <- function(x,
                           climate = x$parameters$climate,
@@ -323,6 +330,8 @@ plot.crestObj <- function(x,
                           optima = TRUE,
                           add_modern = FALSE,
                           simplify = FALSE,
+                          as.anomaly = FALSE,
+                          anomaly.base = x$misc$site_info$climate[climate],
                           xlim = NA, ylim = NA,
                           pt.cex = 0.8, pt.lwd = 0.8,
                           pt.col=ifelse(simplify, 'black', 'white'),
@@ -342,6 +351,12 @@ plot.crestObj <- function(x,
 
     if (length(x$reconstructions) == 0 || is.null(climate)) {
         stop("No reconstruction available for plotting.\n")
+    }
+
+    if(as.anomaly) {
+        anomaly.base <- as.data.frame(anomaly.base)
+        anomaly.base[is.na(anomaly.base)] <- 0
+        colnames(anomaly.base) <- climate
     }
 
     idx <- 0
@@ -381,6 +396,7 @@ plot.crestObj <- function(x,
             oo <- order(tmp1)
             pdfter[, i] <- cumsum(tmp2 / sum(tmp2))[oo]
         }
+        if(as.anomaly) pdfter[, 1] <- pdfter[, 1] - as.numeric(anomaly.base[clim])
 
         var_to_plot <- ifelse(optima, 2, 3)
         xmn <- which.min(x$reconstructions[[clim]][["optima"]][, var_to_plot])
@@ -403,7 +419,6 @@ plot.crestObj <- function(x,
         }
 
         uncertainties <- sort(uncertainties)
-
         val <- apply(pdfter[, -1], 2, function(x) {
             if(is.na(x[1])) return(c(NA, NA))
             w <- which(x <= uncertainties[length(uncertainties)])
@@ -463,11 +478,15 @@ plot.crestObj <- function(x,
                 }
             }
             if(add_modern) {
-                graphics::segments(xlim[1], x$misc$site_info$climate[, clim], xlim[2], x$misc$site_info$climate[, clim],
+                modval <- x$misc$site_info$climate[, clim]
+                if(as.anomaly) modval <- modval - as.numeric(anomaly.base[clim])
+                graphics::segments(xlim[1], modval, xlim[2], modval,
                     col = "grey70", cex = 0.5, lty = 2
                 )
             }
-            graphics::points(xx, x$reconstructions[[clim]]$optima[, var_to_plot], type='o', pch=18, col=pt.col, cex=pt.cex, lwd=pt.lwd)
+            rcnstrctn <- x$reconstructions[[clim]]$optima[, var_to_plot]
+            if(as.anomaly) rcnstrctn <- rcnstrctn - as.numeric(anomaly.base[clim])
+            graphics::points(xx, rcnstrctn, type='o', pch=18, col=pt.col, cex=pt.cex, lwd=pt.lwd)
 
             graphics::par(mgp=c(2,0.3,0), las=1)
             graphics::axis(2, lwd.ticks=0.8, lwd=0, tck=-0.01, cex.axis=6/7)

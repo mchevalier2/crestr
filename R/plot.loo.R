@@ -138,7 +138,7 @@ plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
                        yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
                        tickAtSample=tickAtSample,
                        col_pos=col_pos[clim], col_neg=col_neg[clim],
-                       title=title2)
+                       title=title2, src='loo')
 
             rs[[clim]] <- sort(unlist(lapply(x$reconstructions[[clim]]$loo, function(x) return(mean(x[abs(x)>0])))))
         }

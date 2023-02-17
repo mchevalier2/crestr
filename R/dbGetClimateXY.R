@@ -27,11 +27,7 @@ climate_from_xy <- function(long, lat,
         stop('The coordinates are not numeric.\n')
     }
 
-    db <- connect_online(dbname = dbname)
-    if(!methods::is(db, 'DBIConnection')) {
-        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
-        return(NA)
-    }
+    if(!testConnection(dbname)) return(NA)
 
     long <- resol * (long %/% resol) + resol/2;
     lat  <- resol * (lat %/% resol) + resol/2;
@@ -45,6 +41,7 @@ climate_from_xy <- function(long, lat,
     res <- dbRequest(req, dbname)
     if (nrow(res) == 0) {
         warning('No climate associated with these coordinates.')
+        res <- rbind(res, rep(NA, length(climate)))
     }
     colnames(res) <- climate
     res

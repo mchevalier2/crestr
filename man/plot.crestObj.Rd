@@ -11,6 +11,8 @@
   optima = TRUE,
   add_modern = FALSE,
   simplify = FALSE,
+  as.anomaly = FALSE,
+  anomaly.base = x$misc$site_info$climate[climate],
   xlim = NA,
   ylim = NA,
   pt.cex = 0.8,
@@ -28,8 +30,8 @@
 )
 }
 \arguments{
-\item{x}{A \code{\link{crestObj}} produced by either the
-\code{\link{crest.reconstruct}} or \code{\link{crest}}) functions.}
+\item{x}{A \code{\link{crestObj}} produced by the \code{\link{crest}},
+\code{\link{crest.reconstruct}} or \code{\link{loo}} functions.}
 
 \item{climate}{The climate variables to plot (default is all the
 reconstructed variables from x)}
@@ -45,6 +47,15 @@ or the mean (\code{FALSE}) estimates.}
 \item{simplify}{A boolean to indicate if the full distribution of uncertainties
 should be plotted (\code{FALSE}, default) or if they should be
 simplified to the uncertainty range(s).}
+
+\item{as.anomaly}{A boolean to indicate if the reconstructions should be
+plotted as absolute values (Default, \code{FALSE}) or anomalies
+'(\code{TRUE}).}
+
+\item{anomaly.base}{The anomaly value. Should be a vector with the same
+length as \code{climate}. Default values are the climate values
+correpsonding to the location of the record (\code{site_info} in
+\code{crest.get_modern_data}).}
 
 \item{xlim}{the x limits (x1, x2) of the plot.  Note that \code{x1 > x2}
     is allowed and leads to a \sQuote{reversed axis}.
@@ -104,6 +115,6 @@ Plot the reconstructions and their uncertainties if they exist.
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
 plot(reconstr)
-plot(reconstr, climate='bio1', simplify = TRUE)
+plot(reconstr, climate='bio1', simplify = TRUE, as.anomaly=TRUE)
 
 }

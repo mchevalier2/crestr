@@ -419,3 +419,36 @@ getTaxaTypeFromTaxID <- function(taxID) {
 is.crestObj <- function(x) {
     return(methods::is(x, "crestObj"))
 }
+
+
+#' Simplify a crestObj into a dataframe.
+#'
+#' Simplify a crestObj with reconstructed values into a dataframe.
+#'
+#' @inheritParams plot.crestObj
+#' @return A dataframe with the age/depth of each sample and all the best
+#' reconstructed values.
+#' @export
+#' @examples
+#' head(crest.simplify(reconstr))
+#'
+crest.simplify <- function(x, optima=TRUE) {
+    if(base::missing(x)) x
+
+    if(!is.crestObj(x)) {
+        cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
+    if(!x$misc$stage %in% c('climate_reconstructed', 'leave_one_out')) {
+        cat('\nReconstruct a climate variable before using crest.simplify().\n\n')
+        return(invisible(NA))
+    }
+
+    df <- x$inputs$x
+    for(clim in x$parameters$climate){
+        df <- cbind(df, x$reconstructions[[clim]]$optima[, ifelse(optima, 2, 3)])
+    }
+    colnames(df) <- c(x$inputs$x.name, x$parameters$climate)
+    return(df)
+}

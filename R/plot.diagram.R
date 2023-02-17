@@ -31,6 +31,7 @@
 #' @param col_neg Graphical parameter for the barplot. Colour of all the
 #'        negative values (default light grey).
 #' @param title Name to be added on top of the plot (default \code{NA}).
+#' @param src A graphical parameter used by the `plot_loo()` function.
 #' @return No return value, this function is used to plot.
 #' @export
 #' @examples
@@ -51,7 +52,7 @@ plot_diagram <- function(x, bars=FALSE,
                          as.png = FALSE, png.res=300,
                          yax_incr = 5, bar_width = diff(range(x$inputs$x))/50,
                          xlim=NA, tickAtSample=TRUE,
-                         col_pos = 'black', col_neg='grey80', title=NA) {
+                         col_pos = 'black', col_neg='grey80', title=NA, src=NA) {
 
     if(base::missing(x)) x
 
@@ -124,8 +125,10 @@ plot_diagram <- function(x, bars=FALSE,
             grDevices::pdf(filename, width=width, height=height)
         }
     } else {
-        par_usr <- graphics::par(no.readonly = TRUE)
-        on.exit(graphics::par(par_usr))
+        if(ifelse(is.na(!src == 'loo'), TRUE, FALSE)) {
+            par_usr <- graphics::par(no.readonly = TRUE)
+            on.exit(graphics::par(par_usr))
+        }
     }
 
 
@@ -160,12 +163,13 @@ plot_diagram <- function(x, bars=FALSE,
             }
             graphics::text(xlim[1] - 0.15*dX, (cs[i]+cs[i+1])/2, colnames(x)[i], cex=6/8, adj=c(1,0.5))
         }
-        dX <- diff(xrange2)
-        graphics::rect(xrange2[1] + 0.02*dX, mean(c(max(cs), yrange[2])) + 0.03*dY, xrange2[1] + 0.08*dX, mean(c(max(cs), yrange[2])) + 0.13*dY, col=col_pos)
-        graphics::text(xrange2[1] + 0.10*dX, mean(c(max(cs), yrange[2])) + 0.08*dY, '(+) anomaly', cex=6/8, adj=c(0, 0.45))
-        graphics::rect(xrange2[1] + 0.02*dX, mean(c(max(cs), yrange[2])) - 0.03*dY, xrange2[1] + 0.08*dX, mean(c(max(cs), yrange[2])) - 0.13*dY, col=col_neg)
-        graphics::text(xrange2[1] + 0.10*dX, mean(c(max(cs), yrange[2])) - 0.08*dY, '(-) anomaly', cex=6/8, adj=c(0, 0.45))
-
+        if(sum(x<0) > 0) {
+            dX <- diff(xrange2)
+            graphics::rect(xrange2[1] + 0.02*dX, mean(c(max(cs), yrange[2])) + 0.03*dY, xrange2[1] + 0.08*dX, mean(c(max(cs), yrange[2])) + 0.13*dY, col=col_pos)
+            graphics::text(xrange2[1] + 0.10*dX, mean(c(max(cs), yrange[2])) + 0.08*dY, '(+) anomaly', cex=6/8, adj=c(0, 0.45))
+            graphics::rect(xrange2[1] + 0.02*dX, mean(c(max(cs), yrange[2])) - 0.03*dY, xrange2[1] + 0.08*dX, mean(c(max(cs), yrange[2])) - 0.13*dY, col=col_neg)
+            graphics::text(xrange2[1] + 0.10*dX, mean(c(max(cs), yrange[2])) - 0.08*dY, '(-) anomaly', cex=6/8, adj=c(0, 0.45))
+        }
     } else {
         for(i in 2:ncol(x)) {
             if(amplif > 1) {

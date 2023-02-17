@@ -166,17 +166,19 @@ The first step of any reconstruction is to extract the species distribution data
 
 
 <br >
-```{r extracting_data}
-reconstr <- crest.get_modern_data( df = crest_ex, # The fossil data
-                              pse = crest_ex_pse, # The proxy-species equivalency table
-                                    taxaType = 0, # The type of taxa is 0 for the example
-                    climate = c("bio1", "bio12"), # The climate variables to reconstruct
-               selectedTaxa = crest_ex_selection, # The taxa to use for each variable
-                        dbname = "crest_example", # The database to extract the data
-                                  verbose = FALSE # Print status messages
+```{r extracting_data, echo=TRUE, eval=FALSE}
+reconstr <- crest.get_modern_data(
+                        df = crest_ex, # The fossil data
+                   pse = crest_ex_pse, # The proxy-species equivalency table
+                         taxaType = 0, # The type of taxa is 0 for the example
+         climate = c("bio1", "bio12"), # The climate variables to reconstruct
+    selectedTaxa = crest_ex_selection, # The taxa to use for each variable
+             dbname = "crest_example", # The database to extract the data
+                       verbose = FALSE # Print status messages
 )
-
-if(is.crestObj(reconstr)) reconstr$inputs$selectedTaxa
+```
+```{r extracting_data2}
+reconstr$inputs$selectedTaxa
 ```
 <br >
 
@@ -186,7 +188,7 @@ At every step of the process, the content of the _crestObj_ can be checked by pr
 
 <br >
 ```{r print_crestobj}
-reconstr
+print(reconstr, as='data_extracted')
 ```
 <br >
 
@@ -194,15 +196,17 @@ reconstr
 The next step consists in fitting the _PDFs_ using the _crest.calibrate()_ function. The climate space weighting is selected by default because it is essential to account for the possible heterogeneous distribution of the modern climate when fitting the _PDFs_. As can be seen in **Fig. 5** for temperature, the coldest and warmest values are underrepresented compared to the intermediate values. The correction diminishes the effect of this distribution by upweighting rare values and down-weighting the most abundant ones.
 
 <br >
-```{r calibrating, out.width="100%", fig.height=6, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here."}
-reconstr <- crest.calibrate( reconstr, # A crestObj produced at the previous stage
-         climateSpaceWeighting = TRUE, # Correct the PDFs for the heteregenous
-                                       # distribution of the modern climate space
-                 bin_width = c(2, 50), # The size of bins used for the correction
-     shape = c("normal", "lognormal"), # The shape of the species PDFs
-                       verbose = FALSE # Print status messages
+```{r calibrating, echo=TRUE, eval=FALSE}
+reconstr <- crest.calibrate(
+                            reconstr, # A crestObj produced at the last stage
+        climateSpaceWeighting = TRUE, # Correct the PDFs for the heteregenous
+                                      # distribution of the modern climate space
+                bin_width = c(2, 50), # The size of bins used for the correction
+    shape = c("normal", "lognormal"), # The shape of the species PDFs
+                      verbose = FALSE # Print status messages
 )
-
+```
+```{r plot_climate_space, out.width="100%", fig.height=6, fig.width=6, fig.align='center', fig.cap="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here."}
 plot_climateSpace(reconstr)
 ```
 <br >
@@ -222,19 +226,25 @@ plot_taxaCharacteristics(reconstr, taxanames='Taxon6', climate='bio1', h0=0.2)
 The last step of the process is the reconstruction itself, which is done with the _crest.reconstruct()_ function. The results can be accessed from `reconstr` as follow:
 
 <br >
-```{r reconstructing}
-reconstr <- crest.reconstruct( reconstr, # A crestObj produced at the previous stage
-                         verbose = FALSE # Print status messages
+```{r reconstructing, echo=TRUE, eval=FALSE}
+reconstr <- crest.reconstruct(
+                        reconstr, # A crestObj produced at the previous stage
+                  verbose = FALSE # Print status messages
 )
+```
 
-if(is.crestObj(reconstr)) {
-    names(reconstr)
-    lapply(reconstr$reconstructions, names)
-    head(reconstr$reconstructions$bio1$optima)
-    str(reconstr$reconstructions$bio1$optima)
-    signif(reconstr$reconstructions$bio1$likelihood[1:6, 1:6], 3)
-    str(reconstr$reconstructions$bio1$likelihood)
-}
+```{r reconstructing2}
+names(reconstr)
+
+head(reconstr$reconstructions$bio1$optima)
+
+str(reconstr$reconstructions$bio1$optima)
+
+signif(reconstr$reconstructions$bio1$likelihood[1:6, 1:6], 3)
+
+str(reconstr$reconstructions$bio1$likelihood)
+
+print(reconstr, as='climate_reconstructed')
 ```
 <br >
 
@@ -243,10 +253,21 @@ The results can also be visualised in different forms using the plot function (*
 
 
 ```{r plot, fig.show="hold", fig.width="50%", fig.width=5, fig.height=3, fig.align='center', fig.cap="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided."}
-if(is.crestObj(reconstr)) {
-    plot(reconstr, climate = 'bio1')
-    plot(reconstr, climate = 'bio12', simplify=TRUE, uncertainties=c(0.4, 0.6, 0.8))
-}
+plot(reconstr, climate = 'bio1')
+plot(reconstr, climate = 'bio12', simplify=TRUE,
+        uncertainties=c(0.4, 0.6, 0.8), as.anomaly=TRUE)
+```
+<br >
+
+
+Interpretations can be refined using the built-in 'leave-one-out' (loo) approach. The loo approach iteratively removes one taxon at a time and measures the impact removing that taxon had on the 'true' reconstruction. The results can be plotted as a stratigraphic diagram.
+
+```{r loo, echo=TRUE, eval=FALSE}
+reconstr <- loo(reconstr)
+```
+
+```{r plot_loo, fig.show="hold", fig.width="50%", fig.width=4, fig.height=5, fig.align='center', fig.cap="**Fig. 8**: Leave-One-Out diagram for the reconstructions of bio1."}
+plot_loo(reconstr, climate = 'bio1')
 ```
 <br >
 

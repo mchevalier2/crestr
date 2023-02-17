@@ -31,11 +31,7 @@ getClimateSpace <- function(climate,
 
     if(base::missing(climate)) climate
 
-    db <- connect_online(dbname = dbname)
-    if(!methods::is(db, 'DBIConnection')) {
-        cat("The connection to the database failed and the process has been stopped. check your internet connection and database IDs.\n")
-        return(NA)
-    }
+    if(!testConnection(dbname)) return(NA)
 
     coords <- check_coordinates(xmn, xmx, ymn, ymx)
 
