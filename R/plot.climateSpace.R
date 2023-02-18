@@ -49,7 +49,7 @@ plot_climateSpace <- function( x,
                       resol = 0.25
                       ) {
 
-    if(base::missing(x)) x
+    if(base::missing(x)) x 
 
     if (is.crestObj(x)) {
         test <- is.na(x$modelling$pdfs)

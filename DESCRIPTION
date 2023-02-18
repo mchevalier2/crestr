@@ -26,6 +26,7 @@ Imports:
     plot3D,
     plyr,
     raster,
+    rgdal,
     RPostgres,
     RSQLite,
     scales,
