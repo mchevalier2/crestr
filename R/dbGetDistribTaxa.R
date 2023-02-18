@@ -20,7 +20,7 @@
 #'     realms = "Palaearctic"
 #'   )
 #'   distrib
-#' }
+#' } 
 #'
 getDistribTaxa <- function(taxIDs,
                            climate = NA,
