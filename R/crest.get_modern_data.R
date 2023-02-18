@@ -58,8 +58,9 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
     if(verbose) cat('  <> Checking database connection .......... ')
-    ##. Testing if the input variables are in the correct format ---------------
-
+    if (dbname == 'crest_example') {
+        #dbname <- .createDbEx()
+    }
     if(!testConnection(dbname)) return(NA)
 
     if(verbose) cat('[OK]\n  <> Checking pse .......................... ')

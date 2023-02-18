@@ -20,7 +20,7 @@
 #'     realms = "Palaearctic"
 #'   )
 #'   distrib
-#' } 
+#' }
 #'
 getDistribTaxa <- function(taxIDs,
                            climate = NA,
@@ -41,82 +41,66 @@ getDistribTaxa <- function(taxIDs,
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
-    if (is.na(continents)[1] & is.na(countries)[1]) {
-        GEO_terr <- ""
-    } else {
-        GEO_terr <- paste0(
-          "AND countryID IN ",
-          "  (SELECT distinct geopoID ",
-          "     FROM geopolitical_units ",
-          "    WHERE ",
-          ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
-          ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
-          ifelse(is.na(countries)[1], "", paste0("name IN ('", paste(countries, collapse = "', '"), "') ")),
-          "   ) "
-        )
-    }
-
-    # Formatting subsets of the request------------------------------------------
-    # Formatting the geographical subsetting
-    if (is.na(basins)[1] & is.na(sectors)[1]) {
-        GEO_mari <- ""
-    } else {
-        GEO_mari <- paste0(
-          "AND oceanID IN ",
-          "  (SELECT distinct geopoID ",
-          "     FROM geopolitical_units ",
-          "    WHERE ",
-          ifelse(is.na(basins)[1], "", paste0("basin IN ('", paste(basins, collapse = "', '"), "') ")),
-          ifelse(is.na(basins)[1] | is.na(sectors)[1], "", "AND "),
-          ifelse(is.na(sectors)[1], "", paste0("name IN ('", paste(sectors, collapse = "', '"), "') ")),
-          "   ) "
-        )
-    }
-
-    # Formatting the botanical subsetting
-    if (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) {
-        WWF <- ""
-    } else {
-        WWF <- paste0(
-          "AND terr_ecoID IN ",
-          "  (SELECT distinct ecoID ",
-          "     FROM biogeography ",
-          "    WHERE ",
-          ifelse(is.na(realms)[1], "", paste0("realm IN ('", paste(realms, collapse = "', '"), "') ")),
-          ifelse(is.na(realms)[1] | is.na(biomes)[1], "", "AND "),
-          ifelse(is.na(biomes)[1], "", paste0("biome IN ('", paste(biomes, collapse = "', '"), "') ")),
-          ifelse(is.na(biomes)[1] | is.na(ecoregions)[1], ifelse(is.na(realms)[1] | is.na(ecoregions)[1], "", "AND "), "AND "),
-          ifelse(is.na(ecoregions)[1], "", paste0("ecoregion IN ('", paste(ecoregions, collapse = "', '"), "') ")),
-          "   ) "
-        )
-    }
-
-    # If no climate variables are provided, return values for ALL variables.
-    if (unique(is.na(climate))) {
-        taxaType <- getTaxaTypeFromTaxID(taxIDs[1])
-        if(taxaType %in% c(1, 2, 3, 6)) {
-            climate <- accClimateVariables(domain='Terrestrial')[, 2]
-        } else {
-            climate <- accClimateVariables(domain='Marine')[, 2]
-        }
-        CLIM3 <- paste(', ', paste(climate, collapse = ", "))
-    } else {
-        CLIM3 <- paste(', ', paste(climate, collapse = ", "))
-    }
-
-    ## Excluding grid cells without any climate values (eg. marine plant observations)
-    CLIM4 <- paste0('AND (', climate[1], ' IS NOT NULL')
-    for(clim in climate[-1]){
-        CLIM4 <- paste(CLIM4, " OR ", clim, " IS NOT NULL")
-    }
-    CLIM4 <- paste0(CLIM4, ')')
-
-    # Formatting the request-----------------------------------------------------
     if(dbname == 'crest_example') { # Some parameters are not availble in the example database
+        GEO_terr <- ''
+        GEO_mari <- ''
+        WWF <- ''
         DATE <- ''
         ELEVMIN <- ELEVMAX <- ELEVRANGE <- ''
         TYPEOFOBS <- ''
+        DATA <- ''
     } else {
+        if (is.na(continents)[1] & is.na(countries)[1]) {
+            GEO_terr <- ""
+        } else {
+            GEO_terr <- paste0(
+              "AND countryID IN ",
+              "  (SELECT distinct geopoID ",
+              "     FROM geopolitical_units ",
+              "    WHERE ",
+              ifelse(is.na(continents)[1], "", paste0("continent IN ('", paste(continents, collapse = "', '"), "') ")),
+              ifelse(is.na(continents)[1] | is.na(countries)[1], "", "AND "),
+              ifelse(is.na(countries)[1], "", paste0("name IN ('", paste(countries, collapse = "', '"), "') ")),
+              "   ) "
+            )
+        }
+
+        # Formatting subsets of the request------------------------------------------
+        # Formatting the geographical subsetting
+        if (is.na(basins)[1] & is.na(sectors)[1]) {
+            GEO_mari <- ""
+        } else {
+            GEO_mari <- paste0(
+              "AND oceanID IN ",
+              "  (SELECT distinct geopoID ",
+              "     FROM geopolitical_units ",
+              "    WHERE ",
+              ifelse(is.na(basins)[1], "", paste0("basin IN ('", paste(basins, collapse = "', '"), "') ")),
+              ifelse(is.na(basins)[1] | is.na(sectors)[1], "", "AND "),
+              ifelse(is.na(sectors)[1], "", paste0("name IN ('", paste(sectors, collapse = "', '"), "') ")),
+              "   ) "
+            )
+        }
+
+        # Formatting the botanical subsetting
+        if (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) {
+            WWF <- ""
+        } else {
+            WWF <- paste0(
+              "AND terr_ecoID IN ",
+              "  (SELECT distinct ecoID ",
+              "     FROM biogeography ",
+              "    WHERE ",
+              ifelse(is.na(realms)[1], "", paste0("realm IN ('", paste(realms, collapse = "', '"), "') ")),
+              ifelse(is.na(realms)[1] | is.na(biomes)[1], "", "AND "),
+              ifelse(is.na(biomes)[1], "", paste0("biome IN ('", paste(biomes, collapse = "', '"), "') ")),
+              ifelse(is.na(biomes)[1] | is.na(ecoregions)[1], ifelse(is.na(realms)[1] | is.na(ecoregions)[1], "", "AND "), "AND "),
+              ifelse(is.na(ecoregions)[1], "", paste0("ecoregion IN ('", paste(ecoregions, collapse = "', '"), "') ")),
+              "   ) "
+            )
+        }
+
+        # Formatting the request-----------------------------------------------------
         DATEMIN   <- ifelse(is.na(year_min), '', paste0(" AND last_occ >= ", year_min))
         DATEMAX   <- ifelse(is.na(year_max), '', paste0(" AND first_occ <=", year_max))
         NODATE    <- ifelse(is.na(nodate), '', paste0(" no_date = ", nodate))
@@ -143,6 +127,31 @@ getDistribTaxa <- function(taxIDs,
             TYPEOFOBS <- paste('AND (', substr(TYPEOFOBS, 4, nchar(TYPEOFOBS)), ')')
         }
     }
+
+    # If no climate variables are provided, return values for ALL variables.
+    if (unique(is.na(climate))) {
+        if(dbname == 'crest_example') {
+            climate <- c('bio1', 'bio12')
+        } else {
+            taxaType <- getTaxaTypeFromTaxID(taxIDs[1])
+            if(taxaType %in% c(1, 2, 3, 6)) {
+                climate <- accClimateVariables(domain='Terrestrial')[, 2]
+            } else {
+                climate <- accClimateVariables(domain='Marine')[, 2]
+            }
+        }
+    }
+    CLIM3 <- paste(', ', paste(climate, collapse = ", "))
+    
+
+    ## Excluding grid cells without any climate values (eg. marine plant observations)
+    CLIM4 <- paste0('AND (', climate[1], ' IS NOT NULL')
+    for(clim in climate[-1]){
+        CLIM4 <- paste(CLIM4, " OR ", clim, " IS NOT NULL")
+    }
+    CLIM4 <- paste0(CLIM4, ')')
+
+
     req <- paste0(
         "  SELECT DISTINCT taxonid, locid ",
         "    FROM distrib_qdgc ",

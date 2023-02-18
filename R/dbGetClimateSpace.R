@@ -37,7 +37,7 @@ getClimateSpace <- function(climate,
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
-    if (is.na(continents)[1] & is.na(countries)[1]) {
+    if ( (is.na(continents)[1] & is.na(countries)[1]) | dbname == 'crest_example') {
         GEO_terr <- ""
     } else {
         GEO_terr <- paste0(
@@ -52,7 +52,7 @@ getClimateSpace <- function(climate,
         )
     }
 
-    if (is.na(basins)[1] & is.na(sectors)[1]) {
+    if ( (is.na(basins)[1] & is.na(sectors)[1]) | dbname == 'crest_example') {
         GEO_mari <- ""
     } else {
         GEO_mari <- paste0(
@@ -68,7 +68,7 @@ getClimateSpace <- function(climate,
     }
 
     # Formatting the botanical subsetting
-    if (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) {
+    if ( (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) | dbname == 'crest_example') {
         WWF <- ""
     } else {
         WWF <- paste0(
