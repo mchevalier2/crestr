@@ -50,7 +50,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/using-gbif4crest.html">Using the _gbif4crest_ database</a>
+      <a href="../articles/databasing-with-crestr.html">Using the _gbif4crest_ database</a>
     </li>
     <li>
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
@@ -93,6 +93,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_climateSpace</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  climate <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climate</span>,</span>
+<span>  bin_width <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">bin_width</span>,</span>
 <span>  save <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  filename <span class="op">=</span> <span class="st">"Climate_space.pdf"</span>,</span>
 <span>  as.png <span class="op">=</span> <span class="cn">FALSE</span>,</span>
@@ -115,6 +116,12 @@
 <dt>climate</dt>
 <dd><p>Climate variables to be used to generate the plot. By default
 all the variables are included.</p></dd>
+
+
+<dt>bin_width</dt>
+<dd><p>The width of the bins used to correct for unbalanced climate
+state. Use values that split the studied climate gradient in
+15-25 classes (e.g. 2°C for temperature variables). Default is 1.</p></dd>
 
 
 <dt>save</dt>

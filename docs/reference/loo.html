@@ -50,7 +50,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/using-gbif4crest.html">Using the _gbif4crest_ database</a>
+      <a href="../articles/databasing-with-crestr.html">Using the _gbif4crest_ database</a>
     </li>
     <li>
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
@@ -81,7 +81,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Performs the leave-one-out analysis</h1>
-    <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/R/leave_one_out.R" class="external-link"><code>R/leave_one_out.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/R/crest.leave_one_out.R" class="external-link"><code>R/crest.leave_one_out.R</code></a></small>
     <div class="hidden name"><code>loo.Rd</code></div>
     </div>
 
@@ -90,7 +90,7 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">loo</span><span class="op">(</span><span class="va">x</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">loo</span><span class="op">(</span><span class="va">x</span>, climate <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climate</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -98,6 +98,11 @@
     <dl><dt>x</dt>
 <dd><p>a <code><a href="crestObj.html">crestObj</a></code> produced by the
 <code><a href="crest.reconstruct.html">crest.reconstruct</a></code> or <code><a href="crest.html">crest</a></code> functions.</p></dd>
+
+
+<dt>climate</dt>
+<dd><p>A vector of the climate variables to extract. See
+<code><a href="accClimateVariables.html">accClimateVariables</a></code> for the list of accepted values.</p></dd>
 
 
 <dt>verbose</dt>

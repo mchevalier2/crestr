@@ -61,7 +61,7 @@ navbar:
       text: Applications
       menu:
       - text: Using the _gbif4crest_ database
-        href: articles/using-gbif4crest.html
+        href: articles/databasing-with-crestr.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
 reference:

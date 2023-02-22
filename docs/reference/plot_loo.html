@@ -50,7 +50,7 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/using-gbif4crest.html">Using the _gbif4crest_ database</a>
+      <a href="../articles/databasing-with-crestr.html">Using the _gbif4crest_ database</a>
     </li>
     <li>
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
@@ -93,7 +93,8 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">plot_loo</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
 <span>  optima <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  climate <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climate</span>,</span>
+<span>  climate <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climate</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">reconstructions</span>, <span class="kw">function</span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="st">"loo"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span>,</span>
 <span>  taxanames <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">inputs</span><span class="op">$</span><span class="va">taxa.name</span>,</span>
 <span>  save <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  filename <span class="op">=</span> <span class="st">"Diagram_loo.pdf"</span>,</span>
