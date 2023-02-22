@@ -2,6 +2,7 @@
 #'
 #' Repeat the reconstructions by removing one taxon at a time.
 #'
+#' @inheritParams crest
 #' @param x a \code{\link{crestObj}} produced by the
 #'        \code{\link{crest.reconstruct}} or \code{\link{crest}} functions.
 #' @param verbose A boolean to print non-essential comments on the terminal
@@ -27,7 +28,7 @@
 #' lapply(reconstr$reconstructions$bio12$loo, head)
 #' plot_loo(reconstr)
 #'
-loo <- function(x, verbose=TRUE) {
+loo <- function(x, climate=x$parameters$climate, verbose=TRUE) {
     if(base::missing(x)) x
 
     if(!is.crestObj(x)) {
@@ -35,35 +36,40 @@ loo <- function(x, verbose=TRUE) {
         return(invisible(NA))
     }
 
+    if(x$misc$stage %in% c("data_extracted", "PDFs_fitted", "data_inserted")) {
+        stop('The crestObj requires climate to be reconstructed. Run crest.reconstruct() on your data.\n')
+    }
+
     if(verbose) cat('\n## Prepping data for LOO reconstructions\n')
 
     if(verbose) cat('  <> Checking data ......................... ')
 
     if(verbose) cat('[OK]\n  <> Checking taxa ................... ......')
-    taxa_list <- rownames(x$inputs$selectedTaxa)[apply(as.data.frame(x$inputs$selectedTaxa[, x$parameters$climate]), 1, sum) > 0]
+    taxa_list <- rownames(x$inputs$selectedTaxa)[apply(as.data.frame(x$inputs$selectedTaxa[, climate]), 1, sum) > 0]
     estimated_time <- x$misc$reconstruction_time / nrow(x$inputs$df) * sum(ifelse(x$modelling$weights > 0, 1, 0))
     if(verbose) cat(paste0('[OK]\n  *i Estimated time for the LOO reconstructions: ', estimated_time %/% 60, 'min ', round(estimated_time %% 60, 2), 's.\n'))
     if(verbose) cat('  <> LOO reconstructions ...................   0%\r')
     pbi <- 100
     time0 <- proc.time()
-    for(clim in x$parameters$climate) {
+    for(clim in climate) {
         x$reconstructions[[clim]][['loo']] = list()
     }
     recons_tmp <- x
     for(tax in taxa_list) {
         #recons_tmp$inputs$selectedTaxa <- x$inputs$selectedTaxa
-        #recons_tmp <- excludeTaxa(recons_tmp, tax, x$parameters$climate)
+        #recons_tmp <- excludeTaxa(recons_tmp, tax, climate)
         recons_tmp$inputs$df <- x$modelling$weights ## We do not recalculate the weight matrix. We assign it as the 'default' data
         recons_tmp$inputs$x <- x$inputs$x[recons_tmp$inputs$df[, tax] > 0 ]# Only re-runnig for the samples that contain the taxon
         recons_tmp$inputs$df <- recons_tmp$inputs$df[recons_tmp$inputs$df[, tax] > 0, ]
         recons_tmp$inputs$df[, tax] <- 0 # Excluding the taxon from the recon
         recons_tmp$modelling$weights <- recons_tmp$inputs$df # Seeting df as the weight matrix since this is not updateed with skip_for_loo=TRUE
+        recons_tmp$parameters$climate <- climate
         recons_tmp <- crest.reconstruct(recons_tmp,
                                         presenceThreshold = 0,
                                         taxWeight = 'originalData',
                                         skip_for_loo = TRUE, verbose=FALSE
                                       )
-        for(clim in x$parameters$climate) {
+        for(clim in climate) {
             if(x$inputs$selectedTaxa[tax, clim] > 0) {
                 tmp_opt <- tmp_mean <- rep(NA, nrow(x$reconstructions[[clim]]$optima))
                 tmp_opt[x$modelling$weights[, tax] > 0] <- recons_tmp$reconstructions[[clim]]$optima[, 2]

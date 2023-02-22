@@ -31,8 +31,11 @@ dbSubset <- function( taxaType,
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
     if(verbose) cat('  <> Checking database connection .......... ')
-    ##. Testing if the input variables are in the correct format ---------------
-
+    # If the 'crest_example' database is selected, we modify the parameter to
+    # point to the sqlite3() database created in tmp()
+    if (dbname == 'crest_example') {
+        dbname <- .exampleDB()
+    }
     if(!testConnection(dbname)) return(NA)
 
     if(verbose) cat('[OK]\n  <> Checking taxaType ..................... ')
@@ -55,8 +58,8 @@ dbSubset <- function( taxaType,
 
     if(tools::file_ext(out) != 'sqlite3') out <- paste(out, 'sqlite3', sep='.')
 
-    if(file.exists(file.path(tempdir(), basename(out)))) file.remove(file.path(tempdir(), basename(out)))
-    mydb <- RSQLite::dbConnect(RSQLite::SQLite(), file.path(tempdir(), basename(out)))
+    if(base::file.exists(base::file.path(base::tempdir(), base::basename(out)))) base::file.remove(base::file.path(base::tempdir(), base::basename(out)))
+    mydb <- RSQLite::dbConnect(RSQLite::SQLite(), base::file.path(base::tempdir(), base::basename(out)))
 
     req <- paste0("SELECT * FROM data_qdgc WHERE longitude >= ", xmn, " AND longitude <= ", xmx, " AND latitude >= ", ymn, " AND latitude <= ", ymx)
     tmp <- dbRequest(req, dbname)
@@ -102,11 +105,13 @@ dbSubset <- function( taxaType,
 
     RSQLite::dbDisconnect(mydb)
 
-    file.copy(file.path(tempdir(), basename(out)), dirname(out))
-    file.remove(file.path(tempdir(), basename(out)))
+    base::file.copy(base::file.path(base::tempdir(), base::basename(out)), base::dirname(out))
+    base::file.remove(base::file.path(base::tempdir(), base::basename(out)))
 
     if(verbose) {
       cat('[OK]\n')
       cat(paste0('## Data extraction completed.\n\n'))
     }
+
+    return(invisible(base::file.path(base::dirname(out), base::basename(out))))
 }

@@ -7,7 +7,8 @@
 plot_loo(
   x,
   optima = TRUE,
-  climate = x$parameters$climate,
+  climate = x$parameters$climate[unlist(lapply(x$reconstructions, function(y)
+    return("loo" \%in\% names(y))))],
   taxanames = x$inputs$taxa.name,
   save = FALSE,
   filename = "Diagram_loo.pdf",

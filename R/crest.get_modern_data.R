@@ -58,8 +58,10 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
     if(verbose) cat('  <> Checking database connection .......... ')
+    # If the 'crest_example' database is selected, we modify the parameter to
+    # point to the sqlite3() database created in tmp()
     if (dbname == 'crest_example') {
-        #dbname <- .createDbEx()
+        dbname <- .exampleDB()
     }
     if(!testConnection(dbname)) return(NA)
 
@@ -369,7 +371,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     crest$misc$site_info[['lat']]    <- site_info[2]
     crest$misc$site_info[['site_name']]    <- site_name
     if((!is.na(crest$misc$site_info[['long']])) & (!is.na(crest$misc$site_info[['lat']]))) {
-        resol <- ifelse(dbname == 'crest_example', 0.5, 0.25)
+        resol <- ifelse(.ifExampleDB(dbname), 0.5, 0.25)
         crest$misc$site_info[['climate']] <- climate_from_xy(crest$misc$site_info[['long']],
                                                              crest$misc$site_info[['lat']],
                                                              crest$parameters$climate,

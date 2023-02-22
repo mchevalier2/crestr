@@ -2,6 +2,8 @@
 
 S3method(plot,crestObj)
 S3method(print,crestObj)
+export(.exampleDB)
+export(.ifExampleDB)
 export(.sqlite)
 export(accBasinNames)
 export(accClimateVariables)

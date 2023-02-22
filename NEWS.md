@@ -1,12 +1,15 @@
 # crestr 1.3.0.9000
 
-* New functions:
+* New functions and features:
     * `crest.simplify()` transforms a crestObj into a simple data frame with only the main reconstructed values.
     * `dbSubset()` extracts a subset of the calibration dataset and makes data extraction much faster.
+    * The example dataset is now available offline.
+    * `loo()` can be run on a subset of the available variables to make the process faster.
 * Plotting:
     * The results can be plotted as anomalies (only if simplify=TRUE for now).
 * Major issues:
     * Fixing a major stability issue regarding the connection test (does not impact any result derived from the package)
+    * Reliance on an active internet connection has been significantly reduced
 * Minor issues:
     * If the input `df` contained NA, `crest.get_modern_data()` was crashing. Default value now set to 0.
     * Updating vignettes (reducing the amount of code actually ran to create the vignette).

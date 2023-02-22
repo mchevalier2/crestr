@@ -7,6 +7,7 @@
 plot_climateSpace(
   x,
   climate = x$parameters$climate,
+  bin_width = x$parameters$bin_width,
   save = FALSE,
   filename = "Climate_space.pdf",
   as.png = FALSE,
@@ -24,6 +25,10 @@ plot_climateSpace(
 
 \item{climate}{Climate variables to be used to generate the plot. By default
 all the variables are included.}
+
+\item{bin_width}{The width of the bins used to correct for unbalanced climate
+state. Use values that split the studied climate gradient in
+15-25 classes (e.g. 2°C for temperature variables). Default is 1.}
 
 \item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}

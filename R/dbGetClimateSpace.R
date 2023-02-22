@@ -37,7 +37,7 @@ getClimateSpace <- function(climate,
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
-    if ( (is.na(continents)[1] & is.na(countries)[1]) | dbname == 'crest_example') {
+    if ( (is.na(continents)[1] & is.na(countries)[1]) | .ifExampleDB(dbname) ) {
         GEO_terr <- ""
     } else {
         GEO_terr <- paste0(
@@ -52,7 +52,7 @@ getClimateSpace <- function(climate,
         )
     }
 
-    if ( (is.na(basins)[1] & is.na(sectors)[1]) | dbname == 'crest_example') {
+    if ( (is.na(basins)[1] & is.na(sectors)[1]) | .ifExampleDB(dbname)) {
         GEO_mari <- ""
     } else {
         GEO_mari <- paste0(
@@ -68,7 +68,7 @@ getClimateSpace <- function(climate,
     }
 
     # Formatting the botanical subsetting
-    if ( (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) | dbname == 'crest_example') {
+    if ( (is.na(realms)[1] & is.na(biomes)[1] & is.na(ecoregions)[1]) | .ifExampleDB(dbname) ) {
         WWF <- ""
     } else {
         WWF <- paste0(
@@ -86,7 +86,7 @@ getClimateSpace <- function(climate,
     }
 
     # Formatting the elevation data
-    if(dbname == 'crest_example') { # Some parameters are not availble in the example database
+    if(.ifExampleDB(dbname)) { # Some parameters are not availble in the example database
         ELEVMIN <- ELEVMAX <- ELEVRANGE <- ''
     } else {
         ELEVMIN   <- ifelse(is.na(elev_min), '', paste0('    AND elevation >= ', elev_min))

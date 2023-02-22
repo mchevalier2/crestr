@@ -48,7 +48,8 @@
 #'                      col_pos=c('blue','cornflowerblue'),
 #'                      col_neg=c('red', 'goldenrod3'))
 #'
-plot_loo <- function( x, optima=TRUE, climate=x$parameters$climate,
+plot_loo <- function( x, optima=TRUE,
+                      climate=x$parameters$climate[unlist(lapply(x$reconstructions, function(y) return('loo' %in% names(y))))],
                       taxanames=x$inputs$taxa.name,
                       save=FALSE, filename='Diagram_loo.pdf',
                       as.png = FALSE, png.res=300,

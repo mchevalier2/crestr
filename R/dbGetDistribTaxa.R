@@ -41,7 +41,7 @@ getDistribTaxa <- function(taxIDs,
 
     # Formatting subsets of the request------------------------------------------
     # Formatting the geographical subsetting
-    if(dbname == 'crest_example') { # Some parameters are not availble in the example database
+    if(.ifExampleDB(dbname)) { # Some parameters are not availble in the example database
         GEO_terr <- ''
         GEO_mari <- ''
         WWF <- ''
@@ -130,7 +130,7 @@ getDistribTaxa <- function(taxIDs,
 
     # If no climate variables are provided, return values for ALL variables.
     if (unique(is.na(climate))) {
-        if(dbname == 'crest_example') {
+        if(.ifExampleDB(dbname)) {
             climate <- c('bio1', 'bio12')
         } else {
             taxaType <- getTaxaTypeFromTaxID(taxIDs[1])
@@ -142,7 +142,7 @@ getDistribTaxa <- function(taxIDs,
         }
     }
     CLIM3 <- paste(', ', paste(climate, collapse = ", "))
-    
+
 
     ## Excluding grid cells without any climate values (eg. marine plant observations)
     CLIM4 <- paste0('AND (', climate[1], ' IS NOT NULL')
