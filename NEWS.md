@@ -6,7 +6,7 @@
     * The example dataset is now available offline.
     * `loo()` can be run on a subset of the available variables to make the process faster.
 * Plotting:
-    * The results can be plotted as anomalies (only if simplify=TRUE for now).
+    * The results can be plotted as anomalies.
 * Major issues:
     * Fixing a major stability issue regarding the connection test (does not impact any result derived from the package)
     * Reliance on an active internet connection has been significantly reduced

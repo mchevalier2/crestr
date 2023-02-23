@@ -448,7 +448,7 @@ plot.crestObj <- function(x,
         if(simplify) {
             graphics::par(mar = c(2, 2.2, 0.5, 0.5), ps=8, lwd=1)
             graphics::plot(0,0, type='n', xlim=xlim, ylim = ylim2,
-                 xaxs='i', yaxs='i', frame = TRUE, axes=FALSE)
+                 xaxs='i', yaxs='i', frame = TRUE, axes=FALSE, xlab='', ylab='')
 
             for( u in length(uncertainties):1) {
                 val <- apply(pdfter[, -1], 2, function(x) {
@@ -554,11 +554,15 @@ plot.crestObj <- function(x,
                 )
             }
             if(add_modern) {
-                graphics::segments(xlim[1], x$misc$site_info$climate[, clim], xlim[2], x$misc$site_info$climate[, clim],
+                modval <- x$misc$site_info$climate[, clim]
+                if(as.anomaly) modval <- modval - as.numeric(anomaly.base[clim])
+                graphics::segments(xlim[1], modval, xlim[2], modval,
                     col = "red", cex = 0.5, lty = 2
                 )
             }
-            graphics::points(x$reconstructions[[clim]][["optima"]],
+            rcnstrctn <- x$reconstructions[[clim]]$optima[, var_to_plot]
+            if(as.anomaly) rcnstrctn <- rcnstrctn - as.numeric(anomaly.base[clim])
+            graphics::points(xx, rcnstrctn,
                 pch = 18, col = pt.col, cex = pt.cex, type='o'
             )
 
