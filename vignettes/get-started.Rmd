@@ -171,6 +171,8 @@ reconstr <- crest.get_modern_data(
                         df = crest_ex, # The fossil data
                    pse = crest_ex_pse, # The proxy-species equivalency table
                          taxaType = 0, # The type of taxa is 0 for the example
+              site_info = c(7.5, 7.5), # Coordinates to estimate modern values
+             site_name = 'crest-test', # A specific name for the dataset
          climate = c("bio1", "bio12"), # The climate variables to reconstruct
     selectedTaxa = crest_ex_selection, # The taxa to use for each variable
              dbname = "crest_example", # The database to extract the data
