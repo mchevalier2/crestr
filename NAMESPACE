@@ -2,6 +2,7 @@
 
 S3method(plot,crestObj)
 S3method(print,crestObj)
+S3method(summary,crestObj)
 export(.exampleDB)
 export(.ifExampleDB)
 export(.sqlite)
