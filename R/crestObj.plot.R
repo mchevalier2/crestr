@@ -87,9 +87,14 @@ plot.crestObj <- function(x,
     }
 
     if(as.anomaly) {
-        anomaly.base <- as.data.frame(anomaly.base)
-        anomaly.base[is.na(anomaly.base)] <- 0
-        colnames(anomaly.base) <- climate
+        if(!is.na(anomaly.base)[1]) {
+            anomaly.base <- as.data.frame(anomaly.base)
+            anomaly.base[is.na(anomaly.base)] <- 0
+            colnames(anomaly.base) <- climate
+        } else {
+            as.anomaly <- FALSE
+            warning("No values available to calculate anomalies. Provide coordinates to crest.get_modern_data() to allow crestr to extract the local conditions, or assign values using 'anomaly.base = c(val1, val2, ...)' in the plot function.'")
+        }
     }
 
     idx <- 0
