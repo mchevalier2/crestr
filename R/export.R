@@ -68,8 +68,14 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             }
         }
 
+        loo.exist <- loo
         for (clim in climate) {
             base::dir.create(base::file.path(loc, dataname, clim), showWarnings = TRUE)
+
+            if ((!'loo' %in% names(x$reconstructions[[clim]])) & loo) {
+                loo.exist <- FALSE
+                warning(paste0("Leave-one-out data not available for '", clim,"'. Look at loo() for more details.\n"))
+            }
 
             df <- rep(NA, 5)
             df <- rbind(df, c(paste0('NAME OF THE DATASET: ', x$misc$site_info$site_name), NA, NA, NA, NA))
@@ -88,7 +94,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             if(fullUncertainties)  df <- rbind(df, c(NA, 'fullUncertainties: The distribution of uncertainties for each sample', NA, NA, NA))
             df <- rbind(df, c(NA, 'taxa_percentage: The percentage data used to generate the reconstructions', NA, NA, NA))
             if(weights)  df <- rbind(df, c(NA, 'taxa_weights: The weights derived from the percentage', NA, NA, NA))
-            if(loo)  df <- rbind(df, c(NA, 'leave_one_out: Results of the leave-one-out analysis', NA, NA, NA))
+            if(loo & loo.exist)  df <- rbind(df, c(NA, 'leave_one_out: Results of the leave-one-out analysis', NA, NA, NA))
             df <- rbind(df, c(NA, 'selectedTaxa: List of taxa identified in the study and which ones are selected.', NA, NA, NA))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
@@ -120,8 +126,8 @@ export <- function( x, dataname = x$misc$site_info$site_name,
 
             df <- rep(NA, 5)
             df <- rbind(df, c('SITE INFO:', NA, NA, NA, NA))
-            df <- rbind(df, c(NA, paste0('Longitude: ', x$misc$site_info$long, ' \u00B0N'), NA, NA, NA))
-            df <- rbind(df, c(NA, paste0('Latitude: ', x$misc$site_info$lat, ' \u00B0E'), NA, NA, NA))
+            df <- rbind(df, c(NA, paste0('Longitude: ', x$misc$site_info$long, ' \u00B0E'), NA, NA, NA))
+            df <- rbind(df, c(NA, paste0('Latitude: ', x$misc$site_info$lat, ' \u00B0N'), NA, NA, NA))
             df <- rbind(df, c(NA, paste0(clim, ' modern value: ', x$misc$site_info$climate[clim]), NA, NA, NA))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
@@ -149,6 +155,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, c(NA, paste0('Minimum number of presence records: ', x$parameters$minGridCells), NA, NA, NA))
             if (is.null(nrow(x$inputs$pse))) df <- rbind(df, c(NA, paste0('Weighted presence records: ', ifelse(x$parameters$weightedPresences, 'Yes', 'No')), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Climate Space Weighting: ', ifelse(x$parameters$climateSpaceWeighting, 'Yes', 'No')), NA, NA, NA))
+            if (x$parameters$climateSpaceWeighting) df <- rbind(df, c(NA, paste0('     - Using correction: ', x$parameters$climateSpaceWeighting.type), NA, NA, NA))
             if (x$parameters$climateSpaceWeighting) df <- rbind(df, c(NA, paste0('     - Bin width: ', x$parameters$bin_width[clim, ]), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Species weighted by abundance: ', ifelse(x$parameters$geoWeighting, 'Yes', 'No')), NA, NA, NA))
             df <- rbind(df, c(NA, paste0('Shape of the spcies pdfs: ', x$parameters$shape[clim, ]), NA, NA, NA))
@@ -210,7 +217,7 @@ export <- function( x, dataname = x$misc$site_info$site_name,
                 }
             }
 
-            if (loo) {
+            if (loo & loo.exist) {
                 df <- x$inputs$x
                 for (tax in names(x$reconstructions[[clim]]$loo)) {
                     if (unique(is.na(as.vector(x$reconstructions[[clim]]$loo[[tax]])))) {

@@ -5,6 +5,7 @@
     * `dbSubset()` extracts a subset of the calibration dataset and makes data extraction much faster.
     * The example dataset is now available offline.
     * `loo()` can be run on a subset of the available variables to make the process faster.
+    * INCLUDING A NEW PARAMETER TO `crest.calibrate()`: `climateSpaceWeighting.type`. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using 'sqrt' or 'log', instead of the default 'linear'.
 * Plotting:
     * The results can be plotted as anomalies.
 * Major issues:
@@ -14,6 +15,7 @@
     * If the input `df` contained NA, `crest.get_modern_data()` was crashing. Default value now set to 0.
     * Updating vignettes (reducing the amount of code actually ran to create the vignette).
     * Database handlers can better handle the reduced list of parameters available in the calibration databse
+    * The north and east labels in `export()` were inverted.
 
 
 # crestr 1.2.1

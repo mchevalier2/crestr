@@ -25,17 +25,28 @@
 #' # Testing that the area under the curve is equal to 1.
 #' all.equal(sum(pdfsp * (xrange[2] - xrange[1])), 1)
 #'
-fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE) {
+fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE, climateSpaceWeighting.type='linear') {
     if(base::missing(climate)) climate
     if(base::missing(ccs)) ccs
     if(base::missing(bin_width)) bin_width
     if(base::missing(shape)) shape
     if(base::missing(xrange)) xrange
 
+    if(! climateSpaceWeighting.type %in% c('linear', 'sqrt', 'log')) {
+        warning("climateSpaceweighting.type should be either 'linear', 'log' or 'sqrt'. It was assigned to 'linear' by default.\n")
+    }
+
     climate <- climate[!is.na(climate)]
     if (use_ccs) {
         w <- (climate - ccs[["k1"]][1]) %/% bin_width
-        w2 <- base::tabulate(w + 1, nbins = base::length(ccs[["k1"]])) / ccs[["k2"]]
+        w2 <- base::tabulate(w + 1, nbins = base::length(ccs[["k1"]]))
+        if(climateSpaceWeighting.type == 'sqrt') {
+            w2 <- w2 / sqrt(ccs[['k2']])
+        } else if (climateSpaceWeighting.type == 'log') {
+            w2 <- w2 / log(ccs[['k2']])
+        } else {
+            w2 <- w2 / ccs[["k2"]]
+        }
         w <- w2[w + 1]
         p1 <- base::sum(w * climate) / base::sum(w)
         p2 <- base::sum(w * (climate - p1)**2) / base::sum(w)

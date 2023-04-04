@@ -11,6 +11,7 @@ crest.calibrate(
   npoints = x$parameters$npoints,
   geoWeighting = x$parameters$geoWeighting,
   climateSpaceWeighting = x$parameters$climateSpaceWeighting,
+  climateSpaceWeighting.type = x$parameters$climateSpaceWeighting.type,
   verbose = TRUE
 )
 }
@@ -35,6 +36,10 @@ level taxon-climate relationships.}
 \item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}
 should be corrected for the modern distribution of the climate space
 (default \code{TRUE}).}
+
+\item{climateSpaceWeighting.type}{A correction factor for the clame space
+weighting correction to limit the edge effects. Either 'linear'
+(default), 'sqrt' or 'log'.}
 
 \item{verbose}{A boolean to print non-essential comments on the terminal
 (default \code{TRUE}).}

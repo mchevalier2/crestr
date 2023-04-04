@@ -29,6 +29,7 @@ crest(
   ai.sqrt = FALSE,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
+  climateSpaceWeighting.type = "linear",
   presenceThreshold = 0,
   taxWeight = "normalisation",
   uncertainties = c(0.5, 0.95),
@@ -102,6 +103,10 @@ level taxon-climate relationships.}
 \item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}
 should be corrected for the modern distribution of the climate space
 (default \code{TRUE}).}
+
+\item{climateSpaceWeighting.type}{A correction factor for the clame space
+weighting correction to limit the edge effects. Either 'linear'
+(default), 'sqrt' or 'log'.}
 
 \item{presenceThreshold}{All values above that threshold will be used in the
 reconstruction (e.g. if set at 1, all percentages below 1 will be set

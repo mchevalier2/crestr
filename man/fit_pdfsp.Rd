@@ -4,7 +4,15 @@
 \alias{fit_pdfsp}
 \title{Fit the species \code{pdfs}.}
 \usage{
-fit_pdfsp(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE)
+fit_pdfsp(
+  climate,
+  ccs,
+  bin_width,
+  shape,
+  xrange,
+  use_ccs = TRUE,
+  climateSpaceWeighting.type = "linear"
+)
 }
 \arguments{
 \item{climate}{A vector of climatic values where the species is present.}
@@ -24,6 +32,10 @@ precipitation or aridity. Default is 'normal' for all.}
 
 \item{use_ccs}{Boolean to indicate if the \code{pdfsp} should be corrected by
 the distribution of the modern climate space}
+
+\item{climateSpaceWeighting.type}{A correction factor for the clame space
+weighting correction to limit the edge effects. Either 'linear'
+(default), 'sqrt' or 'log'.}
 }
 \value{
 The pdf of the species.

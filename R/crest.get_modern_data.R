@@ -409,7 +409,9 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         w <- (! taxa.name %in% colnames(df)[-1])
         if (sum(w) > 0) {
             for (tax in taxa.name[w]) {
-                crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
+                #crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
+                #crest$inputs$selectedTaxa <- crest$inputs$selectedTaxa[rownames(crest$inputs$selectedTaxa) != tax, ]
+                crest$inputs$selectedTaxa[rownames(crest$inputs$selectedTaxa) == tax, ] <- -1
                 message <- "Taxon not recorded in the data file."
                 if (! message %in% names(crest$misc[['taxa_notes']])) {
                     crest$misc[['taxa_notes']][[message]] <- c()

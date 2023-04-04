@@ -64,7 +64,10 @@ print.crestObj <- function(x, as=x$misc$stage, ...) {
                     cat(paste0('*       ', paste(rep('_', nchar('Using bins of width ....................')), collapse=''), ' ', clim, ': ', x$parameters$bin_width[clim, 1],'\n'))
                 }
             }
-            if(!is.na(x$parameters$climateSpaceWeighting)) cat(paste0('*   x Weighting of the climate space ........... ',x$parameters$climateSpaceWeighting, '\n'))
+            if(!is.na(x$parameters$climateSpaceWeighting)) {
+                cat(paste0('*   x Weighting of the climate space ........... ',x$parameters$climateSpaceWeighting, '\n'))
+                cat(paste0("*       Using a ",x$parameters$climateSpaceWeighting.type," correction\n"))
+            }
             cat(paste0('*   x Shape of the PDFs ........................ ',x$parameters$climate[1], ': ', x$parameters$shape[x$parameters$climate[1], 1], '\n'))
             for(clim in x$parameters$climate[-1]) {
                 cat(paste0('*     ', paste(rep('_', nchar('Shape of the PDFs ........................')), collapse=''), ' ',clim, ': ', x$parameters$shape[clim, 1], '\n'))

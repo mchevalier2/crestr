@@ -33,6 +33,7 @@ crest.calibrate <- function(x,
                             npoints = x$parameters$npoints,
                             geoWeighting = x$parameters$geoWeighting,
                             climateSpaceWeighting = x$parameters$climateSpaceWeighting,
+                            climateSpaceWeighting.type = x$parameters$climateSpaceWeighting.type,
                             verbose=TRUE) {
 
     if(base::missing(x)) x
@@ -52,6 +53,7 @@ crest.calibrate <- function(x,
     x$parameters$npoints <- npoints
     x$parameters$geoWeighting <- geoWeighting
     x$parameters$climateSpaceWeighting <- climateSpaceWeighting
+    x$parameters$climateSpaceWeighting.type <- climateSpaceWeighting.type
 
     if (unique(is.na(bin_width)) | length(bin_width) != length(x$parameters$climate)) {
         cat("[FAILED]\n\n")
@@ -121,7 +123,8 @@ crest.calibrate <- function(x,
                             bin_width = x$parameters$bin_width[clim, ],
                             shape = x$parameters$shape[clim, ],
                             xrange = x$modelling$xrange[[clim]],
-                            use_ccs = x$parameters$climateSpaceWeighting
+                            use_ccs = x$parameters$climateSpaceWeighting,
+                            climateSpaceWeighting.type = x$parameters$climateSpaceWeighting.type
                           )
                         )
                         pdfpol <- pdfpol + tmp[, ncol(tmp)] * ifelse(x$parameters$geoWeighting,

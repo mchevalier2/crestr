@@ -63,6 +63,9 @@
 #' @param climateSpaceWeighting A boolean to indicate if the species \code{pdfs}
 #'        should be corrected for the modern distribution of the climate space
 #'        (default \code{TRUE}).
+#' @param climateSpaceWeighting.type A correction factor for the clame space
+#'        weighting correction to limit the edge effects. Either 'linear'
+#'        (default), 'sqrt' or 'log'.
 #' @param presenceThreshold All values above that threshold will be used in the
 #'        reconstruction (e.g. if set at 1, all percentages below 1 will be set
 #'        to 0 and the associated presences discarded). Default is 0.
@@ -92,6 +95,7 @@ crestObj <- function(taxa.name, taxaType, climate,
                      npoints = 200,
                      geoWeighting = TRUE,
                      climateSpaceWeighting = TRUE,
+                     climateSpaceWeighting.type = 'linear',
                      selectedTaxa = NA,
                      distributions = NA,
                      presenceThreshold = 0,
@@ -149,6 +153,7 @@ crestObj <- function(taxa.name, taxaType, climate,
         npoints = npoints,
         geoWeighting = geoWeighting,
         climateSpaceWeighting = climateSpaceWeighting,
+        climateSpaceWeighting.type = climateSpaceWeighting.type,
         presenceThreshold = presenceThreshold,
         uncertainties = uncertainties
     )

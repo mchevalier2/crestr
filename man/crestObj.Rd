@@ -38,6 +38,7 @@ crestObj(
   npoints = 200,
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
+  climateSpaceWeighting.type = "linear",
   selectedTaxa = NA,
   distributions = NA,
   presenceThreshold = 0,
@@ -128,6 +129,10 @@ level taxon-climate relationships.}
 \item{climateSpaceWeighting}{A boolean to indicate if the species \code{pdfs}
 should be corrected for the modern distribution of the climate space
 (default \code{TRUE}).}
+
+\item{climateSpaceWeighting.type}{A correction factor for the clame space
+weighting correction to limit the edge effects. Either 'linear'
+(default), 'sqrt' or 'log'.}
 
 \item{selectedTaxa}{A data frame assigns which taxa should be used for each
 variable (1 if the taxon should be used, 0 otherwise). The colnames
