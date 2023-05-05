@@ -25,9 +25,9 @@ navbar:
     - reference
     - articles
     - tutorials
-    - news
+    - community
     right:
-    - twitter
+    - news
     - github
   components:
     home:
@@ -42,6 +42,9 @@ navbar:
     structure:
       text: Technicalities
       href: articles/technicalities.html
+    community:
+      text: Community
+      href: articles/community.html
     start:
       text: Get started
       href: articles/get-started.html

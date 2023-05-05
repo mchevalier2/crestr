@@ -57,13 +57,10 @@
     </li>
   </ul></li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../articles/community.html">Community</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://twitter.com/ChevalierManu" class="external-link">
-    <span class="fab fa-twitter fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="https://github.com/mchevalier2/crestr/" class="external-link">
@@ -94,6 +91,7 @@
 <li>The example dataset is now available offline.</li>
 <li>
 <code><a href="../reference/loo.html">loo()</a></code> can be run on a subset of the available variables to make the process faster.</li>
+<li>INCLUDING A NEW PARAMETER TO <code><a href="../reference/crest.calibrate.html">crest.calibrate()</a></code>: <code>climateSpaceWeighting.type</code>. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using ‘sqrt’ or ‘log’, instead of the default ‘linear’.</li>
 </ul></li>
 <li>Plotting:
 <ul><li>The results can be plotted as anomalies.</li>
@@ -106,6 +104,7 @@
 <ul><li>If the input <code>df</code> contained NA, <code><a href="../reference/crest.get_modern_data.html">crest.get_modern_data()</a></code> was crashing. Default value now set to 0.</li>
 <li>Updating vignettes (reducing the amount of code actually ran to create the vignette).</li>
 <li>Database handlers can better handle the reduced list of parameters available in the calibration databse</li>
+<li>The north and east labels in <code><a href="../reference/export.html">export()</a></code> were inverted.</li>
 </ul></li>
 </ul></div>
     <div class="section level2">

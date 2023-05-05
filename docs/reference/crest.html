@@ -57,13 +57,10 @@
     </li>
   </ul></li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../articles/community.html">Community</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://twitter.com/ChevalierManu" class="external-link">
-    <span class="fab fa-twitter fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="https://github.com/mchevalier2/crestr/" class="external-link">
@@ -115,6 +112,7 @@
 <span>  ai.sqrt <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  geoWeighting <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  climateSpaceWeighting <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  climateSpaceWeighting.type <span class="op">=</span> <span class="st">"linear"</span>,</span>
 <span>  presenceThreshold <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  taxWeight <span class="op">=</span> <span class="st">"normalisation"</span>,</span>
 <span>  uncertainties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.95</span><span class="op">)</span>,</span>
@@ -231,6 +229,12 @@ level taxon-climate relationships.</p></dd>
 <dd><p>A boolean to indicate if the species <code>pdfs</code>
 should be corrected for the modern distribution of the climate space
 (default <code>TRUE</code>).</p></dd>
+
+
+<dt>climateSpaceWeighting.type</dt>
+<dd><p>A correction factor for the clame space
+weighting correction to limit the edge effects. Either 'linear'
+(default), 'sqrt' or 'log'.</p></dd>
 
 
 <dt>presenceThreshold</dt>

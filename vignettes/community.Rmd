@@ -1,0 +1,48 @@
+---
+title: "Join the crestr community"
+author: "Manuel Chevalier"
+date: "`r Sys.Date()`"
+output:
+    rmarkdown::html_vignette:
+        self_contained: no
+vignette: >
+  %\VignetteIndexEntry{Join the crestr community}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+
+
+
+As the crest community has been rapidly growing since the release of the _crestr_ package and associated publication last year, I want to build a mailing list of crest-interested users to share information more efficiently. However, I promise controlled and limited communication through this channel since we all receive too many emails already. These emails will include the following:
+
+- Early notifications of upcoming workshops to allow you to secure spots (independent online events or associated with international congresses);
+- Publication highlights of studies involving crest (please send me your publication(s) if you want your work advertised here!);
+- Notifications about important updates of the crestr R package (bug fixing, new features, new vignettes, etc.);
+- Communications from crest/r members relevant to this community.
+
+
+I am also considering creating a dedicated Slack channel where crest users (i.e. you) could come to discuss good practices and/or seek support from our growing community. As I am still assessing if there is a need for such a platform, please let me know if you would be interested in joining/contributing and what you might expect from it. To join the mailing list, you only need to enter your name and contact below. Finally, feel free to share this link with your colleagues and students who may be interested.
+
+<br >
+
+
+<form action="https://formspree.io/f/xdovbpaw" method="POST" >
+    First name: <input type="text" name="First name" placehold="Your name">
+    Last name: <input type="text" name="Last name" placehold="Your name">
+    Email: <input type="email" name="_replyto" placeholder="Your email">
+    <input type="submit" value="Send">
+    <input type="hidden" name="_subject" value="New member crest/r mailing list" />
+</form>
+
+
+
+<br >

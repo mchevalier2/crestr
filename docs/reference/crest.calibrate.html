@@ -58,13 +58,10 @@ climate variables."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aj
     </li>
   </ul></li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../articles/community.html">Community</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="https://twitter.com/ChevalierManu" class="external-link">
-    <span class="fab fa-twitter fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">News</a>
 </li>
 <li>
   <a href="https://github.com/mchevalier2/crestr/" class="external-link">
@@ -99,6 +96,7 @@ climate variables.</p>
 <span>  npoints <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">npoints</span>,</span>
 <span>  geoWeighting <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">geoWeighting</span>,</span>
 <span>  climateSpaceWeighting <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climateSpaceWeighting</span>,</span>
+<span>  climateSpaceWeighting.type <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climateSpaceWeighting.type</span>,</span>
 <span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -136,6 +134,12 @@ level taxon-climate relationships.</p></dd>
 <dd><p>A boolean to indicate if the species <code>pdfs</code>
 should be corrected for the modern distribution of the climate space
 (default <code>TRUE</code>).</p></dd>
+
+
+<dt>climateSpaceWeighting.type</dt>
+<dd><p>A correction factor for the clame space
+weighting correction to limit the edge effects. Either 'linear'
+(default), 'sqrt' or 'log'.</p></dd>
 
 
 <dt>verbose</dt>
