@@ -11,6 +11,7 @@ plot_scatterPDFs(
   uncertainties = x$parameters$uncertainties,
   xlim = range(x$modelling$climate_space[, climate[1]]),
   ylim = range(x$modelling$climate_space[, climate[2]]),
+  add_modern = FALSE,
   save = FALSE,
   filename = "scatterPDFs.pdf",
   width = 5.51,
@@ -36,6 +37,9 @@ bars that should be calculated (default are the values stored in x).}
 of the observed climate space.}
 
 \item{ylim}{the y limits of the plot.}
+
+\item{add_modern}{A boolean to add the location and the modern climate values
+to the plot (default \code{FALSE}).}
 
 \item{save}{A boolean to indicate if the diagram should be saved as a pdf file.
 Default is \code{FALSE}.}

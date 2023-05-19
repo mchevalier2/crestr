@@ -11,6 +11,8 @@
 #'        recorded taxa).
 #' @param xlim, ylim The climate range to plot the data. Default is the full range
 #'        of the observed climate space.
+#' @param add_modern A boolean to add the location and the modern climate values
+#'        to the plot (default \code{FALSE}).
 #' @param filename An absolute or relative path that indicates where the diagram
 #'        should be saved. Also used to specify the name of the file. Default:
 #'        the file is saved in the working directory under the name
@@ -46,6 +48,7 @@ plot_scatterPDFs <- function( x,
                       uncertainties = x$parameters$uncertainties,
                       xlim=range(x$modelling$climate_space[, climate[1]]),
                       ylim=range(x$modelling$climate_space[, climate[2]]),
+                      add_modern = FALSE,
                       save = FALSE, filename = 'scatterPDFs.pdf',
                       width = 5.51, height = 5.51,
                       as.png = FALSE, png.res=300
@@ -67,6 +70,12 @@ plot_scatterPDFs <- function( x,
             if(use == 10) return(COL1[2])
             if(use == 11) return(COL1[3])
             return(COL1[4])
+        }
+
+        if(add_modern) {
+            if (length(x$misc$site_info) <= 3) {
+                add_modern <- FALSE
+            }
         }
 
         if(save) {
@@ -124,13 +133,21 @@ plot_scatterPDFs <- function( x,
             graphics::abline(h = graphics::axTicks(2), col='grey70')
             graphics::points(x$modelling$climate_space[, climate[1]], x$modelling$climate_space[, climate[2]], pch=15, cex=0.5, col='grey40')
 
+            if(add_modern) {
+                if(is.numeric(x$misc$site_info$climate[, climate[1]])) {
+                    print(x$misc$site_info$climate)
+                    graphics::points(x$misc$site_info$climate[, climate[1]], x$misc$site_info$climate[, climate[2]], pch=24, col=NA, bg='red', cex=1.5, lwd=1.5)
+                }
+            }
+
             for(tax in taxanames) {
                 for(u in 1:length(uncertainties)) {
                     graphics::segments(ranges[[u]][tax, 1], optima2[tax], ranges[[u]][tax, 2], optima2[tax], lwd=u/length(uncertainties))
                     graphics::segments(optima1[[tax]], ranges[[u]][tax, 4], optima1[[tax]], ranges[[u]][tax, 5], lwd=u/length(uncertainties))
                 }
+                graphics::points(optima1[tax], optima2[tax], pch=21, cex=1.5, bg=sapply(names(optima1[tax]), get_col, simplify=TRUE), col='black', lwd=1.2)
+
             }
-            graphics::points(optima1, optima2, pch=21, cex=1.5, bg=sapply(names(optima1), get_col, simplify=TRUE), col='black', lwd=1.2)
 
             graphics::par(mgp=c(2,0.3,0), las=1)
             graphics::axis(2, lwd.ticks=0, lwd=0, tck=-0, cex.axis=7/8)

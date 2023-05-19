@@ -132,8 +132,8 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, rep(NA, 5))
             df <- rbind(df, c('DEFINITION OF THE STUDY AREA:', NA, NA, NA, NA))
-            df <- rbind(df, c(NA, paste0('Longitude: ', x$parameters$xmn, ' - ', x$parameters$xmx, ' \u00B0N'), NA, NA, NA))
-            df <- rbind(df, c(NA, paste0('Latitude: ', x$parameters$ymn, ' - ', x$parameters$ymx, ' \u00B0E'), NA, NA, NA))
+            df <- rbind(df, c(NA, paste0('Longitude: ', x$parameters$xmn, ' - ', x$parameters$xmx, ' \u00B0E'), NA, NA, NA))
+            df <- rbind(df, c(NA, paste0('Latitude: ', x$parameters$ymn, ' - ', x$parameters$ymx, ' \u00B0N'), NA, NA, NA))
             if(x$parameters$taxaType > 0) { # Nothing necessary for the example or private data.
                 if(!is.na(x$parameters$elev_min) | !is.na(x$parameters$elev_max)) df <- rbind(df, c(NA, paste0('Elevation: ', x$parameters$elev_min, ' - ', x$parameters$elev_max, ' m'), NA, NA, NA))
                 if(!is.na(x$parameters$elev_range))df <- rbind(df, c(NA, paste0('Elevation range: ', x$parameters$elev_range, ' m'), NA, NA, NA))

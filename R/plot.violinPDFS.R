@@ -91,7 +91,7 @@ plot_violinPDFs <- function( x,
         ntaxa   <- length(taxanames)
 
         max_abs <- max(max_pdf, na.rm=TRUE)
-        xstep <- mean(max_pdf)/5
+        xstep <- mean(max_pdf)/10
         max_pdf <- cumsum(rep(max_pdf[optima] + xstep/2, each=2) / max_abs)
         ystep <- xstep * (diff(ylim) / height) / (max(max_pdf) / width) ## xstep * xyratio
 
@@ -112,6 +112,7 @@ plot_violinPDFs <- function( x,
         }
 
         for(i in 1:ntaxa) {
+            graphics::segments(max_pdf[2*i-1],  ylim[1], max_pdf[2*i-1], ylim[2], col='grey80', lwd=0.5)
             graphics::polygon(c(max_pdf[2*i-1] - x$modelling$pdfs[[taxanames[optima[i]]]][[climate]]$pdfpol / max_abs, rev(max_pdf[2*i-1] + x$modelling$pdfs[[taxanames[optima[i]]]][[climate]]$pdfpol / max_abs)),
                               c(x$modelling$xrange[[climate]], rev(x$modelling$xrange[[climate]])), col=col[i], border='grey80', lwd=0.5)
             graphics::text(max_pdf[2*i-1] - xstep, ylim[1] + ystep, taxanames[optima[i]], srt=90, adj=c(0,0), font=2)

@@ -67,8 +67,8 @@ plot_climateSpace <- function( x,
         }
 
         if(x$misc$stage == "data_extracted") {
-            while(length(bin_width) < length(climate)) bin_width <- c(bin_width, 1)
-            bin_width <- bin_width[1:length(climate)]
+            #while(length(bin_width) < length(climate)) bin_width <- c(bin_width, 1)
+            #bin_width <- bin_width[1:length(climate)]
 
             ccs <- list()
             x$modelling$xrange <- list()
