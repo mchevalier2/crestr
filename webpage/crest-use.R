@@ -102,15 +102,53 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8
 }  ;  dev.off()
 
 
+png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet01.png", width=5.2, height=4.5, units='in', res=150)  ;  {
+    temp_col <- pals::coolwarm(20)[(climate$Temperature-10) %/% 1]
+    prec_col <- pals::kovesi.linear_bgyw_15_100_c68(25)[6:25][(climate$Precipitation-2) %/% 50 + 1]
+
+    climate <- read.csv('https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/clim.csv')
+    distribs <- read.csv('https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/distrib.csv')
+    par(mfrow = c(3, 2), bg=NA)
+    par(mar=c(0,0.7,1,0.7))
+
+    for (tax in 1:6) {
+        w <- which(distribs[, 'CODE'] == tax)
+        plot(0, 0, type='n', axes=FALSE, frame=FALSE, xlim=c(0, 61), ylim=c(0, 30), asp=1, xaxs='i', yaxs='i')
+        for (i in 1:nrow(climate)) {
+          rect(climate[i, 'Lon'] - 1, climate[i, 'Lat'] - 1, climate[i, 'Lon'], climate[i, 'Lat'], col=temp_col[i], border=temp_col[i], lwd=0.2)
+        }
+        points(distribs[w, 1:2] - 0.5, pch=20, cex=0.7)
+        rect(0,0,30,30, lwd=0.5)
+
+        for (i in 1:nrow(climate)) {
+          rect(climate[i, 'Lon'] + 30, climate[i, 'Lat'] - 1, climate[i, 'Lon'] + 31, climate[i, 'Lat'], col=prec_col[i], border=prec_col[i], lwd=0.2)
+        }
+        mtext(paste0('Taxon', tax), 3, line=-.3, font=2)
+        points(distribs[w, 1] + 30.5, distribs[w, 2] - 0.5, pch=20, cex=0.7)
+        rect(31,0, 61, 30, lwd=0.5)
+    }
+
+}  ;  dev.off()
 
 
 
+png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet02.png", width=3, height=6, units='in', res=150)  ;  {
+    par(bg=NA)
+    crestr::plot_diagram(crestr::crest_ex, bars=TRUE, bar_width=0.8, xlim=c(0,20))
+}  ;  dev.off()
 
 
+png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet03.png", width=5, height=3, units='in', res=150)  ;  {
+    par(bg=NA)
+    plot(reconstr, climate = 'bio1')
+}  ;  dev.off()
 
 
-
-
+png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet04.png", width=5, height=2.7, units='in', res=150)  ;  {
+    par(bg=NA)
+    plot(reconstr, climate = 'bio12', simplify=TRUE,
+            uncertainties=c(0.4, 0.6, 0.8), as.anomaly=TRUE)
+}  ;  dev.off()
 
 
 #-;
