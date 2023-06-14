@@ -18,7 +18,7 @@
 #'     realms = "Palaearctic"
 #'   )
 #'   head(climate)
-#'   raster::plot(raster::rasterFromXYZ(climate), asp=1)
+#'   terra::plot(terra::rast(climate, type='xyz'), asp=1)
 #' }
 #'
 getClimateSpace <- function(climate,

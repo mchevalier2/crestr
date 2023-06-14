@@ -6,8 +6,8 @@
 \usage{
 plot_map_eqearth(
   dat,
-  ext = raster::extent(dat),
-  zlim = range(raster::values(dat), na.rm = TRUE),
+  ext = as.vector(terra::ext(dat)),
+  zlim = range(terra::values(dat), na.rm = TRUE),
   col = viridis::viridis(20),
   brks.pos = c(0, 1),
   brks.lab = brks.pos,

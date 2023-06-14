@@ -3,14 +3,16 @@
 \docType{data}
 \name{M1}
 \alias{M1}
-\title{A shapefile of the world's country borders.}
+\title{A shapefile of the world's country borders. Use 'M1 <- terra::unwrap(M1)' to
+render the object usable in R.}
 \format{
-An object of class \code{SpatialPolygonsDataFrame} with 252 rows and 1 columns.
+An object of class \code{PackedSpatVector} of length 1.
 }
 \usage{
 M1
 }
 \description{
-A shapefile of the world's country borders.
+A shapefile of the world's country borders. Use 'M1 <- terra::unwrap(M1)' to
+render the object usable in R.
 }
 \keyword{datasets}

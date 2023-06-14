@@ -67,7 +67,7 @@ Extract the distribution of the studied climate gradient(s) across the study are
     realms = "Palaearctic"
   )
   head(climate)
-  raster::plot(raster::rasterFromXYZ(climate), asp=1)
+  terra::plot(terra::rast(climate, type='xyz'), asp=1)
 }
 
 }

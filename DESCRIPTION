@@ -25,17 +25,15 @@ Imports:
     openxlsx,
     plot3D,
     plyr,
-    raster,
     RPostgres,
     RSQLite,
     scales,
-    sp,
     stringr,
+    terra,
     viridis
 Suggests:
     knitr,
     rmarkdown,
-    rgdal,
     pals
 Depends:
     R (>= 2.10)

@@ -102,14 +102,14 @@ explore_calibration_dataset <- function( taxaType,
         veg_space      <- plyr::count(veg_space)
         veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
         veg_space[, 3] <- base::log10(veg_space[, 3])
-        veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+        veg_space      <- terra::rast(veg_space, type='xyz', crs=terra::crs("+proj=longlat +datum=WGS84 +no_defs"))
     } else {
         veg_space <- NA
     }
 
 
     ## Plot species abundance --------------------------------------------------
-    zlab=c(0, ifelse(plot.distrib, ceiling(max(raster::values(veg_space), na.rm=TRUE)), 1))
+    zlab=c(0, ifelse(plot.distrib, ceiling(max(terra::values(veg_space), na.rm=TRUE)), 1))
 
     clab=c()
     i <- 0
@@ -117,7 +117,7 @@ explore_calibration_dataset <- function( taxaType,
         clab <- c( clab, c(1,2,5)*10**i )
         i <- i+1
     }
-    if (plot.distrib)  clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
+    if (plot.distrib)  clab <- c(clab[log10(clab) <= max(terra::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(terra::values(veg_space), na.rm=TRUE)][1])
     zlab[2] <- log10(clab[length(clab)])
 
     graphics::layout(c(1,2), height = c(0.5, height-0.5))

@@ -242,12 +242,12 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                 veg_space      <- plyr::count(veg_space)
                 veg_space      <- veg_space[!is.na(veg_space[, 1]), ]
                 veg_space[, 3] <- base::log10(veg_space[, 3])
-                veg_space      <- raster::rasterFromXYZ(veg_space, crs=sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+                veg_space      <- terra::rast(veg_space, type='xyz', crs=terra::crs("+proj=longlat +datum=WGS84 +no_defs"))
 
 
 
                 ## Plot species abundance --------------------------------------------------
-                zlab=c(0, ceiling(max(raster::values(veg_space), na.rm=TRUE)))
+                zlab=c(0, ceiling(max(terra::values(veg_space), na.rm=TRUE)))
 
                 xlab <- c(-0.2,1.2)
                 xlab <- xlab + c(-0.15, 0.02)*diff(xlab)
@@ -258,7 +258,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                     clab <- c( clab, c(1,2,5)*10**i )
                     i <- i+1
                 }
-                clab <- c(clab[log10(clab) <= max(raster::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(raster::values(veg_space), na.rm=TRUE)][1])
+                clab <- c(clab[log10(clab) <= max(terra::values(veg_space), na.rm=TRUE)], clab[log10(clab) > max(terra::values(veg_space), na.rm=TRUE)][1])
                 zlab[2] <- log10(clab[length(clab)])
 
                 graphics::par(mar=c(0,0,0,0), ps=8*3/2)
@@ -345,9 +345,10 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
 
                     ## Plot the distribution over climate --------------------------------
                     brks <- c(x$modelling$ccs[[clim]]$k1, max(x$modelling$ccs[[clim]]$k1)+diff(x$modelling$ccs[[clim]]$k1[1:2]))
-                    R1 <- raster::rasterFromXYZ(cbind(climate_space[, 1:2],
-                                                      climate_space[, clim] ),
-                                                crs = sp::CRS("+proj=longlat +datum=WGS84 +no_defs"))
+                    R1 <- terra::rast(cbind(climate_space[, 1:2],
+                                            climate_space[, clim] ),
+                                      type= 'xyz',
+                                      crs = terra::crs("+proj=longlat +datum=WGS84 +no_defs"))
 
                     graphics::par(mar = c(0, 0, 0, 0), ps=8*3/2)
                     plot_map_eqearth(R1, ext,

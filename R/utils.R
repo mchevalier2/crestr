@@ -233,14 +233,15 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
 #' @examples
 #' \dontrun{
 #'   data(M1)
+#'   M1 <- terra:unwrap(M1)
 #'   ## We want only the data covering Nigeria
 #'   M2 <- M1[M1$COUNTRY == 'Nigeria', ]
 #'   data(reconstr)
 #'   reconstr.cropped <- crop(reconstr, M2)
-#'   data1 <- raster::rasterFromXYZ(reconstr$modelling$climate_space[, 1:3],
-#'                                  crs=raster::crs(M1))
-#'   data2 <- raster::rasterFromXYZ(reconstr.cropped$modelling$climate_space[, 1:3],
-#'                                  crs=raster::crs(M1))
+#'   data1 <- terra::rast(reconstr$modelling$climate_space[, 1:3],
+#'                                  crs=terra::crs(M1), type='xyz')
+#'   data2 <- terra::rast(reconstr.cropped$modelling$climate_space[, 1:3],
+#'                                  crs=terra::crs(M1), type='xyz')
 #'   layout(matrix(c(1,2,3,4), byrow=FALSE, ncol=2), width=1, height=c(0.2, 0.8))
 #'   plot_map_eqearth(data1, brks.pos=seq(13,29,2), colour_scale=TRUE,
 #'                    title='Full dataset', zlim=c(13, 29))
@@ -256,13 +257,13 @@ crop <- function(x, shp) {
     dat.y <- x$modelling$climate_space[, 2]
 
     res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
-    for(i in 1:length(shp)) {
-        for(j in 1:length(shp@polygons[[i]]@Polygons)) {
-            xy <- shp@polygons[[i]]@Polygons[[j]]@coords
-            isin <- sp::point.in.polygon(dat.x, dat.y, xy[,1], xy[,2])
-            res[ isin == 1, 3] <- 1
-        }
-    }
+    #for(i in 1:length(shp)) {
+    #    for(j in 1:length(shp@polygons[[i]]@Polygons)) {
+    #        xy <- shp@polygons[[i]]@Polygons[[j]]@coords
+    #        isin <- sp::point.in.polygon(dat.x, dat.y, xy[,1], xy[,2])
+    #        res[ isin == 1, 3] <- 1
+    #    }
+    #}
     if(sum(res[, 3]) > 0) {
         x$modelling$climate_space <- x$modelling$climate_space[res[, 3] == 1, ]
     } else {
@@ -275,13 +276,14 @@ crop <- function(x, shp) {
         dat.y <- x$modelling$distributions[[tax]][, 3]
 
         res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
-        for(i in 1:length(shp)) {
-            for(j in 1:length(shp@polygons[[i]]@Polygons)) {
-                xy <- shp@polygons[[i]]@Polygons[[j]]@coords
-                isin <- sp::point.in.polygon(dat.x, dat.y, xy[,1], xy[,2])
-                res[ isin == 1, 3] <- 1
-            }
-        }
+        #for(i in 1:length(shp)) {
+        #    for(j in 1:length(shp@polygons[[i]]@Polygons)) {
+        #        xy <- shp@polygons[[i]]@Polygons[[j]]@coords
+        #        #isin <- sp::point.in.polygon(dat.x, dat.y, xy[,1], xy[,2])
+        #        #isin <- terra::relate(dat.x, dat.y, xy[,1], xy[,2])
+        #        res[ isin == 1, 3] <- 1
+        #    }
+        #}
 
         if(sum(res[, 3]) > 0) {
             x$modelling$distributions[[tax]] <- x$modelling$distributions[[tax]][res[, 3] == 1, ]

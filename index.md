@@ -34,11 +34,17 @@ devtools::install_version("crestr", version = "1.2.0", repos = "http://cran.us.r
 ```
 
 
+## _crestr_ in a glimpse
+
+You can now quickly visualise how to run a reconstruction with the _crestr_ cheat sheet. This document summarises the main functionalities of the package and illustrates the main key step you will have to follow to reconsturct environmental parameters from your data. [download here](https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_v1.3.0.pdf)
+
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_thumbnail.png" width="60%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+
 ## Example applications
 
 <br >
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" alt="plot of chunk img1" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 _(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
@@ -46,7 +52,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 ## CREST in the scientific literature
 
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" alt="plot of chunk img3" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 - **2023**
     - Hui, Z., Liu, J., Chevalier, M., Wei, X., Chen, P., Zhan, J., Peng, T., Zhou, X., 2023, Multiple forcing on Late Miocene East Asian Summer Monsoon Precipitation Variability in NE Tibetan Plateau. CATENA 221, 106752. [10.1016/j.catena.2022.106752](https://doi.org/10.1016/j.catena.2022.106752).
@@ -75,10 +81,10 @@ _(A) density of presence records available in my calibration dataset upscaled at
 
 <br >
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-01.png" alt="plot of chunk img2" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-01.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" alt="plot of chunk img4" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 Last update: 03/01/2023
 

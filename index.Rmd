@@ -5,7 +5,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  fig.cap=""
 )
 ```
 
@@ -40,6 +41,14 @@ if(!require(devtools)) install.packages("devtools")
 devtools::install_version("crestr", version = "1.2.0", repos = "http://cran.us.r-project.org")
 ```
 
+
+## _crestr_ in a glimpse
+
+You can now quickly visualise how to run a reconstruction with the _crestr_ cheat sheet. This document summarises the main functionalities of the package and illustrates the main key step you will have to follow to reconsturct environmental parameters from your data. [download here](https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_v1.3.0.pdf)
+
+```{r cheatsheet, echo=FALSE, out.width = '60%', fig.align = "center", out.extra='style="background:none; border:none; box-shadow:none;"'}
+knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_thumbnail.png")
+```
 
 ## Example applications
 

@@ -14,24 +14,20 @@
 eqearth_get_ext <- function(ext, npoints=15) {
     if(base::missing(ext)) ext
 
-    bckg <- sp::Polygons(list(sp::Polygon(cbind(c(rep(ext[1], npoints),
-                                                  rep(ext[2], npoints)),
-                                                c(seq(ext[3], ext[4], length.out=npoints),
-                                                  seq(ext[4], ext[3], length.out=npoints))))), ID = as.character(1))
-    Sl1 <- sp::SpatialPolygons(list(bckg))
-    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
+    bckg <- cbind(id = 1, part = 1,
+                  lon = c(rep(ext[1], npoints), rep(ext[2], npoints)),
+                  lat = c(seq(ext[3], ext[4], length.out=npoints), seq(ext[4], ext[3], length.out=npoints)))
+    bckg <- terra::vect(bckg, type="polygons", crs="+proj=longlat +datum=WGS84 +no_defs")
 
-    PROJ <- sp::CRS(paste0("+proj=eqearth +lon_0=", mean(c(ext[2], ext[1])),
+    PROJ <- paste0("+proj=eqearth +lon_0=", mean(c(ext[2], ext[1])),
                            " +x_0=", mean(c(ext[2], ext[1])),
                            " +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
-                        )
+    bckg.eqearth <- terra::project(bckg, PROJ)
 
-    bckg.eqearth <- sp::spTransform(Sl1, PROJ)
-
-    ext <- raster::extent(bckg.eqearth)
-    ext[1:2] <- ext[1:2] + c(-0.1, 0.02)*diff(ext[1:2])
-    ext[3:4] <- ext[3:4] + c(-0.1, 0.02)*diff(ext[3:4])
-    ext
+    ext.eqearth <- as.vector(terra::ext(bckg.eqearth))
+    ext.eqearth[1:2] <- ext.eqearth[1:2] + c(-0.1, 0.02)*diff(ext.eqearth[1:2])
+    ext.eqearth[3:4] <- ext.eqearth[3:4] + c(-0.1, 0.02)*diff(ext.eqearth[3:4])
+    ext.eqearth
 }
 
 
@@ -60,76 +56,76 @@ eqearth_get_ext <- function(ext, npoints=15) {
 #' @return The set of coordinates ext projected in equal earth.
 #' @export
 #'
-plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos=c(0,1), brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, top_layer.col='ghostwhite', site_xy=NA, dim=NA) {
+plot_map_eqearth <- function(dat, ext=as.vector(terra::ext(dat)), zlim=range(terra::values(dat), na.rm=TRUE), col=viridis::viridis(20), brks.pos=c(0,1), brks.lab=brks.pos, npoints=15, nlines=9, title='', colour_scale=TRUE, top_layer=NA, top_layer.col='ghostwhite', site_xy=NA, dim=NA) {
 
     if(base::missing(dat)) dat
 
-    ## Useless lines to avoid WARNINGs ------------------------- #
-    #slss <- rgdal::projInfo(type = "proj") # ------------------- #
-    #p1 = rgeos::readWKT("POLYGON((0 0,3 0,3 3,0 3,0 0))") # ---- #
-    ## --------------------------------------------------------- #
-
     utils::data(M1, package='crestr', envir = environment())
-    M1 <- raster::crop(M1, ext)
+    M1 <- terra::unwrap(M1)
+    M1 <- terra::crop(M1, ext)
 
-    PROJ <- sp::CRS(paste0("+proj=eqearth +lon_0=",mean(ext[1:2]),
-                           " +x_0=",mean(ext[1:2]),
+    PROJ <- paste0("+proj=eqearth +lon_0=", mean(c(ext[2], ext[1])),
+                           " +x_0=", mean(c(ext[2], ext[1])),
                            " +ellps=WGS84 +datum=WGS84 +units=m +no_defs")
-                        )
+    M2 <- terra::project(M1, PROJ)
 
-    M2 <- sp::spTransform(M1, PROJ)
-    if (inherits(dat, 'RasterLayer'))  dat <- raster::projectRaster(from=dat, crs=PROJ)
+    if (inherits(dat, 'SpatRaster'))  dat <- terra::project(dat, PROJ, align=FALSE)
 
-    if ('Raster' %in% methods::is(top_layer)) top_layer <- raster::projectRaster(from=top_layer, crs=PROJ)
+    if ('SpatRaster' %in% methods::is(top_layer)) top_layer <- terra::project(top_layer, PROJ)
 
-    ll=list()
     idx=1
+    verticals <- cbind(id = NA, part = NA, lon = NA, lat = NA)
     for(i in seq(ext[1], ext[2], length.out=nlines)){
-        ll[[idx]] <- sp::Lines(list(sp::Line(cbind(rep(i,npoints), seq(ext[3], ext[4], length.out=npoints)))), ID = as.character(i))
-        idx = idx  +1
+        verticals <- rbind(verticals,
+                           cbind(id = 1, part = idx,
+                                 lon = rep(i, npoints),
+                                 lat = seq(ext[3], ext[4], length.out=npoints))
+                           )
+        idx = idx + 1
     }
-    Sl1 <- sp::SpatialLines(ll)
-    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
-    verticals.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
-    verticals.eqearth.x <- unlist(lapply(sp::coordinates(verticals.eqearth), function(x) return(x[[1]][1,1])))
+    verticals <- verticals[-1, ]
+    verticals <- terra::vect(verticals, type="lines", crs="+proj=longlat +datum=WGS84 +no_defs")
+    verticals.eqearth <- terra::project(verticals, PROJ)
+    verticals.eqearth.x <- sort((terra::crds(verticals.eqearth, df=TRUE)$x)[seq(1, npoints*nlines, by=npoints) ])
 
-    ll=list()
     idx=1
-    for(i in seq(ext[3], ext[4], length.out=nlines)){
-        ll[[idx]] <- sp::Lines(list(sp::Line(cbind(seq(ext[1], ext[2], length.out=npoints), rep(i, npoints)))), ID = as.character(i))
-        idx = idx  +1
+    horizontals <- cbind(id = NA, part = NA, lon = NA, lat = NA)
+    for(i in seq(ext[1], ext[2], length.out=nlines)){
+        horizontals <- rbind(horizontals,
+                             cbind(id = 1, part = idx,
+                                   lon = seq(ext[1], ext[2], length.out=npoints),
+                                   lat = rep(i, npoints))
+                             )
+        idx = idx + 1
     }
-    Sl1 <- sp::SpatialLines(ll)
-    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
-    horizontals.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
-    horizontals.eqearth.xy <- t(data.frame(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,]))))
-    horizontals.eqearth.y <- unlist(lapply(sp::coordinates(horizontals.eqearth), function(x) return(x[[1]][1,2])))
+    horizontals <- horizontals[-1, ]
+    horizontals <- terra::vect(horizontals, type="lines", crs="+proj=longlat +datum=WGS84 +no_defs")
+    horizontals.eqearth <- terra::project(horizontals, PROJ)
+    horizontals.eqearth.y <- sort((terra::crds(horizontals.eqearth, df=TRUE)$y)[seq(1, npoints*nlines, by=npoints)])
+    horizontals.eqearth.xy <- (terra::crds(horizontals.eqearth, df=TRUE))[seq(1, npoints*nlines, by=npoints), ]
 
 
     if (length(site_xy) == 2) {
-        Sl1 <- sp::SpatialPoints(matrix(site_xy, ncol=2))
-        raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
-        XY <- sp::spTransform(Sl1, raster::crs(PROJ))
+        XY <- terra::vect(matrix(site_xy, ncol=2), crs="+proj=longlat +datum=WGS84 +no_defs")
+        XY <- terra::project(XY, PROJ)
     }
 
-    bckg <- sp::Polygons(list(sp::Polygon(cbind(c(rep(ext[1], npoints),
-                                                  rep(ext[2], npoints)),
-                                                c(seq(ext[3], ext[4], length.out=npoints),
-                                                  seq(ext[4], ext[3], length.out=npoints))))), ID = as.character(1))
-    Sl1 <- sp::SpatialPolygons(list(bckg))
-    raster::crs(Sl1) <- sp::CRS("+proj=longlat +datum=WGS84 +no_defs")
-    bckg.eqearth <- sp::spTransform(Sl1, raster::crs(PROJ))
+    bckg <- cbind(id = 1, part = 1,
+                  lon = c(rep(ext[1], npoints), rep(ext[2], npoints)),
+                  lat = c(seq(ext[3], ext[4], length.out=npoints), seq(ext[4], ext[3], length.out=npoints)))
+    bckg <- terra::vect(bckg, type="polygons", crs="+proj=longlat +datum=WGS84 +no_defs")
+    bckg.eqearth <- terra::project(bckg, PROJ)
 
-    if (inherits(dat, 'RasterLayer'))  dat <- raster::mask(dat, bckg.eqearth)
+    if (inherits(dat, 'SpatRaster'))  dat <- terra::crop(dat, bckg.eqearth)
 
-    ext <- raster::extent(bckg.eqearth)
+    ext.eqearth <- terra::ext(bckg.eqearth)
     ext_factor_x <- max(graphics::strwidth(paste0('     ', round(as.numeric(names(horizontals.eqearth)),2)), units='inches', cex=6/8))
     ext_factor_y <- max(graphics::strheight(paste0('\n', round(as.numeric(names(verticals.eqearth)),2)), units='inches', cex=6/8))
 
     if(is.na(dim)[1]) dim <- grDevices::dev.size('in')
 
-    ext[1:2] <- ext[1:2] + (ext[2]-ext[1])/dim[1] * c(-ext_factor_x, 0.05)
-    ext[3:4] <- ext[3:4] + (ext[4]-ext[3])/dim[2] * c(-ext_factor_y, 0.05)
+    ext.eqearth[1:2] <- ext.eqearth[1:2] + (ext.eqearth[2]-ext.eqearth[1])/dim[1] * c(-ext_factor_x, 0.05)
+    ext.eqearth[3:4] <- ext.eqearth[3:4] + (ext.eqearth[4]-ext.eqearth[3])/dim[2] * c(-ext_factor_y, 0.05)
 
     ## ...........................................................................
     ## Plotting colour scale .....................................................
@@ -175,34 +171,35 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
     ## Plotting map ..............................................................
 
     plot(0, 0, type='n',
-         xlim=c(ext[1], ext[2]), ylim=c(ext[3], ext[4]),
+         xlim=c(ext.eqearth[1], ext.eqearth[2]), ylim=c(ext.eqearth[3], ext.eqearth[4]),
          main='', ylab='', xlab='', xaxs='i', yaxs='i',
          asp=1, frame=FALSE, axes=FALSE)  ;  {
 
-        sp::plot(bckg.eqearth, col='grey80', border=NA, cex=0.2, add=TRUE)
-        sp::plot(horizontals.eqearth,col='white',lwd=0.5, add=TRUE )
-        sp::plot(verticals.eqearth,col='white',lwd=0.5, add=TRUE )
+        terra::plot(bckg.eqearth, col='grey80', border=NA, cex=0.2, add=TRUE)
+        terra::plot(horizontals.eqearth,col='white',lwd=0.5, add=TRUE )
+        terra::plot(verticals.eqearth,col='white',lwd=0.5, add=TRUE )
 
-        sp::plot(M2, col='black', border=NA, add=TRUE)
-        if (inherits(dat, 'RasterLayer')) {
-            raster::image(dat, colNa='black', add=TRUE, interpolate=FALSE, zlim=zlim, col=col)
-            sp::plot(M2, border='black', lwd=0.5, add=TRUE)
+        terra::plot(M2, col='black', border=NA, add=TRUE)
+        if (inherits(dat, 'SpatRaster')) {
+            terra::image(dat, colNa='black', add=TRUE, interpolate=FALSE, zlim=zlim, col=col)
+            terra::plot(M2, border='black', lwd=0.5, add=TRUE)
         }
 
-        if ('Raster' %in% methods::is(top_layer)) {
-            raster::image(top_layer, add=TRUE, col=top_layer.col)
+        if ('SpatRaster' %in% methods::is(top_layer)) {
+            terra::image(top_layer, add=TRUE, col=top_layer.col)
         }
 
         if(length(site_xy) == 2) {
-            sp::plot(XY, col='white', bg='red', cex=2, lwd=2, pch=23, add=TRUE)
+            terra::plot(XY, col='white', bg='red', cex=2, lwd=2, pch=23, add=TRUE)
         }
         labels.lon <- rep(FALSE, length(verticals.eqearth.x))
+        names.lon <- round(seq(ext[1], ext[2], length.out=nlines), 2)
         for(v in 1:length(verticals.eqearth.x)) {
             overlap <- FALSE
             if(v > 1 ) {
                 if (labels.lon[v-1]) {
-                    d1 <- graphics::strwidth(paste0('\n ', round(as.numeric(names(verticals.eqearth))[v-1],2), ' '), cex=6/8)
-                    d2 <- graphics::strwidth(paste0('\n ', round(as.numeric(names(verticals.eqearth))[v],2), ' '), cex=6/8)
+                    d1 <- graphics::strwidth(paste0('\n ', names.lon[v-1], ' '), cex=6/8)
+                    d2 <- graphics::strwidth(paste0('\n ', names.lon[v], ' '), cex=6/8)
                     if (verticals.eqearth.x[v-1] + d1 / 2 >= verticals.eqearth.x[v] - d2 / 2) {
                         overlap <- TRUE
                     }
@@ -210,20 +207,21 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
             }
             if (!overlap){
                 graphics::text(verticals.eqearth.x[v], min(horizontals.eqearth.xy[,2]),
-                                paste0('\n', round(as.numeric(names(verticals.eqearth))[v],2)),
+                                paste0('\n', names.lon[v]),
                                 cex=6/8, adj=c(0.5,0.7)
                 )
                 labels.lon[v] <- TRUE
             }
         }
 
-        labels.lat <- rep(FALSE, length(horizontals.eqearth.xy))
+        labels.lat <- rep(FALSE, length(horizontals.eqearth.y))
+        names.lat <- round(seq(ext[3], ext[4], length.out=nlines), 2)
         for(h in nrow(horizontals.eqearth.xy):1) {
             overlap <- FALSE
             if(h < nrow(horizontals.eqearth.xy)) {
                 if (labels.lat[h+1]) {
-                    d1 <- graphics::strheight(paste0('', round(as.numeric(names(horizontals.eqearth))[h+1],2), ' '), cex=6/8)
-                    d2 <- graphics::strheight(paste0('', round(as.numeric(names(horizontals.eqearth))[h],2), ' '), cex=6/8)
+                    d1 <- graphics::strheight(paste0('', names.lat[h+1], ' '), cex=6/8)
+                    d2 <- graphics::strheight(paste0('', names.lat[h], ' '), cex=6/8)
                     if (horizontals.eqearth.y[h+1] - d1 / 2 <= horizontals.eqearth.y[h] + d2 / 2) {
                         overlap <- TRUE
                     }
@@ -231,14 +229,14 @@ plot_map_eqearth <- function(dat, ext=raster::extent(dat), zlim=range(raster::va
             }
             if (!overlap){
                 graphics::text(horizontals.eqearth.xy[h, 1], horizontals.eqearth.xy[h, 2],
-                                paste0(round(as.numeric(names(horizontals.eqearth))[h], 2),' '),
+                                paste0(names.lat[h],' '),
                                 cex=6/8, adj=c(1,0.4)
                 )
                 labels.lat[h] <- TRUE
             }
         }
 
-        sp::plot(bckg.eqearth, col=NA, border='black', cex=0.2, add=TRUE)
+        terra::plot(bckg.eqearth, col=NA, border='black', cex=0.2, add=TRUE)
     }
-    invisible(ext)
+    invisible(ext.eqearth)
 }

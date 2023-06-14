@@ -48,9 +48,11 @@
 #' }
 "crest_ex_pse"
 
-#' A shapefile of the world's country borders.
+#' A shapefile of the world's country borders. Use 'M1 <- terra::unwrap(M1)' to
+#' render the object usable in R.
 #'
-#' A shapefile of the world's country borders.
+#' A shapefile of the world's country borders. Use 'M1 <- terra::unwrap(M1)' to
+#' render the object usable in R.
 #'
 "M1"
 

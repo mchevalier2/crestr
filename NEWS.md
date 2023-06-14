@@ -1,5 +1,6 @@
 # crestr 1.3.0.9000
 
+* The dependencies to `rgdal`, `sp` and `raster` were replaced to a single dependency to `terra` as these packages are being retired.
 * New functions and features:
     * `crest.simplify()` transforms a crestObj into a simple data frame with only the main reconstructed values.
     * `dbSubset()` extracts a subset of the calibration dataset and makes data extraction much faster.
