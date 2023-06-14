@@ -4,6 +4,7 @@
 * New functions and features:
     * `crest.simplify()` transforms a crestObj into a simple data frame with only the main reconstructed values.
     * `dbSubset()` extracts a subset of the calibration dataset and makes data extraction much faster.
+    * `dbDownload()`allows downloading the calibration dataset on your machine.
     * The example dataset is now available offline.
     * `loo()` can be run on a subset of the available variables to make the process faster.
     * INCLUDING A NEW PARAMETER TO `crest.calibrate()`: `climateSpaceWeighting.type`. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using 'sqrt' or 'log', instead of the default 'linear'.
