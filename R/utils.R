@@ -226,9 +226,9 @@ check_coordinates <- function(xmn, xmx, ymn, ymx) {
 #' to an object of the class \code{SpatialPolygonsDataFrame}.
 #'
 #' @inheritParams crest.calibrate
-#' @param shp A shapefile to crop the data. Data points will be kept if their
-#'        centroid is within the shape.
-#' @return An updated version of the \code{\link{crest.get_modern_data}}.
+#' @param shp A shapefile (spatVect) to crop the data. Data points will be kept
+#'        if their centroid is within the shape.
+#' @return An cropped version of the input \code{crestObj}.
 #' @export
 #' @examples
 #' \dontrun{

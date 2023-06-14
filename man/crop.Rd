@@ -9,11 +9,11 @@ crop(x, shp)
 \arguments{
 \item{x}{A \code{\link{crestObj}} produced by the \code{\link{crest.get_modern_data}} function.}
 
-\item{shp}{A shapefile to crop the data. Data points will be kept if their
-centroid is within the shape.}
+\item{shp}{A shapefile (spatVect) to crop the data. Data points will be kept
+if their centroid is within the shape.}
 }
 \value{
-An updated version of the \code{\link{crest.get_modern_data}}.
+An cropped version of the input \code{crestObj}.
 }
 \description{
 Crop the dataset obtained from \code{\link{crest.get_modern_data}} according
@@ -22,7 +22,7 @@ to an object of the class \code{SpatialPolygonsDataFrame}.
 \examples{
 \dontrun{
   data(M1)
-  M1 <- terra:unwrap(M1)
+  M1 <- terra::unwrap(M1)
   ## We want only the data covering Nigeria
   M2 <- M1[M1$COUNTRY == 'Nigeria', ]
   data(reconstr)

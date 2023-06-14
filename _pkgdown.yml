@@ -127,6 +127,7 @@ reference:
       - '`close_db_connection`'
       - '`connect_online`'
       - '`connect_local_sqlite3`'
+      - '`dbDownload`'
       - '`dbRequest`'
       - '`dbSubset`'
       - '`getClimateSpace`'
