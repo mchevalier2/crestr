@@ -40,7 +40,8 @@ print.crestObj <- function(x, as=x$misc$stage, ...) {
             if(!is.na(x$parameters$year_min) | !is.na(x$parameters$year_max)) cat(paste0('*   x Observation date ...... [', x$parameters$year_min, ' - ', x$parameters$year_max,']\n'))
             if(!is.na(x$parameters$nodate)) cat(paste0('*   x Undated observations .. ', x$parameters$nodate, '\n'))
             if(!unique(is.na(x$parameters$type_of_obs))) {
-                OBSTYPES <- dbRequest("SELECT * FROM typeofobservations ORDER BY type_of_obs", x$misc$dbname)
+                dbname <- .exampleDB()
+                OBSTYPES <- dbRequest("SELECT * FROM typeofobservations ORDER BY type_of_obs", dbname)
                 cat(paste0('*   x Type of observations .. ', paste(base::trimws(OBSTYPES[x$parameters$type_of_obs,2]), collapse=', '), '\n'))
             }
             if(!unique(is.na(x$parameters$continents))) cat(paste0('*   x Continents ............ ', paste(x$parameters$continents, collapse=', '), '\n'))

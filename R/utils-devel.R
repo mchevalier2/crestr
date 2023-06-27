@@ -17,6 +17,7 @@
     RSQLite::dbWriteTable(mydb, 'distrib_qdgc', dbEx[['distrib_qdgc']])
     RSQLite::dbWriteTable(mydb, 'biogeography', dbEx[['biogeography']])
     RSQLite::dbWriteTable(mydb, 'taxa', dbEx[['taxa']])
+    RSQLite::dbWriteTable(mydb, 'typeofobservations', dbEx[['typeofobs']])
 
     RSQLite::dbDisconnect(mydb)
 

@@ -12,7 +12,8 @@
     * The results can be plotted as anomalies.
 * Major issues:
     * Fixing a major stability issue regarding the connection test (does not impact any result derived from the package)
-    * Reliance on an active internet connection has been significantly reduced
+    * Reliance on an active internet connection has been significantly reduced.
+    * Portability of the RData output file was increased.
 * Minor issues:
     * If the input `df` contained NA, `crest.get_modern_data()` was crashing. Default value now set to 0.
     * Updating vignettes (reducing the amount of code actually ran to create the vignette).
