@@ -6,7 +6,7 @@
 \usage{
 \method{plot}{crestObj}(
   x,
-  climate = x$parameters$climate,
+  climate = x$parameters$climate[1],
   uncertainties = x$parameters$uncertainties,
   optima = TRUE,
   add_modern = FALSE,

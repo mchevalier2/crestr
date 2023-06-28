@@ -18,14 +18,13 @@ navbar:
   structure:
     left:
     - home
-    - theory
-    - calibration
-    - structure
+    - how
     - start
+    - data
+    - calibration
     - reference
-    - articles
-    - tutorials
     - community
+    - vignettes
     right:
     - news
     - github
@@ -33,24 +32,31 @@ navbar:
     home:
       icon: fas fa-home fa-lg
       href: index.html
-    theory:
-      text: A bit of theory
+    how:
+      text: How it works
       href: articles/theory.html
-    calibration:
-      text: Calibration data
-      href: articles/calibration-data.html
-    structure:
-      text: Technicalities
-      href: articles/technicalities.html
-    community:
-      text: Community
-      href: articles/community.html
     start:
       text: Get started
       href: articles/get-started.html
+    data:
+      text: Prepare your data
+      href: articles/technicalities.html
+    calibration:
+      text: Calibration data
+      href: articles/calibration-data.html
     reference:
       text: Reference
       href: reference/index.html
+    community:
+      text: Community
+      href: articles/community.html
+    vignettes:
+      text: Vignettes
+      menu:
+      - text: Using the _gbif4crest_ database
+        href: articles/databasing-with-crestr.html
+      - text: MD96-2048 Reconstruction
+        href: articles/limpopo.html
     news:
       text: News
       href: news/index.html
@@ -60,14 +66,8 @@ navbar:
     twitter:
        icon: "fab fa-twitter fa-lg"
        href: https://twitter.com/ChevalierManu
-    articles:
-      text: Applications
-      menu:
-      - text: Using the _gbif4crest_ database
-        href: articles/databasing-with-crestr.html
-      - text: MD96-2048 Reconstruction
-        href: articles/limpopo.html
-reference:
+
+Documentation:
   - title: "Reconstructing"
     desc: "Functions for running the CREST reconstructions."
     contents:

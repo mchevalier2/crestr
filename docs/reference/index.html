@@ -29,23 +29,29 @@
   </a>
 </li>
 <li>
-  <a href="../articles/theory.html">A bit of theory</a>
-</li>
-<li>
-  <a href="../articles/calibration-data.html">Calibration data</a>
-</li>
-<li>
-  <a href="../articles/technicalities.html">Technicalities</a>
+  <a href="../articles/theory.html">How it works</a>
 </li>
 <li>
   <a href="../articles/get-started.html">Get started</a>
 </li>
 <li>
+  <a href="../articles/technicalities.html">Prepare your data</a>
+</li>
+<li>
+  <a href="../articles/calibration-data.html">Calibration data</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
+</li>
+<li>
+  <a href="../articles/community.html">courses\nmaterial</a>
+</li>
+<li>
+  <a href="../articles/community.html">Community</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Applications
+    Vignettes
      
     <span class="caret"></span>
   </a>
@@ -56,9 +62,6 @@
       <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
     </li>
   </ul></li>
-<li>
-  <a href="../articles/community.html">Community</a>
-</li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="../news/index.html">News</a>
 </li>
@@ -81,53 +84,238 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="reconstructing">Reconstructing <a href="#reconstructing" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for running the CREST reconstructions.</p>
+          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="crest.get_modern_data.html">crest.get_modern_data()</a></code> </p>
+          <p><code><a href="M1.html">M1</a></code> </p>
         </td>
-        <td><p>Extract distributions from the database</p></td>
+        <td><p>A shapefile of the world's country borders. Use 'M1 &lt;- terra::unwrap(M1)' to
+render the object usable in R.</p></td>
       </tr><tr><td>
-          <p><code><a href="crest.set_modern_data.html">crest.set_modern_data()</a></code> </p>
+          <p><code><a href="accBasinNames.html">accBasinNames()</a></code> </p>
         </td>
-        <td><p>Format a <code>crestObj</code> with private data.</p></td>
+        <td><p>Return the list of oceans and seas.</p></td>
       </tr><tr><td>
-          <p><code><a href="crest.calibrate.html">crest.calibrate()</a></code> </p>
+          <p><code><a href="accClimateVariables.html">accClimateVariables()</a></code> </p>
         </td>
-        <td><p>Fit the species and proxy <code>pdfs</code></p></td>
+        <td><p>Describes all the variables available in the database.</p></td>
       </tr><tr><td>
-          <p><code><a href="crest.reconstruct.html">crest.reconstruct()</a></code> </p>
+          <p><code><a href="accCountryNames.html">accCountryNames()</a></code> </p>
         </td>
-        <td><p>Reconstruct climate from fossil data</p></td>
+        <td><p>Return the list of the continents and associated countries.</p></td>
+      </tr><tr><td>
+          <p><code><a href="accRealmNames.html">accRealmNames()</a></code> </p>
+        </td>
+        <td><p>Return the list of the realms and associated biomes and ecoregions.</p></td>
+      </tr><tr><td>
+          <p><code><a href="calib_clim_space.html">calib_clim_space()</a></code> </p>
+        </td>
+        <td><p>Calibrate the distribution of the modern climate space.</p></td>
+      </tr><tr><td>
+          <p><code><a href="check_coordinates.html">check_coordinates()</a></code> </p>
+        </td>
+        <td><p>Check if the coordinates are correct.</p></td>
+      </tr><tr><td>
+          <p><code><a href="cite_climate_data.html">cite_climate_data()</a></code> </p>
+        </td>
+        <td><p>Returns the references associated with the climate data used to fit the <code>pdfs</code>.</p></td>
+      </tr><tr><td>
+          <p><code><a href="cite_crest.html">cite_crest()</a></code> </p>
+        </td>
+        <td><p>Returns the list of references associated to the reconstruction.</p></td>
+      </tr><tr><td>
+          <p><code><a href="cite_distrib_data.html">cite_distrib_data()</a></code> </p>
+        </td>
+        <td><p>Returns the references associated with the GBIF data used to fit the <code>pdfs</code>.</p></td>
+      </tr><tr><td>
+          <p><code><a href="cite_method.html">cite_method()</a></code> </p>
+        </td>
+        <td><p>Returns the references associated with the development of CREST.</p></td>
+      </tr><tr><td>
+          <p><code><a href="climate_from_xy.html">climate_from_xy()</a></code> </p>
+        </td>
+        <td><p>Extract The climate values associated to a set of coordinates.</p></td>
+      </tr><tr><td>
+          <p><code><a href="close_db_connection.html">close_db_connection()</a></code> </p>
+        </td>
+        <td><p>Disconnect the database connection.</p></td>
+      </tr><tr><td>
+          <p><code><a href="colour_theme.html">colour_theme()</a></code> </p>
+        </td>
+        <td><p>Returns a vector of colours</p></td>
+      </tr><tr><td>
+          <p><code><a href="connect_local_sqlite3.html">connect_local_sqlite3()</a></code> </p>
+        </td>
+        <td><p>Connect to the gbif4crest calibration database</p></td>
+      </tr><tr><td>
+          <p><code><a href="connect_online.html">connect_online()</a></code> </p>
+        </td>
+        <td><p>Connect to the gbif4crest calibration database</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert2percentages.html">convert2percentages()</a></code> </p>
+        </td>
+        <td><p>Convert abundance data into percentage data.</p></td>
+      </tr><tr><td>
+          <p><code><a href="convert2presenceAbsence.html">convert2presenceAbsence()</a></code> </p>
+        </td>
+        <td><p>Convert data into presence/absence data.</p></td>
+      </tr><tr><td>
+          <p><code><a href="copy_crest.html">copy_crest()</a></code> </p>
+        </td>
+        <td><p>Copy crest data to the clipboard.</p></td>
+      </tr><tr><td>
+          <p><code><a href="createPSE.html">createPSE()</a></code> </p>
+        </td>
+        <td><p>Creates a spreadsheet with the format required for a PSE.</p></td>
       </tr><tr><td>
           <p><code><a href="crest.html">crest()</a></code> </p>
         </td>
         <td><p>A wrapper for all the crest functions.</p></td>
       </tr><tr><td>
-          <p><code><a href="loo.html">loo()</a></code> </p>
+          <p><code><a href="crest.calibrate.html">crest.calibrate()</a></code> </p>
         </td>
-        <td><p>Performs the leave-one-out analysis</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="plotting">Plotting <a href="#plotting" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for generating plots.</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
+        <td><p>Fit the species and proxy <code>pdfs</code></p></td>
+      </tr><tr><td>
+          <p><code><a href="crest.get_modern_data.html">crest.get_modern_data()</a></code> </p>
+        </td>
+        <td><p>Extract distributions from the database</p></td>
+      </tr><tr><td>
+          <p><code><a href="crest.reconstruct.html">crest.reconstruct()</a></code> </p>
+        </td>
+        <td><p>Reconstruct climate from fossil data</p></td>
+      </tr><tr><td>
+          <p><code><a href="crest.set_modern_data.html">crest.set_modern_data()</a></code> </p>
+        </td>
+        <td><p>Format a <code>crestObj</code> with private data.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crest.simplify.html">crest.simplify()</a></code> </p>
+        </td>
+        <td><p>Simplify a crestObj into a dataframe.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crestObj.html">crestObj()</a></code> </p>
+        </td>
+        <td><p>Create a <code>crestObj</code> object.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crest_ex.html">crest_ex</a></code> </p>
+        </td>
+        <td><p>Example dataset to run the CREST method for the first time.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crest_ex_pse.html">crest_ex_pse</a></code> </p>
+        </td>
+        <td><p>Example dataset to Extract data from the example database.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crest_ex_selection.html">crest_ex_selection</a></code> </p>
+        </td>
+        <td><p>Example dataset to associate taxa with climate variables.</p></td>
+      </tr><tr><td>
+          <p><code><a href="crop.html">crop()</a></code> </p>
+        </td>
+        <td><p>Crop the dataset obtained from <code>crest.get_modern_data</code></p></td>
+      </tr><tr><td>
+          <p><code><a href="dbDownload.html">dbDownload()</a></code> </p>
+        </td>
+        <td><p>Download the gbif4crest_02 dataset from figShare.</p></td>
+      </tr><tr><td>
+          <p><code><a href="dbRequest.html">dbRequest()</a></code> </p>
+        </td>
+        <td><p>Connect to the gbif4crest database</p></td>
+      </tr><tr><td>
+          <p><code><a href="dbSubset.html">dbSubset()</a></code> </p>
+        </td>
+        <td><p>Create a subset of the global calibration dataset</p></td>
+      </tr><tr><td>
           <p><code><a href="eqearth_get_ext.html">eqearth_get_ext()</a></code> </p>
         </td>
         <td><p>Calculates the extent of the plot in the equal earth projection.</p></td>
+      </tr><tr><td>
+          <p><code><a href="excludeTaxa.html">excludeTaxa()</a></code> </p>
+        </td>
+        <td><p>Excludes the list of taxa from the reconstructions.</p></td>
       </tr><tr><td>
           <p><code><a href="explore_calibration_dataset.html">explore_calibration_dataset()</a></code> </p>
         </td>
         <td><p>Extract distributions from the database</p></td>
       </tr><tr><td>
+          <p><code><a href="export.html">export()</a></code> </p>
+        </td>
+        <td><p>Export the results</p></td>
+      </tr><tr><td>
+          <p><code><a href="export_pdfs.html">export_pdfs()</a></code> </p>
+        </td>
+        <td><p>Export the pdfs fitted for the different taxa.</p></td>
+      </tr><tr><td>
+          <p><code><a href="find.original.name.html">find.original.name()</a></code> </p>
+        </td>
+        <td><p>Returns the name of the function argument in the global environment</p></td>
+      </tr><tr><td>
+          <p><code><a href="fit_pdfsp.html">fit_pdfsp()</a></code> </p>
+        </td>
+        <td><p>Fit the species <code>pdfs</code>.</p></td>
+      </tr><tr><td>
+          <p><code><a href="fit_xrange.html">fit_xrange()</a></code> </p>
+        </td>
+        <td><p>Define the climate gradient to fit the <code>pdfs</code>.</p></td>
+      </tr><tr><td>
+          <p><code><a href="getClimateSpace.html">getClimateSpace()</a></code> </p>
+        </td>
+        <td><p>Extract the distribution of the studied climate gradient(s) across the study area.</p></td>
+      </tr><tr><td>
+          <p><code><a href="getDistribTaxa.html">getDistribTaxa()</a></code> </p>
+        </td>
+        <td><p>Extract taxonID(s) corresponding to the taxonomic description</p></td>
+      </tr><tr><td>
+          <p><code><a href="getSpeciesdiversity.html">getSpeciesdiversity()</a></code> </p>
+        </td>
+        <td><p>Calculates how many species compose the response of each taxon.</p></td>
+      </tr><tr><td>
+          <p><code><a href="getTaxaTypeFromTaxID.html">getTaxaTypeFromTaxID()</a></code> </p>
+        </td>
+        <td><p>Returns the taxa type corresponding to the taxID.</p></td>
+      </tr><tr><td>
+          <p><code><a href="getTaxonID.html">getTaxonID()</a></code> </p>
+        </td>
+        <td><p>Extract taxonID(s) corresponding to the taxonomic description</p></td>
+      </tr><tr><td>
+          <p><code><a href="getTaxonomy.html">getTaxonomy()</a></code> </p>
+        </td>
+        <td><p>Extract taxonID(s) corresponding to the taxonomic description</p></td>
+      </tr><tr><td>
+          <p><code><a href="get_taxa_type.html">get_taxa_type()</a></code> </p>
+        </td>
+        <td><p>Returns the taxa type corresponding to the index.</p></td>
+      </tr><tr><td>
+          <p><code><a href="includeTaxa.html">includeTaxa()</a></code> </p>
+        </td>
+        <td><p>Includes the list of taxa into the reconstructions.</p></td>
+      </tr><tr><td>
+          <p><code><a href="is.crestObj.html">is.crestObj()</a></code> </p>
+        </td>
+        <td><p>Test if x is a crestObj.</p></td>
+      </tr><tr><td>
           <p><code><a href="isColourStr.html">isColourStr()</a></code> </p>
         </td>
         <td><p>Test if <code>R</code> can interpret a string as a colour</p></td>
       </tr><tr><td>
+          <p><code><a href="loo.html">loo()</a></code> </p>
+        </td>
+        <td><p>Performs the leave-one-out analysis</p></td>
+      </tr><tr><td>
           <p><code><a href="makeTransparent.html">makeTransparent()</a></code> </p>
         </td>
         <td><p>Wrapper function of to add transparency to a colour.</p></td>
+      </tr><tr><td>
+          <p><code><a href="meanPositiveValues.html">meanPositiveValues()</a></code> </p>
+        </td>
+        <td><p>Calculate the mean of all strictly positive values.</p></td>
+      </tr><tr><td>
+          <p><code><a href="normalise.html">normalise()</a></code> </p>
+        </td>
+        <td><p>Normalises the percentages</p></td>
+      </tr><tr><td>
+          <p><code><a href="pdf_ranges.html">pdf_ranges()</a></code> </p>
+        </td>
+        <td><p>Calculate the climate tolerance of the taxa from their pdfs.</p></td>
       </tr><tr><td>
           <p><code><a href="plot.crestObj.html">plot(<i>&lt;crestObj&gt;</i>)</a></code> </p>
         </td>
@@ -164,227 +352,18 @@
           <p><code><a href="plot_violinPDFs.html">plot_violinPDFs()</a></code> </p>
         </td>
         <td><p>Plot the pdfs as violins</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="crestobj-manipulation">CrestObj Manipulation <a href="#crestobj-manipulation" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for creating, reading and modifying crestObj objects.</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="copy_crest.html">copy_crest()</a></code> </p>
-        </td>
-        <td><p>Copy crest data to the clipboard.</p></td>
-      </tr><tr><td>
-          <p><code><a href="createPSE.html">createPSE()</a></code> </p>
-        </td>
-        <td><p>Creates a spreadsheet with the format required for a PSE.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crestObj.html">crestObj()</a></code> </p>
-        </td>
-        <td><p>Create a <code>crestObj</code> object.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crest.simplify.html">crest.simplify()</a></code> </p>
-        </td>
-        <td><p>Simplify a crestObj into a dataframe.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crop.html">crop()</a></code> </p>
-        </td>
-        <td><p>Crop the dataset obtained from <code>crest.get_modern_data</code></p></td>
-      </tr><tr><td>
-          <p><code><a href="export.html">export()</a></code> </p>
-        </td>
-        <td><p>Export the results</p></td>
-      </tr><tr><td>
-          <p><code><a href="export_pdfs.html">export_pdfs()</a></code> </p>
-        </td>
-        <td><p>Export the pdfs fitted for the different taxa.</p></td>
-      </tr><tr><td>
-          <p><code><a href="excludeTaxa.html">excludeTaxa()</a></code> </p>
-        </td>
-        <td><p>Excludes the list of taxa from the reconstructions.</p></td>
-      </tr><tr><td>
-          <p><code><a href="getSpeciesdiversity.html">getSpeciesdiversity()</a></code> </p>
-        </td>
-        <td><p>Calculates how many species compose the response of each taxon.</p></td>
-      </tr><tr><td>
-          <p><code><a href="includeTaxa.html">includeTaxa()</a></code> </p>
-        </td>
-        <td><p>Includes the list of taxa into the reconstructions.</p></td>
-      </tr><tr><td>
-          <p><code><a href="is.crestObj.html">is.crestObj()</a></code> </p>
-        </td>
-        <td><p>Test if x is a crestObj.</p></td>
-      </tr><tr><td>
-          <p><code><a href="pdf_ranges.html">pdf_ranges()</a></code> </p>
-        </td>
-        <td><p>Calculate the climate tolerance of the taxa from their pdfs.</p></td>
-      </tr><tr><td>
-          <p><code><a href="taxonComposition.html">taxonComposition()</a></code> </p>
-        </td>
-        <td><p>Return the size of the distribution of each composing species of each taxon</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="citing-sources">Citing sources <a href="#citing-sources" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for generating the list of references to cite when publishing reconstructions.</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="cite_climate_data.html">cite_climate_data()</a></code> </p>
-        </td>
-        <td><p>Returns the references associated with the climate data used to fit the <code>pdfs</code>.</p></td>
-      </tr><tr><td>
-          <p><code><a href="cite_crest.html">cite_crest()</a></code> </p>
-        </td>
-        <td><p>Returns the list of references associated to the reconstruction.</p></td>
-      </tr><tr><td>
-          <p><code><a href="cite_distrib_data.html">cite_distrib_data()</a></code> </p>
-        </td>
-        <td><p>Returns the references associated with the GBIF data used to fit the <code>pdfs</code>.</p></td>
-      </tr><tr><td>
-          <p><code><a href="cite_method.html">cite_method()</a></code> </p>
-        </td>
-        <td><p>Returns the references associated with the development of CREST.</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="database">Database <a href="#database" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions for querying the calibration data database.</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="accBasinNames.html">accBasinNames()</a></code> </p>
-        </td>
-        <td><p>Return the list of oceans and seas.</p></td>
-      </tr><tr><td>
-          <p><code><a href="accClimateVariables.html">accClimateVariables()</a></code> </p>
-        </td>
-        <td><p>Describes all the variables available in the database.</p></td>
-      </tr><tr><td>
-          <p><code><a href="accCountryNames.html">accCountryNames()</a></code> </p>
-        </td>
-        <td><p>Return the list of the continents and associated countries.</p></td>
-      </tr><tr><td>
-          <p><code><a href="accRealmNames.html">accRealmNames()</a></code> </p>
-        </td>
-        <td><p>Return the list of the realms and associated biomes and ecoregions.</p></td>
-      </tr><tr><td>
-          <p><code><a href="climate_from_xy.html">climate_from_xy()</a></code> </p>
-        </td>
-        <td><p>Extract The climate values associated to a set of coordinates.</p></td>
-      </tr><tr><td>
-          <p><code><a href="close_db_connection.html">close_db_connection()</a></code> </p>
-        </td>
-        <td><p>Disconnect the database connection.</p></td>
-      </tr><tr><td>
-          <p><code><a href="connect_online.html">connect_online()</a></code> </p>
-        </td>
-        <td><p>Connect to the gbif4crest calibration database</p></td>
-      </tr><tr><td>
-          <p><code><a href="connect_local_sqlite3.html">connect_local_sqlite3()</a></code> </p>
-        </td>
-        <td><p>Connect to the gbif4crest calibration database</p></td>
-      </tr><tr><td>
-          <p><code><a href="dbDownload.html">dbDownload()</a></code> </p>
-        </td>
-        <td><p>Download the gbif4crest_02 dataset from figShare.</p></td>
-      </tr><tr><td>
-          <p><code><a href="dbRequest.html">dbRequest()</a></code> </p>
-        </td>
-        <td><p>Connect to the gbif4crest database</p></td>
-      </tr><tr><td>
-          <p><code><a href="dbSubset.html">dbSubset()</a></code> </p>
-        </td>
-        <td><p>Create a subset of the global calibration dataset</p></td>
-      </tr><tr><td>
-          <p><code><a href="getClimateSpace.html">getClimateSpace()</a></code> </p>
-        </td>
-        <td><p>Extract the distribution of the studied climate gradient(s) across the study area.</p></td>
-      </tr><tr><td>
-          <p><code><a href="getDistribTaxa.html">getDistribTaxa()</a></code> </p>
-        </td>
-        <td><p>Extract taxonID(s) corresponding to the taxonomic description</p></td>
-      </tr><tr><td>
-          <p><code><a href="getTaxonID.html">getTaxonID()</a></code> </p>
-        </td>
-        <td><p>Extract taxonID(s) corresponding to the taxonomic description</p></td>
-      </tr><tr><td>
-          <p><code><a href="getTaxonomy.html">getTaxonomy()</a></code> </p>
-        </td>
-        <td><p>Extract taxonID(s) corresponding to the taxonomic description</p></td>
-      </tr><tr><td>
-          <p><code><a href="testConnection.html">testConnection()</a></code> </p>
-        </td>
-        <td><p>Test if a connection can be established with the calibration data</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="modelling-functions">Modelling functions <a href="#modelling-functions" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p><p>Functions used model the data. Not to be used.</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="calib_clim_space.html">calib_clim_space()</a></code> </p>
-        </td>
-        <td><p>Calibrate the distribution of the modern climate space.</p></td>
-      </tr><tr><td>
-          <p><code><a href="check_coordinates.html">check_coordinates()</a></code> </p>
-        </td>
-        <td><p>Check if the coordinates are correct.</p></td>
-      </tr><tr><td>
-          <p><code><a href="colour_theme.html">colour_theme()</a></code> </p>
-        </td>
-        <td><p>Returns a vector of colours</p></td>
-      </tr><tr><td>
-          <p><code><a href="convert2percentages.html">convert2percentages()</a></code> </p>
-        </td>
-        <td><p>Convert abundance data into percentage data.</p></td>
-      </tr><tr><td>
-          <p><code><a href="convert2presenceAbsence.html">convert2presenceAbsence()</a></code> </p>
-        </td>
-        <td><p>Convert data into presence/absence data.</p></td>
-      </tr><tr><td>
-          <p><code><a href="find.original.name.html">find.original.name()</a></code> </p>
-        </td>
-        <td><p>Returns the name of the function argument in the global environment</p></td>
-      </tr><tr><td>
-          <p><code><a href="fit_pdfsp.html">fit_pdfsp()</a></code> </p>
-        </td>
-        <td><p>Fit the species <code>pdfs</code>.</p></td>
-      </tr><tr><td>
-          <p><code><a href="fit_xrange.html">fit_xrange()</a></code> </p>
-        </td>
-        <td><p>Define the climate gradient to fit the <code>pdfs</code>.</p></td>
-      </tr><tr><td>
-          <p><code><a href="get_taxa_type.html">get_taxa_type()</a></code> </p>
-        </td>
-        <td><p>Returns the taxa type corresponding to the index.</p></td>
-      </tr><tr><td>
-          <p><code><a href="getTaxaTypeFromTaxID.html">getTaxaTypeFromTaxID()</a></code> </p>
-        </td>
-        <td><p>Returns the taxa type corresponding to the taxID.</p></td>
-      </tr><tr><td>
-          <p><code><a href="meanPositiveValues.html">meanPositiveValues()</a></code> </p>
-        </td>
-        <td><p>Calculate the mean of all strictly positive values.</p></td>
-      </tr><tr><td>
-          <p><code><a href="normalise.html">normalise()</a></code> </p>
-        </td>
-        <td><p>Normalises the percentages</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h2 id="datasets">Datasets <a href="#datasets" class="anchor" aria-hidden="true"></a></h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr></tbody><tbody><tr><td>
-          <p><code><a href="M1.html">M1</a></code> </p>
-        </td>
-        <td><p>A shapefile of the world's country borders. Use 'M1 &lt;- terra::unwrap(M1)' to
-render the object usable in R.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crest_ex.html">crest_ex</a></code> </p>
-        </td>
-        <td><p>Example dataset to run the CREST method for the first time.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crest_ex_pse.html">crest_ex_pse</a></code> </p>
-        </td>
-        <td><p>Example dataset to Extract data from the example database.</p></td>
-      </tr><tr><td>
-          <p><code><a href="crest_ex_selection.html">crest_ex_selection</a></code> </p>
-        </td>
-        <td><p>Example dataset to associate taxa with climate variables.</p></td>
       </tr><tr><td>
           <p><code><a href="reconstr.html">reconstr</a></code> </p>
         </td>
         <td><p>A <code>crestObj</code> ran with the example dataset.</p></td>
+      </tr><tr><td>
+          <p><code><a href="taxonComposition.html">taxonComposition()</a></code> </p>
+        </td>
+        <td><p>Return the size of the distribution of each composing species of each taxon</p></td>
+      </tr><tr><td>
+          <p><code><a href="testConnection.html">testConnection()</a></code> </p>
+        </td>
+        <td><p>Test if a connection can be established with the calibration data</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

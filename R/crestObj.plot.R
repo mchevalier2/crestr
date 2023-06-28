@@ -58,7 +58,7 @@
 #' plot(reconstr, climate='bio1', simplify = TRUE, as.anomaly=TRUE)
 #'
 plot.crestObj <- function(x,
-                          climate = x$parameters$climate,
+                          climate = x$parameters$climate[1],
                           uncertainties = x$parameters$uncertainties,
                           optima = TRUE,
                           add_modern = FALSE,
