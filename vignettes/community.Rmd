@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 
 
-As the crest community has been rapidly growing since the release of the _crestr_ package and associated publication last year, I want to build a mailing list of crest-interested users to share information more efficiently. However, I promise controlled and limited communication through this channel since we all receive too many emails already. These emails will include the following:
+As the crest community has been rapidly growing since the release of the _crestr_ package and associated publication last year, I created a mailing list of crest-interested users to share information more efficiently. Controlled and limited communication through this channel are guaranteed since we all receive too many emails already.  To join the mailing list, you only need to enter your name and contact below (feel free to share this link with your colleagues and students who may be interested). Emails will include the following information:
 
 - Early notifications of upcoming workshops to allow you to secure spots (independent online events or associated with international congresses);
 - Publication highlights of studies involving crest (please send me your publication(s) if you want your work advertised here!);
@@ -30,10 +30,8 @@ As the crest community has been rapidly growing since the release of the _crestr
 - Communications from crest/r members relevant to this community.
 
 
-I am also considering creating a dedicated Slack channel where crest users (i.e. you) could come to discuss good practices and/or seek support from our growing community. As I am still assessing if there is a need for such a platform, please let me know if you would be interested in joining/contributing and what you might expect from it. To join the mailing list, you only need to enter your name and contact below. Finally, feel free to share this link with your colleagues and students who may be interested.
 
 <br >
-
 
 <form action="https://formspree.io/f/xdovbpaw" method="POST" >
     First name: <input type="text" name="First name" placehold="Your name">
@@ -43,6 +41,13 @@ I am also considering creating a dedicated Slack channel where crest users (i.e.
     <input type="hidden" name="_subject" value="New member crest/r mailing list" />
 </form>
 
-
-
 <br >
+
+
+## crestr workshop material
+
+The slides, data and scripts presented at the crestr workshops are accessible here:
+
+* INQUA Rome, Italy, July 2023 (crestr v1.3): [[slides]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-INQUA2023.pdf) [[data & script]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-INQUA2023-material.zip)
+* IPA-IAL Bariloche, Argentina, December 2022 (crestr v1.2): [[slides]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-IAL-IPA-2022.pdf)
+* SASQUA St-Lucia, South Africa, September 2022(crestr v1.2): [[slides]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-SASQUA-2022.pdf)
