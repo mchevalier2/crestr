@@ -48,6 +48,6 @@ As the crest community has been rapidly growing since the release of the _crestr
 
 The slides, data and scripts presented at the crestr workshops are accessible here:
 
-* INQUA Rome, Italy, July 2023 (crestr v1.3): [[slides]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-INQUA2023.pdf) [[data & script]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-INQUA2023-material.zip)
-* IPA-IAL Bariloche, Argentina, December 2022 (crestr v1.2): [[slides]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-IAL-IPA-2022.pdf)
-* SASQUA St-Lucia, South Africa, September 2022(crestr v1.2): [[slides]](https://github.com/mchevalier2/crestr/blob/91eb9240d8698d6540b0808dd592c0ca4aa46d71/webpage/workshops/Crestr-SASQUA-2022.pdf)
+* INQUA Rome, Italy, July 2023 (crestr v1.3.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-INQUA2023.pdf) [[data & script]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-INQUA2023-material.zip)
+* IPA-IAL Bariloche, Argentina, December 2022 (crestr v1.2.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-IAL-IPA-2022.pdf)
+* SASQUA St-Lucia, South Africa, September 2022 (crestr v1.2.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-SASQUA-2022.pdf)
