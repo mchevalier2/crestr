@@ -66,8 +66,7 @@ navbar:
     twitter:
        icon: "fab fa-twitter fa-lg"
        href: https://twitter.com/ChevalierManu
-
-Documentation:
+reference:
   - title: "Reconstructing"
     desc: "Functions for running the CREST reconstructions."
     contents:
