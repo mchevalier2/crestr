@@ -19,6 +19,7 @@
     * Updating vignettes (reducing the amount of code actually ran to create the vignette).
     * Database handlers can better handle the reduced list of parameters available in the calibration databse
     * The north and east labels in `export()` were inverted.
+    * The `ylim` parameter in `plot(simplify=TRUE)` did not allow to select a y-range larger than the range of the uncertaintieS.
 
 
 # crestr 1.2.1

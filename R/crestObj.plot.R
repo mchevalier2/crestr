@@ -140,6 +140,7 @@ plot.crestObj <- function(x,
         xmn <- which.min(x$reconstructions[[clim]][["optima"]][, var_to_plot])
         xmx <- which.max(x$reconstructions[[clim]][["optima"]][, var_to_plot])
 
+        ## This is for the fill uncertainty plot.
         if (unique(is.na(ylim))) {
             ymn <- pdfter[which(pdfter[, xmn + 1] <= 0.99)[1], 1]
             ymx <- pdfter[rev(which(pdfter[, xmx + 1] <= 0.99))[1], 1]
@@ -147,6 +148,23 @@ plot.crestObj <- function(x,
             ymn <- ylim[idx * 2 - 1]
             ymx <- ylim[idx * 2]
         }
+
+        ## This is for the simplified plot
+        if (unique(is.na(ylim))) {
+            uncertainties <- sort(uncertainties)
+            val <- apply(pdfter[, -1], 2, function(x) {
+                if(is.na(x[1])) return(c(NA, NA))
+                w <- which(x <= uncertainties[length(uncertainties)])
+                return(c(w[1], w[length(w)]))
+                }
+            )
+            ylim2 <- pdfter[c(min(val[1, ], na.rm=TRUE),max(val[2, ], na.rm=TRUE)), 1]
+            ylim2[1] <- max(ylim[1], ylim2[1], na.rm=TRUE)
+            ylim2[2] <- min(ylim[2], ylim2[2], na.rm=TRUE)
+        } else {
+            ylim2 <- ylim[c(idx * 2 - 1, idx * 2)]
+        }
+
         climate_names <- accClimateVariables()
 
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
@@ -156,16 +174,7 @@ plot.crestObj <- function(x,
             xx <- sort(base::jitter(x$inputs$x, 0.0001))
         }
 
-        uncertainties <- sort(uncertainties)
-        val <- apply(pdfter[, -1], 2, function(x) {
-            if(is.na(x[1])) return(c(NA, NA))
-            w <- which(x <= uncertainties[length(uncertainties)])
-            return(c(w[1], w[length(w)]))
-            }
-        )
-        ylim2 <- pdfter[c(min(val[1, ], na.rm=TRUE),max(val[2, ], na.rm=TRUE)), 1]
-        ylim2[1] <- max(ylim[1], ylim2[1], na.rm=TRUE)
-        ylim2[2] <- min(ylim[2], ylim2[2], na.rm=TRUE)
+
 
         if(save) {
             if(as.png) {
