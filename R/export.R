@@ -48,6 +48,15 @@ export <- function( x, dataname = x$misc$site_info$site_name,
             stop("No reconstruction available for export.\n")
         }
 
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
         if(is.na(dataname)) dataname <- 'crest_outputs'
         if (!base::file.exists(base::file.path(loc, dataname))){
             base::dir.create(base::file.path(loc, dataname), showWarnings = TRUE)

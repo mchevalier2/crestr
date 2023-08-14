@@ -63,6 +63,24 @@ plot_loo <- function( x, optima=TRUE,
 
     if (is.crestObj(x)) {
 
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
+        err <- c()
+        for(tax in taxanames) {
+            if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
         if(! 'loo' %in% names(x$reconstructions[[climate[1]]])) {
             stop('No leave-one-out data available. Run the loo() function first.\n')
         }

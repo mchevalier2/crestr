@@ -68,6 +68,23 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
             }
         }
 
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
+        err <- c()
+        for(tax in taxanames) {
+            if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
 
         if(add_modern) {
             if (length(x$misc$site_info) <= 3) {

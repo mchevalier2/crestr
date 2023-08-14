@@ -39,6 +39,24 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
             stop("\nNo pdfs available for export. You need to run crest.calibrate() first.\n\n")
         }
 
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
+        err <- c()
+        for(tax in taxa) {
+            if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
         if(!as.csv) {
             if (!requireNamespace("openxlsx", quietly = TRUE)) {
                 as.csv <- TRUE
@@ -85,5 +103,5 @@ export_pdfs <- function( x, dataname = x$misc$site_info$site_name,
     } else {
         cat("'\ncrestr::export()' is only availble for crestObj objects.\n\n")
     }
-    invisible(x)
+    invisible()
 }

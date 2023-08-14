@@ -37,6 +37,7 @@ pdf_ranges <- function( x,
         for(clim in climate){
             if(! clim %in% x$parameters$climate) {
                 stop(paste0("The climate variable should be one of the following options: '", paste(x$parameters$climate, collapse="', '"), "'.\n"))
+                return(invisible(NA))
             }
         }
 
@@ -45,6 +46,15 @@ pdf_ranges <- function( x,
                 warning(paste0("The value orderby = '", orderby, "' is not accepted. It should be 'name' or one of the climate variables. The data were not sorted.\n"))
                 orderby <- NA
             }
+        }
+
+        err <- c()
+        for(tax in taxanames) {
+            if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
         }
 
         rs <- list()

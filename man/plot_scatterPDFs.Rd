@@ -82,7 +82,7 @@ Plot the pdf optima and uncertainty ranges in a climate biplot
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
 dat <- plot_scatterPDFs(reconstr, save=FALSE,
-                 taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'))
+                 taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)]))
 dat
 
 }

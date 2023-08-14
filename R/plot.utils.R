@@ -90,7 +90,7 @@ plot_map_eqearth <- function(dat, ext=as.vector(terra::ext(dat)), zlim=range(ter
 
     idx=1
     horizontals <- cbind(id = NA, part = NA, lon = NA, lat = NA)
-    for(i in seq(ext[1], ext[2], length.out=nlines)){
+    for(i in seq(ext[3], ext[4], length.out=nlines)){
         horizontals <- rbind(horizontals,
                              cbind(id = 1, part = idx,
                                    lon = seq(ext[1], ext[2], length.out=npoints),

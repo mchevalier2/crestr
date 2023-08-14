@@ -75,7 +75,7 @@ Plot the pdfs as violins
 ## example using pre-saved reconstruction obtained with the previous command.
 data(reconstr)
 ranges <- plot_violinPDFs(reconstr, save=FALSE, ylim=c(5,35),
-                taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'),
+                taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)]),
                 col=c('darkblue', 'firebrick3'))
 lapply(ranges, head)
 

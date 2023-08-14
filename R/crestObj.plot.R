@@ -86,6 +86,15 @@ plot.crestObj <- function(x,
         stop("No reconstruction available for plotting.\n")
     }
 
+    err <- c()
+    for(clim in climate) {
+        if(! clim %in% x$parameters$climate) err <- c(err, clim)
+    }
+    if(length(err) > 0) {
+        stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+        return(invisible(NA))
+    }
+
     if(as.anomaly) {
         if(!is.na(anomaly.base)[1]) {
             anomaly.base <- as.data.frame(anomaly.base)

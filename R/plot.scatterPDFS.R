@@ -39,7 +39,7 @@
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
 #' dat <- plot_scatterPDFs(reconstr, save=FALSE,
-#'                  taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'))
+#'                  taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)]))
 #' dat
 #'
 plot_scatterPDFs <- function( x,
@@ -60,6 +60,24 @@ plot_scatterPDFs <- function( x,
         test <- is.na(x$modelling$pdfs)
         if( test[1] & length(test) == 1 ) {
             stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
+        }
+
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
+        err <- c()
+        for(tax in taxanames) {
+            if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
         }
 
         COL1 = c('#d95f02', '#1b9e77', '#7570b3', 'white')

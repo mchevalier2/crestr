@@ -60,6 +60,15 @@ plot_climateSpace <- function( x,
         #    return(invisible())
         #}
 
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
         if(add_modern) {
             if (length(x$misc$site_info) <= 3) {
                 add_modern <- FALSE
@@ -69,6 +78,11 @@ plot_climateSpace <- function( x,
         if(x$misc$stage == "data_extracted") {
             #while(length(bin_width) < length(climate)) bin_width <- c(bin_width, 1)
             #bin_width <- bin_width[1:length(climate)]
+
+            if(length(bin_width) != length(climate)) {
+                stop(paste0("The number of climate variables (",length(climate),") is different than the number of bin_width (", length(bin_width), ")\n\n"))
+                return(invisible(NA))
+            }
 
             ccs <- list()
             x$modelling$xrange <- list()

@@ -10,6 +10,7 @@
     * INCLUDING A NEW PARAMETER TO `crest.calibrate()`: `climateSpaceWeighting.type`. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using 'sqrt' or 'log', instead of the default 'linear'.
 * Plotting:
     * The results can be plotted as anomalies.
+    * Enabling to select samples by age in `plot.speciesCharacteristics()`
 * Major issues:
     * Fixing a major stability issue regarding the connection test (does not impact any result derived from the package)
     * Reliance on an active internet connection has been significantly reduced.
@@ -20,6 +21,7 @@
     * Database handlers can better handle the reduced list of parameters available in the calibration databse
     * The north and east labels in `export()` were inverted.
     * The `ylim` parameter in `plot(simplify=TRUE)` did not allow to select a y-range larger than the range of the uncertaintieS.
+    * Including more quality tests for the functions parameters (e.g. climate, taxa, taxanames, samples, uncertainties, bin_width).
 
 
 # crestr 1.2.1

@@ -27,6 +27,24 @@ includeTaxa <- function(x, taxa, climate) {
         return(invisible(NA))
     }
 
+    err <- c()
+    for(clim in climate) {
+        if(! clim %in% x$parameters$climate) err <- c(err, clim)
+    }
+    if(length(err) > 0) {
+        stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+        return(invisible(NA))
+    }
+
+    err <- c()
+    for(tax in taxa) {
+        if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+    }
+    if(length(err) > 0) {
+        stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+        return(invisible(NA))
+    }
+
     for (tax in taxa) {
         for (clim in c(climate)) {
             if (x$inputs$selectedTaxa[tax, ncol(x$inputs$selectedTaxa)] >= 0 ) {
@@ -63,6 +81,24 @@ excludeTaxa <- function(x, taxa, climate) {
 
     if(!is.crestObj(x)) {
         cat('\nx should be a crestObj.\n\n')
+        return(invisible(NA))
+    }
+
+    err <- c()
+    for(clim in climate) {
+        if(! clim %in% x$parameters$climate) err <- c(err, clim)
+    }
+    if(length(err) > 0) {
+        stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+        return(invisible(NA))
+    }
+
+    err <- c()
+    for(tax in taxa) {
+        if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+    }
+    if(length(err) > 0) {
+        stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
         return(invisible(NA))
     }
 

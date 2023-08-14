@@ -39,7 +39,7 @@
 #' ## example using pre-saved reconstruction obtained with the previous command.
 #' data(reconstr)
 #' ranges <- plot_violinPDFs(reconstr, save=FALSE, ylim=c(5,35),
-#'                 taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)], 'Taxon'),
+#'                 taxanames=c(reconstr$inputs$taxa.name[c(2,4,5,1)]),
 #'                 col=c('darkblue', 'firebrick3'))
 #' lapply(ranges, head)
 #'
@@ -60,6 +60,23 @@ plot_violinPDFs <- function( x,
             stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
         }
 
+        err <- c()
+        for(clim in climate) {
+            if(! clim %in% x$parameters$climate) err <- c(err, clim)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
+
+        err <- c()
+        for(tax in taxanames) {
+            if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        }
+        if(length(err) > 0) {
+            stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
+            return(invisible(NA))
+        }
 
         if(save) {
             if(as.png) {

@@ -27,6 +27,15 @@ climate_from_xy <- function(long, lat,
         stop('The coordinates are not numeric.\n')
     }
 
+    err <- c()
+    for(clim in climate) {
+        if(! clim %in% accClimateVariables()[, 2]) err <- c(err, clim)
+    }
+    if(length(err) > 0) {
+        stop(paste0("The following variables are not available in your crestObj: '", paste(err, collapse="', '"), "'\n\n"))
+        return(invisible(NA))
+    }
+
     if(!testConnection(dbname)) return(NA)
 
     long <- resol * (long %/% resol) + resol/2;
