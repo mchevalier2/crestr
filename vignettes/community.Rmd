@@ -1,5 +1,5 @@
 ---
-title: "Join the crestr community"
+title: "The crestr community"
 author: "Manuel Chevalier"
 date: "`r Sys.Date()`"
 output:
@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 
 
-
+## Join the mailing-list
 
 As the crest community has been rapidly growing since the release of the _crestr_ package and associated publication last year, I created a mailing list of crest-interested users to share information more efficiently. Controlled and limited communication through this channel are guaranteed since we all receive too many emails already.  To join the mailing list, you only need to enter your name and contact below (feel free to share this link with your colleagues and students who may be interested). Emails will include the following information:
 
@@ -44,9 +44,24 @@ As the crest community has been rapidly growing since the release of the _crestr
 <br >
 
 
-## crestr workshop material
+## crestr workshops
 
-The slides, data and scripts presented at the crestr workshops are accessible here:
+Since 2022, I started to organise hands-on training workshops for _crestr_. Generally, the workshop is divided in four parts:
+1.	I introduce the conceptuals and mathematical bases of the method and discuss the different assumptions necessary to model the datasets. This is followed by a short Q&A session.
+2.	I then describe the architecture of the package and the structure of a crest analysis.
+3.	I then showcase the use of the pacjage with an example dataset. The part is interactive and allows the the participants to connect the different functionalities of the package with the theoretical elements presented during Part 1.
+4.	Finally, the participants are given the opportunity to start using the package with their own data, or an example dataset I provide.
+
+**Target audience**: Colleagues and ECRs who produce and/or use palaeoecological datasets to understand past climate change.
+
+**Required skills**: understanding the nature and limitations of palaeoecological datasets, such as pollen data. Beginner notions of R (nothing fancy).
+
+
+> **_NOTE:_**  If you are organising an event, big or small, and would be interested in hosting a _crestr_ workshop, do not hesitate to contact me at <chevalier.manuel@gmail.com> to discuss opportunities.
+
+
+
+The slides, data and scripts used at previous crestr workshops are accessible here:
 
 * INQUA Rome, Italy, July 2023 (crestr v1.3.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-INQUA2023.pdf) [[data & script]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-INQUA2023-material.zip)
 * IPA-IAL Bariloche, Argentina, December 2022 (crestr v1.2.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-IAL-IPA-2022.pdf)
