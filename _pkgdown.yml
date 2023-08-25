@@ -107,6 +107,7 @@ reference:
       - '`includeTaxa`'
       - '`is.crestObj`'
       - '`pdf_ranges`'
+      - '`PSE_log`'
       - '`taxonComposition`'
   - title: "Citing sources"
     desc: "Functions for generating the list of references to cite when publishing reconstructions."

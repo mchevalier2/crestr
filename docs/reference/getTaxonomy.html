@@ -95,7 +95,8 @@ description, which can be at the family, the genus or the species levels.</p>
 <span>  species <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  depth.out <span class="op">=</span> <span class="fl">8</span>,</span>
-<span>  dbname <span class="op">=</span> <span class="st">"gbif4crest_02"</span></span>
+<span>  dbname <span class="op">=</span> <span class="st">"gbif4crest_02"</span>,</span>
+<span>  crest <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -127,6 +128,11 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 
 <dt>dbname</dt>
 <dd><p>The name of the data source database.</p></dd>
+
+
+<dt>crest</dt>
+<dd><p>A crestObj to be used to refine the selection to a specific study
+area. Set to <code>NA</code> by default (global search).</p></dd>
 
 </dl></div>
     <div id="value">
