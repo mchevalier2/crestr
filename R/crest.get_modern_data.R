@@ -293,7 +293,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         message <- 'Taxon not in the proxy_species_equivalency table.'
         if (! message %in% names(taxa_notes)) {
             taxa_notes[[message]] <- c()
-            warning(paste0("One or more taxa were are not in the proxy-species equivalence table and have been ignored. Check `x$misc$taxa_notes` for details."))
+            warning(paste0("One or more taxa were are not in the proxy-species equivalence table and have been ignored. Use PSE_log() with the output of this function for details."))
         }
         taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
         if(tax %in% rownames(selectedTaxa)) {
@@ -314,7 +314,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 message <- 'Not present in the original selectedTaxa table. Added by default as 1s.'
                 if (! message %in% names(taxa_notes)) {
                     taxa_notes[[message]] <- c()
-                    warning(paste0("One or more taxa were are not in the selectedTaxa table. They have been added but are not selected for any variable. Check `x$misc$taxa_notes` for details."))
+                    warning(paste0("One or more taxa were are not in the selectedTaxa table. They have been added but are not selected for any variable. Use PSE_log() with the output of this function for details."))
                 }
                 taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
                 selectedTaxa[tax, climate] <- rep(0, length(climate))
@@ -342,7 +342,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             message <- "No association between the proxy names and species"
             if (! message %in% names(taxa_notes)) {
                 taxa_notes[[message]] <- c()
-                warning(paste0("One or more taxa were not associated with species. Check `x$misc$taxa_notes` for details."))
+                warning(paste0("One or more taxa were not associated with species. Use PSE_log() with the output of this function for details."))
             }
             taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
         }
@@ -400,7 +400,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 message <- "All percentages equal to 0."
                 if (! message %in% names(crest$misc[['taxa_notes']])) {
                     crest$misc[['taxa_notes']][[message]] <- c()
-                    warning(paste0("The percentages of one or more taxa were always 0 and have been removed accordingly. Check `x$misc$taxa_notes` for details."))
+                    warning(paste0("The percentages of one or more taxa were always 0 and have been removed accordingly. Use PSE_log() with the output of this function for details."))
                 }
                 crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }
@@ -415,7 +415,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 message <- "Taxon not recorded in the data file."
                 if (! message %in% names(crest$misc[['taxa_notes']])) {
                     crest$misc[['taxa_notes']][[message]] <- c()
-                    warning(paste0("One or more taxa were are not recorded in the data file. Check `x$misc$taxa_notes` for details."))
+                    warning(paste0("One or more taxa were are not recorded in the data file. Use PSE_log() with the output of this function for details."))
                 }
                 crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }
@@ -461,24 +461,26 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                         )
                     }
                 } else {
-                    #cat(paste("WARNING: No match for taxon ", paste(pse[w, 2:5], collapse = ", "), "\n"))
                     if (tax %in% crest$inputs$taxa.name) {
-                      crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
-                      message <- "No correspondance with specific species"
-                      if (! message %in% names(crest$misc[['taxa_notes']])) {
-                          crest$misc[['taxa_notes']][[message]] <- as.data.frame(matrix(0, ncol=5, nrow=0))
-                          colnames(crest$misc[['taxa_notes']][[message]]) <- colnames(pse)
-                          warning(paste0("The classification of one or more taxa into species was not successful. Check `x$misc$taxa_notes` for details."))
-                      }
-                      crest$misc[['taxa_notes']][[message]] <- rbind(crest$misc[['taxa_notes']][[message]], pse[w, ])
+                        message <- "No correspondance with specific species"
+                        if (! message %in% names(crest$misc[['taxa_notes']])) {
+                            crest$misc[['taxa_notes']][[message]] <- as.data.frame(matrix(0, ncol=5, nrow=0))
+                            colnames(crest$misc[['taxa_notes']][[message]]) <- colnames(pse)
+                            warning(paste0("The classification of one or more taxa into species was not successful. Use PSE_log() with the output of this function for details."))
+                        }
+                        crest$misc[['taxa_notes']][[message]] <- rbind(crest$misc[['taxa_notes']][[message]], pse[w, ])
                     }
                 }
             }
             pbi <- pbi + 100
         }
     }
-    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa)[apply(crest$inputs$selectedTaxa, 1, sum)>=0]]
 
+    tax_avail <- unique(taxonID2proxy[-1, 2])
+    for(tax in rownames(crest$inputs$selectedTaxa)) {
+        if(! tax %in% tax_avail)  crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
+    }
+    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa)[apply(crest$inputs$selectedTaxa, 1, sum)>=0]]
 
     if(verbose) {
       cat('  <> Extracting taxon species .............. [OK]\n  <> Extracting species distributions ...... \r')
@@ -497,7 +499,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             message <- "No species remained associated with the proxy name at the end of the classification."
             if (! message %in% names(crest$misc[['taxa_notes']])) {
                 crest$misc[['taxa_notes']][[message]] <- c()
-                warning(paste0("For one or more taxa, no species remained associated with the proxy name at the end of the classification. Check `x$misc$taxa_notes` for details."))
+                warning(paste0("For one or more taxa, no species remained associated with the proxy name at the end of the classification. Use PSE_log() with the output of this function for details."))
             }
             crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
         }
@@ -524,7 +526,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 message <- "No data point available in the study area."
                 if (! message %in% names(crest$misc[['taxa_notes']])) {
                     crest$misc[['taxa_notes']][[message]] <- c()
-                    warning(paste0("No data were available within the study area for one or more taxa. Check `x$misc$taxa_notes` for details."))
+                    warning(paste0("No data were available within the study area for one or more taxa. Use PSE_log() with the output of this function for details."))
                 }
                 crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
             }else{
@@ -538,7 +540,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                     message <- "Present but insufficient data in the study area to fit a pdf"
                     if (! message %in% names(crest$misc[['taxa_notes']])) {
                         crest$misc[['taxa_notes']][[message]] <- c()
-                        warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells'. Check `x$misc$taxa_notes` for details."))
+                        warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells'. Use PSE_log() with the output of this function for details."))
                     }
                     crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
                 }

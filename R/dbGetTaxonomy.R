@@ -13,6 +13,8 @@
 #' @param depth.out The taxonomic resolution of the output table. 1 for Kingdom,
 #'   2 for phylum, 3 for class_name, 4 for order_name, 5 for family, 6 for genus,
 #'   7 for species and 8 to also include the taxonID.
+#' @param crest A crestObj to be used to refine the selection to a specific study
+#'        area. Set to `NA` by default (global search).
 #' @return A vector of unique taxonIDs.
 #' @export
 #' @examples
@@ -23,7 +25,7 @@
 #'   getTaxonomy("Zamiaceae", "Ceratozamia", taxaType = 2)
 #' }
 #'
-getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, depth.out = 8, dbname = "gbif4crest_02") {
+getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, depth.out = 8, dbname = "gbif4crest_02", crest=NA) {
     if (family == "" & genus == "" & species == "") {
         stop('No family, genus or species name were provided.\n')
     }
@@ -62,5 +64,37 @@ getTaxonomy <- function(family = "", genus = "", species = "", taxaType = 1, dep
         cat('Nothing matches your request.\n')
         return(invisible())
     }
+
+    if(FALSE %in% is.na(crest)) {
+        if(is.crestObj(crest)) {
+            taxids <- unique(
+                            getDistribTaxa(taxIDs = res$taxonid,
+                                climate=crest$parameters$climate,
+                                xmn = crest$parameters$xmn,
+                                xmx = crest$parameters$xmx,
+                                ymn = crest$parameters$ymn,
+                                ymx = crest$parameters$ymx,
+                                continents = crest$parameters$continents,
+                                countries = crest$parameters$countries,
+                                basins = crest$parameters$basins,
+                                sectors = crest$parameters$sectors,
+                                realms = crest$parameters$realms,
+                                biomes = crest$parameters$biomes,
+                                ecoregions = crest$parameters$ecoregions,
+                                elev_min = crest$parameters$elev_min,
+                                elev_max = crest$parameters$elev_max,
+                                elev_range = crest$parameters$elev_range,
+                                year_min = crest$parameters$year_min,
+                                year_max = crest$parameters$year_max,
+                                nodate = crest$parameters$nodate,
+                                type_of_obs = crest$parameters$type_of_obs,
+                                dbname = dbname
+                        )$taxonid)
+            res <- res[res$taxonid %in% taxids, ]
+        } else {
+            warning("The crest parameter should contain a valid crestObj. The data restriction has been skipped. ")
+        }
+    }
+
     unique(res[, 1:depth.out])
 }

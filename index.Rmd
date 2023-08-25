@@ -38,7 +38,7 @@ Or the latest stable version archived by CRAN. If you use that version, keep in 
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
-devtools::install_version("crestr", version = "1.2.0", repos = "http://cran.us.r-project.org")
+devtools::install_version("crestr", version = "1.2.0", repos = "https://cran.us.r-project.org")
 ```
 
 
@@ -115,13 +115,13 @@ N.B.: This list is as exhaustive as possible, but some studies may be missing. C
  - Chevalier, M., Cheddadi, R., Chase, B.M., 2014. CREST (Climate REconstruction
    SofTware): a probability density function (PDF)-based quantitative climate
    reconstruction method. *Clim. Past* 10, 2081–2098.
-   [10.5194/cp-10-2081-2014](http://https://www.doi.org/10.5194/cp-10-2081-2014)
+   [10.5194/cp-10-2081-2014](https://www.doi.org/10.5194/cp-10-2081-2014)
  - Chevalier, M., 2019. Enabling possibilities to quantify past climate from
    fossil assemblages at a global scale. *Glob. Planet. Change* 175, 27–35.
-   [10.1016/j.gloplacha.2019.01.016](http://https://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+   [10.1016/j.gloplacha.2019.01.016](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)
  - Chevalier, M., Chase, B.M., Quick, L.J., Dupont, L.M. and Johnson, T.C., 2021.
    Temperature change in subtropical southeastern Africa during the past 790,000 yr.
-   _Geology_ 49, 71–75. [10.1130/G47841.1](http://https://www.doi.org/10.1130/G47841.1)
+   _Geology_ 49, 71–75. [10.1130/G47841.1](https://www.doi.org/10.1130/G47841.1)
  - Chevalier, M., 2022. _crestr_ an R package to perform probabilistic climate
    reconstructions from palaeoecological datasets. Clim. Past
    [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)

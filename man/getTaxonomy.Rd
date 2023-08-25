@@ -10,7 +10,8 @@ getTaxonomy(
   species = "",
   taxaType = 1,
   depth.out = 8,
-  dbname = "gbif4crest_02"
+  dbname = "gbif4crest_02",
+  crest = NA
 )
 }
 \arguments{
@@ -29,6 +30,9 @@ palaeoproxy used: 1 for plants, 2 for beetles, 3 for chironomids,
 7 for species and 8 to also include the taxonID.}
 
 \item{dbname}{The name of the data source database.}
+
+\item{crest}{A crestObj to be used to refine the selection to a specific study
+area. Set to \code{NA} by default (global search).}
 }
 \value{
 A vector of unique taxonIDs.

@@ -253,65 +253,70 @@ crop <- function(x, shp) {
     if(base::missing(x)) x
     if(base::missing(shp)) shp
 
-    dat.x <- x$modelling$climate_space[, 1]
-    dat.y <- x$modelling$climate_space[, 2]
-
-    res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
-    pts <- terra::vect(res[, 1:2], crs="+proj=longlat")
-    extracted <- terra::extract(shp, pts)
-    res[extracted[!is.na(extracted[, 2]), 1], 3] <- 1
-    if(sum(res[, 3]) > 0) {
-        x$modelling$climate_space <- x$modelling$climate_space[res[, 3] == 1, ]
-    } else {
-        stop('\nNo overlap between the data and the selected shape.\n\n')
-    }
-
-    taxalist <- c()
-    for(tax in names(x$modelling$distributions)) {
-        dat.x <- x$modelling$distributions[[tax]][, 2]
-        dat.y <- x$modelling$distributions[[tax]][, 3]
+    if (is.crestObj(x)) {
+        dat.x <- x$modelling$climate_space[, 1]
+        dat.y <- x$modelling$climate_space[, 2]
 
         res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
         pts <- terra::vect(res[, 1:2], crs="+proj=longlat")
         extracted <- terra::extract(shp, pts)
         res[extracted[!is.na(extracted[, 2]), 1], 3] <- 1
-
         if(sum(res[, 3]) > 0) {
-            x$modelling$distributions[[tax]] <- x$modelling$distributions[[tax]][res[, 3] == 1, ]
-            if(max(table(x$modelling$distributions[[tax]][, 1])) < x$parameters$minGridCells) {
+            x$modelling$climate_space <- x$modelling$climate_space[res[, 3] == 1, ]
+        } else {
+            stop('\nNo overlap between the data and the selected shape.\n\n')
+        }
+
+        taxalist <- c()
+        for(tax in names(x$modelling$distributions)) {
+            dat.x <- x$modelling$distributions[[tax]][, 2]
+            dat.y <- x$modelling$distributions[[tax]][, 3]
+
+            res <- cbind(dat.x, dat.y, rep(0, length(dat.x)))
+            pts <- terra::vect(res[, 1:2], crs="+proj=longlat")
+            extracted <- terra::extract(shp, pts)
+            res[extracted[!is.na(extracted[, 2]), 1], 3] <- 1
+
+            if(sum(res[, 3]) > 0) {
+                x$modelling$distributions[[tax]] <- x$modelling$distributions[[tax]][res[, 3] == 1, ]
+                if(max(table(x$modelling$distributions[[tax]][, 1])) < x$parameters$minGridCells) {
+                    x$modelling$distributions[[tax]]    <- NULL
+                    x$inputs$taxa.name                  <- x$inputs$taxa.name[!(x$inputs$taxa.name == tax)]
+                    x$inputs$selectedTaxa[tax, ]        <- rep(-1, length(x$parameters$climate))
+                    x$modelling$taxonID2proxy           <- x$modelling$taxonID2proxy[-(x$modelling$taxonID2proxy[, 'proxyName'] == tax), ]
+                    taxalist <- c(taxalist, tax)
+                }
+            } else {
                 x$modelling$distributions[[tax]]    <- NULL
                 x$inputs$taxa.name                  <- x$inputs$taxa.name[!(x$inputs$taxa.name == tax)]
                 x$inputs$selectedTaxa[tax, ]        <- rep(-1, length(x$parameters$climate))
-                x$modelling$taxonID2proxy           <- x$modelling$taxonID2proxy[-(x$modelling$taxonID2proxy[, 'proxyName'] == tax), ]
+                x$modelling$taxonID2proxy           <- x$modelling$taxonID2proxy[-x$modelling$taxonID2proxy[, 'proxyName'] == tax, ]
                 taxalist <- c(taxalist, tax)
             }
-        } else {
-            x$modelling$distributions[[tax]]    <- NULL
-            x$inputs$taxa.name                  <- x$inputs$taxa.name[!(x$inputs$taxa.name == tax)]
-            x$inputs$selectedTaxa[tax, ]        <- rep(-1, length(x$parameters$climate))
-            x$modelling$taxonID2proxy           <- x$modelling$taxonID2proxy[-x$modelling$taxonID2proxy[, 'proxyName'] == tax, ]
-            taxalist <- c(taxalist, tax)
         }
+
+        resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 1])))))[1] / 2.0
+        xx <- range(x$modelling$climate_space[, 1])
+        x$parameters$xmn <- xx[1] - resol
+        x$parameters$xmx <- xx[2] + resol
+
+        resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 2])))))[1] / 2.0
+        yy <- range(x$modelling$climate_space[, 2])
+        x$parameters$ymn <- yy[1] - resol
+        x$parameters$ymx <- yy[2] + resol
+
+
+        if( length(taxalist ) > 0) {
+            name <- find.original.name(x)
+            warning(paste0("One or more taxa were were lost due to the cropping of the study area. Use PSE_log() with the output of this function for details."))
+            message <- 'Taxon excluded by the crop function.'
+            x$misc$taxa_notes[[message]] <- taxalist
+        }
+        return(x)
+    } else {
+        cat('This function only works with a crestObj.\n\n')
     }
-
-    resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 1])))))[1] / 2.0
-    xx <- range(x$modelling$climate_space[, 1])
-    x$parameters$xmn <- xx[1] - resol
-    x$parameters$xmx <- xx[2] + resol
-
-    resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 2])))))[1] / 2.0
-    yy <- range(x$modelling$climate_space[, 2])
-    x$parameters$ymn <- yy[1] - resol
-    x$parameters$ymx <- yy[2] + resol
-
-
-    if( length(taxalist ) > 0) {
-        name <- find.original.name(x)
-        warning(paste0("One or more taxa were were lost due to the cropping of the study area. Check `",name,"$misc$taxa_notes` for details."))
-        message <- 'Taxon excluded by the crop function.'
-        x$misc$taxa_notes[[message]] <- taxalist
-    }
-    x
+    return(invisible(NA))
 }
 
 

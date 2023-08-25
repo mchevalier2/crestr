@@ -144,7 +144,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                         grDevices::png(paste0(strsplit(filename, '.png')[[1]], '.png'), width = width, height = height, units='in', res=png.res)
                     }
                 } else if(continue) {
-                    grDevices::pdf(filename, width=width, height=height)
+                    grDevices::pdf(paste0(strsplit(filename, '.pdf')[[1]], '.pdf'), width=width, height=height)
                     continue <- FALSE
                 }
             }

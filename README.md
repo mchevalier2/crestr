@@ -31,9 +31,10 @@ climate change from fossil assemblage data. The approach is based on the
 estimation of conditional responses of different bio-proxies to various
 climate parameters. These responses take the form of probability density
 functions (*PDFs*). The details of the method have been described in
-[Chevalier *et al.* (2014)](http://www.doi.org/10.5194/cp-10-2081-2014),
-the calibrated data are presented in [Chevalier
-(2019)](http://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the
+[Chevalier *et al.*
+(2014)](https://www.doi.org/10.5194/cp-10-2081-2014), the calibrated
+data are presented in [Chevalier
+(2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the
 package is fully described in [Chevalier
 (2022)](https://cp.copernicus.org/articles/18/821/2022/).
 
@@ -54,7 +55,7 @@ page).
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
-devtools::install_version("crestr", version = "1.2.0", repos = "http://cran.us.r-project.org")
+devtools::install_version("crestr", version = "1.2.0", repos = "https://cran.us.r-project.org")
 ```
 
 > ***NOTE:*** If the install fails, it is possible that
@@ -169,7 +170,7 @@ recons <- crest(
 )
 #> Warning in crest.get_modern_data(pse = pse, taxaType = taxaType, climate =
 #> climate, : The classification of one or more taxa into species was not
-#> successful. Check `x$misc$taxa_notes` for details.
+#> successful. Use PSE_log() with the output of this function for details.
 ```
 
 A specific print function was created to summarise the crestObj.
@@ -199,6 +200,7 @@ recons
 #> *       Using bins of width .................... bio1: 2
 #> *       ________________________________________ bio12: 50
 #> *   x Weighting of the climate space ........... TRUE
+#> *       Using a linear correction
 #> *   x Shape of the PDFs ........................ bio1: normal
 #> *     __________________________________________ bio12: lognormal
 #> *
@@ -303,11 +305,11 @@ list.files(file.path(getwd(), 'crest-test'))
   REconstruction SofTware): a probability density function (PDF)-based
   quantitative climate reconstruction method. *Clim. Past* 10,
   2081–2098.
-  [10.5194/cp-10-2081-2014](http://www.doi.org/10.5194/cp-10-2081-2014)
+  [10.5194/cp-10-2081-2014](https://www.doi.org/10.5194/cp-10-2081-2014)
 - Chevalier, M., 2019. Enabling possibilities to quantify past climate
   from fossil assemblages at a global scale. *Glob. Planet. Change* 175,
   27–35.
-  [10.1016/j.gloplacha.2019.01.016](http://www.doi.org/10.1016/j.gloplacha.2019.01.016)
+  [10.1016/j.gloplacha.2019.01.016](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)
 - Chevalier, M., 2022. *crestr* an R package to perform probabilistic
   climate reconstructions from palaeoecological datasets. Clim. Past
   [doi:10.5194/cp-18-821-2022](https://www.doi.org/10.5194/cp-18-821-2022)
