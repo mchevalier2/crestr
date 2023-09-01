@@ -314,7 +314,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                 message <- 'Not present in the original selectedTaxa table. Added by default as 1s.'
                 if (! message %in% names(taxa_notes)) {
                     taxa_notes[[message]] <- c()
-                    warning(paste0("One or more taxa were are not in the selectedTaxa table. They have been added but are not selected for any variable. Use PSE_log() with the output of this function for details."))
+                    warning(paste0("One or more taxa were are not in the selectedTaxa table. They have been added but are not included for any variable. Use PSE_log() with the output of this function for details."))
                 }
                 taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
                 selectedTaxa[tax, climate] <- rep(0, length(climate))

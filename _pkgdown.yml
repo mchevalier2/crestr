@@ -55,6 +55,8 @@ navbar:
       menu:
       - text: Using the _gbif4crest_ database
         href: articles/databasing-with-crestr.html
+      - text: Understanding warnings
+        href: articles/warnings.html
       - text: MD96-2048 Reconstruction
         href: articles/limpopo.html
     news:
