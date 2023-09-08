@@ -272,3 +272,50 @@ accRealmNames <- function(realm=NA, ecoregion = TRUE) {
     }
     res
 }
+
+
+
+#' Return geopolitical units associated with a geopoID.
+#'
+#' Return geopolitical units associated with a geopoID.
+#'
+#' @param ids A vector of IDs (countryid or oceanid)
+#' @param realm An index that says if the ids are from terrestrial (realm=1;
+#'        default) or from marine (realm=2) settings.
+#' @param dbname The database to use.
+#' @return A list of names.
+.geopoid2names <- function(ids, realm=1, dbname = "gbif4crest_02") {
+    #realm=1 means terrestrial
+    if(realm == 1) {
+        req <- paste0("SELECT geopoid, continent, name FROM geopolitical_units WHERE geopoid IN (",
+                        paste(ids, collapse=', '), " )")
+    } else {
+        req <- paste0("SELECT geopoid, basin, name FROM geopolitical_units WHERE geopoid IN (",
+                        paste(ids, collapse=', '), " )")
+    }
+    res <- dbRequest(req, dbname)
+    res
+}
+
+
+#' Return biogeographical units associated with a ecoID.
+#'
+#' Return biogeographical units associated with a ecoID.
+#'
+#' @param ids A vector of IDs (mari_ecoid or terr_ecoid)
+#' @param realm An index that says if the ids are from terrestrial (realm=1;
+#'        default) or from marine (realm=2) settings.
+#' @param dbname The database to use.
+#' @return A list of names.
+.ecoid2names <- function(ids, realm=1, dbname = "gbif4crest_02") {
+    #realm=1 means terrestrial
+    if(realm == 1) {
+        req <- paste0("SELECT ecoid, realm, biome, ecoregion FROM biogeography WHERE ecoid IN (",
+                        paste(ids, collapse=', '), " )")
+    } else {
+        req <- paste0("SELECT ecoid, realm FROM biogeography WHERE ecoid IN (",
+                        paste(ids, collapse=', '), " )")
+    }
+    res <- dbRequest(req, dbname)
+    res
+}

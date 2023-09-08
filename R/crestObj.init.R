@@ -158,7 +158,7 @@ crestObj <- function(taxa.name, taxaType, climate,
         uncertainties = uncertainties
     )
 
-    modelling <- list(taxonID2proxy = NA, climate_space = NA, pdfs = NA, weights = NA, xrange = NA, distributions = distributions)
+    modelling <- list(taxonID2proxy = NA, climate_space = NA, biome_space = NA, pdfs = NA, weights = NA, xrange = NA, distributions = distributions)
 
     reconstructions <- list()
 

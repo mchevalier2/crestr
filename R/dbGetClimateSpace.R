@@ -94,6 +94,18 @@ getClimateSpace <- function(climate,
         ELEVRANGE <- ifelse(is.na(elev_range), '', paste0('    AND elev_range <= ', elev_range))
     }
 
+    # Extracting the ecological IDs
+    PARAMS <- ''
+    if(.ifExampleDB(dbname)) { # Some parameters are not availble in the example database
+        PARAMS <- ''
+    } else {
+        climvar <- accClimateVariables()
+        climvar <- climvar[climvar[,2] %in% climate, ]
+        if('Terrestrial' %in% climvar[, 4]) PARAMS <- paste0(PARAMS, " countryID, terr_ecoID, ")
+        if('Marine' %in% climvar[, 4]) PARAMS <- paste0(PARAMS, " oceanID, mari_ecoID, ")
+    }
+
+
     # Removing the 'NULL' when using the SQLite3 database
     NULLS <- ""
     if(stringr::str_detect(base::tolower(dbname), '.sqlite3')) {
@@ -104,8 +116,8 @@ getClimateSpace <- function(climate,
 
     # Formatting the request-----------------------------------------------------
     req <- paste0(
-      "  SELECT DISTINCT longitude, latitude, ",
-      "        ", paste(climate, collapse = ", "), " ",
+      "  SELECT DISTINCT longitude, latitude,", PARAMS,
+      "        ", paste(climate, collapse = ", "), " ", 
       "   FROM  data_qdgc ",
       "   WHERE longitude >= ", coords[1], " AND longitude <= ", coords[2], " ",
       "     AND latitude >= ", coords[3], " AND latitude <= ", coords[4], " ",

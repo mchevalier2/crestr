@@ -597,8 +597,23 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         stop(paste0("No climate values available in the defined study area N: ", crest$parameters$ymx," S: ", crest$parameters$ymn, " W: ",crest$parameters$xmn, " E: ",crest$parameters$xmx, ".\n\n"))
     }
 
-    colnames(climate_space)[-c(1, 2)] <- crest$parameters$climate
-    crest$modelling$climate_space <- climate_space
+    if(.ifExampleDB(dbname)) {
+        colnames(climate_space)[-c(1, 2)] <- crest$parameters$climate
+        crest$modelling$climate_space <- climate_space
+    } else {
+        crest$modelling$climate_space <- climate_space[, c('longitude', 'latitude', crest$parameters$climate)]
+        crest$modelling$biome_space <- climate_space[, 1:(ncol(climate_space) - length(crest$parameters$climate))]
+        if('countryid' %in% colnames(crest$modelling$biome_space)) {
+            crest$modelling$biome_space <- merge(crest$modelling$biome_space, .geopoid2names(crest$modelling$biome_space[, 'countryid'], 1, dbname), by.x='countryid', by.y='geopoid')
+            crest$modelling$biome_space <- merge(crest$modelling$biome_space, .ecoid2names(crest$modelling$biome_space[, 'terr_ecoid'], 1, dbname), by.x='terr_ecoid', by.y='ecoid')
+            crest$modelling$biome_space <- crest$modelling$biome_space[, !colnames(crest$modelling$biome_space) %in% c('countryid', 'terr_ecoid')]
+        }
+        if('oceanid' %in% colnames(crest$modelling$biome_space)) {
+            crest$modelling$biome_space <- merge(crest$modelling$biome_space, .geopoid2names(crest$modelling$biome_space[, 'oceanid'], 2, dbname), by.x='oceanid', by.y='geopoid')
+            crest$modelling$biome_space <- merge(crest$modelling$biome_space, .ecoid2names(crest$modelling$biome_space[, 'mari_ecoid'], 2, dbname), by.x='mari_ecoid', by.y='ecoid')
+            crest$modelling$biome_space <- crest$modelling$biome_space[, !colnames(crest$modelling$biome_space) %in% c('oceanid', 'mari_ecoid')]
+        }
+    }
 
     if (ai.sqrt & 'ai' %in% crest$parameters$climate) {
         crest$modelling$climate_space[, "ai"] <- sqrt(crest$modelling$climate_space[, "ai"])

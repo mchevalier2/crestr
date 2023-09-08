@@ -7,7 +7,7 @@
 plot_climateSpace(
   x,
   climate = x$parameters$climate,
-  bin_width = x$parameters$bin_width,
+  bin_width = x$parameters$bin_width[x$parameters$climate, ],
   save = FALSE,
   filename = "Climate_space.pdf",
   as.png = FALSE,

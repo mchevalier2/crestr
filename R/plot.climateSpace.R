@@ -42,7 +42,7 @@ terra::crs#' Plot the studied climate space.
 #'
 plot_climateSpace <- function( x,
                       climate = x$parameters$climate,
-                      bin_width = x$parameters$bin_width,
+                      bin_width = x$parameters$bin_width[x$parameters$climate,],
                       save = FALSE, filename = 'Climate_space.pdf',
                       as.png = FALSE, png.res=300,
                       width=  7.48,
@@ -59,7 +59,6 @@ plot_climateSpace <- function( x,
         #    stop('The crestObj requires the climate space to be calibrated. Run crest.calibrate() on your data.\n')
         #    return(invisible())
         #}
-
         err <- c()
         for(clim in climate) {
             if(! clim %in% x$parameters$climate) err <- c(err, clim)
