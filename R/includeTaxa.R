@@ -38,7 +38,7 @@ includeTaxa <- function(x, taxa, climate) {
 
     err <- c()
     for(tax in taxa) {
-        if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        if(! tax %in% rownames(x$input$selectedTaxa)) err <- c(err, tax)
     }
     if(length(err) > 0) {
         stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))
@@ -95,7 +95,7 @@ excludeTaxa <- function(x, taxa, climate) {
 
     err <- c()
     for(tax in taxa) {
-        if(! tax %in% x$input$taxa.name) err <- c(err, tax)
+        if(! tax %in% rownames(x$input$selectedTaxa)) err <- c(err, tax)
     }
     if(length(err) > 0) {
         stop(paste0("The following taxa names are not available in your dataset: '", paste(err, collapse="', '"), "'\n\n"))

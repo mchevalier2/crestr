@@ -613,6 +613,10 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             crest$modelling$biome_space <- merge(crest$modelling$biome_space, .ecoid2names(crest$modelling$biome_space[, 'mari_ecoid'], 2, dbname), by.x='mari_ecoid', by.y='ecoid')
             crest$modelling$biome_space <- crest$modelling$biome_space[, !colnames(crest$modelling$biome_space) %in% c('oceanid', 'mari_ecoid')]
         }
+
+        crest$modelling$climate_space <- crest$modelling$climate_space[order(crest$modelling$climate_space$longitude, crest$modelling$climate_space$latitude), ]
+        crest$modelling$crest <- crest$modelling$biome_space[order(crest$modelling$biome_space$longitude, crest$modelling$biome_space$latitude), ]
+
     }
 
     if (ai.sqrt & 'ai' %in% crest$parameters$climate) {
