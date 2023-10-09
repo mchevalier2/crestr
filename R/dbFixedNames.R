@@ -284,6 +284,7 @@ accRealmNames <- function(realm=NA, ecoregion = TRUE) {
 #'        default) or from marine (realm=2) settings.
 #' @param dbname The database to use.
 #' @return A list of names.
+#' @keywords internal
 .geopoid2names <- function(ids, realm=1, dbname = "gbif4crest_02") {
     ids[is.na(ids)] <- 'NULL'
     #realm=1 means terrestrial
@@ -308,6 +309,7 @@ accRealmNames <- function(realm=NA, ecoregion = TRUE) {
 #'        default) or from marine (realm=2) settings.
 #' @param dbname The database to use.
 #' @return A list of names.
+#' @keywords internal
 .ecoid2names <- function(ids, realm=1, dbname = "gbif4crest_02") {
     ids[is.na(ids)] <- 'NULL'
     if(realm == 1) {

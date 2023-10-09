@@ -90,7 +90,12 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dbDownload</span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"gbif4crest_02.zip"</span>, lite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">dbDownload</span><span class="op">(</span></span>
+<span>  filename <span class="op">=</span> <span class="st">"gbif4crest_02.zip"</span>,</span>
+<span>  lite <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  res <span class="op">=</span> <span class="st">"15min"</span>,</span>
+<span>  timeout <span class="op">=</span> <span class="fl">10000</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -103,6 +108,15 @@
 <dd><p>A boolean (default <code>TRUE</code>) to indicate if the full database
 should be downloaded (including the raw presences from GBIF;
 <code>lite = FALSE</code>) or only the curated data (<code>lite = TRUE</code>).</p></dd>
+
+
+<dt>res</dt>
+<dd><p>The spatial resolution of the dataset. Either 15min or 5min.</p></dd>
+
+
+<dt>timeout</dt>
+<dd><p>Maximum duration in seconds of the download. If the file is
+not fully downloaded after timeout seconds, it will be interrupted.</p></dd>
 
 </dl></div>
     <div id="see-also">

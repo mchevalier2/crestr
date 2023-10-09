@@ -20,3 +20,4 @@ A list of names.
 \description{
 Return geopolitical units associated with a geopoID.
 }
+\keyword{internal}
