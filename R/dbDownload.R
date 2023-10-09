@@ -7,6 +7,9 @@
 #' @param lite A boolean (default \code{TRUE}) to indicate if the full database
 #'        should be downloaded (including the raw presences from GBIF;
 #'        \code{lite = FALSE}) or only the curated data (\code{lite = TRUE}).
+#' @param res The spatial resolution of the dataset. Either 15min or 5min.
+#' @param timeout Maximum duration in seconds of the download. If the file is
+#'        not fully downloaded after timeout seconds, it will be interrupted.
 #' @export
 #' @seealso The full SQLite3 database can be downloaded from \url{https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207}.
 #' @examples
@@ -27,7 +30,7 @@ dbDownload <- function( filename = "gbif4crest_02.zip", lite=TRUE, res='15min', 
     } else if(res == '5min') {
         utils::download.file("https://figshare.com/ndownloader/files/42606571", filename)
     } else {
-        error("This resolution is not available. Pick res='15min' or '5min'.")
+        stop("This resolution is not available. Pick res='15min' or '5min'.")
     }
     cat("File downloaded and saved at:", tools::file_path_as_absolute(filename), "\n\n")
     options(timeout=oldtimeout)

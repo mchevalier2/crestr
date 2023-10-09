@@ -4,7 +4,12 @@
 \alias{dbDownload}
 \title{Download the gbif4crest_02 dataset from figShare.}
 \usage{
-dbDownload(filename = "gbif4crest_02.zip", lite = TRUE)
+dbDownload(
+  filename = "gbif4crest_02.zip",
+  lite = TRUE,
+  res = "15min",
+  timeout = 10000
+)
 }
 \arguments{
 \item{filename}{The path and name of the file where the database should be saved.}
@@ -12,6 +17,11 @@ dbDownload(filename = "gbif4crest_02.zip", lite = TRUE)
 \item{lite}{A boolean (default \code{TRUE}) to indicate if the full database
 should be downloaded (including the raw presences from GBIF;
 \code{lite = FALSE}) or only the curated data (\code{lite = TRUE}).}
+
+\item{res}{The spatial resolution of the dataset. Either 15min or 5min.}
+
+\item{timeout}{Maximum duration in seconds of the download. If the file is
+not fully downloaded after timeout seconds, it will be interrupted.}
 }
 \description{
 Download the gbif4crest_02 dataset from figShare.
