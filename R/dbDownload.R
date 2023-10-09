@@ -14,12 +14,21 @@
 #'   dbDownload() ## This will download the database in your working directory.
 #' }
 #'
-dbDownload <- function( filename = "gbif4crest_02.zip", lite=TRUE ) {
+dbDownload <- function( filename = "gbif4crest_02.zip", lite=TRUE, res='15min', timeout=10000 ) {
+    oldtimeout <- getOption('timeout')
+    options(timeout=timeout)
     if(tools::file_ext(filename) != 'zip') filename <- paste0(filename, ".zip")
-    if(lite) {
-        utils::download.file("https://figshare.com/ndownloader/files/25071872", filename)
+    if(res == '15min') {
+        if(lite) {
+            utils::download.file("https://figshare.com/ndownloader/files/25071872", filename)
+        } else {
+            utils::download.file("https://figshare.com/ndownloader/files/36126908", filename)
+        }
+    } else if(res == '5min') {
+        utils::download.file("https://figshare.com/ndownloader/files/42606571", filename)
     } else {
-        utils::download.file("https://figshare.com/ndownloader/files/36126908", filename)
+        error("This resolution is not available. Pick res='15min' or '5min'.")
     }
     cat("File downloaded and saved at:", tools::file_path_as_absolute(filename), "\n\n")
+    options(timeout=oldtimeout)
 }

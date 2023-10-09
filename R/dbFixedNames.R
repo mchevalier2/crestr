@@ -285,6 +285,7 @@ accRealmNames <- function(realm=NA, ecoregion = TRUE) {
 #' @param dbname The database to use.
 #' @return A list of names.
 .geopoid2names <- function(ids, realm=1, dbname = "gbif4crest_02") {
+    ids[is.na(ids)] <- 'NULL'
     #realm=1 means terrestrial
     if(realm == 1) {
         req <- paste0("SELECT geopoid, continent, name FROM geopolitical_units WHERE geopoid IN (",
@@ -308,7 +309,7 @@ accRealmNames <- function(realm=NA, ecoregion = TRUE) {
 #' @param dbname The database to use.
 #' @return A list of names.
 .ecoid2names <- function(ids, realm=1, dbname = "gbif4crest_02") {
-    #realm=1 means terrestrial
+    ids[is.na(ids)] <- 'NULL'
     if(realm == 1) {
         req <- paste0("SELECT ecoid, realm, biome, ecoregion FROM biogeography WHERE ecoid IN (",
                         paste(ids, collapse=', '), " )")

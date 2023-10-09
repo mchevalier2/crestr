@@ -1,7 +1,7 @@
 
 #' @export
 .sqlite <- function(){
-    return('/Users/mchevali1/Research/GBIF/gbif4crest_02.sqlite3')
+    return('/Users/palaeosaurus/Research/GBIF/gbif4crest_02.sqlite3')
 }
 
 
