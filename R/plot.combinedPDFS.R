@@ -215,12 +215,15 @@ plot_combinedPDFs <- function( x, ages=range(x$inputs$x),
             graphics::plot( 0,0, type='n', xaxs='i', yaxs='i', frame=FALSE, axes=FALSE, xlab='', ylab='', main='',
                             xlim=c(0,1), ylim=c(1+length(ordered_tax), 1))
 
-            for(tax in 1:length(ordered_tax)) {
-                graphics::segments(0, tax+0.5, 0.20, tax+0.5,
-                #lwd=max(0.2, log10(1+10*x$modelling$weights[s, ordered_tax[tax]])),
-                lwd=max(0.2, 1.5*sqrt(x$modelling$weights[s, ordered_tax[tax]])),
-                lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
-                graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 7/8, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
+            if(length(ordered_tax) > 0) {
+                for(tax in 1:length(ordered_tax)) {
+                    print(tax)
+                    graphics::segments(0, tax+0.5, 0.20, tax+0.5,
+                    #lwd=max(0.2, log10(1+10*x$modelling$weights[s, ordered_tax[tax]])),
+                    lwd=max(0.2, 1.5*sqrt(x$modelling$weights[s, ordered_tax[tax]])),
+                    lty=LTYS[ordered_tax[tax]], col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, COLS[ordered_tax[tax]], 'grey70'))
+                    graphics::text(0.23, tax+0.5, paste(ordered_tax[tax], ' (',round(x$modelling$weights[s, ordered_tax[tax]],2),')',sep=''), adj=c(0, 0.45), cex = 7/8, col=ifelse(x$inputs$selectedTaxa[ordered_tax[tax], climate] > 0, 'black', 'grey70'))
+                }
             }
             if(save & as.png) grDevices::dev.off()
 
