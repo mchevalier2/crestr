@@ -46,7 +46,7 @@ You can now quickly visualise how to run a reconstruction with the _crestr_ chea
 
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
-_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna de Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
+_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
 
 ## CREST in the scientific literature

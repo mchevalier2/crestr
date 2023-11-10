@@ -1,7 +1,7 @@
 library(crestr)
 
 
-dat <- rio::import("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use.csv")
+dat <- rio::import("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use.csv")
 
 
 dat$Continent <- as.factor(dat$Continent)
@@ -26,7 +26,7 @@ sites.eqearth=sp::spTransform(sites, sp::CRS("+proj=eqearth +lon_0=0 +x_0=0 +y_0
 
 
 max_year=2023
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
     layout(matrix(c(1,2), ncol=2, byrow=TRUE), width=1, height=1)
 
     par(mar=c(2,4,2,1), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
@@ -67,7 +67,7 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8
 
 
 
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=10, height=4.5, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=10, height=4.5, units='in', res=150)  ;  {
     layout(matrix(c(2,1,3), ncol=3), width=c(0.95,10,1.05))
     par(mar=c(0,0,0,0), ps=8*2)
     plot_map_eqearth(NA, c(-180,180,-90,90), colour_scale=FALSE, npoints=30)
@@ -76,7 +76,7 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-02.png", width=1
 
 
 
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8, height=4, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8, height=4, units='in', res=150)  ;  {
     par(mar=c(2,4,2,4), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
     layout(matrix(c(1,2), ncol=1, byrow=TRUE), width=1, height=1)
 
@@ -102,12 +102,12 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/crest-use-03.png", width=8
 }  ;  dev.off()
 
 
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet01.png", width=5.2, height=4.5, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/cheatsheet01.png", width=5.2, height=4.5, units='in', res=150)  ;  {
     temp_col <- pals::coolwarm(20)[(climate$Temperature-10) %/% 1]
     prec_col <- pals::kovesi.linear_bgyw_15_100_c68(25)[6:25][(climate$Precipitation-2) %/% 50 + 1]
 
-    climate <- read.csv('https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/clim.csv')
-    distribs <- read.csv('https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/distrib.csv')
+    climate <- read.csv('/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/clim.csv')
+    distribs <- read.csv('/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/distrib.csv')
     par(mfrow = c(3, 2), bg=NA)
     par(mar=c(0,0.7,1,0.7))
 
@@ -132,19 +132,19 @@ png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet01.png", width=5
 
 
 
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet02.png", width=3, height=6, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/cheatsheet02.png", width=3, height=6, units='in', res=150)  ;  {
     par(bg=NA)
     crestr::plot_diagram(crestr::crest_ex, bars=TRUE, bar_width=0.8, xlim=c(0,20))
 }  ;  dev.off()
 
 
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet03.png", width=5, height=3, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/cheatsheet03.png", width=5, height=3, units='in', res=150)  ;  {
     par(bg=NA)
     plot(reconstr, climate = 'bio1')
 }  ;  dev.off()
 
 
-png("/Users/mchevali1/GitHub/Rpackages/crestr/webpage/cheatsheet04.png", width=5, height=2.7, units='in', res=150)  ;  {
+png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/cheatsheet04.png", width=5, height=2.7, units='in', res=150)  ;  {
     par(bg=NA)
     plot(reconstr, climate = 'bio12', simplify=TRUE,
             uncertainties=c(0.4, 0.6, 0.8), as.anomaly=TRUE)
