@@ -55,6 +55,7 @@ _(A) density of presence records available in my calibration dataset upscaled at
 <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 - **2023**
+    - Hui, Z., Wei, X., Xue, Z., Zhao, X., Chevalier, M., Lu, X., Zhang, J., Peng, T., Chen, Y., Chen, P., 2023,Middle Miocene Evolution of East Asian Summer Monsoon Precipitation in the Northeast Part of the Tibetan Plateau Based on a Quantitative Analysis of Palynological Records. Palaeogeography, Palaeoclimatology, Palaeoecology, pp 111808. [10.1016/j.palaeo.2023.111808](https://doi.org/10.1016/j.palaeo.2023.111808).
     - Hui, Z., Liu, J., Chevalier, M., Wei, X., Chen, P., Zhan, J., Peng, T., Zhou, X., 2023, Multiple forcing on Late Miocene East Asian Summer Monsoon Precipitation Variability in NE Tibetan Plateau. CATENA 221, 106752. [10.1016/j.catena.2022.106752](https://doi.org/10.1016/j.catena.2022.106752).
 - **2022**
     - Gibson, M.E., McCoy, J., O’Keefe, J.M.K., Nuñez Otaño, N.B., Warny, S., Pound, M.J., 2022, Reconstructing Terrestrial Paleoclimates: A Comparison of the Co‐Existence Approach, Bayesian and Probability Reconstruction Techniques Using the UK Neogene. Paleoceanog. and Paleoclimatol. 37, e2021PA004358. [10.1029/2021PA004358](https://doi.org/10.1029/2021PA004358)
