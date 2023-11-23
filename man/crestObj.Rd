@@ -39,6 +39,7 @@ crestObj(
   geoWeighting = TRUE,
   climateSpaceWeighting = TRUE,
   climateSpaceWeighting.type = "linear",
+  climateWithObs = FALSE,
   selectedTaxa = NA,
   distributions = NA,
   presenceThreshold = 0,
@@ -133,6 +134,11 @@ should be corrected for the modern distribution of the climate space
 \item{climateSpaceWeighting.type}{A correction factor for the clame space
 weighting correction to limit the edge effects. Either 'linear'
 (default), 'sqrt' or 'log'.}
+
+\item{climateWithObs}{A boolean to indicate whether all climate values from
+the calibration dataset be included (\code{FALSE}, default) or only the
+climate values that corresponds to proxy observations (\code{TRUE}).
+Only useful in if the climate space weighting is activated.}
 
 \item{selectedTaxa}{A data frame assigns which taxa should be used for each
 variable (1 if the taxon should be used, 0 otherwise). The colnames

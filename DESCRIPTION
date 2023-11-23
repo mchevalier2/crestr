@@ -21,6 +21,7 @@ RoxygenNote: 7.2.3
 Imports:
     clipr,
     DBI,
+    data.table,
     methods,
     openxlsx,
     plot3D,

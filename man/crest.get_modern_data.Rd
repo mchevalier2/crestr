@@ -22,6 +22,7 @@ crest.get_modern_data(
   biomes = NA,
   ecoregions = NA,
   minGridCells = 20,
+  climateWithObs = FALSE,
   elev_min = NA,
   elev_max = NA,
   elev_range = NA,
@@ -73,6 +74,11 @@ study area.}
 
 \item{minGridCells}{The minimum number of unique presence data necessary to
 estimate a species' climate response. Default is 20.}
+
+\item{climateWithObs}{A boolean to indicate whether all climate values from
+the calibration dataset be included (\code{FALSE}, default) or only the
+climate values that corresponds to proxy observations (\code{TRUE}).
+Only useful in if the climate space weighting is activated.}
 
 \item{elev_min, elev_max}{Parameters to only selected grid cells with an
 elevation higher than elev_min or lower than elev_max (default is

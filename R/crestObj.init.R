@@ -66,6 +66,10 @@
 #' @param climateSpaceWeighting.type A correction factor for the clame space
 #'        weighting correction to limit the edge effects. Either 'linear'
 #'        (default), 'sqrt' or 'log'.
+#' @param climateWithObs A boolean to indicate whether all climate values from
+#'        the calibration dataset be included (\code{FALSE}, default) or only the
+#'        climate values that corresponds to proxy observations (\code{TRUE}).
+#'        Only useful in if the climate space weighting is activated.
 #' @param presenceThreshold All values above that threshold will be used in the
 #'        reconstruction (e.g. if set at 1, all percentages below 1 will be set
 #'        to 0 and the associated presences discarded). Default is 0.
@@ -96,6 +100,7 @@ crestObj <- function(taxa.name, taxaType, climate,
                      geoWeighting = TRUE,
                      climateSpaceWeighting = TRUE,
                      climateSpaceWeighting.type = 'linear',
+                     climateWithObs = FALSE,
                      selectedTaxa = NA,
                      distributions = NA,
                      presenceThreshold = 0,
@@ -154,6 +159,7 @@ crestObj <- function(taxa.name, taxaType, climate,
         geoWeighting = geoWeighting,
         climateSpaceWeighting = climateSpaceWeighting,
         climateSpaceWeighting.type = climateSpaceWeighting.type,
+        climateWithObs = climateWithObs,
         presenceThreshold = presenceThreshold,
         uncertainties = uncertainties
     )

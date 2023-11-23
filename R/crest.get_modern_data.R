@@ -37,6 +37,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                                    basins = NA, sectors = NA,
                                    realms = NA, biomes = NA, ecoregions = NA,
                                    minGridCells = 20,
+                                   climateWithObs = FALSE,
                                    elev_min = NA, elev_max = NA, elev_range = NA,
                                    year_min = 1900, year_max = 2021, nodate = TRUE,
                                    type_of_obs = c(1, 2, 3, 8, 9),
@@ -363,6 +364,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         year_min=year_min, year_max=year_max, nodate=nodate,
         type_of_obs=type_of_obs,
         selectedTaxa = selectedTaxa,
+        climateWithObs=climateWithObs,
         dbname=dbname
     )
     crest$misc[['taxa_notes']] <- taxa_notes
@@ -615,10 +617,22 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         }
 
         crest$modelling$climate_space <- crest$modelling$climate_space[order(crest$modelling$climate_space$longitude, crest$modelling$climate_space$latitude), ]
-        crest$modelling$crest <- crest$modelling$biome_space[order(crest$modelling$biome_space$longitude, crest$modelling$biome_space$latitude), ]
+        crest$modelling$biome_space <- crest$modelling$biome_space[order(crest$modelling$biome_space$longitude, crest$modelling$biome_space$latitude), ]
 
     }
 
+    if(climateWithObs) {
+        df <- lapply(crest$modelling$distributions, function(x) return(unique(x[, c('longitude', 'latitude')])))
+        df <- as.data.frame(unique(data.table::rbindlist(df)))
+        df <- paste(df[, 'longitude'], df[, 'latitude'], sep='_')
+
+        cs_idx <- paste(crest$modelling$climate_space[, 'longitude'], crest$modelling$climate_space[, 'latitude'], sep='_')
+        crest$modelling$climate_space <- crest$modelling$climate_space[cs_idx %in% df, ]
+
+        cs_idx <- paste(crest$modelling$biome_space[, 'longitude'], crest$modelling$biome_space[, 'latitude'], sep='_')
+        crest$modelling$biome_space <- crest$modelling$biome_space[cs_idx %in% df, ]
+    }
+    
     if (ai.sqrt & 'ai' %in% crest$parameters$climate) {
         crest$modelling$climate_space[, "ai"] <- sqrt(crest$modelling$climate_space[, "ai"])
         for (tax in crest$inputs$taxa.name) {
