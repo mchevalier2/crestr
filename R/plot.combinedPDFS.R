@@ -217,7 +217,6 @@ plot_combinedPDFs <- function( x, ages=range(x$inputs$x),
 
             if(length(ordered_tax) > 0) {
                 for(tax in 1:length(ordered_tax)) {
-                    print(tax)
                     graphics::segments(0, tax+0.5, 0.20, tax+0.5,
                     #lwd=max(0.2, log10(1+10*x$modelling$weights[s, ordered_tax[tax]])),
                     lwd=max(0.2, 1.5*sqrt(x$modelling$weights[s, ordered_tax[tax]])),

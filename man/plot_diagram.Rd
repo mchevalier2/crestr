@@ -16,7 +16,7 @@ plot_diagram(
   as.png = FALSE,
   png.res = 300,
   yax_incr = 5,
-  bar_width = diff(range(x$inputs$x))/50,
+  bar_width = diff(range(x$inputs$x))/length(x$inputs$x),
   xlim = NA,
   tickAtSample = TRUE,
   col_pos = "black",

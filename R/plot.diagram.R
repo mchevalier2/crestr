@@ -50,7 +50,7 @@ plot_diagram <- function(x, bars=FALSE,
                          save=FALSE, filename='Diagram.pdf',
                          width=3.54, height= 9,
                          as.png = FALSE, png.res=300,
-                         yax_incr = 5, bar_width = diff(range(x$inputs$x))/50,
+                         yax_incr = 5, bar_width = diff(range(x$inputs$x))/length(x$inputs$x),
                          xlim=NA, tickAtSample=TRUE,
                          col_pos = 'black', col_neg='grey80', title=NA, src=NA) {
 

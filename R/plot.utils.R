@@ -119,20 +119,28 @@ plot_map_eqearth <- function(dat, ext=as.vector(terra::ext(dat)), zlim=range(ter
     if (inherits(dat, 'SpatRaster'))  dat <- terra::crop(dat, bckg.eqearth)
 
     ext.eqearth <- terra::ext(bckg.eqearth)
-    ext_factor_x <- max(graphics::strwidth(paste0('     ', round(as.numeric(names(horizontals.eqearth)),2)), units='inches', cex=6/8))
-    ext_factor_y <- max(graphics::strheight(paste0('\n', round(as.numeric(names(verticals.eqearth)),2)), units='inches', cex=6/8))
-
     if(is.na(dim)[1]) dim <- grDevices::dev.size('in')
 
-    ext.eqearth[1:2] <- ext.eqearth[1:2] + (ext.eqearth[2]-ext.eqearth[1])/dim[1] * c(-ext_factor_x, 0.05)
-    ext.eqearth[3:4] <- ext.eqearth[3:4] + (ext.eqearth[4]-ext.eqearth[3])/dim[2] * c(-ext_factor_y, 0.05)
+    max_length_y_labs <- 1.25*max(graphics::strwidth(paste0('', round(seq(ext[3], ext[4], length.out=npoints),2)), units='inches', cex=6/8))
+    max_length_x_labs <- 1.1*max(graphics::strwidth(paste0(' ', round(ext[2],2)), units='inches', cex=6/8))
+
+    max_height_y_labs <- 1.25*max(graphics::strheight(paste0('', round(seq(ext[3], ext[4], length.out=npoints),2)), units='inches', cex=6/8))
+    max_height_x_labs <- 1.5*max(graphics::strheight(paste0('', round(seq(ext[1], ext[2], length.out=npoints),2)), units='inches', cex=6/8))
+
+    ## Ratio of map unit range to inches avail for map
+    inches2map_units <- diff(ext.eqearth[1:2]) / (dim[1]-max_length_y_labs-max_length_x_labs/2)
+
+    ## left: we add size of the largest y-axis label
+    ## right: we add half the width of the last x-axis label
+    ext.eqearth[1:2] <- ext.eqearth[1:2] + c(-max_length_y_labs*inches2map_units, max_length_x_labs*inches2map_units/2)
+    ext.eqearth[3:4] <- ext.eqearth[3:4] + c(-max_height_x_labs*inches2map_units, max_height_y_labs*inches2map_units/2)
 
     ## ...........................................................................
     ## Plotting colour scale .....................................................
 
     if(colour_scale) {
         xlab <- c(-0.2,1.2)
-        xlab <- xlab + diff(xlab)/dim[1] * c(-ext_factor_x, 0.05)
+        xlab <- xlab + diff(xlab)/dim[1] * c(-max_length_y_labs, max_length_x_labs/2)
 
         plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlab, ylim=c(-0.05,1), xaxs='i', yaxs='i')
 
@@ -164,7 +172,7 @@ plot_map_eqearth <- function(dat, ext=as.vector(terra::ext(dat)), zlim=range(ter
         }
         graphics::rect(0,0,1,0.3, lwd=0.5)
 
-        graphics::text(0.5, 0.85, title, font=2, cex=cex, adj=c(0.5,1))
+        graphics::text(0.5, 0.9, title, font=2, cex=cex, adj=c(0.5,1))
     }
 
     ## ...........................................................................
@@ -194,45 +202,49 @@ plot_map_eqearth <- function(dat, ext=as.vector(terra::ext(dat)), zlim=range(ter
         }
         labels.lon <- rep(FALSE, length(verticals.eqearth.x))
         names.lon <- round(seq(ext[1], ext[2], length.out=nlines), 2)
+        last_plot <- 0
         for(v in 1:length(verticals.eqearth.x)) {
             overlap <- FALSE
             if(v > 1 ) {
-                if (labels.lon[v-1]) {
-                    d1 <- graphics::strwidth(paste0('\n ', names.lon[v-1], ' '), cex=6/8)
-                    d2 <- graphics::strwidth(paste0('\n ', names.lon[v], ' '), cex=6/8)
-                    if (verticals.eqearth.x[v-1] + d1 / 2 >= verticals.eqearth.x[v] - d2 / 2) {
+                if (labels.lon[last_plot]) {
+                    d1 <- 1.25*graphics::strwidth(paste0('', names.lon[last_plot], ' '), cex=6/8)
+                    d2 <- graphics::strwidth(paste0('', names.lon[v], ' '), cex=6/8)
+                    if (verticals.eqearth.x[last_plot] + d1 / 2 >= verticals.eqearth.x[v] - d2 / 2) {
                         overlap <- TRUE
                     }
                 }
             }
             if (!overlap){
-                graphics::text(verticals.eqearth.x[v], min(horizontals.eqearth.xy[,2]),
-                                paste0('\n', names.lon[v]),
-                                cex=6/8, adj=c(0.5,0.7)
+                graphics::text(verticals.eqearth.x[v], min(horizontals.eqearth.xy[,2])-max_height_x_labs/3*inches2map_units,
+                                names.lon[v],
+                                cex=6/8, adj=c(0.5,1)
                 )
                 labels.lon[v] <- TRUE
+                last_plot <- v
             }
         }
 
         labels.lat <- rep(FALSE, length(horizontals.eqearth.y))
         names.lat <- round(seq(ext[3], ext[4], length.out=nlines), 2)
+        last_plot <- nrow(horizontals.eqearth.xy)
         for(h in nrow(horizontals.eqearth.xy):1) {
             overlap <- FALSE
             if(h < nrow(horizontals.eqearth.xy)) {
-                if (labels.lat[h+1]) {
-                    d1 <- graphics::strheight(paste0('', names.lat[h+1], ' '), cex=6/8)
-                    d2 <- graphics::strheight(paste0('', names.lat[h], ' '), cex=6/8)
-                    if (horizontals.eqearth.y[h+1] - d1 / 2 <= horizontals.eqearth.y[h] + d2 / 2) {
+                if (labels.lat[last_plot]) {
+                    d1 <- 1.5*graphics::strheight(names.lat[last_plot], cex=6/8)
+                    d2 <- graphics::strheight(names.lat[h], cex=6/8)
+                    if (horizontals.eqearth.y[last_plot] - d1 / 2 <= horizontals.eqearth.y[h] + d2 / 2) {
                         overlap <- TRUE
                     }
                 }
             }
             if (!overlap){
                 graphics::text(horizontals.eqearth.xy[h, 1], horizontals.eqearth.xy[h, 2],
-                                paste0(names.lat[h],' '),
+                                paste0(names.lat[h], ' '),
                                 cex=6/8, adj=c(1,0.4)
                 )
                 labels.lat[h] <- TRUE
+                last_plot <- h
             }
         }
 

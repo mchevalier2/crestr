@@ -17,7 +17,7 @@ plot_loo(
   width = 3.54,
   height = 9,
   yax_incr = NA,
-  bar_width = diff(range(x$inputs$x))/50,
+  bar_width = diff(range(x$inputs$x))/length(x$inputs$x),
   xlim = NA,
   tickAtSample = FALSE,
   sort = NA,

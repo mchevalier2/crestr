@@ -14,7 +14,7 @@ plot_climateSpace(
   png.res = 300,
   width = 7.48,
   height = min(9, 3.5 * length(climate)),
-  y0 = 0.5,
+  y0 = 0.4,
   add_modern = FALSE,
   resol = 0.25
 )
@@ -48,7 +48,7 @@ Default is \code{FALSE} and the figure is saved as a pdf file.}
 \item{height}{The height of the output file in inches (default 3in ~ 7.6cm
 per variables).}
 
-\item{y0}{The space to allocate to each title (default 0.3in ~ 0.76 cm.}
+\item{y0}{The space to allocate to each title (default 0.4in ~ 1 cm.}
 
 \item{add_modern}{A boolean to add the location and the modern climate values
 to the plot (default \code{FALSE}).}

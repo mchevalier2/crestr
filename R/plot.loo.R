@@ -54,7 +54,7 @@ plot_loo <- function( x, optima=TRUE,
                       save=FALSE, filename='Diagram_loo.pdf',
                       as.png = FALSE, png.res=300,
                       width=3.54, height= 9,
-                      yax_incr = NA, bar_width = diff(range(x$inputs$x))/50,
+                      yax_incr = NA, bar_width = diff(range(x$inputs$x))/length(x$inputs$x),
                       xlim=NA, tickAtSample=FALSE,
                       sort=NA, filter = 0,
                       col_pos = 'black', col_neg='grey80', title=NA ) {
