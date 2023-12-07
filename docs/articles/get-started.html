@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@
                         <h4 data-toc-skip class="author">Manuel
 Chevalier</h4>
             
-            <h4 data-toc-skip class="date">2023-11-10</h4>
+            <h4 data-toc-skip class="date">2023-12-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/get-started.Rmd" class="external-link"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -318,7 +318,7 @@ later be transformed into “-1”.</p>
 <p>To illustrate the process, we will reconstruct <em>bio1</em> (mean
 annual temperature) and <em>bio12</em> (annual precipitation) from these
 pseudo data. The complete description of the different parameters is
-available <a href="https://mchevalier2.github.io/crestr/reference/index.html" class="external-link">here</a>.</p>
+available <a href="https://www.manuelchevalier.com/crestr/reference/index.html" class="external-link">here</a>.</p>
 <p>The first step of any reconstruction is to extract the species
 distribution data. This is done with the
 <em>crest.get_modern_data()</em> function. This function creates a
@@ -369,8 +369,8 @@ updated based on the reconstruction step.</p>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * The calibration dataset was defined using the following set of parameters:</span></span>
 <span><span class="co">#&gt; *   x Proxy type ............ Example dataset</span></span>
-<span><span class="co">#&gt; *   x Longitude ............. [0 - 15]</span></span>
-<span><span class="co">#&gt; *   x Latitude .............. [0 - 15]</span></span>
+<span><span class="co">#&gt; *   x Longitude ............. [-0.125 - 14.875]</span></span>
+<span><span class="co">#&gt; *   x Latitude .............. [-0.125 - 14.875]</span></span>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * Of the 7 taxa provided in `df` and `PSE`, 1 cannot be analysed.</span></span>
 <span><span class="co">#&gt; * (This may be expected, but check `$misc$taxa_notes` for additional details.)</span></span>
@@ -493,8 +493,8 @@ accessed from <code>reconstr</code> as follow:</p>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * The calibration dataset was defined using the following set of parameters:</span></span>
 <span><span class="co">#&gt; *   x Proxy type ............ Example dataset</span></span>
-<span><span class="co">#&gt; *   x Longitude ............. [0 - 15]</span></span>
-<span><span class="co">#&gt; *   x Latitude .............. [0 - 15]</span></span>
+<span><span class="co">#&gt; *   x Longitude ............. [-0.125 - 14.875]</span></span>
+<span><span class="co">#&gt; *   x Latitude .............. [-0.125 - 14.875]</span></span>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * The PDFs were fitted using the following set of parameters:</span></span>
 <span><span class="co">#&gt; *   x Minimum distinct of distinct occurences .. 20</span></span>
@@ -505,6 +505,7 @@ accessed from <code>reconstr</code> as follow:</p>
 <span><span class="co">#&gt; *       ________________________________________ bio12: 50</span></span>
 <span><span class="co">#&gt; *   x Weighting of the climate space ........... TRUE</span></span>
 <span><span class="co">#&gt; *       Using a linear correction</span></span>
+<span><span class="co">#&gt; *   x Restriction to climate with observations . FALSE</span></span>
 <span><span class="co">#&gt; *   x Shape of the PDFs ........................ bio1: normal</span></span>
 <span><span class="co">#&gt; *     __________________________________________ bio12: lognormal</span></span>
 <span><span class="co">#&gt; *</span></span>
@@ -527,7 +528,12 @@ states.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>,</span>
-<span>        uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span>, as.anomaly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>        uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span>, as.anomaly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in plot.crestObj(reconstr, climate = "bio12", simplify = TRUE,</span></span>
+<span><span class="co">#&gt; uncertainties = c(0.4, : No values available to calculate anomalies. Provide</span></span>
+<span><span class="co">#&gt; coordinates to crest.get_modern_data() to allow crestr to extract the local</span></span>
+<span><span class="co">#&gt; conditions, or assign values using 'anomaly.base = c(val1, val2, ...)' in the</span></span>
+<span><span class="co">#&gt; plot function.'</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot-1.png" alt="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided." width="480"><img src="get-started_files/figure-html/plot-2.png" alt="**Fig. 7**: (top) Reconstruction of mean annual temperature with the full distribution of the uncertainties. (bottom) Reconstruction of annual precipitation using the simplified visualisation option. In both cases, different levels of uncertainties can be provided." width="480"><p class="caption">
 <strong>Fig. 7</strong>: (top) Reconstruction of mean annual temperature

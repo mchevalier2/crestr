@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -94,15 +94,15 @@
 <span>  <span class="va">x</span>,</span>
 <span>  taxanames <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">inputs</span><span class="op">$</span><span class="va">taxa.name</span>,</span>
 <span>  climate <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">parameters</span><span class="op">$</span><span class="va">climate</span>,</span>
-<span>  col.density <span class="op">=</span> <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">plasma</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>,</span>
+<span>  col.density <span class="op">=</span> <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">plasma</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,</span>
 <span>  col.climate <span class="op">=</span> <span class="fu">viridis</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">viridis</a></span><span class="op">(</span><span class="fl">22</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">:</span><span class="fl">20</span><span class="op">]</span>,</span>
 <span>  save <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  filename <span class="op">=</span> <span class="st">"taxaCharacteristics.pdf"</span>,</span>
 <span>  as.png <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  png.res <span class="op">=</span> <span class="fl">300</span>,</span>
 <span>  width <span class="op">=</span> <span class="fl">7.48</span>,</span>
-<span>  w0 <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  height <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">climate</span><span class="op">)</span>,</span>
+<span>  w0 <span class="op">=</span> <span class="fl">0.2</span>,</span>
+<span>  height <span class="op">=</span> <span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">climate</span><span class="op">)</span> <span class="op">+</span> <span class="va">h0</span>,</span>
 <span>  h0 <span class="op">=</span> <span class="fl">0.4</span>,</span>
 <span>  add_modern <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  resol <span class="op">=</span> <span class="fl">0.25</span></span>

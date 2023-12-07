@@ -78,7 +78,7 @@ contact me at <chevalier.manuel@gmail.com> or open a discussion
 The package is fully documented and the help of each function can be
 accessed with `?function`. More detailed information as well as
 documented examples are available from
-**<https://mchevalier2.github.io/crestr/>**.
+**<https://www.manuelchevalier.com/crestr/>**.
 
 ### A Quick Example
 
@@ -141,7 +141,7 @@ climate variable. In the example, *bio1* (mean annual temperature) and
 *bio12* (annual precipitation) will be reconstructed. The dataset has
 been designed so that Taxa 1, 2, 3 and 7 are sensitive to *bio1* while
 Taxa 1, 4, 5 and 7 are sensitive to *bio12*. Check
-<https://mchevalier2.github.io/crestr/articles/get-started.html> for
+<https://www.manuelchevalier.com/crestr/articles/get-started.html> for
 more details on this selection.
 
 ``` r

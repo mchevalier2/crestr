@@ -159,7 +159,7 @@ Note that _Taxon7_ is indicated with 1s but, as no data are available to calibra
 
 ### Data extraction and calibration
 
-To illustrate the process, we will reconstruct _bio1_ (mean annual temperature) and _bio12_ (annual precipitation) from these pseudo data. The complete description of the different parameters is available [here](https://mchevalier2.github.io/crestr/reference/index.html).
+To illustrate the process, we will reconstruct _bio1_ (mean annual temperature) and _bio12_ (annual precipitation) from these pseudo data. The complete description of the different parameters is available [here](https://www.manuelchevalier.com/crestr/reference/index.html).
 
 
 The first step of any reconstruction is to extract the species distribution data. This is done with the _crest.get\_modern\_data()_ function. This function creates a nested R object `reconstr` that contains all the information that will be updated in the following steps. All the functions from the package require such an object. For more details, check the _crestObj_ vignette. We can also verify that the _selectedTaxa_ table has been modified for _Taxon7_.
