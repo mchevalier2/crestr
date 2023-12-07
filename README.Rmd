@@ -150,7 +150,7 @@ recons
 The climate sampled by the data can be graphically represented for a quick
 assessment of the calibration dataset.
 
-```{r plot-climate-space, out.width="100%", fig.height=6, fig.width=6}
+```{r plot-climate-space, out.width="100%", fig.height=7, fig.width=7}
 plot_climateSpace(recons)
 ```
 
