@@ -83,7 +83,7 @@ additional functionalities to incorporate to the package, please contact me at
 
 The package is fully documented and the help of each function can be accessed
 with `?function`. More detailed information as well as documented examples are
-available from **<https://mchevalier2.github.io/crestr/>**.
+available from **<https://www.manuelchevalier.com/crestr/>**.
 
 ### A Quick Example
 
@@ -120,7 +120,7 @@ Finally, unique sets of taxa can be specified to reconstruct each climate
 variable. In the example, *bio1* (mean annual temperature) and *bio12* (annual
 precipitation) will be reconstructed. The dataset has been designed so that
 Taxa 1, 2, 3 and 7 are sensitive to *bio1* while Taxa 1, 4, 5 and 7 are sensitive
-to *bio12*. Check <https://mchevalier2.github.io/crestr/articles/get-started.html>
+to *bio12*. Check <https://www.manuelchevalier.com/crestr/articles/get-started.html>
 for more details on this selection.
 
 ```{r data_preview_selection}

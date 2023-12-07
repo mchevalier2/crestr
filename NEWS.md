@@ -1,4 +1,4 @@
-# crestr 1.3.0.9000
+# crestr 1.3.0
 
 * The dependencies to `rgdal`, `sp` and `raster` were replaced to a single dependency to `terra` as these packages are being retired.
 * New functions and features:
@@ -14,6 +14,7 @@
     * The results can be plotted as anomalies.
     * Enabling to select samples by age in `plot.speciesCharacteristics()`
     * The correct filename extensions (.pdf or .png) is automatically in all plotting functions.
+    * Many visual improvements when exporting the plots to pdf or png.
 * Major issues:
     * Fixing a major stability issue regarding the connection test (does not impact any result derived from the package)
     * Reliance on an active internet connection has been significantly reduced.

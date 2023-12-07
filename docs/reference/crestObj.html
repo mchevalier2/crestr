@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.0</span>
       </span>
     </div>
 
@@ -125,6 +125,7 @@
 <span>  geoWeighting <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  climateSpaceWeighting <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  climateSpaceWeighting.type <span class="op">=</span> <span class="st">"linear"</span>,</span>
+<span>  climateWithObs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  selectedTaxa <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  distributions <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  presenceThreshold <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -278,6 +279,13 @@ should be corrected for the modern distribution of the climate space
 <dd><p>A correction factor for the clame space
 weighting correction to limit the edge effects. Either 'linear'
 (default), 'sqrt' or 'log'.</p></dd>
+
+
+<dt>climateWithObs</dt>
+<dd><p>A boolean to indicate whether all climate values from
+the calibration dataset be included (<code>FALSE</code>, default) or only the
+climate values that corresponds to proxy observations (<code>TRUE</code>).
+Only useful in if the climate space weighting is activated.</p></dd>
 
 
 <dt>selectedTaxa</dt>
