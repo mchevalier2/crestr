@@ -201,6 +201,7 @@ recons
 #> *       ________________________________________ bio12: 50
 #> *   x Weighting of the climate space ........... TRUE
 #> *       Using a linear correction
+#> *   x Restriction to climate with observations . FALSE
 #> *   x Shape of the PDFs ........................ bio1: normal
 #> *     __________________________________________ bio12: lognormal
 #> *
