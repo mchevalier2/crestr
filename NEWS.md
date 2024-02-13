@@ -1,5 +1,8 @@
 # crestr 1.3.1.9000
 
+* Including a note when loading package `.onAttach()`.
+    * Message: "From May 2024, the cloud-based gbif4crest calibration database will be taken down. The datbase will remain accessible through the dbDownload() function."
+
 # crestr 1.3.0
 
 * The dependencies to `rgdal`, `sp` and `raster` were replaced to a single dependency to `terra` as these packages are being retired.

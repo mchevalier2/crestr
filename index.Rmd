@@ -24,6 +24,12 @@ The goal of `crestr` is to produce probabilistic reconstructions of past climate
 > **_NOTE:_**  If you notice any bug, or if you would like to see some specific
 functions implemented, you can contact me at <chevalier.manuel@gmail.com>.
 
+<br >
+
+
+> **_NOTE 2:_**  From May 2024, the cloud-based gbif4crest calibration
+database will be taken down. The database will remain accessible
+through the dbDownload() function.
 
 ## Installation
 

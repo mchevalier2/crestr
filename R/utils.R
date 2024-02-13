@@ -444,3 +444,12 @@ crest.simplify <- function(x, optima=TRUE) {
     colnames(df) <- c(x$inputs$x.name, x$parameters$climate)
     return(df)
 }
+
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage('\nIMPORTANT: From May 2024, the cloud-based gbif4crest calibration\ndatabase will be taken down. The database will remain accessible\nthrough the dbDownload() function.\n\n')
+}
+
+#.onLoad <- function(libname, pkgname){
+#    msg <-
+#    cat(msg)
+#}
