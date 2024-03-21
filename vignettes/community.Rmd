@@ -63,6 +63,6 @@ Since 2022, I started to organise hands-on training workshops for _crestr_. Gene
 
 The slides, data and scripts used at previous crestr workshops are accessible here:
 
-* INQUA Rome, Italy, July 2023 (crestr v1.3.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-INQUA2023.pdf) [[data & script]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-INQUA2023-material.zip)
+* INQUA Rome, Italy, July 2023 (crestr v1.3.x): [[slides]](https://github.com/mchevalier2/mchevalier2.github.io/blob/94628034c5ba32d49cce3aeca20de4bb57b965ac/assets/openscience/workshops/Crestr-INQUA2023.pdf) [[data & script]](https://github.com/mchevalier2/mchevalier2.github.io/blob/94628034c5ba32d49cce3aeca20de4bb57b965ac/assets/openscience/workshops/Crestr-INQUA2023-material.zip)
 * IPA-IAL Bariloche, Argentina, December 2022 (crestr v1.2.x): [[slides]](https://github.com/mchevalier2/mchevalier2.github.io/blob/94628034c5ba32d49cce3aeca20de4bb57b965ac/assets/openscience/workshops/Crestr-IAL-IPA-2022.pdf)
-* SASQUA St-Lucia, South Africa, September 2022 (crestr v1.2.x): [[slides]](https://github.com/mchevalier2/crestr/raw/master/webpage/workshops/Crestr-SASQUA-2022.pdf)
+* SASQUA St-Lucia, South Africa, September 2022 (crestr v1.2.x): [[slides]](https://github.com/mchevalier2/mchevalier2.github.io/blob/94628034c5ba32d49cce3aeca20de4bb57b965ac/assets/openscience/workshops/Crestr-SASQUA-2022.pdf)
