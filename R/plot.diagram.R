@@ -87,7 +87,11 @@ plot_diagram <- function(x, bars=FALSE,
 
     if (length(col) != ncol(x)-1) col = base::rep_len(col,ncol(x)-1)
 
-    cs <- apply(abs(x[, -1]), 2, max)
+    if(ncol(x) > 2) {
+        cs <- apply(abs(x[, -1]), 2, max)
+    } else {
+        cs <- max(abs(x[, 2]))
+    }
     cs <- ifelse(cs > yax_incr, cs, yax_incr)
     cs <- c(0, 0, cumsum(cs + sum(cs)*0.01 ) )# Adding 1% of the total space to each row
 

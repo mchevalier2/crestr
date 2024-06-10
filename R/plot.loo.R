@@ -149,17 +149,21 @@ plot_loo <- function( x, optima=TRUE,
                 df <- df[, c(1, order(apply(df[, -1], 2, function(x) mean(x[abs(x)>0])), decreasing = ifelse(sort=='incr', FALSE, TRUE)) + 1)]
             }
 
-            df <- df[, c(1, which(apply(df[, -1], 2, function(x) mean(abs(x)[abs(x)>0])) >= filter) + 1)]
+            w <- which(apply(df[, -1], 2, function(x) mean(abs(x)[abs(x)>0])) >= filter)
+            if(length(w) == 0) {
+                warning("No taxa remain after filtering. Adjust the filter value to include more taxa.")
+            } else {
+                df <- df[, c(1, w + 1)]
+                plot_diagram(df, bars=TRUE,
+                           save=save, filename=paste0(strsplit(filename, ifelse(as.png, '.png', '.pdf'))[[1]],'_',clim,ifelse(as.png, '.png', '.pdf')),
+                           width=width, height=height, as.png=as.png, png.res=png.res,
+                           yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
+                           tickAtSample=tickAtSample,
+                           col_pos=col_pos[clim], col_neg=col_neg[clim],
+                           title=title2, src='loo')
 
-            plot_diagram(df, bars=TRUE,
-                       save=save, filename=paste0(strsplit(filename, ifelse(as.png, '.png', '.pdf'))[[1]],'_',clim,ifelse(as.png, '.png', '.pdf')),
-                       width=width, height=height, as.png=as.png, png.res=png.res,
-                       yax_incr=yax_incr2, bar_width=bar_width2, xlim=xlim,
-                       tickAtSample=tickAtSample,
-                       col_pos=col_pos[clim], col_neg=col_neg[clim],
-                       title=title2, src='loo')
-
-            rs[[clim]] <- sort(unlist(lapply(x$reconstructions[[clim]]$loo, function(x) return(mean(x[abs(x)>0])))))
+                rs[[clim]] <- sort(unlist(lapply(x$reconstructions[[clim]]$loo, function(y) if(!unique(as.vector(is.na(y)))){return(mean(y[, var_to_plot][abs(y[, var_to_plot])>0]))})))
+            }
         }
         return(invisible(rs))
 
