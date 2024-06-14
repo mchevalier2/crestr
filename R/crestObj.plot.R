@@ -257,6 +257,7 @@ plot.crestObj <- function(x,
                 graphics::axis(1, cex.axis=6/7, lwd.ticks=0.8, tck=-0.01)
             }
 
+            graphics::box()
         } else {
 
             graphics::par(mar = c(2, 2.2, 3, 0.5), lwd=0.8)

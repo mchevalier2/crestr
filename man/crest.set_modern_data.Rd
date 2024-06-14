@@ -10,7 +10,7 @@ crest.set_modern_data(
   df = NA,
   climate_space = NA,
   weight = FALSE,
-  minGridCells = 0,
+  minGridCells = 20,
   selectedTaxa = NA,
   site_info = c(NA, NA),
   site_name = NA,

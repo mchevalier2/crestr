@@ -2,6 +2,11 @@
 
 * Including a note when loading package `.onAttach()`.
     * Message: "From May 2024, the cloud-based gbif4crest calibration database will be taken down. The datbase will remain accessible through the dbDownload() function."
+* Fixing issues with `crest.set_modern_data()`
+    * Ok to pass input data in tibble format.
+    * Logging of taxa assignment is fixed.
+    * Including minGridCell in the algorithm.
+    * Adding a global warning if mingridcell is <15, and an error is <2.
 
 # crestr 1.3.0
 

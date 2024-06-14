@@ -265,6 +265,17 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     }
 
     if(verbose) cat('[OK]\n  <> Checking/Defining selectedTaxa ........ ')
+
+    if(minGridCells) {
+        if(minGridCells < 2) {
+            cat("[FAILED]\n\n")
+            stop("minGridCell must be at least higher than 2, even if a minimum of 15-20 is recommended.\n")
+        }
+        if(minGridCells < 15) {
+            warning("minGridCell is recommended to be higher than 15-20.\n")
+        }
+    }
+
     if (is.na(as.vector(t(selectedTaxa))[1])) {
         selectedTaxa <- data.frame(matrix(rep(1, length(climate) * length(taxa.name)),
           ncol = length(climate)
@@ -632,7 +643,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         cs_idx <- paste(crest$modelling$biome_space[, 'longitude'], crest$modelling$biome_space[, 'latitude'], sep='_')
         crest$modelling$biome_space <- crest$modelling$biome_space[cs_idx %in% df, ]
     }
-    
+
     if (ai.sqrt & 'ai' %in% crest$parameters$climate) {
         crest$modelling$climate_space[, "ai"] <- sqrt(crest$modelling$climate_space[, "ai"])
         for (tax in crest$inputs$taxa.name) {

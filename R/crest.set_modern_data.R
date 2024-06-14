@@ -46,7 +46,7 @@ crest.set_modern_data <- function( distributions, climate,
                                    df = NA,
                                    climate_space = NA,
                                    weight = FALSE,
-                                   minGridCells = 0,
+                                   minGridCells = 20,
                                    selectedTaxa = NA,
                                    site_info = c(NA, NA),
                                    site_name = NA,
@@ -58,12 +58,22 @@ crest.set_modern_data <- function( distributions, climate,
 
     if(verbose) cat('\n## Prepping data for database extraction\n')
 
-    if(verbose) cat('  <> Checking distributions ................ ')
+    if(verbose) cat('  <> Checking parameters ................... ')
 
     if(weight) {
         if(! 'weight' %in% colnames(distributions) ) {
             cat("[FAILED]\n\n")
             stop("You selected 'weight=TRUE' but did not provide weights in your distribution data frame.\n")
+        }
+    }
+
+    if(minGridCells) {
+        if(minGridCells < 2) {
+            cat("[FAILED]\n\n")
+            stop("minGridCell must be at least higher than 2, even if a minimum of 15-20 is recommended.\n")
+        }
+        if(minGridCells < 15) {
+            warning("minGridCell is recommended to be higher than 15-20.\n")
         }
     }
 
@@ -93,6 +103,10 @@ crest.set_modern_data <- function( distributions, climate,
             colnames(climate_space)[2] = 'latitude'
         }
     }
+
+    if(methods::is(distributions, 'tbl')) distributions <- as.data.frame(distributions)
+    if(methods::is(df, 'tbl'))            climate_space <- as.data.frame(climate_space)
+    if(methods::is(df, 'tbl'))            df            <- as.data.frame(df)
 
     taxa.name <- unique(as.character(distributions[, 'ProxyName']))
     if (is.data.frame(df)) taxa.name <- unique(c(taxa.name, colnames(df)[-1]))
@@ -189,11 +203,11 @@ crest.set_modern_data <- function( distributions, climate,
             for (tax in colnames(crest$inputs$df)[w]) {
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
                 message <- "All percentages equal to 0."
-                if (! message %in% names(crest$misc[['taxa_notes']])) {
-                    crest$misc[['taxa_notes']][[message]] <- c()
+                if (! message %in% names(taxa_notes)) {
+                    taxa_notes[[message]] <- c()
                     warning(paste0("The percentages of one or more taxa were always 0 and have been removed accordingly. Check 'x$misc$taxa_notes' for details."))
                 }
-                crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
+                taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
             }
         }
 
@@ -202,11 +216,11 @@ crest.set_modern_data <- function( distributions, climate,
             for (tax in taxa.name[w]) {
                 crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
                 message <- "Taxon not recorded in the data file."
-                if (! message %in% names(crest$misc[['taxa_notes']])) {
-                    crest$misc[['taxa_notes']][[message]] <- c()
+                if (! message %in% names(taxa_notes)) {
+                    taxa_notes[[message]] <- c()
                     warning(paste0("One or more taxa were are not recorded in the data file. Check 'x$misc$taxa_notes' for details."))
                 }
-                crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
+                taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
             }
         }
 
@@ -214,20 +228,41 @@ crest.set_modern_data <- function( distributions, climate,
         stop("'df' should be a data.frame.")
     }
 
+    crest$inputs$taxa.name <- crest$inputs$taxa.name[crest$inputs$taxa.name %in% rownames(crest$inputs$selectedTaxa)[apply(crest$inputs$selectedTaxa, 1, sum)>=0]]
+
     if(verbose) cat('[OK]\n  <> Formatting the modern distributions ... ')
     stats::na.omit(distributions)
 
     crest$modelling$distributions <- list()
     w <- which(colnames(distributions) %in% c('taxonid', 'longitude', 'latitude', climate))
     for (tax in crest$inputs$taxa.name) {
-        if(weight) {
-            tax.rows <- which(distributions[, 'ProxyName'] == tax)
-            dupl.rows <- rep(tax.rows, times=base::ceiling(distributions[tax.rows, 'weight']))
-            crest$modelling$distributions[[tax]] <- distributions[dupl.rows, w]
-            crest$parameters$weightedPresences <- TRUE
+        #print(tax)
+        dstrbtn <- distributions[distributions[, 'ProxyName'] == tax, w]
+        #print(dstrbtn)
+        #print(nrow(dstrbtn))
+        if(nrow(dstrbtn) < minGridCells) {
+            #print('heeeere')
+            crest$modelling$distributions[[tax]] <- NA
+            crest$inputs$selectedTaxa[tax, ] <- rep(-1, length(climate))
+            message <- "Present but insufficient data in the study area to fit a pdf"
+            if (! message %in% names(taxa_notes)) {
+                #print('in warning')
+                taxa_notes[[message]] <- c()
+                warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells'. Use PSE_log() with the output of this function for details."))
+            }
+            taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
+
         } else {
-            crest$modelling$distributions[[tax]] <- distributions[distributions[, 'ProxyName'] == tax, w]
-            crest$parameters$weightedPresences <- FALSE
+            ##print('tadada')
+            if(weight) {
+                tax.rows <- which(distributions[, 'ProxyName'] == tax)
+                dupl.rows <- rep(tax.rows, times=base::ceiling(distributions[tax.rows, 'weight']))
+                crest$modelling$distributions[[tax]] <- distributions[dupl.rows, w]
+                crest$parameters$weightedPresences <- TRUE
+            } else {
+                crest$modelling$distributions[[tax]] <- dstrbtn
+                crest$parameters$weightedPresences <- FALSE
+            }
         }
     }
 

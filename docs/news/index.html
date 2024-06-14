@@ -89,6 +89,12 @@
 <ul><li>Including a note when loading package <code>.onAttach()</code>.
 <ul><li>Message: “From May 2024, the cloud-based gbif4crest calibration database will be taken down. The datbase will remain accessible through the dbDownload() function.”</li>
 </ul></li>
+<li>Fixing issues with <code><a href="../reference/crest.set_modern_data.html">crest.set_modern_data()</a></code>
+<ul><li>Ok to pass input data in tibble format.</li>
+<li>Logging of taxa assignment is fixed.</li>
+<li>Including minGridCell in the algorithm.</li>
+<li>Adding a global warning if mingridcell is &lt;15, and an error is &lt;2.</li>
+</ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.0" id="crestr-130">crestr 1.3.0<a class="anchor" aria-label="anchor" href="#crestr-130"></a></h2>
