@@ -72,7 +72,9 @@ accClimateVariables <- function(v=NA, domain=NA) {
     if(!is.na(v[1])) {
         if(v[1] %in% res[,2]) {
             w=which(res[,2] == v[1])
-            return(c(res[w,1], res[w,2], res[w,3], res[w,4]))
+            return(matrix(c(res[w,1], res[w,2], res[w,3], res[w,4]), ncol=4))
+        } else {
+            return(matrix(c(0, v, v, ''), ncol=4))
         }
     }
     w <- 1:nrow(res)

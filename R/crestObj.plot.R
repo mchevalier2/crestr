@@ -174,7 +174,7 @@ plot.crestObj <- function(x,
             ylim2 <- ylim[c(idx * 2 - 1, idx * 2)]
         }
 
-        climate_names <- accClimateVariables()
+        climate_names <- accClimateVariables(v=clim)
 
         if(is.character(x$inputs$x) | is.factor(x$inputs$x)) {
             if(simplify) warning("The plotting function is not adapted to non-numeric x values. The sample names were replaced by numeric indexes.")
