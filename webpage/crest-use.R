@@ -25,7 +25,7 @@ sites.eqearth=sp::spTransform(sites, sp::CRS("+proj=eqearth +lon_0=0 +x_0=0 +y_0
 
 
 
-max_year=2023
+max_year=2024
 png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
     layout(matrix(c(1,2), ncol=2, byrow=TRUE), width=1, height=1)
 
@@ -39,7 +39,7 @@ png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-01.png", widt
     }
     par(mgp=c(0,0.5,0))
     axis(1, at=c(2013, max_year+1), labels=FALSE, tck=0)
-    axis(1, at=seq(2013.5, max_year+0.5, 1), labels=2013:max_year)
+    axis(1, at=seq(2013.5, max_year+0.5, 1), labels=2013:max_year, cex.axis=0.8)
 
     par(mgp=c(0.5,0.7,0))
     axis(2, at=seq(0, max(table(dat.unique.study[, 'Year'])), 1), las=2)
@@ -48,9 +48,9 @@ png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-01.png", widt
 
 
     par(mar=c(2,1,2,4), cex=1, ps=8, xaxs='i', yaxs='i', cex.axis=0.9)
-    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 6), ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=1.5, xlab='', ylab='')
+    plot(0, 0, type='n', frame=FALSE, axes=FALSE, xlim=c(0, 7), ylim=c(0, max(table(dat.unique.site[, 'Continent']))), main='# Sites / Continent', cex.main=1.5, xlab='', ylab='')
     pos <- 0
-    for(r in c('Africa', 'Asia', 'Europe', 'N. America', 'S. America', 'Oceania')) {
+    for(r in c('Africa', 'Antarctica', 'Asia', 'Europe', 'N. America', 'S. America', 'Oceania')) {
         rect(pos+0.1, 0, pos+0.9, sum(dat.unique.site[, 'Continent'] == r), col='goldenrod3')
         pos <- pos + 1
         print(c(r, sum(dat.unique.site[, 'Continent'] == r)))
@@ -58,7 +58,7 @@ png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-01.png", widt
     }
     par(mgp=c(0,0.5,0))
     axis(1, at=c(0,6), labels=FALSE, tck=0)
-    axis(1, at=seq(0.5, 5.5, 1), labels=c('Africa', 'Asia', 'Europe', 'N. Amer.', 'S. Amer.', 'Oceania'))
+    axis(1, at=seq(0.5, 6.5, 1), labels=c('Africa', 'Antarctica', 'Asia', 'Europe', 'N. Amer.', 'S. Amer.', 'Oceania'), cex.axis=0.8)
     par(mgp=c(0.5,0.7,0))
     axis(4, at=seq(0, max(table(dat.unique.site[, 'Continent'])), 3), las=2)
     axis(4, at=c(0, max(table(dat.unique.site[, 'Continent']))), labels=FALSE, tck=0)
@@ -91,12 +91,12 @@ png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-03.png", widt
 
 
     w <- timecov[, 1] >= 1000
-    plot(1,0, type='n', frame=FALSE, axes=FALSE, ylim=c(0, max(timecov[w, 2]))*1.05, xlim=range(timecov[w, 1]), log='x', main='\n# Reconstructions across time (years BP)', cex.main=1.5, xlab='', ylab='')
+    plot(1,0, type='n', frame=FALSE, axes=FALSE, ylim=c(0, max(timecov[w, 2]))*1.05, xlim=range(timecov[w, 1]), log='x', main='\n# Reconstructions across time (thousand of years BP)', cex.main=1.5, xlab='', ylab='')
     polygon(c(1000, timecov[w, 1], max(timecov[w, 1])), c(0, timecov[w, 2], 0))
     par(mgp=c(0,0.5,0))
-    axis(1, at=c(1001, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000), labels=c('1000', '2000', '5000', '10,000', '20,000', '50,000', '100,000', '200,000', '500,000', '1,000,000', '2,000,000', '5,000,000', '10,000,000', '20,000,000'))
+    axis(1, at=c(1001, 2000, 5000, 10000, 20000, 50000, 100000, 200000, 500000, 1000000, 2000000, 5000000, 10000000, 20000000, 50000000), labels=c('1', '2', '5', '10', '20', '50', '100', '200', '500', '1,000', '2,000', '5,000', '10,000', '20,000', '50,000'))
     par(mgp=c(0.5,0.7,0))
-    axis(2, at=seq(0, max(timecov[w, 2]), 2), las=2)
+    axis(2, at=seq(0, max(timecov[w, 2]), 4), las=2)
     axis(2, at=c(0, max(timecov[w, 2])), labels=FALSE, tck=0)
 
 }  ;  dev.off()
