@@ -17,44 +17,44 @@ knitr::opts_chunk$set(
 
 # **crestr** An R package to perform probabilistic palaeoclimate reconstructions from palaeoecological datasets
 
-The goal of `crestr` is to produce probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2022)](https://cp.copernicus.org/articles/18/821/2022/). The approach is based on the estimation of responses of studies bio-proxy studied to climate parameters using probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://www.manuelchevalier.com/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://www.manuelchevalier.com/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
+`crestr` produces probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2022)](https://cp.copernicus.org/articles/18/821/2022/). `crestr` works by analysing how certain biological indicators (like plant or animal remains) respond to climate factors, using statistical methods to estimate these relationships. These relationships are mdelled as probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://www.manuelchevalier.com/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://www.manuelchevalier.com/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
+
+
+**Why chose `crestr`?** Unlike traditional methods, crestr uses probabilistic techniques to provide more accurate and flexible climate reconstructions. **Its focus on accessibility means you don’t need to be an expert coder to get meaningful results.**
+
 
 <br >
 
-> **_NOTE:_**  If you notice any bug, or if you would like to see some specific
-functions implemented, you can contact me at <chevalier.manuel@gmail.com>.
-
-<br >
-
-
-> **_NOTE 2:_**  From May 2024, the cloud-based gbif4crest calibration
-database will be taken down. The database will remain accessible
-through the dbDownload() function.
+> **_NOTE:_** While active development of crestr has concluded, its robust features continue to provide valuable insights for palaeoclimate research. The available documentation and resources remain accessible for independent use. In addition, I am committed to maintaining this bug-free. As such, please reach out at <paleo@manuelchevalier.com> if you encounter technical issues.
 
 ## Installation
 
-The package is currently unavailable from CRAN. However, you can install the latest development version (1.3.0) from [GitHub](https://github.com/) with:
+Ready to explore the climate history hidden in your data? Install `crestr` now and leverage its robust tools for your research.
+
+The package is available from [GitHub](https://github.com/mchevalier2/crestr/) and can be installed as follow:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
 
-Or the latest stable version archived by CRAN. If you use that version, keep in mind that not all functionalities will be available (See News page).
-
-``` r
-if(!require(devtools)) install.packages("devtools")
-devtools::install_version("crestr", version = "1.2.0", repos = "https://cran.us.r-project.org")
-```
 
 
-## _crestr_ in a glimpse
+## _crestr_ in a nutshell
 
-You can now quickly visualise how to run a reconstruction with the _crestr_ cheat sheet. This document summarises the main functionalities of the package and illustrates the main key step you will have to follow to reconsturct environmental parameters from your data. [download here](https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_v1.3.0.pdf)
+Key advantages of `crestr`:
 
-```{r cheatsheet, echo=FALSE, out.width = '60%', fig.align = "center", out.extra='style="background:none; border:none; box-shadow:none;"'}
-knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_thumbnail.png")
-```
+- Probabilistic climate reconstruction ensures reliable and flexible outcomes.
+- Adaptable to diverse datasets, from pollen to marine microfossils.
+- Generation of clear and engaging representations of probabilistic results.
+- Validated by its application in many peer-reviewed studies (see below).
+
+To get started, refer to the `crestr` cheat sheet, which provides step-by-step guidance on using the package. This document summarises the main functionalities of the package and illustrates the main key step you will have to follow to reconstruct environmental parameters from your data. [[download here]](https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_v1.3.0.pdf)
+
+`
+<a href="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_v1.3.0.pdf" target="_blank">
+  <img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crestr_cheatsheet_thumbnail.png" width="60%" style="background:none; border:none; box-shadow:none;">
+</a>
 
 ## Example applications
 
@@ -64,7 +64,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png")
 ```
 
-_(A) density of presence records available in my calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Annual precipitation reconstructions from Lake Van, Turkey ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Mean annual temperature reconstruction from Laguna Fùquene, Colombia (unpublished) and (D) Mean Annual temperature reconstruction from marine core MD96-2048 ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
+_Real-world examples of how `crestr` has been used. (A) density of presence records available in the gbif4crest_02 calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Lake Van, Turkey: Reconstructed annual rainfall patterns ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Laguna Fùquene, Colombia: Estimated average yearly temperatures. (unpublished) and (D) Marine Core MD96-2048 (off southeastern Africa): 800,000 year-long temperature changes in marine environments ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
 
 ## CREST in the scientific literature
@@ -73,8 +73,15 @@ _(A) density of presence records available in my calibration dataset upscaled at
 ```{r img3, echo=FALSE, out.width = '100%', fig.align = "center", out.extra='style="background:none; border:none; box-shadow:none;"'}
 knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png")
 ```
+_Location of real_world crest-based climate reconstructions. All these examples showcase CREST’s ability to contribute to global climate research and advance our understanding of regional environmental changes._
 
+
+- **2024**
+    - Trasune, L., Väliranta, M., Stivrins, N., Amon, L., Schenk, F., Salonen, J.S., 2024. A comparison of plant macrofossil-based quantitative climate reconstruction methods: A case study of the lateglacial Baltic States. Quaternary Science Reviews 338, 108811. https://doi.org/10.1016/j.quascirev.2024.108811
+    - McCoy, J., Gibson, M.E., Hocking, E.P., O’Keefe, J.M.K., Riding, J.B., Roberts, R., Campbell, S., Abbott, G.D., Pound, M.J., 2024. Temperate to tropical palaeoclimates on the northwest margin of Europe during the middle Cenozoic. Palaeontol Electron. https://doi.org/10.26879/1349
+    - O’Keefe, J.M.K., Pound, M.J., Romero, I.C., Nuñez Otaño, N.B., Gibson, M.E., McCoy, J., Alden, M.E., Fairchild, C.J., Fitzpatrick, J., Hodgson, E., Horsfall, T., Jones, S., Lennex-Stone, J.E., Marsh, C.A., Patel, A.A., Spears, T.M., Tarlton, L., Smallwood, L.F., VanderEspt, O.L., Cabrera, J.R., Eble, C.F., Rember, W.C., Starnes, J.E., Alford, M.H., Brink, A., Warny, S., 2024. Summer-Wet Hydrologic Cycle during the Middle Miocene of the United States: New Evidence from Fossil Fungi. Research 7, 0481. https://doi.org/10.34133/research.0481
 - **2023**
+    - Pilie, M., Gibson, M.E., Romero, I.C., Nuñez Otaño, N.B., Pound, M.J., O’Keefe, J.M.K., Warny, S., 2023. Miocene Climatic Optimum fungal record and plant-based CREST climatic reconstruction from southern McMurdo Sound, Antarctica. J. Micropalaeontol. 42, 291–307. https://doi.org/10.5194/jm-42-291-2023
     - Hui, Z., Wei, X., Xue, Z., Zhao, X., Chevalier, M., Lu, X., Zhang, J., Peng, T., Chen, Y., Chen, P., 2023,Middle Miocene Evolution of East Asian Summer Monsoon Precipitation in the Northeast Part of the Tibetan Plateau Based on a Quantitative Analysis of Palynological Records. Palaeogeography, Palaeoclimatology, Palaeoecology, pp 111808. [10.1016/j.palaeo.2023.111808](https://doi.org/10.1016/j.palaeo.2023.111808).
     - Hui, Z., Liu, J., Chevalier, M., Wei, X., Chen, P., Zhan, J., Peng, T., Zhou, X., 2023, Multiple forcing on Late Miocene East Asian Summer Monsoon Precipitation Variability in NE Tibetan Plateau. CATENA 221, 106752. [10.1016/j.catena.2022.106752](https://doi.org/10.1016/j.catena.2022.106752).
 - **2022**
@@ -111,7 +118,7 @@ knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/ma
 knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png")
 ```
 
-Last update: 03/01/2023
+Last update: 03/01/2025
 
 N.B.: This list is as exhaustive as possible, but some studies may be missing. Contact me if you want your study to be added.
 

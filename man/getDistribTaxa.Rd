@@ -24,7 +24,7 @@ getDistribTaxa(
   year_min = 1900,
   year_max = 2021,
   nodate = TRUE,
-  type_of_obs = c(1, 2, 3, 8, 9),
+  type_of_obs = c(1, 2, 7, 8),
   dbname = "gbif4crest_02"
 )
 }

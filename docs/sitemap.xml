@@ -178,6 +178,9 @@
     <loc>/reference/export_pdfs.html</loc>
   </url>
   <url>
+    <loc>/reference/f_locid.html</loc>
+  </url>
+  <url>
     <loc>/reference/find.original.name.html</loc>
   </url>
   <url>
@@ -200,6 +203,9 @@
   </url>
   <url>
     <loc>/reference/getRealmNames.html</loc>
+  </url>
+  <url>
+    <loc>/reference/getResol.html</loc>
   </url>
   <url>
     <loc>/reference/getSpeciesdiversity.html</loc>

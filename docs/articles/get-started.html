@@ -109,7 +109,7 @@
                         <h4 data-toc-skip class="author">Manuel
 Chevalier</h4>
             
-            <h4 data-toc-skip class="date">2024-06-17</h4>
+            <h4 data-toc-skip class="date">2025-01-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/get-started.Rmd" class="external-link"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -250,9 +250,8 @@ percentages.</p>
 <span><span class="co">#&gt; Sample_3   3      0      0     49      0     25     26      0</span></span>
 <span><span class="co">#&gt; Sample_4   4      0      0     37      0     27     36      0</span></span>
 <span><span class="co">#&gt; Sample_5   5      0      3     36      3     18     40      0</span></span>
-<span><span class="co">#&gt; Sample_6   6      2      2     25      0     21     50      0</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; Sample_6   6      2      2     25      0     21     50      0</span></span>
+<span></span>
 <span><span class="co">## the structure of the data frame</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">crest_ex</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    20 obs. of  8 variables:</span></span>
@@ -272,7 +271,7 @@ to link all the species producing undifferentiated pollen morphotypes in
 a single <em>pollen-type</em>. Here, the seven pseudo-taxa are
 ‘identified’ at the species level so that the table looks like the
 following:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">crest_ex_pse</span></span>
 <span><span class="co">#&gt;   Level      Family    Genus Species ProxyName</span></span>
 <span><span class="co">#&gt; 1     3 Randomaceae Randomus  Taxon1    Taxon1</span></span>
@@ -294,7 +293,7 @@ in one single table containing 1s (meaning “use this taxon for this
 variable”) and 0s (meaning “do not use this taxon for this variable”).
 Based on the description of the sensitivities of the pseudo-taxa (see
 above), it translates as follow:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">crest_ex_selection</span></span>
 <span><span class="co">#&gt;        bio1 bio12</span></span>
 <span><span class="co">#&gt; Taxon1    1     1</span></span>
@@ -329,7 +328,7 @@ package require such an object. For more details, check the
 <em>crestObj</em> vignette. We can also verify that the
 <em>selectedTaxa</em> table has been modified for <em>Taxon7</em>.</p>
 <p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span></span>
 <span>                        df <span class="op">=</span> <span class="va">crest_ex</span>, <span class="co"># The fossil data</span></span>
 <span>                   pse <span class="op">=</span> <span class="va">crest_ex_pse</span>, <span class="co"># The proxy-species equivalency table</span></span>
@@ -341,7 +340,7 @@ package require such an object. For more details, check the
 <span>             dbname <span class="op">=</span> <span class="st">"crest_example"</span>, <span class="co"># The database to extract the data</span></span>
 <span>                       verbose <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># Print status messages</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span><span class="op">$</span><span class="va">inputs</span><span class="op">$</span><span class="va">selectedTaxa</span></span>
 <span><span class="co">#&gt;        bio1 bio12</span></span>
 <span><span class="co">#&gt; Taxon1    1     1</span></span>
@@ -356,7 +355,7 @@ package require such an object. For more details, check the
 can be checked by printing the object. The information displayed is
 updated based on the reconstruction step.</p>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">reconstr</span>, as<span class="op">=</span><span class="st">'data_extracted'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * Summary of the crestObj named ``:</span></span>
@@ -387,7 +386,7 @@ compared to the intermediate values. The correction diminishes the
 effect of this distribution by upweighting rare values and
 down-weighting the most abundant ones.</p>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.calibrate.html">crest.calibrate</a></span><span class="op">(</span></span>
 <span>                            <span class="va">reconstr</span>, <span class="co"># A crestObj produced at the last stage</span></span>
 <span>        climateSpaceWeighting <span class="op">=</span> <span class="cn">TRUE</span>, <span class="co"># Correct the PDFs for the heteregenous</span></span>
@@ -396,7 +395,7 @@ down-weighting the most abundant ones.</p>
 <span>    shape <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"normal"</span>, <span class="st">"lognormal"</span><span class="op">)</span>, <span class="co"># The shape of the species PDFs</span></span>
 <span>                      verbose <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># Print status messages</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot_climate_space-1.png" alt="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here." width="100%"><p class="caption">
@@ -425,7 +424,7 @@ study area indicates that its distribution is not constrained by either
 spatial scale of the study were changed, some trends in the distribution
 would ultimately appear.</p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon2'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
@@ -444,17 +443,16 @@ Africa on this plot.
 done with the <em>crest.reconstruct()</em> function. The results can be
 accessed from <code>reconstr</code> as follow:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.reconstruct.html">crest.reconstruct</a></span><span class="op">(</span></span>
 <span>                        <span class="va">reconstr</span>, <span class="co"># A crestObj produced at the previous stage</span></span>
 <span>                  verbose <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># Print status messages</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "inputs"          "parameters"      "modelling"       "reconstructions"</span></span>
-<span><span class="co">#&gt; [5] "misc"</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; [5] "misc"</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span></span>
 <span><span class="co">#&gt;   Age   optima     mean</span></span>
 <span><span class="co">#&gt; 1   1 15.71142 15.69949</span></span>
@@ -462,16 +460,14 @@ accessed from <code>reconstr</code> as follow:</p>
 <span><span class="co">#&gt; 3   3 15.71142 15.69949</span></span>
 <span><span class="co">#&gt; 4   4 15.71142 15.69949</span></span>
 <span><span class="co">#&gt; 5   5 17.31463 17.29054</span></span>
-<span><span class="co">#&gt; 6   6 18.11623 18.12464</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; 6   6 18.11623 18.12464</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">optima</span><span class="op">)</span></span>
 <span><span class="co">#&gt; 'data.frame':    20 obs. of  3 variables:</span></span>
 <span><span class="co">#&gt;  $ Age   : num  1 2 3 4 5 6 7 8 9 10 ...</span></span>
 <span><span class="co">#&gt;  $ optima: num  15.7 15.7 15.7 15.7 17.3 ...</span></span>
-<span><span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.3 ...</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt;  $ mean  : num  15.7 15.7 15.7 15.7 17.3 ...</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">signif</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">likelihood</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span>, <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          [,1]     [,2]     [,3]     [,4]     [,5]     [,6]</span></span>
 <span><span class="co">#&gt; [1,] 0.00e+00 8.02e-02 1.60e-01 2.40e-01 3.21e-01 4.01e-01</span></span>
@@ -479,13 +475,11 @@ accessed from <code>reconstr</code> as follow:</p>
 <span><span class="co">#&gt; [3,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span></span>
 <span><span class="co">#&gt; [4,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span></span>
 <span><span class="co">#&gt; [5,] 8.41e-15 1.15e-14 1.57e-14 2.14e-14 2.92e-14 3.97e-14</span></span>
-<span><span class="co">#&gt; [6,] 1.45e-18 2.09e-18 3.01e-18 4.32e-18 6.19e-18 8.86e-18</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt; [6,] 1.45e-18 2.09e-18 3.01e-18 4.32e-18 6.19e-18 8.86e-18</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">reconstructions</span><span class="op">$</span><span class="va">bio1</span><span class="op">$</span><span class="va">likelihood</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  num [1:21, 1:500] 0.00 8.41e-15 8.41e-15 8.41e-15 8.41e-15 ...</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
+<span><span class="co">#&gt;  num [1:21, 1:500] 0.00 8.41e-15 8.41e-15 8.41e-15 8.41e-15 ...</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">reconstr</span>, as<span class="op">=</span><span class="st">'climate_reconstructed'</span><span class="op">)</span></span>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * Summary of the crestObj named ``:</span></span>
@@ -531,7 +525,7 @@ function (<strong>Fig. 7</strong>). As per the design, the first samples
 are rather cold and dry, while the last ones are relatively warm and
 humid. A cold and dry event interrupted the transition between the two
 states.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio12'</span>, simplify<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span>        uncertainties<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.4</span>, <span class="fl">0.6</span>, <span class="fl">0.8</span><span class="op">)</span>, as.anomaly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
@@ -554,9 +548,9 @@ both cases, different levels of uncertainties can be provided.
 and measures the impact removing that taxon had on the ‘true’
 reconstruction. The results can be plotted as a stratigraphic
 diagram.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/loo.html">loo</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_loo.html">plot_loo</a></span><span class="op">(</span><span class="va">reconstr</span>, climate <span class="op">=</span> <span class="st">'bio1'</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot_loo-1.png" alt="**Fig. 8**: Leave-One-Out diagram for the reconstructions of bio1." width="384"><p class="caption">
@@ -575,7 +569,7 @@ The <code>reconstruct</code> object is exported as an RData file to
 simplify future data reuse. In the following lines of code, replace
 ‘tempdir()’ with the location where the files should be saved.</p>
 <p><br></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/export.html">export</a></span><span class="op">(</span><span class="va">reconstr</span>, loc<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, dataname<span class="op">=</span><span class="st">'crest-test'</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">'crest-test'</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "bio1"             "bio12"            "crest-test.RData"</span></span></code></pre></div>

@@ -1,7 +1,5 @@
 # crestr 1.3.1.9000
 
-* Including a note when loading package `.onAttach()`.
-    * Message: "From May 2024, the cloud-based gbif4crest calibration database will be taken down. The datbase will remain accessible through the dbDownload() function."
 * Fixing issues with `crest.set_modern_data()`
     * Ok to pass input data in tibble format.
     * Logging of taxa assignment is fixed.
@@ -19,7 +17,7 @@
     * The example dataset is now available offline.
     * `loo()` can be run on a subset of the available variables to make the process faster.
     * `getTaxonomy()` can be used with a `crestObj()` to refine the search to a specific study area.
-    * INCLUDING A NEW PARAMETER TO `crest.calibrate()`: `climateSpaceWeighting.type`. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using 'sqrt' or 'log', instead of the default 'linear'.
+    * Including a new parameter to `crest.calibrate()`: `climateSpaceWeighting.type`. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using 'sqrt' or 'log', instead of the default 'linear'.
     * `crest.get_modern_data()` now extract geopolitcal and biogeophical information from the _gbif4crest_ database.
 * Plotting:
     * The results can be plotted as anomalies.

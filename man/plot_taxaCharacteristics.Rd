@@ -19,7 +19,7 @@ plot_taxaCharacteristics(
   height = 3 * length(climate) + h0,
   h0 = 0.4,
   add_modern = FALSE,
-  resol = 0.25
+  resol = getResol(x)
 )
 }
 \arguments{

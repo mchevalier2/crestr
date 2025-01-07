@@ -86,10 +86,7 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.1.9000" id="crestr-1319000">crestr 1.3.1.9000<a class="anchor" aria-label="anchor" href="#crestr-1319000"></a></h2>
-<ul><li>Including a note when loading package <code>.onAttach()</code>.
-<ul><li>Message: “From May 2024, the cloud-based gbif4crest calibration database will be taken down. The datbase will remain accessible through the dbDownload() function.”</li>
-</ul></li>
-<li>Fixing issues with <code><a href="../reference/crest.set_modern_data.html">crest.set_modern_data()</a></code>
+<ul><li>Fixing issues with <code><a href="../reference/crest.set_modern_data.html">crest.set_modern_data()</a></code>
 <ul><li>Ok to pass input data in tibble format.</li>
 <li>Logging of taxa assignment is fixed.</li>
 <li>Including minGridCell in the algorithm.</li>
@@ -112,7 +109,7 @@
 <code><a href="../reference/loo.html">loo()</a></code> can be run on a subset of the available variables to make the process faster.</li>
 <li>
 <code><a href="../reference/getTaxonomy.html">getTaxonomy()</a></code> can be used with a <code><a href="../reference/crestObj.html">crestObj()</a></code> to refine the search to a specific study area.</li>
-<li>INCLUDING A NEW PARAMETER TO <code><a href="../reference/crest.calibrate.html">crest.calibrate()</a></code>: <code>climateSpaceWeighting.type</code>. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using ‘sqrt’ or ‘log’, instead of the default ‘linear’.</li>
+<li>Including a new parameter to <code><a href="../reference/crest.calibrate.html">crest.calibrate()</a></code>: <code>climateSpaceWeighting.type</code>. This parameter is useful to reduce the edge effects to the climate space calibration, as the range of weights could easily cover several ranges of amplitude. This can be toned down using ‘sqrt’ or ‘log’, instead of the default ‘linear’.</li>
 <li>
 <code><a href="../reference/crest.get_modern_data.html">crest.get_modern_data()</a></code> now extract geopolitcal and biogeophical information from the <em>gbif4crest</em> database.</li>
 </ul></li>
