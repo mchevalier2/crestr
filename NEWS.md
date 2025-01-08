@@ -1,5 +1,9 @@
 # crestr 1.3.1.9000
 
+* Improving compatibility with new calibration database
+    * getResol()
+    * f_locid()
+    * Better factorization of the code
 * Fixing issues with `crest.set_modern_data()`
     * Ok to pass input data in tibble format.
     * Logging of taxa assignment is fixed.
@@ -9,7 +13,7 @@
 * Minor issues:
     * Cleaned documentation
 
-    
+
 
 # crestr 1.3.0
 
