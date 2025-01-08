@@ -16,7 +16,7 @@ plot_climateSpace(
   height = min(9, 3.5 * length(climate)),
   y0 = 0.4,
   add_modern = FALSE,
-  resol = 0.25
+  resol = getResol(x)
 )
 }
 \arguments{
