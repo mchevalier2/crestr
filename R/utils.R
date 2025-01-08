@@ -295,12 +295,11 @@ crop <- function(x, shp) {
             }
         }
 
-        resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 1])))))[1] / 2.0
+        resol <- getResol(x) / 2.0
         xx <- range(x$modelling$climate_space[, 1])
         x$parameters$xmn <- xx[1] - resol
         x$parameters$xmx <- xx[2] + resol
 
-        resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[, 2])))))[1] / 2.0
         yy <- range(x$modelling$climate_space[, 2])
         x$parameters$ymn <- yy[1] - resol
         x$parameters$ymx <- yy[2] + resol
@@ -445,11 +444,50 @@ crest.simplify <- function(x, optima=TRUE) {
     return(df)
 }
 
-.onAttach <- function(libname, pkgname) {
-  packageStartupMessage('\nIMPORTANT: From May 2024, the cloud-based gbif4crest calibration\ndatabase will be taken down. The database will remain accessible\nthrough the dbDownload() function.\n\n')
-}
+#.onAttach <- function(libname, pkgname) {
+#  packageStartupMessage('\nIMPORTANT: From May 2024, the cloud-based gbif4crest calibration\ndatabase will be taken down. The database will remain accessible\nthrough the dbDownload() function.\n\n')
+#}
 
 #.onLoad <- function(libname, pkgname){
 #    msg <-
 #    cat(msg)
 #}
+
+
+
+#' Calculates a unique identifier from coordinates.
+#'
+#' Calculates a unique identifier from coordinates.
+#'
+#' @param long The longitude of the grid cell of interest
+#' @param lat The latitude of the grid cell of interest
+#' @param resol The spatial resolution of the database to target (1/12 for gbif4crest_03)
+#' @return A unique integer describing the cell.
+#' @export
+#' @examples
+#' f_locid(0, 0, 1/12)
+#'
+f_locid <- function(long, lat, resol) {
+    if(long >= 180) long = 180 - resol/2
+    if(lat >= 90) lat = 90 - resol/2
+    return(((180 + long) %/% resol)%/%1 + 360 / resol * ((90 + lat) %/% resol)%/%1)
+}
+
+
+#' Calculates a unique identifier from coordinates.
+#'
+#' Calculates a unique identifier from coordinates.
+#'
+#' @param crest A crestObj object.
+#' @return A unique integer describing the cell.
+#' @export
+#' @examples
+#' getResol(reconstr)
+#'
+getResol <- function(crest) {
+    if(.ifExampleDB(crest$misc$dbname)) return(0.5)
+    res = dbRequest("SELECT * FROM sqlite_master WHERE type='table'", dbname=crest$misc$dbname)
+    if( 'params' %in% res[,2] ) return(1/12)
+    if(grepl('gbif4crest_02-5m', crest$misc$dbname, fixed = TRUE)) return(1/12)
+    return(1/4)
+}

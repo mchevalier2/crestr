@@ -384,7 +384,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     crest$misc$site_info[['lat']]    <- site_info[2]
     crest$misc$site_info[['site_name']]    <- site_name
     if((!is.na(crest$misc$site_info[['long']])) & (!is.na(crest$misc$site_info[['lat']]))) {
-        resol <- ifelse(.ifExampleDB(dbname), 0.5, 0.25)
+        resol <- getResol(crest)
         crest$misc$site_info[['climate']] <- climate_from_xy(crest$misc$site_info[['long']],
                                                              crest$misc$site_info[['lat']],
                                                              crest$parameters$climate,
@@ -435,7 +435,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         }
 
     }
-
 
     taxonID2proxy <- data.frame("taxonID" = NA, "proxyName" = NA, stringsAsFactors = FALSE)
     pse$Level     <- as.numeric(as.character(pse$Level))
@@ -520,7 +519,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             cat(paste0('  <> Extracting species distributions ...... ', stringr::str_pad(paste0(round(pbi / length(crest$inputs$taxa.name)),'%\r'), width=4, side='left')))
             utils::flush.console()
         }
-
         if (sum(crest$inputs$selectedTaxa[tax, climate]>=0) > 0) {
             distributions[[tax]] <- getDistribTaxa(
               taxIDs, climate=climate,
@@ -553,7 +551,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
                     message <- "Present but insufficient data in the study area to fit a pdf"
                     if (! message %in% names(crest$misc[['taxa_notes']])) {
                         crest$misc[['taxa_notes']][[message]] <- c()
-                        warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells'. Use PSE_log() with the output of this function for details."))
+                        warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells' down to 15-20. Use PSE_log() with the output of this function for details."))
                     }
                     crest$misc[['taxa_notes']][[message]] <- append(crest$misc[['taxa_notes']][[message]], tax)
                 }
@@ -654,7 +652,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         }
     }
 
-    resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[, 1])))))[1] / 2.0
+    resol <- getResol(crest) / 2
     xx <- range(climate_space[, 1])
     if (estimate_xlim) {
         crest$parameters$xmn <- xx[1] - resol
@@ -664,7 +662,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         if (crest$parameters$xmx < xx[2] + resol) crest$parameters$xmx <- xx[2] + resol
     }
 
-    resol <- sort(unique(diff(sort(unique(crest$modelling$climate_space[, 2])))))[1] / 2.0
     yy <- range(climate_space[, 2])
     if (estimate_ylim) {
         crest$parameters$ymn <- yy[1] - resol

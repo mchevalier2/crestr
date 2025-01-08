@@ -133,7 +133,6 @@ plot_violinPDFs <- function( x,
             graphics::polygon(c(max_pdf[2*i-1] - x$modelling$pdfs[[taxanames[optima[i]]]][[climate]]$pdfpol / max_abs, rev(max_pdf[2*i-1] + x$modelling$pdfs[[taxanames[optima[i]]]][[climate]]$pdfpol / max_abs)),
                               c(x$modelling$xrange[[climate]], rev(x$modelling$xrange[[climate]])), col=col[i], border='grey80', lwd=0.5)
             graphics::text(max_pdf[2*i-1] - xstep, ylim[1] + ystep, taxanames[optima[i]], srt=90, adj=c(0,0), font=2)
-
         }
 
         graphics::par(las=0)

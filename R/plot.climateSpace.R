@@ -48,7 +48,7 @@ plot_climateSpace <- function( x,
                       width=  7.48,
                       height = min(9, 3.5*length(climate)), y0 = 0.4,
                       add_modern = FALSE,
-                      resol = 0.25
+                      resol = getResol(x)
                       ) {
 
     if(base::missing(x)) x
@@ -223,7 +223,7 @@ plot_climateSpace <- function( x,
 
                 graphics::par(mar=c(0,0,0,0), ps=8*3/2)
                 plot(NA, NA, type='n', xlab='', ylab='', main='', axes=FALSE, frame=FALSE, xlim=xlim, ylim=c(0,0.8), xaxs='i', yaxs='i')
-                graphics::text(mean(c(minx, maxx)),0.15, paste(climate[clim], '(x-axis) vs.', climate[clim+1], '(y-axis)'), adj=c(0.5,0), cex=1, font=1)
+                graphics::text(mean(c(minx, maxx)),0.15, paste(climate[clim], '(x) vs.', climate[clim+1], '(y)'), adj=c(0.5,0), cex=1, font=1)
 
                 graphics::par(mar=c(0,0.2,0,0.2))
                 plot(NA, NA, type='n', xaxs='i', yaxs='i', axes=FALSE, frame=FALSE,
@@ -276,7 +276,7 @@ plot_climateSpace <- function( x,
             plot_map_eqearth(R1, ext, zlim=range(brks), col=viridis::viridis(length(brks)-1),
                             brks.pos = brks, brks.lab = brks,
                             title=accClimateVariables(clim)[3], site_xy = site_xy,
-                            dim=c(x1*width / sum(c(x1,x2,x1)), height / length(climate))
+                            dim=c(x1*width / sum(c(x1,x2,x1)), (height - length(climate)*y0) / length(climate))
             )
         }
 

@@ -6,6 +6,10 @@
     * Including minGridCell in the algorithm.
     * Adding a global warning if mingridcell is <15, and an error is <2.
     * The plots that require variable names function properly.
+* Minor issues:
+    * Cleaned documentation
+
+    
 
 # crestr 1.3.0
 

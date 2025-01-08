@@ -248,7 +248,7 @@ crest.set_modern_data <- function( distributions, climate,
             if (! message %in% names(taxa_notes)) {
                 #print('in warning')
                 taxa_notes[[message]] <- c()
-                warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells'. Use PSE_log() with the output of this function for details."))
+                warning(paste0("An insufficient amount of calibration data points was available within the study area for one or more taxa. Consider reducing 'minGridCells' down to 15-20. Use PSE_log() with the output of this function for details."))
             }
             taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
 

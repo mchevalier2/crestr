@@ -30,7 +30,7 @@ getDistribTaxa <- function(taxIDs,
                            realms = NA, biomes = NA, ecoregions = NA,
                            elev_min = NA, elev_max = NA, elev_range = NA,
                            year_min = 1900, year_max = 2021, nodate = TRUE,
-                           type_of_obs = c(1, 2, 3, 8, 9),
+                           type_of_obs = c(1, 2, 7, 8),
                            dbname = "gbif4crest_02") {
 
     if(base::missing(taxIDs)) taxIDs

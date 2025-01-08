@@ -85,7 +85,7 @@ crest.calibrate <- function(x,
     }
     x$modelling$ccs <- ccs
 
-    resol <- sort(unique(diff(sort(unique(x$modelling$climate_space[,1])))))[1] / 2.0
+    resol <- getResol(x) / 2.0
     if(x$parameters$xmn == -180) {
         x$parameters$xmn <- min(x$modelling$climate_space[, 1]) - resol
     }

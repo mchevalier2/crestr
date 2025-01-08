@@ -153,7 +153,6 @@ plot_scatterPDFs <- function( x,
 
             if(add_modern) {
                 if(is.numeric(x$misc$site_info$climate[, climate[1]])) {
-                    print(x$misc$site_info$climate)
                     graphics::points(x$misc$site_info$climate[, climate[1]], x$misc$site_info$climate[, climate[2]], pch=24, col=NA, bg='red', cex=1.5, lwd=1.5)
                 }
             }

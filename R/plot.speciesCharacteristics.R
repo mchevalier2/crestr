@@ -56,7 +56,7 @@ plot_taxaCharacteristics <- function( x, taxanames = x$inputs$taxa.name,
                                       width = 7.48, w0 = 0.2,
                                       height = 3*length(climate)+h0, h0 = 0.4,
                                       add_modern = FALSE,
-                                      resol = 0.25
+                                      resol = getResol(x)
                                       ) {
 
     if(base::missing(x)) x
