@@ -12,8 +12,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-<br > [![CRAN
-status](https://www.r-pkg.org/badges/version/crestr)](https://CRAN.R-project.org/package=crestr)
+<br >
 ![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) [![GitHub R
 package
 version](https://img.shields.io/github/r-package/v/mchevalier2/crestr)](https://img.shields.io/github/r-package/v/mchevalier2/crestr)
@@ -24,52 +23,33 @@ month downloads](https://cranlogs.r-pkg.org/badges/crestr) <br >
 [![R-CMD-check](https://github.com/mchevalier2/crestr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mchevalier2/crestr/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-# 
 
-The goal of `crestr` is to enable probabilistic reconstructions of past
-climate change from fossil assemblage data. The approach is based on the
-estimation of conditional responses of different bio-proxies to various
-climate parameters. These responses take the form of probability density
-functions (*PDFs*). The details of the method have been described in
-[Chevalier *et al.*
-(2014)](https://www.doi.org/10.5194/cp-10-2081-2014), the calibrated
-data are presented in [Chevalier
-(2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016) and the
-package is fully described in [Chevalier
-(2022)](https://cp.copernicus.org/articles/18/821/2022/).
+# **crestr** An R package to perform probabilistic palaeoclimate reconstructions from palaeoecological datasets
+
+`crestr` produces probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2022)](https://cp.copernicus.org/articles/18/821/2022/). `crestr` works by analysing how certain biological indicators (like plant or animal remains) respond to climate factors, using statistical methods to estimate these relationships. These relationships are mdelled as probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://www.manuelchevalier.com/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://www.manuelchevalier.com/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
+
+
+**Why choose `crestr`?** Unlike traditional methods, crestr uses probabilistic techniques to provide more accurate and flexible climate reconstructions. **Its focus on accessibility means you don’t need to be an expert coder to get meaningful results.**
+
+
+<br >
+
+> **_NOTE:_** While active development of crestr has concluded, its robust features will continue to provide valuable insights for palaeoclimate research. The available documentation and resources will remain accessible for independent use. In addition, I am committed to maintaining this bug-free. As such, please reach out at <paleo@manuelchevalier.com> if you encounter technical issues.
+
+
 
 ## Installation
 
-The package is currently unavailable from CRAN. However, you can install
-the latest development version (1.3.0) from
-[GitHub](https://github.com/) with:
+Ready to explore the climate history hidden in your data? Install `crestr` now and leverage its robust tools for your research.
+
+The package is available from [GitHub](https://github.com/mchevalier2/crestr/) and can be installed as follow:
 
 ``` r
 if(!require(devtools)) install.packages("devtools")
 devtools::install_github("mchevalier2/crestr")
 ```
 
-Or the latest stable version archived by CRAN. If you use that version,
-keep in mind that not all functionalities will be available (See News
-page).
 
-``` r
-if(!require(devtools)) install.packages("devtools")
-devtools::install_version("crestr", version = "1.2.0", repos = "https://cran.us.r-project.org")
-```
-
-> ***NOTE:*** If the install fails, it is possible that
-> [**gdal**](https://gdal.org/download.html) or
-> [**PROJ**](https://proj.org/install.html) are not installed on your
-> system. Ample documentation exists online to guide you through the
-> installation of these two elements to your own system.
-
-## Contact
-
-If you experience any trouble while using this package, or if you think
-of additional functionalities to incorporate to the package, please
-contact me at <chevalier.manuel@gmail.com> or open a discussion
-[here](https://github.com/mchevalier2/crestr/issues).
 
 ## How to use `crestr`
 
@@ -247,8 +227,8 @@ names(recons)
 #> [5] "misc"
 lapply(recons$reconstructions, names)
 #> $bio1
-#> [1] "likelihood"    "uncertainties" "optima"       
-#> 
+#> [1] "likelihood"    "uncertainties" "optima"
+#>
 #> $bio12
 #> [1] "likelihood"    "uncertainties" "optima"
 ```
