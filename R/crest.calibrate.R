@@ -86,16 +86,16 @@ crest.calibrate <- function(x,
     x$modelling$ccs <- ccs
 
     resol <- getResol(x) / 2.0
-    if(x$parameters$xmn == -180) {
+    if(x$parameters$xmn == -180 | is.na(x$parameters$xmn)) {
         x$parameters$xmn <- min(x$modelling$climate_space[, 1]) - resol
     }
-    if(x$parameters$xmx == 180) {
+    if(x$parameters$xmx == 180 | is.na(x$parameters$xmn)) {
         x$parameters$xmx <- max(x$modelling$climate_space[, 1]) + resol
     }
-    if(x$parameters$ymn == -90) {
+    if(x$parameters$ymn == -90 | is.na(x$parameters$xmn)) {
         x$parameters$ymn <- min(x$modelling$climate_space[, 2]) - resol
     }
-    if(x$parameters$ymx == 90) {
+    if(x$parameters$ymx == 90 | is.na(x$parameters$xmn)) {
         x$parameters$ymx <- max(x$modelling$climate_space[, 2]) + resol
     }
 
@@ -142,9 +142,9 @@ crest.calibrate <- function(x,
                     pdfs[[tax]][[clim]] <- NA
                 }
             }
-        } else {
-            pdfs[[tax]] <- NA
-        }
+        }# else {
+        #    pdfs[[tax]] <- NA
+        #}
         if(verbose) {
             cat(paste0('  <> Fitting relationships ................. ', stringr::str_pad(paste0(round(pbi / length(x$modelling$distributions)),'%\r'), width=4, side='left')))
             utils::flush.console()

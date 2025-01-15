@@ -485,7 +485,9 @@ f_locid <- function(long, lat, resol) {
 #' getResol(reconstr)
 #'
 getResol <- function(crest) {
+    if(!is.na(crest$misc$resol)) return(crest$misc$resol)
     if(.ifExampleDB(crest$misc$dbname)) return(0.5)
+    if(crest$misc$dbname == "private-database") return(1)
     res = dbRequest("SELECT * FROM sqlite_master WHERE type='table'", dbname=crest$misc$dbname)
     if( 'params' %in% res[,2] ) return(1/12)
     if(grepl('gbif4crest_02-5m', crest$misc$dbname, fixed = TRUE)) return(1/12)

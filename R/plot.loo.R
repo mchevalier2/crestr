@@ -127,7 +127,6 @@ plot_loo <- function( x, optima=TRUE,
                 }
             }
             df <- do.call(cbind, df)
-
             if(is.na(xlim)[1]) {
                 xlim <- range(df[, 1])
             } else {
@@ -149,7 +148,7 @@ plot_loo <- function( x, optima=TRUE,
                 df <- df[, c(1, order(apply(df[, -1], 2, function(x) mean(x[abs(x)>0])), decreasing = ifelse(sort=='incr', FALSE, TRUE)) + 1)]
             }
 
-            w <- which(apply(df[, -1], 2, function(x) mean(abs(x)[abs(x)>0])) >= filter)
+            w <- which(apply(df[, -1], 2, function(x) mean(abs(x)[abs(x)>=0])) >= filter)
             if(length(w) == 0) {
                 warning("No taxa remain after filtering. Adjust the filter value to include more taxa.")
             } else {

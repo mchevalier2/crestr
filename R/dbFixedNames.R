@@ -253,7 +253,6 @@ getRealmNames <- function(terr = NA, biome = TRUE, ecoregion = TRUE, dbname = "g
 #' @export
 #' @seealso \url{https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world}
 #' @examples
-#' accRealmNames()
 #' accRealmNames(realm='Africotropical')
 #' accRealmNames(realm='Africotropical', ecoregion=FALSE)
 accRealmNames <- function(realm=NA, ecoregion = TRUE) {

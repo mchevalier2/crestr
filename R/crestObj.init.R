@@ -168,7 +168,7 @@ crestObj <- function(taxa.name, taxaType, climate,
 
     reconstructions <- list()
 
-    misc <- list(dbname = dbname, stage = 'init')
+    misc <- list(dbname = dbname, stage = 'init', resol = NA)
 
     value <- list(
         inputs = inputs,
