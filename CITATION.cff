@@ -1,10 +1,10 @@
-bibentry(
-        bibtype = "Article",
-        title = "crestr: an R package to perform probabilistic climate reconstructions from palaeoecological datasets",
-        author = c(person(c("Manuel"), "Chevalier")),
-        journal = "Climate of the Past",
-        pages = "821-844",
-        issue = "18(4)",
-        year = "2022",
-        doi = "10.5194/cp-18-821-2022"
-)
+@article{chevalier2022crestr,
+  title={crestr: an R package to perform probabilistic climate reconstructions from palaeoecological datasets},
+  author={Chevalier, Manuel},
+  journal={Climate of the Past},
+  volume={18},
+  number={4},
+  pages={821--844},
+  year={2022},
+  publisher={Copernicus Publications G{\"o}ttingen, Germany}
+}
