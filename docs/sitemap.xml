@@ -10,6 +10,12 @@
     <loc>/LICENSE.html</loc>
   </url>
   <url>
+    <loc>/articles/calibration-data-v2.html</loc>
+  </url>
+  <url>
+    <loc>/articles/calibration-data-v3.html</loc>
+  </url>
+  <url>
     <loc>/articles/calibration-data.html</loc>
   </url>
   <url>
@@ -221,6 +227,9 @@
   </url>
   <url>
     <loc>/reference/get_taxa_type.html</loc>
+  </url>
+  <url>
+    <loc>/reference/identifyDatabase.html</loc>
   </url>
   <url>
     <loc>/reference/includeTaxa.html</loc>

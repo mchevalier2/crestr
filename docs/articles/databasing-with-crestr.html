@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manipulating the _gbif4crest_ calibration data • crestr</title>
+<title>Manipulating the gbif4crest calibration data • crestr</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Manipulating the _gbif4crest_ calibration data">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Manipulating the gbif4crest calibration data">
 <meta property="og:description" content="crestr">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -55,36 +55,36 @@
   <a href="../articles/technicalities.html">Prepare your data</a>
 </li>
 <li>
-  <a href="../articles/calibration-data.html">Calibration data</a>
+  <a href="../articles/calibration-data-v3.html">Dive into gbif4crest</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../articles/community.html">Community</a>
+  <a href="../reference/index.html">Take the control</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Vignettes
+    More
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/databasing-with-crestr.html">Using the _gbif4crest_ database</a>
+      <a href="../articles/databasing-with-crestr.html">Using the gbif4crest database</a>
     </li>
     <li>
       <a href="../articles/warnings.html">Understanding warnings</a>
     </li>
     <li>
-      <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
+      <a href="../articles/calibration-data-v3.html">gbif4crest v2 (old release)</a>
+    </li>
+    <li>
+      <a href="../articles/community.html">Community</a>
     </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Latest changes</a>
 </li>
 <li>
   <a href="https://github.com/mchevalier2/crestr/" class="external-link">
@@ -105,12 +105,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Manipulating the <em>gbif4crest</em> calibration
+      <h1 data-toc-skip>Manipulating the gbif4crest calibration
 data</h1>
                         <h4 data-toc-skip class="author">Manuel
 Chevalier</h4>
             
-            <h4 data-toc-skip class="date">2025-01-08</h4>
+            <h4 data-toc-skip class="date">2025-01-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/databasing-with-crestr.Rmd" class="external-link"><code>vignettes/databasing-with-crestr.Rmd</code></a></small>
       <div class="hidden name"><code>databasing-with-crestr.Rmd</code></div>
@@ -120,26 +120,28 @@ Chevalier</h4>
     
     
 <blockquote>
-<p><strong>Note</strong>: If you have your own calibration data, this
+<p><strong>Note 1</strong>: If you have your own calibration data, this
 vignette is of little interest to you. Refer to the documentation of
 <code><a href="../reference/crest.set_modern_data.html">crest.set_modern_data()</a></code>.</p>
 </blockquote>
+<blockquote>
+<p><strong>Note 2</strong>: The calibration dataset comes now in
+multiple versions (v2 and v3 on Jan. 2025). The data structure in the
+two versions being the same, the content of this page applies to both
+equally.</p>
+</blockquote>
 <div class="section level2">
-<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<h2 id="downloading-calibration-dataset">Downloading calibration dataset<a class="anchor" aria-label="anchor" href="#downloading-calibration-dataset"></a>
 </h2>
-<p><code>crestr</code> comes with a built-in global calibration dataset
-for several proxies (see details in other vignettes andd the didicated
-webpage). This dataset can be accessed in two different ways: - The data
-can be accessed using <em>crestr</em> built-in functions, which connects
-to a cloud-based database. This solution requires an active internet
-connection and can be slow. The database in hosted on an Amazon server,
-which is not accessible from some countries or if your internet
-connection is not secure. - The entire calibration dataset can be
-downloaded from <a href="https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207" target="_blank" class="external-link">[here]</a>. However, it is a large file once unzipped
-(&gt;23Gb). The data extraction phase of the package is, however, MUCH
-faster.</p>
-<p>The two options can be easily selected from the package. But let’s
-begin by loading <code>crestr</code>.</p>
+<p><code>crestr</code> comes with a companion global calibration dataset
+for several proxies (see details in other vignettes andd the dedicated
+webpage). This dataset can be downloaded from <a href="https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207" target="_blank" class="external-link">[here]</a>. Alternatively, you can also download it
+directly from R using the <a href="https://www.manuelchevalier.com/crestr/reference/dbDownload.html" target="_blank" class="external-link">dbDownload()</a> function.</p>
+</div>
+<div class="section level2">
+<h2 id="a-quick-illustration">A quick illustration<a class="anchor" aria-label="anchor" href="#a-quick-illustration"></a>
+</h2>
+<p>Let’s begin by loading <code>crestr</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mchevalier2/crestr" class="external-link">crestr</a></span><span class="op">)</span></span></code></pre></div>
 <p>In this example, we will work with a reduced dataset, composed of
@@ -154,52 +156,47 @@ three pollen taxa:</p>
 <div class="section level2">
 <h2 id="using-the-gbif4crest-database">Using the <em>gbif4crest</em> database<a class="anchor" aria-label="anchor" href="#using-the-gbif4crest-database"></a>
 </h2>
-<p>Independently of how you want to access the calibration data, you
-will use the <code><a href="../reference/crest.get_modern_data.html">crest.get_modern_data()</a></code> if you want to use the
-<em>gbif4crest</em> data.</p>
-<p>If you want to access the cloud-based data, you will do the
-following:</p>
+<p>Independently of how you downloaded the calibration data, you will
+use the <code><a href="../reference/crest.get_modern_data.html">crest.get_modern_data()</a></code> if you want to use the
+<em>gbif4crest</em> data. You will need to note the location of the
+dataset on your computer and provide that physical address to the
+function, as follow:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,</span>
-<span>                                    taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                                    climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,</span>
-<span>                                    <span class="co"># The name of the online database</span></span>
-<span>                                    dbname <span class="op">=</span> <span class="st">"gbif4crest_02"</span>,</span>
-<span>                                    verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>If you have downloaded and unzipped the <em>gbif4crest</em> dataset
-on your computer, you can use the following:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,</span>
 <span>                                    taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                                    climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,</span>
 <span>                                    <span class="co"># The full path to the local database</span></span>
 <span>                                    <span class="co"># Or place the database in the working</span></span>
 <span>                                    <span class="co">#   directory.</span></span>
-<span>                                    dbname <span class="op">=</span> <span class="st">"path/to/gbif4crest_02.sqlite3"</span>,</span>
+<span>                                    dbname <span class="op">=</span> <span class="st">"path/to/gbif4crest_03.sqlite3"</span>,</span>
 <span>                                    verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
+<p>This is it! You have used the gbif4crest calibration dataset to
+estimate the response of Ericaceae, artemisia and Olea. Please note that
+since no geographical constraints were provided, the fitted responses
+englobe all species worldwide. These curves have, therefore, little
+meaning. You always need to tailor the extent of your calibration
+dataset to your study region!</p>
 <blockquote>
 <p>Note: The local calibration database file can be saved in your
-working directory or anywhere else and renamed in any way. The file
-extension ‘.sqlite3’ is, however, the only difference between the online
-and the offline options. It is thus crucial to call the file
-database.sqlite3 to orient the package in the right direction.</p>
+working directory or anywhere else and renamed in any way you want. The
+file extension ‘.sqlite3’ is, however, important and cannot be
+modified.</p>
 </blockquote>
 </div>
 <div class="section level2">
 <h2 id="local-subset-of-the-calibration-dataset">Local subset of the calibration dataset<a class="anchor" aria-label="anchor" href="#local-subset-of-the-calibration-dataset"></a>
 </h2>
-<p>A third option exists (<code>crestr</code> &gt; v1.3.0) that combines
-the strength of the two above approaches: subsetting the online database
-and save it locally. This way, you do not need to save a huge file on
-your computer and you only need an active internet connection to create
-the subset. Such subsets can be created using the
-<code><a href="../reference/dbSubset.html">dbSubset()</a></code> function.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>If the database is too big for our computer and you want to save
+space, you can subset it after downloading it. This way, you do not need
+to keep a large file on your computer and you only need an active
+internet connection to create the subset. Such subsets can be created
+using the <code><a href="../reference/dbSubset.html">dbSubset()</a></code> function.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/dbSubset.html">dbSubset</a></span><span class="op">(</span> taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>          xmn <span class="op">=</span> <span class="fl">0</span>, xmx <span class="op">=</span> <span class="fl">50</span>, ymn <span class="op">=</span> <span class="op">-</span><span class="fl">45</span>, ymx <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>          out <span class="op">=</span> <span class="st">'gbif4crest_southernAfrica.sqlite3'</span>,</span>
+<span>          dbname <span class="op">=</span> <span class="st">"path/to/gbif4crest_03.sqlite3"</span>,</span>
+<span>          out <span class="op">=</span> <span class="st">'myDatabaseSubset.sqlite3'</span>,</span>
 <span>          verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span>      <span class="op">)</span></span></code></pre></div>
 <p>This will create a local snapshot of the database in your working
@@ -208,14 +205,14 @@ You can then use this restricted dataset with
 <code><a href="../reference/crest.get_modern_data.html">crest.get_modern_data()</a></code> and all other functions as if it
 was the “full” dataset. This restricted database is only 45Mb and the
 storage problem is therefore avoided.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reconstr</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/crest.get_modern_data.html">crest.get_modern_data</a></span><span class="op">(</span>  pse <span class="op">=</span> <span class="va">PSE</span>,</span>
 <span>                                    taxaType <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>                                    climate <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bio1"</span>, <span class="st">"bio12"</span><span class="op">)</span>,</span>
 <span>                                    <span class="co"># The full path to the local database</span></span>
 <span>                                    <span class="co"># Or place the database in the working</span></span>
 <span>                                    <span class="co">#   directory.</span></span>
-<span>                                    dbname <span class="op">=</span> <span class="st">"gbif4crest_southernAfrica.sqlite3"</span>,</span>
+<span>                                    dbname <span class="op">=</span> <span class="st">"myDatabaseSubset.sqlite3"</span>,</span>
 <span>                                    verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>

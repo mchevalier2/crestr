@@ -493,3 +493,32 @@ getResol <- function(crest) {
     if(grepl('gbif4crest_02-5m', crest$misc$dbname, fixed = TRUE)) return(1/12)
     return(1/4)
 }
+
+
+#' Identify the calibration database used.
+#'
+#' Identify the calibration database used.
+#'
+#' @param dbname A functional crestObj or a database name.
+#' @return A string uniquely characterising the database used. Possible values
+#'         are 'privateDB', 'exampleDB', 'gbif4crest_02', and 'gbif4crest_03'.
+#' @export
+#' @examples
+#' identifyDatabase(reconstr)
+#'
+identifyDatabase <- function(dbname) {
+    if(is.crestObj(dbname)) dbname <- dbname$misc$dbname
+    if(dbname == 'private-database') return('privateDB')
+    if(grepl("exampleDB",dbname, fixed=TRUE)) return('exampleDB')
+    params <- tryCatch(
+                {
+                    dbRequest("SELECT  * FROM params", dbname=dbname)
+                },
+                error = function(cond) {
+                    # Choose a return value in case of error
+                    NA
+                }
+    )
+    if(is.na(params)[1]) return('gbif4crest_02')
+    return('gbif4crest_03')
+}

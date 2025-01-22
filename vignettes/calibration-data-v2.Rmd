@@ -1,12 +1,12 @@
 ---
-title: "Calibration data for CREST"
+title: "gbif4crest calibration dataset v2 for CREST"
 author: "Manuel Chevalier"
 date: "`r Sys.Date()`"
 output:
     rmarkdown::html_vignette:
         self_contained: no
 vignette: >
-  %\VignetteIndexEntry{Calibration data for CREST}
+  %\VignetteIndexEntry{gbif4crest calibration dataset v2 for CREST}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

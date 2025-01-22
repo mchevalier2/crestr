@@ -1,17 +1,19 @@
 citHeader("To cite crestr in publications use:")
 
-citEntry(entry = "Article",
-  title        = "{crestr} An R package to perform probabilistic climate reconstructions using fossil proxies",
-  author       = personList(as.person("Manuel Chevalier")),
-  journal      = "Climate of the Past Discussions",
-  year         = "2021",
-  pages        = "1--35",
-  url          = "https://cp.copernicus.org/preprints/cp-2021-153/",
-  DOI          = "10.5194/cp-2021-153",
+bibentry(
+        bibtype = "Article",
+        title = "crestr: an R package to perform probabilistic climate reconstructions from palaeoecological datasets",
+        author = c(person(c("Manuel"), "Chevalier")),
+        journal = "Climate of the Past",
+        pages = "821-844",
+        issue = "18(4)",
+        year = "2022",
+        doi = "10.5194/cp-18-821-2022"
+)
 
-  textVersion  =
-  paste("Manuel Chevalier (2021).",
-        "{crestr} An R package to perform probabilistic climate reconstructions using fossil proxies.",
-        "Climate of the Past Discussions.",
-        "https://cp.copernicus.org/preprints/cp-2021-153/")
+textVersion  =
+  paste("Manuel Chevalier (2022).",
+        "{crestr} an R package to perform probabilistic climate reconstructions from palaeoecological datasets.",
+        "Climate of the Past.",
+        "https://www.doi.org/10.5194/cp-18-821-2022"
 )

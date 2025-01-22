@@ -47,43 +47,105 @@ cite_crest <- function(x, verbose=TRUE) {
 cite_distrib_data <- function(x, verbose=TRUE) {
     if(base::missing(x)) x
 
-    if (x$parameters$taxaType == 1) {
+    db <- identifyDatabase(x$misc$dbname)
+
+    if(db == 'private-database') {
+        ## References to cite in case of a private dataset: None
         tocite <- c()
-        list_of_classes <- unique(stats::na.omit(x$inputs$pse[, 'Class_name']))
-        citations = list()
-        citations[['Pinopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Pinopsida occurrence data. https://doi.org/10.15468/dl.x2r7pa.'
-        citations[['Cycadopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Cycadopsida occurrence data. https://doi.org/10.15468/dl.sfjzxu.'
-        citations[['Gnetopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Gnetopsida occurrence data. https://doi.org/10.15468/dl.h2kjnc.'
-        citations[['Gingkoopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Gingkoopsida occurrence data. https://doi.org/10.15468/dl.da9wz8.'
-        citations[['Lycopodiopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Lycopodiopsida occurrence data. https://doi.org/10.15468/dl.ydhyhz.'
-        citations[['Anthocerotopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Anthocerotopsida occurrence data. https://doi.org/10.15468/dl.t9zenf.'
-        citations[['Liliopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Liliopsida occurrence data. https://doi.org/10.15468/dl.axv3yd.'
-        citations[['Magnoliopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Magnoliopsida occurrence data. https://doi.org/10.15468/dl.ra49dt.'
-        citations[['Polypodiopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Polypodiopsida occurrence data. https://doi.org/10.15468/dl.87tbp6.'
-        if (verbose)  cat('Please cite the following dataset(s):\n')
-        for (class in list_of_classes)  {
-            if (verbose)  cat(' -->  ', citations[[class]], '\n')
-            tocite <- c(tocite, citations[[class]])
+        if (verbose)  cat('You did not use the gbif4crest dataset. No distribution data citations are required.\n')
+
+    } else if (db == 'exampleDB') {
+        ## References to cite when using the example dataset: None
+        tocite <- c()
+        if (verbose)  cat('You did not use the gbif4crest dataset. No distribution data citations are required.\n')
+
+    } else if (db == "gbif4crest_03") {
+        ## References to cite when using the gbif4crest_03 database
+        if (x$parameters$taxaType == 1) {
+            tocite <- c()
+            list_of_refs <- matrix(c(
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.68HQXG.', 1008772.0, 1045883.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.7BVEJK.', 1045886.0, 1073577.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.MPFC47.', 1073578.0, 1089246.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.NUQ5TN.', 1089248.0, 1116099.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.Q8ZUHH.', 1116101.0, 1145540.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.QWCS68.', 1145541.0, 1184082.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.UK2XV6.', 1184083.0, 1202306.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.ZGMNQ9.', 1000002.0, 1211608.0),
+                    c('The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.Y9KPWC.', 1000065.0, 1008427.0)
+                ), byrow=TRUE, ncol=3)[9:1, ]
+
+            list_of_ids <- unique(unlist(lapply(x$modelling$distributions, function(d) {if(is.na(d)[1]){return(-1)}else{return(unique(d[,1]))}})))
+
+            f <- function(ids, refs) {
+                ids <- ids>=as.numeric(refs[2]) & ids<=as.numeric(refs[3])
+                if(sum(ids) > 0) return(TRUE)
+                return(FALSE)
+            }
+
+            for(i in 1:nrow(list_of_refs)) {
+                if(f(list_of_ids, list_of_refs[i, ])) {
+                    tocite <- c(tocite, list_of_refs[i, 1])
+                }
+            }
+        } else if (x$parameters$taxaType == 2) {
+            tocite <- c()
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        } else if (x$parameters$taxaType == 4) {
+            tocite <- 'The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.68HQXG.'
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        } else if (x$parameters$taxaType == 5) {
+            tocite <- 'The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.68HQXG.'
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        } else if (x$parameters$taxaType == 3) {
+            tocite <- c()
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        } else if (x$parameters$taxaType == 6) {
+            tocite <- c(
+                'The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024. https://doi.org/10.15468/DL.ZGMNQ9.',
+                'The Global Biodiversity Information Facility, 2024. Occurrence data downloaded on 25 August 2024.https://doi.org/10.15468/DL.68HQXG.'
+            )
         }
-    } else if (x$parameters$taxaType == 2) {
-        tocite <- 'GBIF.org (Date accessed: 24 September 2020) Beetles occurrence data. https://doi.org/10.15468/dl.nteruy.'
-        if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        if (verbose)  cat('Please cite the following dataset(s): ', tocite, '\n')
+
+    } else if (db == "gbif4crest_02") {
+        ## References to cite when using the gbif4crest_02 database
+        tocite <- c()
+        if (x$parameters$taxaType == 1) {
+            list_of_classes <- unique(stats::na.omit(x$inputs$pse[, 'Class_name']))
+            citations = list()
+            citations[['Pinopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Pinopsida occurrence data. https://doi.org/10.15468/dl.x2r7pa.'
+            citations[['Cycadopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Cycadopsida occurrence data. https://doi.org/10.15468/dl.sfjzxu.'
+            citations[['Gnetopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Gnetopsida occurrence data. https://doi.org/10.15468/dl.h2kjnc.'
+            citations[['Gingkoopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Gingkoopsida occurrence data. https://doi.org/10.15468/dl.da9wz8.'
+            citations[['Lycopodiopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Lycopodiopsida occurrence data. https://doi.org/10.15468/dl.ydhyhz.'
+            citations[['Anthocerotopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Anthocerotopsida occurrence data. https://doi.org/10.15468/dl.t9zenf.'
+            citations[['Liliopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Liliopsida occurrence data. https://doi.org/10.15468/dl.axv3yd.'
+            citations[['Magnoliopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Magnoliopsida occurrence data. https://doi.org/10.15468/dl.ra49dt.'
+            citations[['Polypodiopsida']] <- 'GBIF.org (Date accessed: 24 September 2020) Polypodiopsida occurrence data. https://doi.org/10.15468/dl.87tbp6.'
+            if (verbose)  cat('Please cite the following dataset(s):\n')
+            for (class in list_of_classes)  {
+                if (verbose)  cat(' -->  ', citations[[class]], '\n')
+                tocite <- c(tocite, citations[[class]])
+            }
+        } else if (x$parameters$taxaType == 2) {
+            tocite <- 'GBIF.org (Date accessed: 24 September 2020) Beetles occurrence data. https://doi.org/10.15468/dl.nteruy.'
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
         } else if (x$parameters$taxaType == 4) {
             tocite <- 'GBIF.org (Date accessed: 24 September 2020) Foraminifera occurrence data. https://doi.org/10.15468/dl.692yg6.'
             if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
-            } else if (x$parameters$taxaType == 5) {
-                tocite <- 'GBIF.org (Date accessed: 24 September 2020) Diatoms occurrence data. https://doi.org/10.15468/dl.vfr257.'
-                if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
-                } else if (x$parameters$taxaType == 3) {
-                    tocite <- 'GBIF.org (Date accessed: 24 September 2020) Chironomids occurrence data. https://doi.org/10.15468/dl.jv3wsh.'
-                    if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
-                    } else if (x$parameters$taxaType == 6) {
-                        tocite <- 'GBIF.org (Date accessed: 24 September 2020) Rodentia occurrence data. https://doi.org/10.15468/dl.fscw6q.'
-                        if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
-                        } else {
-                            if (verbose)  cat('You did not use the gbif4crest dataset. No distribution data citations are required.\n')
-                            tocite <- NULL
-                        }
+        } else if (x$parameters$taxaType == 5) {
+            tocite <- 'GBIF.org (Date accessed: 24 September 2020) Diatoms occurrence data. https://doi.org/10.15468/dl.vfr257.'
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        } else if (x$parameters$taxaType == 3) {
+            tocite <- 'GBIF.org (Date accessed: 24 September 2020) Chironomids occurrence data. https://doi.org/10.15468/dl.jv3wsh.'
+            if (verbose)  cat('Please cite the following dataset: ', tocite, '\n')
+        } else if (x$parameters$taxaType == 6) {
+            tocite <- 'GBIF.org (Date accessed: 24 September 2020) Rodentia occurrence data. https://doi.org/10.15468/dl.fscw6q.'
+        }
+        if (verbose)  cat('Please cite the following dataset(s): ', tocite, '\n')
+    }
+
     invisible(tocite)
 }
 
@@ -103,7 +165,7 @@ cite_climate_data <- function(x, verbose=TRUE) {
     if(base::missing(x)) x
 
     if (x$parameters$taxaType == 0) {
-        if (verbose)  cat('You have not used the provided calibration dataset. No climate reference are required.\n')
+        if (verbose)  cat('You have not used the gbif4crest calibration dataset. No climate reference are required.\n')
         tocite <- NULL
     } else {
         ref1 <- "Fick, S.E. and Hijmans, R.J., 2017, WorldClim 2: new 1-km spatial resolution climate surfaces for global land areas. International Journal of Climatology, 37, pp. 4302-4315."

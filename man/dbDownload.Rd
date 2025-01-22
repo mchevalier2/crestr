@@ -5,30 +5,36 @@
 \title{Download the gbif4crest_02 dataset from figShare.}
 \usage{
 dbDownload(
-  filename = "gbif4crest_02.zip",
+  filename = "gbif4crest_03.zip",
+  version = 3,
   lite = TRUE,
-  res = "15min",
+  res = "5min",
   timeout = 10000
 )
 }
 \arguments{
 \item{filename}{The path and name of the file where the database should be saved.}
 
-\item{lite}{A boolean (default \code{TRUE}) to indicate if the full database
-should be downloaded (including the raw presences from GBIF;
-\code{lite = FALSE}) or only the curated data (\code{lite = TRUE}).}
+\item{version}{The version of the gbif4crest dataset desired. Either 2 or 3.}
 
-\item{res}{The spatial resolution of the dataset. Either 15min or 5min.}
+\item{lite}{Deprecated since v3. A boolean (default \code{TRUE}) to indicate
+if the full database should be downloaded (including the raw presences
+from GBIF; \code{lite = FALSE}) or only the curated data (\code{lite =
+       TRUE}).}
+
+\item{res}{The spatial resolution of the dataset. Either 15min or 5min. Since
+v3, 5min is the only version available.}
 
 \item{timeout}{Maximum duration in seconds of the download. If the file is
-not fully downloaded after timeout seconds, it will be interrupted.}
+not fully downloaded after 'timeout' seconds, it will be interrupted.}
 }
 \description{
 Download the gbif4crest_02 dataset from figShare.
 }
 \examples{
 \dontrun{
-  dbDownload() ## This will download the database in your working directory.
+  dbDownload() ## This will download the latest version of the database in
+  your working directory.
 }
 
 }

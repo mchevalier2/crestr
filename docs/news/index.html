@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -38,32 +38,32 @@
   <a href="../articles/technicalities.html">Prepare your data</a>
 </li>
 <li>
-  <a href="../articles/calibration-data.html">Calibration data</a>
+  <a href="../articles/calibration-data-v3.html">Dive into gbif4crest</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../articles/community.html">Community</a>
+  <a href="../reference/index.html">Take the control</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Vignettes
+    More
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/databasing-with-crestr.html">Using the _gbif4crest_ database</a>
+      <a href="../articles/databasing-with-crestr.html">Using the gbif4crest database</a>
     </li>
     <li>
       <a href="../articles/warnings.html">Understanding warnings</a>
     </li>
     <li>
-      <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
+      <a href="../articles/calibration-data-v3.html">gbif4crest v2 (old release)</a>
+    </li>
+    <li>
+      <a href="../articles/community.html">Community</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Latest changes</a>
 </li>
 <li>
   <a href="https://github.com/mchevalier2/crestr/" class="external-link">
@@ -85,11 +85,14 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.3.1.9000" id="crestr-1319000">crestr 1.3.1.9000<a class="anchor" aria-label="anchor" href="#crestr-1319000"></a></h2>
+<h2 class="page-header" data-toc-text="1.4.0" id="crestr-140">crestr 1.4.0<a class="anchor" aria-label="anchor" href="#crestr-140"></a></h2>
 <ul><li>Improving compatibility with new calibration database
-<ul><li>getResol()</li>
-<li>f_locid()</li>
+<ul><li><code><a href="../reference/getResol.html">getResol()</a></code></li>
+<li><code><a href="../reference/f_locid.html">f_locid()</a></code></li>
+<li><code><a href="../reference/identifyDatabase.html">identifyDatabase()</a></code></li>
 <li>Better factorization of the code</li>
+<li>Adding new references to <code><a href="../reference/cite_crest.html">cite_crest()</a></code>
+</li>
 </ul></li>
 <li>Fixing issues with <code><a href="../reference/crest.set_modern_data.html">crest.set_modern_data()</a></code>
 <ul><li>Ok to pass input data in tibble format.</li>

@@ -1,12 +1,12 @@
 ---
-title: "Manipulating the _gbif4crest_ calibration data"
+title: "Manipulating the gbif4crest calibration data"
 author: "Manuel Chevalier"
 date: "`r Sys.Date()`"
 output:
     rmarkdown::html_vignette:
         self_contained: no
 vignette: >
-  %\VignetteIndexEntry{Manipulating the _gbif4crest_ calibration data}
+  %\VignetteIndexEntry{Manipulating the gbif4crest calibration data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,18 +18,20 @@ knitr::opts_chunk$set(
 )
 ```
 
-> **Note**: If you have your own calibration data, this vignette is of little interest to you. Refer to the documentation of `crest.set_modern_data()`.
+> **Note 1**: If you have your own calibration data, this vignette is of little interest to you. Refer to the documentation of `crest.set_modern_data()`.
+
+> **Note 2**: The calibration dataset comes now in multiple versions (v2 and v3 on Jan. 2025). The data structure in the two versions being the same, the content of this page applies to both equally.
 
 
-## Introduction
+## Downloading calibration dataset
 
-`crestr` comes with a built-in global calibration dataset for several proxies (see details in other vignettes andd the didicated webpage). This dataset can be accessed in two different ways:
-    - The data can be accessed using _crestr_ built-in functions, which connects to a cloud-based database. This solution requires an active internet connection and can be slow. The database in hosted on an Amazon server, which is not accessible from some countries or if your internet connection is not secure.
-    - The entire calibration dataset can be downloaded from [[here]](https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207){target="_blank"}. However, it is a large file once unzipped (>23Gb). The data extraction phase of the package is, however, MUCH faster.
+`crestr` comes with a companion global calibration dataset for several proxies (see details in other vignettes andd the dedicated webpage). This dataset can be downloaded from [[here]](https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207){target="_blank"}. Alternatively, you can also download it directly from R using the [dbDownload()](https://www.manuelchevalier.com/crestr/reference/dbDownload.html){target="_blank"} function.
 
 
 
-The two options can be easily selected from the package. But let's begin by loading `crestr`.
+## A quick illustration
+
+Let's begin by loading `crestr`.
 ```{r setup}
 library(crestr)
 ```
@@ -52,20 +54,9 @@ PSE
 
 ## Using the _gbif4crest_ database
 
-Independently of how you want to access the calibration data, you will use the `crest.get_modern_data()` if you want to use the _gbif4crest_ data.
-
-If you want to access the cloud-based data, you will do the following:
-```{r get_modern_data, eval=FALSE, echo=TRUE}
-reconstr <- crest.get_modern_data(  pse = PSE,
-                                    taxaType = 1,
-                                    climate = c("bio1", "bio12"),
-                                    # The name of the online database
-                                    dbname = "gbif4crest_02",
-                                    verbose = TRUE
-)
-```
-
-If you have downloaded and unzipped the _gbif4crest_ dataset on your computer, you can use the following:
+Independently of how you downloaded the calibration data, you will use the `crest.get_modern_data()` if you want to use the _gbif4crest_ data. You will
+need to note the location of the dataset on your computer and provide that
+physical address to the function, as follow:
 
 ```{r offline-option, echo=TRUE, eval=FALSE}
 reconstr <- crest.get_modern_data(  pse = PSE,
@@ -74,22 +65,26 @@ reconstr <- crest.get_modern_data(  pse = PSE,
                                     # The full path to the local database
                                     # Or place the database in the working
                                     #   directory.
-                                    dbname = "path/to/gbif4crest_02.sqlite3",
+                                    dbname = "path/to/gbif4crest_03.sqlite3",
                                     verbose = TRUE
 )
 ```
 
-> Note: The local calibration database file can be saved in your working directory or anywhere else and renamed in any way. The file extension '.sqlite3' is, however, the only difference between the online and the offline options. It is thus crucial to call the file database.sqlite3 to orient the package in the right direction.
+This is it! You have used the gbif4crest calibration dataset to estimate the response of Ericaceae, artemisia and Olea. Please note that since no geographical constraints were provided, the fitted responses englobe all species worldwide. These curves have, therefore, little meaning. You always need to tailor the extent of your calibration dataset to your study region!
+
+> Note: The local calibration database file can be saved in your working directory or anywhere else and renamed in any way you want. The file extension '.sqlite3' is, however, important and cannot be modified.
+
 
 
 ## Local subset of the calibration dataset
 
-A third option exists (`crestr` > v1.3.0) that combines the strength of the two above approaches: subsetting the online database and save it locally. This way, you do not need to save a huge file on your computer and you only need an active internet connection to create the subset. Such subsets can be created using the `dbSubset()` function.
+If the database is too big for our computer and you want to save space, you can subset it after downloading it. This way, you do not need to keep a large file on your computer and you only need an active internet connection to create the subset. Such subsets can be created using the `dbSubset()` function.
 
 ```{r dbsubset, echo=TRUE, eval=FALSE}
 dbSubset( taxaType = 1,
           xmn = 0, xmx = 50, ymn = -45, ymx = 0,
-          out = 'gbif4crest_southernAfrica.sqlite3',
+          dbname = "path/to/gbif4crest_03.sqlite3",
+          out = 'myDatabaseSubset.sqlite3',
           verbose = TRUE
       )
 ```
@@ -103,7 +98,7 @@ reconstr <- crest.get_modern_data(  pse = PSE,
                                     # The full path to the local database
                                     # Or place the database in the working
                                     #   directory.
-                                    dbname = "gbif4crest_southernAfrica.sqlite3",
+                                    dbname = "myDatabaseSubset.sqlite3",
                                     verbose = TRUE
 )
 ```

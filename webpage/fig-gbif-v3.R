@@ -111,7 +111,7 @@ for(loc in "/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/fig-gbif_v3.png"
                 frame=FALSE, axes=FALSE)
             text(0.5, 0.45, paste0(TAXA_NAMES[i], ' (N=', prettyNum(TAXA_SIZES[i], big.mark = ","),')'), adj=c(0.5, 0.5), font=2, cex=1)
 
-            colour_scale <- viridis::inferno(25)[6:25]
+            colour_scale <- viridis::inferno(23)[4:23]
 
             plot(0, 0, type='n',
                  xlim=c(ext[1], ext[2]), ylim=c(ext[3], ext[4]),
@@ -133,7 +133,7 @@ for(loc in "/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/fig-gbif_v3.png"
                 frame=FALSE, axes=FALSE)
 
             for(j in 1:100) {
-                rect((j-1)/100, 0.95, j/100, 0.65, col=viridis::inferno(125)[j+25], border=viridis::inferno(125)[j+25])
+                rect((j-1)/100, 0.95, j/100, 0.65, col=viridis::inferno(115)[j+15], border=viridis::inferno(115)[j+15])
             }
             rect(0, 0.95, 1, 0.65, lwd=0.5)
 

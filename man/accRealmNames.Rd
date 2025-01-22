@@ -20,7 +20,6 @@ ecoregions) of each realm.
 Return the list of the realms and associated biomes and ecoregions.
 }
 \examples{
-accRealmNames()
 accRealmNames(realm='Africotropical')
 accRealmNames(realm='Africotropical', ecoregion=FALSE)
 }

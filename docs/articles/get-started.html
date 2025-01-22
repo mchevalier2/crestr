@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">crestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.0</span>
       </span>
     </div>
 
@@ -55,36 +55,36 @@
   <a href="../articles/technicalities.html">Prepare your data</a>
 </li>
 <li>
-  <a href="../articles/calibration-data.html">Calibration data</a>
+  <a href="../articles/calibration-data-v3.html">Dive into gbif4crest</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li>
-  <a href="../articles/community.html">Community</a>
+  <a href="../reference/index.html">Take the control</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-    Vignettes
+    More
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/databasing-with-crestr.html">Using the _gbif4crest_ database</a>
+      <a href="../articles/databasing-with-crestr.html">Using the gbif4crest database</a>
     </li>
     <li>
       <a href="../articles/warnings.html">Understanding warnings</a>
     </li>
     <li>
-      <a href="../articles/limpopo.html">MD96-2048 Reconstruction</a>
+      <a href="../articles/calibration-data-v3.html">gbif4crest v2 (old release)</a>
+    </li>
+    <li>
+      <a href="../articles/community.html">Community</a>
     </li>
   </ul>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Latest changes</a>
 </li>
 <li>
   <a href="https://github.com/mchevalier2/crestr/" class="external-link">
@@ -109,7 +109,7 @@
                         <h4 data-toc-skip class="author">Manuel
 Chevalier</h4>
             
-            <h4 data-toc-skip class="date">2025-01-08</h4>
+            <h4 data-toc-skip class="date">2025-01-22</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/get-started.Rmd" class="external-link"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -309,6 +309,56 @@ later be transformed into “-1”.</p>
 <p><br></p>
 </div>
 <div class="section level2">
+<h2 id="the-central-element-of-the-package-the-crestobj-object">The central element of the package: the <code>crestObj</code>
+object<a class="anchor" aria-label="anchor" href="#the-central-element-of-the-package-the-crestobj-object"></a>
+</h2>
+<p>In <code>crestr</code>, all the CREST-related data are stored within
+a single S3 object of the class <code>crestObj</code>. Most package
+functions will take a <code>crestObj</code> as their primary input and
+return an updated version of that object. In practice, a
+<code>crestObj</code> is a nested list that contains five sub-lists,
+each one grouping a specific type of information, such as the
+calibration data, the fitted climate responses, or the reconstructions
+(<strong>Fig. 4</strong>). Wrapper functions have been implemented to
+manipulate and modify the information contained in a
+<code>crestObj</code>, and users are never expected to manually modify
+their <code>crestObj</code>– even if it is possible. The five sub-lists
+contain the following information:</p>
+<ul>
+<li><p><code>inputs</code>: contains the input data (<em>e.g.</em> the
+counts/percentages of the fossil proxy data, the ages of the samples or
+the names of the fossil taxa).</p></li>
+<li><p><code>parameters</code>: contains the parameters provided at the
+different stages of the analysis (<em>e.g.</em> the tailoring of the
+<em>gbif4crest</em> calibration dataset or the fitting and combination
+of the PDFs).</p></li>
+<li><p><code>modelling</code>: contains all the data related to the
+estimation of the PDFs (<em>e.g.</em> the occurrence data (the
+‘distributions’) used to estimate the PDFs, the climate space of the
+study area, or the PDFs themselves).</p></li>
+<li><p><code>reconstructions</code>: contains all the results
+(<em>e.g.</em> best estimates, synthetic error measurements, as well as
+the full distribution of the reconstruction).</p></li>
+<li><p><code>misc</code>: contains some additional metadata relative to
+the reconstruction (<em>e.g.</em> the site location or, most
+importantly, information related to the proxy-species associated process
+described in section).</p></li>
+</ul>
+<p><br></p>
+<div class="figure">
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/fig-crestrobj_v1.png" alt="**Fig. 4** Structure of a crestObj, here called 'rcnstrctn', with the five main sub-lists in colour. For simplicity, lists with many elements ('tax' or 'clim') are represented with double framed boxes. The unframed terminal nodes on the right-hand side of each branch are simple R objects, such as numbers, strings, vectors or data frames. The names of the functions that modify these obsjects are indicated on the right." width="100%" style="background:none; border:none; box-shadow:none;"><p class="caption">
+<strong>Fig. 4</strong> Structure of a crestObj, here called
+‘rcnstrctn’, with the five main sub-lists in colour. For simplicity,
+lists with many elements (‘tax’ or ‘clim’) are represented with double
+framed boxes. The unframed terminal nodes on the right-hand side of each
+branch are simple R objects, such as numbers, strings, vectors or data
+frames. The names of the functions that modify these obsjects are
+indicated on the right.
+</p>
+</div>
+<p><br></p>
+</div>
+<div class="section level2">
 <h2 id="application-reconstructions-using-pseudo-data">Application: Reconstructions using pseudo-data
 <a id="reconstructions"></a><a class="anchor" aria-label="anchor" href="#application-reconstructions-using-pseudo-data"></a>
 </h2>
@@ -369,8 +419,8 @@ updated based on the reconstruction step.</p>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * The calibration dataset was defined using the following set of parameters:</span></span>
 <span><span class="co">#&gt; *   x Proxy type ............ Example dataset</span></span>
-<span><span class="co">#&gt; *   x Longitude ............. [-0.125 - 14.875]</span></span>
-<span><span class="co">#&gt; *   x Latitude .............. [-0.125 - 14.875]</span></span>
+<span><span class="co">#&gt; *   x Longitude ............. [0 - 15]</span></span>
+<span><span class="co">#&gt; *   x Latitude .............. [0 - 15]</span></span>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * Of the 7 taxa provided in `df` and `PSE`, 1 cannot be analysed.</span></span>
 <span><span class="co">#&gt; * (This may be expected, but check `$misc$taxa_notes` for additional details.)</span></span>
@@ -493,8 +543,8 @@ accessed from <code>reconstr</code> as follow:</p>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * The calibration dataset was defined using the following set of parameters:</span></span>
 <span><span class="co">#&gt; *   x Proxy type ............ Example dataset</span></span>
-<span><span class="co">#&gt; *   x Longitude ............. [-0.125 - 14.875]</span></span>
-<span><span class="co">#&gt; *   x Latitude .............. [-0.125 - 14.875]</span></span>
+<span><span class="co">#&gt; *   x Longitude ............. [0 - 15]</span></span>
+<span><span class="co">#&gt; *   x Latitude .............. [0 - 15]</span></span>
 <span><span class="co">#&gt; *</span></span>
 <span><span class="co">#&gt; * The PDFs were fitted using the following set of parameters:</span></span>
 <span><span class="co">#&gt; *   x Minimum distinct of distinct occurences .. 20</span></span>

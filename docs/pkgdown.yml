@@ -2,13 +2,13 @@ pandoc: 3.1.11.1
 pkgdown: 2.0.9
 pkgdown_sha: ~
 articles:
-  calibration-data: calibration-data.html
+  calibration-data-v2: calibration-data-v2.html
+  calibration-data-v3: calibration-data-v3.html
   community: community.html
   databasing-with-crestr: databasing-with-crestr.html
   get-started: get-started.html
-  limpopo: limpopo.html
   technicalities: technicalities.html
   theory: theory.html
   warnings: warnings.html
-last_built: 2025-01-08T07:40Z
+last_built: 2025-01-22T10:16Z
 

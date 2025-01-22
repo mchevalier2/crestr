@@ -155,6 +155,31 @@ Note that _Taxon7_ is indicated with 1s but, as no data are available to calibra
 
 <br >
 
+
+## The central element of the package: the `crestObj` object
+
+In `crestr`, all the CREST-related data are stored within a single S3 object of the class `crestObj`. Most package functions will take a `crestObj` as their primary input and return an updated version of that object. In practice, a `crestObj` is a nested list that contains five sub-lists, each one grouping a specific type of information, such as the calibration data, the fitted climate responses, or the reconstructions (**Fig. 4**). Wrapper functions have been implemented to manipulate and modify the information contained in a `crestObj`, and users are never expected to manually modify their `crestObj`-- even if it is possible. The five sub-lists contain the following information:
+
+- `inputs`: contains the input data (_e.g._ the counts/percentages of the fossil proxy data, the ages of the samples or the names of the fossil taxa).
+
+- `parameters`: contains the parameters provided at the different stages of the analysis (_e.g._ the tailoring of the _gbif4crest_ calibration dataset or the fitting and combination of the PDFs).
+
+- `modelling`: contains all the data related to the estimation of the PDFs (_e.g._ the occurrence data (the 'distributions') used to estimate the PDFs, the climate space of the study area, or the PDFs themselves).
+
+- `reconstructions`: contains all the results (_e.g._ best estimates, synthetic error measurements, as well as the full distribution of the reconstruction).
+
+- `misc`: contains some additional metadata relative to the reconstruction (_e.g._ the site location or, most importantly, information related to the proxy-species associated process described in section).
+
+
+<br >
+
+```{r crestobj, echo=FALSE, fig.cap = "**Fig. 4** Structure of a crestObj, here called 'rcnstrctn', with the five main sub-lists in colour. For simplicity, lists with many elements ('tax' or 'clim') are represented with double framed boxes. The unframed terminal nodes on the right-hand side of each branch are simple R objects, such as numbers, strings, vectors or data frames. The names of the functions that modify these obsjects are indicated on the right.", out.width = '100%', out.extra='style="background:none; border:none; box-shadow:none;"'}
+knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/fig-crestrobj_v1.png")
+```
+
+<br >
+
+
 ## Application: Reconstructions using pseudo-data <a id="reconstructions"></a>
 
 ### Data extraction and calibration

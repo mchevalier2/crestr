@@ -12,12 +12,12 @@
 `crestr` produces probabilistic reconstructions of past climate change from fossil assemblage data [(Chevalier, 2022)](https://cp.copernicus.org/articles/18/821/2022/). `crestr` works by analysing how certain biological indicators (like plant or animal remains) respond to climate factors, using statistical methods to estimate these relationships. These relationships are mdelled as probability density functions (_PDFs_; see [Chevalier *et al.* (2014)](https://www.doi.org/10.5194/cp-10-2081-2014) and [Chevalier (2019)](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)). The theory underpinning this package is explained in section [_A bit of theory_](https://www.manuelchevalier.com/crestr/articles/theory.html) and is illustrated with an application based on pseudo-data in section [_Get Started_](https://www.manuelchevalier.com/crestr/articles/get-started.html). The different vignettes present different aspects of the structure of the package and the data it contains, along with applications based on real data.
 
 
-**Why chose `crestr`?** Unlike traditional methods, crestr uses probabilistic techniques to provide more accurate and flexible climate reconstructions. **Its focus on accessibility means you don’t need to be an expert coder to get meaningful results.**
+**Why choose `crestr`?** Unlike traditional methods, crestr uses probabilistic techniques to provide more accurate and flexible climate reconstructions. **Its focus on accessibility means you don’t need to be an expert coder to get meaningful results.**
 
 
 <br >
 
-> **_NOTE:_** While active development of crestr has concluded, its robust features continue to provide valuable insights for palaeoclimate research. The available documentation and resources remain accessible for independent use. In addition, I am committed to maintaining this bug-free. As such, please reach out at <paleo@manuelchevalier.com> if you encounter technical issues.
+> **_NOTE:_** While active development of crestr has concluded, its robust features will continue to provide valuable insights for palaeoclimate research. The available documentation and resources will remain accessible for independent use. In addition, I am committed to maintaining this bug-free. As such, please reach out at <paleo@manuelchevalier.com> if you encounter technical issues.
 
 ## Installation
 

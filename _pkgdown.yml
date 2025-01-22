@@ -42,25 +42,24 @@ navbar:
       text: Prepare your data
       href: articles/technicalities.html
     calibration:
-      text: Calibration data
-      href: articles/calibration-data.html
+      text: Dive into gbif4crest
+      href: articles/calibration-data-v3.html
     reference:
-      text: Reference
+      text: Take the control
       href: reference/index.html
-    community:
-      text: Community
-      href: articles/community.html
     vignettes:
-      text: Vignettes
+      text: More
       menu:
-      - text: Using the _gbif4crest_ database
+      - text: Using the gbif4crest database
         href: articles/databasing-with-crestr.html
       - text: Understanding warnings
         href: articles/warnings.html
-      - text: MD96-2048 Reconstruction
-        href: articles/limpopo.html
+      - text: gbif4crest v2 (old release)
+        href: articles/calibration-data-v3.html
+      - text: Community
+        href: articles/community.html
     news:
-      text: News
+      text: Latest changes
       href: news/index.html
     github:
       icon: fab fa-github fa-lg
@@ -136,6 +135,7 @@ reference:
       - '`getDistribTaxa`'
       - '`getTaxonID`'
       - '`getTaxonomy`'
+      - '`identifyDatabase`'
       - '`testConnection`'
   - title: "Modelling functions"
     desc: "Functions used model the data. Not to be used."
