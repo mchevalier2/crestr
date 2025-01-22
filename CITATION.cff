@@ -5,7 +5,7 @@ authors:
   given-names: "Manuel"
   orcid: "https://orcid.org/0000-0002-8183-9881"
 title: "crestr: an R package to perform probabilistic climate reconstructions from palaeoecological datasets"
-version: 1.4.0
+version: 1.4.1
 doi: 10.5194/cp-18-821-2022
 date-released: 2025-01-22
 url: "https://www.manuelchevalier.com/crestr"

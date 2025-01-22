@@ -1,3 +1,6 @@
+# crestr 1.4.1
+    * Adding CITATION.cff
+
 # crestr 1.4.0
 
 * Improving compatibility with new calibration database
