@@ -1,3 +1,6 @@
+# crestr 1.4.2
+    * Fixing web address of gbif4crest_03 in `dbDownload()``
+
 # crestr 1.4.1
     * Adding CITATION.cff
 

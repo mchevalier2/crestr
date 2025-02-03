@@ -43,7 +43,7 @@ dbDownload <- function( filename = "gbif4crest_03.zip", version=3, lite=TRUE, re
     } else if(version == 3) {
         if(res == '5min') {
             filename <- ifelse(filename=="gbif4crest_03.zip", "gbif4crest_03_5min.zip", filename)
-            utils::download.file("https://figshare.com/ndownloader/files/51642191", filename)
+            utils::download.file("https://figshare.com/ndownloader/files/51983723", filename)
         } else {
             stop("This resolution is not available. Pick res='5min'.")
         }
