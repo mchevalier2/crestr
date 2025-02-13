@@ -62,8 +62,10 @@ crest.set_modern_data <- function( distributions, climate,
 
     if(weight) {
         if(! 'weight' %in% colnames(distributions) ) {
-            cat("[FAILED]\n\n")
-            stop("You selected 'weight=TRUE' but did not provide weights in your distribution data frame.\n")
+            if(! 'Weight' %in% colnames(distributions) ) {
+                cat("[FAILED]\n\n")
+                stop("You selected 'weight=TRUE' but did not provide weights in your distribution data frame. The column should be called 'weight'.\n")
+            }
         }
     }
 
@@ -234,7 +236,7 @@ crest.set_modern_data <- function( distributions, climate,
     stats::na.omit(distributions)
 
     crest$modelling$distributions <- list()
-    w <- which(colnames(distributions) %in% c('taxonid', 'longitude', 'latitude', climate))
+    w <- which(colnames(distributions) %in% c('taxonid', 'longitude', 'latitude', climate, 'weight', 'Weight'))
     for (tax in crest$inputs$taxa.name) {
         dstrbtn <- distributions[distributions[, 'ProxyName'] == tax, w]
         if(nrow(dstrbtn) < minGridCells) {
@@ -262,9 +264,8 @@ crest.set_modern_data <- function( distributions, climate,
                 taxa_notes[[message]] <- append(taxa_notes[[message]], tax)
             } else {
                 if(weight) {
-                    tax.rows <- which(dstrbtn == tax)
-                    dupl.rows <- rep(tax.rows, times=base::ceiling(distributions[tax.rows, 'weight']))
-                    crest$modelling$distributions[[tax]] <- distributions[dupl.rows, w]
+                    dupl.rows <- rep(1:nrow(dstrbtn), times=base::ceiling(dstrbtn[, 'weight']))
+                    crest$modelling$distributions[[tax]] <- dstrbtn[dupl.rows, ]
                     crest$parameters$weightedPresences <- TRUE
                 } else {
                     crest$modelling$distributions[[tax]] <- dstrbtn

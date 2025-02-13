@@ -1,8 +1,15 @@
+# crestr 1.4.3
+* MAJOR
+    * Identified and fixed a problem with `crest.set_modern_data()` that appeared with v1.4.0. The modern data were not distributed to the correct species when weight was set to TRUE (no problem with weight=FALSE). The problem is fixed.
+* MINOR
+    * The column for weights in the `distributions` table can be spelled 'weight' or 'Weight'.
+    * The labelling bug in `plot_violinPDFs()` associated with private calibration dataset is fixed.
+
 # crestr 1.4.2
-    * Fixing web address of gbif4crest_03 in `dbDownload()``
+* Fixing web address of gbif4crest_03 in `dbDownload()``
 
 # crestr 1.4.1
-    * Adding CITATION.cff
+* Adding CITATION.cff
 
 # crestr 1.4.0
 
