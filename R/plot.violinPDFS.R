@@ -136,9 +136,14 @@ plot_violinPDFs <- function( x,
         }
 
         graphics::par(las=0)
-        climate_names <- accClimateVariables()
-        graphics::mtext(climate_names[climate_names[, 2] == climate, 3],side=2,line=1.5, cex=1, font=2)
-        graphics::mtext(climate_names[climate_names[, 2] == climate, 3],side=4,line=1.3, cex=1, font=2)
+        if(x$misc$dbname == 'private-database') {
+            graphics::mtext(climate,side=2,line=1.5, cex=1, font=2)
+            graphics::mtext(climate,side=4,line=1.3, cex=1, font=2)
+        } else {
+            climate_names <- accClimateVariables()
+            graphics::mtext(climate_names[climate_names[, 2] == climate, 3],side=2,line=1.5, cex=1, font=2)
+            graphics::mtext(climate_names[climate_names[, 2] == climate, 3],side=4,line=1.3, cex=1, font=2)
+        }
 
         graphics::par(mgp=c(2,0.5,0), las=1)
         graphics::axis(2, lwd.ticks=0.8, lwd=0, tck=-0.01, cex.axis=6/7)
