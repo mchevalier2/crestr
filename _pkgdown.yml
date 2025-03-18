@@ -136,6 +136,7 @@ reference:
       - '`getTaxonID`'
       - '`getTaxonomy`'
       - '`identifyDatabase`'
+      - '`is_database_gbif`'
       - '`testConnection`'
   - title: "Modelling functions"
     desc: "Functions used model the data. Not to be used."
