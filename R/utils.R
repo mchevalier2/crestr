@@ -532,10 +532,11 @@ identifyDatabase <- function(dbname) {
 #'         or the example database (TRUE). FALSE otherwise.
 #' @export
 #' @examples
-#' is_database_gbif(reconstr)
+#' is_database_gbif(reconstr$misc$dbname)
 #'
 is_database_gbif <- function(dbname) {
-    if(dbname %in% c('gbif4crest_02', 'gbif4crest_03', 'privateDB')) {
+    dbname=identifyDatabase(dbname)
+    if(dbname %in% c('gbif4crest_02', 'gbif4crest_03', 'exampleDB')) {
         return(TRUE)
     } else {
         return(FALSE)

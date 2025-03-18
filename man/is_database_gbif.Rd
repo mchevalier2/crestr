@@ -17,6 +17,6 @@ or the example database (TRUE). FALSE otherwise.
 Check if the database is one of mine.
 }
 \examples{
-is_database_gbif(reconstr)
+is_database_gbif(reconstr$misc$dbname)
 
 }

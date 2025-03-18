@@ -109,8 +109,8 @@ or the example database (TRUE). FALSE otherwise.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">is_database_gbif</span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (dbname %in% c("gbif4crest_02", "gbif4crest_03", "privateDB")) {    return(TRUE)} else {    return(FALSE)}:</span> the condition has length &gt; 1</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">is_database_gbif</span><span class="op">(</span><span class="va">reconstr</span><span class="op">$</span><span class="va">misc</span><span class="op">$</span><span class="va">dbname</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
