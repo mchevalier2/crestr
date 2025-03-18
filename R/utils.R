@@ -522,3 +522,22 @@ identifyDatabase <- function(dbname) {
     if(is.na(params)[1]) return('gbif4crest_02')
     return('gbif4crest_03')
 }
+
+#' Check if the database is one of mine.
+#'
+#' Check if the database is one of mine.
+#'
+#' @param dbname A functional crestObj or a database name.
+#' @return A boolean indicating if the database if of the gbif4crest Family
+#'         or the example database (TRUE). FALSE otherwise.
+#' @export
+#' @examples
+#' is_database_gbif(reconstr)
+#'
+is_database_gbif <- function(dbname) {
+    if(dbname %in% c('gbif4crest_02', 'gbif4crest_03', 'privateDB')) {
+        return(TRUE)
+    } else {
+        return(FALSE)
+    }
+}

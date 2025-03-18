@@ -1,3 +1,8 @@
+# crestr 1.4.4
+* MINOR
+    * Adding `is_database_gbif()` function
+    * Removing one erroneous check in `plot.combinedPDFs()`
+
 # crestr 1.4.3
 * MAJOR
     * Identified and fixed a problem with `crest.set_modern_data()` that appeared with v1.4.0. The modern data were not distributed to the correct species when weight was set to TRUE (no problem with weight=FALSE). The problem is fixed.
