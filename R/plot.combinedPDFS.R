@@ -92,13 +92,15 @@ plot_combinedPDFs <- function( x, ages=range(x$inputs$x),
             return(invisible(NA))
         }
 
-        climVar <- accClimateVariables()
-        new_clim <- climate
-        if (!(climate %in% climVar[, 1] | climate %in% climVar[, 2])) {
-            stop(paste0("The variable '", climate, "' is not an accepted value. Check the list of accepted values using 'accClimateVariables()'.\n\n"))
-        } else {
-            if (suppressWarnings(!is.na(as.numeric(climate)))) {
-                new_clim <- as.character(climVar[which(climVar[, 1] == as.numeric(climate)), 2])
+        if(is_database_gbif(x$misc$dbname)) {
+            climVar <- accClimateVariables()
+            new_clim <- climate
+            if (!(climate %in% climVar[, 1] | climate %in% climVar[, 2])) {
+                stop(paste0("The variable '", climate, "' is not an accepted value. Check the list of accepted values using 'accClimateVariables()'.\n\n"))
+            } else {
+                if (suppressWarnings(!is.na(as.numeric(climate)))) {
+                    new_clim <- as.character(climVar[which(climVar[, 1] == as.numeric(climate)), 2])
+                }
             }
         }
 
