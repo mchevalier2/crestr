@@ -160,9 +160,8 @@ getDistribTaxa <- function(taxIDs,
         "    ", TYPEOFOBS, '   '
        )
     res <- dbRequest(req, dbname)
-
+    
     if(nrow(res) == 0) return(stats::setNames(data.frame(matrix(ncol = length(c('taxonid', 'longitude', 'latitude', climate)), nrow = 0)), c('taxonid', 'longitude', 'latitude', climate)))
-
 
     # Removing the 'NULL' when using the SQLite3 database
     NULLS <- ""
