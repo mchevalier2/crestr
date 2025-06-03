@@ -10,7 +10,7 @@ license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![Project Status: Active – The project has reached a stable, usable
-state and is being actively
+state and is being actively 
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <br > ![CRAN/METACRAN](https://img.shields.io/cran/v/crestr) [![GitHub R
 package
@@ -246,8 +246,8 @@ names(recons)
 #> [5] "misc"
 lapply(recons$reconstructions, names)
 #> $bio1
-#> [1] "likelihood"    "uncertainties" "optima"       
-#> 
+#> [1] "likelihood"    "uncertainties" "optima"
+#>
 #> $bio12
 #> [1] "likelihood"    "uncertainties" "optima"
 ```

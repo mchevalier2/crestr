@@ -1,3 +1,7 @@
+# crestr 1.4.5
+* MINOR
+    * Adjusting default parameters to `crest.get_modern_data()`
+
 # crestr 1.4.4
 * MINOR
     * Adding `is_database_gbif()` function
