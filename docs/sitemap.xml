@@ -1,300 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/calibration-data-v2.html</loc>
-  </url>
-  <url>
-    <loc>/articles/calibration-data-v3.html</loc>
-  </url>
-  <url>
-    <loc>/articles/calibration-data.html</loc>
-  </url>
-  <url>
-    <loc>/articles/community.html</loc>
-  </url>
-  <url>
-    <loc>/articles/databasing-with-crestr.html</loc>
-  </url>
-  <url>
-    <loc>/articles/get-started.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/limpopo.html</loc>
-  </url>
-  <url>
-    <loc>/articles/technicalities.html</loc>
-  </url>
-  <url>
-    <loc>/articles/technicalities2.html</loc>
-  </url>
-  <url>
-    <loc>/articles/theory.html</loc>
-  </url>
-  <url>
-    <loc>/articles/using-gbif4crest.html</loc>
-  </url>
-  <url>
-    <loc>/articles/warnings.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/M1.html</loc>
-  </url>
-  <url>
-    <loc>/reference/PSE_log.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accBasinNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accClimateVariables.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accCountryNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/accRealmNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/calib_clim_space.html</loc>
-  </url>
-  <url>
-    <loc>/reference/check_coordinates.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cite_climate_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cite_crest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cite_distrib_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cite_method.html</loc>
-  </url>
-  <url>
-    <loc>/reference/climate_from_xy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/close_db_connection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/colour_theme.html</loc>
-  </url>
-  <url>
-    <loc>/reference/connect_local_sqlite3.html</loc>
-  </url>
-  <url>
-    <loc>/reference/connect_online.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert2percentages.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert2presenceAbsence.html</loc>
-  </url>
-  <url>
-    <loc>/reference/copy_crest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/createPSE.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest.calibrate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest.get_modern_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest.reconstruct.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest.set_modern_data.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest.simplify.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crestObj.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest_ex.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest_ex_pse.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crest_ex_selection.html</loc>
-  </url>
-  <url>
-    <loc>/reference/crop.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dbDownload.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dbRequest.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dbSubset.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-ecoid2names.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dot-geopoid2names.html</loc>
-  </url>
-  <url>
-    <loc>/reference/eqearth_get_ext.html</loc>
-  </url>
-  <url>
-    <loc>/reference/excludeTaxa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/explore_calibration_dataset.html</loc>
-  </url>
-  <url>
-    <loc>/reference/export.html</loc>
-  </url>
-  <url>
-    <loc>/reference/export_pdfs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/f_locid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/find.original.name.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fit_pdfsp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/fit_xrange.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getBasinNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getClimateSpace.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getCountryNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getDistribTaxa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getRealmNames.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getResol.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getSpeciesdiversity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getTaxaTypeFromTaxID.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getTaxonID.html</loc>
-  </url>
-  <url>
-    <loc>/reference/getTaxonomy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_taxa_type.html</loc>
-  </url>
-  <url>
-    <loc>/reference/identifyDatabase.html</loc>
-  </url>
-  <url>
-    <loc>/reference/includeTaxa.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is.crestObj.html</loc>
-  </url>
-  <url>
-    <loc>/reference/isColourStr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/is_database_gbif.html</loc>
-  </url>
-  <url>
-    <loc>/reference/loo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/makeTransparent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/meanPositiveValues.html</loc>
-  </url>
-  <url>
-    <loc>/reference/normalise.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pdf_ranges.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.crestObj.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_climateSpace.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_combinedPDFs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_diagram.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_loo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_map_eqearth.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_scatterPDFs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_taxaCharacteristics.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_violinPDFs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reconstr.html</loc>
-  </url>
-  <url>
-    <loc>/reference/taxonComposition.html</loc>
-  </url>
-  <url>
-    <loc>/reference/testConnection.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/calibration-data-v2.html</loc></url>
+<url><loc>/articles/calibration-data-v3.html</loc></url>
+<url><loc>/articles/calibration-data.html</loc></url>
+<url><loc>/articles/community.html</loc></url>
+<url><loc>/articles/databasing-with-crestr.html</loc></url>
+<url><loc>/articles/get-started.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/limpopo.html</loc></url>
+<url><loc>/articles/technicalities.html</loc></url>
+<url><loc>/articles/technicalities2.html</loc></url>
+<url><loc>/articles/theory.html</loc></url>
+<url><loc>/articles/using-gbif4crest.html</loc></url>
+<url><loc>/articles/warnings.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/M1.html</loc></url>
+<url><loc>/reference/PSE_log.html</loc></url>
+<url><loc>/reference/accBasinNames.html</loc></url>
+<url><loc>/reference/accClimateVariables.html</loc></url>
+<url><loc>/reference/accCountryNames.html</loc></url>
+<url><loc>/reference/accRealmNames.html</loc></url>
+<url><loc>/reference/calib_clim_space.html</loc></url>
+<url><loc>/reference/check_coordinates.html</loc></url>
+<url><loc>/reference/cite_climate_data.html</loc></url>
+<url><loc>/reference/cite_crest.html</loc></url>
+<url><loc>/reference/cite_distrib_data.html</loc></url>
+<url><loc>/reference/cite_method.html</loc></url>
+<url><loc>/reference/climate_from_xy.html</loc></url>
+<url><loc>/reference/close_db_connection.html</loc></url>
+<url><loc>/reference/colour_theme.html</loc></url>
+<url><loc>/reference/connect_local_sqlite3.html</loc></url>
+<url><loc>/reference/connect_online.html</loc></url>
+<url><loc>/reference/convert2percentages.html</loc></url>
+<url><loc>/reference/convert2presenceAbsence.html</loc></url>
+<url><loc>/reference/copy_crest.html</loc></url>
+<url><loc>/reference/createPSE.html</loc></url>
+<url><loc>/reference/crest.calibrate.html</loc></url>
+<url><loc>/reference/crest.get_modern_data.html</loc></url>
+<url><loc>/reference/crest.html</loc></url>
+<url><loc>/reference/crest.reconstruct.html</loc></url>
+<url><loc>/reference/crest.set_modern_data.html</loc></url>
+<url><loc>/reference/crest.simplify.html</loc></url>
+<url><loc>/reference/crestObj.html</loc></url>
+<url><loc>/reference/crest_ex.html</loc></url>
+<url><loc>/reference/crest_ex_pse.html</loc></url>
+<url><loc>/reference/crest_ex_selection.html</loc></url>
+<url><loc>/reference/crop.html</loc></url>
+<url><loc>/reference/dbDownload.html</loc></url>
+<url><loc>/reference/dbRequest.html</loc></url>
+<url><loc>/reference/dbSubset.html</loc></url>
+<url><loc>/reference/dot-ecoid2names.html</loc></url>
+<url><loc>/reference/dot-geopoid2names.html</loc></url>
+<url><loc>/reference/eqearth_get_ext.html</loc></url>
+<url><loc>/reference/excludeTaxa.html</loc></url>
+<url><loc>/reference/explore_calibration_dataset.html</loc></url>
+<url><loc>/reference/export.html</loc></url>
+<url><loc>/reference/export_pdfs.html</loc></url>
+<url><loc>/reference/f_locid.html</loc></url>
+<url><loc>/reference/find.original.name.html</loc></url>
+<url><loc>/reference/fit_pdfsp.html</loc></url>
+<url><loc>/reference/fit_xrange.html</loc></url>
+<url><loc>/reference/getBasinNames.html</loc></url>
+<url><loc>/reference/getClimateSpace.html</loc></url>
+<url><loc>/reference/getCountryNames.html</loc></url>
+<url><loc>/reference/getDistribTaxa.html</loc></url>
+<url><loc>/reference/getRealmNames.html</loc></url>
+<url><loc>/reference/getResol.html</loc></url>
+<url><loc>/reference/getSpeciesdiversity.html</loc></url>
+<url><loc>/reference/getTaxaTypeFromTaxID.html</loc></url>
+<url><loc>/reference/getTaxonID.html</loc></url>
+<url><loc>/reference/getTaxonomy.html</loc></url>
+<url><loc>/reference/get_taxa_type.html</loc></url>
+<url><loc>/reference/identifyDatabase.html</loc></url>
+<url><loc>/reference/includeTaxa.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/is.crestObj.html</loc></url>
+<url><loc>/reference/isColourStr.html</loc></url>
+<url><loc>/reference/is_database_gbif.html</loc></url>
+<url><loc>/reference/loo.html</loc></url>
+<url><loc>/reference/makeTransparent.html</loc></url>
+<url><loc>/reference/meanPositiveValues.html</loc></url>
+<url><loc>/reference/normalise.html</loc></url>
+<url><loc>/reference/pdf_ranges.html</loc></url>
+<url><loc>/reference/plot.crestObj.html</loc></url>
+<url><loc>/reference/plot_climateSpace.html</loc></url>
+<url><loc>/reference/plot_combinedPDFs.html</loc></url>
+<url><loc>/reference/plot_diagram.html</loc></url>
+<url><loc>/reference/plot_loo.html</loc></url>
+<url><loc>/reference/plot_map_eqearth.html</loc></url>
+<url><loc>/reference/plot_scatterPDFs.html</loc></url>
+<url><loc>/reference/plot_taxaCharacteristics.html</loc></url>
+<url><loc>/reference/plot_violinPDFs.html</loc></url>
+<url><loc>/reference/reconstr.html</loc></url>
+<url><loc>/reference/taxonComposition.html</loc></url>
+<url><loc>/reference/testConnection.html</loc></url>
 </urlset>
+

@@ -123,7 +123,7 @@ The following two columns contain the coordinates of the species occurrence data
 
 **Table 4** Template for the `distributions` data frame. The weights column, here indicated with a '*', is optional and can be omitted or its values all set to 1 to assign the same weight to each observation. The number of rows the of table should correspond to the number of unique occurrences available.
 
-| Species name                       | Taxon Name                 | Longitude | Latitude | Weight* | clim\_1 | ... | clim\_n |
+| taxonid                            | TaxonName                  | longitude | latitude | weight* | clim\_1 | ... | clim\_n |
 |------------------------------------|----------------------------|-----------|----------|---------|---------|-----|---------|
 | _Stoebe plumosa_                   | _Stoebe_-type              | 18.875    | -34.375  | 20      | 15.8    | ... | 711     |
 | _Elytropappus rhinocerotis_        | _Stoebe_-type              | 18.375    | -33.625  | 32      | 16.9    | ... | 477     |
@@ -141,9 +141,9 @@ This data frame is only necessary if the users use a personal calibration datase
 
 <br >
 
-**Table 5** Template for the `distributions` data frame. The weights column, here indicated with a '*', is optional and can be omitted or its values all set to 1 to assign the same weight to each observation. The number of rows the of table should correspond to the number of unique occurrences available.
+**Table 5** Template for the `climate_space` data frame.
 
-| Longitude | Latitude | clim\_1 | ... | clim\_n |
+| longitude | latitude | clim\_1 | ... | clim\_n |
 |-----------|----------|---------|-----|---------|
 | 18.375    | -33.625  | 16.9    | ... | 477     |
 | ...       | ...      | ...     | ... | ...     |
