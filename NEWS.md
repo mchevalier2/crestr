@@ -1,3 +1,7 @@
+# crestr 1.4.7
+* MINOR
+    *
+
 # crestr 1.4.6
 * MINOR
     * Adding a check for PSE file column names in `crest.get_modern_data()`.
