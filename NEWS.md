@@ -1,3 +1,11 @@
+# crestr 1.4.6
+* MINOR
+    * Adding a check for PSE file column names in `crest.get_modern_data()`.
+    * Adding a check for type_of_obs file column names in `crest.get_modern_data()`.
+    * Changing default values of type_of_obs to match gbif4crest_03.
+    * Adding a check for climate names in `crest.set_modern_data()`.
+    * Improving documentation.
+
 # crestr 1.4.5
 * MINOR
     * Adjusting default parameters to `crest.get_modern_data()`

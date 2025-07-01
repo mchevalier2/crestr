@@ -74,6 +74,11 @@ crest.get_modern_data <- function( pse, taxaType, climate,
         stop("The 'pse' variable (proxy_species_equivalency) must be a data frame.\n\n")
     }
 
+    if (!('Level' %in% colnames(pse) & 'Family' %in% colnames(pse) & 'Genus' %in% colnames(pse) & 'Species' %in% colnames(pse) & 'ProxyName' %in% colnames(pse) )) {
+        cat("[FAILED]\n")
+        stop("The 'pse' file must contain the five following columns 'Level', 'Family', 'Genus', 'Species' , and 'ProxyName'.\n\n")
+    }
+
     pse <- pse[!is.na((pse[, 'ProxyName'])), ]
     pse <- pse[(pse[, 'ProxyName'] != ''), ]
 
@@ -84,6 +89,18 @@ crest.get_modern_data <- function( pse, taxaType, climate,
     for(tax in taxa.name) {
         if (! tax %in% pse[, 'ProxyName']) taxa_to_ignore=c(taxa_to_ignore, tax)
     }
+
+    if(verbose) cat('[OK]\n  <> Checking type_of_obs .................. ')
+    if (identifyDatabase(dbname) == 'gbif4crest_03') {
+        max_type_of = 8
+    } else {
+        max_type_of = 9
+    }
+    if (typeof(type_of_obs) != typeof(4) | min(type_of_obs)<1 | max(type_of_obs) > max_type_of ) {
+        cat("[FAILED]\n\n")
+        stop(paste0("type_of_obs should only contain integer values between 1 and 8.\n"))
+    }
+    type_of_obs <- unique(trunc(type_of_obs)) ## Making sure only integers are used
 
     if(verbose) cat('[OK]\n  <> Checking climate variables ............ ')
     ## . Change the climate variable ID for the climate variable name -----------
@@ -519,6 +536,7 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             cat(paste0('  <> Extracting species distributions ...... ', stringr::str_pad(paste0(round(pbi / length(crest$inputs$taxa.name)),'%\r'), width=4, side='left')))
             utils::flush.console()
         }
+        print(tax)
         if (sum(crest$inputs$selectedTaxa[tax, climate]>=0) > 0) {
             distributions[[tax]] <- getDistribTaxa(
               taxIDs, climate=climate,

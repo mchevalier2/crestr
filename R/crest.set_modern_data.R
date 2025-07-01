@@ -65,6 +65,9 @@ crest.set_modern_data <- function( distributions, climate,
             if(! 'Weight' %in% colnames(distributions) ) {
                 cat("[FAILED]\n\n")
                 stop("You selected 'weight=TRUE' but did not provide weights in your distribution data frame. The column should be called 'weight'.\n")
+            } else {
+                w <- which(colnames(distributions) == 'Weight')
+                colnames(distributions)[w] <- 'weight'
             }
         }
     }
@@ -117,6 +120,19 @@ crest.set_modern_data <- function( distributions, climate,
     # The taxa that are in the fossil but not the modern data files
     for(tax in taxa.name) {
         if (! tax %in% distributions[, 'ProxyName']) taxa_to_ignore=c(taxa_to_ignore, tax)
+    }
+
+
+    if(verbose) cat('[OK]\n  <> Checking climate variable names ....... ')
+    pb_var <- c()
+    for(v in climate) {
+        if(! ( ( is.null(nrow(climate_space)) | v %in% colnames(climate_space) ) & v %in% colnames(distributions)) ){
+            pb_var <- c(pb_var, v)
+        }
+    }
+    if(length(pb_var) > 0) {
+        cat("[FAILED]\n\n")
+        stop(paste0("The variable", ifelse(length(pb_var)==1, ' ', 's '), paste(pb_var, collapse=', '), ifelse(length(pb_var)==1, ' was ', ' were '), "not found in climate_space or distributions. Look for differences across the files, e.g. leading or trailing spaces, and upper/lower case letters. bio1 is different from BIO1.\n"))
     }
 
 
@@ -236,7 +252,7 @@ crest.set_modern_data <- function( distributions, climate,
     stats::na.omit(distributions)
 
     crest$modelling$distributions <- list()
-    w <- which(colnames(distributions) %in% c('taxonid', 'longitude', 'latitude', climate, 'weight', 'Weight'))
+    w <- which(colnames(distributions) %in% c('taxonid', 'longitude', 'latitude', climate, 'weight'))
     for (tax in crest$inputs$taxa.name) {
         dstrbtn <- distributions[distributions[, 'ProxyName'] == tax, w]
         if(nrow(dstrbtn) < minGridCells) {
