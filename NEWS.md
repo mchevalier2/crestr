@@ -1,4 +1,6 @@
 # crestr 1.4.7
+* MAJOR
+    * `dbDownload()` was broken. download.files() needed some extra parameters. It now works.
 * MINOR
     *
 

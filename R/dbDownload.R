@@ -29,21 +29,21 @@ dbDownload <- function( filename = "gbif4crest_03.zip", version=3, lite=TRUE, re
         if(res == '15min') {
             if(lite) {
                 filename <- ifelse(filename=="gbif4crest_03.zip", "gbif4crest_02_15min_lite.zip", filename)
-                utils::download.file("https://figshare.com/ndownloader/files/25071872", filename)
+                utils::download.file("https://figshare.com/ndownloader/files/25071872", filename, method='libcurl', mode='wb',     headers  = c("User-Agent" = "Mozilla/5.0", "Referer" = "https://figshare.com/" ))
             } else {
-                filename <- ifelse(filename=="gbif4crest_03.zip", "gbif4crest_02_15min.zip", filename)
-                utils::download.file("https://figshare.com/ndownloader/files/36126908", filename)
+                filename <- ifelse(filename=="gbif4crest_03.zip", "gbif4crest_02_15min.zip", filename, method='libcurl', mode='wb',     headers  = c("User-Agent" = "Mozilla/5.0", "Referer" = "https://figshare.com/" ))
+                utils::download.file("https://figshare.com/ndownloader/files/36126908", filename, method='libcurl', mode='wb',     headers  = c("User-Agent" = "Mozilla/5.0", "Referer" = "https://figshare.com/" ))
             }
         } else if(res == '5min') {
             filename <- ifelse(filename=="gbif4crest_03.zip", "gbif4crest_02_5min.zip", filename)
-            utils::download.file("https://figshare.com/ndownloader/files/42606571", filename)
+            utils::download.file("https://figshare.com/ndownloader/files/42606571", filename, method='libcurl', mode='wb',     headers  = c("User-Agent" = "Mozilla/5.0", "Referer" = "https://figshare.com/" ))
         } else {
             stop("This resolution is not available. Pick res='15min' or '5min'.")
         }
     } else if(version == 3) {
         if(res == '5min') {
             filename <- ifelse(filename=="gbif4crest_03.zip", "gbif4crest_03_5min.zip", filename)
-            utils::download.file("https://figshare.com/ndownloader/files/51983723", filename)
+            utils::download.file("https://figshare.com/ndownloader/files/51983723", filename, method='libcurl', mode='wb',     headers  = c("User-Agent" = "Mozilla/5.0", "Referer" = "https://figshare.com/" ))
         } else {
             stop("This resolution is not available. Pick res='5min'.")
         }
