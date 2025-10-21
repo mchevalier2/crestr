@@ -50,20 +50,20 @@ Okeefe_2024,2024,N. America,Clarkia (Megafossils),-116.269,46.998,15140000,64000
 Okeefe_2024,2024,N. America,Clarkia (Pollen),-116.269,46.998,15140000,37000000,Quantitative
 Okeefe_2024,2024,N. America,Trapper Creek,-114.079,42.134,12690000,16000000,Quantitative
 Pilie,2023,Antarctica,McMurdo Sound,165.2768833,-77.75813333,15600000,16400000,Quantitative
-McCoy_2024,2024,Europe,Washing Bay,-6.60,54.54,23000000,33900000,Quantitative
+McCoy_2024,2024,Europe,Washing Bay,-6.6,54.54,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,Bovey,-3.92,50.57,27820000,33900000,Quantitative
 McCoy_2024,2024,Europe,Ballynakilly,-9.96,53.56,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,Bellbrook,-6.25,54.61,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,Mire House,-6.75,54.55,23000000,33900000,Quantitative
-McCoy_2024,2024,Europe,Petrockstowe,-4.13,51.00,23000000,33900000,Quantitative
+McCoy_2024,2024,Europe,Petrockstowe,-4.13,51,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,Little Minch (80/14) ALL,-5.97,58.06,25500000,31800000,Quantitative
 McCoy_2024,2024,Europe,St. Agnes Beacon,-5.23,50.31,27820000,33900000,Quantitative
 McCoy_2024,2024,Europe,73/35,-4.59,51.19,23030000,27820000,Quantitative
 McCoy_2024,2024,Europe,73/58,-4.41,51.19,23030000,27820000,Quantitative
 McCoy_2024,2024,Europe,Ballygiblin,-8.52,52.22,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,Ballymacadam,-9.43,52.24,23000000,33900000,Quantitative
-McCoy_2024,2024,Europe,16/16B-A,1.23,58.80,26300000,32100000,Quantitative
-McCoy_2024,2024,Europe,21/28-A,-3.10,57.82,26600000,33000000,Quantitative
+McCoy_2024,2024,Europe,16/16B-A,1.23,58.8,26300000,32100000,Quantitative
+McCoy_2024,2024,Europe,21/28-A,-3.1,57.82,26600000,33000000,Quantitative
 McCoy_2024,2024,Europe,80/14-A,-6.92,57.77,25500000,31800000,Quantitative
 McCoy_2024,2024,Europe,88/12-A,-6.99,56.84,27050000,31800000,Quantitative
 McCoy_2024,2024,Europe,78/01-A,-7.32,56.74,25600000,33900000,Quantitative
@@ -76,11 +76,25 @@ McCoy_2024,2024,Europe,LND,-6.62,54.65,25800000,31650000,Quantitative
 McCoy_2024,2024,Europe,Castlemartin,-4.99,51.61,15970000,23000000,Quantitative
 McCoy_2024,2024,Europe,LN_13611,-6.58,54.99,23030000,27820000,Quantitative
 McCoy_2024,2024,Europe,LN_27415,-6.55,54.68,23030000,27820000,Quantitative
-McCoy_2024,2024,Europe,LN_603,-6.40,55.11,23030000,27820000,Quantitative
-McCoy_2024,2024,Europe,LN_36_4680,-6.40,54.56,23030000,27820000,Quantitative
+McCoy_2024,2024,Europe,LN_603,-6.4,55.11,23030000,27820000,Quantitative
+McCoy_2024,2024,Europe,LN_36_4680,-6.4,54.56,23030000,27820000,Quantitative
 McCoy_2024,2024,Europe,Mochras (1),-4.14,52.81,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,Mochras (2),-4.14,52.81,15970000,33900000,Quantitative
 McCoy_2024,2024,Europe,515.42,-4.14,52.81,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,408.43,-4.14,52.81,23000000,33900000,Quantitative
 McCoy_2024,2024,Europe,368.8,-4.14,52.81,15970000,33900000,Quantitative
 McCoy_2024,2024,Europe,368.2,-4.14,52.81,15970000,33900000,Quantitative
+Gao_etal_2025,2025,Asia,WC36-A South China Sea,112.34,18.27,33900000,46000000,Quantitative
+Chevalier_etal_2025,2025,S. America,Fuquene,-73.76666667,5.45,0,284000,Quantitative
+Umbo_etal_2025,2025,Asia,Lena River Delta,126.94,72.27,8580000,8680000,Quantitative
+Martin-Ramos_etal_2025,2025,Europe,Gran Canaria,-15.5,28.1,0,28000,Quantitative
+Herzschuh_etal_2025,2025,Asia,Billyakh,126.74,65.27,0,32000,Quantitative
+Gosling_etal_2025,2025,Africa,Bambili,10.24383,5.93487,0,20200,Quantitative
+Gosling_etal_2025,2025,Africa,Jikariya,11.077,13.313667,0,11600,Quantitative
+Gosling_etal_2025,2025,Africa,Tilla,12.131525,10.544476,0,13100,Quantitative
+Gosling_etal_2025,2025,Africa,Kashiru (swamp),29.53333,-3.45,0,26800,Quantitative
+Gosling_etal_2025,2025,Africa,Rusaka (swamp),29.61667,-3.43333,0,45200,Quantitative
+Gosling_etal_2025,2025,Africa,Rumuiku (swamp),37.535985,-0.46234,0,46700,Quantitative
+Gosling_etal_2025,2025,Africa,Deva-Deva (swamp),37.62533,-7.1222,0,42600,Quantitative
+Gosling_etal_2025,2025,Africa,Kitumbako (swamp),37.631333,-7.145333,0,12600,Quantitative
+Gosling_etal_2025,2025,Africa,Garba Garucha (lake),39.861517,6.877983,0,13700,Quantitative
