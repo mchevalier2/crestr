@@ -25,7 +25,17 @@ knitr::opts_chunk$set(
 
 <br >
 
-> **_NOTE:_** While active development of crestr has concluded, its robust features will continue to provide valuable insights for palaeoclimate research. The available documentation and resources will remain accessible for independent use. In addition, I am committed to maintaining this bug-free. As such, please reach out at <paleo@manuelchevalier.com> if you encounter technical issues.
+
+> **Stuck? You’re not alone**
+>
+> I regularly host **online crestr workshops** where we explore both the theoretical foundations of the method and its practical implementation.
+> You’ll learn everything you need to produce your first reconstructions with confidence.
+> Check out the upcoming dates on the [DataSharp Academy CREST workshop page](https://datasharpacademy.com/workshop-crest/) and book your seat.
+> I also offer [consulting support for CREST analyses](https://datasharpacademy.com/crest-consulting/) if you need more personalised guidance.
+>
+> Feel free to get in touch at [manuel.chevalier@datasharpacademy.com](manuel.chevalier@datasharpacademy.com).
+
+
 
 ## Installation
 
@@ -71,11 +81,19 @@ _Real-world examples of how `crestr` has been used. (A) density of presence reco
 
 
 ```{r img3, echo=FALSE, out.width = '100%', fig.align = "center", out.extra='style="background:none; border:none; box-shadow:none;"'}
-knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-02.png")
+knitr::include_graphics("https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-02.png?raw=true")
 ```
 _Location of real_world crest-based climate reconstructions. All these examples showcase CREST’s ability to contribute to global climate research and advance our understanding of regional environmental changes._
 
 
+- **2025**
+    - Gao, M., You, L., Hu, G., Chevalier, M., Teng, X., Feng, Q., Chen, Y., Jin, F., Yang, R., Zhang, J., 2025. Palynological and geochemical evidence for East Asian monsoon evolution from the northern South China Sea during the middle to late Eocene. Palaeogeography, Palaeoclimatology, Palaeoecology 666, 112837. https://doi.org/10.1016/j.palaeo.2025.112837
+    - Chevalier, M., Gosling, W.D., Hooghiemstra, H., Cartapanis, O., Chase, B.M., Kaboth-Bahr, S., 2025. Eccentricity-driven glacial climate variability and its influence on speciation in the tropical Andes. Quaternary Science Advances 18, 100278. https://doi.org/10.1016/j.qsa.2025.100278
+    - Gosling, W.D., 2025. A multi-model approach to the spatial and temporal characterization of the African Humid Period. Quaternary International 744, 109933. https://doi.org/10.1016/j.quaint.2025.109933
+    - Umbo, S., Panitz, S., Homann, J., McCoy, J., Pound, M., Opel, T., Lechleitner, F., Vaks, A., Osintzev, A., Adrian, I., Kononov, A., Breitenbach, S.F.M., 2025. Late Miocene speleothems show significant warming, temperate vegetation, and wildfires in Arctic Siberia. Sci Rep 15, 28420. https://doi.org/10.1038/s41598-025-12287-x
+    - Martin-Ramos, P., Castilla-Beltrán, A., Davtian, N., Fernández-Palacios, J.M., Fernández-Palacios, E., Naranjo-Cigala, A., Nogué, S., Villanueva, J., Wilmshurst, J.M., De Nascimento, L., 2025. Millennial-scale climatic variability and fire regimes and their impacts on vegetation in Gran Canaria since 28 cal ka BP. Quaternary Science Reviews 369, 109576. https://doi.org/10.1016/j.quascirev.2025.109576
+    - Herzschuh, U., Böhmer, T., Jia, W., Lisovski, S., 2025. Quantitative climate reconstruction from sedimentary ancient DNA: framework, validation and application. https://doi.org/10.5194/egusphere-2025-2678
+    - Herzschuh, U., Stoof-Leichsenring, K.R., Farkas, L.Z., Liu, Y., Liu, S., Böhmer, T., Baisheva, I., Biskaborn, B.K., Courtin, J., Diekmann, B., Epp, L.S., Von Hippel, B., Huang, S., Huang, Y., Jia, W., Kaufman, D.S., Meyer, H., Melles, M., Meucci, S., Pestryakova, L.A., Schulte, L., Wagner, B., Wang, Z., Zakharov, E.S., 2025. Dynamic connectivities of plant metacommunities at a millennial time-scale: the Beringia testbed. https://doi.org/10.1101/2025.08.19.671027
 - **2024**
     - Trasune, L., Väliranta, M., Stivrins, N., Amon, L., Schenk, F., Salonen, J.S., 2024. A comparison of plant macrofossil-based quantitative climate reconstruction methods: A case study of the lateglacial Baltic States. Quaternary Science Reviews 338, 108811. https://doi.org/10.1016/j.quascirev.2024.108811
     - McCoy, J., Gibson, M.E., Hocking, E.P., O’Keefe, J.M.K., Riding, J.B., Roberts, R., Campbell, S., Abbott, G.D., Pound, M.J., 2024. Temperate to tropical palaeoclimates on the northwest margin of Europe during the middle Cenozoic. Palaeontol Electron. https://doi.org/10.26879/1349
@@ -110,15 +128,15 @@ _Location of real_world crest-based climate reconstructions. All these examples 
 <br >
 
 ```{r img2, echo=FALSE, out.width = '100%', fig.align = 'center', out.extra='style="background:none; border:none; box-shadow:none;"'}
-knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-01.png")
+knitr::include_graphics("https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-01.png?raw=true")
 ```
 
 
 ```{r img4, echo=FALSE, out.width = '100%', fig.align = 'center', out.extra='style="background:none; border:none; box-shadow:none;"'}
-knitr::include_graphics("https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/crest-use-03.png")
+knitr::include_graphics("https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-03.png?raw=true")
 ```
 
-Last update: 03/01/2025
+Last update: 21/10/2025
 
 N.B.: This list is as exhaustive as possible, but some studies may be missing. Contact me if you want your study to be added.
 

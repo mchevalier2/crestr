@@ -25,7 +25,7 @@ sites.eqearth=sp::spTransform(sites, sp::CRS("+proj=eqearth +lon_0=0 +x_0=0 +y_0
 
 
 
-max_year=2024
+max_year=2025
 png("/Users/palaeosaurus/GitHub/Rpackages/crestr/webpage/crest-use-01.png", width=8, height=2.5, units='in', res=150)  ;  {
     layout(matrix(c(1,2), ncol=2, byrow=TRUE), width=1, height=1)
 
