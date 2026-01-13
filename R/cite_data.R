@@ -49,7 +49,7 @@ cite_distrib_data <- function(x, verbose=TRUE) {
 
     db <- identifyDatabase(x$misc$dbname)
 
-    if(db == 'private-database') {
+    if(db == 'privateDB') {
         ## References to cite in case of a private dataset: None
         tocite <- c()
         if (verbose)  cat('You did not use the gbif4crest dataset. No distribution data citations are required.\n')
