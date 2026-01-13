@@ -1,3 +1,9 @@
+# crestr 1.4.7
+* MAJOR
+    * `dbDownload()` was broken. download.files() needed some extra parameters. It now works.
+* MINOR
+    *
+
 # crestr 1.4.6
 * MINOR
     * Adding a check for PSE file column names in `crest.get_modern_data()`.

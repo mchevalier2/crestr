@@ -536,7 +536,6 @@ crest.get_modern_data <- function( pse, taxaType, climate,
             cat(paste0('  <> Extracting species distributions ...... ', stringr::str_pad(paste0(round(pbi / length(crest$inputs$taxa.name)),'%\r'), width=4, side='left')))
             utils::flush.console()
         }
-        print(tax)
         if (sum(crest$inputs$selectedTaxa[tax, climate]>=0) > 0) {
             distributions[[tax]] <- getDistribTaxa(
               taxIDs, climate=climate,
