@@ -108,7 +108,7 @@
                         <h4 data-toc-skip class="author">Manuel
 Chevalier</h4>
             
-            <h4 data-toc-skip class="date">2026-01-13</h4>
+            <h4 data-toc-skip class="date">2026-02-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/mchevalier2/crestr/blob/HEAD/vignettes/get-started.Rmd" class="external-link"><code>vignettes/get-started.Rmd</code></a></small>
       <div class="hidden name"><code>get-started.Rmd</code></div>
@@ -445,10 +445,7 @@ down-weighting the most abundant ones.</p>
 <span>                      verbose <span class="op">=</span> <span class="cn">FALSE</span> <span class="co"># Print status messages</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_climateSpace.html">plot_climateSpace</a></span><span class="op">(</span><span class="va">reconstr</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot_climate_space-1.png" class="r-plt" alt="**Fig. 5**: Distribution of the climate data. The grey histogram represent the abundance of each climate bins in the study area and the black histogram represents how this climate space is sampled by the studied taxa. In a good calibration dataset, the two histograms should be more or less symmetrical. Note: This figure is designed for real data, hence the presence of some African country borders. Just ignore these here." width="100%"><p class="caption">
 <strong>Fig. 5</strong>: Distribution of the climate data. The grey
@@ -478,11 +475,7 @@ would ultimately appear.</p>
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon2'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span>
-<span><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span>
-<span><span class="co">#&gt; Warning: PROJ: proj_create_from_database: Cannot find proj.db (GDAL error 1)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/plot_taxaCharacteristics.html">plot_taxaCharacteristics</a></span><span class="op">(</span><span class="va">reconstr</span>, taxanames<span class="op">=</span><span class="st">'Taxon6'</span>, climate<span class="op">=</span><span class="st">'bio1'</span>, h0<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-1.png" class="r-plt" alt="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot." width="70%"><img src="get-started_files/figure-html/plot-plot_taxaCharacteristics-2.png" class="r-plt" alt="**Fig. 6**: Distributions and responses of _Taxon2_ and _Taxon6_ to _bio1_. Again, ignore the coastline of Africa on this plot." width="70%"><p class="caption">
 <strong>Fig. 6</strong>: Distributions and responses of <em>Taxon2</em>

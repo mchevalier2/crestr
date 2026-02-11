@@ -85,7 +85,8 @@ knitr::include_graphics("https://github.com/mchevalier2/crestr/blob/master/webpa
 ```
 _Location of real_world crest-based climate reconstructions. All these examples showcase CREST’s ability to contribute to global climate research and advance our understanding of regional environmental changes._
 
-
+- **2026**
+    - Escobar-Torrez, K., Ledru, M.-P., Cassino, R. F., Horák-Terra, I., Chevalier, M., Barbosa De Camargo, P., Wainer, I.: Early Holocene wet-cool Cerrado tree corridor. Quaternary Science Reviews, 109851. https://doi.org/10.1016/j.quascirev.2026.109851
 - **2025**
     - Gao, M., You, L., Hu, G., Chevalier, M., Teng, X., Feng, Q., Chen, Y., Jin, F., Yang, R., Zhang, J., 2025. Palynological and geochemical evidence for East Asian monsoon evolution from the northern South China Sea during the middle to late Eocene. Palaeogeography, Palaeoclimatology, Palaeoecology 666, 112837. https://doi.org/10.1016/j.palaeo.2025.112837
     - Chevalier, M., Gosling, W.D., Hooghiemstra, H., Cartapanis, O., Chase, B.M., Kaboth-Bahr, S., 2025. Eccentricity-driven glacial climate variability and its influence on speciation in the tropical Andes. Quaternary Science Advances 18, 100278. https://doi.org/10.1016/j.qsa.2025.100278

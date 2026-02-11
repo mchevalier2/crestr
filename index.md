@@ -62,7 +62,7 @@ To get started, refer to the `crestr` cheat sheet, which provides step-by-step g
 
 <br >
 
-<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://raw.githubusercontent.com/mchevalier2/crestr/master/webpage/example-app.png" alt="" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 _Real-world examples of how `crestr` has been used. (A) density of presence records available in the gbif4crest_02 calibration dataset upscaled at a 1° resolution. The diamonds represent the location of the pollen records used to generate the reconstructions presented in B-D, and the coloured boxes represent the extent of their respective calibration zones. (B) Lake Van, Turkey: Reconstructed annual rainfall patterns ([Chevalier, 2019](https://www.doi.org/10.1016/j.gloplacha.2019.01.016)), (C) Laguna Fùquene, Colombia: Estimated average yearly temperatures. (unpublished) and (D) Marine Core MD96-2048 (off southeastern Africa): 800,000 year-long temperature changes in marine environments ([Chevalier et al., 2021](https://www.doi.org/10.1130/G47841.1))._
 
@@ -70,10 +70,11 @@ _Real-world examples of how `crestr` has been used. (A) density of presence reco
 ## CREST in the scientific literature
 
 
-<img src="https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-02.png?raw=true" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-02.png?raw=true" alt="" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 _Location of real_world crest-based climate reconstructions. All these examples showcase CREST’s ability to contribute to global climate research and advance our understanding of regional environmental changes._
 
-
+- **2026**
+    - Escobar-Torrez, K., Ledru, M.-P., Cassino, R. F., Horák-Terra, I., Chevalier, M., Barbosa De Camargo, P., Wainer, I.: Early Holocene wet-cool Cerrado tree corridor. Quaternary Science Reviews, 109851. https://doi.org/10.1016/j.quascirev.2026.109851
 - **2025**
     - Gao, M., You, L., Hu, G., Chevalier, M., Teng, X., Feng, Q., Chen, Y., Jin, F., Yang, R., Zhang, J., 2025. Palynological and geochemical evidence for East Asian monsoon evolution from the northern South China Sea during the middle to late Eocene. Palaeogeography, Palaeoclimatology, Palaeoecology 666, 112837. https://doi.org/10.1016/j.palaeo.2025.112837
     - Chevalier, M., Gosling, W.D., Hooghiemstra, H., Cartapanis, O., Chase, B.M., Kaboth-Bahr, S., 2025. Eccentricity-driven glacial climate variability and its influence on speciation in the tropical Andes. Quaternary Science Advances 18, 100278. https://doi.org/10.1016/j.qsa.2025.100278
@@ -115,10 +116,10 @@ _Location of real_world crest-based climate reconstructions. All these examples 
 
 <br >
 
-<img src="https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-01.png?raw=true" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-01.png?raw=true" alt="" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 
-<img src="https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-03.png?raw=true" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
+<img src="https://github.com/mchevalier2/crestr/blob/master/webpage/crest-use-03.png?raw=true" alt="" width="100%" style="background:none; border:none; box-shadow:none;" style="display: block; margin: auto;" />
 
 Last update: 21/10/2025
 
