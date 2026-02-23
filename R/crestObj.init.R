@@ -27,9 +27,9 @@
 #' @param nodate A boolean to accept occurrences without a date (can overlap
 #'        with occurrences with a date; default \code{TRUE}).
 #' @param type_of_obs The type of observation to use in the study. 1: human
-#'        observation, 2: observation, 3: preserved specimen, 4: living specimen,
-#'        5: fossil specimen, 6: material sample, 7: machine observation, 8:
-#'        literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})
+#'        observation, 2: observation, 3: living specimen,
+#'        4: fossil specimen, 5: material sample, 6: machine observation,
+#'        7: literature, 8: unknown (Default \code{c(1, 2, 7, 8)})
 #' @param dbname The name of the data source database.
 #' @param continents A vector of the continent names defining the study area.
 #' @param countries A vector of the country names defining the study area.
@@ -88,9 +88,9 @@ crestObj <- function(taxa.name, taxaType, climate,
                      continents = NA, countries = NA,
                      basins = NA, sectors = NA,
                      realms = NA, biomes = NA, ecoregions = NA,
-                     xmn = NA, xmx = NA, ymn = NA, ymx = NA,
+                     xmn = -180, xmx = 180, ymn = -90, ymx = 90,
                      elev_min = NA, elev_max = NA, elev_range = NA,
-                     year_min = 1900, year_max = 2021, nodate = TRUE,
+                     year_min = 1900, year_max = 2025, nodate = TRUE,
                      type_of_obs = c(1, 2, 7, 8),
                      df = NA, x = NA, x.name = "",
                      minGridCells = 20, weightedPresences = FALSE,

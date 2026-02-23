@@ -1,8 +1,15 @@
+# crestr 1.4.8
+* MAJOR
+    * `fit_pdfsp()` returned NAs if the variance was null. Forced it to returns a vector of 0s, which will have no impact on the pdfpol.
+    * Entirely rewrote `dbDownload()` using more recent technology and more appriopriate API download links.
+* MINOR
+    * Refined documentation
+
+
 # crestr 1.4.7
 * MAJOR
     * `dbDownload()` was broken. download.files() needed some extra parameters. It now works.
-* MINOR
-    *
+
 
 # crestr 1.4.6
 * MINOR

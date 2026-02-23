@@ -2,42 +2,60 @@
 % Please edit documentation in R/dbDownload.R
 \name{dbDownload}
 \alias{dbDownload}
-\title{Download the gbif4crest_02 dataset from figShare.}
+\title{Download gbif4crest data from Figshare}
 \usage{
 dbDownload(
   filename = "gbif4crest_03.zip",
   version = 3,
   lite = TRUE,
   res = "5min",
-  timeout = 10000
+  timeout = 10000,
+  overwrite = TRUE,
+  quiet = FALSE,
+  max_tries = 3
 )
 }
 \arguments{
-\item{filename}{The path and name of the file where the database should be saved.}
+\item{filename}{Character. Destination file path for the downloaded archive.
+If it has no \code{.zip} extension, \code{.zip} is appended. If left as the default
+\code{"gbif4crest_03.zip"}, it is replaced by the appropriate release filename.}
 
-\item{version}{The version of the gbif4crest dataset desired. Either 2 or 3.}
+\item{version}{Integer. Dataset major version. Currently supported: \code{2} or \code{3}.}
 
-\item{lite}{Deprecated since v3. A boolean (default \code{TRUE}) to indicate
-if the full database should be downloaded (including the raw presences
-from GBIF; \code{lite = FALSE}) or only the curated data (\code{lite =
-       TRUE}).}
+\item{lite}{Logical. Only relevant for \code{version = 2} and \code{res = "15min"}.
+If \code{TRUE}, downloads the curated/lite variant when available.
+Ignored for \code{version = 3}.}
 
-\item{res}{The spatial resolution of the dataset. Either 15min or 5min. Since
-v3, 5min is the only version available.}
+\item{res}{Character. Spatial resolution. One of \code{"15min"} or \code{"5min"}.
+Note: \code{version = 3} is currently available only as \code{"5min"}.}
 
-\item{timeout}{Maximum duration in seconds of the download. If the file is
-not fully downloaded after 'timeout' seconds, it will be interrupted.}
+\item{timeout}{Numeric. Maximum time in seconds for the transfer (passed to libcurl).}
+
+\item{overwrite}{Logical. If \code{TRUE}, overwrite an existing \code{filename}.
+If \code{FALSE}, an existing file triggers an error.}
+
+\item{quiet}{Logical. If \code{TRUE}, suppresses the download progress meter.}
+
+\item{max_tries}{Integer. Maximum number of attempts for transient failures.
+(Most issues should not require retries when using the API endpoint.)}
+}
+\value{
+Invisibly returns the absolute path to the downloaded file.
 }
 \description{
-Download the gbif4crest_02 dataset from figShare.
+Downloads a packaged gbif4crest release hosted on Figshare and saves it as a
+local \code{.zip} file.
 }
 \examples{
 \dontrun{
-  dbDownload() ## This will download the latest version of the database in
-  your working directory.
+# Default: v3 5min
+dbDownload()
+
+# Version 2, 15min lite
+dbDownload(version = 2, res = "15min", lite = TRUE)
+
+# Save to a custom location
+dbDownload(filename = "data/gbif4crest.zip", quiet = FALSE)
 }
 
-}
-\seealso{
-The full SQLite3 database can be downloaded from \url{https://figshare.com/articles/dataset/GBIF_for_CREST_database/6743207}.
 }

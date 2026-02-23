@@ -54,6 +54,10 @@ fit_pdfsp <- function(climate, ccs, bin_width, shape, xrange, use_ccs = TRUE, cl
         p1 <- base::mean(climate)
         p2 <- stats::var(climate)
     }
+    
+    ## If the variance is null, return a vector of 0s.
+    if(p2 == 0) return(rep(0, length(xrange)))
+
     if (shape == "normal") {
         return(base::exp(-0.5 * (((xrange - p1) / base::sqrt(p2))**2))
         /

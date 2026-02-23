@@ -65,9 +65,9 @@ range (default is \code{NA}).}
 with occurrences with a date; default \code{TRUE}).}
 
 \item{type_of_obs}{The type of observation to use in the study. 1: human
-observation, 2: observation, 3: preserved specimen, 4: living specimen,
-5: fossil specimen, 6: material sample, 7: machine observation, 8:
-literature, 9: unknown (Default \code{c(1, 2, 3, 8, 9)})}
+observation, 2: observation, 3: living specimen,
+4: fossil specimen, 5: material sample, 6: machine observation,
+7: literature, 8: unknown (Default \code{c(1, 2, 7, 8)})}
 
 \item{dbname}{The name of the data source database.}
 }
